@@ -3,6 +3,8 @@
 **2026-11-14 | Research #186 | Coding #50 OPEN/BLOCKED**  
 **BASE main:** e6838dbdb5911acf4f0b67ce744a6c23a9396a22. **P00 docs-only, no library adopted, no code, executor not ready.** Risk LOW documentary; FUTURE ELEVATED for parser/streaming/concurrency/NET/Game authority. Release class UNDECIDED.
 
+**RESEARCH RESULT APPROVED/MERGED:** [PR #187](https://github.com/KayzenRoot/stormline/pull/187), final audited HEAD `564acd9cb18b0a8ad498cf8936e199a7adca4f6b`, [Docs Validation #43648889523](https://github.com/KayzenRoot/stormline/actions/runs/43648889523) SUCCESS, auditoria objetiva pt-BR comment #6885277029, normal squash main `3dcbc8e363f1257b06025e40fd848dce793de76e`, readback confirmed. Separate checkpoint PR still requires exact-HEAD CI/audit. Future coding #50 BLOCKED, 112 runtime cases NOT RUN.
+
 ## OBJECTIVE
 Specify original engine-owned 2D/2.5D/3D Navigation & Behavior with streaming-safe navmesh/pathfinding, dynamic topology and obstacle avoidance, behavior trees/statecharts, typed blackboard, perception/LOS and authoritative SIM-03 movement, plus measurable runtime acceptance and security plans.
 
