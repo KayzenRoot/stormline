@@ -36,6 +36,7 @@ if reg.get("schema_version") != 1 or reg.get("engine_implemented") is not False:
 if len(modules) != 80:
     errors.append(f"expected 80 WOs, got {len(modules)}")
 
+issue_numbers: set[int] = set()
 ids: set[str] = set()
 wo_ids: set[str] = set()
 seen: set[str] = set()
@@ -70,6 +71,15 @@ for m in modules:
         errors.append(f"WO incorrectly unblocked: {module_id}")
     if m.get("executor_ready") is not False or m.get("release_class") != "UNDECIDED":
         errors.append(f"WO falsely executor-ready/released: {module_id}")
+    issue_number = m.get("github_issue")
+    if not isinstance(issue_number, int) or issue_number <= 0:
+        errors.append(f"missing/non-integer issue for {module_id}")
+    elif issue_number in issue_numbers:
+        errors.append(f"duplicate GitHub issue number: {issue_number}")
+    else:
+        issue_numbers.add(issue_number)
+    if m.get("issue_url") != f"https://github.com/KayzenRoot/stormline/issues/{issue_number}":
+        errors.append(f"incorrect issue URL for {module_id}")
     if m.get("approved_adr") is not None or m.get("context_lock_sha") is not None:
         errors.append(f"WO claims approved architecture/lock: {module_id}")
     path = ROOT / m.get("file", "")
@@ -90,6 +100,8 @@ for m in modules:
 doc_wo_count = len(list((ROOT / "docs/queue/work-orders").glob("*.md")))
 if doc_wo_count != 80:
     errors.append(f"expected 80 individual WO files, got {doc_wo_count}")
+if len(issue_numbers) != 80:
+    errors.append(f"expected 80 mapped GitHub issues, got {len(issue_numbers)}")
 if len({m.get("module_id") for m in modules}) != 80:
     errors.append("registry module IDs not unique")
 if errors:
@@ -97,4 +109,4 @@ if errors:
     for error in errors:
         print(" -", error)
     sys.exit(1)
-print("PASS: 80 unique blocked Work Order packets; catalog, dependency order, section coverage and no-premature-execution gate verified.")
+print("PASS: 80 unique blocked Work Order packets and GitHub issue mappings; catalog, dependency order, required sections and no-premature-execution gate verified.")

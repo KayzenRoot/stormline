@@ -16,7 +16,7 @@ mods = registry["modules"]
 if args.list or not args.module_id:
     if args.json:
         print(json.dumps([
-            {"module": m["module_id"], "wo": m["id"], "status": m["work_order_status"],
+            {"module": m["module_id"], "wo": m["id"], "status": m["work_order_status"], "issue_number": m.get("github_issue"),
              "path": m["file"], "dependencies": m["dependencies"]}
             for m in mods
         ], indent=2))
@@ -35,6 +35,8 @@ result = {
     "work_order_id": selected["id"],
     "packet_file": selected["file"],
     "dependencies": selected["dependencies"],
+    "issue_number": selected.get("github_issue"),
+    "issue_url": selected.get("issue_url"),
     "status": selected["work_order_status"],
     "executor_ready": bool(ready),
     "next_action": "EXECUTE_ONLY_AFTER_NEW_OBJECTIVE_AUDIT" if ready else
@@ -45,6 +47,7 @@ if args.json:
 else:
     print(f'Work Order: {result["work_order_id"]}')
     print(f'Packet: {result["packet_file"]}')
+    print(f'GitHub issue: {result["issue_url"]}')
     print(f'Dependencies: {", ".join(result["dependencies"]) or "(foundational)"}')
     print(f'Status: {result["status"]}')
     print(f'Executor-ready: {result["executor_ready"]}')

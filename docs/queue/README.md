@@ -1,6 +1,6 @@
 # Stormline — Zcode Work Order Queue (80 modules)
 
-**Status:** PROPOSED. Full 80-module **draft packet inventory**, not 80 executable authorizations.  
+**Status:** APPROVED AS BLOCKED QUEUE after PR #17 and audited issue creation. Full 80-module **draft packet inventory**, not 80 executable authorizations.  
 **Work Order:** NLE-P00-WO-002-QUEUE-001 | **Baseline:** `3db4507ffa99896a799c0da7fe0be738fa4a4f4c`.
 
 ## Why this exists
@@ -41,4 +41,4 @@ Only one implementation Work Order can be **IN_PROGRESS** per dependency chain. 
 Registry is a **topological** suggestion, not a license to perform each module sequentially without its own approved planning. Prefer NECESSARY WOs and small, testable increments. Some advanced systems will require multiple actual implementation WOs and must not be packed into one giant one-shot.
 
 ## Issue tracking
-Once the registry and docs CI pass, create one planning-only issue per `NLE-EXEC-WO-<MODULE_ID>-001`, with unique IDs, explicit blocked state and links to drafts. Record GitHub issue mappings in a follow-up audited registry update if the available issue API supports reliable readback.
+Completed: 80 individual [planning-only issues](https://github.com/KayzenRoot/stormline/issues?q=is%3Aissue+NLE-EXEC-WO), **#18–#97**, exactly one per stable module WO ID, all prefixed `[PLANNING/BLOCKED]`. Issue number and canonical URL are stored in the [registry](implementation-registry.json); readback found zero missing or duplicate IDs. Ticket creation does **not** unlock implementation.

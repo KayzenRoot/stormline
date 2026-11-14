@@ -2,8 +2,8 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-03` — **APPROVED / MERGED** (jobs/concurrency, sem código).  
-**Main SHA comprovado após o merge da PR #3:** `e41274bb841094630ba71843b0876bb5d79370f4`.  
+**Último incremento documental aprovado:** `NLE-P00-WO-002-QUEUE-001` — 80 pacotes de Work Orders bloqueados e 80 issues de planejamento (sem engine implementada).  
+**Main SHA comprovado após o merge da PR #17:** `b479396d0751e316691b859079a589c8c0c189a7`.  
 **Evidence Bundle:** [NLE-P00-WO-001-EXT-001](evidence/NLE-P00-WO-001-EXT-001.md).
 
 ## 1. Fundação previamente aprovada
@@ -68,5 +68,13 @@
 - Hipótese de tecnologia própria SFAS permanece pesquisa, não prova de desempenho ou scheduler implementado.
 - Nenhuma versão pública ou programa C++ foi criado.
 
-## 9. Próximo incremento
-`NLE-P00-WO-002-QUEUE-001`: preparar a fila versionada de issues e pacotes de Work Order futuros para Zcode, **somente templates bloqueados por especificações técnicas pendentes**; nenhum executor de código autorizado. A fila só avançará após reconciliação e auditoria do CORE-03.
+## 9. Fila completa de Work Orders preparada (não executável)
+- O proprietário solicitou precriar WOs/issues para que o Zcode, quando autorizado, codifique em vez de decidir produto/arquitetura.
+- PR #17 (base `3db4507ffa99896a799c0da7fe0be738fa4a4f4c`, HEAD auditado `1b45aee397d5a375cc95202840611b4e0e251435`) integrou **80 pacotes individuais**, registry topológico JSON, scripts de validação e seleção em modo somente leitura, contrato Zcode. O merge squash foi `b479396d0751e316691b859079a589c8c0c189a7`, conferido por readback da main.
+- [CI 43595119500](https://github.com/KayzenRoot/stormline/actions/runs/43595119500): docs-validation **SUCCESS**, incluindo 80 WOs, DAG e teste de que seletor recusa trabalho bloqueado.
+- **80 issues de implementação futura em estado PLANNING/BLOCKED foram criadas e conferidas**, números #18 a #97, 80 IDs de WO únicos, 0 faltantes/duplicados. Ver [fila](queue/README.md) e [registro](queue/implementation-registry.json); mapeamento numérico incluído em delta documental auditável.
+- Todas as WOs permanecem `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, release class UNDECIDED, `executor_ready=false`. Não existem código, benchmarks, arte, exportadores ou implementação de MCP.
+- [Evidence Bundle da fila](evidence/NLE-P00-WO-002-QUEUE-001.md) lista SHAs, CI, limitações e riscos. Nenhum requisito de revisor externo, CodeRabbit ou serviço pago.
+
+## 10. Próximo incremento
+`NLE-P00-WO-002-CORE-04`: pesquisa detalhada do relógio de simulação e determinismo, **PLANNED / NOT STARTED**. Só iniciar depois da reconciliação e auditoria da fila. Tecnologia, API, arquivos e tests de cada WO futura devem ser completados no planejamento antes de permitir Zcode.
