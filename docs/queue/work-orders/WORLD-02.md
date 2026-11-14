@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Architecture](../../architecture/world-02-scene-prefab-hierarchy.md), [tech/license matrix](../../research/world-02-prefab-technology-license-matrix.md), [ADR-0027 PROPOSED](../../adr/0027-world-02-prefab-override-rebase-policy.md), [typed Scene/Prefab API](../../contracts/world-02-scene-prefab-api.md), [122 FUTURE NOT EXECUTED tests](../../testing/world-02-acceptance-matrix.md), [benchmark protocol](../../research/world-02-prefab-benchmark-protocol.md), [research WO](../../work-orders/NLE-P00-WO-002-WORLD-02.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-WORLD-02.md) are PROPOSED research only, not approved C++ implementations. Safe hierarchy source/variant/nested overrides and 3-way rebase with DATA-04 journal must be proven, not inferred from a file. OpenUSD upstream TOST 1.0 license is NOT plain Apache2; O3DE dual core and transitive rights separate; Unity proprietary and Godot MIT are references only. Mandatory code WORLD-01/DATA-02 not integrated, CORE-04 historical research pending; future coding #42 and all 80 code WOs BLOCKED/executor_ready=false.
+
 ## DEPENDENCIES
 `WORLD-01`, `DATA-02`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
