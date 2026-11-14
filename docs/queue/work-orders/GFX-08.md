@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-08`, but implementation details and release class are not yet approved.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[GFX-08 architecture](../../architecture/gfx-08-vfx-particle-graph.md), [technology/license matrix](../../research/gfx-08-vfx-technology-license-matrix.md), [ADR-0021 PROPOSED](../../adr/0021-gfx-08-vfx-graph-particle-policy.md), [typed VFX semantic contract](../../contracts/gfx-08-vfx-api.md), [78 future NOT EXECUTED tests](../../testing/gfx-08-acceptance-matrix.md), [ARPG benchmark plan](../../research/gfx-08-vfx-performance-benchmark-protocol.md), [research Work Order](../../work-orders/NLE-P00-WO-002-GFX-08.md) and [Evidence Bundle](../../evidence/NLE-P00-WO-002-GFX-08.md) remain **research proposals**, not a frozen, tested executable contract. Exact module files, binary format, versions, budgets, hardware targets, feature tiers, license/SBOM and source SHA-256 Context Lock TBD by approval. No code/workflow activation; #36 and all 80 code WOs remain BLOCKED/`executor_ready=false`.
+
 ## DEPENDENCIES
 `GFX-03`, `GFX-05`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
