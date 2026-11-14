@@ -137,6 +137,7 @@ The documentation badge reports only the **docs-validation** workflow. It is **n
 | [Agent Contract](AGENTS.md) · [Solo Governance](docs/engineering/solo-governance.md) | Rules for Codex, Zcode and owner approvals |
 | [Engineering Playbook](docs/engineering/agent-execution.md) · [Free CI](docs/engineering/free-ci.md) | Evidence bundles, reproducibility, and cost constraints |
 | [Versioning](docs/engineering/versioning.md) · [Changelog](CHANGELOG.md) | Editorial history vs actual software releases |
+| [Zcode Work Order Queue](docs/queue/README.md) · [Execution Handoff](docs/engineering/zcode-handoff.md) | 80 prepared, BLOCKED module drafts; not implementation-ready until reviewed |
 
 ## Engineering governance
 
