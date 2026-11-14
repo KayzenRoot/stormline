@@ -1,7 +1,7 @@
 # Work Order — NLE-P00-WO-002-QUEUE-001
 
 **Risk:** STANDARD documentation / mass issue preparation  
-**Status:** DRAFT PLANNING / PENDING AUDIT  
+**Status:** APPROVED / MERGED as blocked Work Order preparation (PR #17); 80 issues created #18–97 after registry merge, issue mapping in audited follow-up.  
 **Issue:** #16  
 **Baseline main:** `3db4507ffa99896a799c0da7fe0be738fa4a4f4c`.
 
