@@ -169,4 +169,4 @@
 - [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-03.md): RGP-001..034, C++/GPU, drivers Windows/Linux/macOS/Web, VRAM/CPU/GPU p95/p99, testes de alias e fuzz **NÃO EXECUTADOS**. Todas 80 WOs de implementação mantidas BLOCKED/`executor_ready=false`.
 
 ## 21. Próximo módulo (somente após reconciliação GFX-03)
-`NLE-P00-WO-002-GFX-04`: pesquisa documental de Renderização 3D / Pipeline de alto desempenho, próximo no registro topológico; dependências e escopo devem ser lidos antes de iniciar. Nenhum código Zcode liberado.
+`NLE-P00-WO-002-GFX-04`: Geometry, Occlusion & LOD: instancing, culling, HLOD, mesh streaming e vegetação, próximo no registro topológico; dependências e escopo devem ser lidos antes de iniciar. Nenhum código Zcode liberado.
