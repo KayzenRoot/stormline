@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-DATA-05
 
 **Date:** 2026-11-14 | **Research issue:** #120 | **Future implementation:** #28 BLOCKED.
-**Evidence state:** IN PROGRESS / DOCUMENTATION RESEARCH ONLY; no C++/asset bundle/cooker/patcher/export/deployment.
+**Evidence state:** RESEARCH DOCUMENTATION UNDER FINAL AUDIT; NO ENGINE CODE; no C++/asset bundle/cooker/patcher/export/deployment.
 **Baseline main:** `8659327e73e803dcf09345e95f14647375ce9fe5`; branch `docs/NLE-P00-WO-002-DATA-05-cooking-research`. Risk LOW docs, future ELEVATED integrity, untrusted codec, recoverable updates.
 
 ## Context Lock and authoritative sources
@@ -28,11 +28,11 @@ SHA baseline is the DATA-04 checkpoint-merged main. Critical source fingerprints
 A bundle digest is a bit-integrity check, **not** a signature or publisher authenticity. Remote delivery requires trustworthy source/signature/rollback policy, deferred PLAT-05 authorization. VFS and DATA-02 registry cannot be treated as one ACID transaction, so journal+prior-good recovery is a future proof obligation. Potential decompression bomb/offset overflow, source rights and mixed-license KTX/etcdec have future ELEVATED implications. Native Windows/Linux/macOS and Web range 200/206 fallback still unverified.
 
 ## Evidence and audit (actual results only)
-- Documentation validation at final research HEAD: PENDING actual CI.
-- 80 WOs status and selector: future verified CI; code executor still BLOCKED.
-- Scoped diff/secret scan, objective pt-BR audit, final research HEAD and PR: PENDING.
+- First authored research HEAD `7dd86f42b4d9d4aa2c6aecd1d6df3408c061b670`: [GitHub Actions Docs Validation #43607513578](https://github.com/KayzenRoot/stormline/actions/runs/43607513578) **SUCCESS**. Steps: Source Pack/local links, 80-module DAG, 80 Work Order registry, blocked-selector all SUCCESS. After this Evidence update, rerun check on **new final HEAD** before audit/merge.
+- 80 Work Orders verified by CI selector; branch registry still 80 BLOCKED with 0 executor_ready. Future implementation issue [#28](https://github.com/KayzenRoot/stormline/issues/28) stays PLANNING/BLOCKED.
+- [PR #121](https://github.com/KayzenRoot/stormline/pull/121) preliminary diff: 10 docs-only files, 431 added lines, 0 deletions on first draft; no obvious embedded credential in reviewed patch. Tech/SBOM and publishing-key requirements remain PROPOSED and unexecuted. Final exact HEAD and pt-BR audit **PENDING**.
 - Tests COOK-001..028, C++ compilation/build, GPU and native OS benchmarks, fuzzing, runtime codec, Web app, uploads, cloud releases and SHA-256 runtime proof: **NOT RUN**.
-- Normal squash merge, main readback and same-WO checkpoint reconciliation: PENDING.
+- Normal squash merge, main readback and same-WO checkpoint reconciliation: PENDING final audit/CI. No next module opened.
 
 ## Proposed Checkpoint Delta (not active until audited merge)
 After independent docs CI and scope/security review APPROVED and research PR normal squash merge, record DATA-05 research as DOCUMENTED_ADR_PROPOSED, ADR-0013 still PROPOSED, implementation #28 + 80 WOs BLOCKED with `executor_ready=false`, no engine code. Reconcile in separate approved docs-only PR for this same WO before further research.
