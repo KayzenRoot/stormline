@@ -1,7 +1,7 @@
 # Stormline — Complete Engine Module Catalog v0.1
 
 **Work Order:** NLE-P00-WO-001-EXT-002 (owner-requested planning extension)  
-**Date:** 2026-11-14 | **Status:** PROPOSED FOR OWNER REVIEW, NOT APPROVED | **Implementation:** NONE  
+**Date:** 2026-11-14 | **Status:** APPROVED AS CANDIDATE INDEX; MODULE TECHNOLOGIES / 1.0 RELEASE CLASSES NOT YET APPROVED | **Implementation:** NONE  
 **Baseline:** `9032fe3eeb28ef3ac1ec786387e42a3758ed703a`  
 **Scope:** Inventory of intended modules for a complete commercial engine. Not an implementation instruction or a frozen 1.0 scope.
 
@@ -275,4 +275,4 @@ Every **approved authoring capability** must have a stable typed operation (read
 
 ## Decisions and next steps
 
-This module inventory is a **proposal only** and does not supersede approved Source Pack or checkpoint. Only after owner review and objective audit may its classification be reflected in Requirements, Scope, DoD and Architecture. The already planned `NLE-P00-WO-002` (technology/license research) remains unstarted; its inputs should include this catalog once approved. No engine code or assets are created in this Work Order.
+This module inventory was approved as a **candidate index** via PR #5; it does not supersede approved Scope, DoD or Checkpoint and does not approve implementation, a frozen 1.0 feature set or any particular technology. Only after owner review and objective audit may its classification be reflected in Requirements, Scope, DoD and Architecture. The already planned `NLE-P00-WO-002` (technology/license research) remains unstarted; its inputs should include this catalog once approved. No engine code or assets are created in this Work Order.
