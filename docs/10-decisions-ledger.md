@@ -19,7 +19,8 @@ Este Ledger separa instruções aprovadas pelo proprietário, propostas técnica
 | NLE-D013 | Sem MVP público: Stormline só poderá ser lançada após DoD completo da versão 1.0 aprovada; builds internos de testes permitidos | OWNER-DIRECTED | Solicitação explícita do proprietário |
 | NLE-D014 | Plataforma completa de criação 2D, 2.5D, 3D e jogos web, com editor manual | OWNER-DIRECTED | Solicitação explícita do proprietário |
 | NLE-D015 | AI-native, MCP para autoria com Codex, Claude e LLMs compatíveis; cobertura de operações públicas autorizadas, sem acesso irrestrito | OWNER-DIRECTED | Solicitação explícita do proprietário |
-| NLE-D016 | Catálogo de 80 módulos candidatos e critérios de completude da versão 1.0 | PROPOSED | docs/product/module-catalog.md ainda sob revisão do proprietário |
+| NLE-D016 | Catálogo de 80 módulos e 14 domínios como índice arquitetural; classes obrigatórias para 1.0 e escolhas técnicas ainda não fixadas | APPROVED INVENTORY / OPEN RELEASE CLASSES | PR #5, auditada e integrada como planejamento |
 | NLE-D017 | Windows, Linux e macOS como destinos desktop obrigatórios para Editor e jogos exportados; web continua planejado | OWNER-DIRECTED | Nova solicitação explícita; matrizes/targets mínimos dependem de ADR |
+| NLE-D018 | Autonomia delegada para propostas técnicas e integrações documentais de rotina com CI/auditoria; despesas, ações irreversíveis, bypass e HIGH/CRITICAL permanecem bloqueadas sem autorização adequada | OWNER-DIRECTED | Solicitação de prosseguir sem perguntas repetitivas, condicionada à governança aprovada |
 
 Os estados OWNER-* são contexto aprovado; o arquivo em si só vira fonte canônica após auditoria e integração do PR. Nenhuma proposta técnica é aprovada por simples inclusão em documentação. Ver [ADR 0001](adr/0001-original-engine.md), [ADR 0002](adr/0002-solo-free-governance.md).
