@@ -9,6 +9,8 @@
 Implement an independently verifiable, production-grade first necessary increment for **Diagnostics & Observability** after detailed technology architecture has been approved. Current candidate capability: Logs, traces, contadores, crashes, profiling e telemetria local opt-in.
 
 ## CONTEXT
+This packet remains BLOCKED after research is documented. Read proposed [CORE-06 diagnostics architecture](../../architecture/core-06-diagnostics-observability.md), [technology matrix](../../research/core-06-technology-matrix.md), [ADR-0008](../../adr/0008-core-06-observability-policy.md) and [research WO](../../work-orders/NLE-P00-WO-002-CORE-06.md). None of these papers authorizes code, networking, crash uploads or a Zcode implementation branch.
+
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `CORE-06`, but implementation details and release class are not yet approved.
 
 ## DEPENDENCIES
