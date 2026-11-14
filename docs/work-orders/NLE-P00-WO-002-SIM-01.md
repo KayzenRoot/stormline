@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-SIM-01
 
 **Date:** 2026-11-14 | **Research issue:** #174 | **Future code:** #46 OPEN/BLOCKED  
-**Status:** RESEARCH IN PROGRESS / DOCS ONLY | **ADR-0031:** PROPOSED | **Context Lock BASE main:** e7704cecb085db5584c88408e5451c4639780db4 (WORLD-05 research PR #172 and checkpoint PR #173 merged).  
+**Status:** APPROVED/MERGED FOR RESEARCH DOCS ONLY (PR #175), NO CODE | **ADR-0031:** PROPOSED | **Context Lock BASE main:** e7704cecb085db5584c88408e5451c4639780db4 (WORLD-05 research PR #172 and checkpoint PR #173 merged).  
 **Risk:** LOW documentary now, future ELEVATED for physics collision/simulation, numeric determinism, stale events/ECS memory, untrusted shapes and save/network authority.
 
 ## OBJECTIVE
@@ -57,3 +57,6 @@ Changed main/Scope/DoD/approved ADR => STALE/rebase/context lock; failed CI, lic
 
 ## CONTEXT LOCK
 Research BASE Git main e7704cecb085db5584c88408e5451c4639780db4, future code requires raw source byte SHA-256, approved release Scope/DoD/ADR-0031, integrated WORLD-01+TWO-01 code prerequisites, actual C++ target paths/ABI and real runtime Evidence Bundle.
+
+## Verified research PR #175 and correction receipts
+Research BASE main e7704cecb085db5584c88408e5451c4639780db4, initial HEAD 014de4c56413d373ad1788acf6e01c506da0ea99 failed [Docs Validation #43642247043](https://github.com/KayzenRoot/stormline/actions/runs/43642247043) due two escaped Markdown backticks in physics benchmark. Correction Delta within SAME WO/PR fixed and logged failure in Evidence. Final audited HEAD f594b5f7991e463dc571a135602115d7d3a49e71 passed [Docs Validation #43642341455](https://github.com/KayzenRoot/stormline/actions/runs/43642341455) SUCCESS exact final HEAD plus Socket Security/SonarCloud SUCCESS. Eleven docs-only files, objective pt-BR architecture/security/licensing/DoD audit APPROVED docs only no known HIGH/CRITICAL, normal squash main dabbec4840bf43885f884a6c6a1fd3bc5bac4048 and Git readback confirmed. Same-WO checkpoint PR is separate with own exact HEAD CI/audit gate. 159 FUTURE physics tests NOT EXECUTED, ADR-0031 PROPOSED, coding #46 OPEN/BLOCKED.

@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-05` — Procedural Generation Framework, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #172:** `36e71c4e582da9086f19065993fe2165dfe7f656`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-05](evidence/NLE-P00-WO-002-WORLD-05.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-01` — Physics 2D, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #175:** `dabbec4840bf43885f884a6c6a1fd3bc5bac4048`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-01](evidence/NLE-P00-WO-002-SIM-01.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -287,8 +287,18 @@
 - **All 160 FUTURE tests** SEE/DAG/NUM/CEL/ALG/WFC/SRC/CAC/SEC/INT/BEN **NOT EXECUTED**, no C++/WASM/Linux/macOS/Windows/GPU build, real determinism golden comparison, canvas/terrain data, source overlay persistence/rebase, cache/PHYS/NET/stream integration or CPU p95/p99/memory proof. ADR-0030 PROPOSED, release class UNDECIDED; mandatory WORLD-04/DATA-03 CODE absent; coding #45 BLOCKED.
 - **Research tally after this checkpoint:** **27 / 80 modules research documented (33.75%)**, **53 RESEARCH_PENDING** including historical CORE-04 gap unresolved. All 80 implementation work orders `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`; no implemented runtime modules.
 
-## 35. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-SIM-01: **Physics 2D**, catalog_order=28 canonical next documentary research, future coding dependencies WORLD-01 and TWO-01 unimplemented. Independent checkpoint exact HEAD CI/audit/normal squash/main readback is required before starting this next research; historical CORE-04 gap remains explicit. No coding unlock.
+## 35. SIM-01 — Physics 2D (research APPROVED, documentation only)
+- [Research issue #174](https://github.com/KayzenRoot/stormline/issues/174), NLE-P00-WO-002-SIM-01 **APPROVED DOCUMENTARY RESEARCH ONLY**. Future coding [issue #46](https://github.com/KayzenRoot/stormline/issues/46) stays OPEN/BLOCKED, no runtime/API produced.
+- [Research PR #175](https://github.com/KayzenRoot/stormline/pull/175): BASE main e7704cecb085db5584c88408e5451c4639780db4, initial HEAD 014de4c56413d373ad1788acf6e01c506da0ea99 [Docs Validation #43642247043](https://github.com/KayzenRoot/stormline/actions/runs/43642247043) FAILED due two escaped Markdown backticks in benchmark doc. Correction Delta same WO/PR removed escapes and logged failure. Audited final HEAD f594b5f7991e463dc571a135602115d7d3a49e71 [Docs Validation #43642341455](https://github.com/KayzenRoot/stormline/actions/runs/43642341455) SUCCESS on exact final HEAD, Socket Security+SonarCloud SUCCESS, 11 docs-only files and objective pt-BR audit APPROVED documentary scope, no known HIGH/CRITICAL. Normal squash merged main dabbec4840bf43885f884a6c6a1fd3bc5bac4048, readback verified. Checkpoint reconciliation is separate same-WO PR with independent CI/audit.
+- [Architecture](architecture/sim-01-physics-2d.md), [technology and license matrix](research/sim-01-physics-2d-technology-license-matrix.md), [ADR-0031 PROPOSED](adr/0031-sim-01-physics-2d-fixedstep-backend-policy.md), [typed API](contracts/sim-01-physics-2d-api.md), [159 FUTURE cases](testing/sim-01-acceptance-matrix.md), [physics benchmark](research/sim-01-physics-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-SIM-01.md).
+- Original engine-owned PhysicsWorld/Body/Shape/Joint generational opaque ID and WORLD-01 ECS EntityGuid mapping, CORE-06 fixed tick and command barrier, TWO-01 Canvas pixels↔meters/read-only render interp, Convex/Chain from TWO-02 tile source with ghost vertices, masks/filters, optional contacts/sensor events buffered poststep, ray/shape casts, CCD high-speed limits, joints, WORLD-03 critical collider PHYS ACK, DATA-04 source CAS distinct runtime state. Stable fully scoped physics state replay and optional rollback must be proven, not assumed. CPU/headless without graphics requirement.
+- Box2D 3.x C17 MIT **LEADING CANDIDATE NOT ADOPTED**, Chipmunk2D C99 MIT and Rapier2D Rust Apache-2.0 alternatives. Box2D vendor FAQ reports cross-platform determinism since 3.1 for same input/precision; not Stormline evidence. Exact SDK tag, wrapper ABI/license/SBOM/numeric flags and hardware tests future.
+- **All 159 future tests** IDN/UNT/BOD/SHP/EVT/QRY/CCD/JNT/TIM/INT/SEC/BEN **NOT EXECUTED**: no C++/WASM native binaries, headless physics, CCD/contacts, world stream source, stability/stack/joint tests, deterministic replay golden, memory/CPU p95/p99 or security fuzz. ADR-0031 PROPOSED, release class UNDECIDED and mandatory WORLD-01+TWO-01 CODE absent, issue #46 BLOCKED.
+- Registry after this checkpoint: **28/80 research modules documented (35%)**, **52 research pending** including historic CORE-04 gap. **All 80 coding WOs** remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS/executor_ready=false, approved_adr=null, zero engine implemented.
+
+## 36. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-SIM-02: **Physics 3D**, catalog_order=29 canonical next documentary research. Future code prerequisites WORLD-02 and CORE-03 not integrated; historical CORE-04 research pending remains explicit. Start SIM-02 research only after checkpoint exact final HEAD CI/audit/normal squash and main readback; coding never auto-unlocked.
+
 
 
 
