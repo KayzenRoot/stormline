@@ -5,7 +5,7 @@
 Transform Stormline's public GitHub entry into an accurate, polished, international, startup-grade presentation while retaining the owner-approved P00 scope and solo/free governance.
 
 ## CONTEXT
-Approved P00 foundation via PR #1/#2, baseline main commit \`dcd6c81d092d629caf2f4f143bdd9377a262f87d\`. Engine implementation NOT STARTED. The owner expressly requested a highly professional README and repository hygiene as the first visible presentation task.
+Approved P00 foundation via PR #1/#2, baseline main commit `dcd6c81d092d629caf2f4f143bdd9377a262f87d`. Engine implementation NOT STARTED. The owner expressly requested a highly professional README and repository hygiene as the first visible presentation task.
 
 ## SCOPE
 Main English README with coherent professional sections; pt-BR summary; docs navigation; Changelog, Contribution, Conduct, Security and Support; versioning/repository policies; GitHub issue templates; minimal formatting controls; stronger P00 documentation validation; changelog and backlog update.
@@ -35,7 +35,7 @@ R$0 mandatory CI; no CodeRabbit/external reviewer; no new runtime dependency or 
 - Diff contains no engine code or secret, and has evidence/audit in pt-BR.
 
 ## TESTS
-\`python3 scripts/validate_docs.py\`; real GitHub Actions docs-validation; diff check; docs status consistency review; check issue template metadata and pipeline references.
+`python3 scripts/validate_docs.py`; real GitHub Actions docs-validation; diff check; docs status consistency review; check issue template metadata and pipeline references.
 
 ## DELIVERABLES
 README, README.pt-BR, repo community and editorial standards, validation script changes, PR, Evidence Bundle with base/head SHA, audit and proposed Checkpoint Delta.
@@ -47,7 +47,7 @@ pt-BR: APPROVED, CORRECTION REQUIRED or BLOCKED, findings ordered by severity, a
 Out-of-scope implementation, missing license decision masquerading as license, false software claims, stale canonical sources, failing CI or HIGH/CRITICAL problem. Rework within same WO/PR.
 
 ## CONTEXT LOCK
-Base SHA \`dcd6c81d092d629caf2f4f143bdd9377a262f87d\`. Read-only fingerprints should be collected and rechecked for checkpoint, Scope, DoD, Architecture and Ledger when tools support hashing.
+Base SHA `dcd6c81d092d629caf2f4f143bdd9377a262f87d`. Read-only fingerprints should be collected and rechecked for checkpoint, Scope, DoD, Architecture and Ledger when tools support hashing.
 
 ## CHECKPOINT DELTA
 Proposal only: after objective approval and merge, record repository presentation completed; enumerate inaccessible GitHub About/security/branch rules and brand asset/licensing as open. NLE-P00-WO-002 remains not started.
