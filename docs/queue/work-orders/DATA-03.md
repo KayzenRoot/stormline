@@ -9,6 +9,8 @@
 Implement an independently verifiable, production-grade first necessary increment for **Import & Conversion Pipeline** after detailed technology architecture has been approved. Current candidate capability: Importadores 2D/3D, texturas, animações, áudio, validação e relatórios de origem.
 
 ## CONTEXT
+**This packet remains BLOCKED.** For planned technology only, read [DATA-03 architecture](../../architecture/data-03-import-conversion-pipeline.md), [technology matrix](../../research/data-03-importer-technology-matrix.md), [ADR-0011 PROPOSED](../../adr/0011-data-03-import-policy.md), [semantic import API](../../contracts/data-03-import-api.md), [future acceptance matrix](../../testing/data-03-acceptance-matrix.md) and [research WO](../../work-orders/NLE-P00-WO-002-DATA-03.md). None grants approval to implement, install decoder libraries, import project files or expose unrestricted MCP imports.
+
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `DATA-03`, but implementation details and release class are not yet approved.
 
 ## DEPENDENCIES
