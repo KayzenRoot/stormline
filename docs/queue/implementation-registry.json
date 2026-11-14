@@ -534,7 +534,7 @@
       "catalog_acceptance": "Alterações em prefabs propagam de forma controlada, com undo/redo.",
       "id": "NLE-EXEC-WO-WORLD-02-001",
       "file": "docs/queue/work-orders/WORLD-02.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",

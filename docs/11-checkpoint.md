@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-01` — Entity Component Model, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #160:** `33de3993eedaf7c4b07cdbda092c2268296bed9d`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-01](evidence/NLE-P00-WO-002-WORLD-01.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-02` — Scene & Prefab Hierarchy, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #163:** `f278b46d6bf67f3751125e81af9e4346e7eced76`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-02](evidence/NLE-P00-WO-002-WORLD-02.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -251,8 +251,18 @@
 - **117 future test cases** IDN/LIF/SCH/STO/QUE/CMD/PER/SYS/BEN **NOT EXECUTED**; no running ECS, C++ build, ASan/TSan, native/Web, headless world, CPU p95/p99, million-entity demonstration or actual source migration. ADR-0026 remains PROPOSED, future code #41 NOT authorized. Mandatory CORE-05/DATA-04 code not implemented.
 - **Measured documentation planning tally after this checkpoint:** 23 of 80 modules with research documented (28.75%); 57 RESEARCH_PENDING. Historical **CORE-04 research remains RESEARCH_PENDING** despite catalog_order=3, requires separate dedicated research before any dependency chain/DoD that needs it may be approved. All 80 implementation packets remain BLOCKED and executor_ready=false. Documentation tally is **not** 23 executable modules or approved technology ADRs.
 
-## 31. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-WORLD-02: **Scene & Prefab Hierarchy**, catalog_order=24 in canonical queue. Research only; Zcode implementation remains blocked pending ADR/Scope/DoD and actual dependent code plus evidence. Historical CORE-04 gap is not hidden by proceeding in checkpoint order.
+## 31. WORLD-02 — Scene & Prefab Hierarchy (research APPROVED, documentation only)
+- [Research issue #162](https://github.com/KayzenRoot/stormline/issues/162) and WO NLE-P00-WO-002-WORLD-02, **APPROVED DOCUMENTARY RESEARCH ONLY**. Future coding [issue #42](https://github.com/KayzenRoot/stormline/issues/42) remains OPEN/BLOCKED.
+- [Research PR #163](https://github.com/KayzenRoot/stormline/pull/163): BASE main 1871b4adc99eb82e79890af5e7a423d8db202daa, audited corrected final HEAD 07045d868d96088c9897a78391fe92f2ef4fd1ca. Initial [Docs Validation #43635576110](https://github.com/KayzenRoot/stormline/actions/runs/43635576110) FAILED on 22 escaped Markdown backticks in research WO; Correction Delta same WO/PR fixed exactly 22 and recorded in Evidence Bundle. Corrected [Docs Validation #43635712447](https://github.com/KayzenRoot/stormline/actions/runs/43635712447) SUCCESS on exact final HEAD, Socket Security/SonarCloud SUCCESS; pt-BR objective audit APPROVED documentation only, 11 docs files, no known HIGH/CRITICAL, normal squash main f278b46d6bf67f3751125e81af9e4346e7eced76. Same-WO checkpoint reconciliation is separate PR with independent exact HEAD CI/audit.
+- [Architecture](architecture/world-02-scene-prefab-hierarchy.md), [technology/rights](research/world-02-prefab-technology-license-matrix.md), [ADR-0027 PROPOSED](adr/0027-world-02-prefab-override-rebase-policy.md), [typed Scene/Prefab API](contracts/world-02-scene-prefab-api.md), [122 future cases](testing/world-02-acceptance-matrix.md), [benchmark protocol](research/world-02-prefab-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-WORLD-02.md).
+- Original source SceneAsset/PrefabAsset/NodeId/VariantId/InstanceId, parent scene forest vs separate prefab nested dependency DAG, cycle/depth guards, CORE-05 KEEP_LOCAL/KEEP_WORLD affine reparent, overrides at stable component field+structural NodeId, non-overridden base propagation and typed base/ours/theirs 3-way conflict rebase. DATA-02 asset provenance, DATA-04 source journal/CAS undo/redo+crash recovery and separately acknowledged WORLD-01 runtime snapshot; no arbitrary script/file access from AI editor.
+- Godot PackedScene MIT and Unity 6 nested variants/Apply-Revert under proprietary license as design references; OpenUSD current dev source **Tomorrow Open Source Technology License 1.0**, distinct from original Apache-2.0 trademark provision and bundled third-party rights; O3DE core Apache-2.0 OR MIT, third-party packages separate. No library/vendor source/art installed. SIOP optional PROVE-OR-DROP, no performance claim.
+- All **122 future tests** IDN/HIE/TRF/VAR/MRG/TXN/INT/SEC/BEN **NOT EXECUTED**, no Scene/Prefab editor, C++/save-reopen, actual World/Asset source, native/Web, CPU p95/p99, undo/redo or conflict resolution running. ADR-0027 PROPOSED, release class UNDECIDED and mandatory WORLD-01/DATA-02 CODE prerequisites absent. Future code #42 NOT authorized.
+- Registry after this checkpoint: **24 of 80 research modules documented (30%)**, **56 RESEARCH_PENDING**, including historical CORE-04 research gap. All 80 coding WOs still BLOCKED/executor_ready=false; **0/80 code modules implemented**.
+
+## 32. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-WORLD-03: **Spatial Index & World Streaming**, catalog_order=25, canonical next research, dependencies WORLD-02 and DATA-05 for future code still unimplemented. Only research may start after this checkpoint passes independent CI/audit/merge/readback; historical CORE-04 pending remains explicit.
+
 
 
 
