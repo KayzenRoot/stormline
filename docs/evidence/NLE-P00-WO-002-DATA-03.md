@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-14 | **Risk:** LOW docs, future ELEVATED hostile decoder/project integrity.  
 **Research issue:** [#114](https://github.com/KayzenRoot/stormline/issues/114) | **Implementation:** [#26](https://github.com/KayzenRoot/stormline/issues/26) remains BLOCKED.  
-**Evidence state:** PENDING FINAL CI/AUDIT / NO ENGINE CODE. ADR-0011 PROPOSED.
+**Evidence state:** APPROVED / MERGED for research docs, NO ENGINE CODE. ADR-0011 remains PROPOSED.
 
 ## BASE and Context Lock
 - Git main baseline `b477dbecacc733a251666644ac05173f9390d159`.
@@ -36,9 +36,16 @@
 - Original SIRG research must prove practical benefit over DATA-02 receipts/graph and must not duplicate a second source of truth.
 - Exact source tags/licenses/release schema, performance budgets and high-fidelity fixtures deferred for future approved implementation.
 
+## Final research PR audit / merge evidence
+- Research [PR #115](https://github.com/KayzenRoot/stormline/pull/115), BASE `b477dbecacc733a251666644ac05173f9390d159`, audited final HEAD `d5cd189e55452c351e7cddb8d15f31eed5577201`.
+- [GitHub Actions run 43603329199](https://github.com/KayzenRoot/stormline/actions/runs/43603329199): `docs-validation` SUCCESS, links/Source Pack, 80-module taxonomy DAG, 80 WOs, blocked-selector PASS.
+- Scope audit in pt-BR recorded on PR #115: APPROVED for **documentation only**, ten docs/ Markdown files; no native engine, codec library, assets processed or obvious secret in patch.
+- Squash merge `d6993c2e67a5fd53c19126f0d0473a62e0e7909f`, confirmed by main readback and architecture/Evidence file read.
+- Future implementation issue #26 and all 80 queue packets remain BLOCKED.
+
 ## Tests and checks
-- GitHub Actions final research HEAD CI: **PENDING** at creation; record only after real run and objective audit.
-- Objective audit: **PENDING**.
+- GitHub Actions final research HEAD CI: **SUCCESS** on the exact audited HEAD above. A separate checkpoint reconciliation CI run is required.
+- Objective audit: **APPROVED for research**, recorded in PR #115.
 - glTF parser integration, Windows/Linux/macOS builds, simulated malicious inputs, fuzzers/ASan/TSan, 2D/3D/audio golden fixtures, GPU quality, import/reimport/fault injection, benchmark: **NOT RUN**. No engine runtime exists.
 - No mandatory external reviewer, CodeRabbit, paid CI, bypass, force push or secret credentials.
 

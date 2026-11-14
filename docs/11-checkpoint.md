@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-02` — asset identity, metadata, reference graph and recovery, PROPOSTA de arquitetura (sem engine implementada).  
-**Main SHA comprovado após o merge da PR #112:** `a5664bfccf011dc3300c54a18d6ae846ee0926d8`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-02](evidence/NLE-P00-WO-002-DATA-02.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-03` — importadores, conversão e reimportação idempotente, PROPOSTA de arquitetura (sem engine implementada).  
+**Main SHA comprovado após o merge da PR #115:** `d6993c2e67a5fd53c19126f0d0473a62e0e7909f`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-03](evidence/NLE-P00-WO-002-DATA-03.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -116,5 +116,14 @@
 - SQLite WAL single writer/local-only e política de durabilidade são requisitos de avaliação; alterações VFS+SQLite **não constituem uma transação atômica**. Journal/reconciliação e falhas injetadas são provas futuras. SAPG é R&D não comprovado.
 - [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-02.md). Sem C++ compilado, SQLite criado, benchmarks, testes de recuperação, GPU, plataforma ou MCP implementados; as 80 WOs permanecem BLOCKED/`executor_ready=false`.
 
-## 15. Próximo incremento
-`NLE-P00-WO-002-DATA-03`: pesquisa dos importadores e conversão de assets (2D/3D/texturas/animações/áudio), import receipts, reimport idempotente, segurança de arquivos e testes de fidelidade. **PLANNED / NOT STARTED** até reconciliação DATA-02 aprovada por CI/auditoria/merge. Nenhuma liberação para codificação.
+## 15. DATA-03 — importação e conversão segura, recibos e reimportação
+- Issue de pesquisa [#114](https://github.com/KayzenRoot/stormline/issues/114), WO `NLE-P00-WO-002-DATA-03`, **APPROVED para documentos somente**; [issue #26](https://github.com/KayzenRoot/stormline/issues/26) de implementação continua BLOCKED.
+- PR [#115](https://github.com/KayzenRoot/stormline/pull/115): base main `b477dbecacc733a251666644ac05173f9390d159`, HEAD auditado `d5cd189e55452c351e7cddb8d15f31eed5577201`. [CI 43603329199](https://github.com/KayzenRoot/stormline/actions/runs/43603329199) docs-validation SUCCESS, incluindo links/Source Pack, 80 módulos/DAG, 80 WOs e seletor bloqueado.
+- Auditoria em pt-BR APPROVED para pesquisa documental, squash merge `d6993c2e67a5fd53c19126f0d0473a62e0e7909f` confirmado por leitura de main e artefatos. Nenhum HIGH/CRITICAL conhecido no escopo documental.
+- [Arquitetura](architecture/data-03-import-conversion-pipeline.md), [matriz de tecnologia](research/data-03-importer-technology-matrix.md), [ADR-0011 PROPOSED](adr/0011-data-03-import-policy.md), [API semântica](contracts/data-03-import-api.md), [20 testes futuros](testing/data-03-acceptance-matrix.md).
+- Conformidade glTF/GLB, fastgltf/cgltf MIT, Assimp BSD-based; KTX-Software licenças mistas com decoder ETC não open-source opcional sob bloqueio de distribuição. OpenUSD condicional. Nenhuma biblioteca vendored.
+- `AssetId` preservado em reimportação, mapeamento estável de subassets e usuário overrides protegidos por preview/conflito propostos; import receipts e staged commit devem respeitar DATA-01 VFS e DATA-02 reconstrução de índices.
+- [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-03.md): não foram executados parser/codec, C++ builds, testes de fuzz/fidelidade/recovery, benchmarks hardware/macOS ou MCP. Nenhum importador funcional, engine ou conversor entregue. `executor_ready=false` nas 80 WOs.
+
+## 16. Próximo incremento
+`NLE-P00-WO-002-DATA-04`: pesquisa de Serialization & Scene Format, contratos versionados, diffs semânticos e migrações com roundtrip seguro, **PLANNED / NOT STARTED** até esta reconciliação passar CI/auditoria/merge. O próximo incremento é documental; nenhuma WO do Zcode executável.

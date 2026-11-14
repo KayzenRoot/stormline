@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-DATA-03
 
 **Research issue:** #114 | **Future code issue:** #26 (BLOCKED) | **Date:** 2026-11-14  
-**State:** RESEARCH PROPOSED / AUDIT PENDING, **NOT IMPLEMENTED**  
+**State:** APPROVED / MERGED for documentation only (PR #115), ADR-0011 remains PROPOSED, **NOT IMPLEMENTED**  
 **Base main:** `b477dbecacc733a251666644ac05173f9390d159`.  
 **Risk:** LOW for documentation, ELEVATED for future decoder security/asset preservation/distribution.
 
