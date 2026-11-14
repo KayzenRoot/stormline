@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-WORLD-02 Prefab Research
 
-**State:** DRAFT RESEARCH PR/CI/AUDIT PENDING | Research issue #162 | Future code #42 OPEN/BLOCKED.  
+**State:** RESEARCH PR OPEN / INITIAL CI FAILURE IDENTIFIED AND CORRECTED; NEW EXACT-HEAD CI/AUDIT PENDING | Research issue #162 | Future code #42 OPEN/BLOCKED.  
 **BASE main:** 1871b4adc99eb82e79890af5e7a423d8db202daa. Branch docs/NLE-P00-WO-002-WORLD-02-prefab-research. No engine/editor/runtime/source assets, actual scene save/reopen, prefab propagation or performance test executed.
 
 ## Source and dependency context
@@ -9,9 +9,18 @@
 - Official references: Godot 4.6 PackedScene/Node.owner and MIT license; Unity 6 nested/variants/Apply-Revert under proprietary editor terms; OpenUSD public composition graphs/strength, upstream source LICENSE = **Tomorrow Open Source Technology License 1.0 (not plain Apache2)** plus third-party notices; O3DE core Apache-2.0 OR MIT and independent third parties. These are design/license references only, no third-party package/asset installed.
 - Research design: stable NodeGuid/PrefabId/InstanceId and WORLD-01 EntityGuid/Handle separation; source scene tree + prefab DAG; nested/variant sparse overrides and field-level base/ours/theirs 3-way merge, deterministic propagation, DATA-04 CAS undo/redo+crash recovery and separate runtime publish, CORE-05 transform semantics, scoped Editor/CLI/MCP. SIOP optional PROVE-OR-DROP only.
 
+## Canonical BASE Git blob fingerprints (NOT raw file SHA-256)
+- Checkpoint docs/11-checkpoint.md: `61cb5373ed25f8dbbf02cb14c34b0b9c5392275d`
+- Ledger docs/10-decisions-ledger.md: `d47abc54aa3aa1826d6a0a3c67dbfcaf1853ae9e`
+- Scope docs/03-scope.md: `4ef605c74632ece080b2650e37dd83a415b63310`
+- DoD docs/09-definition-of-done.md: `160b3054db9ea1961308934b401488b838d24c3e`
+- Architecture docs/04-architecture.md: `70bafe80f9f8d3c0fa949ce0077d2f83e65e91a8`
+- Future packet docs/queue/work-orders/WORLD-02.md: `a9b49f9fbdf81a504de7bf3fc6704ee57ad01eb3`
+These are version control Git object hashes, not SHA-256 of source contents. Executor must compute raw SHA-256 after future code approvals and re-lock when canonical sources change.
+
 ## Research evidence truth
 - Expected 11 docs-only research files: 8 new architecture, matrix, ADR-0027, typed API, 122 future cases, benchmark, WO and Evidence; 3 additive Architecture/Backlog/future #42 packet. **Registry/checkpoint NOT touched in research PR**.
-- Research PR exact HEAD CI and security checks: **PENDING**.
+- [Research PR #163](https://github.com/KayzenRoot/stormline/pull/163) initial HEAD `5c8fc2ce357f8ebef885f0dcb57a84199893f7f8` had [Docs Validation #43635576110](https://github.com/KayzenRoot/stormline/actions/runs/43635576110) **FAILURE** due to 22 escaped Markdown backticks in `docs/work-orders/NLE-P00-WO-002-WORLD-02.md`; fetched job #132571515546 log proves `escaped Markdown code-fence marker`. **Correction Delta:** replace escaped markers with valid Markdown inline code markers, same WO/PR, no scope/architecture change. After correction, NEW exact final HEAD CI required, not yet claimed success.
 - Objective pt-BR documentary audit/normal merge and readback: **PENDING**.
 - **All 122 tests FUTURE NOT EXECUTED**, no real save/reopen, scripted merge, undo, serializer, graph code, C++ memory, native/Web build, performance p50/p95/p99 or security fuzz. No claim of lossless prefab propagation achieved. ADR-0027 PROPOSED, release class UNDECIDED and approved_adr=null.
 - Risk LOW docs; future ELEVATED authoring loss, link/cycle fraud, buffer exhaustion, source/runtime publication race, metadata security, external dependency license compliance.
