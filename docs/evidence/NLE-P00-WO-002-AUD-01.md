@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-01 Audio Device & Mixer Research
 
-**STATUS: RESEARCH BRANCH IN PROGRESS, PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #196 DRAFT, INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT, MERGE AND CHECKPOINT PENDING. NO ENGINE CODE.**  
 **Date:** 2026-11-14 | Research [#195](https://github.com/KayzenRoot/stormline/issues/195) | Future implementation [#52](https://github.com/KayzenRoot/stormline/issues/52) OPEN/BLOCKED.  
 **BASE main:** `21e50e73cf1f5f3a3c01bb2f869422161b28e248` | branch `docs/NLE-P00-WO-002-AUD-01-audio-device-mixer-research`.
 
@@ -21,8 +21,8 @@ Critical blob lock: checkpoint `319a05d912a548057465944f4874ac7549272b70`; ledge
 | Gate | Current state |
 |---|---|
 | Research issue #195, branch created from checked main | OBSERVED |
-| Research PR exact HEAD and file diff | PENDING |
-| GitHub Docs Validation exact final HEAD | NOT VERIFIED |
+| Research PR and initial HEAD | [PR #196](https://github.com/KayzenRoot/stormline/pull/196) DRAFT, BASE `21e50e73cf1f5f3a3c01bb2f869422161b28e248`, initial HEAD `b42a422fb1e31d96aafe6e1016fc780459fdcfca`, exactly eight new Markdown-only files, no registry/runtime changes; final HEAD changes when this evidence is committed. |
+| Initial Docs Validation (not final after evidence revision) | [Run #43655431711](https://github.com/KayzenRoot/stormline/actions/runs/43655431711) SUCCESS on initial PR HEAD `b42a422fb1e31d96aafe6e1016fc780459fdcfca`, job #132632782081, Source Pack/local link, module DAG, WO registry and blocked Zcode selector all SUCCESS. This evidence update creates a new HEAD and requires repeat exact-head CI. |
 | SonarCloud/Socket other security CI | NOT VERIFIED |
 | Actual native/Web/NullSink/audio software, audio device, callback, underruns/latency | NOT IMPLEMENTED / NOT TESTED |
 | 128 future acceptance cases, fuzz/ASan/TSan, audio samples/performance | ALL FUTURE / NOT EXECUTED |
