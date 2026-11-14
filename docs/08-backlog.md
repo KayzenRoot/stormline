@@ -8,7 +8,8 @@ Status: INITIAL / NÃO são issues criadas
 | NLE-P00-WO-001-EXT-002 | Catálogo de 80 módulos, 2D/2.5D/3D/web e Windows/Linux/macOS, MCP-first e no-MVP como propostas | Solicitação explícita owner após EXT-001 | APPROVED / MERGED (PR #5), catálogo técnico de candidatos; sem código |
 | NLE-P00-WO-002 | Pesquisa de stack/licenças por módulo, começando em NLE-P00-WO-002-CORE-01 (issue #6) | EXT-002 catalog e checkpoint integrados | CORE-01 pesquisa documental APPROVED via PR #8; CORE-02 PLANNED; demais módulos NÃO INICIADOS, sem código |
 | NLE-P00-WO-002-CORE-02 | Pesquisa std::pmr/mimalloc/rpmalloc, arenas e memória (issue #10) | CORE-01 docs/checkpoint APPROVED | RESEARCH DOCS APPROVED via PR #11, implementation NOT STARTED |
-| NLE-P00-WO-002-CORE-03 | Research job scheduler, work stealing, task graph and thread affinity (CORE-03) | CORE-02 checkpoint/CI APPROVED | RESEARCH DOCS IN PROGRESS; code NOT STARTED |
+| NLE-P00-WO-002-CORE-03 | Research job scheduler, work stealing, task graph and thread affinity (CORE-03) | CORE-02 checkpoint/CI APPROVED | RESEARCH DOCS APPROVED / MERGED via PR #14; code NOT STARTED |
+| NLE-P00-WO-002-QUEUE-001 | Planejamento da fila completa de Work Orders/Issues para Zcode, templates bloqueados por ADRs/DoD | CORE-03 research/checkpoint approved | PLANNED / NOT STARTED |
 | NLE-P00-WO-003 | Arquitetura Core, memória, jobs, tempo, contratos | WO-002 APPROVED | PLANNED |
 | NLE-P00-WO-004 | Arquitetura renderer, shaders, iluminação, VFX | WO-003 APPROVED | PLANNED |
 | NLE-P00-WO-005 | World/terrain/physics/assets/audio | WO-003/004 APPROVED | PLANNED |

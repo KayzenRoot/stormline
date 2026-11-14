@@ -1,7 +1,7 @@
 # Work Order — NLE-P00-WO-002-CORE-03
 
 **Risk:** LOW (planning); future implementation ELEVATED if threading/runtime safety.  
-**State:** PROPOSED DOCS / AUDIT PENDING | **Issue:** #13 | **Base SHA:** `b76e7fd9992dcc012c212e8afe3d2836d9776c63`.
+**State:** APPROVED / MERGED (docs only, PR #14); ADR-0005 remains PROPOSED | **Issue:** #13 | **Base SHA:** `b76e7fd9992dcc012c212e8afe3d2836d9776c63`.
 
 ## OBJECTIVE
 Specify a precise cross-platform job/task scheduling technology decision and future acceptance plan for 2D/3D/VFX workloads, keeping long-tail frame latency low and preventing concurrency bugs.
