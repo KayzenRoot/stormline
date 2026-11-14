@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-04 Skeletal Animation & Motion Research
 
-**Status: RESEARCH BRANCH IN PROGRESS; CI, PR, AUDIT, MERGE AND CHECKPOINT NOT YET VERIFIED. NO ENGINE CODE.**  
+**Status: RESEARCH PR #184 OPEN DRAFT; INITIAL DOCS CI PASS; FINAL EXACT-HEAD CI/AUDIT, MERGE AND CHECKPOINT PENDING. NO ENGINE CODE.**  
 **Date:** 2026-11-14 | **Issue:** [#183](https://github.com/KayzenRoot/stormline/issues/183) | **Coding #49:** [OPEN/BLOCKED](https://github.com/KayzenRoot/stormline/issues/49).  
 **Base main:** `4dc7060fc0de16c036364a7363755a9ec4ea9144`; research branch `docs/NLE-P00-WO-002-SIM-04-skeletal-motion-research`.
 
@@ -23,12 +23,12 @@ No source, compiled runtime, third-party library, actual fixture or benchmark in
 |---|---|
 | Source Pack/Decisions/Module catalog | READ in main as above |
 | Research issue/branch | #183 created, scoped branch based on main SHA |
-| Research PR number/final head | PENDING |
-| CI Docs Validation exact-head | NOT RUN/NOT VERIFIED |
+| Research PR number/initial head | [PR #184](https://github.com/KayzenRoot/stormline/pull/184) Draft; initial HEAD `ec7e02850bc443e174a3feac8525457397c4fd49`; 8 added docs files, 0 executable paths |
+| Initial CI Docs Validation | [Run 43647075521](https://github.com/KayzenRoot/stormline/actions/runs/43647075521) SUCCESS at initial PR HEAD `ec7e02850bc443e174a3feac8525457397c4fd49`; job `132607157833` all steps SUCCESS: Source Pack/link, dependency DAG, registry, blocked Zcode selector. **After this evidence revision, final HEAD requires a new CI result**. |
 | Other security CI/Sonar/Socket | NOT VERIFIED |
 | Engine/native/Web/headless tests | NOT EXECUTED |
 | 96 runtime acceptance cases | NOT EXECUTED |
-| Objective pt-BR diff/architecture/security audit | PENDING |
+| Objective pt-BR diff/architecture/security audit | PENDING on revised exact HEAD; source diff confirmed eight new docs, no runtime or registry flag change |
 | Normal squash merge/readback | PENDING |
 | Separate checkpoint PR/CI/audit/squash | PENDING |
 
