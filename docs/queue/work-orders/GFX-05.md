@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-05`, but implementation details and release class are not yet approved.
 
+## RESEARCH-ONLY CONTEXT (NOT EXECUTOR READY)
+The [GFX-05 architecture](../../architecture/gfx-05-materials-textures-pbr.md), [technology matrix](../../research/gfx-05-material-technology-matrix.md), [ADR-0018 PROPOSED](../../adr/0018-gfx-05-material-texture-policy.md), [typed semantic API](../../contracts/gfx-05-material-texture-api.md), [44 future acceptance scenarios](../../testing/gfx-05-acceptance-matrix.md), [research Work Order](../../work-orders/NLE-P00-WO-002-GFX-05.md) and [Evidence Bundle](../../evidence/NLE-P00-WO-002-GFX-05.md) are **research only**, not an approved implementation plan. The current speculative KTX2/BasisU/MaterialX paths require real licenses/versions/target device tests; shader compiling, importer, GPU resource allocator and cooker are NOT duplicated. Actual source paths, exact dependencies, release classification, hardware budgets, quality thresholds and completed predecessor receipts are still TBD. Code issue #33 and all 80 future Work Orders remain BLOCKED and `executor_ready=false`.
+
 ## DEPENDENCIES
 `GFX-02`, `DATA-03`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
