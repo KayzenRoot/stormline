@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-06 Destruction Research
 
-**Status: RESEARCH BRANCH IN PROGRESS; PR, CI, AUDIT, MERGE AND CHECKPOINT PENDING. NO ENGINE CODE.**  
+**Status: RESEARCH PR #190 DRAFT; INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT, MERGE AND CHECKPOINT PENDING. NO ENGINE CODE.**  
 **Date:** 2026-11-14 | Research issue [#189](https://github.com/KayzenRoot/stormline/issues/189) | Future coding [#51](https://github.com/KayzenRoot/stormline/issues/51) OPEN/BLOCKED.  
 **BASE main:** `1a0fd10dde4f9fa119732d445fbce8499bec29f6`; branch `docs/NLE-P00-WO-002-SIM-06-destruction-research`.
 
@@ -23,12 +23,12 @@ No source code added; no vendor SDK, assets/footage, imported model or installed
 | Gate | Current observation |
 |---|---|
 | Canonical source lock, issue #189 and branch | Observed as above |
-| Research PR #/base/final HEAD and changed files | PENDING |
-| GitHub Docs Validation exact-HEAD CI | NOT VERIFIED |
+| Research PR and initial HEAD | [PR #190](https://github.com/KayzenRoot/stormline/pull/190) DRAFT, base main `1a0fd10dde4f9fa119732d445fbce8499bec29f6`, initial HEAD `63a5e52cf4ea378ab6e8286000fa4c9016cb1429`, eight new Markdown files, no runtime/registry edits. |
+| Initial Docs Validation | [Run #43653111689](https://github.com/KayzenRoot/stormline/actions/runs/43653111689) SUCCESS on initial PR HEAD `63a5e52cf4ea378ab6e8286000fa4c9016cb1429`, job #132625693623, Source Pack/local links, catalog DAG, registry, Zcode blocked selector all SUCCESS. Because updating this Evidence Bundle changes HEAD, a new exact-final-HEAD run is required. |
 | SonarCloud/Socket security checks | NOT VERIFIED |
 | Win/Linux/macOS/Web/CPU headless engine | NOT IMPLEMENTED, NOT TESTED |
 | 120 runtime, security fuzz, ASan/TSan, GPU/CPU benchmarks | FUTURE / NOT EXECUTED |
-| Objective pt-BR audit | PENDING |
+| Objective pt-BR audit | PENDING on final exact HEAD; initial changed files confirmed eight documents only. |
 | Research PR squash/readback | PENDING |
 | Separate checkpoint PR CI/audit/squash/readback | PENDING |
 
