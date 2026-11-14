@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-DATA-04
 
 **Date:** 2026-11-14 | **Research issue:** #117 | **Future coding:** #27 BLOCKED.
-**Evidence state:** IN PROGRESS, DOCUMENTATION RESEARCH ONLY. No runtime code, benchmark, serializer, data migration or deployment exists.
+**Evidence state:** DOCS RESEARCH REVIEWED, FINAL CI / MERGE PENDING; NO ENGINE CODE. No runtime code, benchmark, serializer, data migration or deployment exists.
 **Baseline main:** 3f03773cf5ca9cba0d2ebda4b6c142f0fc93e45d; docs-only branch docs/NLE-P00-WO-002-DATA-04-scene-research.
 
 ## Critical source Git blob fingerprints at baseline
@@ -30,10 +30,10 @@ Any changed canonical input marks Context Lock STALE; recompute/rebase before im
 LOW docs risk; future ELEVATED project corruption, prompt injection/host paths, unknown plugin execution, migration/rollback and security of untrusted documents. No file-system/SQLite atomicity guarantee. Exact pinned library versions, test datasets/hardware and legal notices remain selection gates. SSD innovation is a hypothesis only.
 
 ## Tests / CI / audit (fill only from observed GitHub results)
-- Docs validator: PENDING on authored HEAD.
+- First audited docs-validation [GitHub Actions run #43606093967](https://github.com/KayzenRoot/stormline/actions/runs/43606093967): SUCCESS on research HEAD 199582a1f82324bc4bbbb38047c78cfbca4b5c8c. Jobs: Source Pack/local links, module dependency DAG, 80-WO registry and blocked selector all SUCCESS. Evidence-doc update requires new HEAD + CI revalidation before merge.
 - Actual C++ build/compiler/static analysis/fuzz/golden fixtures/Windows/Linux/macOS/Web hardware or browser runtime benchmark: **NOT EXECUTED**.
-- Patch diff, no secrets, link checks, CI run ID and pt-BR review: PENDING audit.
-- PR number, final HEAD SHA, merge SHA and main readback: PENDING.
+- [PR #118](https://github.com/KayzenRoot/stormline/pull/118) docs-only diff audited: 10 Markdown files, no C++/vendored code; no credential-looking changes observed. Architecture/contract maintain DATA-01/02 boundaries, scoped MCP and non-ACID recovery. License/version caveats remain PROPOSED and test-required, not an implementation greenlight. Verdict **APPROVED conditionally for documentation**, subject to exact final HEAD CI PASS, no HIGH/CRITICAL and scoped diff reread.
+- PR #118 opened as Draft; exact final HEAD SHA and merge/main readback PENDING. Record final proof in PR audit and post-merge same-WO checkpoint reconciliation.
 - Required 80 coding WOs remain BLOCKED and executor_ready=false.
 
 ## Proposed Checkpoint Delta (do not promote yet)
