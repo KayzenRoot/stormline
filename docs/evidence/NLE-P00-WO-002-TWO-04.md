@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-TWO-04 Hybrid Research
 
-**Status:** RESEARCH PR OPEN; INITIAL EXACT-HEAD CI SUCCESS, FINAL HEAD REVALIDATION/AUDIT PENDING | Research issue #156 | Future coding issue #40 OPEN/BLOCKED.  
+**Status:** RESEARCH DOCUMENTATION AUDITED/APPROVED/MERGED; CHECKPOINT PR PENDING ITS OWN EXACT-HEAD CI/AUDIT | Research issue #156 | Future coding issue #40 OPEN/BLOCKED.  
 **BASE main:** 73f4826354724ce72a037411eba3dc86174638c3; research branch docs/NLE-P00-WO-002-TWO-04-hybrid-composition-research. No 2.5D engine, GPU compositing, real cutscene/art assets or benchmark produced.
 
 ## Context/Source Check
@@ -20,9 +20,12 @@ These are Git object fingerprints observed before research changes, not SHA-256 
 ## Research PR source inventory and truthfulness
 - Expected 11 docs-only research files: 8 new (architecture, technology/license matrix, ADR-0025, API, tests, benchmark, WO, EB) and 3 existing Architecture/Backlog/blocked #40 packet references. **NO checkpoint or implementation-registry change in initial research PR**.
 - [Research PR #157](https://github.com/KayzenRoot/stormline/pull/157): initial HEAD `be5b5dfd67ad31a5584f4adaf43a807187d3f1f2`, [Docs Validation run #43633144894](https://github.com/KayzenRoot/stormline/actions/runs/43633144894) **SUCCESS on initial exact HEAD**; initial Socket Security Project Report SUCCESS. This Evidence edit changes HEAD and requires a NEW final-exact-HEAD CI before objective audit and merge.
-- Objective pt-BR audit and merge SHA/readback: **PENDING**.
+- [Research PR #157](https://github.com/KayzenRoot/stormline/pull/157): pt-BR objective audit APPROVED docs-only, 11 scoped docs, no known HIGH/CRITICAL documentation defects; audited final HEAD b9c71e084f95d9aa9b8f371b5f35b85cd69746cb with [Docs Validation #43633197318](https://github.com/KayzenRoot/stormline/actions/runs/43633197318) SUCCESS exact HEAD, Socket Security/SonarCloud PASS; squash merged main 52d7bb881ab7cd0a323f51a6bf443f3448c6978a. Checkpoint must separately pass exact-HEAD CI/audit.
 - All **109 future tests NOT EXECUTED**. No CPU/3D sprite math implementation, GPU screenshots, real HDR mode, native/Web device, full frame p95/p99, source license SBOM, shadows, physics or 60FPS data. No claim Stormline is better than existing engines.
 - Risk LOW docs, future ELEVATED GPU buffer/alpha/depth precision/viewport life cycle and untrusted scene authoring. All release/ABI targets undecided, ADR-0025 PROPOSED.
 
 ## Proposed Checkpoint Delta, NOT APPLIED
 Only after exact-head CI+objective audit APPROVED and research merge, open separate same-WO checkpoint PR changing ONLY TWO-04.research_status RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED. Update checkpoint/backlog/research WO/evidence with verified receipts, preserve 80 future implementation statuses BLOCKED, 0 executor_ready, approved_adr=null, release class UNDECIDED, coding issue #40 OPEN. Require independent exact-final-HEAD CI and audit before closing #156 / starting WORLD-01 research.
+
+## Proposed checkpoint reconciliation receipts in this separate same-WO PR
+The only registry delta is TWO-04.research_status: RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED. Preserve all 80 coding WO statuses BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null, release_class UNDECIDED, future #40 OPEN. ADR-0025 stays PROPOSED. All 109 future depth/sprite/lighting/alpha/GPU/benchmark tests NOT EXECUTED; no playable hybrid renderer. Do not research WORLD-01 until this checkpoint PR has passed its own exact-final-HEAD CI, objective pt-BR audit, squash and main readback.
