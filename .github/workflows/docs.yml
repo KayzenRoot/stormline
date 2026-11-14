@@ -22,3 +22,5 @@ jobs:
         run: python3 scripts/validate_docs.py
       - name: Module taxonomy and dependency DAG validation
         run: python3 scripts/validate_module_catalog.py
+      - name: Work Order registry validation
+        run: python3 scripts/validate_wo_registry.py
