@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Architecture](../../architecture/world-01-entity-component-model.md), [technology/license matrix](../../research/world-01-ecs-technology-license-matrix.md), [ADR-0026 PROPOSED](../../adr/0026-world-01-entity-identity-storage-policy.md), [typed Entity API](../../contracts/world-01-entity-api.md), [117 future NOT EXECUTED tests](../../testing/world-01-acceptance-matrix.md), [ECS benchmark protocol](../../research/world-01-ecs-benchmark-protocol.md), [research Work Order](../../work-orders/NLE-P00-WO-002-WORLD-01.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-WORLD-01.md) are **proposed research**, not final executable C++ contracts. Stable GUID vs ephemeral world-instance/slot/generation handles, typed schema, deferred structural commands, query borrow fences and code ownership require actual source/DoD proof. Flecs/EnTT/Bevy alternatives not selected or integrated. Historical CORE-04 research remains pending; CORE-05+DATA-04 code not built. Research #159 does not authorize issue #41 or any of the 80 code WOs (all BLOCKED/executor_ready=false).
+
 ## DEPENDENCIES
 `CORE-05`, `DATA-04`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
