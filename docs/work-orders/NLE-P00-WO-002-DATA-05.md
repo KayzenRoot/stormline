@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-DATA-05
 
 **Research issue:** #120 | **Future code issue:** #28 BLOCKED | **Date:** 2026-11-14
-**Status:** IN PROGRESS / RESEARCH DOCUMENTS ONLY | **ADR-0013:** PROPOSED.
+**Status:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #121) | **ADR-0013:** PROPOSED; NO ENGINE CODE.
 **Base main / Context Lock:** 8659327e73e803dcf09345e95f14647375ce9fe5. DATA-04 research and checkpoint approved/merged via PRs #118/#119.
 **Risk:** LOW documentation; future ELEVATED integrity, codecs, patching and target distribution.
 

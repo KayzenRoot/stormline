@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-04` — serialização de cenas, diff semântico e migrações seguras, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #118:** `c5f733d2bda16a3b30956fc2296b569cbc44bf47`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-04](evidence/NLE-P00-WO-002-DATA-04.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-05` — target cooking, streaming bundles e patches recuperáveis, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #121:** `7361647bb0a35930d0088708ad17c41682cbf17d`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-05](evidence/NLE-P00-WO-002-DATA-05.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -134,5 +134,13 @@
 - Segurança: payloads de plugin não executam código, unknown required capability falha fechado; no atomicidade mágica entre DATA-01 VFS e DATA-02 SQLite. SSD é hipótese prove-or-drop sem desempenho comprovado.
 - [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-04.md): nenhuma biblioteca, motor, serializer, migração, Windows/macOS/Web build, benchmark, fuzzing ou testes SER-001..020 executados. As 80 WOs continuam BLOCKED/`executor_ready=false`.
 
-## 17. Próximo incremento (somente após reconciliação aprovada)
-`NLE-P00-WO-002-DATA-05`: pesquisa documental de cooking, bundles, target profiles e distribuição de assets. Não iniciar antes da validação e merge deste checkpoint DATA-04; nenhuma WO de implementação está liberada.
+## 17. DATA-05 — Target cooking, streaming bundles e patching seguro
+- Research issue [#120](https://github.com/KayzenRoot/stormline/issues/120), WO `NLE-P00-WO-002-DATA-05`: pesquisa APPROVED para documentos somente. Implementação [#28](https://github.com/KayzenRoot/stormline/issues/28) continua BLOCKED.
+- PR [#121](https://github.com/KayzenRoot/stormline/pull/121), BASE main `8659327e73e803dcf09345e95f14647375ce9fe5`, HEAD auditado `c3fc08d125b188f30d4e8b505af2b52bb783ba2c`; [CI #43607595361](https://github.com/KayzenRoot/stormline/actions/runs/43607595361) docs-validation SUCCESS no HEAD exato (links/Source Pack, DAG 80 módulos, registry, seletor bloqueado).
+- Auditoria objetiva pt-BR APPROVED exclusivamente para pesquisa documental, 10 arquivos docs sem HIGH/CRITICAL conhecido no diff; squash merge normal `7361647bb0a35930d0088708ad17c41682cbf17d` confirmado por leitura de main e arquitetura.
+- [Arquitetura](architecture/data-05-cooking-streaming-bundles.md), [matriz](research/data-05-cooking-technology-matrix.md), [ADR-0013 PROPOSED](adr/0013-data-05-cooking-policy.md), [API semântica](contracts/data-05-cook-bundle-api.md), [28 cenários futuros](testing/data-05-acceptance-matrix.md).
+- zstd dual BSD/GPL, LZ4 lib BSD/CLI GPL, Brotli, meshoptimizer, KTX2/Basis e formatos binários são **candidatos sem biblioteca instalada**. Bundle chunks derivados com referências AssetId DATA-02, target capability, hashes separados de autenticidade, streaming com budgets e Web fallback, patch copy-on-write com journal e recuperação propostos; nenhuma ferramenta de distribuição/assinatura implantada.
+- SASG como hipótese prove-or-drop, não comprovada. [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-05.md): nenhum teste COOK-001..028, codec runtime, build C++, benchmark macOS/Windows/Web ou fuzz foi executado. Todas 80 WOs futuras permanecem BLOCKED e `executor_ready=false`.
+
+## 18. Próxima pesquisa (após este checkpoint)
+`NLE-P00-WO-002-GFX-01`: fundamentos do backend gráfico/renderização, próximo módulo no registro topológico. Não iniciar antes desta reconciliação documental ser auditada e integrada; Zcode ainda não está liberado para código.
