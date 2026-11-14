@@ -7,7 +7,7 @@
 
 ## Product strategy and definitions
 
-Stormline is planned as an **original, commercial-capable, human + AI-native 2D/2.5D/3D engine**, covering desktop and browser releases. The owner requests **NO MVP** and **NO public use before full release readiness**. Internal integration milestones are engineering verification stages, *not* public MVPs, launches or promises to meet all possible game types. A commercial 1.0 requires a frozen, owner-approved versioned capability matrix, with all MUST-HAVE modules and acceptance tests satisfied. A general-purpose engine cannot meaningfully guarantee every possible engine feature forever; post-1.0 innovation continues under a compatibility policy.
+Stormline is planned as an **original, commercial-capable, human + AI-native 2D/2.5D/3D engine**, covering **Windows, Linux and macOS desktop**, plus browser releases. The owner requests **NO MVP** and **NO public use before full release readiness**. Internal integration milestones are engineering verification stages, *not* public MVPs, launches or promises to meet all possible game types. A commercial 1.0 requires a frozen, owner-approved versioned capability matrix, with all MUST-HAVE modules and acceptance tests satisfied. A general-purpose engine cannot meaningfully guarantee every possible engine feature forever; post-1.0 innovation continues under a compatibility policy.
 
 User-facing quality references: military combined-arms games for world/network/vehicle requirements and Path of Exile 2-like modern ARPG capability for action, animation, lighting, VFX and audio. Reference games remain unaffiliated and their protected content shall not be copied.
 
@@ -30,10 +30,10 @@ User-facing quality references: military combined-arms games for world/network/v
 | 09 · Multiplayer & Online | 6 | Cliente/servidor confiável e seguro, com limites claros; serviços cloud pagos não são pré-requisitos. |
 | 10 · Professional Editor & Authoring | 7 | Experiência manual completa, desacoplada do runtime e equivalente em poder ao controle por IA. |
 | 11 · AI-native & MCP Integration | 9 | Toda a capacidade de autoria aprovada terá contrato versionado e testável, acessível a humano, CLI e MCP. |
-| 12 · Platforms, Packaging & Runtime Targets | 5 | Mesmos dados de projeto com builds específicos e redução de recursos por plataforma. |
+| 12 · Platforms, Packaging & Runtime Targets | 6 | Mesmos dados de projeto com builds específicos e redução de recursos por plataforma. |
 | 13 · Quality, Security & Performance Engineering | 5 | Metas de qualidade são parte da especificação do produto, não um plugin instalado no fim. |
 | 14 · Commercial Product & Ecosystem | 3 | A engine só estará pronta para uso comercial após distribuição, documentação e acordos claros. |
-| **TOTAL** | **79** | **Proposed catalog, not 79 delivered modules or fixed scope.** |
+| **TOTAL** | **80** | **Proposed catalog, not 80 delivered modules or fixed scope.** |
 
 ## Catalog by subsystem
 
@@ -189,8 +189,9 @@ Mesmos dados de projeto com builds específicos e redução de recursos por plat
 | `PLAT-01` | **Windows Desktop Target** | Window/input/GPU/audio targets, empacotamento e atualização. | GFX-01 · GAME-01 | Build e smoke test em hardware Windows definido. |
 | `PLAT-02` | **Linux Desktop Target** | Distribuições/camada de compatibilidade, GPU/audio/windowing e packaging. | GFX-01 · GAME-01 | Build e smoke test em Linux definido. |
 | `PLAT-03` | **Browser Runtime (WebAssembly/WebGPU/WebGL)** | Execução em navegador com targets de memória, sandbox, loading e fallbacks. | TWO-01 · GFX-01 · DATA-05 | 2D e cenário 3D browser compatíveis em browsers matriz; sem alegar 1:1 nativo. |
+| `PLAT-06` | **macOS Desktop Target (Apple Silicon + Intel compatibility)** | Cocoa/Objective-C++ bridge, native window lifecycle, Metal presentation surface, packaging, architecture ABI, GPU capability/fallback and OS version matrix. Apple Silicon mandatory; Intel coverage to be decided by ADR for 1.0. | CORE-01 · GFX-01 · GAME-01 | Editor and exported 2D/2.5D/3D game open/build/close on a macOS test matrix, with platform-native graphics checks and recoverable errors. |
 | `PLAT-04` | **Mobile Target Adaptation** | Input touch, orçamento bateria/termal, GPUs mobile e packaging, sujeita a validação de custo. | GFX-01 · GAME-01 | Plataformas móveis selecionadas com smoke/compatibilidade documentadas. |
-| `PLAT-05` | **Build, Export & Distribution** | Export templates, assets por target, package manifests, símbolos, checksums e distribuição. | PLAT-01 · PLAT-02 · PLAT-03 · DATA-05 | Export reprodutível de aplicações aprovadas; falhas claras por target. |
+| `PLAT-05` | **Build, Export & Distribution** | Export templates, assets por target, package manifests, símbolos, checksums e distribuição. | PLAT-01 · PLAT-02 · PLAT-03 · PLAT-06 · DATA-05 | Export reprodutível de aplicações aprovadas; falhas claras por target. |
 
 ### 13 · Quality, Security & Performance Engineering
 
@@ -217,7 +218,7 @@ A engine só estará pronta para uso comercial após distribuição, documentaç
 ## Release requirement model (proposed)
 
 Each catalog item gets **Release Class** at the next planning stage:
-- **MANDATORY FOR 1.0** — all acceptance tests and platform matrix must pass before any commercial/public launch. Baseline includes native 2D/2.5D/3D authoring, editor, scripting, AI/MCP coverage, Windows/Linux and Web target, audio/VFX/lighting, asset pipeline, export, security and documentation. Exact titles, depth, and constraints require owner approval in the versioned capability matrix.
+- **MANDATORY FOR 1.0** — all acceptance tests and platform matrix must pass before any commercial/public launch. Baseline includes native Windows/Linux/macOS 2D/2.5D/3D authoring, editor, scripting, AI/MCP coverage, Windows/Linux/macOS and Web target, audio/VFX/lighting, asset pipeline, export, security and documentation. Exact titles, depth, and constraints require owner approval in the versioned capability matrix.
 - **RESEARCH / ADVANCED TECHNIQUE** — custom GI, new VFX algorithm, ray tracing, physics or audio innovations require benchmarks and ADRs; do not block 1.0 unless explicitly declared mandatory after technical proof.
 - **PLATFORM CONDITIONAL** — mobile, console-specific integration and specialized vendor SDKs need explicit target, licensing, test hardware and budget decision. Mobile here is a candidate to assess, not automatic mandatory target; consoles are not promised.
 
@@ -233,6 +234,10 @@ Each catalog item gets **Release Class** at the next planning stage:
 | Web | Browser target from same project with graceful quality/feature reduction, compatibility table and explicit loading constraints |
 | Multiplayer | Dedicated headless authority, client prediction/replication, reconnect/security, latency/jitter/loss testing |
 | AI-native workflow | Project generated/edited/validated/exported by MCP and CLI; every authoring action has deterministic semantics, user-visible diff, permission and undo when applicable |
+
+## Approved desktop platform intent (release contract details pending)
+
+Windows, Linux and **macOS** are mandatory first-party desktop targets for **Stormline Editor + exported games**. Browser delivery is a separate mandatory product capability, not a fourth desktop OS. macOS Apple Silicon must have native test coverage; Intel compatibility and minimum macOS release need an ADR and should not be presumed. Renderer backends and Apple signing/notarization costs need separate design/approval; no subscription or fee was authorized for planning/CI. A translation layer is only a candidate, not proof of performance parity.
 
 ## Cross-cutting global invariants
 
