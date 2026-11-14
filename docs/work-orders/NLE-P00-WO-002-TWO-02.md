@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-TWO-02
 
 **Research issue #150 | Future implementation #38 OPEN/BLOCKED** | 2026-11-14  
-**State:** RESEARCH IN PROGRESS, DOCS ONLY | **ADR-0023:** PROPOSED | **BASE main:** 11beaafb5122a29fdeb8a45aa01e4f90c1a6517a (TWO-01 research #147, PRs #148/#149 integrated).  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #151) | **ADR-0023:** PROPOSED | **BASE main:** 11beaafb5122a29fdeb8a45aa01e4f90c1a6517a (TWO-01 research #147, PRs #148/#149 integrated).  
 **Risk:** LOW docs; future ELEVATED persistence, malicious compressed source maps, collision cutover, GPU/physics consistency.
 
 ## OBJECTIVE
@@ -54,3 +54,6 @@ Stale source or failed CI, improper license, unexpected code/asset, false benchm
 
 ## CONTEXT LOCK
 BASE main 11beaafb5122a29fdeb8a45aa01e4f90c1a6517a; Git blob SHA is NOT raw file SHA-256. Runtime activation needs actual SHA-256, exact files/ABI, owner-approved DoD and integrated dependencies.
+
+## Verified research merge receipt
+BASE main 11beaafb5122a29fdeb8a45aa01e4f90c1a6517a, final audited HEAD f4368e0c29312c8607596386fd6e82a1b05fe291, [Docs Validation #43629001202](https://github.com/KayzenRoot/stormline/actions/runs/43629001202) SUCCESS on exact final HEAD, Socket Security/SonarCloud PASS; objective pt-BR audit APPROVED docs only, scoped 11 files, no known HIGH/CRITICAL documentation defects, normal squash merged main 81be9c9a9dbba91299499e45041fb12229173314. Checkpoint is separate same-WO PR with own exact-head CI/audit. ADR-0023 PROPOSED, code #38 OPEN/BLOCKED and 93 scenarios NOT EXECUTED.
