@@ -27,6 +27,7 @@ Status: INITIAL CANDIDATES; somente decisões do proprietário no Ledger têm ap
 - CAP-012: exportação e reprodução de jogos em navegador são parte da visão; matriz de compatibilidade, gráficos e custos precisam ser especificados.
 - CAP-013: interface manual e **AI-native** com MCP, Codex, Claude e hosts LLM compatíveis, cobrindo todas as funções **públicas de autoria aprovadas**, por comandos tipados e controles de segurança.
 - CAP-014: não publicar MVP; permitir builds internos de integração e testes, lançar 1.0 comercial somente após DoD completo e escopo 1.0 aprovado.
+- CAP-016: suporte nativo obrigatório a **Windows, Linux e macOS** no Editor e nos jogos exportados, com matriz de versão/arquitetura e testes multi-OS; suporte web permanece requisito independente. Apple Silicon deve integrar a matriz; Intel e versão mínima serão definidos em ADR.
 - CAP-015: capacidade extensível para múltiplos gêneros, sem exigir hardcode de regras particulares no núcleo.
 Detalhamento ainda **PROPOSED**, ver [catálogo](product/module-catalog.md) e [prontidão comercial](product/full-release-readiness.md). Não há nova implementação aprovada por estes requisitos.
 
