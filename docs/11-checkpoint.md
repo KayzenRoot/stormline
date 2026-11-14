@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-04` — Geometry, Occlusion & LOD, instancing e streaming de geometria, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #133:** `ed4b77e1113c0aee615f5d17b0bf4f60bb624702`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-04](evidence/NLE-P00-WO-002-GFX-04.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-05` — Materials, Texture Systems & PBR, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #136:** `694bb961066631f84a38008a268ede3bb7c60693`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-05](evidence/NLE-P00-WO-002-GFX-05.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -177,5 +177,14 @@
 - meshoptimizer C/C++ MIT, glTF EXT_meshopt_compression/EXT_mesh_gpu_instancing ratificados, clusterlod.h e gltfpack como candidatos sem tag/versão aprovada; Epic Nanite referência conceitual sem cópia. DATA-05 retém fonte/streaming e último LOD seguro; GFX-03 conserva GPU VRAM/fences. SVCG original só hipótese prove-or-drop.
 - [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-04.md): GEO-001..036, C++/SDK, testes nativos Windows/Linux/macOS/Web, geometria renderizada, fuzz, VRAM/CPU/GPU p95/p99 **NÃO EXECUTADOS**. Todas as 80 WOs de código continuam BLOCKED/`executor_ready=false`.
 
-## 22. Próximo módulo de pesquisa (somente após esta reconciliação)
-`NLE-P00-WO-002-GFX-05`: **Materials, Texture Systems & PBR**, conforme registry topológico. Trata shading físico, sistemas de textura, mips/filtros, decals e transparência; implementações Zcode permanecem bloqueadas até validação dos gates.
+## 22. GFX-05 — Materials, Texture Systems & PBR (somente pesquisa)
+- Research [issue #135](https://github.com/KayzenRoot/stormline/issues/135), WO `NLE-P00-WO-002-GFX-05`: pesquisa **APPROVED para documentação somente**. Issue de implementação [#33](https://github.com/KayzenRoot/stormline/issues/33) continua BLOCKED.
+- Research [PR #136](https://github.com/KayzenRoot/stormline/pull/136): base `ace3355583dd1f83d2d483081184d665fa2229fa`, HEAD auditado `084292f57182ec54fdde0a91cdf7f22f39c13ad2`, [Docs Validation #43616014685](https://github.com/KayzenRoot/stormline/actions/runs/43616014685) **SUCCESS no HEAD exato**; Socket Security e SonarCloud checks SUCCESS conforme checagem.
+- Auditoria pt-BR no [comentário da PR #136](https://github.com/KayzenRoot/stormline/pull/136): **APPROVED exclusivamente para docs**, 10 arquivos `docs/`, sem engine/codecs/shaders/binários e sem HIGH/CRITICAL identificado no diff; squash merge normal `694bb961066631f84a38008a268ede3bb7c60693` confirmado pelo GitHub. A reconciliação documental do checkpoint é uma PR separada da mesma WO, não nova pesquisa.
+- [Arquitetura](architecture/gfx-05-materials-textures-pbr.md), [tecnologias/licenças](research/gfx-05-material-technology-matrix.md), [ADR-0018 PROPOSED](adr/0018-gfx-05-material-texture-policy.md), [API semântica](contracts/gfx-05-material-texture-api.md), [44 testes futuros](testing/gfx-05-acceptance-matrix.md), [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-05.md).
+- Propostas de PBR metallic-roughness GGX/Smith/Fresnel e stylized/2D, sRGB/linear, normal/mips/alpha, OPAQUE/MASK/BLEND/TRANSMISSION, decals, overdraw, KTX2/BasisU ETC1S/UASTC e BCn/ASTC/ETC2 por feature tier; MaterialX opcional. KTX-Software possui decodificador ETC não open-source opcional, com gate legal; não foi instalada nenhuma biblioteca.
+- GFX-02 é dono do shader compiler, DATA-03 import, DATA-05 cook, GFX-03 VRAM/fences, GFX-01 capacidade de dispositivo e GFX-06 luz; sem interfaces duplicadas. STAM apenas hipótese prove-or-drop.
+- Os 44 cenários futuros PBR/TEX/ALP/SYS, builds C++, fuzzing, GPUs reais em Windows/Linux/macOS/Web e benchmarks p50/p95/p99 **NÃO EXECUTADOS**. Todas as 80 WOs de implementação continuam BLOCKED/`executor_ready=false` e ADR-0018 permanece PROPOSED.
+
+## 23. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-GFX-06`: **Lighting & Shadows**, conforme DAG canônico; implementação Zcode continua bloqueada e nenhuma integração de iluminação foi executada.

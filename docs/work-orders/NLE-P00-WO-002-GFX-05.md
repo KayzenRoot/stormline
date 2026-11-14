@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-GFX-05
 
 **Research issue:** #135 | **Future implementation issue:** #33 BLOCKED | **Date:** 2026-11-14  
-**State:** RESEARCH IN PROGRESS, DOCS ONLY | **ADR-0018:** PROPOSED / NO ENGINE CODE  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #136) | **ADR-0018:** PROPOSED / NO ENGINE CODE  
 **Context Lock BASE main:** `ace3355583dd1f83d2d483081184d665fa2229fa` (GFX-04 research/checkpoint #133/#134 merged).  
 **Risk:** LOW docs, future ELEVATED (untrusted image codecs, PBR correctness, GPU resource lifetime, texture streaming).
 
@@ -59,4 +59,4 @@ Do not advance until exact-head CI, scope and review pass. Halt if canonical fil
 BASE main `ace3355583dd1f83d2d483081184d665fa2229fa`, linked critical **Git blob object SHAs**, not claimed byte SHA-256; byte SHA-256 of canonical files required only at later executable activation. Rebase and re-review if Checkpoint/Scope/DoD/Architecture/approved ADR changes.
 
 ## EVIDENCE BUNDLE
-See [research evidence](../evidence/NLE-P00-WO-002-GFX-05.md). PR CI and audit must be added only after observed; checkpoint delta proposed, never executor-promoted unilaterally.
+See [research evidence](../evidence/NLE-P00-WO-002-GFX-05.md): final HEAD `084292f57182ec54fdde0a91cdf7f22f39c13ad2`, [docs CI #43616014685](https://github.com/KayzenRoot/stormline/actions/runs/43616014685) SUCCESS, [PR #136](https://github.com/KayzenRoot/stormline/pull/136) pt-BR audit APPROVED for docs-only and normal squash main merge `694bb961066631f84a38008a268ede3bb7c60693`. Reconciliation PR in same WO subject to distinct CI/audit/merge; no code unlock.
