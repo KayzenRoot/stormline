@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-02` — Tilemaps & 2D Worlds, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #151:** `81be9c9a9dbba91299499e45041fb12229173314`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-02](evidence/NLE-P00-WO-002-TWO-02.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-03` — 2D Animation & Sequencing, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #154:** `28ade29693e407e781946769b5f559e0ec1d3d9d`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-03](evidence/NLE-P00-WO-002-TWO-03.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -226,6 +226,15 @@
 - External file candidates Tiled TMX/JSON/infinite GID high four flags and LDtk JSON external levels; **Tiled editor GPL versus libtiled BSD2, LDtk MIT**, all source art/license/sandbox still future proof. SWSP only optional prove-or-drop hypothesis, no proven novelty or performance gain.
 - All **93 future tests** CRD/DAT/GRD/RUL/STR/COL/IMP/SYS/BEN are **NOT EXECUTED**, including saved map editor, cross-platform GPU/streaming/PHYS integration, p95/p99 and security fuzz; engine/demo/build/benchmark not produced. ADR-0023 PROPOSED; all 80 implementation work orders remain BLOCKED/executor_ready=false, issue #38 NOT authorized for Zcode.
 
-## 28. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-TWO-03: **2D Animation & Sequencing**, catalog_order=21, next official research in the DAG. Future code authorization is blocked pending approved Scope/DoD/ADR, actual integrated dependencies and independent evidence.
+## 28. TWO-03 — 2D Animation & Sequencing (research APPROVED documentation only)
+- [Research issue #153](https://github.com/KayzenRoot/stormline/issues/153), WO NLE-P00-WO-002-TWO-03, **APPROVED only DOCUMENTATION**. Future coding [issue #39](https://github.com/KayzenRoot/stormline/issues/39) OPEN/BLOCKED.
+- [Research PR #154](https://github.com/KayzenRoot/stormline/pull/154): BASE main 8a104213bdd6d9d6fd88875d12a463200944975b, final audited HEAD 9e3d8bc369465311a9bc18602a203cf2c1acaec8; [Docs Validation #43630601311](https://github.com/KayzenRoot/stormline/actions/runs/43630601311) SUCCESS at final HEAD, Socket Security+SonarCloud SUCCESS; objective pt-BR documentary audit APPROVED, 11 docs-only files, no known HIGH/CRITICAL in scope, normal squash merged into main 28ade29693e407e781946769b5f559e0ec1d3d9d. This checkpoint reconciliation is **separate same-WO PR**.
+- [Architecture](architecture/two-03-animation-sequencing.md), [technology/license matrix](research/two-03-animation-technology-license-matrix.md), [ADR-0024 PROPOSED](adr/0024-two-03-deterministic-animation-sequencing-policy.md), [semantic API](contracts/two-03-animation-api.md), [106 future tests](testing/two-03-acceptance-matrix.md), [A/V sync benchmark](research/two-03-timeline-sync-benchmark.md), [Evidence Bundle](evidence/NLE-P00-WO-002-TWO-03.md).
+- Proposals: original flipbook, stable 2D skeleton/skin/IK, CPU reference+optional GPU skinning, state machines/blends, rational/integer timebase for frame-to-audio sample schedule, bounded cutscene tracks and idempotent cue replay/seek. TWO-01 Canvas renders, DATA-04 persists, GFX-03/07 own GPU/camera, AUDIO owns actual clock/mixer and export owner owns encoding. No audible sample-accurate claim from timeline schedule alone.
+- License research: DragonBonesCPP MIT, Godot comparative MIT, Rive MIT runtime with free export splash and paid clean export, **Spine runtimes custom editor-license restrictions updated Nov 2026**, Lottie-web MIT with audio/media feature gaps, FFmpeg LGPL/GPL depending build, codecs and media rights independent. No libraries, audio, rigs or binaries installed.
+- **106 future cases TIM/FLI/RIG/BLN/EVT/SEQ/AUD/INT/SEC/BEN NOT EXECUTED**; no C++/GPU, actual timeline playback, A/V export, AUDIO clock/latency verification, Web/native tests, benchmark or quality claim. ADR-0024 PROPOSED, all 80 future implementation WOs BLOCKED/executor_ready=false, future code issue #39 not authorized. STS remains optional PROVE-OR-DROP.
+
+## 29. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-TWO-04: **2.5D Hybrid Composition**, catalog_order=22, next official research in the queue. Zcode coding remains blocked until owner-approved Scope/DoD/ADR, implemented dependencies and objectively audited proof.
+
 

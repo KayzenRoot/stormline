@@ -468,7 +468,7 @@
       "catalog_acceptance": "Timeline reproduzível e exportada com sincronismo áudio.",
       "id": "NLE-EXEC-WO-TWO-03-001",
       "file": "docs/queue/work-orders/TWO-03.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",

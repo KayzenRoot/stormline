@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-TWO-03
 
 **2026-11-14 | Research issue #153 | Future implementation issue #39 OPEN/BLOCKED**  
-**State:** RESEARCH IN PROGRESS / DOCS ONLY | **ADR-0024:** PROPOSED | **Context Lock BASE main:** 8a104213bdd6d9d6fd88875d12a463200944975b (TWO-02 research PR #151 and checkpoint PR #152 merged).  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #154) | **ADR-0024:** PROPOSED | **Context Lock BASE main:** 8a104213bdd6d9d6fd88875d12a463200944975b (TWO-02 research PR #151 and checkpoint PR #152 merged).  
 **Risk:** LOW research docs; future ELEVATED audiovisual time accuracy, untrusted animation assets, authored events/gameplay authority, GPU animation buffers and codecs/export licensing.
 
 ## OBJECTIVE
@@ -56,3 +56,6 @@ Stale Git canonical source, unsupported licensing or artificial synced-export cl
 
 ## CONTEXT LOCK
 BASE main 8a104213bdd6d9d6fd88875d12a463200944975b. Git blob IDs (when captured) are NOT raw file SHA-256; future executor must capture SHA-256 from real source byte content and rebase after any relevant approved DoD/Scope/ADR change. No activated code packet in this phase.
+
+## Verified research merge receipt
+Research BASE main 8a104213bdd6d9d6fd88875d12a463200944975b, audited final HEAD 9e3d8bc369465311a9bc18602a203cf2c1acaec8; [Docs Validation #43630601311](https://github.com/KayzenRoot/stormline/actions/runs/43630601311) SUCCESS at final exact HEAD, Socket Security and SonarCloud PASS, pt-BR objective audit APPROVED exclusively docs, no HIGH/CRITICAL in scope. Normal squash merged PR #154 into main 28ade29693e407e781946769b5f559e0ec1d3d9d. This checkpoint PR requires its own exact HEAD CI/audit, no automatic code approval. All 106 prospective tests NOT EXECUTED, ADR-0024 PROPOSED and #39 still OPEN/BLOCKED.
