@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-GFX-03
 
 **Research issue:** #129 | **Future implementation issue:** #31 BLOCKED | **Date:** 2026-11-14  
-**State:** IN PROGRESS, DOCUMENTATION ONLY | **ADR-0016:** PROPOSED  
+**State:** APPROVED / MERGED FOR DOCUMENTAL RESEARCH ONLY (PR #130) | **ADR-0016:** PROPOSED / NO ENGINE CODE  
 **Context Lock BASE main:** `e76d561d98dd4192d8bae1fb66cab09e194fbc70` (GFX-02 research/checkpoint PRs #127/#128 audited and merged).
 **Risk:** LOW docs; future ELEVATED GPU sync/alias/device loss/VRAM.
 

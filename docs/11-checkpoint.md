@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-02` — compilação de shaders/materiais, reflexão, variantes e hot reload seguro, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #127:** `076362cd71020359cd8fe8475a3f623e1e3a4fe8`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-02](evidence/NLE-P00-WO-002-GFX-02.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-03` — Render Graph, segurança da sincronização e orçamentos de VRAM, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #130:** `43d844b6f1de1b5545193c6a3c004ed28561bca4`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-03](evidence/NLE-P00-WO-002-GFX-03.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -159,5 +159,14 @@
 - Contratos typed Shader/MaterialDefinition, binding reflection, variant budget, cache source vs driver cache, last-good generation/hot reload, controles de segurança e MCP semantic-only propostos. SSVF prove-or-drop, sem benchmark.
 - [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-02.md): nenhum teste SHD-001..030, C++, shader binary, compilação GPU, macOS/browser conformance, fuzz ou benchmark executado. Todas 80 WOs de implementação continuam BLOCKED com `executor_ready=false`.
 
-## 20. Próximo módulo (após reconciliação desta WO)
-`NLE-P00-WO-002-GFX-03`: Render Graph & GPU Resource Manager, pesquisa documental de pass scheduling, barriers, transient recursos e VRAM budgets. Não iniciar até este checkpoint receber CI/auditoria/merge; nenhuma implementação Zcode desbloqueada.
+## 20. GFX-03 — Render Graph, sincronização e gestão de VRAM
+- Research [issue #129](https://github.com/KayzenRoot/stormline/issues/129), WO `NLE-P00-WO-002-GFX-03`, **APPROVED para documentos de pesquisa somente**. Implementação [#31](https://github.com/KayzenRoot/stormline/issues/31) permanece BLOCKED.
+- Research [PR #130](https://github.com/KayzenRoot/stormline/pull/130): BASE main `e76d561d98dd4192d8bae1fb66cab09e194fbc70`, HEAD auditado `59409196dad6828a2e749cd899ad2c8f0d182c1a`; [CI docs-validation #43612692152](https://github.com/KayzenRoot/stormline/actions/runs/43612692152) **SUCCESS** no SHA exato (Source Pack/links, DAG 80 módulos, registry e seletor bloqueado).
+- Auditoria objetiva pt-BR **APPROVED para documentos somente**, 10 arquivos docs, nenhum HIGH/CRITICAL identificado no diff; squash merge normal `43d844b6f1de1b5545193c6a3c004ed28561bca4` comprovado na main e arquitetura GFX-03.
+- [Arquitetura](architecture/gfx-03-render-graph-gpu-memory.md), [matriz tecnológica](research/gfx-03-rendergraph-technology-matrix.md), [ADR-0016 PROPOSED](adr/0016-gfx-03-render-graph-policy.md), [API semântica](contracts/gfx-03-render-graph-api.md), [34 testes futuros](testing/gfx-03-acceptance-matrix.md).
+- Proposta de DAG tipado, RAW/WAR/WAW, subresources e histórico, aliases de transientes somente com prova de fence/época/conclusão GPU; alternativa segura sem alias/serial. Orçamentos de VRAM com KNOWN/ESTIMATED/UNKNOWN, UMA/discrete/Web e recuperação por geração.
+- Candidatos Vulkan Synchronization2/VMA MIT, D3D12 barreiras legadas/melhoradas quando suportadas e D3D12MA MIT, Metal MTLHeap/fences e WebGPU usage scopes; nenhuma lib selecionada, instalada ou benchmarkada. SAFG é somente hipótese prove-or-drop.
+- [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-03.md): RGP-001..034, C++/GPU, drivers Windows/Linux/macOS/Web, VRAM/CPU/GPU p95/p99, testes de alias e fuzz **NÃO EXECUTADOS**. Todas 80 WOs de implementação mantidas BLOCKED/`executor_ready=false`.
+
+## 21. Próximo módulo (somente após reconciliação GFX-03)
+`NLE-P00-WO-002-GFX-04`: pesquisa documental de Renderização 3D / Pipeline de alto desempenho, próximo no registro topológico; dependências e escopo devem ser lidos antes de iniciar. Nenhum código Zcode liberado.

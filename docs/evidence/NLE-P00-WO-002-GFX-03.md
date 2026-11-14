@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-03
 
 **Date:** 2026-11-14 | **Research issue:** #129 | **Future code issue:** #31 BLOCKED
-**Evidence state:** RESEARCH DOCUMENTATION UNDER FINAL AUDIT, NO ENGINE CODE. No C++ graph, GPU heap, shaders, SDK, benchmarks, driver tests, render pass or deployment.
+**Evidence state:** RESEARCH DOCUMENTATION APPROVED / MERGED, IMPLEMENTATION BLOCKED, NO ENGINE CODE. No C++ graph, GPU heap, shaders, SDK, benchmarks, driver tests, render pass or deployment.
 **BASE main:** `e76d561d98dd4192d8bae1fb66cab09e194fbc70`; **research branch:** `docs/NLE-P00-WO-002-GFX-03-rendergraph-research`.
 **Risk:** LOW docs, future ELEVATED GPU memory alias, async sync and recovery.
 
@@ -28,13 +28,13 @@ Critical fingerprint values below are **Git blob object IDs, NOT SHA-256 hashes 
 - SAFG experimental prove-or-drop, no claimed extra frames/sec, RAM saving or VRAM allocator performance.
 
 ## Actual tests/evidence log (must be updated from real runs)
-- Initial research HEAD `420ab4e8e1317de6e9824a46e6add53640cdedc2` passed [Docs Validation #43612642586](https://github.com/KayzenRoot/stormline/actions/runs/43612642586) **SUCCESS**, including Source Pack/links, 80 module DAG, registry and blocked selector. After this Evidence edit, rerun exact new HEAD CI before approval.
-- [PR #130](https://github.com/KayzenRoot/stormline/pull/130): preliminary diff 10 files under `docs/` only, +444 lines / 0 removed; no C++/GPU graph/runtime, SDK, shader or obvious secret found in added lines. Registry verified 80/80 BLOCKED with zero executor_ready; code issue #31 stays blocked. Final exact HEAD and pt-BR review PENDING.
+- Initial research HEAD `420ab4e8e1317de6e9824a46e6add53640cdedc2` passed [Docs Validation #43612642586](https://github.com/KayzenRoot/stormline/actions/runs/43612642586) **SUCCESS**, including Source Pack/links, 80 module DAG, registry and blocked selector. Final research HEAD `59409196dad6828a2e749cd899ad2c8f0d182c1a` passed independent [Docs Validation #43612692152](https://github.com/KayzenRoot/stormline/actions/runs/43612692152) **SUCCESS**.
+- [PR #130](https://github.com/KayzenRoot/stormline/pull/130): preliminary diff 10 files under `docs/` only, +444 lines / 0 removed; no C++/GPU graph/runtime, SDK, shader or obvious secret found in added lines. Registry verified 80/80 BLOCKED with zero executor_ready; code issue #31 stays blocked. Final research HEAD `59409196dad6828a2e749cd899ad2c8f0d182c1a` and CI #43612692152 passed objective pt-BR **APPROVED for docs only** ([PR #130 audit comment](https://github.com/KayzenRoot/stormline/pull/130#issuecomment-6880161825)).
 - RGP-001..034, real C++/GPU builds, native Windows/Linux/macOS/Web, fuzz GPU, driver validation, CPU/GPU/VRAM p95/p99, SAFG benchmarks: **NOT RUN**.
-- Squash merge SHA and main readback / same-WO checkpoint reconciliation: PENDING.
+- Normal squash merge [PR #130](https://github.com/KayzenRoot/stormline/pull/130) `43d844b6f1de1b5545193c6a3c004ed28561bca4` VERIFIED in main and GFX-03 architecture readback. Separate same-WO checkpoint reconciliation PR needs independent CI/audit/merge before GFX-04.
 
 ## Risks and future gates
 Unsafe GPU memory aliasing can corrupt output and crash drivers. CPU DAG ordering is insufficient proof of GPU completion across queues and epochs. GFX-01/CORE-03 code not implemented, RHI feature tiers remain research proposed, VMA/D3D12MA version/driver hardware/SBOM and physical VRAM budgets not locked; no remote telemetry or GPU SDK installed. All 80 implementation packets stay BLOCKED, none executor_ready.
 
-## Proposed Checkpoint Delta (not active until objective audit)
-After research docs CI and audit APPROVED and research squash merge read back, promote only GFX-03.research_status=RESEARCH_DOCUMENTED_ADR_PROPOSED via a separate same-WO checkpoint reconciliation PR. Leave ADR-0016 PROPOSED, future code #31 / 80 WOs BLOCKED, executor_ready=false. Next GFX-04 research only after checkpoint audited/merged.
+## Checkpoint Reconciliation (pending this PR's own audit)
+Promote only GFX-03.research_status=RESEARCH_DOCUMENTED_ADR_PROPOSED as documentary milestone. ADR-0016 remains PROPOSED, no licensed code/library selected, #31 and all 80 implementation WOs BLOCKED with executor_ready=false. This PR must pass independent CI, objective audit, normal merge/readback, then research issue #129 closure before any GFX-04 research.
