@@ -2,7 +2,7 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento documental aprovado:** `NLE-P00-WO-001-EXT-002` — **APPROVED / MERGED** (catálogo de 80 capacidades candidatas, não funcionalidades implementadas).  
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-01` — **APPROVED / MERGED** (plataforma e ciclo de vida, não código).  
 **Main SHA comprovado após o merge da PR #3:** `e41274bb841094630ba71843b0876bb5d79370f4`.  
 **Evidence Bundle:** [NLE-P00-WO-001-EXT-001](evidence/NLE-P00-WO-001-EXT-001.md).
 
@@ -45,5 +45,13 @@
 - Windows, Linux e macOS são plataformas desktop obrigatórias para Editor e jogos exportados; a matriz de hardware/macOS Intel deverá ser decidida e testada. Jogos web são alvo adicional.
 - Nenhum módulo de código implementado, e nenhum desempenho AAA comprovado. Repositório permanece em P00.
 
-## 6. Próxima Work Order
-`NLE-P00-WO-002`: pesquisa técnica de stack, licenças, alternativas e requisitos de benchmarking. **PLANNED / NOT STARTED**. A issue #6 documenta CORE-01; o trabalho só inicia após auditada a reconciliação documental e revalidado o Context Lock. Não promover automaticamente propostas tecnológicas ou identidade visual.
+## 6. Pesquisa tecnológica CORE-01 concluída documentalmente
+- Issue #6, módulo CORE-01, WO filha `NLE-P00-WO-002-CORE-01`; **pesquisa/ADR PROPOSED entregue, sem implementação**.
+- PR #8 base `c5ef59c13e65db2a79a04d420cdfc9a9c10768d6`, HEAD auditado `d8c5eccbf5620c9075373c545146d94866f1fd8b`; CI [run 43591720602](https://github.com/KayzenRoot/stormline/actions/runs/43591720602) docs-validation SUCCESS.
+- Squash merge PR #8 SHA `85e04b98163bb273a2c1e3d08fd4fd95d0ba9893`, confirmado na main; Evidence Bundle [CORE-01](evidence/NLE-P00-WO-002-CORE-01.md).
+- Tecnologias preferidas para avaliação futura: C++20, SDL3, CMake Presets/Ninja, bridges Win32/Cocoa/Wayland/X11; hipótese SAPL ainda sem vantagem comprovada.
+- Windows/Linux/macOS no Editor e em exports, com Apple Silicon; Intel/minimum OS/assinaturas e render Metal/Vulkan aguardam ADRs de plataforma/gráficos. A spec não demonstra compilação nem desempenho.
+- NLE-P00-WO-002 é programa de pesquisa modular ainda em andamento; cada próximo módulo receberá sua WO filha sequencial.
+
+## 7. Próximo incremento
+`NLE-P00-WO-002-CORE-02`: avaliação técnica de memória/alocadores, após a reconciliação objetiva deste checkpoint. **PLANNED / NOT STARTED**. Não promover propostas nem iniciar implementação sem provas e ADRs.
