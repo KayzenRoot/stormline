@@ -28,6 +28,14 @@ Status: PROPOSED para o planejamento P00
 - Sem tecnologia aprovada por suposição; catálogo permanece PROPOSED até aceite do proprietário.
 - CI documental e validador do catálogo verdes no SHA do PR; sem código de engine.
 
+## DoD da preparação de Work Orders (NLE-P00-WO-002-QUEUE-001)
+- 80 Work Orders drafts, IDs estáveis, dependências do catálogo corretas, estado explicitamente BLOCKED, release class UNDECIDED e nenhuma autorização de implementação.
+- Registro machine-readable, 80 documentos individuais, validação automatizada de estrutura/links/DAG e comando read-only para o executor.
+- Issues de planejamento rastreáveis, sem duplicatas e explicitamente não prontas para código.
+- Guia Zcode com preflight, Scope/DoD/ADR/Context Lock, CI, evidência, auditoria e uso da mesma PR em correções.
+- CI documentação PASS no SHA fixo, Evidence Bundle, auditoria e checkpoint posterior ao merge.
+- Não declarar que Zcode pode apenas codificar em módulos ainda sem specification/approved ADR.
+
 ## DoD futuros
 Funcional, testado, documentado, deployado quando aplicável e validado em ambiente-alvo, incluindo perf, segurança, compatibilidade e migração conforme risco. Não aceitar claim "completed" desacompanhada de evidência.
 
