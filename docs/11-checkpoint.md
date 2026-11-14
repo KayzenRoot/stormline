@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-05` — Materials, Texture Systems & PBR, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #136:** `694bb961066631f84a38008a268ede3bb7c60693`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-05](evidence/NLE-P00-WO-002-GFX-05.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-06` — Lighting & Shadows, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #139:** `00f65c0200615bbbecd63afb4f66101b72663cc6`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-06](evidence/NLE-P00-WO-002-GFX-06.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -186,5 +186,13 @@
 - GFX-02 é dono do shader compiler, DATA-03 import, DATA-05 cook, GFX-03 VRAM/fences, GFX-01 capacidade de dispositivo e GFX-06 luz; sem interfaces duplicadas. STAM apenas hipótese prove-or-drop.
 - Os 44 cenários futuros PBR/TEX/ALP/SYS, builds C++, fuzzing, GPUs reais em Windows/Linux/macOS/Web e benchmarks p50/p95/p99 **NÃO EXECUTADOS**. Todas as 80 WOs de implementação continuam BLOCKED/`executor_ready=false` e ADR-0018 permanece PROPOSED.
 
-## 23. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-P00-WO-002-GFX-06`: **Lighting & Shadows**, conforme DAG canônico; implementação Zcode continua bloqueada e nenhuma integração de iluminação foi executada.
+## 23. GFX-06 — Lighting & Shadows (pesquisa concluída documentalmente)
+- Research [issue #138](https://github.com/KayzenRoot/stormline/issues/138), WO `NLE-P00-WO-002-GFX-06`, **APPROVED para pesquisa DOCUMENTAL somente**. Implementação [#34](https://github.com/KayzenRoot/stormline/issues/34) continua BLOCKED.
+- [PR de pesquisa #139](https://github.com/KayzenRoot/stormline/pull/139): base main `59f044b9ac34411bbdd2f0170549bb4a9c78465e`, HEAD auditado `9a76064bf356d74bf9eafd3bebe07d1502611855`; [Docs Validation #43618319999](https://github.com/KayzenRoot/stormline/actions/runs/43618319999) SUCCESS **no HEAD exato**, SonarCloud/Socket Security checks SUCCESS. Auditoria pt-BR APPROVED somente docs, sem HIGH/CRITICAL documental detectado no diff de 11 arquivos; squash merge `00f65c0200615bbbecd63afb4f66101b72663cc6`, confirmado no GitHub. Esta reconciliação é PR separada da mesma WO, sujeita a nova auditoria.
+- [Arquitetura](architecture/gfx-06-lighting-shadows.md), [matriz de tecnologias/licenças](research/gfx-06-lighting-technology-matrix.md), [ADR-0019 PROPOSED](adr/0019-gfx-06-adaptive-lighting-policy.md), [API semântica](contracts/gfx-06-lighting-api.md), [68 testes futuros](testing/gfx-06-acceptance-matrix.md), [protocolo de comparação Unreal/GGG](research/gfx-06-competitive-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-06.md).
+- Baseline proposto: unidades fotométricas explícitas, luzes diretas limitadas, Forward+/clustered por capacidade, CSM+PCF e IBL/probes com fallback para 2D/2.5D/WebGL2. Avançados opcionais: sombras suaves, **Virtual Shadow Maps paginadas diferentes de variance shadows**, GI SDF/Brixelizer compute nativo, probes/SSR, RT validado, fog volumétrica e cache temporal com invalidação correta.
+- Radiance Cascades de Alexander Sannikov/GGG é referência para pesquisa independente 2D/2.5D; 3D não é presumido equivalente. NVIDIA RTXDI/RTXGI SDKs **NÃO MIT**, sem incorporação automática. SLRG é hipótese de R&D prove-or-drop. Não existe prova de que Stormline supera Unreal/Path of Exile.
+- Os 68 cenários LGT/SHD/GI/REF/VOL/TWO/PLT/SEC/BEN, GPU native Windows/Linux/macOS/Web, builds C++, fuzz, shaders, screenshots comparativos e p50/p95/p99 **NÃO EXECUTADOS**. As 80 WOs de código permanecem BLOCKED/`executor_ready=false`, ADR-0019 permanece PROPOSED.
+
+## 24. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-GFX-07`: **Camera, Color & Post-processing**, conforme DAG topológico. Nenhum renderizador executável foi entregue e a implementação via Zcode continua bloqueada.

@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-GFX-06
 
 **Issue:** #138 | **Future code issue:** #34 BLOCKED | **Date:** 2026-11-14  
-**State:** RESEARCH IN PROGRESS / DOCS ONLY | **ADR-0019:** PROPOSED | **Risk:** LOW docs; future ELEVATED GPU memory/temporal/driver.  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #139) | **ADR-0019:** PROPOSED | **Risk:** LOW docs; future ELEVATED GPU memory/temporal/driver.  
 **Context Lock BASE main:** `59f044b9ac34411bbdd2f0170549bb4a9c78465e` (GFX-05 research PR #136 & checkpoint PR #137 merged).
 
 ## OBJECTIVE
@@ -55,3 +55,6 @@ STALE canonical SHA, wrong license/cross-platform claim, HIGH/CRITICAL defect, C
 
 ## CONTEXT LOCK / EVIDENCE
 Base `59f044b9ac34411bbdd2f0170549bb4a9c78465e`; Git blob SHAs in Evidence Bundle are not file-byte SHA-256. Code activation later requires SHA-256 fingerprints. Research/CI and merge status must be observed and recorded, not asserted beforehand.
+
+## Research PR #139 final evidence
+BASE `59f044b9ac34411bbdd2f0170549bb4a9c78465e`; HEAD `9a76064bf356d74bf9eafd3bebe07d1502611855`; [Docs Validation #43618319999](https://github.com/KayzenRoot/stormline/actions/runs/43618319999) SUCCESS at exact HEAD, SonarCloud and Socket Security PASS; pt-BR objective audit APPROVED for docs-only, no HIGH/CRITICAL known; normal squash merged as `00f65c0200615bbbecd63afb4f66101b72663cc6`. Checkpoint reconciliation is a separate same-WO PR subject to its own CI/audit. No engine or hardware benchmark delivered.
