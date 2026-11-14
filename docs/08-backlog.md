@@ -11,7 +11,7 @@ Status: PLANNING; module implementation issues #18–#97 exist but remain BLOCKE
 | NLE-P00-WO-002-CORE-03 | Research job scheduler, work stealing, task graph and thread affinity (CORE-03) | CORE-02 checkpoint/CI APPROVED | RESEARCH DOCS APPROVED / MERGED via PR #14; code NOT STARTED |
 | NLE-P00-WO-002-QUEUE-001 | Fila de 80 WOs drafts bloqueadas, Zcode handoff, issues e validação CI | CORE-03 research/checkpoint approved | APPROVED AS BLOCKED QUEUE: 80 WOs + issues #18–97; zero engine implementation |
 | NLE-P00-WO-002-CORE-04 | Time & simulation fixed-step, clock/replay research (issue #99) | CORE-03 + queue issue mapping checkpoint APPROVED | RESEARCH DOCS APPROVED / MERGED via PR #100; ADR-0006 PROPOSED for code, no implementation |
-| NLE-P00-WO-002-CORE-05 | Math / Coordinates / Types technology and contract research | CORE-04 checkpoint reconciliation APPROVED | PLANNED / NOT STARTED (docs only) |
+| NLE-P00-WO-002-CORE-05 | Math / Coordinates / Types research (issue #102) | CORE-04 checkpoint reconciled | RESEARCH IN PROGRESS / ADR-0007 PROPOSED; no code |
 | NLE-P00-WO-003 | Arquitetura Core, memória, jobs, tempo, contratos | WO-002 APPROVED | PLANNED |
 | NLE-P00-WO-004 | Arquitetura renderer, shaders, iluminação, VFX | WO-003 APPROVED | PLANNED |
 | NLE-P00-WO-005 | World/terrain/physics/assets/audio | WO-003/004 APPROVED | PLANNED |
