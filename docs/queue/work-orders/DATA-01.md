@@ -9,6 +9,8 @@
 Implement an independently verifiable, production-grade first necessary increment for **Virtual File System** after detailed technology architecture has been approved. Current candidate capability: Paths virtualizados, mounts, overlays, permissão, cache e abstração de armazenamento.
 
 ## CONTEXT
+**Research proposal only:** [DATA-01 VFS architecture](../../architecture/data-01-virtual-file-system.md), [technology comparison](../../research/data-01-vfs-technology-matrix.md), [ADR-0009 PROPOSED](../../adr/0009-data-01-vfs-policy.md), [research Work Order](../../work-orders/NLE-P00-WO-002-DATA-01.md). These documents DO NOT authorize code, permission bypass, access to arbitrary files, archive library installation or MCP raw filesystem commands.
+
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `DATA-01`, but implementation details and release class are not yet approved.
 
 ## DEPENDENCIES
