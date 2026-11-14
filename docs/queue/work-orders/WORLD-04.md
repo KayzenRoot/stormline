@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Architecture](../../architecture/world-04-terrain-environment.md), [technology/license matrix](../../research/world-04-terrain-environment-technology-license-matrix.md), [ADR-0029 PROPOSED](../../adr/0029-world-04-authored-terrain-environment-visual-ownership.md), [typed Terrain API](../../contracts/world-04-terrain-environment-api.md), [148 FUTURE NOT EXECUTED acceptance cases](../../testing/world-04-acceptance-matrix.md), [original multi-biome benchmark](../../research/world-04-biome-benchmark-protocol.md), [research WO](../../work-orders/NLE-P00-WO-002-WORLD-04.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-WORLD-04.md) are proposed research, not implemented engine/approved code contracts. Stable authored source patch+manual layer vs heightfield limitations and cave meshes, candidate GFX-04 quadtree/clipmaps, GFX-05 splat/texture, GFX-06 sky/shadows/fog, GFX-07 HDR, GFX-08 rain and PHYS water/collision authority require actual code/independent tests. Terrain3D MIT, meshoptimizer MIT, Bruneton BSD are references/candidates, not installed. Mandatory WORLD-03+GFX-04 code absent, historical CORE-04 research pending; #44 OPEN/BLOCKED, all 80 coding WOs BLOCKED/executor_ready=false.
+
 ## DEPENDENCIES
 `WORLD-03`, `GFX-04`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
