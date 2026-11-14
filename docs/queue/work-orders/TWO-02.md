@@ -8,6 +8,10 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+- [TWO-02 architecture](../../architecture/two-02-tilemaps-worlds.md) | [technology/license matrix](../../research/two-02-tilemap-technology-license-matrix.md) | [ADR-0023 PROPOSED](../../adr/0023-two-02-sparse-chunk-tilemap-policy.md) | [typed Map/Chunk API](../../contracts/two-02-tilemap-api.md) | [93 FUTURE NOT RUN tests](../../testing/two-02-acceptance-matrix.md) | [streaming benchmark](../../research/two-02-world-streaming-benchmark.md) | [research Work Order](../../work-orders/NLE-P00-WO-002-TWO-02.md) | [Evidence Bundle](../../evidence/NLE-P00-WO-002-TWO-02.md).
+These documents are **research-only** and not C++ or runtime approval. Tiled editor GPL versus libtiled BSD-2, LDtk MIT, data/tileset source art rights, negative signed64 world keys, camera/collision ack and DATA-04/TWO-01 implementation dependencies are future gates. Issue #38 remains OPEN/BLOCKED and all 80 implementation WOs executor_ready=false. No imported copyrighted map, real collision or save/reopen demo exists.
+
 ## DEPENDENCIES
 `TWO-01`, `DATA-04`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 

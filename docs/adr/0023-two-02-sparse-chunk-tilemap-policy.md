@@ -1,0 +1,25 @@
+# ADR-0023 — Signed 64-bit Sparse Worlds, Transactional Chunk Streaming and Collision Provenance
+
+**Status: PROPOSED / NOT APPROVED FOR ENGINE CODE**  
+**Date 2026-11-14 | WO NLE-P00-WO-002-TWO-02 | Research #150 | Future code #38 OPEN/BLOCKED**.
+
+## Context
+Stormline should author and render finite and large/infinite 2D maps with reproducible save/reopen, layer/parallax/autotiling and visual/physics correspondence, while preserving true first-class TWO-01 Canvas, CPU/WebGL2 fallback and no cross-module duplicate services. Godot TileMapLayer documents a signed-16 serialized tile coord limit; Tiled has infinite-map chunks, 32-bit map-relative GIDs and mixed GPL/BSD licensing; LDtk has MIT editor and JSON external level files. Rendering and physics may advance on different revisions unless explicitly coordinated.
+
+## PROPOSED decisions
+1. **Canonical TileMapV1 sparse chunked model**, stable MapId/LayerId/TileId/LevelId, signed **64-bit** persisted global cell grid with mathematically correct floor division for negatives, checked product/bounds, local GPU/camera float coordinates and explicit origin rebasing. No universal chunk size/version/ABI frozen before benchmarks.
+2. **Orthogonal square/rect baseline necessary candidate**; isometric/staggered/hex important conditional with their own inverse transforms/hex rotation/collision test fixtures; these aren't promised first-slice without DoD. TWO-01 owns actual sprite rendering, alpha layer/order, DPI and Canvas batching.
+3. DATA-04 **owns** source-of-truth transactional save, undo/redo, compare-and-swap expected revision and recovery; DATA-05 **owns** cooked chunk cache, async dependency streaming and integrity; GFX-03/05/07 own GPU/texture/camera processing. TWO-02 supplies typed map/chunk/cell/terrain/parallax/visibility semantic plans and validation.
+4. Bounded `MapStreamingPlanV1` with camera-visible ring, priority/prefetch, hysteresis, memory/job/frame budgets, cancellation, partial/failed/corrupt chunk differentiation, fence-safe GPU retirement, last-good version and no dirty source eviction. WebGL2 CPU chunk plan fallback; GPU compute never core requirement.
+5. **Collision metadata is authoring, not physics.** Physics/world authority owns contact/collision solver and authoritative gameplay. `CollisionActivationReceiptV1` confirms physics accepted matching chunk version before declaring critical collision region active; fail-safe on absent/corrupt chunk, no “walk through walls during streaming” hidden behavior.
+6. Deterministic bounded terrain/Wang/bitmask neighbor rules, content seed and explicit seams/invalidation across chunk boundaries. No unbounded brush flood-fill, script evaluation or GPU nondeterministic persistent tile selection.
+7. **Tiled/LDtk external interoperability optional**: use published TMX/JSON and LDtk JSON formats, convert Tiled map-local GID/flip flags into own stable TileId and safe typed metadata. Tiled editor/plugins GPL, libtiled BSD-2-Clause separately, LDtk MIT; tool source/art/content/Qt licenses treated separately, no GPL editor embedded or external level paths fetched without sandbox rights. Imported custom scripts remain inert data or rejected.
+8. Secure Editor/CLI/MCP semantic `Stage->Validate->Commit` per project+map+layer/chunk expected revision, DATA-04 journal and rollback, quotas/time limits, redacted diff, no arbitrary host/URL path and no unrestricted world generation.
+9. **SWSP** optional speculative prefetch + seam/physics fence R&D PROVE-OR-DROP against simple fixed radius/hysteresis; no novelty/performance proven. Code must not be gated on it.
+10. **NO CODE AUTHORIZATION:** release class UNDECIDED, ADR-0023 PROPOSED, 80 future implementation WOs `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, issue #38 open. Required predecessors TWO-01 and DATA-04 code unimplemented; exact schemas/ABI/source paths/licenses and hardware/security benchmarks and final owner 1.0 Scope/DoD absent.
+
+## Rejected mandatory options
+Store all world cells in single dense map/32-bit or signed-16 GPU coordinates; naive truncating signed division; hard-code external Tiled GIDs as permanent IDs; couple GPL Tiled editor; treat tile visual geometry as physics; delete missing chunk as air with no warnings; own physics/nav/stream filesystem in TWO-02; support all hex/isometric rule combinations without tests; unbounded flood fill or infinite decompression.
+
+## Future evidence **NOT EXECUTED**
+Signed negative boundary/far coordinates and roundtrip, chunk seam dirty update, transactional undo/save/atomic recover, variable projections and parallax, orientation flag import, security fuzz+decompress quotas, collision snapshot/PHYS activation matching, WebGL2/native GPU real scene, no frame stalls p95/p99 and actual disk/VRAM bytes, visual screenshot and no HIGH/CRITICAL. See [architecture](../architecture/two-02-tilemaps-worlds.md), [matrix](../research/two-02-tilemap-technology-license-matrix.md), [typed API](../contracts/two-02-tilemap-api.md), [tests](../testing/two-02-acceptance-matrix.md), [benchmark](../research/two-02-world-streaming-benchmark.md).
