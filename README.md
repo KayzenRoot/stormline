@@ -1,17 +1,11 @@
 <div align="center">
-
-# ⚡ STORMLINE
-### An original, high-performance 3D game engine initiative by NexLabs Technology
-
-**Worlds that move. Technology that earns its performance.**
-
-[**Explore the vision**](docs/01-project-overview.md) · [**Engineering roadmap**](docs/08-backlog.md) · [**Documentation**](docs/00-source-hierarchy.md) · [**Português (BR)**](README.pt-BR.md)
-
-[![Docs Validation](https://github.com/KayzenRoot/stormline/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/KayzenRoot/stormline/actions/workflows/docs.yml)
-
-**PROJECT PHASE: P00 · PLANNING & ARCHITECTURE**  
-**ENGINE: NOT IMPLEMENTED** · **PUBLIC ALPHA: NOT AVAILABLE** · **LICENSE: PENDING**
-
+  <h1>⚡ STORMLINE</h1>
+  <h3>An original, high-performance 3D game engine initiative by NexLabs Technology</h3>
+  <p><strong>Worlds that move. Technology that earns its performance.</strong></p>
+  <p><a href="docs/01-project-overview.md">Explore the vision</a> · <a href="docs/08-backlog.md">Engineering roadmap</a> · <a href="docs/00-source-hierarchy.md">Documentation</a> · <a href="README.pt-BR.md">Português (BR)</a></p>
+  <p><a href="https://github.com/KayzenRoot/stormline/actions/workflows/docs.yml"><img alt="Docs Validation" src="https://github.com/KayzenRoot/stormline/actions/workflows/docs.yml/badge.svg?branch=main"></a></p>
+  <p><strong>PROJECT PHASE: P00 · PLANNING & ARCHITECTURE</strong></p>
+  <p><strong>ENGINE: NOT IMPLEMENTED · PUBLIC ALPHA: NOT AVAILABLE · LICENSE: PENDING</strong></p>
 </div>
 
 ---
@@ -60,7 +54,7 @@ These names describe planned components; none currently exists as a released app
 
 We will own our engine's design while evaluating carefully selected third-party libraries. Modules and contracts are **conceptual**, and the exact language, graphics backend, physics integration and tooling are subject to formal technical decisions.
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
     subgraph Apps["Planned applications"]
       E["Editor"]:::app
@@ -85,7 +79,7 @@ flowchart TD
     classDef app fill:#1A1D24,color:#F5F7FA,stroke:#2D8CFF
     classDef core fill:#2D8CFF,color:#FFFFFF,stroke:#4FE3FF
     classDef base fill:#1A1D24,color:#F5F7FA,stroke:#3B4453
-\`\`\`
+```
 
 **Design constraints:** runtime independent from editor UI; dedicated server without a required GPU; explicit ownership and data contracts; simulation timing independent of rendering; carefully measured abstractions and portability.
 
@@ -147,12 +141,12 @@ The documentation badge reports only the **docs-validation** workflow. It is **n
 
 Stormline is **owner-directed** and implemented incrementally with AI-assisted tooling. We do not require external human reviewers or paid code-review services. The process is nevertheless strict:
 
-\`\`\`text
+```text
 Source check -> Work Order -> Context Lock -> Preflight -> Implementation
            -> Tests & Evidence -> PR -> Objective Audit
            -> APPROVED / CORRECTION REQUIRED / BLOCKED
            -> Checkpoint Delta -> Merge -> Next Increment
-\`\`\`
+```
 
 No new increment starts while the previous one requires correction or validation. No known high/critical defect passes the gate. No force-push, history rewrite, or protection bypass without explicit authorization. Audits and approvals must follow real Git and CI evidence.
 
@@ -164,11 +158,11 @@ No new increment starts while the previous one requires correction or validation
 
 There is **no build or install command for Stormline Engine yet**. To explore the current Source Pack locally:
 
-\`\`\`bash
+```bash
 git clone https://github.com/KayzenRoot/stormline.git
 cd stormline
 python3 scripts/validate_docs.py
-\`\`\`
+```
 
 The validator checks required documentation and local Markdown links using Python's standard library. It does **not** compile software or test graphics hardware.
 
@@ -185,11 +179,7 @@ The validator checks required documentation and local Markdown links using Pytho
 ---
 
 <div align="center">
-
-**STORMLINE**
-
-*Original engineering. Measurable progress. Built by NexLabs Technology.*
-
-[Back to top](#-stormline)
-
+  <p><strong>STORMLINE</strong></p>
+  <p><em>Original engineering. Measurable progress. Built by NexLabs Technology.</em></p>
+  <p><a href="#-stormline">Back to top</a></p>
 </div>
