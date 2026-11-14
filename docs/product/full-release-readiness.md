@@ -9,7 +9,7 @@ No commercial software can provide literally all possible technologies or game g
 
 Candidate minimum contracted capability:
 1. Full creation and export of original **2D**, **2.5D** and **3D** games; independent 2D workflow.
-2. Desktop builds for Windows/Linux, and browser/WebAssembly target with documented feature tiers/fallback.
+2. Desktop Editor and game export builds for **Windows, Linux and macOS**, and browser/WebAssembly target with documented feature tiers/fallback.
 3. Complete visual editor with assets, scenes, animation, material, VFX, audio, gameplay, debug, export and profiling.
 4. Scriptable gameplay and extensibility, source/project format stability and migration.
 5. Performance-aware rendering/lighting, VFX and audio with reproducible scenes/hardware.
@@ -21,6 +21,11 @@ Candidate minimum contracted capability:
 
 ### Web target guardrails
 WebGPU can deliver advanced rendering but remains limited across some browser/OS combinations, requires secure contexts and selected adapter features. Browser threads/shared memory can need cross-origin isolation. Define WebGPU and fallback path(s) as a platform-specific ADR. Do not promise feature/performance parity with native.
+
+### macOS-specific release obligations
+- Apple Silicon native Editor and exported games, plus Intel compatibility decision and minimum OS version from a platform ADR.
+- Evaluate native Metal versus Vulkan portability solutions, GPU feature differences, input/window lifecycle, distribution/packaging and required Apple test hardware.
+- macOS notarization/Developer ID distribution may involve an Apple Developer membership and legal/platform requirements; no paid membership is automatically approved under the zero-cost tooling policy.
 
 ### Specialized targets
 Mobile platform selection, console SDKs, storefronts and external proprietary integrations are conditional, depending on rights, budgets, certification and hardware. They are not automatically required for a full desktop+web 1.0 unless explicitly approved.
