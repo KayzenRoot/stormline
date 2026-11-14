@@ -41,5 +41,8 @@ Monotonic C++20 steady_clock adapter with injected fake clock, rational integer 
 ## CORE-05 — Math, Coordinate Spaces & Types (research proposal)
 Portable C++20 typed math and scalar reference, GLM as candidate comparator, strong units, right-handed +Y-up world, explicit 2D/UI/graphics adapters, global f64 or cell+local f32 origin shifting, stable persistent IDs distinct from runtime handles. [Architecture](architecture/core-05-math-coordinate-types.md), [matrix](research/core-05-technology-matrix.md), [ADR-0007 PROPOSED](adr/0007-core-05-coordinate-policy.md). No engine code or numeric performance evidence.
 
+## CORE-06 — Diagnostics & Observability (research proposal)
+Event/span/counter/crash envelopes, build SHA + frame/tick/job correlation, bounded offline-first logs and redacted diagnostic export. Prefer evaluating spdlog for logging, Tracy for development profiling, Perfetto for offline traces, Crashpad as conditional native crash candidate; no cloud/listener/automatic telemetry. Stormline Diagnostic Fabric (SDF) is a prove-or-drop research hypothesis only. [CORE-06 Architecture](architecture/core-06-diagnostics-observability.md), [Technology Matrix](research/core-06-technology-matrix.md), [ADR-0008 PROPOSED](adr/0008-core-06-observability-policy.md). No library is installed or runtime profiled.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
