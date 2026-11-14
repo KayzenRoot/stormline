@@ -5,8 +5,8 @@ Status: INITIAL / NÃO são issues criadas
 |---|---|---|---|
 | NLE-P00-WO-001 | Source Pack, identidade de marca, governança solo, CI docs | base Git | APPROVED: Source Pack integrado na PR #1; proteção da main ainda NÃO VERIFICADA |
 | NLE-P00-WO-001-EXT-001 | README profissional, apresentação GitHub, templates, versionamento | WO-001 APPROVED, solicitação do proprietário | APPROVED: PR #3 merged, checkpoint/evidence em reconciliação documental |
-| NLE-P00-WO-001-EXT-002 | Catálogo de 80 módulos, 2D/2.5D/3D/web e Windows/Linux/macOS, MCP-first e no-MVP como propostas | Solicitação explícita owner após EXT-001 | PROPOSED / PENDING OWNER APPROVAL; sem código |
-| NLE-P00-WO-002 | Pesquisa tecnologia/licenças iniciando em CORE-01, Windows/Linux/macOS; issue #6 | EXT-002 catalog PR #5 auditado e integrado | PLANNED / NOT STARTED; issue #6 aguardando gate |
+| NLE-P00-WO-001-EXT-002 | Catálogo de 80 módulos, 2D/2.5D/3D/web e Windows/Linux/macOS, MCP-first e no-MVP como propostas | Solicitação explícita owner após EXT-001 | APPROVED / MERGED (PR #5), catálogo técnico de candidatos; sem código |
+| NLE-P00-WO-002 | Pesquisa tecnologia/licenças iniciando em CORE-01, Windows/Linux/macOS; issue #6 | EXT-002 catalog PR #5 auditado e integrado | PLANNED / NOT STARTED; issue #6 após checkpoint integrado |
 | NLE-P00-WO-003 | Arquitetura Core, memória, jobs, tempo, contratos | WO-002 APPROVED | PLANNED |
 | NLE-P00-WO-004 | Arquitetura renderer, shaders, iluminação, VFX | WO-003 APPROVED | PLANNED |
 | NLE-P00-WO-005 | World/terrain/physics/assets/audio | WO-003/004 APPROVED | PLANNED |
