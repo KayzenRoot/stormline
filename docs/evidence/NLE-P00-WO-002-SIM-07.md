@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-07 Vehicles & Flight Research
 
-**STATUS: RESEARCH BRANCH, PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE IMPLEMENTATION.**  
+**STATUS: RESEARCH PR #193 DRAFT AND INITIAL DOCS CI SUCCESS; FINAL-HEAD CI/AUDIT/MERGE AND CHECKPOINT PENDING. NO ENGINE IMPLEMENTATION.**  
 **Date:** 2026-11-14 | Research [#192](https://github.com/KayzenRoot/stormline/issues/192) | Future implementation [#57](https://github.com/KayzenRoot/stormline/issues/57) OPEN/BLOCKED.  
 **BASE main:** `bf5d2fb497985344a8d1fea5dc1631d6f17505c4` | Research branch `docs/NLE-P00-WO-002-SIM-07-vehicles-flight-research`.
 
@@ -23,8 +23,8 @@ No SDK downloaded/compiled, Jolt/Chrono/JSBSim/Bullet code, flight scripts, test
 | Gate | Observed |
 |---|---|
 | Research issue and branch | #192 created, branch from main base SHA |
-| Research PR/diff and exact final HEAD | PENDING |
-| GitHub Docs Validation exact final HEAD | NOT VERIFIED |
+| Research PR/diff and initial HEAD | [PR #193](https://github.com/KayzenRoot/stormline/pull/193) Draft, base `bf5d2fb497985344a8d1fea5dc1631d6f17505c4`, initial HEAD `72f4b9bef4a9f4029e85bc9ad566df58c41a97f5`, exactly 8 new Markdown docs, no runtime/registry changes; final HEAD after this Evidence revision pending. |
+| Initial Docs Validation (NOT FINAL after this revision) | [Run #43654221241](https://github.com/KayzenRoot/stormline/actions/runs/43654221241) SUCCESS on initial HEAD `72f4b9bef4a9f4029e85bc9ad566df58c41a97f5`, job #132629091147: Source Pack/link, dependency DAG, WO registry and blocked Zcode selector all SUCCESS. This Evidence Bundle update changes HEAD, so require repeat CI for final exact HEAD. |
 | Other SonarCloud/Socket/security checks at exact HEAD | NOT VERIFIED |
 | Build/runtime Windows/Linux/macOS/Web/headless | NOT EXECUTED |
 | 144 prospect runtime tests, static/flight/NET/security fuzz/sanitizer | FUTURE / NOT EXECUTED |
