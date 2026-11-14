@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-GFX-07
 
 **Research issue #141** | **Future code issue #35 BLOCKED** | **Date:** 2026-11-14  
-**State:** RESEARCH IN PROGRESS, DOCS ONLY | **ADR-0020:** PROPOSED | **Context Lock BASE:** `bd45e076f789e0b934076a1973139400d3eb382b` (GFX-06 PRs #139/#140 merged).  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #142) | **ADR-0020:** PROPOSED | **Context Lock BASE:** `bd45e076f789e0b934076a1973139400d3eb382b` (GFX-06 PRs #139/#140 merged).  
 **Risk:** LOW documentation; future ELEVATED GPU memory/history, HDR output correctness, potentially hostile LUTs and binary SDK rights.
 
 ## OBJECTIVE
@@ -55,3 +55,6 @@ Failing exact-HEAD CI, stale source hierarchy, unlicensed binary/asset, unsuppor
 
 ## CONTEXT LOCK
 Base main `bd45e076f789e0b934076a1973139400d3eb382b`; repository Git blob SHAs are NOT raw-file SHA-256. Freeze exact SHA-256 fingerprints before code activation, when approved dependencies/DoD are implemented.
+
+## Observed research merge receipt
+Research BASE `bd45e076f789e0b934076a1973139400d3eb382b`, final HEAD `830ddbe54b56825bfd902faa2b273d68532a2b99`. [Docs Validation #43624090643](https://github.com/KayzenRoot/stormline/actions/runs/43624090643) SUCCESS at exact HEAD; Socket Security/SonarCloud SUCCESS, objective pt-BR audit APPROVED docs-only, 11 docs files, no HIGH/CRITICAL known. Normal squash merge PR #142 as `5bab9b54b83cfb48a8591e040a3f3e4ecd4a69c3`. This separate checkpoint PR remains subject to exact-HEAD CI/audit. Code #35 BLOCKED, 77 tests NOT RUN, ADR-0020 PROPOSED.

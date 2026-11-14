@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-06` — Lighting & Shadows, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #139:** `00f65c0200615bbbecd63afb4f66101b72663cc6`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-06](evidence/NLE-P00-WO-002-GFX-06.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-07` — Camera, Color & Post-processing, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #142:** `5bab9b54b83cfb48a8591e040a3f3e4ecd4a69c3`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-07](evidence/NLE-P00-WO-002-GFX-07.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -194,5 +194,13 @@
 - Radiance Cascades de Alexander Sannikov/GGG é referência para pesquisa independente 2D/2.5D; 3D não é presumido equivalente. NVIDIA RTXDI/RTXGI SDKs **NÃO MIT**, sem incorporação automática. SLRG é hipótese de R&D prove-or-drop. Não existe prova de que Stormline supera Unreal/Path of Exile.
 - Os 68 cenários LGT/SHD/GI/REF/VOL/TWO/PLT/SEC/BEN, GPU native Windows/Linux/macOS/Web, builds C++, fuzz, shaders, screenshots comparativos e p50/p95/p99 **NÃO EXECUTADOS**. As 80 WOs de código permanecem BLOCKED/`executor_ready=false`, ADR-0019 permanece PROPOSED.
 
-## 24. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-P00-WO-002-GFX-07`: **Camera, Color & Post-processing**, conforme DAG topológico. Nenhum renderizador executável foi entregue e a implementação via Zcode continua bloqueada.
+## 24. GFX-07 — Camera, Color & Post-processing (pesquisa aprovada somente documentos)
+- Research [issue #141](https://github.com/KayzenRoot/stormline/issues/141), WO `NLE-P00-WO-002-GFX-07`; **APPROVED pesquisa DOCUMENTAL SOMENTE**. Issue de código [#35](https://github.com/KayzenRoot/stormline/issues/35) permanece BLOCKED.
+- [PR de pesquisa #142](https://github.com/KayzenRoot/stormline/pull/142), BASE main `bd45e076f789e0b934076a1973139400d3eb382b`, HEAD final auditado `830ddbe54b56825bfd902faa2b273d68532a2b99`; [Docs Validation #43624090643](https://github.com/KayzenRoot/stormline/actions/runs/43624090643) SUCCESS no HEAD final. Socket Security/ SonarCloud SUCCESS. Auditoria objetiva pt-BR APPROVED exclusivamente docs, diff 11 arquivos `docs/`, sem defeitos HIGH/CRITICAL documentais identificados; squash merge `5bab9b54b83cfb48a8591e040a3f3e4ecd4a69c3` confirmado.
+- [Arquitetura](architecture/gfx-07-camera-color-postprocessing.md), [matriz tecnologias e licenças](research/gfx-07-camera-color-technology-matrix.md), [ADR-0020 PROPOSED](adr/0020-gfx-07-camera-color-reconstruction-policy.md), [API semântica](contracts/gfx-07-camera-color-api.md), [77 testes futuros](testing/gfx-07-acceptance-matrix.md), [protocolo comparativo](research/gfx-07-quality-benchmark-protocol.md), [evidências](evidence/NLE-P00-WO-002-GFX-07.md).
+- Câmera ortográfica/perspectiva/2.5D, projeção/jitter/motion vectors e invalidadores; cenário linear HDR explícito, SDR sRGB obrigatório, HDR10 PQ e macOS EDR condicionados a OS+monitor+swapchain reais, WebGPU Display-P3 não equivale HDR10. ACES2/OCIO candidato BSD-3-Clause, LUT/ICC seguro.
+- AA nativo/espacial para UI e 2D, TAA/TAAU com rejeição temporal de ghosting, opção FSR SDK 2.4 com **DLLs assinadas** e direitos próprios, Streamline/DLSS-G binário, Intel XeSS binário-only. Exposure, pós-processos/motion blur opcionais com acessibilidade. SRCC apenas hipótese PROVE-OR-DROP.
+- 77 cenários CAM/CLR/HDR/EXP/AA/UP/FX/SYS/BEN e benchmarks CPU/GPU/VRAM/latência, HDR10 físico, Win/Linux/macOS/Web, fuzz/licensing e validação visual **NÃO EXECUTADOS**; sem hardware, SDK ou renderizador gráfico entregue. Todas 80 WOs de implementação seguem BLOCKED/`executor_ready=false`; ADR-0020 continua PROPOSED; não há prova de superioridade visual sobre Unreal/GGG.
+
+## 25. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-GFX-08`: **VFX & Particle Graph**, pela fila topológica canônica. O executor Zcode continua bloqueado até contratos/DoD/ADR aprovados e dependências efetivamente integradas.
