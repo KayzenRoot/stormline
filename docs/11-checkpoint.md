@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-02` — Scene & Prefab Hierarchy, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #163:** `f278b46d6bf67f3751125e81af9e4346e7eced76`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-02](evidence/NLE-P00-WO-002-WORLD-02.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-03` — Spatial Index & World Streaming, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #166:** `c930bbd158ab4114c288532da1838090f8084a1e`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-03](evidence/NLE-P00-WO-002-WORLD-03.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -260,8 +260,18 @@
 - All **122 future tests** IDN/HIE/TRF/VAR/MRG/TXN/INT/SEC/BEN **NOT EXECUTED**, no Scene/Prefab editor, C++/save-reopen, actual World/Asset source, native/Web, CPU p95/p99, undo/redo or conflict resolution running. ADR-0027 PROPOSED, release class UNDECIDED and mandatory WORLD-01/DATA-02 CODE prerequisites absent. Future code #42 NOT authorized.
 - Registry after this checkpoint: **24 of 80 research modules documented (30%)**, **56 RESEARCH_PENDING**, including historical CORE-04 research gap. All 80 coding WOs still BLOCKED/executor_ready=false; **0/80 code modules implemented**.
 
-## 32. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-WORLD-03: **Spatial Index & World Streaming**, catalog_order=25, canonical next research, dependencies WORLD-02 and DATA-05 for future code still unimplemented. Only research may start after this checkpoint passes independent CI/audit/merge/readback; historical CORE-04 pending remains explicit.
+## 32. WORLD-03 — Spatial Index & World Streaming (research APPROVED, documentation only)
+- [Research issue #165](https://github.com/KayzenRoot/stormline/issues/165), WO NLE-P00-WO-002-WORLD-03: **APPROVED DOCUMENTARY RESEARCH ONLY**. Future coding [issue #43](https://github.com/KayzenRoot/stormline/issues/43) remains OPEN/BLOCKED.
+- [Research PR #166](https://github.com/KayzenRoot/stormline/pull/166), BASE main e73765d3884fac6bd925a19a016792718e240050, audited final HEAD 2bc705527ab99d4869030d065804b01d95a6ea6e. Initial [Docs Validation #43636997989](https://github.com/KayzenRoot/stormline/actions/runs/43636997989) SUCCESS, then Evidence Bundle receipt changed HEAD and corrected final [Docs Validation #43637055849](https://github.com/KayzenRoot/stormline/actions/runs/43637055849) SUCCESS at exact final HEAD, Socket Security and SonarCloud SUCCESS. Objective pt-BR scope/license/security documentary audit APPROVED on final HEAD, 11 docs-only files, no known HIGH/CRITICAL, normal squash merged main c930bbd158ab4114c288532da1838090f8084a1e, readback confirmed. This checkpoint is a separate same-WO PR with independent validation/audit.
+- [Architecture](architecture/world-03-spatial-index-streaming.md), [technology/licenses](research/world-03-spatial-streaming-technology-license-matrix.md), [ADR-0028 PROPOSED](adr/0028-world-03-budgeted-spatial-streaming-policy.md), [typed Spatial Streaming API](contracts/world-03-spatial-streaming-api.md), [132 FUTURE cases](testing/world-03-acceptance-matrix.md), [traversal benchmark](research/world-03-traversal-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-WORLD-03.md).
+- Proposed sparse global signed cell 2D/3D grid and optional loose BVH/octree/R-tree loaded-cell query; complete vs nonresident/incomplete bounded queries and dedup of giant cross-cell entity proxies. Interest union with camera/player/AI/quest/PHYS/NET/audio and critical simulation pins, lookahead/hysteresis/teleport cancellation per WorldEpoch and CellGeneration. DATA-05 owns asset I/O/decompression/cache, CORE jobs/tick, WORLD-01 ECS, WORLD-02 scene source, PHYS/GFX/NET owner ACKs; staged validated cell publication, safe backpressure/fence/lease eviction. CORE-05 global/local origin shifts with PHYS/GFX/NET ACK, headless server without GPU.
+- Libraries **not installed**: Boost.Geometry R-tree Boost Software License 1.0, libspatialindex MIT >=1.8/older LGPL, Zstd BSD as DATA-05 candidate. Unreal World Partition and Unity Addressables proprietary **design references only**, Godot HLOD/large world MIT reference, OGC 3D Tiles 1.1 standard optional future. SIP speculative predictor only PROVE-OR-DROP, no speed or novelty claim.
+- All **132 FUTURE cases** IDX/QRY/INT/LIF/ORG/MEM/SEC/INTG/BEN **NOT EXECUTED**: no running stream, no scene assets, no CPU/GPU/IO, Web/native/headless, PHYS/NET proof, full frame/physics p95/p99, teleport latency or memory benchmark. No "zero stalls"/60fps claim. ADR-0028 PROPOSED, release class UNDECIDED, WORLD-02/DATA-05 code deps absent, future issue #43 still blocked.
+- **Research planning tally after checkpoint:** **25 / 80 modules documented (31.25%)**, **55 RESEARCH_PENDING**, including historical CORE-04 gap. All 80 coding WOs remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS/executor_ready=false and approved_adr=null; zero implemented runtime modules.
+
+## 33. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-WORLD-04: **Terrain & Environment**, catalog_order=26 in canonical queue. Future code prerequisites WORLD-03 and GFX-04 are NOT implemented. Only P00 documentary research may begin after independent checkpoint CI/audit/merge/readback; historical CORE-04 research gap remains explicit.
+
 
 
 

@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-WORLD-03
 
 **2026-11-14 | Research issue #165 | Future implementation #43 OPEN/BLOCKED**  
-**State:** RESEARCH IN PROGRESS / DOCS ONLY; **ADR-0028 PROPOSED**; **BASE main:** e73765d3884fac6bd925a19a016792718e240050 (WORLD-02 research PR #163 and checkpoint PR #164 merged).  
+**State:** RESEARCH DOCUMENTATION APPROVED/MERGED (PR #166) / NO CODE; **ADR-0028 PROPOSED**; **BASE main:** e73765d3884fac6bd925a19a016792718e240050 (WORLD-02 research PR #163 and checkpoint PR #164 merged).  
 **Risk:** LOW docs; future ELEVATED world-spatial consistency, I/O safety, async publication, origin rebase, GPU/PHYS/NET synchronization and memory/permissions.
 
 ## OBJECTIVE
@@ -58,3 +58,6 @@ If main/Scope/DoD/ADR changes, mark STALE and re-lock; failed CI, incorrect righ
 
 ## CONTEXT LOCK
 BASE Git e73765d3884fac6bd925a19a016792718e240050; Git SHA-1 blob IDs recorded separately are NOT raw file SHA-256. Coding later requires actual source SHA-256 from bytes, integrated WORLD-02/DATA-05 and other owner dependencies, approved Scope/ADR/1.0 DoD and code-specific proof.
+
+## Verified research receipts
+Research PR #166 BASE main e73765d3884fac6bd925a19a016792718e240050, initial HEAD 1c439d368c40d9595bae7867b66b8b4625d92e91 with [Docs Validation #43636997989](https://github.com/KayzenRoot/stormline/actions/runs/43636997989) SUCCESS; Evidence update changed final head 2bc705527ab99d4869030d065804b01d95a6ea6e with [Docs Validation #43637055849](https://github.com/KayzenRoot/stormline/actions/runs/43637055849) SUCCESS on exact final HEAD and Socket/SonarCloud checks SUCCESS. Eleven docs-only files, objective pt-BR architecture/rights/security/DoD audit APPROVED documentary only without known HIGH/CRITICAL. Normal squash merged main c930bbd158ab4114c288532da1838090f8084a1e and Git readback verified. Separate same-WO checkpoint PR requires independent CI/audit/readback. All 132 future tests NOT EXECUTED, ADR-0028 PROPOSED, code #43 OPEN/BLOCKED.
