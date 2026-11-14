@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-14 | **Risk:** LOW documentation; future crash/telemetry runtime ELEVATED.  
 **Research issue:** [#105](https://github.com/KayzenRoot/stormline/issues/105) | **Implementation issue:** [#23](https://github.com/KayzenRoot/stormline/issues/23) remains BLOCKED.  
-**State:** PENDING FINAL HEAD AUDIT (no runtime code). ADR-0008 PROPOSED.
+**State:** APPROVED / MERGED for research documents, no runtime code. ADR-0008 remains PROPOSED for code.
 
 ## Context Lock
 - Base main SHA after CORE-05 research/checkpoint: `cc18ce33a05cbadac330effcc7ad6ddf29380721`.
@@ -30,12 +30,18 @@
 - Offline-first, no remote telemetry/upload/listening service by default. Bounded buffer and source redaction; raw crash dumps treated as sensitive data.
 - CORE-01/02/03/04/05 ownership preserved, realtime audio never allocates/blocks for general diagnostics. AI/MCP diagnostics are scoped and read-only, not arbitrary access.
 
+## Final PR #106 audit and merge
+- Final audited research HEAD `e12aec2ee7f410e5f024e98295a2f109e1aef834`; base `cc18ce33a05cbadac330effcc7ad6ddf29380721`.
+- [GitHub Actions run 43599614853](https://github.com/KayzenRoot/stormline/actions/runs/43599614853): docs-validation **SUCCESS** on exact research HEAD; Source Pack/links, 80-module DAG, registry and Zcode selector PASS.
+- Objective audit APPROVED in pt-BR recorded on PR #106; 8 changed Markdown documents; no runtime C++, dependencies or secret patterns observed in scoped patch.
+- Squash merge `a76cb2bb3d39af44897df89d348c667fa1cb4fc3`, confirmed by main readback. Implementation issue #23 remains BLOCKED.
+
 ## Validation and audit placeholders
-- GitHub Actions Docs Validation: **PENDING** final PR run and exact HEAD (update after observing a completed result).
+- GitHub Actions Docs Validation: **SUCCESS on final research HEAD** (see observed run above); this checkpoint reconciliation requires its own CI run.
 - Unit/integration/C++ builds/macOS native tests/profiler/real crash/low-end hardware tests: **NOT RUN** (future implementation).
 - Threat/license review covers candidate terms at conceptual level; exact vendored tags/transitive notices and security advisories are pending.
-- Objective audit pt-BR: **PENDING**.
-- PR SHA/merge SHA: **PENDING**; do not claim success until read-back.
+- Objective audit pt-BR: **APPROVED for research documentation only**, recorded on PR #106.
+- PR head and merge SHA confirmed above; no engine or benchmark is claimed.
 
 ## Risk and checkpoint delta proposal
 - Future implementation may inadvertently expose secrets via crash dumps or default network/telemetry; no remote upload or listener is authorized.
