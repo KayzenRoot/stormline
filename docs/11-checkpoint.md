@@ -2,7 +2,7 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Última Work Order de apresentação concluída:** `NLE-P00-WO-001-EXT-001` — **APPROVED / MERGED**.  
+**Último incremento documental aprovado:** `NLE-P00-WO-001-EXT-002` — **APPROVED / MERGED** (catálogo de 80 capacidades candidatas, não funcionalidades implementadas).  
 **Main SHA comprovado após o merge da PR #3:** `e41274bb841094630ba71843b0876bb5d79370f4`.  
 **Evidence Bundle:** [NLE-P00-WO-001-EXT-001](evidence/NLE-P00-WO-001-EXT-001.md).
 
@@ -37,5 +37,13 @@
 - Nenhum build de C++, renderer, VFX, áudio, física, multiplayer ou GPU benchmark existe.
 - Badges indicam apenas CI documental, não qualidade de runtime nem aprovação de produto.
 
-## 5. Próxima Work Order
-`NLE-P00-WO-002`: pesquisa técnica de stack, licenças, alternativas e requisitos de benchmarking. **PLANNED / NOT STARTED**. Só iniciar após auditada a reconciliação documental e revalidado o Context Lock. Não promover automaticamente propostas tecnológicas ou identidade visual.
+## 5. Catálogo de módulos e autonomia de planejamento (novembro de 2026)
+- PR #5, HEAD auditado `6fd10ed65bea105c14d40797f2a14455a4cd4d0c`, foi aprovado para integrar **o inventário de 80 módulos e 14 áreas**, não para tornar cada tecnologia automaticamente obrigatória à versão 1.0.
+- GitHub Actions run `43590210539`, job docs-validation: SUCCESS, incluindo verificação de links e DAG de dependências.
+- Squash merge PR #5: `06c6a624812bed255ab153793a988fef50dd311a`, confirmado por leitura da main. Evidence: [NLE-P00-WO-001-EXT-002](evidence/NLE-P00-WO-001-EXT-002.md).
+- Dono do projeto autorizou continuidade de propostas técnicas de rotina sem perguntar repetidamente; permanecem necessários testes, auditoria, controles de segurança e consentimento explícito para gastos, ações irreversíveis ou bypass.
+- Windows, Linux e macOS são plataformas desktop obrigatórias para Editor e jogos exportados; a matriz de hardware/macOS Intel deverá ser decidida e testada. Jogos web são alvo adicional.
+- Nenhum módulo de código implementado, e nenhum desempenho AAA comprovado. Repositório permanece em P00.
+
+## 6. Próxima Work Order
+`NLE-P00-WO-002`: pesquisa técnica de stack, licenças, alternativas e requisitos de benchmarking. **PLANNED / NOT STARTED**. A issue #6 documenta CORE-01; o trabalho só inicia após auditada a reconciliação documental e revalidado o Context Lock. Não promover automaticamente propostas tecnológicas ou identidade visual.
