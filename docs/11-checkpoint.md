@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-06` — diagnósticos e observabilidade offline-first, PROPOSTA de arquitetura (sem engine implementada).  
-**Main SHA comprovado após o merge da PR #106:** `a76cb2bb3d39af44897df89d348c667fa1cb4fc3`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-CORE-06](evidence/NLE-P00-WO-002-CORE-06.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-01` — Virtual File System seguro e contratos de I/O, PROPOSTA de arquitetura (sem engine implementada).  
+**Main SHA comprovado após o merge da PR #109:** `aca78dab42e3ecfa5f8a9b4101c7f7ad41b0e17b`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-01](evidence/NLE-P00-WO-002-DATA-01.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -99,5 +99,13 @@
 - Privacidade local-first e telemetria/upload OFF por padrão; crash dumps potencialmente sensíveis. [Evidence Bundle](evidence/NLE-P00-WO-002-CORE-06.md).
 - CORE-01..CORE-06 possuem **pesquisa de planejamento**, nenhuma implementação C++ ou testes reais de benchmark/crash/CPU/GPU. `NLE-EXEC-WO-CORE-06-001` permanece `executor_ready=false`.
 
-## 13. Próximo incremento
-`NLE-P00-WO-002-DATA-01`: pesquisa do Virtual File System, mounts, overlays, permissões, cache e proteção contra path traversal, **PLANNED / NOT STARTED** até a auditoria/merge desta reconciliação. A fila de Zcode permanece integralmente bloqueada até ADRs/contratos/testes aprovados.
+## 13. DATA-01 — Virtual File System, segurança de montagem e persistência
+- Research issue [#108](https://github.com/KayzenRoot/stormline/issues/108), WO `NLE-P00-WO-002-DATA-01`: pesquisa aprovada **somente como documentação**; implementation issue [#24](https://github.com/KayzenRoot/stormline/issues/24) continua BLOCKED.
+- PR [#109](https://github.com/KayzenRoot/stormline/pull/109): base main `3befddfb0df42ee5a8a749fb39116bfbd36fb01a`, HEAD auditado `fc08fb2c4374405acecfd9c56a8f543b40fe0410`; GitHub Actions [43600716325](https://github.com/KayzenRoot/stormline/actions/runs/43600716325) docs-validation SUCCESS: Source Pack/links, 80-module DAG, 80-WO registry, seletor recusando WO BLOCKED.
+- Auditoria objetiva em pt-BR APPROVED apenas para pesquisa; squash merge `aca78dab42e3ecfa5f8a9b4101c7f7ad41b0e17b` confirmado em leitura de main. Nenhum HIGH/CRITICAL documental conhecido.
+- [Arquitetura DATA-01](architecture/data-01-virtual-file-system.md), [matriz de tecnologia](research/data-01-vfs-technology-matrix.md), [ADR-0009](adr/0009-data-01-vfs-policy.md) PROPOSED; namespace lógico, mounts/overlays com permissões, abertura por handle para contenção, quotas e escrita staged. PhysicsFS zlib e libzip BSD-3-Clause candidatos; nenhuma dependência instalada.
+- Path traversal, TOCTOU, symlink/junction, ZIP-bomb/zip-slip, recuperação após crash e risco de perda de dados requerem testes nativos. SAMG é hipótese de R&D não comprovada.
+- [Evidence Bundle DATA-01](evidence/NLE-P00-WO-002-DATA-01.md): sem build C++, fuzzing, runtime filesystem, benchmark, integração real ou sandbox comprovado. Implementation issue #24 preservada com `executor_ready=false`.
+
+## 14. Próximo incremento
+`NLE-P00-WO-002-DATA-02`: pesquisa do Asset Registry, IDs estáveis, metadados, integridade de referências e provenance. **PLANNED / NOT STARTED** até esta reconciliação passar CI/auditoria/merge. Nenhuma execução de código ou liberação do Zcode.
