@@ -1,7 +1,7 @@
 # Work Order — NLE-P00-WO-002-DATA-01
 
 **Issue:** #108 | **Module:** DATA-01 Virtual File System | **Risk:** LOW documentation; later implementation ELEVATED due to filesystem security/data loss.  
-**Status:** PROPOSED RESEARCH / NOT IMPLEMENTED | **Context Lock main SHA:** `3befddfb0df42ee5a8a749fb39116bfbd36fb01a`.
+**Status:** APPROVED / MERGED (research documentation only, PR #109); ADR-0009 remains PROPOSED, engine not implemented | **Context Lock main SHA:** `3befddfb0df42ee5a8a749fb39116bfbd36fb01a`.
 
 ## OBJECTIVE
 Research the full cross-platform secure Virtual File System architecture, technology stack, licensing and security/performance test plan. Minimize future Zcode decisions; this WO writes only reviewed planning documents.
