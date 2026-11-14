@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-03` — Character Controller & Movement, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #181:** `b1eef0a603683d1b876ac9d029b7d05e3d2b9a58`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-03](evidence/NLE-P00-WO-002-SIM-03.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-04` — Skeletal Animation & Motion, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #184:** `38e3c8080fe02d54aed9b78a8273f340a5427e32`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-04](evidence/NLE-P00-WO-002-SIM-04.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -313,5 +313,14 @@
 - **All 72 future tests NOT EXECUTED**: no character motor, integrated physics, Windows/Linux/macOS/Web/headless build, sanitizer runs, contact/replay, security fuzz, CPU p95/p99, user playtest or gameplay superiority evidence. The ADR-0033 and release class remain PROPOSED/UNDECIDED.
 - **Research tally after this checkpoint reconciliation:** **30 / 80 modules documented (37.5%)**, **50 RESEARCH_PENDING**, including historical CORE-04 gap unresolved. **0 / 80 runtime modules implemented**; all 80 implementation packets `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`.
 
-## 38. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-P00-WO-002-SIM-04`: **Skeletal Animation & Motion**, next catalog-order documentary research. No SIM-04 issue/PR/implementation until SIM-03 checkpoint PR has exact-HEAD CI/audit/squash/main readback. Future code requires preceding runtime modules. No authorization to unlock Zcode coding.
+## 38. SIM-04 — Skeletal Animation & Motion (research APPROVED, documentation only)
+- [Research issue #183](https://github.com/KayzenRoot/stormline/issues/183), WO `NLE-P00-WO-002-SIM-04`, **APPROVED DOCUMENTARY RESEARCH ONLY**. Future implementation [issue #49](https://github.com/KayzenRoot/stormline/issues/49) remains **OPEN/BLOCKED**: SIM-03+DATA-03 native runtime code does not exist.
+- [Research PR #184](https://github.com/KayzenRoot/stormline/pull/184): base main `4dc7060fc0de16c036364a7363755a9ec4ea9144`, initial Docs Validation [run #43647075521](https://github.com/KayzenRoot/stormline/actions/runs/43647075521) SUCCESS on initial head `ec7e02850bc443e174a3feac8525457397c4fd49`. **Final exact audited HEAD** `bd099f87fb6d99865d63ed087d28dde3a23413d7` passed [Docs Validation run #43647135918](https://github.com/KayzenRoot/stormline/actions/runs/43647135918) SUCCESS, job #132607334305: source links, catalog DAG, registry, blocked Zcode selector all SUCCESS. Objective audit in pt-BR [comment #6885044210](https://github.com/KayzenRoot/stormline/pull/184#issuecomment-6885044210) APPROVED documentary-only, eight docs files, no known HIGH/CRITICAL within scoped changes. SonarCloud/Socket on exact HEAD **NOT VERIFIED**. Normal squash merged main `38e3c8080fe02d54aed9b78a8273f340a5427e32`; main SHA readback confirmed.
+- [Architecture](architecture/sim-04-skeletal-animation-motion.md), [ADR-0034 PROPOSED](adr/0034-sim-04-animation-authority-retarget-ik-and-ragdoll.md), [technology/licensing](research/sim-04-skeletal-animation-technology-license-matrix.md), [typed API contract](contracts/sim-04-skeletal-animation-api.md), [96 FUTURE cases](testing/sim-04-acceptance-matrix.md), [benchmark protocol](research/sim-04-animation-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-SIM-04.md).
+- Stormline-owned skeleton/clip/graph/pose IDs, source revisions, CPU headless graph, blends/masks and marker receipts at CORE-04 fixed TickId; animation root delta is **intent**, with SIM-03 authoritative collision/motion ACK. Retarget profiles with joint/bind/rest reference, bounded IK grounded on real SIM-03/SIM-02 contact, ragdoll bodies/constraints exclusively SIM-02 at safe PHYS barriers, GFX consumes immutable pose/read-only GPU skinning. DATA-03/04/05 own source/rights/import/cooking; TWO-03 owns 2D cutscene sequencing; one EDIT/CLI/MCP validated authoring schema.
+- ozz-animation MIT **leading CPU sampler candidate NOT ADOPTED**; ACL MIT optional compressor **NOT ADOPTED** (requires real format adapter to interoperate with ozz runtime); glTF 2.0 optional standards-driven importer format candidate, Jolt via SIM-02 only. No vendor binaries, engine code, third-party characters/assets, clip fixtures or profiler executed; versions/licenses must be pinned in future code ADR.
+- **All 96 future test cases NOT EXECUTED**: no live animation, CPU headless, native/WASM builds, parser fuzz/ASan, physics ragdoll, roots, retarget/IK, GPU skin, screenshot, quality trials or CPU/GPU/VRAM benchmarks. No performance/superiority or cross-OS bitwise guarantee. ADR-0034 remains PROPOSED, release class UNDECIDED.
+- **Research tally after this checkpoint reconciliation:** **31/80 documented (38.75%)**, **49 RESEARCH_PENDING** including historical CORE-04 gap. **0/80 runtime modules implemented**; all 80 coding WOs remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`. This checkpoint delta itself is subject to separate PR CI/audit/merge.
+
+## 39. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-SIM-05`: **Navigation & Behavior**, next catalog-order documentary research. No SIM-05 work before SIM-04 checkpoint PR exact-HEAD CI/audit/squash/main readback. Future code requires preceding runtime modules. No Zcode coding unlock.
