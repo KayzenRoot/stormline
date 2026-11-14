@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Animation architecture](../../architecture/two-03-animation-sequencing.md), [technology/license matrix](../../research/two-03-animation-technology-license-matrix.md), [ADR-0024 PROPOSED](../../adr/0024-two-03-deterministic-animation-sequencing-policy.md), [typed timeline/skeleton/audio API](../../contracts/two-03-animation-api.md), [106 FUTURE NOT EXECUTED tests](../../testing/two-03-acceptance-matrix.md), [A/V timeline sync benchmark protocol](../../research/two-03-timeline-sync-benchmark.md), [research Work Order](../../work-orders/NLE-P00-WO-002-TWO-03.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-TWO-03.md) are **proposed research** not approved code plans or measured A/V output. Source artist/tool licensing for Spine runtime/editor, Rive branded free exports, DragonBones MIT, Lottie-web MIT and FFmpeg LGPL/GPL, exact codec rights and AUDIO sample-clock ownership require future explicit approval. All 80 coding packets remain BLOCKED/executor_ready=false, #39 OPEN/BLOCKED. No codec, SDK, skeleton or animation runtime exists.
+
 ## DEPENDENCIES
 `TWO-01`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
