@@ -21,7 +21,7 @@ Código, Git, diffs, testes e evidência observável prevalecem sobre declaraç�
 - STALE: contexto/fingerprints invalidados por alteração em checkpoint, Scope, DoD, Architecture ou decisão relevante.
 - NOT STARTED / NOT IMPLEMENTED: ausência de implementação verificada.
 
-Uma decisão aprovada exige registro no Ledger/ADR; alterações passam por novo ADR e aceite do proprietário. Este Source Pack inicial é a **proposta documental em PR** até auditoria e merge; não se autodeclara aprovado.
+Uma decisão aprovada exige registro no Ledger/ADR; alterações passam por novo ADR e aceite do proprietário. Este Source Pack foi integrado por squash merge na PR #1 após auditoria documental objetiva e CI verificado. Decisões tecnológicas e visuais que constam como PROPOSED continuam sem aprovação.
 
 ## Alteração documental
 Cada PR identifica fontes afetadas, risco, versão, compatibilidade, justificativa, evidências e Checkpoint Delta proposto. Primeiro auditar; somente após APPROVED atualizar formalmente fontes canônicas afetadas. Evitar docs contraditórias.
