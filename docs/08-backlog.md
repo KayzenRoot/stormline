@@ -6,7 +6,7 @@ Status: PLANNING; module implementation issues #18–#97 exist but remain BLOCKE
 | NLE-P00-WO-001 | Source Pack, identidade de marca, governança solo, CI docs | base Git | APPROVED: Source Pack integrado na PR #1; proteção da main ainda NÃO VERIFICADA |
 | NLE-P00-WO-001-EXT-001 | README profissional, apresentação GitHub, templates, versionamento | WO-001 APPROVED, solicitação do proprietário | APPROVED: PR #3 merged, checkpoint/evidence em reconciliação documental |
 | NLE-P00-WO-001-EXT-002 | Catálogo de 80 módulos, 2D/2.5D/3D/web e Windows/Linux/macOS, MCP-first e no-MVP como propostas | Solicitação explícita owner após EXT-001 | APPROVED / MERGED (PR #5), catálogo técnico de candidatos; sem código |
-| NLE-P00-WO-002 | Pesquisa de stack/licenças por módulo, começando em NLE-P00-WO-002-CORE-01 (issue #6) | EXT-002 catalog e checkpoint integrados | CORE-01..CORE-06 e DATA-01: research docs APPROVED / MERGED; DATA-02 research APPROVED / MERGED; DATA-03 and DATA-04 research APPROVED / MERGED; engine not implemented |
+| NLE-P00-WO-002 | Pesquisa de stack/licenças por módulo, começando em NLE-P00-WO-002-CORE-01 (issue #6) | EXT-002 catalog e checkpoint integrados | CORE-01..CORE-06 e DATA-01: research docs APPROVED / MERGED; DATA-02 research APPROVED / MERGED; DATA-03, DATA-04 and DATA-05 research APPROVED / MERGED; engine not implemented |
 | NLE-P00-WO-002-CORE-02 | Pesquisa std::pmr/mimalloc/rpmalloc, arenas e memória (issue #10) | CORE-01 docs/checkpoint APPROVED | RESEARCH DOCS APPROVED via PR #11, implementation NOT STARTED |
 | NLE-P00-WO-002-CORE-03 | Research job scheduler, work stealing, task graph and thread affinity (CORE-03) | CORE-02 checkpoint/CI APPROVED | RESEARCH DOCS APPROVED / MERGED via PR #14; code NOT STARTED |
 | NLE-P00-WO-002-QUEUE-001 | Fila de 80 WOs drafts bloqueadas, Zcode handoff, issues e validação CI | CORE-03 research/checkpoint approved | APPROVED AS BLOCKED QUEUE: 80 WOs + issues #18–97; zero engine implementation |
@@ -14,7 +14,7 @@ Status: PLANNING; module implementation issues #18–#97 exist but remain BLOCKE
 | NLE-P00-WO-002-CORE-05 | Math / Coordinates / Types research (issue #102) | CORE-04 checkpoint reconciled | RESEARCH IN PROGRESS / ADR-0007 PROPOSED; no code |
 | NLE-P00-WO-002-DATA-03 | 2D/3D/textures/audio and idempotent reimport research (issue #114) | DATA-02 research/checkpoint APPROVED | RESEARCH DOCS APPROVED / MERGED via PR #115; ADR-0011 PROPOSED; implementation #26 BLOCKED |
 | NLE-P00-WO-002-DATA-04 | Serialization & Scene Format, schema migrations and semantic diff technology research (issue #117) | DATA-03 checkpoint APPROVED | RESEARCH DOCS APPROVED / MERGED PR #118; ADR-0012 PROPOSED, implementation #27 BLOCKED |
-| NLE-P00-WO-002-DATA-05 | Cooking, streaming bundles, incremental patching, target profiles (research #120) | DATA-04 checkpoint APPROVED / MERGED | RESEARCH IN PROGRESS; ADR-0013 PROPOSED; implementation #28 BLOCKED |
+| NLE-P00-WO-002-DATA-05 | Cooking, streaming bundles, incremental patching, target profiles (research #120) | DATA-04 checkpoint APPROVED / MERGED | RESEARCH DOCS APPROVED / MERGED PR #121; ADR-0013 PROPOSED; implementation #28 BLOCKED |
 | NLE-P00-WO-003 | Arquitetura Core, memória, jobs, tempo, contratos | WO-002 APPROVED | PLANNED |
 | NLE-P00-WO-004 | Arquitetura renderer, shaders, iluminação, VFX | WO-003 APPROVED | PLANNED |
 | NLE-P00-WO-005 | World/terrain/physics/assets/audio | WO-003/004 APPROVED | PLANNED |
