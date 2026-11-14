@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-07`, but implementation details and release class are not yet approved.
 
+## RESEARCH CONTEXT (PROPOSALS ONLY; EXECUTOR STILL BLOCKED)
+[Architecture](../../architecture/gfx-07-camera-color-postprocessing.md), [technology/license matrix](../../research/gfx-07-camera-color-technology-matrix.md), [ADR-0020 PROPOSED](../../adr/0020-gfx-07-camera-color-reconstruction-policy.md), [typed semantics](../../contracts/gfx-07-camera-color-api.md), [77 FUTURE NOT RUN tests](../../testing/gfx-07-acceptance-matrix.md), [benchmark protocol](../../research/gfx-07-quality-benchmark-protocol.md), [research WO](../../work-orders/NLE-P00-WO-002-GFX-07.md) and [research Evidence Bundle](../../evidence/NLE-P00-WO-002-GFX-07.md) are only conceptual research, NOT a frozen ABI, code/SDK target or executable approval. ACES2/OCIO, AMD FSR SDK 2.4 signed binaries, NVIDIA Streamline/DLSS plugin rights and Intel XeSS binary-only terms require future exact-tag/license approval. All 80 coding WOs remain BLOCKED/`executor_ready=false`; existing #35 not unlocked.
+
 ## DEPENDENCIES
 `GFX-06`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
