@@ -28,15 +28,19 @@ row_re = re.compile(
 rows = row_re.findall(content)
 ids = [row[0] for row in rows]
 dep_map: dict[str, list[str]] = {}
-if len(ids) != 79:
-    errors.append(f"expected 79 catalog modules; got {len(ids)}")
+if len(ids) != 80:
+    errors.append(f"expected 80 catalog modules; got {len(ids)}")
 if len(set(ids)) != len(ids):
     errors.append("duplicate module IDs")
-if "| **TOTAL** | **79** |" not in content:
+if "| **TOTAL** | **80** |" not in content:
     errors.append("catalog summary does not claim 79 modules")
 group_counts = Counter(identifier.split("-", 1)[0] for identifier in ids)
 if len(group_counts) != 14:
     errors.append(f"expected 14 functional areas; got {len(group_counts)}")
+if group_counts.get("PLAT") != 6:
+    errors.append("missing macOS platform module")
+if "PLAT-06" not in ids:
+    errors.append("explicit macOS module ID is absent")
 if group_counts.get("SIM") != 7:
     errors.append("vehicles/flight dynamics module missing from SIM family")
 for item_id, title, scope, dependencies, acceptance in rows:
@@ -64,7 +68,7 @@ def walk(node: str, stack: list[str]) -> None:
 for identifier in ids:
     walk(identifier, [])
 
-for phrase in ("NO MVP", "2D", "2.5D", "3D", "Web", "MCP"):
+for phrase in ("NO MVP", "2D", "2.5D", "3D", "Web", "MCP", "macOS", "Windows", "Linux"):
     text = content + mcp.read_text(encoding="utf-8") + release.read_text(encoding="utf-8")
     if phrase not in text:
         errors.append(f"missing declared scope: {phrase}")
