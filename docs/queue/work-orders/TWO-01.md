@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[TWO-01 architecture](../../architecture/two-01-renderer-canvas.md), [technology/license research](../../research/two-01-renderer-technology-license-matrix.md), [ADR-0022 PROPOSED](../../adr/0022-two-01-native-2d-renderer-policy.md), [typed Canvas API](../../contracts/two-01-canvas-api.md), [81 FUTURE NOT RUN tests](../../testing/two-01-acceptance-matrix.md), [reproducible 2D benchmark](../../research/two-01-benchmark-protocol.md), [research WO](../../work-orders/NLE-P00-WO-002-TWO-01.md) and [Evidence Bundle](../../evidence/NLE-P00-WO-002-TWO-01.md) are proposals only, **not** approved implementation contracts or C++/GPU source. Font/Rive rights, exact ABI, dependencies GFX-01/DATA-03 and target hardware 60FPS proof TBD. #37 and all 80 future code WOs remain BLOCKED/`executor_ready=false`.
+
 ## DEPENDENCIES
 `GFX-01`, `DATA-03`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
