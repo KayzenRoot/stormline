@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-GFX-08
 
 **Research issue #144 | Future implementation #36 BLOCKED** | Date 2026-11-14  
-**State:** RESEARCH IN PROGRESS, DOCS ONLY | **ADR-0021:** PROPOSED | **BASE main:** `729f111d30fe927107f42fe6e4b951d17f357e10` (GFX-07 research PR #142 and checkpoint PR #143 merged).  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #145) | **ADR-0021:** PROPOSED | **BASE main:** `729f111d30fe927107f42fe6e4b951d17f357e10` (GFX-07 research PR #142 and checkpoint PR #143 merged).  
 **Risk:** LOW documentation; future ELEVATED GPU memory/synchronization, untrusted assets/graph and visual collision/authority isolation.
 
 ## OBJECTIVE
@@ -55,3 +55,6 @@ Any canonical stale base, unlicensed source, missing links/failing CI, unauthori
 
 ## CONTEXT LOCK
 BASE main `729f111d30fe927107f42fe6e4b951d17f357e10`; Git blob hashes used for documentation fingerprints are **not** raw SHA-256 file checksums; future code requires SHA-256 source fingerprints, approved contracts/versions and integrated predecessors.
+
+## Observed research PR #145 receipts
+BASE `729f111d30fe927107f42fe6e4b951d17f357e10`, final HEAD `e37f8e0f44252405b078146de7eaa29fde992802`; [Docs Validation #43625522752](https://github.com/KayzenRoot/stormline/actions/runs/43625522752) SUCCESS at exact HEAD, Socket Security and SonarCloud SUCCESS, pt-BR documentary audit APPROVED, no HIGH/CRITICAL found in 11-file docs diff. Normal squash merged into main `f3db6c126866e870bea6e00a646152ca615ecb16`. Separate same-WO checkpoint PR requires independent exact-head CI/audit; ADR-0021 PROPOSED, 78 future tests NOT EXECUTED, code #36 BLOCKED.
