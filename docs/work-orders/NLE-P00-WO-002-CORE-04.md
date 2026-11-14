@@ -1,7 +1,7 @@
 # Work Order — NLE-P00-WO-002-CORE-04
 
 **Risk:** LOW (documentation); future clock runtime STANDARD/ELEVATED with physics/server integration.  
-**State:** RESEARCH IN PROGRESS / ADR-0006 PROPOSED / NO ENGINE CODE. **Issue:** #99.  
+**State:** APPROVED / MERGED as RESEARCH DOCS via PR #100 (head `27eafe1d514d909a51470766eb4513d4bbf5ef40`; squash `17b1a4c75e87fcf424a6cf42f198e72c4da2ea9a`). ADR-0006 PROPOSED for code / NO ENGINE IMPLEMENTATION. **Issue:** #99.  
 **Baseline main:** 90eaf1b7cef148dfd168e3fa1ac8f7e9be603216 (after PR #98).
 
 ## OBJECTIVE
@@ -32,13 +32,13 @@ Clock acquisition from CORE-01 only; CORE-04 owns TickId/rational timeline; CORE
 Zero-cost public CI; no engine implementation, secret, paid package, CodeRabbit, external approval, bypass, force-push or premature issue status promotion. Approved prior ADRs and Source Pack dominate speculative alternatives.
 
 ## ACCEPTANCE CRITERIA
-- [ ] Clock candidates, portable semantics, source links, licenses/packaging implications and reasons documented.
-- [ ] Typed conceptual contracts for monotonic ClockSource, integer/rational TickId/timeline, errors, pause, one-step, replay scope, overload/clamp/dropped time diagnostics and interpolation.
-- [ ] 60Hz fixture, 30/60/144 FPS partition invariance, 24h/5,184,000 tick drift check, overflow, backwards time, sleep, pause and server overload scenarios specified.
-- [ ] Cross-module DAG and OS/headless/Web limitations documented; deterministic scheduling explicitly distinguished from deterministic physics.
-- [ ] ADR-0006 explicitly PROPOSED and implementation #21 remains BLOCKED.
-- [ ] GitHub Actions docs-validation passes on exact HEAD; no code or unintended artifacts; objective audit in pt-BR and scoped Evidence Bundle.
-- [ ] Checkpoint delta ONLY after approval/merge, with main readback; no premature next module.
+- [x] Clock candidates, portable semantics, source links, licenses/packaging implications and reasons documented.
+- [x] Typed conceptual contracts for monotonic ClockSource, integer/rational TickId/timeline, errors, pause, one-step, replay scope, overload/clamp/dropped time diagnostics and interpolation.
+- [x] 60Hz fixture, 30/60/144 FPS partition invariance, 24h/5,184,000 tick drift check, overflow, backwards time, sleep, pause and server overload scenarios specified.
+- [x] Cross-module DAG and OS/headless/Web limitations documented; deterministic scheduling explicitly distinguished from deterministic physics.
+- [x] ADR-0006 explicitly PROPOSED and implementation #21 remains BLOCKED.
+- [x] GitHub Actions docs-validation passes on exact HEAD; no code or unintended artifacts; objective audit in pt-BR and scoped Evidence Bundle.
+- [x] Checkpoint delta ONLY after approval/merge, with main readback; no premature next module.
 
 ## TESTS
 Current Work Order: python3 scripts/validate_docs.py; python3 scripts/validate_module_catalog.py; python3 scripts/validate_wo_registry.py; python3 scripts/select_wo.py CORE-04 (must refuse execution); GitHub Actions docs-validation exact PR HEAD. Planned runtime tests are specifications only, not executed.
@@ -57,3 +57,6 @@ Base SHA: 90eaf1b7cef148dfd168e3fa1ac8f7e9be603216. Critical file fingerprints a
 
 ## EVIDENCE BUNDLE
 Document actual PR head/base, CI commands and run IDs, changed files, checks and limitations, licensing, risks, corrections and proposed Checkpoint Delta. No native tests are claimed in this P00 research.
+
+## POST-MERGE AUDIT
+Final-head Docs Validation [run 43597153261](https://github.com/KayzenRoot/stormline/actions/runs/43597153261): SUCCESS. An initial evidence Markdown error failed run 43596956616; corrected in the same PR. Objective pt-BR audit on PR #100 APPROVED docs only; squash merge 17b1a4c75e87fcf424a6cf42f198e72c4da2ea9a read back on main. Checkpoint reconciliation documented in docs/11-checkpoint.md; no executable CORE-04 code or benchmarks exist.

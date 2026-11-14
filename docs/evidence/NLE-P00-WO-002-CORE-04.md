@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-14 | **Risk:** LOW for documentary research, future implementation risk STANDARD/ELEVATED.  
 **Issue:** [#99](https://github.com/KayzenRoot/stormline/issues/99) | **PR:** [#100](https://github.com/KayzenRoot/stormline/pull/100).  
-**Status:** AUDIT PENDING FINAL HEAD; no runtime code/build/release. ADR-0006 remains PROPOSED.
+**Status:** APPROVED / MERGED for research docs only; no runtime code/build/release. ADR-0006 remains PROPOSED for implementation.
 
 ## Source, context and Git
 - Baseline verified after queue reconciliation PR #98: main = `90eaf1b7cef148dfd168e3fa1ac8f7e9be603216`.
@@ -31,7 +31,7 @@
 ## Observed tests
 - [GitHub Actions run #43596800522](https://github.com/KayzenRoot/stormline/actions/runs/43596800522) on exact research content HEAD `e95953316947393f33574ddd73aa173a60f22155`: workflow **Docs Validation**, job **docs-validation**, **SUCCESS**.
 - Verified successful steps: Source Pack/local links; module catalog/DAG; 80-blocked-WO registry; Zcode selector rejection of blocked packet.
-- Final evidence-update commit creates a *new* HEAD and **must have its own successful CI run before merge**. Audit review comment/PR provides final SHA and run ID.
+- Final audited HEAD `27eafe1d514d909a51470766eb4513d4bbf5ef40`: [CI run 43597153261](https://github.com/KayzenRoot/stormline/actions/runs/43597153261) **SUCCESS** (all four validation checks passed).
 - Commands described by Work Order are for future/local reproducibility; this evidence does not falsely claim an independent local execution.
 
 ## Security, contracts and residual risk
@@ -46,8 +46,8 @@
 - Evidence commit `3cc51056559b32ffbf9e8da5837bf5866b423541` failed Docs Validation [run #43596956616](https://github.com/KayzenRoot/stormline/actions/runs/43596956616) because Markdown delimiters were accidentally escaped. Fixed in the same WO/PR; final-head CI must pass before approval. No source or runtime logic changed.
 
 ## Objective audit and proposed Checkpoint Delta
-Proposed verdict for **research artifact only**, conditional on exact final-head CI + diff audit: APPROVED, no known HIGH/CRITICAL documentary defect. Final verdict to be recorded externally on PR in pt-BR.
-After approved merge and main readback:
+**Actual verdict: APPROVED for research documentation only**, on fixed HEAD `27eafe1d514d909a51470766eb4513d4bbf5ef40`, no known HIGH/CRITICAL documentary defect. [Portuguese audit comment on PR #100](https://github.com/KayzenRoot/stormline/pull/100#issuecomment-6877570942). Normal squash merge `17b1a4c75e87fcf424a6cf42f198e72c4da2ea9a` verified on main. The checkpoint is reconciled through this separate follow-up PR under the same WO; neither ADR-0006 nor coding issue #21 is promoted.
+Checkpoint Delta applied after approved merge and readback:
 1. Record NLE-P00-WO-002-CORE-04 research documentation as merged, link issue #99, PR #100, audited HEAD and final CI.
 2. Retain ADR-0006 as **PROPOSED FOR IMPLEMENTATION**, not an approved engine ABI; implementation #21 remains BLOCKED.
 3. State no clock code, native compile/benchmark, release, deploy or cross-platform numerical determinism.
