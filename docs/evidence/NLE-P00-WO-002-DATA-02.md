@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-14 | **Risk:** LOW documentary research; future persistent registry/migrations and cross-file operations ELEVATED.
 **Research issue:** [#111](https://github.com/KayzenRoot/stormline/issues/111) | **Future implementation issue:** [#25](https://github.com/KayzenRoot/stormline/issues/25) remains BLOCKED.
-**Current evidence status:** PENDING FINAL CI AND AUDIT (no engine software); ADR-0010 PROPOSED.
+**Current evidence status:** APPROVED / MERGED for research documentation ONLY; no engine software, ADR-0010 remains PROPOSED.
 
 ## Baseline and Context Lock
 - Main before research: `7924f0eaf1eaf711e2316da7f4ee3dc7521afddb` (DATA-01/checkpoint completed).
@@ -36,9 +36,15 @@
 - SAPG is optional experimental provenance and impact graph with prove-or-drop criterion; no uniqueness/throughput claim.
 - MCP contracts must be scope-limited, previewable, transaction-safe and redacted. No arbitrary SQL or host path exposure.
 
+## Final research PR audit and merge
+- [PR #112](https://github.com/KayzenRoot/stormline/pull/112), BASE main `7924f0eaf1eaf711e2316da7f4ee3dc7521afddb`, final audited HEAD `99076f7df0e63e12e082329830bbac49cd241143`.
+- [GitHub Actions run 43601883375](https://github.com/KayzenRoot/stormline/actions/runs/43601883375): `docs-validation` SUCCESS for final research HEAD; Source Pack/links, module DAG, 80-WO registry and blocked-selector smoke PASS.
+- Objective pt-BR audit on PR #112: APPROVED for documentation only. Diff: 10 Markdown docs/ files, no runtime code or obvious secrets in patch (not full secret scanning).
+- Squash merge `a5664bfccf011dc3300c54a18d6ae846ee0926d8` confirmed by main readback and actual architecture file; implementation issue #25 and full queue still BLOCKED.
+
 ## Actual tests
-- GitHub Actions docs-validation on final research HEAD: **PENDING** until observed.
-- GitHub objective audit pt-BR: **PENDING**.
+- GitHub Actions docs-validation: **SUCCESS on final audited HEAD** per run above; separate checkpoint PR needs independent CI.
+- GitHub objective audit pt-BR: **APPROVED for research documentation**, recorded on PR #112.
 - C++ native build, SQLite WAL/integrity/recovery, project file migration, VFS integration, UUID generation, hash throughput, asset ID reference correctness, 1m-asset benchmark, OS/AI/security test: **NOT RUN**.
 - No paid tools, CodeRabbit, mandatory outside reviewer, force-push or bypass.
 
