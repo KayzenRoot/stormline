@@ -1,0 +1,26 @@
+# ADR-0024 — Engine-Owned Rational-Time 2D Animation and Audio-Aware Sequencing
+
+**Status: PROPOSED / NOT APPROVED FOR ENGINE CODE**  
+**Date:** 2026-11-14 | **Research issue #153 | WO NLE-P00-WO-002-TWO-03 | Future code issue #39 OPEN/BLOCKED**.
+
+## Context
+Owner expects flipbooks, 2D bones, blend, cutscenes and reproducible timeline exported with audio synchronization. Naïve frame-by-frame floating `dt` plus rendering FPS can drift; scripts attached to arbitrary animation tracks may violate game/network authority; distributing proprietary/editor-licensed Spine, bundled FFmpeg codecs or Rive no-splash assets risks compliance. Canvas rendering and audio mixing already belong elsewhere.
+
+## Proposed choices
+1. **Native canonical animation data/time** under DATA-02/04 stable IDs/revisions. Rational tick or frame/sample mapping with signed64 bounds, checked wide intermediates, explicit rounding/timebase and no unrestricted LCM or accumulated float drift. Fixed simulation ticks for gameplay event intentions, cosmetic presentation interpolation separated; deterministic headless pose and offline frame/sample schedule.
+2. Sprite flipbook/variable frame holds first-class on TWO-01 SpriteAssetId/AtlasRegion, no duplicate material/texture/Canvas renderer or GPU resource pool. Atlas streaming/repack must retain frame identity and invalidate stale rendering handles.
+3. Typed clip/curve/track schema and finite bone DAG/slot/skin/2D mesh with CPU reference, bounded IK/additive/1D blending/state transitions. GPU skinning, 2D blend spaces, complex deform and Rive-style interactive vector animations are optional gated performance/features, not default dependencies.
+4. Pure `EvaluatePoseAt` and `EvaluateSequenceAt` yield immutable pose and cue intents. Root motion/physics/gameplay is **proposal to authoritative owner**, not direct GPU skin/visual or network state; AUDIO owns sound sample scheduling/mix/latency; GFX-07 camera/HDR, VFX owns its emitters. Deterministic event dedup/seek/loop/reverse policy required.
+5. Authoring timeline/cutscene tracks must be bounded, immutable-revision validated and have explicit target property allowlists, nested clip limits, type/units, camera and VFX/audio cue owners. No arbitrary function/JS/Lua track execution, remote resource import or cross-project asset export.
+6. `SequenceExportPlanV1` frames at rational times, cue/sample offset plans and rights/preset without claiming real encoded media or sample-accurate hardware playback. Actual video/audio export via separate approved owner and real measured A/V drift/capture after encoder/codec legal review.
+7. Platform guarantee is conceptual portability: Windows/Linux/macOS/WebGL2 baseline **CPU reference + TWO-01 Canvas**, WebGPU and native optional GPU skinning after feature/correctness/memory tests. No mandatory proprietary SDK or runtime authoring subscription.
+8. **License boundary:** DragonBonesCPP MIT import candidate, Godot AnimationTree/2D skeletons MIT as references; Spine runtime's custom license/editor-per-user requirement prohibits mandatory embedding absent explicit legal approval; Rive MIT runtime but free exports splash/paid removal and content rights; Lottie-web MIT feature caveats; FFmpeg LGPLv2.1+ or GPLv2+ depending build/codec rights and future export module. No library installed/pinned or selected as mandatory.
+9. **AI-native Editor/CLI/MCP** typed revision-scoped commands with DATA-04 journal/rollback, allowlisted property changes, asset rights+quotas and dedup/failure receipts, no unsafe OS/file/codec or GPU access. Accessibility includes reduced motion and caption timing but actual UI owner remains separate.
+10. **STS optional PROVE-OR-DROP** static rational scheduling verifier vs simple clip/cue validators. No novelty/performance claimed or accepted without benchmark and false positive analysis.
+11. **Research is not implementation authorization**: 80 future code WOs remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, #39 OPEN/BLOCKED. Tech ADR-0024 proposed, engine 1.0 release class undecided; mandatory TWO-01 implementation and AUDIO/EXPORT/PHYS contracts and numeric sync/quality tests unverified.
+
+## Alternatives rejected as mandatory
+A runtime driven by GPU render frame `dt`; everything authored in Spine/Rive editor requiring paid account/license or branded splash; copying Godot state graph; video export by bundling any FFmpeg binary without license review; animation track string eval/shell scripts; per-frame sound triggers without event dedup; fake "sample accurate" based only on rational timestamps; GPU-only skinning; headless server allocating textures/audio.
+
+## Future evidence **NOT EXECUTED**
+CPU golden for fps 24000/1001 and sample 48k, seeks and nested/reverse loops; original sprite/bone/IK pose goldens, painter alpha/atlas rev; scene+audio cue event once during transitions and replay, headless CPU, platform GPU/Web and source security fuzz, actual A/V export sample drift with sound fixture, p95/p99 and no known HIGH/CRITICAL. See [architecture](../architecture/two-03-animation-sequencing.md), [matrix](../research/two-03-animation-technology-license-matrix.md), [typed API](../contracts/two-03-animation-api.md), [tests](../testing/two-03-acceptance-matrix.md), [benchmark](../research/two-03-timeline-sync-benchmark.md).
