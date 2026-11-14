@@ -1,3 +1,4 @@
+<a id="top"></a>
 <div align="center">
   <h1>⚡ STORMLINE</h1>
   <h3>An original, high-performance 3D game engine initiative by NexLabs Technology</h3>
@@ -181,5 +182,5 @@ The validator checks required documentation and local Markdown links using Pytho
 <div align="center">
   <p><strong>STORMLINE</strong></p>
   <p><em>Original engineering. Measurable progress. Built by NexLabs Technology.</em></p>
-  <p><a href="#-stormline">Back to top</a></p>
+  <p><a href="#top">Back to top</a></p>
 </div>
