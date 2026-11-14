@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-05 Navigation & Behavior Research
 
-**STATUS: RESEARCH PR #187 DRAFT; INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #187 AUDITED/APPROVED AND SQUASH-MERGED; SEPARATE CHECKPOINT PR PENDING OWN CI/AUDIT. NO ENGINE CODE.**  
 **2026-11-14 | Research [#186](https://github.com/KayzenRoot/stormline/issues/186) | future coding [#50](https://github.com/KayzenRoot/stormline/issues/50) OPEN/BLOCKED.**  
 **BASE main:** e6838dbdb5911acf4f0b67ce744a6c23a9396a22. **Research branch:** docs/NLE-P00-WO-002-SIM-05-navigation-behavior-research.
 
@@ -26,14 +26,15 @@ Prior SIM-04 research PR #184 merged and checkpoint PR #185 merged, main SHA bas
 |---|---|
 | Issue and branch | #186 opened, dedicated research branch from e6838dbd |
 | Source hierarchy and upstream modules | README/Scope/DoD/Ledger/Architecture/Requirements, WORLD-03, SIM-02/03, CORE-04 read |
-| Research PR and initial HEAD | [PR #187](https://github.com/KayzenRoot/stormline/pull/187) DRAFT; initial HEAD `17a9ffd371f3bfc76a79ab5a48f9cb01cb909979`, eight new Markdown docs, no runtime/registry edit |
-| Initial Docs Validation (not final after this revision) | [Run #43648850190](https://github.com/KayzenRoot/stormline/actions/runs/43648850190) SUCCESS on initial HEAD `17a9ffd371f3bfc76a79ab5a48f9cb01cb909979`, job #132612580436, Source Pack/local links, catalog DAG, registry and Zcode blocked-selector all SUCCESS. This Evidence Bundle revision changes HEAD, so a new exact-head CI gate is necessary. |
-| Sonar/Socket other security CI | NOT VERIFIED |
+| Research PR base/final HEAD | [PR #187](https://github.com/KayzenRoot/stormline/pull/187) MERGED, base `e6838dbdb5911acf4f0b67ce744a6c23a9396a22`, final audited HEAD `564acd9cb18b0a8ad498cf8936e199a7adca4f6b`, eight new Markdown docs only; no runtime/registry edit |
+| Initial Docs Validation (not final after this revision) | [Run #43648850190](https://github.com/KayzenRoot/stormline/actions/runs/43648850190) SUCCESS on initial HEAD `17a9ffd371f3bfc76a79ab5a48f9cb01cb909979`, job #132612580436, Source Pack/local links, catalog DAG, registry and Zcode blocked-selector all SUCCESS. This was initial CI; new final exact-HEAD run independently passed as described below. |
+| FINAL exact-HEAD Docs Validation | [Run #43648889523](https://github.com/KayzenRoot/stormline/actions/runs/43648889523) SUCCESS at `564acd9cb18b0a8ad498cf8936e199a7adca4f6b`, job #132612692684, every docs/links/catalog/DAG/registry/Zcode selector step SUCCESS | 
+| Sonar/Socket other security CI | NOT VERIFIED at final HEAD |
 | Technical/C++/WASM/headless build, nav/AI unit/integration tests | NOT RUN |
 | 112 future acceptance cases, security fuzz, ASan/TSan, benchmarks | NOT EXECUTED |
-| pt-BR objective review | PENDING |
-| Research PR squash/main readback | PENDING |
-| Separate checkpoint PR exact-head CI/audit/merge | PENDING |
+| pt-BR objective review | **APPROVED documentary-only** [comment #6885277029](https://github.com/KayzenRoot/stormline/pull/187#issuecomment-6885277029) after exact-head CI, no known HIGH/CRITICAL documentary scoped defect; no runtime evidence |
+| Research PR squash/main readback | PR #187 normal squash merged as `3dcbc8e363f1257b06025e40fd848dce793de76e`; main readback verified |
+| Separate checkpoint PR exact-head CI/audit/merge | PENDING at time of reconciliation draft; require own CI/audit/squash/readback, record actual result in PR/checkpoint |
 
 ## 4. Risk register and actual scope
 Potential future HIGH: stale/revoked nav tiles treated as ground; hidden-information leak from client blackboard; actor/tool spoofed motor/damage orders; malformed polygon/parser UAF; unbounded A*/BT/LOS query DoS; unsafe path completion after world unload; conflicting collider epochs. **Proposed mitigations**: fail-closed PATH_PARTIAL/UNKNOWN; leases/generational handles/epoch-bound jobs; SIM-03 action ACK and GAME authority; bounds, sandbox and fuzz; permissioned/redacted view. No runtime controls implemented or tested here. No vendor code, third-party assets, dependency lockfile or credentials imported. Open engine license not decided.
