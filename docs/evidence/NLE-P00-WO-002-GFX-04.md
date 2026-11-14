@@ -23,7 +23,7 @@ These are **Git object blob hashes, NOT SHA-256 file content hashes**. Before ac
 - Mesh/HLOD/instance typed contracts, source AssetId+authored rights preserved, screen-space error/hysteresis, animated material/double-sided/alpha foliage and silhouette seam checks.
 - DATA-05 verified immutable chunk streaming and resident coarse proxy; GFX-03 owns VRAM/fence, GFX-01/02 own GPU/shaders; no parallel packer, allocator or GPU memory store.
 - meshoptimizer C/C++ MIT candidate with exact tag and experimental feature gates, glTF EXT meshopt compression and GPU instancing ratified, gltfpack tool caveats; Nanite comparison without copyrighted engine content copying. ADR-0017 PROPOSED.
-- 36 future GEO-001..036 scenarios including real hardware platform, low-end, WebGPU/WebGL2, high-geometry CPU/GPU/VRAM/IO/popping reference, streaming error, meshlet fuzz, source rights and MPC semantic permissions.
+- 36 future GEO-001..036 scenarios including real hardware platform, low-end, WebGPU/WebGL2, high-geometry CPU/GPU/VRAM/IO/popping reference, streaming error, meshlet fuzz, source rights and MCP semantic permissions.
 - SVCG optional prove-or-drop with hard correctness before perf, no innovation performance claims.
 
 ## Observed checks / evidence (populate with exact GitHub results only)
