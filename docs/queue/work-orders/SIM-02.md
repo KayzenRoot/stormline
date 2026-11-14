@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Architecture](../../architecture/sim-02-physics-3d.md), [technology and license matrix](../../research/sim-02-physics-3d-technology-license-matrix.md), [ADR-0032 PROPOSED](../../adr/0032-sim-02-engine-owned-3d-physics-and-collider-publication.md), [typed physics API](../../contracts/sim-02-physics-3d-api.md), [170 FUTURE NOT EXECUTED cases](../../testing/sim-02-acceptance-matrix.md), [reproducible CPU/headless benchmark](../../research/sim-02-physics-benchmark-protocol.md), [research WO](../../work-orders/NLE-P00-WO-002-SIM-02.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-SIM-02.md) are DOCUMENTARY RESEARCH, not solver code or selected dependency. Jolt C++ MIT LEADING CANDIDATE (determinism flag exact source/defines/ordered API, broadphase query caveat, dynamic mesh limits), PhysX CPU BSD3 with CUDA GPU optional only, Rapier3D Apache2 Rust and Bullet core zlib alternatives uninstalled. CPU first and headless, ECS/scene source, fixed tick and WORLD-03/04 critical collider ACK require future code. Mandatory WORLD-02 and CORE-03 CODE absent and historical CORE-04 research gap pending; future code #47 plus all 80 coding WOs **BLOCKED/executor_ready=false**.
+
 ## DEPENDENCIES
 `WORLD-02`, `CORE-03`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
