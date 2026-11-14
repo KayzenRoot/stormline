@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-04
 
 **Date:** 2026-11-14 | **Research issue:** #132 | **Future code issue:** #32 BLOCKED  
-**State:** RESEARCH DOCS UNDER FINAL AUDIT. No C++ geometry, meshoptimizer runtime, GPU visibility, shader, HLOD tool, benchmark or deployment.
+**State:** RESEARCH DOCUMENTATION APPROVED / MERGED; IMPLEMENTATION STILL BLOCKED. No C++ geometry, meshoptimizer runtime, GPU visibility, shader, HLOD tool, benchmark or deployment.
 **BASE main:** `563f5dff168a688f5d03d959685024dd374de4c9`; **research branch:** `docs/NLE-P00-WO-002-GFX-04-geometry-research`. LOW doc risk; future ELEVATED incorrect visibility, GPU memory, geometry content rights and streaming.
 
 ## Canonical Context Lock: live GitHub blob fingerprints
@@ -27,13 +27,13 @@ These are **Git object blob hashes, NOT SHA-256 file content hashes**. Before ac
 - SVCG optional prove-or-drop with hard correctness before perf, no innovation performance claims.
 
 ## Observed checks / evidence (populate with exact GitHub results only)
-- First research HEAD `8565e7bb7506dbf5ff2643eea8f2b8ff0875fa0d` passed [Docs Validation #43614101059](https://github.com/KayzenRoot/stormline/actions/runs/43614101059) **SUCCESS** (Source Pack links, catalog 80 modules/DAG, registry, blocked selector); after this evidence update exact new HEAD CI required.
-- [Research PR #133](https://github.com/KayzenRoot/stormline/pull/133) initial scope audit: 10 documentation files under `docs/`, +399 / 0 deleted; no C++/SDK/compiled mesh, GPU test, workflow change or apparent secret. Registry readback shows 80/80 BLOCKED and zero executor_ready; implementation issue #32 remains PLANNING/BLOCKED. Final pt-BR audit and exact HEAD: PENDING.
+- First research HEAD `8565e7bb7506dbf5ff2643eea8f2b8ff0875fa0d` passed [Docs Validation #43614101059](https://github.com/KayzenRoot/stormline/actions/runs/43614101059) **SUCCESS** (Source Pack links, catalog 80 modules/DAG, registry, blocked selector); Final research HEAD `adee64b866160ba7da5a32ff189250098159b781` independently passed [Docs Validation #43614164512](https://github.com/KayzenRoot/stormline/actions/runs/43614164512) **SUCCESS**.
+- [Research PR #133](https://github.com/KayzenRoot/stormline/pull/133) initial scope audit: 10 documentation files under `docs/`, +399 / 0 deleted; no C++/SDK/compiled mesh, GPU test, workflow change or apparent secret. Registry readback shows 80/80 BLOCKED and zero executor_ready; implementation issue #32 remains PLANNING/BLOCKED. Final HEAD `adee64b866160ba7da5a32ff189250098159b781` with exact CI #43614164512 and [pt-BR objective audit](https://github.com/KayzenRoot/stormline/pull/133#issuecomment-6880406746) **APPROVED DOCUMENTATION ONLY**; 80 WOs stay BLOCKED / executor_ready=false.
 - Native/real GEO-001..036, shader build, C++ compiler, meshoptimizer codec, GPU culling, Windows/Linux/macOS/Web browser, fuzz, benchmark frame-time p95/p99 and VRAM: **NOT RUN**.
-- Research squash merge readback, separate same-WO checkpoint PR: PENDING.
+- Research [PR #133](https://github.com/KayzenRoot/stormline/pull/133) normal squash merge `ed4b77e1113c0aee615f5d17b0bf4f60bb624702` VERIFIED by main/architecture readback. Same-WO separate checkpoint reconciliation PR still needs independent exact-HEAD CI/audit/merge.
 
 ## Risks/unfinished selection gates
 No library/toolchain pinned or installed. Any third-party modeled scenes/copyrighted Epic assets prohibited unless authorized rights. UI/editor commands are semantic only; unbounded GPU count, private scene/asset data and GPU driver internals remain an ELEVATED boundary for future code. Both GFX-03 and DATA-05 **code** dependencies not integrated. All 80 implementation tickets BLOCKED and none executor_ready.
 
-## Proposed Checkpoint Delta (not yet audited or merged)
-After research PR docs CI success, objective audit and normal squash merge with readback, promote only GFX-04.research_status=RESEARCH_DOCUMENTED_ADR_PROPOSED via separate audited docs-only PR. ADR-0017 stays PROPOSED; future #32 and all 80 work orders remain BLOCKED/executor_ready=false. Then next eligible GFX-05 research.
+## Checkpoint Reconciliation (this separate PR requires own audit)
+Promote only `GFX-04.research_status=RESEARCH_DOCUMENTED_ADR_PROPOSED` as evidence of merged docs research; ADR-0017 remains PROPOSED, no code nor approved meshoptimizer/SDK, #32 and all 80 future WOs remain BLOCKED/executor_ready=false. Before GFX-05 research, this PR needs exact-HEAD CI, pt-BR objective audit, normal squash merge/readback and research issue #132 closure.

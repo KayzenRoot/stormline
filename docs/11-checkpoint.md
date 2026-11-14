@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-03` — Render Graph, segurança da sincronização e orçamentos de VRAM, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #130:** `43d844b6f1de1b5545193c6a3c004ed28561bca4`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-03](evidence/NLE-P00-WO-002-GFX-03.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-04` — Geometry, Occlusion & LOD, instancing e streaming de geometria, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #133:** `ed4b77e1113c0aee615f5d17b0bf4f60bb624702`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-04](evidence/NLE-P00-WO-002-GFX-04.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -168,5 +168,14 @@
 - Candidatos Vulkan Synchronization2/VMA MIT, D3D12 barreiras legadas/melhoradas quando suportadas e D3D12MA MIT, Metal MTLHeap/fences e WebGPU usage scopes; nenhuma lib selecionada, instalada ou benchmarkada. SAFG é somente hipótese prove-or-drop.
 - [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-03.md): RGP-001..034, C++/GPU, drivers Windows/Linux/macOS/Web, VRAM/CPU/GPU p95/p99, testes de alias e fuzz **NÃO EXECUTADOS**. Todas 80 WOs de implementação mantidas BLOCKED/`executor_ready=false`.
 
-## 21. Próximo módulo (somente após reconciliação GFX-03)
-`NLE-P00-WO-002-GFX-04`: Geometry, Occlusion & LOD: instancing, culling, HLOD, mesh streaming e vegetação, próximo no registro topológico; dependências e escopo devem ser lidos antes de iniciar. Nenhum código Zcode liberado.
+## 21. GFX-04 — Geometry, Occlusion & LOD, instancing e streaming seguro
+- Research [issue #132](https://github.com/KayzenRoot/stormline/issues/132), WO `NLE-P00-WO-002-GFX-04`, **APPROVED para pesquisa DOCUMENTAL somente**. Implementação [#32](https://github.com/KayzenRoot/stormline/issues/32) continua BLOCKED.
+- Research [PR #133](https://github.com/KayzenRoot/stormline/pull/133), BASE main `563f5dff168a688f5d03d959685024dd374de4c9`, HEAD auditado `adee64b866160ba7da5a32ff189250098159b781`; [CI docs-validation #43614164512](https://github.com/KayzenRoot/stormline/actions/runs/43614164512) **SUCCESS no HEAD exato** (links/Source Pack, 80 módulos/DAG, registry, seletor bloqueado).
+- Auditoria objetiva pt-BR **APPROVED somente para docs**, dez arquivos Markdown dentro de docs, nenhum HIGH/CRITICAL identificado no diff. Squash merge normal `ed4b77e1113c0aee615f5d17b0bf4f60bb624702` confirmado em main e na arquitetura GFX-04.
+- [Arquitetura](architecture/gfx-04-geometry-visibility-lod.md), [matriz tecnológica](research/gfx-04-geometry-technology-matrix.md), [ADR-0017 PROPOSED](adr/0017-gfx-04-visibility-geometry-policy.md), [contrato tipado](contracts/gfx-04-geometry-api.md), [36 testes futuros](testing/gfx-04-acceptance-matrix.md).
+- CPU frustum/culling e LOD base conservadores, opção Hi-Z/indirect/meshlet/mesh shader sob capacidade comprovada, com Metal/WebGPU/WebGL2 e GPU modesta por fallback; bounds de objetos deformados, foliage/alpha e depth history inválido **nunca** resultam em culling sem prova.
+- meshoptimizer C/C++ MIT, glTF EXT_meshopt_compression/EXT_mesh_gpu_instancing ratificados, clusterlod.h e gltfpack como candidatos sem tag/versão aprovada; Epic Nanite referência conceitual sem cópia. DATA-05 retém fonte/streaming e último LOD seguro; GFX-03 conserva GPU VRAM/fences. SVCG original só hipótese prove-or-drop.
+- [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-04.md): GEO-001..036, C++/SDK, testes nativos Windows/Linux/macOS/Web, geometria renderizada, fuzz, VRAM/CPU/GPU p95/p99 **NÃO EXECUTADOS**. Todas as 80 WOs de código continuam BLOCKED/`executor_ready=false`.
+
+## 22. Próximo módulo de pesquisa (somente após esta reconciliação)
+`NLE-P00-WO-002-GFX-05`: **Materials, Texture Systems & PBR**, conforme registry topológico. Trata shading físico, sistemas de textura, mips/filtros, decals e transparência; implementações Zcode permanecem bloqueadas até validação dos gates.
