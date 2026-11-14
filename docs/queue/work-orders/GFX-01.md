@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-01`, but implementation details and release class are not yet approved.
 
+## RESEARCH-ONLY CONTEXT (NOT EXECUTOR READY)
+The [GFX-01 architecture](../../architecture/gfx-01-graphics-rhi.md), [technology matrix](../../research/gfx-01-rhi-technology-matrix.md), [ADR-0014 PROPOSED](../../adr/0014-gfx-01-rhi-backends.md), [semantic API](../../contracts/gfx-01-rhi-api.md), [future RHI tests](../../testing/gfx-01-acceptance-matrix.md), and [research Work Order](../../work-orders/NLE-P00-WO-002-GFX-01.md) are **planning**, not approval of Vulkan/Metal/D3D12/SDL GPU implementation. No exact backend versions or accepted release class. All 80 implementation WOs including #29 remain BLOCKED / executor_ready=false.
+
 ## DEPENDENCIES
 `CORE-01`, `CORE-02`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
