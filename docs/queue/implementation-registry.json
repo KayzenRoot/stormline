@@ -316,7 +316,7 @@
       "catalog_acceptance": "Grande cena com culling correto e evidência de custo.",
       "id": "NLE-EXEC-WO-GFX-04-001",
       "file": "docs/queue/work-orders/GFX-04.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
