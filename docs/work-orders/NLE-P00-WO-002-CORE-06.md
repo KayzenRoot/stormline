@@ -1,7 +1,7 @@
 # Work Order — NLE-P00-WO-002-CORE-06
 
 **Stable ID:** NLE-P00-WO-002-CORE-06 | **Issue:** #105 | **Risk:** LOW documentation, future ELEVATED native/crash/privacy implementation  
-**State:** PROPOSED RESEARCH / AUDIT PENDING  
+**State:** APPROVED / MERGED (research docs only, PR #106); ADR-0008 remains PROPOSED; no code or profiling executed  
 **Context Lock baseline SHA:** `cc18ce33a05cbadac330effcc7ad6ddf29380721`
 
 ## OBJECTIVE

@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-05` — matemática, coordenadas, precisão e IDs estáveis, PROPOSTA de arquitetura (sem engine implementada).  
-**Main SHA comprovado após o merge da PR #103:** `c5f5b97508d31f4abb49671e9d4d9a59c7bc940f`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-CORE-05](evidence/NLE-P00-WO-002-CORE-05.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-06` — diagnósticos e observabilidade offline-first, PROPOSTA de arquitetura (sem engine implementada).  
+**Main SHA comprovado após o merge da PR #106:** `a76cb2bb3d39af44897df89d348c667fa1cb4fc3`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-CORE-06](evidence/NLE-P00-WO-002-CORE-06.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -91,5 +91,13 @@
 - Nenhum build, benchmark numérico, teste de precisão, engine, renderer ou integração física/rede foi realizado. [Evidência](evidence/NLE-P00-WO-002-CORE-05.md).
 - `NLE-EXEC-WO-CORE-05-001` permanece `executor_ready=false` e RELEASE CLASS UNDECIDED. A pesquisa não libera o Zcode.
 
-## 12. Próximo incremento
-`NLE-P00-WO-002-CORE-06`: pesquisa de diagnóstico, profiling, logs/traces e crash observability, **PLANNED / NOT STARTED** até concluir auditoria/merge desta reconciliação. Não iniciar implementação ou liberar Zcode sem ADR/contratos/testes aprovados.
+## 12. CORE-06 — diagnósticos, profiling e crash evidences
+- Issue de pesquisa [#105](https://github.com/KayzenRoot/stormline/issues/105), WO `NLE-P00-WO-002-CORE-06` aprovada **somente para documentação**. Issue de implementação [#23](https://github.com/KayzenRoot/stormline/issues/23) permanece BLOCKED.
+- PR [#106](https://github.com/KayzenRoot/stormline/pull/106): BASE main `cc18ce33a05cbadac330effcc7ad6ddf29380721`, HEAD auditado `e12aec2ee7f410e5f024e98295a2f109e1aef834`. [CI 43599614853](https://github.com/KayzenRoot/stormline/actions/runs/43599614853) docs-validation SUCCESS (Source Pack/links, 80-module DAG, 80 WOs registry e seletor de bloqueio).
+- Auditoria pt-BR APPROVED para pesquisa documental. Merge squash `a76cb2bb3d39af44897df89d348c667fa1cb4fc3` lido de volta na main; sem defeitos HIGH/CRITICAL documentais conhecidos.
+- Contratos de logs, spans, métricas, crash-envelope local e correlação por build SHA/tick/job/frame propostos. [Arquitetura](architecture/core-06-diagnostics-observability.md), [matriz](research/core-06-technology-matrix.md), [ADR-0008](adr/0008-core-06-observability-policy.md) (PROPOSED). spdlog, Tracy, Perfetto, Crashpad **apenas candidatos**, sem vendor instalado nem cloud obrigatório; SDF hipótese de R&D.
+- Privacidade local-first e telemetria/upload OFF por padrão; crash dumps potencialmente sensíveis. [Evidence Bundle](evidence/NLE-P00-WO-002-CORE-06.md).
+- CORE-01..CORE-06 possuem **pesquisa de planejamento**, nenhuma implementação C++ ou testes reais de benchmark/crash/CPU/GPU. `NLE-EXEC-WO-CORE-06-001` permanece `executor_ready=false`.
+
+## 13. Próximo incremento
+`NLE-P00-WO-002-DATA-01`: pesquisa do Virtual File System, mounts, overlays, permissões, cache e proteção contra path traversal, **PLANNED / NOT STARTED** até a auditoria/merge desta reconciliação. A fila de Zcode permanece integralmente bloqueada até ADRs/contratos/testes aprovados.
