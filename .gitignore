@@ -1,0 +1,26 @@
+# Local editor/operating-system artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python validation artifacts
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Future local builds (no engine implementation currently exists)
+build/
+dist/
+out/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+
+# Temporary logs and caches
+*.log
+.cache/

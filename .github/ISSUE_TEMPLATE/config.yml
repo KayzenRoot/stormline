@@ -1,0 +1,3 @@
+# The maintainer can still create custom issues.
+# Public submissions are directed to a scoped template.
+blank_issues_enabled: false
