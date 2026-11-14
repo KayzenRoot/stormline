@@ -1,12 +1,8 @@
 <div align="center">
-
-# ⚡ STORMLINE
-### Uma iniciativa de engine 3D original da NexLabs Technology
-
-**Mundos imersivos · Engenharia orientada a desempenho · Evolução contínua**
-
-[English](README.md) · **Português (Brasil)** · [Documentação](docs/00-source-hierarchy.md) · [Roadmap](docs/08-backlog.md)
-
+  <h1>⚡ STORMLINE</h1>
+  <h3>Uma iniciativa de engine 3D original da NexLabs Technology</h3>
+  <p><strong>Mundos imersivos · Engenharia orientada a desempenho · Evolução contínua</strong></p>
+  <p><a href="README.md">English</a> · <strong>Português (Brasil)</strong> · <a href="docs/00-source-hierarchy.md">Documentação</a> · <a href="docs/08-backlog.md">Roadmap</a></p>
 </div>
 
 > [!IMPORTANT]
@@ -71,20 +67,17 @@ A fonte de verdade é o Git, os ADRs aprovados, o Scope, o DoD e o Checkpoint. T
 
 **Ainda não há código de engine para compilar ou executar.** O repositório pode ser clonado para consultar a documentação e validar links com Python 3:
 
-\`\`\`bash
+```bash
 git clone https://github.com/KayzenRoot/stormline.git
 cd stormline
 python3 scripts/validate_docs.py
-\`\`\`
+```
 
 A pilha técnica e a licença pública do código **ainda não foram decididas**. Repositório público não significa permissão de reutilização, distribuição ou contribuição irrestrita. [Política de versões](docs/engineering/versioning.md).
 
 ---
 
 <div align="center">
-
-**STORMLINE** · Uma iniciativa da **NexLabs Technology**
-
-*Construída com disciplina. Medida com evidências.*
-
+  <p><strong>STORMLINE</strong> · Uma iniciativa da <strong>NexLabs Technology</strong></p>
+  <p><em>Construída com disciplina. Medida com evidências.</em></p>
 </div>
