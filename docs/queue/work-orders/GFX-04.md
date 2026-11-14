@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-04`, but implementation details and release class are not yet approved.
 
+## RESEARCH-ONLY CONTEXT (NOT EXECUTOR READY)
+The [GFX-04 architecture](../../architecture/gfx-04-geometry-visibility-lod.md), [technology matrix](../../research/gfx-04-geometry-technology-matrix.md), [ADR-0017 PROPOSED](../../adr/0017-gfx-04-visibility-geometry-policy.md), [semantic API](../../contracts/gfx-04-geometry-api.md), [36 future GEO tests](../../testing/gfx-04-acceptance-matrix.md) and [research Work Order](../../work-orders/NLE-P00-WO-002-GFX-04.md) are **research only**, not an approved implementation plan. C++ source paths, selected meshoptimizer tag/SDK and source rights, release class, hardware quality/cost thresholds and implemented dependency receipts are still missing. Future issue #32 and all 80 implementation Work Orders remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS` / `executor_ready=false`.
+
 ## DEPENDENCIES
 `GFX-03`, `DATA-05`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
