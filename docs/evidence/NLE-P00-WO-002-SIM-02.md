@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-02 Physics 3D Research
 
-**Status: DRAFT RESEARCH PR, EXACT FINAL HEAD CI/AUDIT PENDING | Research #177 | Code #47 OPEN/BLOCKED**  
+**Status: RESEARCH PR OPEN; INITIAL EXACT-HEAD DOCS VALIDATION SUCCESS, SOCKET PR DIFF REPORT TECHNICAL ERROR; NEW HEAD CI/AUDIT PENDING | Research #177 | Code #47 OPEN/BLOCKED**  
 **BASE main 6099128ead915e010ef252f57cd880f441303d59 | branch docs/NLE-P00-WO-002-SIM-02-physics-3d-research.** No C++/WASM/Rust backend, vendor SDK, native/Web/headless simulator, compiler, physics scene, collision benchmark, actual GPU/CPU memory measurements or sample scene exists for this increment.
 
 ## Canonical source and dependencies
@@ -9,9 +9,18 @@
 - Official source/rights research: Jolt MIT C++ vendor docs 5.6, CROSS_PLATFORM_DETERMINISTIC build conditioned on same source/defines/API order and warnings on parallel broadphase query reproducibility, dynamic triangle mesh vs static mesh/heightfield limitations. PhysX5 CPU BSD-3-Clause, CUDA GPU optional specialized Win/Linux platform and binary license gate, Rapier3D Rust Apache-2.0 with optional enhanced determinism, Bullet core zlib Extras/third party separately licensed. **No packages/binaries/vendor sample art imported or adopted.**
 - Original proposed stable PhysicsWorld3D+WorldEpoch, Body/Shape/Constraint handles and ECS EntityGuid mapping, CORE-06 fixed tick/CORE-03 jobs and allocation, contact poststep immutable buffer, exact narrowphase refinement, WORLD-02 prefab source and DATA-04 journal, WORLD-03/04/05 staged static collider and PHYS ready ACK, no GPU requirement. S3P optional PROVE-OR-DROP, no performance claim.
 
+## Canonical BASE Git object fingerprints (Git blob SHA-1, not raw byte SHA-256)
+- `docs/11-checkpoint.md`: `bf9aaa64cfcc917a31e6e43ad146df2591efac79`
+- `docs/10-decisions-ledger.md`: `d47abc54aa3aa1826d6a0a3c67dbfcaf1853ae9e`
+- `docs/03-scope.md`: `4ef605c74632ece080b2650e37dd83a415b63310`
+- `docs/09-definition-of-done.md`: `160b3054db9ea1961308934b401488b838d24c3e`
+- `docs/04-architecture.md`: `fee0957d2e3740f1941c27fce37caafe95520f1e`
+- `docs/queue/work-orders/SIM-02.md`: `8946c606a958f6d0894074dab0f8ddcee76ed162`
+Git object identifiers are not source SHA-256. Before actual coding, fingerprint raw source bytes on a fresh approved implementation Context Lock.
+
 ## Honest research scope and checks
 - Intended exactly 11 docs-only files: 8 new architecture, matrix, ADR-0032, versioned semantic API, **170 future NOT EXECUTED scenarios**, reproducible native/Web/headless/CPU p95/p99 benchmark protocol, research WO and Evidence Bundle; 3 additive links in Architecture/Backlog/blocked future coding #47 packet. **No checkpoint or implementation-registry changed in research PR.**
-- Research PR, final audited HEAD exact Docs Validation and security receipts: PENDING.
+- [Research PR #178](https://github.com/KayzenRoot/stormline/pull/178), INITIAL HEAD `6dbe3995bb9236e8e1ea94e5b123a6a89a7226b9`: [Docs Validation #43643764457](https://github.com/KayzenRoot/stormline/actions/runs/43643764457) **SUCCESS on initial exact HEAD**, SonarCloud Code Analysis SUCCESS with 0 new issues and 0 security hotspots reported, Socket Security Project Report SUCCESS. **Socket Security: Pull Request Alerts = NEUTRAL**, explicitly `Pull Request #178 Alerts: Failed` because external Socket diff report encountered a service/API error; its security comparison DID NOT RUN and is NOT a PASS, nor evidence of a specific vulnerability. This Evidence update changes the HEAD and triggers a NEW exact-final-HEAD docs/security check; assess any external report gap objectively before merge.
 - Objective pt-BR audit, normal squash/main readback: PENDING.
 - **All 170 cases FUTURE / NOT EXECUTED**. No C++ library/CPU headless/native/WASM build, physics contacts, joints, sweeps, stream terrain/PHYS ACK, memory/TSan/ASan, determinism/cross-platform replay, snapshot/rollback or actual benchmark. No 60fps, perfect CCD, portable GPU or engine superiority claims.
 - Docs risk LOW; future ELEVATED body/constraint lifetime/collision rights, source integrity, multithreaded callbacks and worker shutdown, physics gameplay authority and large-world precision.
