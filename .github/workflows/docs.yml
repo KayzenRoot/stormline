@@ -24,3 +24,12 @@ jobs:
         run: python3 scripts/validate_module_catalog.py
       - name: Work Order registry validation
         run: python3 scripts/validate_wo_registry.py
+      - name: Zcode selector must reject blocked packets
+        run: |
+          python3 scripts/select_wo.py --list > /dev/null
+          set +e
+          python3 scripts/select_wo.py CORE-01 --json > /tmp/stormline-wo-guard.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python3 -c "import json; x=json.load(open('/tmp/stormline-wo-guard.json')); assert x['executor_ready'] is False; assert x['status'].startswith('BLOCKED_')"
