@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-03`, but implementation details and release class are not yet approved.
 
+## RESEARCH-ONLY CONTEXT (NOT EXECUTOR READY)
+The [GFX-03 architecture](../../architecture/gfx-03-render-graph-gpu-memory.md), [technology matrix](../../research/gfx-03-rendergraph-technology-matrix.md), [ADR-0016 PROPOSED](../../adr/0016-gfx-03-render-graph-policy.md), [semantic API](../../contracts/gfx-03-render-graph-api.md), [34 future RGP tests](../../testing/gfx-03-acceptance-matrix.md) and [research Work Order](../../work-orders/NLE-P00-WO-002-GFX-03.md) are **planning research**, not a code authorization. GPUOpen VMA/D3D12MA remain MIT candidate versions without pinned tags; native Metal/WebGPU heap support still unverified. Future GFX-03 implementation #31 and all 80 WOs are BLOCKED/`executor_ready=false`.
+
 ## DEPENDENCIES
 `GFX-01`, `CORE-03`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
