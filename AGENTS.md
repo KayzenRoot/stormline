@@ -15,4 +15,6 @@ Applies to Codex, Zcode, DeepSeek and every automated executor. **Read before pr
 11. Never force push, rewrite history, disable security checks or merge an unvalidated change. Escalate unfulfillable controls as BLOCKED.
 12. The owner decides publication and brand clearance. Public repo is not an open-source license.
 
+For planned engine implementation, inspect [Zcode handoff](docs/engineering/zcode-handoff.md) and the [80-module queue](docs/queue/README.md). **All queue packets are blocked**, not permission to code. Planner must approve exact architecture, API, source files and tests first.
+
 See [checkpoint](docs/11-checkpoint.md), [governance](docs/engineering/solo-governance.md), [agent runbook](docs/engineering/agent-execution.md) and [WO template](docs/engineering/wo-template.md).
