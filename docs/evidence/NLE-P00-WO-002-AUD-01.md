@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-01 Audio Device & Mixer Research
 
-**STATUS: RESEARCH PR #196 DRAFT, INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT, MERGE AND CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #196 APPROVED/SQUASH-MERGED; SEPARATE CHECKPOINT PR PENDING OWN CI/AUDIT. NO ENGINE CODE.**  
 **Date:** 2026-11-14 | Research [#195](https://github.com/KayzenRoot/stormline/issues/195) | Future implementation [#52](https://github.com/KayzenRoot/stormline/issues/52) OPEN/BLOCKED.  
 **BASE main:** `21e50e73cf1f5f3a3c01bb2f869422161b28e248` | branch `docs/NLE-P00-WO-002-AUD-01-audio-device-mixer-research`.
 
@@ -21,14 +21,15 @@ Critical blob lock: checkpoint `319a05d912a548057465944f4874ac7549272b70`; ledge
 | Gate | Current state |
 |---|---|
 | Research issue #195, branch created from checked main | OBSERVED |
-| Research PR and initial HEAD | [PR #196](https://github.com/KayzenRoot/stormline/pull/196) DRAFT, BASE `21e50e73cf1f5f3a3c01bb2f869422161b28e248`, initial HEAD `b42a422fb1e31d96aafe6e1016fc780459fdcfca`, exactly eight new Markdown-only files, no registry/runtime changes; final HEAD changes when this evidence is committed. |
-| Initial Docs Validation (not final after evidence revision) | [Run #43655431711](https://github.com/KayzenRoot/stormline/actions/runs/43655431711) SUCCESS on initial PR HEAD `b42a422fb1e31d96aafe6e1016fc780459fdcfca`, job #132632782081, Source Pack/local link, module DAG, WO registry and blocked Zcode selector all SUCCESS. This evidence update creates a new HEAD and requires repeat exact-head CI. |
-| SonarCloud/Socket other security CI | NOT VERIFIED |
+| Research PR/base/final HEAD | [PR #196](https://github.com/KayzenRoot/stormline/pull/196) MERGED, BASE `21e50e73cf1f5f3a3c01bb2f869422161b28e248`, final audited HEAD `ba3146b32346df92fc9c4e5b7be84096075c78c2`, eight new Markdown files, no code/registry edit. |
+| Initial Docs Validation (not final after evidence revision) | [Run #43655431711](https://github.com/KayzenRoot/stormline/actions/runs/43655431711) SUCCESS on initial PR HEAD `b42a422fb1e31d96aafe6e1016fc780459fdcfca`, job #132632782081, Source Pack/local link, module DAG, WO registry and blocked Zcode selector all SUCCESS. This was initial CI, not final; final exact-HEAD CI SUCCESS independently as recorded below. |
+| Final exact-HEAD Docs Validation | [Run #43655480415](https://github.com/KayzenRoot/stormline/actions/runs/43655480415) SUCCESS at `ba3146b32346df92fc9c4e5b7be84096075c78c2`, job #132632929897, Source Pack/local links, taxonomy/DAG, registry and Zcode blocked selector all SUCCESS. | 
+| SonarCloud/Socket other security CI | NOT VERIFIED on final HEAD; not marked PASS |
 | Actual native/Web/NullSink/audio software, audio device, callback, underruns/latency | NOT IMPLEMENTED / NOT TESTED |
 | 128 future acceptance cases, fuzz/ASan/TSan, audio samples/performance | ALL FUTURE / NOT EXECUTED |
-| Objective pt-BR audit | PENDING |
-| Research PR normal squash/readback | PENDING |
-| Separate checkpoint PR with CI/audit/squash/readback | PENDING |
+| Objective pt-BR audit | APPROVED documentary-only [comment #6886186954](https://github.com/KayzenRoot/stormline/pull/196#issuecomment-6886186954) after exact-head CI, no known HIGH/CRITICAL in scoped documentary diff; runtime safety not proven |
+| Research PR normal squash/readback | [PR #196](https://github.com/KayzenRoot/stormline/pull/196) normal squash main `b70abb72357c48610ec9610816a922226c19355c`, verified main readback |
+| Separate checkpoint PR with CI/audit/squash/readback | PENDING at reconciliation draft; must independently verify exact-HEAD CI, audit, squash and main readback |
 
 ## 4. Threat and risk register
 Future HIGH concerns: RT callback blocks/allocation/data race, malicious codec and decompression bombs, device callback uses freed stream pointer on hotplug, audio event storms starve other engine tasks, untrusted MCP input/capture/microphone permissions, speech/private sound telemetry leak, channel layout mixup hearing volume spikes, wrong source license or SDL double mix. Only proposed mitigations: fixed RT buffers, bounded queue, immutable snapshots, generation/epoch and consumer-retire gates, DATA sandbox, off-RT decode, user permission and fuzz/sanitizer, hardware loopback measurements; **none implemented**. Current docs LOW risk.
