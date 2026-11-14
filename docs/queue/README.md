@@ -10,7 +10,7 @@ The owner requests every module and corresponding implementation issue/Work Orde
 - [Machine-readable implementation registry](implementation-registry.json), topologically ordered from the [approved 80-module catalog](../product/module-catalog.md).
 - [Individual Work Order drafts](work-orders/) (one stable `NLE-EXEC-WO-<MODULE_ID>-001` per module), all **BLOCKED** until promoted.
 - [Zcode handoff protocol](../engineering/zcode-handoff.md); [Work Order template](../engineering/wo-template.md).
-- [Planning research CORE-01, CORE-02 and CORE-03](../research/) already documented and audited, **not equivalent** to implementation approval.
+- [Planning research CORE-01, CORE-02, CORE-03 and CORE-04](../research/) already documented and audited, **not equivalent** to implementation approval.
 
 ## State machine
 `CATALOG_APPROVED -> DRAFT_BLOCKED -> TECH_RESEARCH_APPROVED -> IMPLEMENTATION_CONTRACT_PROPOSED -> OWNER/OBJECTIVE_AUDIT -> EXECUTOR_READY -> IN_PROGRESS -> TESTED -> AUDITED -> APPROVED -> CHECKPOINT_RECONCILED -> NEXT`.

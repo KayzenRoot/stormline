@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento documental aprovado:** `NLE-P00-WO-002-QUEUE-001` — 80 pacotes de Work Orders bloqueados e 80 issues de planejamento (sem engine implementada).  
-**Main SHA comprovado após o merge da PR #17:** `b479396d0751e316691b859079a589c8c0c189a7`.  
-**Evidence Bundle:** [NLE-P00-WO-001-EXT-001](evidence/NLE-P00-WO-001-EXT-001.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-04` — relógio de simulação, tick racional e determinismo de agendamento como PROPOSTA de arquitetura (sem engine implementada).  
+**Main SHA comprovado após o merge da PR #100:** `17b1a4c75e87fcf424a6cf42f198e72c4da2ea9a`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-CORE-04](evidence/NLE-P00-WO-002-CORE-04.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -76,5 +76,12 @@
 - Todas as WOs permanecem `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, release class UNDECIDED, `executor_ready=false`. Não existem código, benchmarks, arte, exportadores ou implementação de MCP.
 - [Evidence Bundle da fila](evidence/NLE-P00-WO-002-QUEUE-001.md) lista SHAs, CI, limitações e riscos. Nenhum requisito de revisor externo, CodeRabbit ou serviço pago.
 
-## 10. Próximo incremento
-`NLE-P00-WO-002-CORE-04`: pesquisa detalhada do relógio de simulação e determinismo, **PLANNED / NOT STARTED**. Só iniciar depois da reconciliação e auditoria da fila. Tecnologia, API, arquivos e tests de cada WO futura devem ser completados no planejamento antes de permitir Zcode.
+## 10. CORE-04 — relógio de simulação e determinismo de agendamento
+- Issue de pesquisa [#99](https://github.com/KayzenRoot/stormline/issues/99), Work Order `NLE-P00-WO-002-CORE-04`, pesquisa aprovada **exclusivamente como documentação**, sem código de runtime.
+- PR [#100](https://github.com/KayzenRoot/stormline/pull/100): base main `90eaf1b7cef148dfd168e3fa1ac8f7e9be603216`; HEAD auditado `27eafe1d514d909a51470766eb4513d4bbf5ef40`. [CI final 43597153261](https://github.com/KayzenRoot/stormline/actions/runs/43597153261): **SUCCESS** com Source Pack/links, catálogo/DAG, registry de 80 WOs e teste que rejeita executor em estado BLOCKED. Falha Markdown anterior foi corrigida na mesma PR; ver Evidence Bundle.
+- Auditoria objetiva em pt-BR: **APPROVED para o escopo documental**, sem HIGH/CRITICAL conhecido; squash merge normal da PR #100 em `17b1a4c75e87fcf424a6cf42f198e72c4da2ea9a` com leitura de main confirmada.
+- Decisão preferencial **PROPOSTA**: `std::chrono::steady_clock` monotônico injetável, contador racional/integer tick fixo, interpolação de apresentação, time debt observável e pausa/single-step. [Arquitetura](architecture/core-04-time-simulation.md), [matriz](research/core-04-technology-matrix.md) e [ADR-0006](adr/0006-core-04-time-policy.md) seguem em estado de pesquisa; **ADR-0006 não é autorização de implementação**.
+- Agendamento de ticks é distinto de determinismo numérico cross-OS em física/rede. Nenhum build C++, benchmark, hardware test, clock funcional, SDK, editor, renderizador, release ou deploy foi observado. **Issue futura #21 permanece PLANNING/BLOCKED** e `executor_ready=false`.
+
+## 11. Próximo incremento
+`NLE-P00-WO-002-CORE-05`: pesquisa de matemática, tipos, convenções espaciais, coordenadas e precisão de mundo (NECESSARY para especificações futuras), **PLANNED / NOT STARTED**. Somente após auditoria e merge da reconciliação atual; sem código ou liberação de qualquer fila do Zcode.
