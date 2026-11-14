@@ -23,5 +23,8 @@ C++20, Vulkan, SDL3, Jolt, EnTT, miniaudio, glTF, meshoptimizer, Python, CMake, 
 ## Pesquisa de inovação
 Renderização e iluminação, VFX, áudio e hardware modesto merecerão ADRs e experimentos independentes; provar ganhos visuais e eficiência em cenas comparáveis. Não declarar tecnologia inédita sem pesquisa de anterioridade.
 
+## Proposta AI-first em avaliação
+A nova direção de produto exige avaliar um **Command Kernel** comum ao editor, CLI/headless e adaptador MCP, com contratos estáveis e auditáveis. Esta orientação está descrita como proposta em [AI/MCP Contract](product/ai-mcp-contract.md), não como sistema já projetado/implementado. A revisão técnica deverá considerar a especificação MCP 2026-07-28, backward compatibility, ferramentas/resources/prompts e segurança por capability/permission.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
