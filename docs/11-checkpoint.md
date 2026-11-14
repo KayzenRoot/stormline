@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-04` — relógio de simulação, tick racional e determinismo de agendamento como PROPOSTA de arquitetura (sem engine implementada).  
-**Main SHA comprovado após o merge da PR #100:** `17b1a4c75e87fcf424a6cf42f198e72c4da2ea9a`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-CORE-04](evidence/NLE-P00-WO-002-CORE-04.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-05` — matemática, coordenadas, precisão e IDs estáveis, PROPOSTA de arquitetura (sem engine implementada).  
+**Main SHA comprovado após o merge da PR #103:** `c5f5b97508d31f4abb49671e9d4d9a59c7bc940f`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-CORE-05](evidence/NLE-P00-WO-002-CORE-05.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -83,5 +83,13 @@
 - Decisão preferencial **PROPOSTA**: `std::chrono::steady_clock` monotônico injetável, contador racional/integer tick fixo, interpolação de apresentação, time debt observável e pausa/single-step. [Arquitetura](architecture/core-04-time-simulation.md), [matriz](research/core-04-technology-matrix.md) e [ADR-0006](adr/0006-core-04-time-policy.md) seguem em estado de pesquisa; **ADR-0006 não é autorização de implementação**.
 - Agendamento de ticks é distinto de determinismo numérico cross-OS em física/rede. Nenhum build C++, benchmark, hardware test, clock funcional, SDK, editor, renderizador, release ou deploy foi observado. **Issue futura #21 permanece PLANNING/BLOCKED** e `executor_ready=false`.
 
-## 11. Próximo incremento
-`NLE-P00-WO-002-CORE-05`: pesquisa de matemática, tipos, convenções espaciais, coordenadas e precisão de mundo (NECESSARY para especificações futuras), **PLANNED / NOT STARTED**. Somente após auditoria e merge da reconciliação atual; sem código ou liberação de qualquer fila do Zcode.
+## 11. CORE-05 — matemática, precisão espacial e IDs estáveis
+- Issue de pesquisa [#102](https://github.com/KayzenRoot/stormline/issues/102), WO `NLE-P00-WO-002-CORE-05`; pesquisa concluída **apenas documentalmente**. Issue de implementação [#22](https://github.com/KayzenRoot/stormline/issues/22) permanece BLOCKED.
+- PR [#103](https://github.com/KayzenRoot/stormline/pull/103): BASE `c96fcc0d5e5094c84cd1e0af9085fba6849bcecb`, HEAD auditado `fc1949b1da58f8c89bafb16560498fc0bfd32cf0`. [CI 43597892824](https://github.com/KayzenRoot/stormline/actions/runs/43597892824) docs-validation SUCCESS, incluindo Source Pack/links, catálogo, registro de 80 WOs e seletor que recusa status BLOCKED.
+- Auditoria pt-BR APPROVED para pesquisa documental, sem HIGH/CRITICAL identificado no escopo; merge squash `c5f5b97508d31f4abb49671e9d4d9a59c7bc940f`, lido de volta na main.
+- [Arquitetura](architecture/core-05-math-coordinate-types.md), [matriz de bibliotecas](research/core-05-technology-matrix.md), [ADR-0007](adr/0007-core-05-coordinate-policy.md) PROPOSED. C++20 com contratos próprios, GLM candidato, float64 global/float32 relativo ou célula+offset, IDs persistentes distintos de handles voláteis; eixos RH Y-up e unidades SI são **propostas**, não interface já executável.
+- Nenhum build, benchmark numérico, teste de precisão, engine, renderer ou integração física/rede foi realizado. [Evidência](evidence/NLE-P00-WO-002-CORE-05.md).
+- `NLE-EXEC-WO-CORE-05-001` permanece `executor_ready=false` e RELEASE CLASS UNDECIDED. A pesquisa não libera o Zcode.
+
+## 12. Próximo incremento
+`NLE-P00-WO-002-CORE-06`: pesquisa de diagnóstico, profiling, logs/traces e crash observability, **PLANNED / NOT STARTED** até concluir auditoria/merge desta reconciliação. Não iniciar implementação ou liberar Zcode sem ADR/contratos/testes aprovados.
