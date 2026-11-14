@@ -26,5 +26,8 @@ Renderização e iluminação, VFX, áudio e hardware modesto merecerão ADRs e 
 ## Proposta AI-first em avaliação
 A nova direção de produto exige avaliar um **Command Kernel** comum ao editor, CLI/headless e adaptador MCP, com contratos estáveis e auditáveis. Esta orientação está descrita como proposta em [AI/MCP Contract](product/ai-mcp-contract.md), não como sistema já projetado/implementado. A revisão técnica deverá considerar a especificação MCP 2026-07-28, backward compatibility, ferramentas/resources/prompts e segurança por capability/permission.
 
+## CORE-01 — Platform & Lifecycle (pesquisa técnica PROPOSTA)
+A direção preferencial de pesquisa é C++20 + SDL3 + CMake Presets/Ninja, com Win32, Wayland/X11 e Cocoa/Objective-C++ encapsulados em bridges estreitas quando necessário. A interface de host deve funcionar também sem display/GPU. SAPL (capability graph + event journal) é hipótese a medir, e **não** inovação comprovada. A decisão está apenas PROPOSED em [ADR-0003](adr/0003-core-01-platform-technology.md), com [contratos de plataforma](architecture/core-01-platform-lifecycle.md) e [matriz de tecnologias](research/core-01-platform-technology-matrix.md). A escolha gráfica Metal/Vulkan/D3D12 pertence a GFX-01, fora desta WO.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
