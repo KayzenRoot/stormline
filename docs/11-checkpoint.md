@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-03` — importadores, conversão e reimportação idempotente, PROPOSTA de arquitetura (sem engine implementada).  
-**Main SHA comprovado após o merge da PR #115:** `d6993c2e67a5fd53c19126f0d0473a62e0e7909f`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-03](evidence/NLE-P00-WO-002-DATA-03.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-04` — serialização de cenas, diff semântico e migrações seguras, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #118:** `c5f733d2bda16a3b30956fc2296b569cbc44bf47`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-04](evidence/NLE-P00-WO-002-DATA-04.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -125,5 +125,14 @@
 - `AssetId` preservado em reimportação, mapeamento estável de subassets e usuário overrides protegidos por preview/conflito propostos; import receipts e staged commit devem respeitar DATA-01 VFS e DATA-02 reconstrução de índices.
 - [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-03.md): não foram executados parser/codec, C++ builds, testes de fuzz/fidelidade/recovery, benchmarks hardware/macOS ou MCP. Nenhum importador funcional, engine ou conversor entregue. `executor_ready=false` nas 80 WOs.
 
-## 16. Próximo incremento
-`NLE-P00-WO-002-DATA-04`: pesquisa de Serialization & Scene Format, contratos versionados, diffs semânticos e migrações com roundtrip seguro, **PLANNED / NOT STARTED** até esta reconciliação passar CI/auditoria/merge. O próximo incremento é documental; nenhuma WO do Zcode executável.
+## 16. DATA-04 — Serialização versionada, diffs semânticos e migração recuperável
+- Research issue [#117](https://github.com/KayzenRoot/stormline/issues/117), WO `NLE-P00-WO-002-DATA-04`, **APPROVED para documentos de pesquisa somente**; implementação [#27](https://github.com/KayzenRoot/stormline/issues/27) continua BLOCKED.
+- PR [#118](https://github.com/KayzenRoot/stormline/pull/118): base main `3f03773cf5ca9cba0d2ebda4b6c142f0fc93e45d`, HEAD auditado `d5cba923ce7ca15d49f5cc95c9aa029daa12e554`. [CI 43606207114](https://github.com/KayzenRoot/stormline/actions/runs/43606207114): docs-validation SUCCESS no HEAD final, Source Pack e links, DAG de 80 módulos, registry e seletor Zcode BLOCKED.
+- Auditoria em pt-BR APPROVED somente para pesquisa documental, 10 arquivos de docs, sem HIGH/CRITICAL conhecido nesse escopo; squash merge `c5f733d2bda16a3b30956fc2296b569cbc44bf47` confirmado por leitura de main e arquitetura.
+- [Arquitetura](architecture/data-04-serialization-scene-format.md), [matriz tecnológica](research/data-04-scene-technology-matrix.md), [ADR-0012 PROPOSED](adr/0012-data-04-scene-schema-policy.md), [contrato semântico](contracts/data-04-scene-api.md), [20 cenários futuros](testing/data-04-acceptance-matrix.md).
+- JSON estrito UTF-8 e SceneIR próprios como candidatos editáveis, JSON Schema 2020-12 e JCS RFC 8785 com limites; FlatBuffers/Protobuf/Cap'n Proto para possível DATA-05 runtime, ainda não selecionados/testados. EntityIds estáveis, DATA-02 AssetId, diffs com preconditions/3-way merge e migração com journal/backup propostos.
+- Segurança: payloads de plugin não executam código, unknown required capability falha fechado; no atomicidade mágica entre DATA-01 VFS e DATA-02 SQLite. SSD é hipótese prove-or-drop sem desempenho comprovado.
+- [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-04.md): nenhuma biblioteca, motor, serializer, migração, Windows/macOS/Web build, benchmark, fuzzing ou testes SER-001..020 executados. As 80 WOs continuam BLOCKED/`executor_ready=false`.
+
+## 17. Próximo incremento (somente após reconciliação aprovada)
+`NLE-P00-WO-002-DATA-05`: pesquisa documental de cooking, bundles, target profiles e distribuição de assets. Não iniciar antes da validação e merge deste checkpoint DATA-04; nenhuma WO de implementação está liberada.

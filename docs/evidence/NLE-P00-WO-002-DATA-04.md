@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-DATA-04
 
 **Date:** 2026-11-14 | **Research issue:** #117 | **Future coding:** #27 BLOCKED.
-**Evidence state:** DOCS RESEARCH REVIEWED, FINAL CI / MERGE PENDING; NO ENGINE CODE. No runtime code, benchmark, serializer, data migration or deployment exists.
+**Evidence state:** RESEARCH DOCUMENTATION APPROVED / MERGED; IMPLEMENTATION BLOCKED; NO ENGINE CODE. No runtime code, benchmark, serializer, data migration or deployment exists.
 **Baseline main:** 3f03773cf5ca9cba0d2ebda4b6c142f0fc93e45d; docs-only branch docs/NLE-P00-WO-002-DATA-04-scene-research.
 
 ## Critical source Git blob fingerprints at baseline
@@ -30,11 +30,11 @@ Any changed canonical input marks Context Lock STALE; recompute/rebase before im
 LOW docs risk; future ELEVATED project corruption, prompt injection/host paths, unknown plugin execution, migration/rollback and security of untrusted documents. No file-system/SQLite atomicity guarantee. Exact pinned library versions, test datasets/hardware and legal notices remain selection gates. SSD innovation is a hypothesis only.
 
 ## Tests / CI / audit (fill only from observed GitHub results)
-- First audited docs-validation [GitHub Actions run #43606093967](https://github.com/KayzenRoot/stormline/actions/runs/43606093967): SUCCESS on research HEAD 199582a1f82324bc4bbbb38047c78cfbca4b5c8c. Jobs: Source Pack/local links, module dependency DAG, 80-WO registry and blocked selector all SUCCESS. Evidence-doc update requires new HEAD + CI revalidation before merge.
+- First audited docs-validation [GitHub Actions run #43606093967](https://github.com/KayzenRoot/stormline/actions/runs/43606093967): SUCCESS on research HEAD 199582a1f82324bc4bbbb38047c78cfbca4b5c8c. Jobs: Source Pack/local links, module dependency DAG, 80-WO registry and blocked selector all SUCCESS. Updated final research HEAD d5cba923ce7ca15d49f5cc95c9aa029daa12e554 subsequently revalidated by [GitHub Actions #43606207114](https://github.com/KayzenRoot/stormline/actions/runs/43606207114), SUCCESS.
 - Actual C++ build/compiler/static analysis/fuzz/golden fixtures/Windows/Linux/macOS/Web hardware or browser runtime benchmark: **NOT EXECUTED**.
-- [PR #118](https://github.com/KayzenRoot/stormline/pull/118) docs-only diff audited: 10 Markdown files, no C++/vendored code; no credential-looking changes observed. Architecture/contract maintain DATA-01/02 boundaries, scoped MCP and non-ACID recovery. License/version caveats remain PROPOSED and test-required, not an implementation greenlight. Verdict **APPROVED conditionally for documentation**, subject to exact final HEAD CI PASS, no HIGH/CRITICAL and scoped diff reread.
-- PR #118 opened as Draft; exact final HEAD SHA and merge/main readback PENDING. Record final proof in PR audit and post-merge same-WO checkpoint reconciliation.
+- [PR #118](https://github.com/KayzenRoot/stormline/pull/118) docs-only diff audited: 10 Markdown files, no C++/vendored code; no credential-looking changes observed. Architecture/contract maintain DATA-01/02 boundaries, scoped MCP and non-ACID recovery. License/version caveats remain PROPOSED and test-required, not an implementation greenlight. Final pt-BR verdict **APPROVED for documentation only**, on exact final HEAD; no HIGH/CRITICAL documented in research diff. [PR audit comment](https://github.com/KayzenRoot/stormline/pull/118#issuecomment-6879036616).
+- PR #118 merged via normal squash with commit c5f733d2bda16a3b30956fc2296b569cbc44bf47, confirmed by main SHA and architecture readback. Audited research HEAD d5cba923ce7ca15d49f5cc95c9aa029daa12e554, CI #43606207114 SUCCESS. This same-WO checkpoint reconciliation requires separate CI/audit/merge proof.
 - Required 80 coding WOs remain BLOCKED and executor_ready=false.
 
-## Proposed Checkpoint Delta (do not promote yet)
-After exact-HEAD docs CI PASS, objective audit APPROVED and normal squash merge, set DATA-04 research documented in backlog/checkpoint/registry with ADR-0012 PROPOSED, close #117, preserve #27/other 79 blocked and verify main. Use separate docs-only reconciliation PR for the SAME WO. No advance DATA-05 before it is reconciled.
+## Checkpoint Reconciliation (this PR must pass independently)
+Reconcile DATA-04 docs status with verified #118 research merge: set DATA-04 research_status=RESEARCH_DOCUMENTED_ADR_PROPOSED, update Checkpoint/Backlog/research WO/Evidence, preserve ADR-0012 PROPOSED and all 80 implementation tickets BLOCKED with executor_ready=false. Final checkpoint HEAD/CI, main readback and closure of #117 must be recorded after this PR is audited/merged. No DATA-05 before final evidence.

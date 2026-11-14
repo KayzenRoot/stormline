@@ -206,7 +206,7 @@
       "catalog_acceptance": "Round-trip equivalente; diff estruturado e migração testada.",
       "id": "NLE-EXEC-WO-DATA-04-001",
       "file": "docs/queue/work-orders/DATA-04.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
