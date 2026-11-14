@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-03` — Spatial Index & World Streaming, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #166:** `c930bbd158ab4114c288532da1838090f8084a1e`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-03](evidence/NLE-P00-WO-002-WORLD-03.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-04` — Terrain & Environment, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #169:** `d0b5b6b259f67116fac63c7fa59460a629877814`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-04](evidence/NLE-P00-WO-002-WORLD-04.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -269,8 +269,18 @@
 - All **132 FUTURE cases** IDX/QRY/INT/LIF/ORG/MEM/SEC/INTG/BEN **NOT EXECUTED**: no running stream, no scene assets, no CPU/GPU/IO, Web/native/headless, PHYS/NET proof, full frame/physics p95/p99, teleport latency or memory benchmark. No "zero stalls"/60fps claim. ADR-0028 PROPOSED, release class UNDECIDED, WORLD-02/DATA-05 code deps absent, future issue #43 still blocked.
 - **Research planning tally after checkpoint:** **25 / 80 modules documented (31.25%)**, **55 RESEARCH_PENDING**, including historical CORE-04 gap. All 80 coding WOs remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS/executor_ready=false and approved_adr=null; zero implemented runtime modules.
 
-## 33. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-WORLD-04: **Terrain & Environment**, catalog_order=26 in canonical queue. Future code prerequisites WORLD-03 and GFX-04 are NOT implemented. Only P00 documentary research may begin after independent checkpoint CI/audit/merge/readback; historical CORE-04 research gap remains explicit.
+## 33. WORLD-04 — Terrain & Environment (research APPROVED, documentation only)
+- [Research issue #168](https://github.com/KayzenRoot/stormline/issues/168), WO NLE-P00-WO-002-WORLD-04, **APPROVED only DOCUMENTARY RESEARCH**; future code [issue #44](https://github.com/KayzenRoot/stormline/issues/44) remains OPEN/BLOCKED.
+- [Research PR #169](https://github.com/KayzenRoot/stormline/pull/169): BASE main d6858410a2b5770400e1c6b816db5620264f48b8, audited final HEAD 1a02693e7ee2ecc308c6386c95fe6df73d39b3de. Initial [Docs Validation #43639236423](https://github.com/KayzenRoot/stormline/actions/runs/43639236423) SUCCESS, evidence commit changed HEAD, final [Docs Validation #43639297615](https://github.com/KayzenRoot/stormline/actions/runs/43639297615) SUCCESS exact HEAD with Socket Security and SonarCloud SUCCESS. Objective pt-BR documentary audit APPROVED with 11 files only docs, no known HIGH/CRITICAL, normal squash merge main d0b5b6b259f67116fac63c7fa59460a629877814, readback confirmed. Separate same-WO checkpoint reconciliation requires its own independent CI/audit.
+- [Terrain architecture](architecture/world-04-terrain-environment.md), [technology and licenses](research/world-04-terrain-environment-technology-license-matrix.md), [ADR-0029 PROPOSED](adr/0029-world-04-authored-terrain-environment-visual-ownership.md), [typed API](contracts/world-04-terrain-environment-api.md), [148 FUTURE cases](testing/world-04-acceptance-matrix.md), [clean-room biome benchmark](research/world-04-biome-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-WORLD-04.md).
+- Original authored stable signed TerrainAsset/PatchId/HeightTile and non-destructive DATA-04 sculpt/paint/source layers, cave/overhang explicit mesh topology, GFX-04 tile/quadtree stitched LOD vs GPU geometry clipmaps optional benchmark, GFX-05 normalized splat/PBR/texture owner; original biome/vegetation authored placement with WORLD-05 procedural generation separate, GFX-06 shadows/sky/fog, GFX-07 HDR/post and GFX-08 precipitation VFX, WORLD-03 cell residency/PHYS collision source ACK, water visual surface versus PHYS buoyancy and GAME/NET weather authority; CORE global/local origin.
+- License/rights **no adoption/install**: Terrain3D Godot plugin MIT, meshoptimizer MIT optional GFX-04 tool, Bruneton scattering BSD optional GFX owner, Godot MIT reference; Unreal Landscape proprietary reference, GPU Gems 2 historic geometry clipmap paper and Khronos glTF public instancing standard. SABE optional PROVE-OR-DROP, no unsupported WebGL2 compute/mesh shader promises.
+- **All 148 FUTURE tests** TIL/LOD/MAT/EDT/BIO/WAT/SKY/SEC/INT/BEN **NOT EXECUTED**, no running terrain/biome/scene/editor/shader, no working water/cloud, no actual PHYS/Web/native/headless/hardware, visual golden, frame p95/p99 or superior performance evidence. ADR-0029 PROPOSED, release class UNDECIDED and mandatory WORLD-03+GFX-04 CODE absent. Future issue #44 not authorized.
+- **Research planning tally after this checkpoint**: **26 of 80 researched/documented modules (32.5%)**, **54 research pending**, including historical CORE-04 unresolved. All **80 coding packets** remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null and no runtime modules implemented.
+
+## 34. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-WORLD-05: **Procedural Generation Framework**, catalog_order=27 in canonical queue, next documentary research. Future code dependencies WORLD-04 and DATA-03 not implemented; historical CORE-04 research gap remains pending. No WORLD-05 research before independent checkpoint CI/audit/normal squash/main readback, no Zcode implementation authorization.
+
 
 
 

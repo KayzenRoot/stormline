@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-WORLD-04
 
 **2026-11-14 | Research issue #168 | Future coding #44 OPEN/BLOCKED**  
-**State:** RESEARCH IN PROGRESS / DOCS ONLY; **ADR-0029 PROPOSED**; **BASE main:** d6858410a2b5770400e1c6b816db5620264f48b8 (WORLD-03 research PR #166 + checkpoint PR #167 merged).
+**State:** APPROVED/MERGED FOR RESEARCH DOCS ONLY (PR #169); **ADR-0029 PROPOSED**; **BASE main:** d6858410a2b5770400e1c6b816db5620264f48b8 (WORLD-03 research PR #166 + checkpoint PR #167 merged).
 **Risk:** LOW documentation, future ELEVATED GPU/VRAM and visual fidelity, terrain→PHYS consistency, DATA-04 source mutation, shader/asset security, NET authority and unrecoverable changes.
 
 ## OBJECTIVE
@@ -59,3 +59,6 @@ Changed main or canonical fingerprints, unlicensed imported assets, failed Docs 
 
 ## CONTEXT LOCK
 Research BASE Git main d6858410a2b5770400e1c6b816db5620264f48b8. Git SHA-1 blob hashes are NOT raw byte SHA-256. Future Zcode implementation requires approved Scope/DoD and ADR, observed WORLD-03+GFX-04 implementation, source code file inventory/ABI, actual SHA-256 byte fingerprints and runtime tests with Evidence Bundle.
+
+## Verified research PR #169 receipts (not code)
+Research BASE main d6858410a2b5770400e1c6b816db5620264f48b8, initial HEAD d7d4fa2f9e50f7c207c39e5c0ad9f8e4c8a48a60 with [Docs Validation #43639236423](https://github.com/KayzenRoot/stormline/actions/runs/43639236423) SUCCESS. Evidence edit changed final audited HEAD 1a02693e7ee2ecc308c6386c95fe6df73d39b3de, [Docs Validation #43639297615](https://github.com/KayzenRoot/stormline/actions/runs/43639297615) SUCCESS exact final HEAD plus Socket Security/SonarCloud SUCCESS. Scoped 11 docs-only files, objective pt-BR architectural/security/licenses/DoD audit APPROVED for research only, no known HIGH/CRITICAL. Normal squash into main d0b5b6b259f67116fac63c7fa59460a629877814, readback verified. Separate same-WO checkpoint PR requires own exact-HEAD CI/audit/readback. All 148 runtime/GPU/PHYS/Web/visual/benchmark tests FUTURE NOT EXECUTED, ADR-0029 PROPOSED and future coding #44 OPEN/BLOCKED.

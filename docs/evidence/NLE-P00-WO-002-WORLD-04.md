@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-WORLD-04 Terrain & Environment Research
 
-**Status: RESEARCH PR OPEN / INITIAL EXACT HEAD CI SUCCESS, FINAL HEAD REVALIDATION/AUDIT PENDING | Research issue #168 | Future code #44 OPEN/BLOCKED.**  
+**Status: RESEARCH DOCS OBJECTIVELY AUDITED/APPROVED/MERGED; CHECKPOINT PR PENDING INDEPENDENT CI/AUDIT | Research issue #168 | Future code #44 OPEN/BLOCKED.**  
 **BASE main:** d6858410a2b5770400e1c6b816db5620264f48b8; research branch docs/NLE-P00-WO-002-WORLD-04-terrain-environment-research. No compiled engine, terrain shader, scene, image/3D asset, GPU capture, actual edit, benchmark, browser/server or release produced.
 
 ## Source and dependency check
@@ -21,9 +21,12 @@ Do not label Git object IDs as raw-file SHA-256. Future implementation Context L
 ## Research PR truthfulness
 - Expect exactly 11 `docs/` files: 8 new architecture, technology/license matrix, ADR-0029 PROPOSED, API, **148 future NOT EXECUTED** scenarios, benchmark, WO, EB; 3 addivive Architecture/Backlog/future code WORLD-04 packet references. **Research PR must not change Checkpoint or implementation-registry**.
 - [Research PR #169](https://github.com/KayzenRoot/stormline/pull/169) INITIAL HEAD `d7d4fa2f9e50f7c207c39e5c0ad9f8e4c8a48a60`, [Docs Validation #43639236423](https://github.com/KayzenRoot/stormline/actions/runs/43639236423) **SUCCESS at initial exact HEAD** with Socket Security PR Alerts/Project Report and SonarCloud Code Analysis SUCCESS. This Evidence edit changes HEAD, so a NEW final exact HEAD CI must pass before objective audit/merge.
-- Objective pt-BR audit, normal squash/main readback: **PENDING**.
+- [Research PR #169](https://github.com/KayzenRoot/stormline/pull/169): BASE d6858410a2b5770400e1c6b816db5620264f48b8, final objective audit HEAD 1a02693e7ee2ecc308c6386c95fe6df73d39b3de, [Docs Validation #43639297615](https://github.com/KayzenRoot/stormline/actions/runs/43639297615) SUCCESS at exact final HEAD; Socket Security and SonarCloud PASS, 11 scoped docs files, pt-BR audit APPROVED documentary only no known HIGH/CRITICAL. Normal squash merged main d0b5b6b259f67116fac63c7fa59460a629877814, Git readback verified. Checkpoint has own independent PR/CI/audit gate.
 - **All 148 test scenarios FUTURE / NOT EXECUTED.** No actual terrain mesh or cave source, GPU visual, copy of biome art, Web/native, PHYS collider, texture splat, water/weather sim, undo journal, security fuzz, HDR sky/VRAM or full frame/physics p95/p99 benchmark. No valid claim of engine quality or superlative.
 - Risk LOW docs, future ELEVATED rendering/physics/source integrity, asset rights, memory and network weather/gameplay.
 
 ## Proposed Checkpoint Delta NOT APPLIED
 After objective research PR exact-final-HEAD Docs Validation and available security checks success, pt-BR audit APPROVED and normal squash+main readback, open separate same-WO checkpoint PR changing **ONLY WORLD-04.research_status RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED**; checkpoint/backlog/research WO/evidence updated with observed receipts. Keep all 80 coding WOs BLOCKED/executor_ready=false/approved_adr=null/release class UNDECIDED, future issue #44 OPEN/BLOCKED, ADR-0029 PROPOSED and CORE-04 research gap pending. Independent checkpoint exact-final-HEAD CI/audit/squash/main readback, then close #168 and only then begin WORLD-05 research.
+
+## Proposed checkpoint reconciliation (separate same-WO PR)
+Only WORLD-04.research_status changes RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED, new tally 26/80 research documented = 32.5%, 54 pending including historical CORE-04. All 80 code packets keep work_order_status BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null, release class UNDECIDED; coding #44 OPEN, ADR-0029 PROPOSED. 148 future test scenarios NOT EXECUTED and no terrain/environment implementation/benchmark proven. Independent checkpoint exact final HEAD CI/audit/squash/main readback before WORLD-05.
