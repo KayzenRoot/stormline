@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-07` — Camera, Color & Post-processing, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #142:** `5bab9b54b83cfb48a8591e040a3f3e4ecd4a69c3`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-07](evidence/NLE-P00-WO-002-GFX-07.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-08` — VFX & Particle Graph, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #145:** `f3db6c126866e870bea6e00a646152ca615ecb16`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-08](evidence/NLE-P00-WO-002-GFX-08.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -202,5 +202,13 @@
 - AA nativo/espacial para UI e 2D, TAA/TAAU com rejeição temporal de ghosting, opção FSR SDK 2.4 com **DLLs assinadas** e direitos próprios, Streamline/DLSS-G binário, Intel XeSS binário-only. Exposure, pós-processos/motion blur opcionais com acessibilidade. SRCC apenas hipótese PROVE-OR-DROP.
 - 77 cenários CAM/CLR/HDR/EXP/AA/UP/FX/SYS/BEN e benchmarks CPU/GPU/VRAM/latência, HDR10 físico, Win/Linux/macOS/Web, fuzz/licensing e validação visual **NÃO EXECUTADOS**; sem hardware, SDK ou renderizador gráfico entregue. Todas 80 WOs de implementação seguem BLOCKED/`executor_ready=false`; ADR-0020 continua PROPOSED; não há prova de superioridade visual sobre Unreal/GGG.
 
-## 25. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-P00-WO-002-GFX-08`: **VFX & Particle Graph**, pela fila topológica canônica. O executor Zcode continua bloqueado até contratos/DoD/ADR aprovados e dependências efetivamente integradas.
+## 25. GFX-08 — VFX & Particle Graph (pesquisa documental aprovada)
+- Research [issue #144](https://github.com/KayzenRoot/stormline/issues/144), WO `NLE-P00-WO-002-GFX-08`, **APPROVED para pesquisa DOCUMENTAL SOMENTE**, future coding [issue #36](https://github.com/KayzenRoot/stormline/issues/36) continua BLOCKED.
+- [Research PR #145](https://github.com/KayzenRoot/stormline/pull/145): BASE main `729f111d30fe927107f42fe6e4b951d17f357e10`, HEAD final auditado `e37f8e0f44252405b078146de7eaa29fde992802`, [Docs Validation #43625522752](https://github.com/KayzenRoot/stormline/actions/runs/43625522752) **SUCCESS no HEAD exato**; Socket Security e SonarCloud checks SUCCESS. Auditoria pt-BR APPROVED somente docs, 11 arquivos `docs/`, sem HIGH/CRITICAL identificado no diff; squash merge normal `f3db6c126866e870bea6e00a646152ca615ecb16` confirmado. Reconciliação checkpoint é PR separada da MESMA WO.
+- [Arquitetura](architecture/gfx-08-vfx-particle-graph.md), [matriz tecnologias/licenças](research/gfx-08-vfx-technology-license-matrix.md), [ADR-0021 PROPOSED](adr/0021-gfx-08-vfx-graph-particle-policy.md), [API semântica](contracts/gfx-08-vfx-api.md), [78 testes futuros](testing/gfx-08-acceptance-matrix.md), [benchmark ARPG](research/gfx-08-vfx-performance-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-08.md).
+- Proposta de DAG tipado VFX node graph, simulação CPU referência e GPU SoA opcional, partículas/ribbons/trails/flipbooks/mesh e alfa/OIT aproximado, presets 2D/2.5D/3D, GPU RenderGraph/fences GFX-03, material alpha GFX-05, luzes/fog GFX-06 e HDR/reação temporal GFX-07. Falha de compute em WebGL2 leva a fallback CPU; colisões gráficas **não** são autoridade de gameplay.
+- Licenciamento: Effekseer runtime MIT com dependências backend/tools a verificar, AMD Parallel Sort MIT **DX12/Vulkan** não automaticamente Metal/Web, OpenVDB upstream Apache-2.0 com codecs/transitives e assets não aprovados. Niagara/Godot apenas referências; SVAG hipotético prove-or-drop, sem prova de inovação ou superioridade.
+- 78 cenários GRF/CPU/GPU/VIS/LGT/SYS/BEN e builds C++/GPU, plataformas Windows/Linux/macOS/WebGPU/WebGL2, testes de segurança, VRAM/overdraw e P50/P95/P99 **NÃO EXECUTADOS**. Sem implementação, assets, SDK, métricas reais ou comparador independente; 80 coding WOs permanecem BLOCKED/`executor_ready=false`, ADR-0021 continua PROPOSED.
+
+## 26. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-TWO-01`: **2D Renderer & Canvas**, próximo `catalog_order=19` na fila canônica. A implementação via Zcode permanece bloqueada enquanto Scope/DoD/ADR/dependências não estiverem formalmente aprovados e realizados.

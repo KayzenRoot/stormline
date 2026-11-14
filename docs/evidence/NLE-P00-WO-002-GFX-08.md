@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-08 Research
 
-**Status:** RESEARCH PR OPEN, INITIAL EXACT-HEAD DOCS CI SUCCESS, FINAL HEAD CI/AUDIT PENDING | **Research #144** | **Implementation #36 BLOCKED**  
+**Status:** RESEARCH DOCS APPROVED / MERGED; CHECKPOINT PR PENDING ITS OWN CI/AUDIT | **Research #144** | **Implementation #36 BLOCKED**  
 **BASE main:** `729f111d30fe927107f42fe6e4b951d17f357e10` | **Branch:** `docs/NLE-P00-WO-002-GFX-08-vfx-research`. No library, scene assets, graphics code, test, demo or benchmark created.
 
 ## Context and sources
@@ -11,7 +11,7 @@
 
 ## Truthful evidence status
 - [Research PR #145](https://github.com/KayzenRoot/stormline/pull/145) BASE `729f111d30fe927107f42fe6e4b951d17f357e10`; initial HEAD `b13299c23040b6172617a542eafd8a74b61cf56d`, 11 scoped `docs/` files. [Docs Validation run #43625459746](https://github.com/KayzenRoot/stormline/actions/runs/43625459746) **SUCCESS on initial exact HEAD**. This Evidence Bundle update requires NEW final-head CI before audit; do not reuse initial result as final proof.
-- Research objective pt-BR audit, risk, merge SHA and main readback: **PENDING**.
+- Objective pt-BR review on PR #145 **APPROVED docs-only**, 11 scoped files, no known HIGH/CRITICAL documentary defects. Normal squash merged `f3db6c126866e870bea6e00a646152ca615ecb16`, observed as main before creating checkpoint PR. Future native risk ELEVATED, not reviewed as implemented runtime.
 - All 78 future tests, GPU/C++/WebGL2/Metal/Vulkan builds, visual screenshot, ARPG FPS p50/p95/p99, fuzz, shader variants and license source vendoring: **NOT EXECUTED**.
 - Future implementation #36 remains blocked; ADR-0021 PROPOSED, numeric target/release class and exact hardware UNDECIDED. No claim of superiority to Unreal/GGG or commercial effect delivery.
 
@@ -26,3 +26,6 @@ Git blob hashes only; the executor must later compute **actual SHA-256 bytes** a
 
 ## Next checkpoints (proposed only)
 Exact-head CI, diff security/license checks and review on research PR -> normal squash merge -> separate same-WO checkpoint/registry PR -> exact head CI/audit/merge -> verify main and issue close. Never automatically authorize code or advance before final reconciliation.
+
+## Reconciliation-only Checkpoint Delta (this separate PR)
+`GFX-08.research_status: RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED` only. Preserve 80 coding WOs BLOCKED/`executor_ready=false`, `approved_adr=null`, release class UNDECIDED, future implementation issue #36 open. A new exact-HEAD CI and objective audit for the checkpoint PR are required before merge and next TWO-01 research. 78 future tests and all native GPU/engine/visual benchmarks are NOT EXECUTED.
