@@ -250,7 +250,7 @@
       "catalog_acceptance": "Testar ciclo de vida de recursos, perda/recuperação de device e validação API.",
       "id": "NLE-EXEC-WO-GFX-01-001",
       "file": "docs/queue/work-orders/GFX-01.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
