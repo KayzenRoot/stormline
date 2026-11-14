@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-TWO-02 Research
 
-**Status:** RESEARCH PR OPEN; INITIAL EXACT-HEAD CI SUCCESS, FINAL HEAD REVALIDATION/AUDIT PENDING | **Research issue #150** | **Future implementation issue #38 OPEN/BLOCKED**.  
+**Status:** RESEARCH DOCUMENTS APPROVED/MERGED; CHECKPOINT RECONCILIATION PR REQUIRES ITS OWN CI/AUDIT | **Research issue #150** | **Future implementation issue #38 OPEN/BLOCKED**.  
 **BASE main:** 11beaafb5122a29fdeb8a45aa01e4f90c1a6517a; branch docs/NLE-P00-WO-002-TWO-02-tilemaps-research. No executable engine, edited real world, GPU benchmark, collision system, completed code or external tool installed.
 
 ## Context and Source Check
@@ -20,9 +20,12 @@ These are Git blob object IDs at the baseline, **not** SHA-256 hashes of file by
 
 ## Objective evidence status
 - [Research PR #151](https://github.com/KayzenRoot/stormline/pull/151): initial HEAD `c5f9725b46ba3ede9c5488465bf5b89dbced40af`, [Docs Validation #43628951809](https://github.com/KayzenRoot/stormline/actions/runs/43628951809) SUCCESS at that initial exact HEAD, Socket Security PR Alerts and Project Report SUCCESS. This evidence edit changes HEAD; must re-run final-head CI before audit/merge.
-- Objective pt-BR review, final HEAD, merge SHA and main readback: **PENDING**.
+- Research #151 pt-BR objective review APPROVED documentary scope; final exact HEAD f4368e0c29312c8607596386fd6e82a1b05fe291 [Docs Validation #43629001202](https://github.com/KayzenRoot/stormline/actions/runs/43629001202) SUCCESS with Socket Security/SonarCloud checks PASS. 11 docs-only files, no known HIGH/CRITICAL documentary defects; normal squash merged main 81be9c9a9dbba91299499e45041fb12229173314. No GPU/runtime evidence; checkpoint PR has separate gate.
 - All **93 future scenarios NOT EXECUTED**; no actual save/reopen, C++, GPU native/Web, physics collision ack, compression parser fuzz, disk I/O, memory p95/p99 or licensed texture. No claimed performance/correctness.
 - Risk LOW docs, future ELEVATED source durability/security and GPU/PHYS asynchronous cutover. ADR-0023 PROPOSED, release class UNDECIDED, future #38 remains open/blocked.
 
 ## Proposed checkpoint Delta (NOT APPLIED)
 After objective research PR approval/merge and a **separate same-WO** checkpoint PR with own exact-final-HEAD CI/audit: change ONLY TWO-02.research_status to RESEARCH_DOCUMENTED_ADR_PROPOSED, preserve all 80 blocked implementation packet statuses, executor_ready=false and approved_adr=null, #38 open; then update Checkpoint, Backlog, WO and Evidence truth. TWO-03 only after checkpoint readback.
+
+## Checkpoint Delta and readback gate
+Only TWO-02.research_status changes from RESEARCH_PENDING to RESEARCH_DOCUMENTED_ADR_PROPOSED. Preserve all 80 coding WOs as BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, release_class=UNDECIDED, approved_adr=null and future code issue #38 OPEN. ADR-0023 remains PROPOSED, all 93 visual/physics/streaming/CPU/OS/import tests NOT EXECUTED. This same-WO checkpoint PR must pass exact HEAD CI and independent objective audit before merge and next TWO-03.

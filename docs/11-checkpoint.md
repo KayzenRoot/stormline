@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-01` — 2D Renderer & Canvas, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #148:** `7fb41e39a938f94dbe5c6c1fa177174d7f6d0bb0`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-01](evidence/NLE-P00-WO-002-TWO-01.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-02` — Tilemaps & 2D Worlds, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #151:** `81be9c9a9dbba91299499e45041fb12229173314`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-02](evidence/NLE-P00-WO-002-TWO-02.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -218,5 +218,14 @@
 - ThorVG MIT SVG Tiny subset, Skia BSD alternativa ampla, Blend2D zlib JIT não universal Web, lyon Rust alternativas MIT/Apache/MPL, HarfBuzz shaping não equivale BiDi UI, FreeType FTL com crédito ou GPLv2 e msdfgen MIT core/ext. Rive runtime MIT **não** implica exports sem splash grátis; Rive opcional e direitos específicos. Nenhuma biblioteca instalada.
 - Os **81 testes futuros** CAN/SPR/LYR/VEC/TXT/LIT/SYS/BEN são **NÃO EXECUTADOS**; nenhuma GPU/C++/Web/nativa, rasterização de fontes, golden pixel, 60 FPS ou benchmark entregue. ADR-0022 permanece PROPOSED; todas as 80 WOs de código permanecem BLOCKED/`executor_ready=false`.
 
-## 27. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-P00-WO-002-TWO-02`: **Tilemaps & 2D Worlds**, próximo `catalog_order=20` da fila canônica. A implementação Zcode segue bloqueada até Scope/DoD/ADR, interfaces e dependências efetivamente integradas.
+## 27. TWO-02 — Tilemaps & 2D Worlds (research APPROVED documentation only)
+- [Research #150](https://github.com/KayzenRoot/stormline/issues/150), WO NLE-P00-WO-002-TWO-02, APPROVED for RESEARCH DOCUMENTATION ONLY. Future coding issue [#38](https://github.com/KayzenRoot/stormline/issues/38) remains OPEN/BLOCKED.
+- [Research PR #151](https://github.com/KayzenRoot/stormline/pull/151): BASE main 11beaafb5122a29fdeb8a45aa01e4f90c1a6517a, final audited HEAD f4368e0c29312c8607596386fd6e82a1b05fe291; [Docs Validation #43629001202](https://github.com/KayzenRoot/stormline/actions/runs/43629001202) SUCCESS on exact final HEAD, Socket Security and SonarCloud SUCCESS. Pt-BR documentary audit APPROVED with 11 docs-only files and no known HIGH/CRITICAL in scope; normal squash merged commit 81be9c9a9dbba91299499e45041fb12229173314. This same-WO checkpoint reconciliation is a separate PR.
+- [Tilemap architecture](architecture/two-02-tilemaps-worlds.md), [technology/licensing](research/two-02-tilemap-technology-license-matrix.md), [ADR-0023 PROPOSED](adr/0023-two-02-sparse-chunk-tilemap-policy.md), [typed API](contracts/two-02-tilemap-api.md), [93 future tests](testing/two-02-acceptance-matrix.md), [streaming benchmark](research/two-02-world-streaming-benchmark.md), [Evidence Bundle](evidence/NLE-P00-WO-002-TWO-02.md).
+- Research proposal: sparse signed64 global tile coords, mathematically correct negative chunk floor division, 2D layers/tilesets/terrain/autotile and parallax, DATA-04 atomic save/reopen/journal, DATA-05 stream/cancellation/corrupt state, TWO-01 Canvas batching and GFX-03 fences, PHYS separate collision generation ack before gameplay interaction; no duplicated world/physics renderer.
+- External file candidates Tiled TMX/JSON/infinite GID high four flags and LDtk JSON external levels; **Tiled editor GPL versus libtiled BSD2, LDtk MIT**, all source art/license/sandbox still future proof. SWSP only optional prove-or-drop hypothesis, no proven novelty or performance gain.
+- All **93 future tests** CRD/DAT/GRD/RUL/STR/COL/IMP/SYS/BEN are **NOT EXECUTED**, including saved map editor, cross-platform GPU/streaming/PHYS integration, p95/p99 and security fuzz; engine/demo/build/benchmark not produced. ADR-0023 PROPOSED; all 80 implementation work orders remain BLOCKED/executor_ready=false, issue #38 NOT authorized for Zcode.
+
+## 28. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-TWO-03: **2D Animation & Sequencing**, catalog_order=21, next official research in the DAG. Future code authorization is blocked pending approved Scope/DoD/ADR, actual integrated dependencies and independent evidence.
+
