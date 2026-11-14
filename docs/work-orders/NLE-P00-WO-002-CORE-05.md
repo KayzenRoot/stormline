@@ -1,7 +1,7 @@
 # Work Order — NLE-P00-WO-002-CORE-05
 
 **Issue:** #102 | **Risk:** LOW documentation; future implementation ELEVATED for world precision/persistence/network coupling.  
-**Status:** RESEARCH PROPOSED / NOT IMPLEMENTED | **Base SHA:** c96fcc0d5e5094c84cd1e0af9085fba6849bcecb
+**Status:** APPROVED / MERGED (research documentation only; PR #103). ADR-0007 remains PROPOSED; code NOT IMPLEMENTED | **Base SHA:** c96fcc0d5e5094c84cd1e0af9085fba6849bcecb
 
 ## OBJECTIVE
 Select mathematical/type/coordinate technology research direction and publish an auditable typed contract, licensing matrix and test plan before Zcode implementation.
