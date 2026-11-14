@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-TWO-04
 
 **Date:** 2026-11-14 | **Research issue #156** | **Future code issue #40 OPEN/BLOCKED**  
-**State:** RESEARCH IN PROGRESS, DOCS ONLY | **ADR-0025:** PROPOSED | **BASE main:** 73f4826354724ce72a037411eba3dc86174638c3 (TWO-03 research PR #154 and checkpoint PR #155 integrated).  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #157) | **ADR-0025:** PROPOSED | **BASE main:** 73f4826354724ce72a037411eba3dc86174638c3 (TWO-03 research PR #154 and checkpoint PR #155 integrated).  
 **Risk:** LOW documentation only; future ELEVATED depth buffer/VRAM, GPU attachments, raster alpha, temporal history, lighting/large-world camera and unsafe authoring.
 
 ## OBJECTIVE
@@ -56,3 +56,6 @@ Stale main/canonical fingerprint, failing CI/unknown required status, unexpected
 
 ## CONTEXT LOCK
 Research BASE main 73f4826354724ce72a037411eba3dc86174638c3. Git blob OID is not raw file SHA-256. Before future runtime work, compute SHA-256 bytes, implement prerequisite TWO-01/GFX-04, freeze exact ABI/files/DoD and revalidate canonical source SHA after all approved changes.
+
+## Verified research receipts
+PR #157 BASE main 73f4826354724ce72a037411eba3dc86174638c3, audited final HEAD b9c71e084f95d9aa9b8f371b5f35b85cd69746cb, [Docs Validation #43633197318](https://github.com/KayzenRoot/stormline/actions/runs/43633197318) SUCCESS at exact final HEAD, Socket Security/SonarCloud PASS, pt-BR documentary objective audit APPROVED only docs (11 files, no known HIGH/CRITICAL), normal squash merged main 52d7bb881ab7cd0a323f51a6bf443f3448c6978a. Checkpoint is a separate same-WO PR with independent exact-final-HEAD CI/audit and main readback. All 109 graphics/GPU/native/Web/VRAM tests FUTURE NOT EXECUTED, ADR-0025 PROPOSED, future code #40 OPEN/BLOCKED.

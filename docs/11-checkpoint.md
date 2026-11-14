@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-03` — 2D Animation & Sequencing, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #154:** `28ade29693e407e781946769b5f559e0ec1d3d9d`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-03](evidence/NLE-P00-WO-002-TWO-03.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-04` — 2.5D Hybrid Composition, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #157:** `52d7bb881ab7cd0a323f51a6bf443f3448c6978a`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-04](evidence/NLE-P00-WO-002-TWO-04.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -234,7 +234,16 @@
 - License research: DragonBonesCPP MIT, Godot comparative MIT, Rive MIT runtime with free export splash and paid clean export, **Spine runtimes custom editor-license restrictions updated Nov 2026**, Lottie-web MIT with audio/media feature gaps, FFmpeg LGPL/GPL depending build, codecs and media rights independent. No libraries, audio, rigs or binaries installed.
 - **106 future cases TIM/FLI/RIG/BLN/EVT/SEQ/AUD/INT/SEC/BEN NOT EXECUTED**; no C++/GPU, actual timeline playback, A/V export, AUDIO clock/latency verification, Web/native tests, benchmark or quality claim. ADR-0024 PROPOSED, all 80 future implementation WOs BLOCKED/executor_ready=false, future code issue #39 not authorized. STS remains optional PROVE-OR-DROP.
 
-## 29. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-TWO-04: **2.5D Hybrid Composition**, catalog_order=22, next official research in the queue. Zcode coding remains blocked until owner-approved Scope/DoD/ADR, implemented dependencies and objectively audited proof.
+## 29. TWO-04 — 2.5D Hybrid Composition (research documentation APPROVED)
+- [Research #156](https://github.com/KayzenRoot/stormline/issues/156), WO NLE-P00-WO-002-TWO-04, **APPROVED only DOCUMENTARY RESEARCH**. Future code [issue #40](https://github.com/KayzenRoot/stormline/issues/40) remains OPEN/BLOCKED.
+- [Research PR #157](https://github.com/KayzenRoot/stormline/pull/157): BASE main 73f4826354724ce72a037411eba3dc86174638c3, audited final HEAD b9c71e084f95d9aa9b8f371b5f35b85cd69746cb, [Docs Validation #43633197318](https://github.com/KayzenRoot/stormline/actions/runs/43633197318) SUCCESS at final exact HEAD; Socket Security and SonarCloud SUCCESS. Pt-BR documentary audit APPROVED, 11 docs-only files, no known HIGH/CRITICAL in scope, normal squash merge main 52d7bb881ab7cd0a323f51a6bf443f3448c6978a read back. This checkpoint reconciliation is a separate same-WO PR.
+- [Architecture](architecture/two-04-hybrid-composition.md), [technology/rights matrix](research/two-04-hybrid-technology-license-matrix.md), [ADR-0025 PROPOSED](adr/0025-two-04-depth-order-hybrid-composition-policy.md), [typed API](contracts/two-04-hybrid-api.md), [109 future tests](testing/two-04-acceptance-matrix.md), [clean-room benchmark](research/two-04-hybrid-visual-benchmark.md), [Evidence Bundle](evidence/NLE-P00-WO-002-TWO-04.md).
+- Three proposed **explicit hybrid modes** SHARED_DEPTH_WORLD (compatible camera and 3D per-pixel depth), ORDERED_CANVAS_OVERLAY (stable artist painter and pixel-art/UI order, not world-depth) and ISOLATED_SUBVIEW (render-to-texture; cross-view 3D depth unavailable without verified reprojection). Ortho/perspective 2Dpx↔world meters and glTF source +Y-up, world-plane and billboard sprites, mask vs blend depth-write policies, approximate optional OIT, lit/normal/shadow proxies via GFX-06, GFX-07 HDR/temporal/native UI and GFX-03 memory/fences. TWO-01 is sole Canvas; GFX-04 sole mesh/culling; PHYS and WORLD remain gameplay authority.
+- Godot 4.6 CanvasItem/SubViewport MIT and Unity 6 proprietary sorting only references, W3C WebGPU and Khronos glTF specs, McGuire/Bavoil weighted OIT publication not a software license. No third-party code or art imported. SDOI only optional prove-or-drop.
+- All **109 tests** PRO/DEP/SRT/ALP/CAM/LIT/SUB/INT/SEC/BEN FUTURE / **NOT EXECUTED**; no 2.5D rendering engine, HDR, shaders, hardware, C++, GPU screenshots, p95/p99 FPS or superiority evidence. ADR-0025 PROPOSED; mandatory TWO-01/GFX-04 code prerequisites absent; 80 future coding WOs remain BLOCKED/executor_ready=false, #40 NOT authorized.
+
+## 30. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-WORLD-01: **Entity Component Model**, catalog_order=23, next official research in canonical queue. Zcode coding remains blocked pending Scope/DoD/ADR, implemented prerequisites, code-specific tests and objective proof.
+
 
 
