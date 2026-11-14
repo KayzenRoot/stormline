@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `DATA-05`, but implementation details and release class are not yet approved.
 
+## RESEARCH-ONLY CONTEXT (NOT EXECUTOR READY)
+The [DATA-05 architecture](../../architecture/data-05-cooking-streaming-bundles.md), [technology matrix](../../research/data-05-cooking-technology-matrix.md), [ADR-0013 PROPOSED](../../adr/0013-data-05-cooking-policy.md), [semantic API](../../contracts/data-05-cook-bundle-api.md), [future COOK tests](../../testing/data-05-acceptance-matrix.md) and [research Work Order](../../work-orders/NLE-P00-WO-002-DATA-05.md) are **research proposals only**, not executable implementation plans. They do not finalize a runtime codec, content/signing trust, hardware targets or release class. #28 remains PLANNING/BLOCKED and executor_ready=false with all 80 WOs.
+
 ## DEPENDENCIES
 `DATA-03`, `DATA-04`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
