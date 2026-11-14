@@ -9,6 +9,8 @@
 Implement an independently verifiable, production-grade first necessary increment for **Math / Coordinates / Types** after detailed technology architecture has been approved. Current candidate capability: Vetores, matrizes, espaços de coordenadas, unidades, precisão e IDs estáveis.
 
 ## CONTEXT
+Research-only proposal links (NOT code authorization): [CORE-05 typed math and precision](../../architecture/core-05-math-coordinate-types.md), [technology matrix](../../research/core-05-technology-matrix.md), [ADR-0007 PROPOSED](../../adr/0007-core-05-coordinate-policy.md), [research WO](../../work-orders/NLE-P00-WO-002-CORE-05.md). This future implementation packet remains BLOCKED until exact approved API/file/test contracts.
+
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `CORE-05`, but implementation details and release class are not yet approved.
 
 ## DEPENDENCIES

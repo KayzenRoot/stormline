@@ -38,5 +38,8 @@ Scheduler de tarefas, execução paralela e work stealing com contratos de dura�
 ## CORE-04 — Time & Simulation Clock (research proposal)
 Monotonic C++20 steady_clock adapter with injected fake clock, rational integer fixed tick timeline, explicit pause/single-step/interpolation and bounded catch-up policies for offline/server modes. Tick ordering and numeric physics determinism are separate obligations. [Architecture](architecture/core-04-time-simulation.md), [technology matrix](research/core-04-technology-matrix.md), [ADR-0006 PROPOSED](adr/0006-core-04-time-policy.md). No implementation or benchmark.
 
+## CORE-05 — Math, Coordinate Spaces & Types (research proposal)
+Portable C++20 typed math and scalar reference, GLM as candidate comparator, strong units, right-handed +Y-up world, explicit 2D/UI/graphics adapters, global f64 or cell+local f32 origin shifting, stable persistent IDs distinct from runtime handles. [Architecture](architecture/core-05-math-coordinate-types.md), [matrix](research/core-05-technology-matrix.md), [ADR-0007 PROPOSED](adr/0007-core-05-coordinate-policy.md). No engine code or numeric performance evidence.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
