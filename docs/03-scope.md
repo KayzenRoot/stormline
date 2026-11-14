@@ -7,6 +7,9 @@ Status: P00 DOCUMENTATION ONLY
 - Formalizar governança solo, papel de Codex/Zcode, evidência, PR e controles de CI gratuitos.
 - Implantar apenas o mínimo de automação de **validação documental**; sem código de engine.
 
+## Extensão de apresentação NLE-P00-WO-001-EXT-001 (owner-requested)
+Somente documentação e organização pública do repositório: README inglês profissional, versão pt-BR, Changelog, versionamento proposto, arquivos comunitários, templates de issues, padrões de formatação e validação documental ampliada. A extensão não altera o aceite da WO-001 nem antecipa a pesquisa tecnológica WO-002. Ver [Work Order específica](work-orders/NLE-P00-WO-001-EXT-001.md).
+
 ## Fora do incremento
 Nenhuma implementação C++, shader, build Vulkan, editor, física, VFX, runtime, servidor, asset gráfico final, vídeo final, áudio final, hospedagem, autenticação, credencial, release ou deploy da engine. Não presumir marca registrada nem uso exclusivo do nome.
 
