@@ -5,7 +5,7 @@
 **GitHub issue:** #6  
 **Risk classification:** LOW for this documentation-only execution; future C++ implementation STANDARD or ELEVATED depending on OS/security changes  
 **Context Lock baseline SHA:** c5ef59c13e65db2a79a04d420cdfc9a9c10768d6  
-**Status:** PLANNING / AWAITING OBJECTIVE AUDIT
+**Status:** APPROVED / MERGED (docs only, PR #8); technology choice ADR remains PROPOSED pending future code proof
 
 ## OBJECTIVE
 Produce researched technology recommendations and functional/architectural contracts for CORE-01 that enable Windows, Linux and macOS Editor + exported games, while protecting headless server and Web target boundaries.
