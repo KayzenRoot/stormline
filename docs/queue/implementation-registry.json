@@ -512,7 +512,7 @@
       "catalog_acceptance": "Criar/destruir entidades preservando invariantes e referências.",
       "id": "NLE-EXEC-WO-WORLD-01-001",
       "file": "docs/queue/work-orders/WORLD-01.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",

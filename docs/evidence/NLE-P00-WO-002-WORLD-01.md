@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-WORLD-01 ECS Research
 
-**Status:** RESEARCH PR OPEN, INITIAL EXACT-HEAD DOCS CI SUCCESS; FINAL-HEAD REVALIDATION AND AUDIT PENDING | Research #159 | Future code #41 OPEN/BLOCKED.  
+**Status:** RESEARCH DOCUMENTATION APPROVED/MERGED; CHECKPOINT PR PENDING INDEPENDENT EXACT-HEAD CI/AUDIT | Research #159 | Future code #41 OPEN/BLOCKED.  
 **BASE main:** 7a9385aa739edec145a5c417ca7a2b45acda0766. **Branch:** docs/NLE-P00-WO-002-WORLD-01-ecs-research. No installed ECS binary/tool, C++ source implementation, headless running world, test harness, performance benchmark or compiled reflection delivered.
 
 ## Canonical source check
@@ -21,9 +21,12 @@ These are Git object hashes at research baseline, NOT SHA-256 of raw file bytes.
 ## Research PR file inventory and truth
 - Expected 11 research-only docs: 8 new architecture/matrix/ADR-0026/API/test-matrix/benchmark/research WO/Evidence; 3 additive docs Architecture/Backlog/blocked WORLD-01 packet. **NO Checkpoint or implementation-registry modification in initial research PR**.
 - [Research PR #160](https://github.com/KayzenRoot/stormline/pull/160), initial head `a35841a4d8091ca724edaa4dc3548356521cd40e` and [Docs Validation #43634445055](https://github.com/KayzenRoot/stormline/actions/runs/43634445055) **SUCCESS on initial exact HEAD**; initial Socket Security Project Report SUCCESS. This evidence update changes HEAD and demands **new exact-final-HEAD CI** before approval/merge.
-- Objective pt-BR documentary audit/merge SHA/main readback: **PENDING**.
+- [Research PR #160](https://github.com/KayzenRoot/stormline/pull/160), BASE 7a9385aa739edec145a5c417ca7a2b45acda0766, audited final HEAD af5152a74fe57558171fd4adf67fab20b11346f0, [Docs Validation #43634492193](https://github.com/KayzenRoot/stormline/actions/runs/43634492193) SUCCESS on exact final HEAD with Socket Security and SonarCloud SUCCESS, pt-BR objective audit APPROVED documentation-only, 11 scoped files, no known HIGH/CRITICAL. Normal squash merged main 33de3993eedaf7c4b07cdbda092c2268296bed9d. Checkpoint awaits its own PR/CI/audit.
 - **117 tests FUTURE / NOT EXECUTED**: no real generational handle code, memory/TSan/ASan/UBSan, entity destruction, data reserialize, WASM build, CPU p95/p99, archetype/sparse comparative benchmark or MCP security verification. No “millions of entities supported” declaration.
 - Risk LOW current docs; future ELEVATED ABA/after-free, untrusted schema migrations, concurrent access, persistent scene integrity and possible C++ plugin code. ADR-0026 PROPOSED, release class UNDECIDED and approved_adr=null.
 
 ## Proposed Checkpoint Delta NOT APPLIED
 After objective research PR audit/merge and its exact-head SUCCESS, open a **separate same-WO** checkpoint PR: change ONLY WORLD-01.research_status from RESEARCH_PENDING to RESEARCH_DOCUMENTED_ADR_PROPOSED; update Checkpoint/Backlog/WO/EB to observed true evidence; preserve 80 blocked code WOs, zero executor_ready, approved_adr=null, release class UNDECIDED, #41 OPEN. Historical CORE-04 pending remains explicit; next WORLD-02 only after checkpoint PR passes independent exact-final-HEAD CI/audit/squash/readback.
+
+## Proposed exact checkpoint delta in separate same-WO PR
+Only WORLD-01.research_status: RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED, tally 23/80 documented, 57 pending including CORE-04 historical gap. Preserve all 80 code packets work_order_status=BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null and release_class=UNDECIDED, #41 coding OPEN. ADR-0026 PROPOSED. All 117 future ECS/identity/concurrency/CPU/ASan/TSan tests NOT EXECUTED; no runtime ECS implementation. Require independent checkpoint exact final-head Docs Validation/audit/squash/main readback before WORLD-02.
