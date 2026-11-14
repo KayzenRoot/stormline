@@ -9,7 +9,7 @@ Status: INITIAL / NÃO são issues criadas
 | NLE-P00-WO-002 | Pesquisa de stack/licenças por módulo, começando em NLE-P00-WO-002-CORE-01 (issue #6) | EXT-002 catalog e checkpoint integrados | CORE-01 pesquisa documental APPROVED via PR #8; CORE-02 PLANNED; demais módulos NÃO INICIADOS, sem código |
 | NLE-P00-WO-002-CORE-02 | Pesquisa std::pmr/mimalloc/rpmalloc, arenas e memória (issue #10) | CORE-01 docs/checkpoint APPROVED | RESEARCH DOCS APPROVED via PR #11, implementation NOT STARTED |
 | NLE-P00-WO-002-CORE-03 | Research job scheduler, work stealing, task graph and thread affinity (CORE-03) | CORE-02 checkpoint/CI APPROVED | RESEARCH DOCS APPROVED / MERGED via PR #14; code NOT STARTED |
-| NLE-P00-WO-002-QUEUE-001 | Fila de 80 WOs drafts bloqueadas, Zcode handoff, issues e validação CI | CORE-03 research/checkpoint approved | PREPARING / NOT ENGINE IMPLEMENTATION |
+| NLE-P00-WO-002-QUEUE-001 | Fila de 80 WOs drafts bloqueadas, Zcode handoff, issues e validação CI | CORE-03 research/checkpoint approved | APPROVED AS BLOCKED QUEUE: 80 WOs + issues #18–97; zero engine implementation |
 | NLE-P00-WO-003 | Arquitetura Core, memória, jobs, tempo, contratos | WO-002 APPROVED | PLANNED |
 | NLE-P00-WO-004 | Arquitetura renderer, shaders, iluminação, VFX | WO-003 APPROVED | PLANNED |
 | NLE-P00-WO-005 | World/terrain/physics/assets/audio | WO-003/004 APPROVED | PLANNED |
