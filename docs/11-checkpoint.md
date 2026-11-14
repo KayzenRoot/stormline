@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-05` — target cooking, streaming bundles e patches recuperáveis, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #121:** `7361647bb0a35930d0088708ad17c41682cbf17d`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-05](evidence/NLE-P00-WO-002-DATA-05.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-01` — abstração gráfica RHI, backends, feature tiers e recuperação de GPU, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #124:** `2997cbf09a10965fa0dbb11f4048a22ceede50e2`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-01](evidence/NLE-P00-WO-002-GFX-01.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -142,5 +142,13 @@
 - zstd dual BSD/GPL, LZ4 lib BSD/CLI GPL, Brotli, meshoptimizer, KTX2/Basis e formatos binários são **candidatos sem biblioteca instalada**. Bundle chunks derivados com referências AssetId DATA-02, target capability, hashes separados de autenticidade, streaming com budgets e Web fallback, patch copy-on-write com journal e recuperação propostos; nenhuma ferramenta de distribuição/assinatura implantada.
 - SASG como hipótese prove-or-drop, não comprovada. [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-05.md): nenhum teste COOK-001..028, codec runtime, build C++, benchmark macOS/Windows/Web ou fuzz foi executado. Todas 80 WOs futuras permanecem BLOCKED e `executor_ready=false`.
 
-## 18. Próxima pesquisa (após este checkpoint)
-`NLE-P00-WO-002-GFX-01`: fundamentos do backend gráfico/renderização, próximo módulo no registro topológico. Não iniciar antes desta reconciliação documental ser auditada e integrada; Zcode ainda não está liberado para código.
+## 18. GFX-01 — Render Hardware Interface, capacidades gráficas e recuperação de device
+- Research [issue #123](https://github.com/KayzenRoot/stormline/issues/123), WO `NLE-P00-WO-002-GFX-01`, **APPROVED para documentos de pesquisa apenas**; implementação [#29](https://github.com/KayzenRoot/stormline/issues/29) continua BLOCKED.
+- Research [PR #124](https://github.com/KayzenRoot/stormline/pull/124) BASE main `36f08368be2c1d1cdd8aa7bd553f4fed7d610d56`, HEAD auditado `35ba2700288bb465d2aef6bf90e5de5a2fa3108a`; [CI #43609201366](https://github.com/KayzenRoot/stormline/actions/runs/43609201366) docs-validation SUCCESS no HEAD exato (links/Source Pack, 80 modules DAG, registry e blocked selector).
+- Auditoria objetiva pt-BR APPROVED somente no diff documental 10 arquivos, sem HIGH/CRITICAL conhecido; squash merge normal `2997cbf09a10965fa0dbb11f4048a22ceede50e2` confirmado por leitura de main e arquitetura GFX-01.
+- [Arquitetura](architecture/gfx-01-graphics-rhi.md), [matriz](research/gfx-01-rhi-technology-matrix.md), [ADR-0014 PROPOSED](adr/0014-gfx-01-rhi-backends.md), [contrato RHI](contracts/gfx-01-rhi-api.md), [28 testes futuros](testing/gfx-01-acceptance-matrix.md).
+- RHI C++20 próprio como contrato candidato, alternativas Vulkan Windows/Linux, Metal nativo macOS, D3D12 Windows, SDL3 GPU, Dawn/wgpu-native, bgfx, browser WebGPU com WebGL2 degradado. Khronos recomenda KosmicKrisp para Apple Silicon Vulkan-on-Metal, MoltenVK deprecated/community-maintained e Intel Mac recomendado conforme orientação atual. Nenhum backend/lib selecionado ou instalado.
+- Contratos para handles geracionais, quotas, sincronização, device lost/restart, NDC/clip-space e acesso MCP somente inspeção; SCGF recurso original apenas prove-or-drop. [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-01.md) confirma nenhum RHI-001..028, GPU runtime, drivers, CI C++, benchmark físico ou GPU visual realizado. As 80 WOs de código continuam BLOCKED/`executor_ready=false`.
+
+## 19. Próximo módulo de pesquisa (somente após esta reconciliação)
+`NLE-P00-WO-002-GFX-02`: Shader & Material Compilation, após GFX-01 checkpoint validado/merged. Não liberar Zcode ou iniciar implementação até todos os gates de tecnologia/ADR/DoD/dependências satisfeitos.

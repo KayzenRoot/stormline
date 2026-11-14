@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-GFX-01
 
 **Research issue:** #123 | **Future implementation issue:** #29 BLOCKED | **Date:** 2026-11-14  
-**State:** IN PROGRESS, RESEARCH DOCUMENTATION ONLY | **ADR-0014:** PROPOSED  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #124) | **ADR-0014:** PROPOSED / NO ENGINE CODE  
 **Context Lock BASE main:** `36f08368be2c1d1cdd8aa7bd553f4fed7d610d56` after DATA-05 checkpoint PR #122. Risk LOW docs, future ELEVATED native GPU.
 
 ## OBJECTIVE

@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-01
 
 **Date:** 2026-11-14 | **Research issue:** #123 | **Future code issue:** #29 BLOCKED.
-**State:** RESEARCH DOCS UNDER FINAL AUDIT, no engine code. No C++ graphics code, GPU backend, Vulkan/D3D/Metal/SDL GPU SDK, shader compiler, benchmark or deployment.
+**State:** RESEARCH DOCUMENTATION APPROVED / MERGED; implementation still BLOCKED; no engine code. No C++ graphics code, GPU backend, Vulkan/D3D/Metal/SDL GPU SDK, shader compiler, benchmark or deployment.
 **BASE main:** `36f08368be2c1d1cdd8aa7bd553f4fed7d610d56`; research branch `docs/NLE-P00-WO-002-GFX-01-rhi-research`. LOW research risk; future ELEVATED device/driver/resource/sync safety.
 
 ## Baseline canonical Context Lock
@@ -30,10 +30,10 @@ An updated Checkpoint, ADR, Scope/DoD/Architecture or critical source makes old 
 Documented barriers: GPU driver is a privileged/complex boundary; shader binaries can be hostile; resource release requires fence-safe ownership, device lost must invalidate handles. Future physical Windows/Linux/macOS Apple Silicon GPU and Web browser tests required; unsupported WebGPU and Mac Intel constraints not hidden. Cross-platform SDK/code license and SBOM remain open gates. No hardware performance claim, no shaders, no GFX-03 graph code. All 80 implementation WOs remain BLOCKED, executor_ready=false.
 
 ## Tests / audit evidence (fill from real GitHub results)
-- First research HEAD `cfa84c47474fb23caa6f5bdc2ab110665321b137`: [Docs Validation #43609149048](https://github.com/KayzenRoot/stormline/actions/runs/43609149048) **SUCCESS**. Source Pack/local links, 80 modules/DAG, 80 WOs registry, selector refusal of BLOCKED all green. Revalidation required after this evidence edit on final HEAD.
-- [PR #124](https://github.com/KayzenRoot/stormline/pull/124): preliminary scope diff 10 Markdown files exclusively under docs/, +408/0, no source C++, no generated shader/SDK or obvious secret in added lines. 80/80 implementation WOs still BLOCKED and 0 executor_ready, #29 PLANNING/BLOCKED. Final exact HEAD and objective pt-BR audit PENDING.
+- First research HEAD `cfa84c47474fb23caa6f5bdc2ab110665321b137`: [Docs Validation #43609149048](https://github.com/KayzenRoot/stormline/actions/runs/43609149048) **SUCCESS**. Source Pack/local links, 80 modules/DAG, 80 WOs registry, selector refusal of BLOCKED all green. Final research HEAD `35ba2700288bb465d2aef6bf90e5de5a2fa3108a` passed independent [docs-validation #43609201366](https://github.com/KayzenRoot/stormline/actions/runs/43609201366) SUCCESS.
+- [PR #124](https://github.com/KayzenRoot/stormline/pull/124): preliminary scope diff 10 Markdown files exclusively under docs/, +408/0, no source C++, no generated shader/SDK or obvious secret in added lines. 80/80 implementation WOs still BLOCKED and 0 executor_ready, #29 PLANNING/BLOCKED. Final exact HEAD `35ba2700288bb465d2aef6bf90e5de5a2fa3108a`, pt-BR objective audit **APPROVED DOCUMENTATION ONLY** ([PR #124 audit comment](https://github.com/KayzenRoot/stormline/pull/124#issuecomment-6879533187)); 80 WOs still blocked.
 - RHI-001..028, native compiler/GPU real hardware, perf p50/p95/p99, device loss, race/fuzz, Web browser, Apple Silicon: **NOT RUN**.
-- Normal merge SHA/main readback and same-WO checkpoint reconciliation: PENDING.
+- Normal squash merge [PR #124](https://github.com/KayzenRoot/stormline/pull/124): `2997cbf09a10965fa0dbb11f4048a22ceede50e2`, verified main SHA and RHI architecture readback. Separate same-WO checkpoint reconciliation PR requires its own CI/audit/merge before GFX-02.
 
-## Proposed Checkpoint Delta (not yet approved)
-After docs-only PR CI+review APPROVED and squash merge/readback, record GFX-01 research as RESEARCH_DOCUMENTED_ADR_PROPOSED; ADR-0014 remains PROPOSED, #29/80 future coding WOs all BLOCKED/executor_ready=false, no code. Checkpoint reconciliation happens in separate audited docs PR for this **same WO** before researching GFX-02.
+## Checkpoint Reconciliation (pending this PR's own CI/audit)
+Only GFX-01.research_status is promoted to RESEARCH_DOCUMENTED_ADR_PROPOSED in registry, reflecting the objectively audited research PR #124. ADR-0014 remains PROPOSED, #29 and other 79 future WOs remain BLOCKED/executor_ready=false, no engine code. This delta needs an independent green HEAD, readback/merge and issue #123 closure before GFX-02.
