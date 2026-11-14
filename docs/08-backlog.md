@@ -3,8 +3,8 @@ Status: INITIAL / NÃO são issues criadas
 
 | ID | Incremento | Predecessor | Estado |
 |---|---|---|---|
-| NLE-P00-WO-001 | Source Pack, identidade de marca, governança solo, CI docs | base Git | IN PROGRESS via PR |
-| NLE-P00-WO-002 | Pesquisa de stack, licenças, matriz de avaliação | WO-001 APPROVED | PLANNED |
+| NLE-P00-WO-001 | Source Pack, identidade de marca, governança solo, CI docs | base Git | APPROVED: Source Pack integrado na PR #1; proteção da main ainda NÃO VERIFICADA |
+| NLE-P00-WO-002 | Pesquisa de stack, licenças, matriz de avaliação | WO-001 APPROVED (docs) | PLANNED |
 | NLE-P00-WO-003 | Arquitetura Core, memória, jobs, tempo, contratos | WO-002 APPROVED | PLANNED |
 | NLE-P00-WO-004 | Arquitetura renderer, shaders, iluminação, VFX | WO-003 APPROVED | PLANNED |
 | NLE-P00-WO-005 | World/terrain/physics/assets/audio | WO-003/004 APPROVED | PLANNED |
