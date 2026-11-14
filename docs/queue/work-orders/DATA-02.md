@@ -9,6 +9,8 @@
 Implement an independently verifiable, production-grade first necessary increment for **Asset Registry & Metadata** after detailed technology architecture has been approved. Current candidate capability: IDs estáveis, dependências, tags, queries, schema, referências e provenance.
 
 ## CONTEXT
+**Planning research only:** [DATA-02 asset identity architecture](../../architecture/data-02-asset-registry.md), [technology matrix](../../research/data-02-asset-registry-technology-matrix.md), [ADR-0010 PROPOSED](../../adr/0010-data-02-asset-identity.md), [semantic API contract](../../contracts/data-02-registry-api.md), [planned test matrix](../../testing/data-02-acceptance-matrix.md) and [research Work Order](../../work-orders/NLE-P00-WO-002-DATA-02.md) are reference materials. They are not approval of runtime code, SQLite adoption, schema migrations or a Zcode coding branch. Maintain `executor_ready=false` until all future preflight gates and approved software WO requirements are met.
+
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `DATA-02`, but implementation details and release class are not yet approved.
 
 ## DEPENDENCIES
