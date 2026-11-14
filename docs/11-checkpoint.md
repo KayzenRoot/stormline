@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-01` — abstração gráfica RHI, backends, feature tiers e recuperação de GPU, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #124:** `2997cbf09a10965fa0dbb11f4048a22ceede50e2`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-01](evidence/NLE-P00-WO-002-GFX-01.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-02` — compilação de shaders/materiais, reflexão, variantes e hot reload seguro, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #127:** `076362cd71020359cd8fe8475a3f623e1e3a4fe8`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-02](evidence/NLE-P00-WO-002-GFX-02.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -150,5 +150,14 @@
 - RHI C++20 próprio como contrato candidato, alternativas Vulkan Windows/Linux, Metal nativo macOS, D3D12 Windows, SDL3 GPU, Dawn/wgpu-native, bgfx, browser WebGPU com WebGL2 degradado. Khronos recomenda KosmicKrisp para Apple Silicon Vulkan-on-Metal, MoltenVK deprecated/community-maintained e Intel Mac recomendado conforme orientação atual. Nenhum backend/lib selecionado ou instalado.
 - Contratos para handles geracionais, quotas, sincronização, device lost/restart, NDC/clip-space e acesso MCP somente inspeção; SCGF recurso original apenas prove-or-drop. [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-01.md) confirma nenhum RHI-001..028, GPU runtime, drivers, CI C++, benchmark físico ou GPU visual realizado. As 80 WOs de código continuam BLOCKED/`executor_ready=false`.
 
-## 19. Próximo módulo de pesquisa (somente após esta reconciliação)
-`NLE-P00-WO-002-GFX-02`: Shader & Material Compilation, após GFX-01 checkpoint validado/merged. Não liberar Zcode ou iniciar implementação até todos os gates de tecnologia/ADR/DoD/dependências satisfeitos.
+## 19. GFX-02 — Shader & Material Compilation, reflection e hot reload
+- Research [issue #126](https://github.com/KayzenRoot/stormline/issues/126), WO `NLE-P00-WO-002-GFX-02`, **APPROVED para pesquisa documental somente**. Implementação [#30](https://github.com/KayzenRoot/stormline/issues/30) permanece BLOCKED.
+- Research [PR #127](https://github.com/KayzenRoot/stormline/pull/127), base main `d968809bc4869a3a39f1fb1f82f75d5a212dfbda`, HEAD auditado `dae67ef8f3307d2f10a525442e6dc01d7fc771b3`. [CI #43611454959](https://github.com/KayzenRoot/stormline/actions/runs/43611454959) docs-validation **SUCCESS** no SHA exato (Source Pack/links, 80 module DAG, 80 WOs registry, blocked selector).
+- Auditoria objetiva pt-BR **APPROVED só para documentos**, diff de 10 arquivos `docs/` sem HIGH/CRITICAL identificado; normal squash merge `076362cd71020359cd8fe8475a3f623e1e3a4fe8` confirmado em main e pela arquitetura.
+- [Arquitetura](architecture/gfx-02-shader-material-compilation.md), [matriz tecnológica](research/gfx-02-shader-technology-matrix.md), [ADR-0015 PROPOSED](adr/0015-gfx-02-shader-compilation-policy.md), [API semântica](contracts/gfx-02-shader-api.md), [30 testes futuros](testing/gfx-02-acceptance-matrix.md).
+- Candidatos Slang (Apache-2.0 WITH LLVM-exception; Metal experimental/WGSL em progresso), DXC HLSL->DXIL/SPIR-V (UIUC), glslang/shaderc/SPIRV-Tools/Cross, Tint/Naga WGSL e MSL nativo. Não há compilador aprovado/instalado nem alegação de paridade Metal/Web.
+- Contratos typed Shader/MaterialDefinition, binding reflection, variant budget, cache source vs driver cache, last-good generation/hot reload, controles de segurança e MCP semantic-only propostos. SSVF prove-or-drop, sem benchmark.
+- [Evidence Bundle](evidence/NLE-P00-WO-002-GFX-02.md): nenhum teste SHD-001..030, C++, shader binary, compilação GPU, macOS/browser conformance, fuzz ou benchmark executado. Todas 80 WOs de implementação continuam BLOCKED com `executor_ready=false`.
+
+## 20. Próximo módulo (após reconciliação desta WO)
+`NLE-P00-WO-002-GFX-03`: Render Graph & GPU Resource Manager, pesquisa documental de pass scheduling, barriers, transient recursos e VRAM budgets. Não iniciar até este checkpoint receber CI/auditoria/merge; nenhuma implementação Zcode desbloqueada.
