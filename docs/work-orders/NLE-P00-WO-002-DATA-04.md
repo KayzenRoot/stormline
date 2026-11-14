@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-DATA-04
 
 **Research issue:** #117 | **Future implementation issue:** #27 (BLOCKED) | **Date:** 2026-11-14
-**Status:** IN PROGRESS, RESEARCH DOCUMENTATION ONLY | **ADR-0012:** PROPOSED
+**Status:** APPROVED / MERGED FOR RESEARCH DOCUMENTS ONLY (PR #118) | **ADR-0012:** PROPOSED, NOT IMPLEMENTED
 **Context Lock base main:** 3f03773cf5ca9cba0d2ebda4b6c142f0fc93e45d; last approved research DATA-03/PR #116.
 **Risk:** LOW docs; future ELEVATED persistence/migration/data loss.
 
