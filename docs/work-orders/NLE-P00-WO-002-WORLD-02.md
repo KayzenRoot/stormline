@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-WORLD-02
 
 **Date 2026-11-14 | Research #162 | Future code issue #42 OPEN/BLOCKED**  
-**Status:** RESEARCH IN PROGRESS / DOCS ONLY | **ADR-0027:** PROPOSED | **Context Lock BASE main:** 1871b4adc99eb82e79890af5e7a423d8db202daa (WORLD-01 research PR #160 + checkpoint PR #161 merged).
+**Status:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #163) | **ADR-0027:** PROPOSED | **Context Lock BASE main:** 1871b4adc99eb82e79890af5e7a423d8db202daa (WORLD-01 research PR #160 + checkpoint PR #161 merged).
 **Risk:** LOW docs, future ELEVATED persistent prefab source, schema migration, cross-project refs, rollback/synchronization, massive graph expansion.
 
 ## OBJECTIVE
@@ -57,3 +57,6 @@ Changed canonical source, incompatible rights, unsafe untrusted data graph, sema
 
 ## CONTEXT LOCK
 Research BASE 1871b4adc99eb82e79890af5e7a423d8db202daa. Git blob SHA is not raw byte SHA-256. Before any code, new approved Scope/DoD/ADR, exact target code files/ABI/rights, implemented WORLD-01+DATA-02 prerequisites, independent evidence and raw SHA-256 fingerprints mandatory.
+
+## Verified research evidence and correction receipts
+PR #163 research BASE main 1871b4adc99eb82e79890af5e7a423d8db202daa; initial HEAD 5c8fc2ce357f8ebef885f0dcb57a84199893f7f8 failed [Docs Validation #43635576110](https://github.com/KayzenRoot/stormline/actions/runs/43635576110) due 22 escaped Markdown backtick markers. Same WO/PR Correction Delta fixed 22 markers in this Work Order and added failure Evidence. Final audited HEAD 07045d868d96088c9897a78391fe92f2ef4fd1ca, [Docs Validation #43635712447](https://github.com/KayzenRoot/stormline/actions/runs/43635712447) SUCCESS exact HEAD, Socket Security/SonarCloud PASS, 11 docs-only files and objective pt-BR audit APPROVED no known HIGH/CRITICAL documentary defects. Normal squash main f278b46d6bf67f3751125e81af9e4346e7eced76. Checkpoint separate same-WO PR requires independent exact-HEAD CI/audit/readback. 122 future tests NOT EXECUTED, ADR-0027 PROPOSED and code #42 OPEN/BLOCKED.
