@@ -2,6 +2,7 @@
 
 **2026-11-14 | Research issue #180 | Future implementation issue #48 OPEN/BLOCKED**  
 **BASE main:** `c8ee0cd07ab30cd207f7ea9b7aedfe06b09b3d64`. Research documentation only; no engine build and no Zcode coding unlock.
+**Research result APPROVED/MERGED:** [PR #181](https://github.com/KayzenRoot/stormline/pull/181) final audit HEAD `c0cafa09ad29ed9fc5ed9ffad0fec33ba26b14d6`, exact [Docs Validation run 43645494686](https://github.com/KayzenRoot/stormline/actions/runs/43645494686) SUCCESS, normal squash main `b1eef0a603683d1b876ac9d029b7d05e3d2b9a58`. Checkpoint reconciliation is a separate same-WO PR and requires its own approval. Future code #48 remains BLOCKED.
 
 ## OBJECTIVE
 Plan portable engine-owned 2D and 3D character motion, authoritative fixed-tick input/motor/physics collision, responsive movement policies, Web/native/headless tiers and verifiable replay/performance/security.
@@ -43,7 +44,7 @@ No mandatory paid service. Solo admin auditing in pt-BR. Research ADR PROPOSED; 
 - [ ] Normal squash PR merge, readback and separate checkpoint reconciliation; if not done remain PENDING
 
 ## TESTS
-Documentation link/Source Pack validation and registry/blocked-selector tests by existing repo CI; current turn does NOT demonstrate these ran. All engine-specific unit/replay/fuzz/perf/cross-OS acceptance tests are FUTURE.
+Documentation link/Source Pack validation and registry/blocked-selector tests by existing repo CI; research PR #181 exact-HEAD Docs Validation #43645494686 demonstrated SUCCESS; checkpoint PR has its own CI gate. All engine-specific unit/replay/fuzz/perf/cross-OS acceptance tests are FUTURE.
 
 ## DELIVERABLES
 Architecture, ADR-0033, tech/license matrix, typed API, 72-case matrix, benchmark, this WO, Evidence Bundle, research #180 and PR. Implementation #48 untouched.
@@ -58,4 +59,4 @@ If CI fails, unapproved technology is promoted, changes touch runtime/registry e
 Base `c8ee0cd07ab30cd207f7ea9b7aedfe06b09b3d64`. Critical source fingerprints require per-file blob SHA check and refreshed main before merger; latest checkpoint blob at preflight `64f16740be507b55a490f9b0a45c48e2aa709cb9` (subject to readback). Research commits are on distinct docs branch.
 
 ## EVIDENCE BUNDLE
-See [Evidence Bundle](../evidence/NLE-P00-WO-002-SIM-03.md). A PR and green checks cannot be presumed prior to actual verification.
+See [Evidence Bundle](../evidence/NLE-P00-WO-002-SIM-03.md). Evidence now records observed research CI and merge; do not infer runtime test success or checkpoint PR approval.
