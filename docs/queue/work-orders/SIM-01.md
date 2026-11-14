@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Architecture](../../architecture/sim-01-physics-2d.md), [technology/license matrix](../../research/sim-01-physics-2d-technology-license-matrix.md), [ADR-0031 PROPOSED](../../adr/0031-sim-01-physics-2d-fixedstep-backend-policy.md), [typed Physics API](../../contracts/sim-01-physics-2d-api.md), [159 FUTURE NOT EXECUTED tests](../../testing/sim-01-acceptance-matrix.md), [headless/native/Web benchmark](../../research/sim-01-physics-benchmark-protocol.md), [research WO](../../work-orders/NLE-P00-WO-002-SIM-01.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-SIM-01.md) are PROPOSED research, not Box2D adapter code or physical simulation delivered. Box2D 3.x C17 MIT leading **candidate only**, Chipmunk2D C99 MIT and Rapier2D Rust Apache-2.0 alternatives; exact release/precision/backends and native/WASM or full rollback must be independently proven. ECS/world handles, fixed CORE tick, post-step contact events, sensors/chain tile collisions and WORLD-03 critical collider readiness are future contracts. Mandatory WORLD-01+TWO-01 CODE absent, CORE-04 historical research gap pending; coding #46 and all 80 code packets BLOCKED/executor_ready=false.
+
 ## DEPENDENCIES
 `WORLD-01`, `TWO-01`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
