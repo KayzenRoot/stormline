@@ -44,5 +44,8 @@ Portable C++20 typed math and scalar reference, GLM as candidate comparator, str
 ## CORE-06 — Diagnostics & Observability (research proposal)
 Event/span/counter/crash envelopes, build SHA + frame/tick/job correlation, bounded offline-first logs and redacted diagnostic export. Prefer evaluating spdlog for logging, Tracy for development profiling, Perfetto for offline traces, Crashpad as conditional native crash candidate; no cloud/listener/automatic telemetry. Stormline Diagnostic Fabric (SDF) is a prove-or-drop research hypothesis only. [CORE-06 Architecture](architecture/core-06-diagnostics-observability.md), [Technology Matrix](research/core-06-technology-matrix.md), [ADR-0008 PROPOSED](adr/0008-core-06-observability-policy.md). No library is installed or runtime profiled.
 
+## DATA-01 — Virtual File System (research PROPOSED)
+Scoped virtual namespaces/mount permissions, deterministic overlay priority, typed `VfsPath` and file handles, read-only archive mounts, bounded I/O/cache, staged writes/recovery, and native handle-based security against TOCTOU/symlinks. Technology candidates: owned minimal mount table + C++20 `std::filesystem` baseline, PhysicsFS zlib and libzip BSD-3-Clause (conditional). No real filesystem sandbox implemented or proven. See [Architecture](architecture/data-01-virtual-file-system.md), [research matrix](research/data-01-vfs-technology-matrix.md), [ADR-0009 PROPOSED](adr/0009-data-01-vfs-policy.md). AssetId belongs DATA-02; bundles/patching belong DATA-05.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
