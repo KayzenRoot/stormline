@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-04` — 2.5D Hybrid Composition, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #157:** `52d7bb881ab7cd0a323f51a6bf443f3448c6978a`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-04](evidence/NLE-P00-WO-002-TWO-04.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-01` — Entity Component Model, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #160:** `33de3993eedaf7c4b07cdbda092c2268296bed9d`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-01](evidence/NLE-P00-WO-002-WORLD-01.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -242,8 +242,18 @@
 - Godot 4.6 CanvasItem/SubViewport MIT and Unity 6 proprietary sorting only references, W3C WebGPU and Khronos glTF specs, McGuire/Bavoil weighted OIT publication not a software license. No third-party code or art imported. SDOI only optional prove-or-drop.
 - All **109 tests** PRO/DEP/SRT/ALP/CAM/LIT/SUB/INT/SEC/BEN FUTURE / **NOT EXECUTED**; no 2.5D rendering engine, HDR, shaders, hardware, C++, GPU screenshots, p95/p99 FPS or superiority evidence. ADR-0025 PROPOSED; mandatory TWO-01/GFX-04 code prerequisites absent; 80 future coding WOs remain BLOCKED/executor_ready=false, #40 NOT authorized.
 
-## 30. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-WORLD-01: **Entity Component Model**, catalog_order=23, next official research in canonical queue. Zcode coding remains blocked pending Scope/DoD/ADR, implemented prerequisites, code-specific tests and objective proof.
+## 30. WORLD-01 — Entity Component Model (research APPROVED documentation only)
+- [Research #159](https://github.com/KayzenRoot/stormline/issues/159), WO NLE-P00-WO-002-WORLD-01, **APPROVED only RESEARCH DOCUMENTATION**. Future coding [issue #41](https://github.com/KayzenRoot/stormline/issues/41) remains OPEN/BLOCKED.
+- [Research PR #160](https://github.com/KayzenRoot/stormline/pull/160): BASE main 7a9385aa739edec145a5c417ca7a2b45acda0766, audited final HEAD af5152a74fe57558171fd4adf67fab20b11346f0; [Docs Validation #43634492193](https://github.com/KayzenRoot/stormline/actions/runs/43634492193) SUCCESS on exact final HEAD, Socket Security PR Alerts/Project Report and SonarCloud SUCCESS. Pt-BR objective documentary audit APPROVED, 11 docs-only files, no known HIGH/CRITICAL in scope; normal squash merged main 33de3993eedaf7c4b07cdbda092c2268296bed9d. This checkpoint reconciliation is a separate same-WO PR.
+- [Entity architecture](architecture/world-01-entity-component-model.md), [technology/license matrix](research/world-01-ecs-technology-license-matrix.md), [ADR-0026 PROPOSED](adr/0026-world-01-entity-identity-storage-policy.md), [typed API](contracts/world-01-entity-api.md), [117 future tests](testing/world-01-acceptance-matrix.md), [ECS performance benchmark](research/world-01-ecs-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-WORLD-01.md).
+- Runtime ephemeral WorldEpoch+slot+generation EntityHandle is NOT DATA-02/04 durable EntityGuid; no stale/ABA after destroy/world reload, generation-overflow slot retirement, registered stable ComponentTypeId/schema and source-generated reflection, C++26 reflection only optional after compiler proof, archetype/table vs sparse/hybrid storage benchmark gate. Deferred deterministic command buffer and CORE-owned jobs/borrow epochs, DATA-04 journal and save/reopen, WORLD-02 hierarchy/prefab and WORLD-03 spatial remain other owners. Safe Editor/CLI/MCP versioned semantic actions, explicit PHYS/NET/gameplay authority.
+- Flecs MIT, EnTT MIT candidate with exact pinned rights to verify, Bevy ECS MIT OR Apache-2 Rust reference and Unity proprietary ECS reference **not adopted/installed**; no code, toolchain, memory safety test or performance measured. STLG only optional prove-or-drop.
+- **117 future test cases** IDN/LIF/SCH/STO/QUE/CMD/PER/SYS/BEN **NOT EXECUTED**; no running ECS, C++ build, ASan/TSan, native/Web, headless world, CPU p95/p99, million-entity demonstration or actual source migration. ADR-0026 remains PROPOSED, future code #41 NOT authorized. Mandatory CORE-05/DATA-04 code not implemented.
+- **Measured documentation planning tally after this checkpoint:** 23 of 80 modules with research documented (28.75%); 57 RESEARCH_PENDING. Historical **CORE-04 research remains RESEARCH_PENDING** despite catalog_order=3, requires separate dedicated research before any dependency chain/DoD that needs it may be approved. All 80 implementation packets remain BLOCKED and executor_ready=false. Documentation tally is **not** 23 executable modules or approved technology ADRs.
+
+## 31. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-WORLD-02: **Scene & Prefab Hierarchy**, catalog_order=24 in canonical queue. Research only; Zcode implementation remains blocked pending ADR/Scope/DoD and actual dependent code plus evidence. Historical CORE-04 gap is not hidden by proceeding in checkpoint order.
+
 
 
 
