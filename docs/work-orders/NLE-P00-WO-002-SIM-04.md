@@ -4,6 +4,8 @@
 **BASE main:** `4dc7060fc0de16c036364a7363755a9ec4ea9144` | P00 documentation-only. No library selection for code and no Zcode implementation unlock.  
 **Risk:** LOW research; future ELEVATED runtime/parsing/physics/rights. **Release class:** UNDECIDED.
 
+**RESEARCH PR APPROVED/MERGED:** [#184](https://github.com/KayzenRoot/stormline/pull/184), final audited HEAD `bd099f87fb6d99865d63ed087d28dde3a23413d7`, [Docs Validation #43647135918](https://github.com/KayzenRoot/stormline/actions/runs/43647135918) SUCCESS, objective pt-BR audit comment #6885044210, normal squash main `38e3c8080fe02d54aed9b78a8273f340a5427e32`, readback confirmed. Separate checkpoint PR requires own exact-head CI/audit. Coding #49 remains BLOCKED, 96 runtime tests NOT RUN.
+
 ## OBJECTIVE
 Plan a first-class, engine-owned animation graph and skeletal motion pipeline with versioned Skeleton/Clip/Graph/Retarget/RootMotion/Ragdoll contracts, CPU/headless sampling and bounded performance/security/quality acceptance.
 
