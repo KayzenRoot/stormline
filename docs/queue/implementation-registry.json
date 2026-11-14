@@ -381,7 +381,7 @@
       "catalog_acceptance": "Testes de cor/estabilidade, compatibilidade e falhas de GPU.",
       "id": "NLE-EXEC-WO-GFX-07-001",
       "file": "docs/queue/work-orders/GFX-07.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",

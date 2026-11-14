@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-07 Research
 
-**State:** RESEARCH PR OPEN, INITIAL EXACT-HEAD CI SUCCESS; FINAL HEAD CI/AUDIT PENDING | **Research #141** | **Future code #35 BLOCKED** | **BASE main:** `bd45e076f789e0b934076a1973139400d3eb382b` | **Research branch:** `docs/NLE-P00-WO-002-GFX-07-camera-color-research`.  
+**State:** RESEARCH DOCS AUDITED/APPROVED/MERGED; CHECKPOINT RECONCILIATION REQUIRES SEPARATE CI/AUDIT | **Research #141** | **Future code #35 BLOCKED** | **BASE main:** `bd45e076f789e0b934076a1973139400d3eb382b` | **Research branch:** `docs/NLE-P00-WO-002-GFX-07-camera-color-research`.  
 **Risk:** LOW documents; future ELEVATED GPU history, HDR/monitor/capture and untrusted LUT/vendor DLL. No code/SDK/HDR GPU measured.
 
 ## Context Lock and research facts
@@ -11,7 +11,7 @@
 
 ## Not yet evidenced
 - [Research PR #142](https://github.com/KayzenRoot/stormline/pull/142): BASE `bd45e076f789e0b934076a1973139400d3eb382b`, initial HEAD `fbd0779910fa39ca6e9cc7c380e88d2002dc2a31`, 11 files docs only. [Docs Validation #43624036306](https://github.com/KayzenRoot/stormline/actions/runs/43624036306) **SUCCESS on initial exact HEAD**; future evidence commit requires NEW exact-HEAD check before audit.
-- Audit pt-BR HIGH/CRITICAL, merge SHA and readback: **PENDING**.
+- Final [Docs Validation #43624090643](https://github.com/KayzenRoot/stormline/actions/runs/43624090643) SUCCESS at **final HEAD** `830ddbe54b56825bfd902faa2b273d68532a2b99`, with Socket Security/SonarCloud checks SUCCESS. PR #142 audited in pt-BR APPROVED **docs-only**, 11-file scope, no known HIGH/CRITICAL documentation defect; normal squash merged `5bab9b54b83cfb48a8591e040a3f3e4ecd4a69c3`. Checkpoint PR requires separate exact-HEAD audit.
 - All 77 future tests, numerical color/ACES2 comparison, GPU HDR screenshots, VRAM p95/p99, native Win/Linux/macOS/Web render builds and signed SDK tests: **NOT EXECUTED**.
 - SRCC proof and superiority vs Unreal/GGG **NOT ESTABLISHED**.
 - No deployment, credentials, paid CI, vendor binaries or visual assets delivered.
@@ -27,3 +27,6 @@ These represent observed Git content identities, not proof a future source file 
 
 ## Future exact-head workflow
 Only after observed green docs CI + 11-file scoped diff objective audit, use normal squash PR. Then separate same-WO checkpoint PR; validate final HEAD CI and audit before merge. No next research module if correction required; never promote code on documentation alone.
+
+## Checkpoint Delta and readback policy
+Only `GFX-07.research_status` can change to `RESEARCH_DOCUMENTED_ADR_PROPOSED`; code #35, all 80 blocked WOs, `approved_adr=null`, `executor_ready=false`, release classes unchanged. This same-WO checkpoint PR requires its own green final HEAD and pt-BR objective audit, normal squash merge and main readback before declaring GFX-08 next. No graphics, verified HDR, benchmark, code or vendor binaries implied.
