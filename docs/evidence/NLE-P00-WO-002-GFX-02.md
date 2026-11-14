@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-02
 
 **Date:** 2026-11-14 | **Research issue:** #126 | **Future code issue:** #30 BLOCKED
-**Evidence state:** RESEARCH IN PROGRESS / DOCUMENTS ONLY. No C++, compiled shaders, GPU binaries, compiler dependencies, material editor, code tests or deployment.
+**Evidence state:** DOCUMENTAL RESEARCH UNDER FINAL AUDIT / NO ENGINE CODE. No C++, compiled shaders, GPU binaries, compiler dependencies, material editor, code tests or deployment.
 **BASE main:** `d968809bc4869a3a39f1fb1f82f75d5a212dfbda` | **Research branch:** `docs/NLE-P00-WO-002-GFX-02-shader-research`. Research risk LOW, future shader compiler/driver & authoring integrity ELEVATED.
 
 ## Canonical Context Lock (baseline from live GitHub)
@@ -25,8 +25,8 @@ Fingerprints below are **Git blob object SHA-1 IDs, NOT SHA-256 of file bytes**.
 - Original SSVF optimization only prove-or-drop, never assumed beneficial.
 
 ## Actual tests and evidence (fill only observed data)
-- GitHub docs-validation on exact research HEAD: PENDING.
-- PR/diff/CI pt-BR audit: PENDING.
+- Preliminary research HEAD `94c141f3fb4fc89246a5113006e3365ea72ad26d`: [Docs Validation #43611408051](https://github.com/KayzenRoot/stormline/actions/runs/43611408051) **SUCCESS**, Source Pack/links, 80 modules/DAG, registry and blocked-selector checks. After this evidence edit, **new exact final HEAD** must independently pass.
+- [Research PR #127](https://github.com/KayzenRoot/stormline/pull/127) preliminary scope audit: 10 docs-only files, +414 / 0 removed; no C++/shader binaries/compiler installs, CI config or apparent embedded secret in added lines. Registry: 80/80 WOs BLOCKED and 0 executor_ready, code issue #30 stays open PLANNING/BLOCKED. Final HEAD and objective pt-BR verdict **PENDING**.
 - All SHD-001..030, shader compilation, C++ builds, GPU driver tests, macOS/Web browser, shader fuzzing, benchmark, CI sanitizer, deployment: **NOT RUN**.
 - Merge SHA/readback and same-WO checkpoint reconciliation: PENDING.
 
