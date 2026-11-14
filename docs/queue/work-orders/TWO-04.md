@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Architecture](../../architecture/two-04-hybrid-composition.md), [technology/license matrix](../../research/two-04-hybrid-technology-license-matrix.md), [ADR-0025 PROPOSED](../../adr/0025-two-04-depth-order-hybrid-composition-policy.md), [typed depth/layer API](../../contracts/two-04-hybrid-api.md), [109 future NOT EXECUTED tests](../../testing/two-04-acceptance-matrix.md), [original-scene benchmark protocol](../../research/two-04-hybrid-visual-benchmark.md), [research Work Order](../../work-orders/NLE-P00-WO-002-TWO-04.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-TWO-04.md) are **proposed research**, not executable C++/shader contracts or approved runtime implementation. Shared-depth vs ordered Canvas vs subview distinctions and their known loss of depth, WebGL2 feature fallback, GPU resource ownership and media rights are future gates. Mandatory code dependencies TWO-01 and GFX-04 NOT integrated. Issue #40 OPEN/BLOCKED and all 80 code WOs remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`/`executor_ready=false`. No GPU scene, HDR, shadow or FPS measured.
+
 ## DEPENDENCIES
 `TWO-01`, `GFX-04`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
