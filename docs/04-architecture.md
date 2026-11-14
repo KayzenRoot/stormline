@@ -29,5 +29,8 @@ A nova direção de produto exige avaliar um **Command Kernel** comum ao editor,
 ## CORE-01 — Platform & Lifecycle (pesquisa técnica PROPOSTA)
 A direção preferencial de pesquisa é C++20 + SDL3 + CMake Presets/Ninja, com Win32, Wayland/X11 e Cocoa/Objective-C++ encapsulados em bridges estreitas quando necessário. A interface de host deve funcionar também sem display/GPU. SAPL (capability graph + event journal) é hipótese a medir, e **não** inovação comprovada. A decisão está apenas PROPOSED em [ADR-0003](adr/0003-core-01-platform-technology.md), com [contratos de plataforma](architecture/core-01-platform-lifecycle.md) e [matriz de tecnologias](research/core-01-platform-technology-matrix.md). A escolha gráfica Metal/Vulkan/D3D12 pertence a GFX-01, fora desta WO.
 
+## CORE-02 — Memory & Allocators (pesquisa PROPOSTA)
+Arquitetura de memória C++20 `std::pmr` com ownership, domains e budgets versionados; comparadores `malloc/new`, mimalloc e rpmalloc antes de qualquer substituição global. Hipótese de inovação `Stormline Memory Fabric` restrita a políticas e diagnósticos mensuráveis, não um malloc reinventado. Ver [CORE-02](architecture/core-02-memory-allocators.md), [matriz](research/core-02-memory-technology-matrix.md), [ADR-0004](adr/0004-core-02-memory-policy.md). GPU VRAM pertence ao módulo GFX-03. Nenhuma tecnologia de produção aprovada sem benchmark.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
