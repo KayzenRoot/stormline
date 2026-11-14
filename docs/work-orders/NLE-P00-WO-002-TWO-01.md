@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-TWO-01
 
 **Date:** 2026-11-14 | **Research issue #147** | **Future implementation issue #37 BLOCKED**  
-**State:** RESEARCH IN PROGRESS, DOCS ONLY | **ADR-0022:** PROPOSED | **BASE main `2ec91d4cf0f3062745a5d4b6d340da7027317348`**.  
+**State:** APPROVED / MERGED FOR RESEARCH DOCS ONLY (PR #148) | **ADR-0022:** PROPOSED | **BASE main `2ec91d4cf0f3062745a5d4b6d340da7027317348`**.  
 **Risk:** LOW documentation; future ELEVATED GPU/asset parsing/clip/Unicode/toolchain/rights. Research following GFX-08 checkpoint PR #146; code GFX-01/DATA-03 not yet implemented.
 
 ## OBJECTIVE
@@ -54,3 +54,6 @@ Canonically stale base, failing CI, unlicensed code/assets, false benchmark clai
 
 ## CONTEXT LOCK
 BASE main `2ec91d4cf0f3062745a5d4b6d340da7027317348`; Git blob hashes are not raw file SHA-256. SHA-256 fingerprints and exact ABI/source files are required before implementation activation, not claimed at research stage.
+
+## Observed research PR #148 receipts
+BASE `2ec91d4cf0f3062745a5d4b6d340da7027317348`, HEAD `e25399cedab2fddab242ccfa5d562e95513d2c76`, [Docs Validation #43627143316](https://github.com/KayzenRoot/stormline/actions/runs/43627143316) SUCCESS at exact final HEAD; Socket Security/SonarCloud PASS, 11 documents only, objective pt-BR audit APPROVED docs with no HIGH/CRITICAL found, squash merge `7fb41e39a938f94dbe5c6c1fa177174d7f6d0bb0`. Checkpoint is separate same-WO PR with own CI/audit. 81 future tests NOT RUN; ADR-0022 PROPOSED; code #37 BLOCKED.

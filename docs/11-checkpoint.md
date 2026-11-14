@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GFX-08` — VFX & Particle Graph, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #145:** `f3db6c126866e870bea6e00a646152ca615ecb16`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-GFX-08](evidence/NLE-P00-WO-002-GFX-08.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-TWO-01` — 2D Renderer & Canvas, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #148:** `7fb41e39a938f94dbe5c6c1fa177174d7f6d0bb0`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-TWO-01](evidence/NLE-P00-WO-002-TWO-01.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -210,5 +210,13 @@
 - Licenciamento: Effekseer runtime MIT com dependências backend/tools a verificar, AMD Parallel Sort MIT **DX12/Vulkan** não automaticamente Metal/Web, OpenVDB upstream Apache-2.0 com codecs/transitives e assets não aprovados. Niagara/Godot apenas referências; SVAG hipotético prove-or-drop, sem prova de inovação ou superioridade.
 - 78 cenários GRF/CPU/GPU/VIS/LGT/SYS/BEN e builds C++/GPU, plataformas Windows/Linux/macOS/WebGPU/WebGL2, testes de segurança, VRAM/overdraw e P50/P95/P99 **NÃO EXECUTADOS**. Sem implementação, assets, SDK, métricas reais ou comparador independente; 80 coding WOs permanecem BLOCKED/`executor_ready=false`, ADR-0021 continua PROPOSED.
 
-## 26. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-P00-WO-002-TWO-01`: **2D Renderer & Canvas**, próximo `catalog_order=19` na fila canônica. A implementação via Zcode permanece bloqueada enquanto Scope/DoD/ADR/dependências não estiverem formalmente aprovados e realizados.
+## 26. TWO-01 — 2D Renderer & Canvas (research APPROVED documental)
+- [Research issue #147](https://github.com/KayzenRoot/stormline/issues/147), WO `NLE-P00-WO-002-TWO-01`, **APPROVED apenas documentação**, future implementation [#37](https://github.com/KayzenRoot/stormline/issues/37) ainda OPEN/BLOCKED.
+- [Research PR #148](https://github.com/KayzenRoot/stormline/pull/148): BASE main `2ec91d4cf0f3062745a5d4b6d340da7027317348`, HEAD final auditado `e25399cedab2fddab242ccfa5d562e95513d2c76`, [Docs Validation #43627143316](https://github.com/KayzenRoot/stormline/actions/runs/43627143316) **SUCCESS no HEAD exato**; Socket Security e SonarCloud checks SUCCESS. Auditoria pt-BR APPROVED apenas docs, 11 arquivos `docs/`, sem HIGH/CRITICAL documental conhecido; squash merge normal `7fb41e39a938f94dbe5c6c1fa177174d7f6d0bb0` confirmado. Checkpoint reconciliation é PR separada desta mesma WO.
+- [Arquitetura de Canvas](architecture/two-01-renderer-canvas.md), [matriz licenças](research/two-01-renderer-technology-license-matrix.md), [ADR-0022 PROPOSED](adr/0022-two-01-native-2d-renderer-policy.md), [API semântica](contracts/two-01-canvas-api.md), [81 testes futuros](testing/two-01-acceptance-matrix.md), [benchmark 2D](research/two-01-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-TWO-01.md).
+- Semântica 2D nativa: sprites, atlas/UV/alpha, batching de trechos contíguos sem reordenar transparentes, layers/masks/clips, pixel-perfect/HiDPI/orthographic, UI crisp, vetores SVG Tiny com sanitização, texto Unicode/glyph font/license e WebGL2 fallback. GFX-01/03/05/06/07 e DATA-03/04/05 mantêm seus papéis. Sem criar GPU allocador/shader compiler duplicado.
+- ThorVG MIT SVG Tiny subset, Skia BSD alternativa ampla, Blend2D zlib JIT não universal Web, lyon Rust alternativas MIT/Apache/MPL, HarfBuzz shaping não equivale BiDi UI, FreeType FTL com crédito ou GPLv2 e msdfgen MIT core/ext. Rive runtime MIT **não** implica exports sem splash grátis; Rive opcional e direitos específicos. Nenhuma biblioteca instalada.
+- Os **81 testes futuros** CAN/SPR/LYR/VEC/TXT/LIT/SYS/BEN são **NÃO EXECUTADOS**; nenhuma GPU/C++/Web/nativa, rasterização de fontes, golden pixel, 60 FPS ou benchmark entregue. ADR-0022 permanece PROPOSED; todas as 80 WOs de código permanecem BLOCKED/`executor_ready=false`.
+
+## 27. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-TWO-02`: **Tilemaps & 2D Worlds**, próximo `catalog_order=20` da fila canônica. A implementação Zcode segue bloqueada até Scope/DoD/ADR, interfaces e dependências efetivamente integradas.
