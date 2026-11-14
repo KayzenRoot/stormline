@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-02
 
 **Date:** 2026-11-14 | **Research issue:** #126 | **Future code issue:** #30 BLOCKED
-**Evidence state:** DOCUMENTAL RESEARCH UNDER FINAL AUDIT / NO ENGINE CODE. No C++, compiled shaders, GPU binaries, compiler dependencies, material editor, code tests or deployment.
+**Evidence state:** DOCUMENTAL RESEARCH APPROVED / MERGED; CODE IMPLEMENTATION BLOCKED / NO ENGINE CODE. No C++, compiled shaders, GPU binaries, compiler dependencies, material editor, code tests or deployment.
 **BASE main:** `d968809bc4869a3a39f1fb1f82f75d5a212dfbda` | **Research branch:** `docs/NLE-P00-WO-002-GFX-02-shader-research`. Research risk LOW, future shader compiler/driver & authoring integrity ELEVATED.
 
 ## Canonical Context Lock (baseline from live GitHub)
@@ -25,13 +25,13 @@ Fingerprints below are **Git blob object SHA-1 IDs, NOT SHA-256 of file bytes**.
 - Original SSVF optimization only prove-or-drop, never assumed beneficial.
 
 ## Actual tests and evidence (fill only observed data)
-- Preliminary research HEAD `94c141f3fb4fc89246a5113006e3365ea72ad26d`: [Docs Validation #43611408051](https://github.com/KayzenRoot/stormline/actions/runs/43611408051) **SUCCESS**, Source Pack/links, 80 modules/DAG, registry and blocked-selector checks. After this evidence edit, **new exact final HEAD** must independently pass.
-- [Research PR #127](https://github.com/KayzenRoot/stormline/pull/127) preliminary scope audit: 10 docs-only files, +414 / 0 removed; no C++/shader binaries/compiler installs, CI config or apparent embedded secret in added lines. Registry: 80/80 WOs BLOCKED and 0 executor_ready, code issue #30 stays open PLANNING/BLOCKED. Final HEAD and objective pt-BR verdict **PENDING**.
+- Preliminary research HEAD `94c141f3fb4fc89246a5113006e3365ea72ad26d`: [Docs Validation #43611408051](https://github.com/KayzenRoot/stormline/actions/runs/43611408051) **SUCCESS**, Source Pack/links, 80 modules/DAG, registry and blocked-selector checks. Final audited research HEAD `dae67ef8f3307d2f10a525442e6dc01d7fc771b3` passed [Docs Validation #43611454959](https://github.com/KayzenRoot/stormline/actions/runs/43611454959) **SUCCESS**.
+- [Research PR #127](https://github.com/KayzenRoot/stormline/pull/127) preliminary scope audit: 10 docs-only files, +414 / 0 removed; no C++/shader binaries/compiler installs, CI config or apparent embedded secret in added lines. Registry: 80/80 WOs BLOCKED and 0 executor_ready, code issue #30 stays open PLANNING/BLOCKED. Final research HEAD `dae67ef8f3307d2f10a525442e6dc01d7fc771b3` passed CI #43611454959 and objective pt-BR **APPROVED DOCUMENTATION ONLY** ([PR #127 audit comment](https://github.com/KayzenRoot/stormline/pull/127#issuecomment-6879939272)).
 - All SHD-001..030, shader compilation, C++ builds, GPU driver tests, macOS/Web browser, shader fuzzing, benchmark, CI sanitizer, deployment: **NOT RUN**.
-- Merge SHA/readback and same-WO checkpoint reconciliation: PENDING.
+- Normal squash merge [PR #127](https://github.com/KayzenRoot/stormline/pull/127) SHA `076362cd71020359cd8fe8475a3f623e1e3a4fe8` VERIFIED in main and GFX-02 architecture readback. Separate same-WO checkpoint reconciliation is pending independent CI/audit/merge.
 
 ## Risks and gates
 Untrusted shader compiler/driver inputs and legacy/experimental targets have future ELEVATED implications. Exact shader source and dependency rights, compiler/platform toolchain licenses, source-map privacy, deterministic variant key and safe rollback need executable proof. Browser WGSL is not SPIR-V. No false 4-target parity or cloud compiler functionality claim. 80 future implementation WOs remain BLOCKED and `executor_ready=false`.
 
-## Proposed Checkpoint Delta (not active until audit and merge)
-After research PR passes free docs CI and pt-BR objective audit, record GFX-02 research as RESEARCH_DOCUMENTED_ADR_PROPOSED while ADR-0015 remains PROPOSED, issue #30 and all 80 future implementation WOs BLOCKED. Reconcile in separately audited docs-only PR of this same WO. No GFX-03 research before checkpoint.
+## Checkpoint Reconciliation (pending this separate PR's audit)
+Only GFX-02.research_status is promoted to RESEARCH_DOCUMENTED_ADR_PROPOSED in registry as a documentation progress marker. ADR-0015 remains PROPOSED and unselected; implementation #30 and other 79 WOs remain BLOCKED / executor_ready=false. CI, pt-BR audit, normal squash merge/readback and research issue #126 closure must occur before GFX-03.

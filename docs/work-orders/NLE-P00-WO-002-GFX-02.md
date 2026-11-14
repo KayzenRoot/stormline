@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-GFX-02
 
 **Research issue:** #126 | **Future implementation:** #30 BLOCKED | **Date:** 2026-11-14  
-**State:** RESEARCH IN PROGRESS / DOCUMENTS ONLY | **ADR-0015:** PROPOSED  
+**State:** APPROVED / MERGED FOR DOCUMENTAL RESEARCH ONLY (PR #127) | **ADR-0015:** PROPOSED / NO ENGINE CODE  
 **BASE main / Context Lock:** `d968809bc4869a3a39f1fb1f82f75d5a212dfbda` (GFX-01 research/checkpoint PRs #124/#125 audited and merged).
 **Risk:** LOW docs, future ELEVATED compiler/driver attack surface, invalid cache/parameter graph and hot reload data loss.
 
