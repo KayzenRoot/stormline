@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-03
 
 **Date:** 2026-11-14 | **Research issue:** #129 | **Future code issue:** #31 BLOCKED
-**Evidence state:** RESEARCH IN PROGRESS, DOCUMENTS ONLY. No C++ graph, GPU heap, shaders, SDK, benchmarks, driver tests, render pass or deployment.
+**Evidence state:** RESEARCH DOCUMENTATION UNDER FINAL AUDIT, NO ENGINE CODE. No C++ graph, GPU heap, shaders, SDK, benchmarks, driver tests, render pass or deployment.
 **BASE main:** `e76d561d98dd4192d8bae1fb66cab09e194fbc70`; **research branch:** `docs/NLE-P00-WO-002-GFX-03-rendergraph-research`.
 **Risk:** LOW docs, future ELEVATED GPU memory alias, async sync and recovery.
 
@@ -28,8 +28,8 @@ Critical fingerprint values below are **Git blob object IDs, NOT SHA-256 hashes 
 - SAFG experimental prove-or-drop, no claimed extra frames/sec, RAM saving or VRAM allocator performance.
 
 ## Actual tests/evidence log (must be updated from real runs)
-- GitHub docs-validation on final research HEAD: PENDING.
-- PR diff, CI and objective pt-BR audit: PENDING.
+- Initial research HEAD `420ab4e8e1317de6e9824a46e6add53640cdedc2` passed [Docs Validation #43612642586](https://github.com/KayzenRoot/stormline/actions/runs/43612642586) **SUCCESS**, including Source Pack/links, 80 module DAG, registry and blocked selector. After this Evidence edit, rerun exact new HEAD CI before approval.
+- [PR #130](https://github.com/KayzenRoot/stormline/pull/130): preliminary diff 10 files under `docs/` only, +444 lines / 0 removed; no C++/GPU graph/runtime, SDK, shader or obvious secret found in added lines. Registry verified 80/80 BLOCKED with zero executor_ready; code issue #31 stays blocked. Final exact HEAD and pt-BR review PENDING.
 - RGP-001..034, real C++/GPU builds, native Windows/Linux/macOS/Web, fuzz GPU, driver validation, CPU/GPU/VRAM p95/p99, SAFG benchmarks: **NOT RUN**.
 - Squash merge SHA and main readback / same-WO checkpoint reconciliation: PENDING.
 
