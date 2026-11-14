@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-04` — Skeletal Animation & Motion, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #184:** `38e3c8080fe02d54aed9b78a8273f340a5427e32`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-04](evidence/NLE-P00-WO-002-SIM-04.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-05` — Navigation & Behavior, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #187:** `3dcbc8e363f1257b06025e40fd848dce793de76e`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-05](evidence/NLE-P00-WO-002-SIM-05.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -322,5 +322,14 @@
 - **All 96 future test cases NOT EXECUTED**: no live animation, CPU headless, native/WASM builds, parser fuzz/ASan, physics ragdoll, roots, retarget/IK, GPU skin, screenshot, quality trials or CPU/GPU/VRAM benchmarks. No performance/superiority or cross-OS bitwise guarantee. ADR-0034 remains PROPOSED, release class UNDECIDED.
 - **Research tally after this checkpoint reconciliation:** **31/80 documented (38.75%)**, **49 RESEARCH_PENDING** including historical CORE-04 gap. **0/80 runtime modules implemented**; all 80 coding WOs remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`. This checkpoint delta itself is subject to separate PR CI/audit/merge.
 
-## 39. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-P00-WO-002-SIM-05`: **Navigation & Behavior**, next catalog-order documentary research. No SIM-05 work before SIM-04 checkpoint PR exact-HEAD CI/audit/squash/main readback. Future code requires preceding runtime modules. No Zcode coding unlock.
+## 39. SIM-05 — Navigation & Behavior (research APPROVED, documentation only)
+- [Research issue #186](https://github.com/KayzenRoot/stormline/issues/186), WO NLE-P00-WO-002-SIM-05, **APPROVED DOCUMENTARY RESEARCH ONLY**; future [implementation issue #50](https://github.com/KayzenRoot/stormline/issues/50) **OPEN/BLOCKED**; WORLD-03 and SIM-02 runtime prerequisites do not exist.
+- [Research PR #187](https://github.com/KayzenRoot/stormline/pull/187), BASE main `e6838dbdb5911acf4f0b67ce744a6c23a9396a22`: eight new Markdown docs. Initial HEAD `17a9ffd371f3bfc76a79ab5a48f9cb01cb909979` passed [Docs Validation #43648850190](https://github.com/KayzenRoot/stormline/actions/runs/43648850190) SUCCESS. **Final audited HEAD** `564acd9cb18b0a8ad498cf8936e199a7adca4f6b` passed exact [Docs Validation #43648889523](https://github.com/KayzenRoot/stormline/actions/runs/43648889523) SUCCESS, job #132612692684: Source Pack/local links, catalog DAG, WO registry and Zcode blocked-selector all SUCCESS. Objective auditoria pt-BR [comment #6885277029](https://github.com/KayzenRoot/stormline/pull/187#issuecomment-6885277029) APPROVED documentary-only, no known HIGH/CRITICAL in changed docs. SonarCloud/Socket exact HEAD **NOT VERIFIED**. Normal squash merged main `3dcbc8e363f1257b06025e40fd848dce793de76e`, main readback confirmed; checkpoint reconcilia apenas em PR distinta com seu próprio CI/auditoria.
+- [Architecture](architecture/sim-05-navigation-behavior.md), [ADR-0035 PROPOSED](adr/0035-sim-05-engine-owned-navigation-and-behavior-authority.md), [technology/license matrix](research/sim-05-navigation-behavior-technology-license-matrix.md), [typed API](contracts/sim-05-navigation-behavior-api.md), [112 FUTURE tests](testing/sim-05-acceptance-matrix.md), [future benchmark protocol](research/sim-05-navigation-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-SIM-05.md).
+- Proposed engine-owned NavWorld/Tile/Agent/Path/Query/BehaviorGraph/Statechart/Blackboard/Perception with generation and NavTopologyEpoch/source revisions, 3D tiled Recast-like nav bake candidate and 2D grid/portal alternative; WORLD-03 leases and SIM-02 collider-ready barriers gate tiles, UNLOADED/PENDING nav never claims safe traversability. Path and crowd avoidance merely produce requested steering; SIM-03 MotorMotionReceipt is authoritative movement, GAME/NET authorization controls abilities and hidden NPC perception. Fixed CORE-04 TickId and bounded concurrent path, BT and perception tasks, single permitted Editor/CLI/MCP authoring kernel.
+- Upstream candidates only: Recast/Detour + TileCache/Crowd zlib **LEADING NOT ADOPTED**; RVO2 Apache-2.0 alternate planar steering, BehaviorTree.CPP MIT and Boost::ext.SML BSL-1.0 compare, all **NOT ADOPTED**. Need pinned tags, full licenses/SBOM, ABI, browser and headless proof for code.
+- **All 112 future cases NOT EXECUTED**: no navmesh, NPC AI, pathfinding, runtime headless/native/WASM, streaming obstacle test, fuzz/ASan/TSan, concurrency/perception privacy checks, CPU/memory/crowd benchmarks or gameplay test. No measured superiority; ADR-0035 PROPOSED, release class UNDECIDED.
+- **After this checkpoint reconciliation:** **32/80 research modules documented (40%)**, **48 RESEARCH_PENDING**, including historical CORE-04 research-status gap. **0/80 runtime modules implemented**, all 80 code WOs remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`. No authorization to unlock coding.
+
+## 40. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-SIM-06`: **Destruction & Environmental Response**, next catalog-order documentary research. Do not start SIM-06 until SIM-05 checkpoint PR exact-HEAD CI/audit/squash/main readback. Future code requires preceding runtime implementations. No Zcode coding unlock.
