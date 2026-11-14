@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-14 | **Risk:** LOW for research docs; ELEVATED for future engine implementation due to serialization/origin concerns.  
 **Research issue:** [#102](https://github.com/KayzenRoot/stormline/issues/102) | **PR:** [#103](https://github.com/KayzenRoot/stormline/pull/103).  
-**State:** PENDING FINAL HEAD AUDIT; architecture and ADR-0007 PROPOSED, no runtime code.
+**State:** APPROVED / MERGED for research docs only; ADR-0007 remains PROPOSED for implementation, no runtime code.
 
 ## Git and scoped change
 - Base main / checkpoint after CORE-04: `c96fcc0d5e5094c84cd1e0af9085fba6849bcecb`.
@@ -20,10 +20,16 @@
 - CORE-04 ADR-0006: `436413710da01c49eee1042050530937fd50081d`
 - The eventual Zcode executor must obtain fresh SHA-256 fingerprints at code-activation preflight. Git blob hashes are not SHA-256 proof.
 
+## Final audited research HEAD and merge
+- Final PR #103 HEAD: `fc1949b1da58f8c89bafb16560498fc0bfd32cf0`.
+- [CI #43597892824](https://github.com/KayzenRoot/stormline/actions/runs/43597892824): **SUCCESS** on final HEAD. Includes Source Pack/links, module taxonomy+DAG, registry validation and Zcode blocked-selector smoke.
+- Objective audit in pt-BR recorded on PR #103: APPROVED for documentation, no known HIGH/CRITICAL issue in scoped files.
+- Squash merge `c5f5b97508d31f4abb49671e9d4d9a59c7bc940f`, read back on main. No code, binaries, dependency install or real physics/GPU test.
+
 ## Observed Docs Validation
 - [CI #43597818853](https://github.com/KayzenRoot/stormline/actions/runs/43597818853) SUCCESS on research-content HEAD `8dabf39cb76fbbf1ec436ed63e6fe8992763c0ca`.
 - Steps green: Source Pack/links, catalog+DAG, 80-module WO registry, read-only Zcode selector rejecting blocked WOs.
-- **Final CI after adding this file must also pass before approval/merge.** Do not assert a passing final HEAD without an observed run. No native C++/CPU/GPU benchmarks or precision golden tests have run.
+- Final CI after adding the Evidence Bundle **did** pass on the exact audited HEAD above; subsequent post-merge checkpoint reconciliation requires a separate verified CI run. No native C++/CPU/GPU benchmarks or precision golden tests have run.
 
 ## Technical proposal and boundaries
 - C++20 portable scalar reference and strong unit/space types, GLM comparator, Eigen/DirectXMath/MathFu alternatives evaluated at research level. No library introduced, version pinned, ABI implemented or external licensing obligation incurred.
@@ -35,7 +41,7 @@
 - Repo remains public with zero-cost CI; no CodeRabbit, required external human reviewer, force push, bypass, unapproved expenditure or secrets. Release classes are UNDECIDED.
 - GLM source declares permissive terms and Eigen MPL-2.0 weak copyleft; pinned versions, notices, security provenance and actual distribution/license analysis required before code.
 - Implementation packet `NLE-EXEC-WO-CORE-05-001` and issue #22 remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`.
-- Objective pt-BR audit to be recorded on the PR. No known HIGH/CRITICAL issue identified in the initial research-only diff; final HEAD requires validation.
+- Objective pt-BR audit recorded on PR #103 and final HEAD verified. No known HIGH/CRITICAL issue identified in the research-only diff.
 
 ## Proposed Checkpoint Delta AFTER approved merge/readback
 1. Mark `NLE-P00-WO-002-CORE-05` research as APPROVED/MERGED **docs only**, issue #102, PR #103, final CI HEAD and merge commit, with limitations above.
