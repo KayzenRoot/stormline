@@ -2,7 +2,7 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-02` — **APPROVED / MERGED** (memória e alocadores, sem código).  
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-03` — **APPROVED / MERGED** (jobs/concurrency, sem código).  
 **Main SHA comprovado após o merge da PR #3:** `e41274bb841094630ba71843b0876bb5d79370f4`.  
 **Evidence Bundle:** [NLE-P00-WO-001-EXT-001](evidence/NLE-P00-WO-001-EXT-001.md).
 
@@ -61,5 +61,12 @@
 - Tecnologias candidatas: C++20 `std::pmr`, sistema como baseline, mimalloc 3.x e rpmalloc para A/B, Tracy/sanitizers para profiling; SMF como hipótese **não comprovada**.
 - Nenhuma alocação real foi substituída. Sem benchmark, binários, testes de GPU/OS ou melhorias provadas. ADR-0004 mantém status PROPOSED.
 
-## 8. Próximo incremento
-`NLE-P00-WO-002-CORE-03`: pesquisa técnica do scheduler/jobs, concorrência e work stealing, depois de auditada a reconciliação do CORE-02. **PLANNED / NOT STARTED**. Não iniciar implementação nem avançar sem evidências.
+## 8. CORE-03 — jobs/concurrency, aprovado documentalmente
+- Issue #13, `NLE-P00-WO-002-CORE-03`: especificação do scheduler, pesquisas Taskflow/enkiTS/oneTBB/C++20 e ADR-0005 PROPOSED.
+- PR #14 base `b76e7fd9992dcc012c212e8afe3d2836d9776c63`, HEAD auditado `cdab3939056541ce924571333f5942adbbc81973`; [CI 43593597518](https://github.com/KayzenRoot/stormline/actions/runs/43593597518) docs-validation SUCCESS.
+- Merge squash `15702e6228f1571596ef3b34e2592783ba786c74` confirmado por read-back de main. [Evidence Bundle](evidence/NLE-P00-WO-002-CORE-03.md).
+- Hipótese de tecnologia própria SFAS permanece pesquisa, não prova de desempenho ou scheduler implementado.
+- Nenhuma versão pública ou programa C++ foi criado.
+
+## 9. Próximo incremento
+`NLE-P00-WO-002-QUEUE-001`: preparar a fila versionada de issues e pacotes de Work Order futuros para Zcode, **somente templates bloqueados por especificações técnicas pendentes**; nenhum executor de código autorizado. A fila só avançará após reconciliação e auditoria do CORE-03.
