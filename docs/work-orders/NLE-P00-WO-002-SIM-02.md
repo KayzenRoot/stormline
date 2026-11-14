@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-SIM-02
 
 **2026-11-14 | Research issue #177 | Future coding issue #47 OPEN/BLOCKED**  
-**Status:** RESEARCH IN PROGRESS / DOCUMENTATION ONLY, ADR-0032 PROPOSED. **Context Lock BASE main:** 6099128ead915e010ef252f57cd880f441303d59 (SIM-01 research PR #175 and separate checkpoint PR #176 merged).  
+**Status:** APPROVED/MERGED FOR RESEARCH DOCS ONLY (PR #178), NO CODE, ADR-0032 PROPOSED. **Context Lock BASE main:** 6099128ead915e010ef252f57cd880f441303d59 (SIM-01 research PR #175 and separate checkpoint PR #176 merged).  
 **Risk:** LOW docs-only; future ELEVATED native memory, concurrency, game collision integrity, cross-target floating-point and source/stream authority.
 
 ## OBJECTIVE
@@ -58,3 +58,6 @@ Changed main/Scope/DoD/approved ADR means Context Lock STALE and rebase. CI fail
 
 ## CONTEXT LOCK
 BASE Git SHA 6099128ead915e010ef252f57cd880f441303d59. Git blob SHA-1 OIDs NOT source raw SHA-256. Future executor needs actual byte SHA-256, code target file/ABI, approved Scope/DoD/ADR-0032 and integrated WORLD-02+CORE-03 and owner contracts before implementation.
+
+## Verified research PR #178 receipts
+Research BASE main 6099128ead915e010ef252f57cd880f441303d59; initial head 6dbe3995bb9236e8e1ea94e5b123a6a89a7226b9 [Docs Validation #43643764457](https://github.com/KayzenRoot/stormline/actions/runs/43643764457) SUCCESS but Socket PR Alerts NEUTRAL because external service/API diff failure, NOT a security success. Evidence updated, final audited head 33250c7955aee929008ae952c0ab9fbb79a6aeab [Docs Validation #43643912007](https://github.com/KayzenRoot/stormline/actions/runs/43643912007) SUCCESS exact HEAD, SonarCloud SUCCESS and Socket Project Report SUCCESS; Socket Alerts SUCCESS status SKIPPED because no net dependency changes, not dependency-diff scan proof. Eleven scoped docs files, objective pt-BR audit APPROVED research-only no known HIGH/CRITICAL, normal squash main 351d1bd60b2922297691ffcfaff3547d9a888eff, Git readback confirmed. Separate same-WO checkpoint must pass own independent exact HEAD CI/audit/squash/readback. 170 FUTURE runtime tests NOT EXECUTED, ADR-0032 PROPOSED, #47 OPEN/BLOCKED.
