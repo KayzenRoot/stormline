@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-01` — Virtual File System seguro e contratos de I/O, PROPOSTA de arquitetura (sem engine implementada).  
-**Main SHA comprovado após o merge da PR #109:** `aca78dab42e3ecfa5f8a9b4101c7f7ad41b0e17b`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-01](evidence/NLE-P00-WO-002-DATA-01.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-DATA-02` — asset identity, metadata, reference graph and recovery, PROPOSTA de arquitetura (sem engine implementada).  
+**Main SHA comprovado após o merge da PR #112:** `a5664bfccf011dc3300c54a18d6ae846ee0926d8`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-DATA-02](evidence/NLE-P00-WO-002-DATA-02.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -107,5 +107,14 @@
 - Path traversal, TOCTOU, symlink/junction, ZIP-bomb/zip-slip, recuperação após crash e risco de perda de dados requerem testes nativos. SAMG é hipótese de R&D não comprovada.
 - [Evidence Bundle DATA-01](evidence/NLE-P00-WO-002-DATA-01.md): sem build C++, fuzzing, runtime filesystem, benchmark, integração real ou sandbox comprovado. Implementation issue #24 preservada com `executor_ready=false`.
 
-## 14. Próximo incremento
-`NLE-P00-WO-002-DATA-02`: pesquisa do Asset Registry, IDs estáveis, metadados, integridade de referências e provenance. **PLANNED / NOT STARTED** até esta reconciliação passar CI/auditoria/merge. Nenhuma execução de código ou liberação do Zcode.
+## 14. DATA-02 — Asset Registry, IDs persistentes e provenance
+- Research issue [#111](https://github.com/KayzenRoot/stormline/issues/111), `NLE-P00-WO-002-DATA-02` research documentation APPROVED. Implementation issue [#25](https://github.com/KayzenRoot/stormline/issues/25) continua BLOCKED.
+- PR [#112](https://github.com/KayzenRoot/stormline/pull/112): base main `7924f0eaf1eaf711e2316da7f4ee3dc7521afddb`, HEAD auditado `99076f7df0e63e12e082329830bbac49cd241143`; [CI 43601883375](https://github.com/KayzenRoot/stormline/actions/runs/43601883375) docs-validation SUCCESS (Source Pack/links, 80-module DAG, registry de 80 WOs, selector bloqueado).
+- Auditoria em pt-BR APPROVED somente para pesquisa documental; merge squash `a5664bfccf011dc3300c54a18d6ae846ee0926d8` confirmado por leitura de main/arquitetura. Nenhum defeito HIGH/CRITICAL documental conhecido.
+- [Arquitetura](architecture/data-02-asset-registry.md), [matriz](research/data-02-asset-registry-technology-matrix.md), [ADR-0010](adr/0010-data-02-asset-identity.md) PROPOSED, [contrato de API](contracts/data-02-registry-api.md), [16 cenários de testes](testing/data-02-acceptance-matrix.md).
+- Direção candidata: `AssetId` persistente independente do caminho físico, hash, revision e runtime handle; avaliar UUIDv7/v4, SQLite derivado com metadados canônicos portáteis versus outras alternativas e BLAKE3/SHA-256; dependências/provenance e operações sem quebrar referência.
+- SQLite WAL single writer/local-only e política de durabilidade são requisitos de avaliação; alterações VFS+SQLite **não constituem uma transação atômica**. Journal/reconciliação e falhas injetadas são provas futuras. SAPG é R&D não comprovado.
+- [Evidence Bundle](evidence/NLE-P00-WO-002-DATA-02.md). Sem C++ compilado, SQLite criado, benchmarks, testes de recuperação, GPU, plataforma ou MCP implementados; as 80 WOs permanecem BLOCKED/`executor_ready=false`.
+
+## 15. Próximo incremento
+`NLE-P00-WO-002-DATA-03`: pesquisa dos importadores e conversão de assets (2D/3D/texturas/animações/áudio), import receipts, reimport idempotente, segurança de arquivos e testes de fidelidade. **PLANNED / NOT STARTED** até reconciliação DATA-02 aprovada por CI/auditoria/merge. Nenhuma liberação para codificação.

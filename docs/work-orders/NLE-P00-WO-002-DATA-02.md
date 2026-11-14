@@ -2,7 +2,7 @@
 
 **Module:** DATA-02 Asset Registry & Metadata | **Research issue:** #111 | **Blocked implementation issue:** #25  
 **Risk:** LOW for documentation, future persistence/schema changes ELEVATED.  
-**Status:** PROPOSED RESEARCH / NOT IMPLEMENTED. **Context Lock main:** `7924f0eaf1eaf711e2316da7f4ee3dc7521afddb`.
+**Status:** APPROVED / MERGED (research documentation only, PR #112; ADR-0010 remains PROPOSED; NOT IMPLEMENTED). **Context Lock main:** `7924f0eaf1eaf711e2316da7f4ee3dc7521afddb`.
 
 ## OBJECTIVE
 Research and specify a production-quality asset registry technology/identity model, API, data recovery, provenance and dependency graph for Stormline. Preserve stable references across rename/move/reimport and supply Zcode with future test obligations, **not** premature implementation authorization.
