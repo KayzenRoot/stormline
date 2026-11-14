@@ -1,11 +1,11 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-03 Character Controller Research
 
-**Status: DOCUMENTARY DRAFT / PR AND CI AUDIT PENDING. NOT APPROVED OR MERGED.**  
+**Status: DOCUMENTARY RESEARCH PR #181 DRAFT; INITIAL CI SUCCESS / FINAL HEAD AUDIT PENDING. NOT MERGED.**  
 **Date:** 2026-11-14 | **Issue:** #180 | **Future coding issue:** #48 OPEN/BLOCKED.  
 **BASE main:** `c8ee0cd07ab30cd207f7ea9b7aedfe06b09b3d64`.  
 **Research branch:** `docs/NLE-P00-WO-002-SIM-03-character-controller-research`.  
 **Initial docs head before this bundle:** `9f14331833dbd34e94b70273b73a211c0cedf46d`.  
-**PR final HEAD/CI:** PENDING exact-head readback. No test/benchmark success claimed.
+**PR #181 initial head verified:** `e356952489fec55907e50c005baa60e849798235`; **Docs Validation run #43645409527 SUCCESS** (docs-validation job #132601933344; Source Pack/links, catalog DAG, registry, blocked selector passed). **This Evidence Bundle update changes HEAD; exact final-head CI/audit still pending.** No runtime test/benchmark claimed.
 
 ## 1. Source Check and Context Lock
 Canonical order: `docs/11-checkpoint.md` > Ledger/approved ADRs > Scope > DoD > Architecture > Requirements > AGENTS/catalog/registry/queue. Previous SIM-02 research approved/merged and checkpoint reconciled, latest main commit at research preflight `c8ee0cd07ab30cd207f7ea9b7aedfe06b09b3d64`. Source checkpoint blob observed `64f16740be507b55a490f9b0a45c48e2aa709cb9`. Mandatory SIM-01+SIM-02 executable runtimes missing; all 80 coding WOs BLOCKED and `executor_ready=false`. Research tally at base: 29/80 docs complete; 51 pending, including historical CORE-04 research gap recorded by checkpoint.
@@ -25,15 +25,15 @@ Canonical order: `docs/11-checkpoint.md` > Ledger/approved ADRs > Scope > DoD > 
 ## 3. Verification ledger: honest results
 | Gate | Observed result |
 |---|---|
-| Original GitHub issue and branch created | #180 and research branch created via connected GitHub; commits received for authored docs |
+| Original GitHub issue, branch and PR | #180, dedicated research branch, PR #181 DRAFT; base `c8ee0cd07ab30cd207f7ea9b7aedfe06b09b3d64`; eight added docs files only |
 | Source precedence | Reviewed checkpoint, Ledger, Scope, DoD, current SIM-01/02 boundary and blocked SIM-03 queue |
 | Technology research | Official Jolt CharacterVirtual and architecture; Box2D experimental mover; Rapier character control; Godot documentation consulted |
-| Documentation links/registry validation | **PENDING CI**, not a passing claim |
-| Source/doc tests at exact final PR HEAD | **PENDING** |
+| Documentation links/registry validation | **INITIAL PASS**: Docs Validation run #43645409527, exact initial HEAD `e356952489fec55907e50c005baa60e849798235` |
+| Source/doc tests at exact final PR HEAD | **PENDING after this Evidence Bundle update** |
 | SonarCloud/Socket checks | **PENDING; do not infer PASS** |
 | Independent visual/CPU/device motion tests | **NOT RUN**, future only |
 | Native/Web/headless engine build, ASan/TSan, benchmarks | **NOT RUN**, future only |
-| Exact-head audit in pt-BR | **PENDING** |
+| Exact-head audit in pt-BR | **PENDING**: initial review found eight docs-only files, 387 additions, zero deletions, all future test results explicitly NOT EXECUTED; must revalidate after update |
 | Normal squash merge / main readback / checkpoint | **NOT DONE** |
 
 ## 4. Risks and constraints
