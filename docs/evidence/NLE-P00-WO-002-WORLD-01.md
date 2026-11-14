@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-WORLD-01 ECS Research
 
-**Status:** DRAFT / RESEARCH PR CI/AUDIT PENDING | Research #159 | Future code #41 OPEN/BLOCKED.  
+**Status:** RESEARCH PR OPEN, INITIAL EXACT-HEAD DOCS CI SUCCESS; FINAL-HEAD REVALIDATION AND AUDIT PENDING | Research #159 | Future code #41 OPEN/BLOCKED.  
 **BASE main:** 7a9385aa739edec145a5c417ca7a2b45acda0766. **Branch:** docs/NLE-P00-WO-002-WORLD-01-ecs-research. No installed ECS binary/tool, C++ source implementation, headless running world, test harness, performance benchmark or compiled reflection delivered.
 
 ## Canonical source check
@@ -9,9 +9,18 @@
 - Research refs official Flecs MIT C++/archetype/relationships/defer commands, EnTT C++ sparse-set and versioned handle with MIT candidate to pin, Bevy ECS MIT OR Apache-2 table/sparse+change references, Unity Entities proprietary structural sync/command buffers, WG21 C++26 P2996R13 accepted in working draft with compiler rollout gate. All are technical/license **references**, no runtime/library/source copied or installed.
 - Original proposed safe entity Guid vs runtime world-instance/slot/generation, generation retirement on wrap, typed schema/source-generated baseline, queries/borrows/epoch fences, deterministic deferred structural command transactions, DATA-04 persistence and AI-native edit rights. STLG optional PROVE-OR-DROP, no novelty/speed claim.
 
+## Canonical Git fingerprints at BASE (Git blob SHA-1 OIDs, NOT raw file SHA-256)
+- `docs/11-checkpoint.md`: `745173adbd2ec58336d4901cfce7139ab86a98c7`
+- `docs/10-decisions-ledger.md`: `d47abc54aa3aa1826d6a0a3c67dbfcaf1853ae9e`
+- `docs/03-scope.md`: `4ef605c74632ece080b2650e37dd83a415b63310`
+- `docs/09-definition-of-done.md`: `160b3054db9ea1961308934b401488b838d24c3e`
+- `docs/04-architecture.md`: `3253e2f493e1a39a3a3c93e8be9bfea3336a6e46`
+- `docs/queue/work-orders/WORLD-01.md`: `4d312e110cd4adacc6858f8c1dea7ddd898f6799`
+These are Git object hashes at research baseline, NOT SHA-256 of raw file bytes. Future implementation Context Lock must compute true SHA-256 and rebase when canonical sources change.
+
 ## Research PR file inventory and truth
 - Expected 11 research-only docs: 8 new architecture/matrix/ADR-0026/API/test-matrix/benchmark/research WO/Evidence; 3 additive docs Architecture/Backlog/blocked WORLD-01 packet. **NO Checkpoint or implementation-registry modification in initial research PR**.
-- PR number, final HEAD, exact-head Docs Validation and Socket/SonarCloud results: **PENDING**.
+- [Research PR #160](https://github.com/KayzenRoot/stormline/pull/160), initial head `a35841a4d8091ca724edaa4dc3548356521cd40e` and [Docs Validation #43634445055](https://github.com/KayzenRoot/stormline/actions/runs/43634445055) **SUCCESS on initial exact HEAD**; initial Socket Security Project Report SUCCESS. This evidence update changes HEAD and demands **new exact-final-HEAD CI** before approval/merge.
 - Objective pt-BR documentary audit/merge SHA/main readback: **PENDING**.
 - **117 tests FUTURE / NOT EXECUTED**: no real generational handle code, memory/TSan/ASan/UBSan, entity destruction, data reserialize, WASM build, CPU p95/p99, archetype/sparse comparative benchmark or MCP security verification. No “millions of entities supported” declaration.
 - Risk LOW current docs; future ELEVATED ABA/after-free, untrusted schema migrations, concurrent access, persistent scene integrity and possible C++ plugin code. ADR-0026 PROPOSED, release class UNDECIDED and approved_adr=null.
