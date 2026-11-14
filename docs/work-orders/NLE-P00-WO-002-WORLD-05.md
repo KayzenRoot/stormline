@@ -1,7 +1,7 @@
 # Research Work Order — NLE-P00-WO-002-WORLD-05
 
 **2026-11-14 | Research #171 | Future coding issue #45 OPEN/BLOCKED**  
-**Status:** RESEARCH IN PROGRESS / DOCS ONLY | **ADR-0030 PROPOSED** | **Context Lock BASE main:** 6a52aef21150e815692b83a4060a994f46d835f9 (WORLD-04 research #168 PR #169 and checkpoint #170 merged).  
+**Status:** APPROVED/MERGED FOR RESEARCH DOCS ONLY (PR #172), NO CODE | **ADR-0030 PROPOSED** | **Context Lock BASE main:** 6a52aef21150e815692b83a4060a994f46d835f9 (WORLD-04 research #168 PR #169 and checkpoint #170 merged).  
 **Risk:** LOW documentation, future ELEVATED due to nondeterministic data, manual authoring loss, untrusted generator graph, large CPU/WFC costs, source corruption and cache/streaming races.
 
 ## OBJECTIVE
@@ -59,3 +59,6 @@ Main/canonical source drift => STALE and re-lock, failed CI/security, unlicensed
 
 ## CONTEXT LOCK
 Research BASE Git 6a52aef21150e815692b83a4060a994f46d835f9. Git blob SHA-1 object IDs are NOT raw source byte SHA-256. Before any future Zcode coding, owner-approved 1.0 Scope/DoD, ADR-0030, integrated WORLD-04+DATA-03 code and all owner contracts, exact ABI/source file inventory and raw SHA-256 context lock are mandatory.
+
+## Verified research PR #172 and same-WO correction receipts
+Research BASE 6a52aef21150e815692b83a4060a994f46d835f9, initial HEAD 2735772a2faa3830383ace314ae1533c7f2cc7da failed [Docs Validation #43640529671](https://github.com/KayzenRoot/stormline/actions/runs/43640529671) due escaped Markdown in 4 new docs. Same WO/PR Correction Delta removed escapes and documented failed CI. Audited final HEAD b2a1bb6c46ddf0e63ca2eebfa9c336adc305ab57 passed [Docs Validation #43640639332](https://github.com/KayzenRoot/stormline/actions/runs/43640639332) on exact final HEAD plus Socket Security/SonarCloud SUCCESS, 11 docs-only files, objective pt-BR audit APPROVED doc-only with no known HIGH/CRITICAL. Normal squash merged main 36e71c4e582da9086f19065993fe2165dfe7f656, Git readback. Separate same-WO checkpoint PR requires its own exact final HEAD CI/audit/merge/readback. 160 future golden/runtime/CPU/WASM/security/manual editing tests NOT EXECUTED, ADR-0030 PROPOSED and future #45 OPEN/BLOCKED.
