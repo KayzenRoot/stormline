@@ -600,7 +600,7 @@
       "catalog_acceptance": "Mesmo seed + versão produz resultado idêntico; edição manual preservada.",
       "id": "NLE-EXEC-WO-WORLD-05-001",
       "file": "docs/queue/work-orders/WORLD-05.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",

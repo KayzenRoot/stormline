@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-04` — Terrain & Environment, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #169:** `d0b5b6b259f67116fac63c7fa59460a629877814`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-04](evidence/NLE-P00-WO-002-WORLD-04.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-WORLD-05` — Procedural Generation Framework, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #172:** `36e71c4e582da9086f19065993fe2165dfe7f656`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-WORLD-05](evidence/NLE-P00-WO-002-WORLD-05.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -278,8 +278,18 @@
 - **All 148 FUTURE tests** TIL/LOD/MAT/EDT/BIO/WAT/SKY/SEC/INT/BEN **NOT EXECUTED**, no running terrain/biome/scene/editor/shader, no working water/cloud, no actual PHYS/Web/native/headless/hardware, visual golden, frame p95/p99 or superior performance evidence. ADR-0029 PROPOSED, release class UNDECIDED and mandatory WORLD-03+GFX-04 CODE absent. Future issue #44 not authorized.
 - **Research planning tally after this checkpoint**: **26 of 80 researched/documented modules (32.5%)**, **54 research pending**, including historical CORE-04 unresolved. All **80 coding packets** remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null and no runtime modules implemented.
 
-## 34. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-WORLD-05: **Procedural Generation Framework**, catalog_order=27 in canonical queue, next documentary research. Future code dependencies WORLD-04 and DATA-03 not implemented; historical CORE-04 research gap remains pending. No WORLD-05 research before independent checkpoint CI/audit/normal squash/main readback, no Zcode implementation authorization.
+## 34. WORLD-05 — Procedural Generation Framework (research APPROVED, documentation only)
+- [Research #171](https://github.com/KayzenRoot/stormline/issues/171), WO NLE-P00-WO-002-WORLD-05, **APPROVED DOCUMENTARY RESEARCH ONLY**. Future coding [issue #45](https://github.com/KayzenRoot/stormline/issues/45) remains OPEN/BLOCKED, no executor authorization.
+- [Research PR #172](https://github.com/KayzenRoot/stormline/pull/172): BASE main 6a52aef21150e815692b83a4060a994f46d835f9, initial HEAD 2735772a2faa3830383ace314ae1533c7f2cc7da failed [Docs Validation #43640529671](https://github.com/KayzenRoot/stormline/actions/runs/43640529671) due to escaped Markdown markers in 4 docs. Correction Delta same WO/PR fixed them and logged failure in Evidence Bundle. Audited final HEAD b2a1bb6c46ddf0e63ca2eebfa9c336adc305ab57 passed [Docs Validation #43640639332](https://github.com/KayzenRoot/stormline/actions/runs/43640639332) at exact final HEAD with Socket Security PR Alerts/Project Report and SonarCloud Code Analysis SUCCESS. Objective pt-BR audit approved docs only, 11 docs files, no known HIGH/CRITICAL in changed scope, normal squash merged main 36e71c4e582da9086f19065993fe2165dfe7f656 and Git readback confirmed. Same-WO checkpoint reconciliation is a separate PR with independent exact-HEAD validation/audit.
+- [Generator architecture](architecture/world-05-procedural-generation.md), [technology/rights](research/world-05-procedural-technology-license-matrix.md), [ADR-0030 PROPOSED](adr/0030-world-05-versioned-deterministic-nondestructive-generation.md), [typed API](contracts/world-05-generation-api.md), [160 FUTURE cases](testing/world-05-acceptance-matrix.md), [deterministic byte/golden benchmark](research/world-05-determinism-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-WORLD-05.md).
+- Original typed bounded DAG with stable GraphGuid/NodeGuid/AlgorithmId+Version+source asset hash, domain-separated MasterSeed128 (project/world/region/cell/patch/sample/counter) independent of worker and streaming order, canonical CPU numeric/profile/endianness golden proof future, GPU noncanonical preview until proved equal. Globally signed coordinates and halo/region solver for seams; typed noise/field/mask/biome/vegetation/geometry/tile recipe proposals, WFC bounded solver contradictory exit and resource caps. DATA-04 artist manual overlays, deletion suppressions and three-way old-generator/new-generator/manual conflicts must never be overwritten silently; source CAS/journal/undo, DATA-05 asset cook/content hash and WORLD-03 staged publish, WORLD-04 authored terrain and WORLD-02 prefab owners, GFX/PHYS/NET authority preserved. SCDI optional PROVE-OR-DROP.
+- No adopted libraries or assets: FastNoiseLite MIT; OpenSimplex2 most files CC0 and some Unlicense with per-file rights; WFC MIT software but independently licensed samples; Random123 BSD-style optional exact pinned LICENSE gate; Unreal PCG and SideFX Houdini PDG **proprietary design references only**. No generated world, used binary, source art import, output byte hash, runtime algorithm or benchmark.
+- **All 160 FUTURE tests** SEE/DAG/NUM/CEL/ALG/WFC/SRC/CAC/SEC/INT/BEN **NOT EXECUTED**, no C++/WASM/Linux/macOS/Windows/GPU build, real determinism golden comparison, canvas/terrain data, source overlay persistence/rebase, cache/PHYS/NET/stream integration or CPU p95/p99/memory proof. ADR-0030 PROPOSED, release class UNDECIDED; mandatory WORLD-04/DATA-03 CODE absent; coding #45 BLOCKED.
+- **Research tally after this checkpoint:** **27 / 80 modules research documented (33.75%)**, **53 RESEARCH_PENDING** including historical CORE-04 gap unresolved. All 80 implementation work orders `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`; no implemented runtime modules.
+
+## 35. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-SIM-01: **Physics 2D**, catalog_order=28 canonical next documentary research, future coding dependencies WORLD-01 and TWO-01 unimplemented. Independent checkpoint exact HEAD CI/audit/normal squash/main readback is required before starting this next research; historical CORE-04 gap remains explicit. No coding unlock.
+
 
 
 
