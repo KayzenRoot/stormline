@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-06`, but implementation details and release class are not yet approved.
 
+## RESEARCH CONTEXT (NOT EXECUTOR READY)
+Research [GFX-06 architecture](../../architecture/gfx-06-lighting-shadows.md), [technology/license matrix](../../research/gfx-06-lighting-technology-matrix.md), [ADR-0019 PROPOSED](../../adr/0019-gfx-06-adaptive-lighting-policy.md), [typed light/GI/shadow API](../../contracts/gfx-06-lighting-api.md), [68 FUTURE tests](../../testing/gfx-06-acceptance-matrix.md), [competitive benchmark protocol](../../research/gfx-06-competitive-benchmark-protocol.md), [research Work Order](../../work-orders/NLE-P00-WO-002-GFX-06.md) and [research evidence](../../evidence/NLE-P00-WO-002-GFX-06.md) are **proposals only**, not approved executable contracts or an implemented engine. Exact versions, C++ paths, hardware budgets, release class, shader/ABI and dependency code receipts TBD. Vendor NVIDIA RTXDI/RTXGI SDK is **not MIT**. Future #34 and all 80 implementation WOs remain BLOCKED/`executor_ready=false`.
+
 ## DEPENDENCIES
 `GFX-03`, `GFX-05`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 
