@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `DATA-04`, but implementation details and release class are not yet approved.
 
+## RESEARCH-ONLY CONTEXT (NOT EXECUTOR READY)
+The [DATA-04 architecture](../../architecture/data-04-serialization-scene-format.md), [technology matrix](../../research/data-04-scene-technology-matrix.md), [ADR-0012 PROPOSED](../../adr/0012-data-04-scene-schema-policy.md), [semantic API](../../contracts/data-04-scene-api.md), [future tests](../../testing/data-04-acceptance-matrix.md) and [research WO](../../work-orders/NLE-P00-WO-002-DATA-04.md) are planning proposals. They do **not** approve C++ libraries, production schema or migrations. The future implementation ticket #27 and all 80 WOs stay BLOCKED and executor_ready=false.
+
 ## DEPENDENCIES
 `CORE-05`, `DATA-02`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 

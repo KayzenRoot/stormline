@@ -10,7 +10,7 @@ These are **Git blob object IDs, NOT SHA-256 of bytes**:
 - Decisions Ledger: d47abc54aa3aa1826d6a0a3c67dbfcaf1853ae9e
 - Scope: 4ef605c74632ece080b2650e37dd83a415b63310
 - DoD: 160b3054db9ea1961308934b401488b838d24c3e
-- Architecture: inspect precise baseline blob before future code; see PR readback
+- Architecture: 578d87b6acf6fd19423b206527ca2d0abfa8f4f3
 - Requirements: 14c84b5cd7334b81f63e6a2ba8a07bef73fdee7b
 - DATA-04 queued future WO: fe58229885f8e44110dba6acbfc1228a72e07eee
 - Registry: d8e347eae50818bb45cbd01624c67d766da8fd8e
