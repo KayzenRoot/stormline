@@ -3,6 +3,7 @@
 **Parent:** NLE-P00-WO-002 | **Module:** CORE-02 Memory & Allocators | **Issue:** #10  
 **Risk:** LOW (docs), future implementation STANDARD/ELEVATED.  
 **Context Lock base SHA:** 98738969c970c2f04cfaa35c84da86ab41688744
+**Research result:** APPROVED / MERGED (documentation only, PR #11). ADR-0004 remains PROPOSED.
 
 ## OBJECTIVE
 Research and specify a measurable cross-platform memory management strategy and candidate unique technology for Stormline's C++ engine, without programming or selecting a production allocator prematurely.

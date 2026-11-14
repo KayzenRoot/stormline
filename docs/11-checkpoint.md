@@ -2,7 +2,7 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-01` — **APPROVED / MERGED** (plataforma e ciclo de vida, não código).  
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-CORE-02` — **APPROVED / MERGED** (memória e alocadores, sem código).  
 **Main SHA comprovado após o merge da PR #3:** `e41274bb841094630ba71843b0876bb5d79370f4`.  
 **Evidence Bundle:** [NLE-P00-WO-001-EXT-001](evidence/NLE-P00-WO-001-EXT-001.md).
 
@@ -53,5 +53,13 @@
 - Windows/Linux/macOS no Editor e em exports, com Apple Silicon; Intel/minimum OS/assinaturas e render Metal/Vulkan aguardam ADRs de plataforma/gráficos. A spec não demonstra compilação nem desempenho.
 - NLE-P00-WO-002 é programa de pesquisa modular ainda em andamento; cada próximo módulo receberá sua WO filha sequencial.
 
-## 7. Próximo incremento
-`NLE-P00-WO-002-CORE-02`: avaliação técnica de memória/alocadores, após a reconciliação objetiva deste checkpoint. **PLANNED / NOT STARTED**. Não promover propostas nem iniciar implementação sem provas e ADRs.
+## 7. Pesquisa tecnológica CORE-02 concluída documentalmente
+- Issue #10, WO filha `NLE-P00-WO-002-CORE-02`, memória/alocadores/budgets; pesquisa e ADR-0004 entregues, **sem código**.
+- PR #11: base `98738969c970c2f04cfaa35c84da86ab41688744`, HEAD auditado `25bad2fedc56e7e66e42ceaae3922d0711bf1b16`; CI [run 43592434642](https://github.com/KayzenRoot/stormline/actions/runs/43592434642) docs-validation SUCCESS.
+- Squash merge PR #11: `dabc066897358e95fa92c8624441cc6b0f4a83f0`, confirmado por leitura da main.
+- [Evidence Bundle CORE-02](evidence/NLE-P00-WO-002-CORE-02.md) documenta limites de evidência e próximos gates.
+- Tecnologias candidatas: C++20 `std::pmr`, sistema como baseline, mimalloc 3.x e rpmalloc para A/B, Tracy/sanitizers para profiling; SMF como hipótese **não comprovada**.
+- Nenhuma alocação real foi substituída. Sem benchmark, binários, testes de GPU/OS ou melhorias provadas. ADR-0004 mantém status PROPOSED.
+
+## 8. Próximo incremento
+`NLE-P00-WO-002-CORE-03`: pesquisa técnica do scheduler/jobs, concorrência e work stealing, depois de auditada a reconciliação do CORE-02. **PLANNED / NOT STARTED**. Não iniciar implementação nem avançar sem evidências.
