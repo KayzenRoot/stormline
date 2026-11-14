@@ -1,7 +1,7 @@
 # Evidence Bundle — NLE-P00-WO-002-GFX-04
 
 **Date:** 2026-11-14 | **Research issue:** #132 | **Future code issue:** #32 BLOCKED  
-**State:** RESEARCH IN PROGRESS DOCS ONLY. No C++ geometry, meshoptimizer runtime, GPU visibility, shader, HLOD tool, benchmark or deployment.
+**State:** RESEARCH DOCS UNDER FINAL AUDIT. No C++ geometry, meshoptimizer runtime, GPU visibility, shader, HLOD tool, benchmark or deployment.
 **BASE main:** `563f5dff168a688f5d03d959685024dd374de4c9`; **research branch:** `docs/NLE-P00-WO-002-GFX-04-geometry-research`. LOW doc risk; future ELEVATED incorrect visibility, GPU memory, geometry content rights and streaming.
 
 ## Canonical Context Lock: live GitHub blob fingerprints
@@ -27,8 +27,8 @@ These are **Git object blob hashes, NOT SHA-256 file content hashes**. Before ac
 - SVCG optional prove-or-drop with hard correctness before perf, no innovation performance claims.
 
 ## Observed checks / evidence (populate with exact GitHub results only)
-- Research docs-validation exact HEAD: PENDING.
-- PR/diff objective pt-BR audit: PENDING.
+- First research HEAD `8565e7bb7506dbf5ff2643eea8f2b8ff0875fa0d` passed [Docs Validation #43614101059](https://github.com/KayzenRoot/stormline/actions/runs/43614101059) **SUCCESS** (Source Pack links, catalog 80 modules/DAG, registry, blocked selector); after this evidence update exact new HEAD CI required.
+- [Research PR #133](https://github.com/KayzenRoot/stormline/pull/133) initial scope audit: 10 documentation files under `docs/`, +399 / 0 deleted; no C++/SDK/compiled mesh, GPU test, workflow change or apparent secret. Registry readback shows 80/80 BLOCKED and zero executor_ready; implementation issue #32 remains PLANNING/BLOCKED. Final pt-BR audit and exact HEAD: PENDING.
 - Native/real GEO-001..036, shader build, C++ compiler, meshoptimizer codec, GPU culling, Windows/Linux/macOS/Web browser, fuzz, benchmark frame-time p95/p99 and VRAM: **NOT RUN**.
 - Research squash merge readback, separate same-WO checkpoint PR: PENDING.
 
