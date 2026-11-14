@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-02` — Physics 3D, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #178:** `351d1bd60b2922297691ffcfaff3547d9a888eff`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-02](evidence/NLE-P00-WO-002-SIM-02.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-03` — Character Controller & Movement, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #181:** `b1eef0a603683d1b876ac9d029b7d05e3d2b9a58`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-03](evidence/NLE-P00-WO-002-SIM-03.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -305,15 +305,13 @@
 - **All 170 FUTURE tests** IDN/UNI/SHP/BOD/BRD/CTK/CON/CCD/TER/DET/SEC/INT/BEN **NOT EXECUTED**: no actual 3D physics engine, Win/Linux/macOS/ARM/WASM/headless binary, stream collider, real joint/CCD/constraint state, rollback/snapshot, security fuzz, CPU p95/p99 or memory benchmark. ADR-0032 PROPOSED, release class UNDECIDED, #47 BLOCKED.
 - **Research tally after this checkpoint:** **29/80 documented (36.25%)**, **51 RESEARCH_PENDING** including historical CORE-04 gap unresolved. All 80 coding WOs BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS/executor_ready=false, approved_adr=null; zero runtime engine implemented.
 
-## 37. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-SIM-03: **Character Controller & Movement**, catalog_order=30 canonical next documentary research. Future code prerequisites SIM-01+SIM-02 runtime are NOT implemented; historical CORE-04 research pending remains explicit. Do not start SIM-03 before checkpoint own exact final HEAD CI/audit/squash/main readback; no coding unlock.
+## 37. SIM-03 — Character Controller & Movement (research APPROVED, documentation only)
+- [Research issue #180](https://github.com/KayzenRoot/stormline/issues/180), WO `NLE-P00-WO-002-SIM-03`, **APPROVED DOCUMENTARY RESEARCH ONLY**. Future coding [issue #48](https://github.com/KayzenRoot/stormline/issues/48) remains OPEN/BLOCKED; SIM-01+SIM-02 physics code and runtime integration do not exist.
+- [Research PR #181](https://github.com/KayzenRoot/stormline/pull/181): BASE main `c8ee0cd07ab30cd207f7ea9b7aedfe06b09b3d64`, final audited HEAD `c0cafa09ad29ed9fc5ed9ffad0fec33ba26b14d6`. Initial Docs Validation [run 43645409527](https://github.com/KayzenRoot/stormline/actions/runs/43645409527) SUCCESS, Evidence Bundle changed HEAD, final exact-HEAD [Docs Validation run 43645494686](https://github.com/KayzenRoot/stormline/actions/runs/43645494686) SUCCESS (source/link, catalog DAG, registry, blocked Zcode selector). Objective pt-BR audit APPROVED documentary-only scope in PR comment; no known HIGH/CRITICAL documentary scoped defect. SonarCloud/Socket for this exact HEAD **NOT VERIFIED**. Eight documentation files, normal squash merged main `b1eef0a603683d1b876ac9d029b7d05e3d2b9a58`; readback verified. This checkpoint reconciliation requires its own separate exact-HEAD CI/audit.
+- [Architecture](architecture/sim-03-character-controller-movement.md), [technology/licensing](research/sim-03-character-controller-technology-license-matrix.md), [ADR-0033 PROPOSED](adr/0033-sim-03-authoritative-character-motor-policy.md), [typed semantic API](contracts/sim-03-character-motor-api.md), [72 future cases](testing/sim-03-acceptance-matrix.md), [reproducible benchmark plan](research/sim-03-character-motion-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-SIM-03.md).
+- Proposal: Stormline-owned, generation-scoped, unit-typed 2D/3D kinematic character motor and fixed-TickId intents; physics collision query/shape casts owned by SIM-01/02; safe slopes/stairs/walls/moving platforms/ground snapping, jump buffer/coyote integer-ticks, streaming ground readiness and origin epoch validation. Render/animation, AI pathing, input mapping, NET authority and GAME mechanics stay at their own owner. Jolt CharacterVirtual MIT leading 3D candidate, Box2D experimental character mover 2D candidate, Rapier comparison only, no package, backend selection or runtime.
+- **All 72 future tests NOT EXECUTED**: no character motor, integrated physics, Windows/Linux/macOS/Web/headless build, sanitizer runs, contact/replay, security fuzz, CPU p95/p99, user playtest or gameplay superiority evidence. The ADR-0033 and release class remain PROPOSED/UNDECIDED.
+- **Research tally after this checkpoint reconciliation:** **30 / 80 modules documented (37.5%)**, **50 RESEARCH_PENDING**, including historical CORE-04 gap unresolved. **0 / 80 runtime modules implemented**; all 80 implementation packets `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`.
 
-
-
-
-
-
-
-
-
-
+## 38. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+`NLE-P00-WO-002-SIM-04`: **Skeletal Animation & Motion**, next catalog-order documentary research. No SIM-04 issue/PR/implementation until SIM-03 checkpoint PR has exact-HEAD CI/audit/squash/main readback. Future code requires preceding runtime modules. No authorization to unlock Zcode coding.
