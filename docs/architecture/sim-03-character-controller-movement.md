@@ -14,7 +14,7 @@ Never claim perfect or superior gameplay feel without player testing. Numerical 
 |---|---|---|
 | CORE-04 | fixed monotonic simulation time, integer tick and pause/step concepts | independent frame-timing loop or new clock |
 | CORE-05 | validated global/local transforms, units, coordinates, origin epoch | second global coordinate system |
-| CORE-03/06 | jobs, memory budgets, tracing, errors and profiling (subject to canonical contract) | independent allocator, unbounded event log or logging core |
+| CORE-02/03/06 | allocators and memory budgets (CORE-02), jobs (CORE-03), logs/tracing/profiling (CORE-06) | independent allocator, scheduler, unbounded event log or logging core |
 | SIM-01 | 2D collision world, shape casts, bodies, contact snapshots and collision filters | another 2D physics solver |
 | SIM-02 | 3D shape casts, body/constraint state, safe pre/post-step barriers | another 3D solver or bypass of collision readiness |
 | WORLD-01/02 | ECS generations, prefab identity, scene source, revision and component lifecycle | separate entity registry or scene store |
