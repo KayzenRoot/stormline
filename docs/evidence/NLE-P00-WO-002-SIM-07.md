@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-07 Vehicles & Flight Research
 
-**STATUS: RESEARCH PR #193 DRAFT AND INITIAL DOCS CI SUCCESS; FINAL-HEAD CI/AUDIT/MERGE AND CHECKPOINT PENDING. NO ENGINE IMPLEMENTATION.**  
+**STATUS: RESEARCH PR #193 APPROVED/SQUASH-MERGED; SEPARATE CHECKPOINT PR PENDING OWN CI/AUDIT. NO ENGINE IMPLEMENTATION.**  
 **Date:** 2026-11-14 | Research [#192](https://github.com/KayzenRoot/stormline/issues/192) | Future implementation [#57](https://github.com/KayzenRoot/stormline/issues/57) OPEN/BLOCKED.  
 **BASE main:** `bf5d2fb497985344a8d1fea5dc1631d6f17505c4` | Research branch `docs/NLE-P00-WO-002-SIM-07-vehicles-flight-research`.
 
@@ -23,14 +23,15 @@ No SDK downloaded/compiled, Jolt/Chrono/JSBSim/Bullet code, flight scripts, test
 | Gate | Observed |
 |---|---|
 | Research issue and branch | #192 created, branch from main base SHA |
-| Research PR/diff and initial HEAD | [PR #193](https://github.com/KayzenRoot/stormline/pull/193) Draft, base `bf5d2fb497985344a8d1fea5dc1631d6f17505c4`, initial HEAD `72f4b9bef4a9f4029e85bc9ad566df58c41a97f5`, exactly 8 new Markdown docs, no runtime/registry changes; final HEAD after this Evidence revision pending. |
-| Initial Docs Validation (NOT FINAL after this revision) | [Run #43654221241](https://github.com/KayzenRoot/stormline/actions/runs/43654221241) SUCCESS on initial HEAD `72f4b9bef4a9f4029e85bc9ad566df58c41a97f5`, job #132629091147: Source Pack/link, dependency DAG, WO registry and blocked Zcode selector all SUCCESS. This Evidence Bundle update changes HEAD, so require repeat CI for final exact HEAD. |
-| Other SonarCloud/Socket/security checks at exact HEAD | NOT VERIFIED |
+| Research PR/base/final HEAD | [PR #193](https://github.com/KayzenRoot/stormline/pull/193) MERGED, base `bf5d2fb497985344a8d1fea5dc1631d6f17505c4`, final audited HEAD `623b20d1471d44067b2ec391b06bd57a2cfc1171`, eight new Markdown-only files, no runtime/registry edits. |
+| Initial Docs Validation (NOT FINAL after this revision) | [Run #43654221241](https://github.com/KayzenRoot/stormline/actions/runs/43654221241) SUCCESS on initial HEAD `72f4b9bef4a9f4029e85bc9ad566df58c41a97f5`, job #132629091147: Source Pack/link, dependency DAG, WO registry and blocked Zcode selector all SUCCESS. This was initial CI; final exact-HEAD run also passed independently, as recorded below. |
+| Final exact-HEAD Docs Validation | [Run #43654252714](https://github.com/KayzenRoot/stormline/actions/runs/43654252714) SUCCESS at `623b20d1471d44067b2ec391b06bd57a2cfc1171`, job #132629190633: Source Pack/link, taxonomy/dependency DAG, registry and Zcode selector all SUCCESS. | 
+| Other SonarCloud/Socket/security checks at exact HEAD | NOT VERIFIED for final head (not PASS). |
 | Build/runtime Windows/Linux/macOS/Web/headless | NOT EXECUTED |
 | 144 prospect runtime tests, static/flight/NET/security fuzz/sanitizer | FUTURE / NOT EXECUTED |
-| Objective pt-BR documentary audit | PENDING |
-| Research PR normal squash/readback | PENDING |
-| Separate checkpoint PR CI/audit/squash/readback | PENDING |
+| Objective pt-BR documentary audit | APPROVED documentary-only [comment #6886017641](https://github.com/KayzenRoot/stormline/pull/193#issuecomment-6886017641) after final-head CI, no known HIGH/CRITICAL documentary-scoped defect; no runtime tests. |
+| Research PR normal squash/readback | PR #193 normal squash MERGED main `9617a05371b3426197eafde445460f2844b4c9cc`, main SHA readback verified. |
+| Separate checkpoint PR CI/audit/squash/readback | PENDING at the time of this draft; required separate CI on exact head, audit and normal squash/main readback. |
 
 ## 4. Risk ledger and security caveats
 FUTURE HIGH concerns: double-integration/PHYS divergence, untrusted input and seat replay, unbounded spring force/rotor torque, airfoil table NaN/oversize, XML external entities/DoS, stale ground-water-wind sampling/OriginEpoch, network client physics authority, hot reload UAF, wrong world status and LGPL packaging violation, unlicensed reference aircraft content. Proposed mitigation: immutable source schema, finite bounds/units, GAME role, net anti-cheat, SIM-02 sole authority, source/lease versioning, parser fuzz, ASan/TSan and repeatable numerical traces, legal review. None of these controls have been implemented or executed in Stormline.

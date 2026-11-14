@@ -864,7 +864,7 @@
       "catalog_acceptance": "Original drivable tank, truck and aircraft/rotorcraft reference tests with reproducible physics and network timing.",
       "id": "NLE-EXEC-WO-SIM-07-001",
       "file": "docs/queue/work-orders/SIM-07.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
