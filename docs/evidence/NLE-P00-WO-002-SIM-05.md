@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-SIM-05 Navigation & Behavior Research
 
-**STATUS: RESEARCH BRANCH IN PROGRESS; PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #187 DRAFT; INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE.**  
 **2026-11-14 | Research [#186](https://github.com/KayzenRoot/stormline/issues/186) | future coding [#50](https://github.com/KayzenRoot/stormline/issues/50) OPEN/BLOCKED.**  
 **BASE main:** e6838dbdb5911acf4f0b67ce744a6c23a9396a22. **Research branch:** docs/NLE-P00-WO-002-SIM-05-navigation-behavior-research.
 
@@ -26,8 +26,8 @@ Prior SIM-04 research PR #184 merged and checkpoint PR #185 merged, main SHA bas
 |---|---|
 | Issue and branch | #186 opened, dedicated research branch from e6838dbd |
 | Source hierarchy and upstream modules | README/Scope/DoD/Ledger/Architecture/Requirements, WORLD-03, SIM-02/03, CORE-04 read |
-| PR, exact final HEAD and changed files | PENDING |
-| Docs Validation (exact final HEAD) | NOT VERIFIED |
+| Research PR and initial HEAD | [PR #187](https://github.com/KayzenRoot/stormline/pull/187) DRAFT; initial HEAD `17a9ffd371f3bfc76a79ab5a48f9cb01cb909979`, eight new Markdown docs, no runtime/registry edit |
+| Initial Docs Validation (not final after this revision) | [Run #43648850190](https://github.com/KayzenRoot/stormline/actions/runs/43648850190) SUCCESS on initial HEAD `17a9ffd371f3bfc76a79ab5a48f9cb01cb909979`, job #132612580436, Source Pack/local links, catalog DAG, registry and Zcode blocked-selector all SUCCESS. This Evidence Bundle revision changes HEAD, so a new exact-head CI gate is necessary. |
 | Sonar/Socket other security CI | NOT VERIFIED |
 | Technical/C++/WASM/headless build, nav/AI unit/integration tests | NOT RUN |
 | 112 future acceptance cases, security fuzz, ASan/TSan, benchmarks | NOT EXECUTED |
