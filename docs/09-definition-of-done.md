@@ -21,7 +21,7 @@ Status: PROPOSED para o planejamento P00
 6. Configurações de GitHub About, branch protections, private vulnerability reporting permanecem NOT VERIFIED enquanto o conector não suportar leitura/alteração.
 
 ## Critérios propostos da extensão de catálogo NLE-P00-WO-001-EXT-002
-- Inventário de módulos 2D, 2.5D, 3D, web, gráfico, áudio, VFX, gameplay, editor, multiplayer, ferramentas e produto comercial.
+- Inventário de módulos 2D, 2.5D, 3D, Windows/Linux/macOS, web, gráfico, áudio, VFX, gameplay, editor, multiplayer, ferramentas e produto comercial.
 - IDs únicos, dependências válidas sem ciclos e testes conceituais de aceitação por módulo.
 - Contrato de comando comum a UI/CLI/MCP, autorização, schemas, transações, validação e compatibilidade MCP versionada.
 - Conceito **No MVP**: marcos internos válidos, sem disponibilização comercial até atingir DoD global aprovado.
