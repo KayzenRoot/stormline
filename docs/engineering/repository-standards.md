@@ -9,15 +9,15 @@ Work Order: NLE-P00-WO-001-EXT-001 | Status: PROPOSED until audited/merged.
 - Public-facing material distinguishes *vision*, *planned capability*, *proposal*, and *verified implementation*.
 
 ## Suggested GitHub About metadata (NOT APPLIED)
-**Description:** \`Stormline is NexLabs Technology's original high-performance 3D engine initiative, focused on real-time graphics, VFX, spatial audio and efficient worlds. Planning phase.\`
+**Description:** `Stormline is NexLabs Technology's original high-performance 3D engine initiative, focused on real-time graphics, VFX, spatial audio and efficient worlds. Planning phase.`
 
-**Topics (candidates):** \`game-engine\`, \`3d-graphics\`, \`rendering\`, \`engine-development\`, \`nexlabs\`, \`research\`.
+**Topics (candidates):** `game-engine`, `3d-graphics`, `rendering`, `engine-development`, `nexlabs`, `research`.
 
 **Website:** leave unset until official destination is owner-approved and verified. Do not advertise a download or public product site.
 
 ## Recommended settings (NOT VERIFIED OR APPLIED)
 - Default branch main; allow pull requests and squash merge, disallow force-push/deletions.
-- Require PR and the existing \`docs-validation\` check **after** verifying exact check context on main.
+- Require PR and the existing `docs-validation` check **after** verifying exact check context on main.
 - Required human approvals: **0**; no mandatory outside reviewer or CodeRabbit.
 - Prefer linear history if compatible with chosen merge strategy; no bypass of existing rules.
 - Allow free security scanning and dependency monitoring for public repositories where eligible.
@@ -32,4 +32,4 @@ Work Order: NLE-P00-WO-001-EXT-001 | Status: PROPOSED until audited/merged.
 - Source Pack before implementation, one WO per PR, Evidence Bundle and post-merge checkpoint reconciliation.
 
 ## Validation
-Verify links, file presence, README claims, issue templates, PR template, GitHub CI run and exact SHAs. If a setting is inaccessible, report \`NOT VERIFIED\` rather than claiming \`CONFIGURED\`.
+Verify links, file presence, README claims, issue templates, PR template, GitHub CI run and exact SHAs. If a setting is inaccessible, report `NOT VERIFIED` rather than claiming `CONFIGURED`.
