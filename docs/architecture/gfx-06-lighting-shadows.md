@@ -83,7 +83,7 @@ Owner-approved release classes/DoD, exact API and C++ paths, GFX-03 + GFX-05 dep
 - Epic Virtual Shadow Maps (paged shadows; moving caster invalidation, pool pressure): https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-shadow-maps-in-unreal-engine
 - GGG official *Rendering Path of Exile 2*, Alexander Sannikov (2023): https://www.youtube.com/watch?v=TrHHTQqmAaM
 - Sannikov Radiance Cascades working-paper source (not a commercial license): https://github.com/Raikiri/RadianceCascadesPaper
-- GGG 2026 ExileCon *The Engine of Path of Exile* (official live recording): https://www.youtube.com/live/8CEAhCzm
+- GGG 2026 ExileCon *The Engine of Path of Exile* (community recording index; official recording linked there when available): https://poe2page.com/poe2/guides/exilecon-2026/
 - AMD FidelityFX Brixelizer/GI (D3D12 and Vulkan SDK): https://gpuopen.com/fidelityfx-brixelizer/
 - AMD FidelityFX SDK terms: https://gpuopen.com/manuals/fidelityfx_sdk/getting-started/
 - Vulkan RT extension/AS/ray-query documentation: https://docs.vulkan.org/guide/latest/extensions/ray_tracing.html
