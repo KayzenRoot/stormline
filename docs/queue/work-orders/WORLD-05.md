@@ -8,6 +8,9 @@ Deliver the first **approved**, independently testable implementation increment 
 ## CONTEXT
 Stormline is a planned original 2D/2.5D/3D/Web game engine, Windows/Linux/macOS editor+export, human and MCP authoring, no public MVP. This draft is **not** authorization to code.
 
+## RESEARCH CONTEXT ONLY (NOT EXECUTOR READY)
+[Architecture](../../architecture/world-05-procedural-generation.md), [technology/rights matrix](../../research/world-05-procedural-technology-license-matrix.md), [ADR-0030 PROPOSED](../../adr/0030-world-05-versioned-deterministic-nondestructive-generation.md), [typed Graph/Recipe API](../../contracts/world-05-generation-api.md), [160 FUTURE NOT EXECUTED tests](../../testing/world-05-acceptance-matrix.md), [canonical golden corpus benchmark](../../research/world-05-determinism-benchmark-protocol.md), [research WO](../../work-orders/NLE-P00-WO-002-WORLD-05.md), [Evidence Bundle](../../evidence/NLE-P00-WO-002-WORLD-05.md) are RESEARCH ONLY, not approved generator implementation or actual byte-deterministic proof. Stable MasterSeed128 and graph/algorithm/asset/source/numeric/region versions define full recipe. CPU golden proof vs Web/WASM/GPU (preview noncanonical) mandatory; bounded WFC may return contradiction, no infinite solver guarantees; generated proposals preserve DATA-04 authored overrides and suppressed/deleted tree instance IDs through typed three-way conflict. FastNoiseLite MIT, OpenSimplex2 CC0/Unlicense, WFC MIT (example sample art distinct), Random123 BSD-style candidates only; Unreal PCG and Houdini PDG proprietary design references. WORLD-04+DATA-03 code absent, CORE-04 historical research gap pending; coding #45 and all 80 code WOs **BLOCKED/executor_ready=false**.
+
 ## DEPENDENCIES
 `WORLD-04`, `DATA-03`. All mandatory predecessor WOs must be APPROVED/MERGED with evidence before activation.
 
