@@ -9,6 +9,8 @@
 Implement an independently verifiable, production-grade first necessary increment for **Time & Simulation Clock** after detailed technology architecture has been approved. Current candidate capability: Tempo real, tick fixo, interpolação, pausa, stepping, replay determinístico onde exigido.
 
 ## CONTEXT
+Research-only prerequisites (do not lift this BLOCKED status): [CORE-04 clock architecture](../../architecture/core-04-time-simulation.md), [matrix](../../research/core-04-technology-matrix.md), [ADR-0006 PROPOSED](../../adr/0006-core-04-time-policy.md), and [research WO](../../work-orders/NLE-P00-WO-002-CORE-04.md). These are not approved executable API/file/test contracts.
+
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `CORE-04`, but implementation details and release class are not yet approved.
 
 ## DEPENDENCIES
