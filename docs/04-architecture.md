@@ -32,5 +32,8 @@ A direção preferencial de pesquisa é C++20 + SDL3 + CMake Presets/Ninja, com 
 ## CORE-02 — Memory & Allocators (pesquisa PROPOSTA)
 Arquitetura de memória C++20 `std::pmr` com ownership, domains e budgets versionados; comparadores `malloc/new`, mimalloc e rpmalloc antes de qualquer substituição global. Hipótese de inovação `Stormline Memory Fabric` restrita a políticas e diagnósticos mensuráveis, não um malloc reinventado. Ver [CORE-02](architecture/core-02-memory-allocators.md), [matriz](research/core-02-memory-technology-matrix.md), [ADR-0004](adr/0004-core-02-memory-policy.md). GPU VRAM pertence ao módulo GFX-03. Nenhuma tecnologia de produção aprovada sem benchmark.
 
+## CORE-03 — Jobs & Concurrency (proposta de pesquisa)
+Scheduler de tarefas, execução paralela e work stealing com contratos de duração/cancelamento de jobs, afinidades, deterministic commit e quotas para hardware de poucos núcleos. Candidatos: C++20 `std::jthread`, Taskflow, enkiTS e oneTBB; avaliar Stormline Frame-Aware Scheduler somente se superioridade funcional/operacional for demonstrada. [Spec](architecture/core-03-concurrency-jobs.md), [matriz](research/core-03-technology-matrix.md), [ADR-0005](adr/0005-core-03-jobs-concurrency.md). Sem código ou benchmark.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
