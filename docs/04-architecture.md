@@ -35,5 +35,8 @@ Arquitetura de memória C++20 `std::pmr` com ownership, domains e budgets versio
 ## CORE-03 — Jobs & Concurrency (proposta de pesquisa)
 Scheduler de tarefas, execução paralela e work stealing com contratos de duração/cancelamento de jobs, afinidades, deterministic commit e quotas para hardware de poucos núcleos. Candidatos: C++20 `std::jthread`, Taskflow, enkiTS e oneTBB; avaliar Stormline Frame-Aware Scheduler somente se superioridade funcional/operacional for demonstrada. [Spec](architecture/core-03-concurrency-jobs.md), [matriz](research/core-03-technology-matrix.md), [ADR-0005](adr/0005-core-03-jobs-concurrency.md). Sem código ou benchmark.
 
+## CORE-04 — Time & Simulation Clock (research proposal)
+Monotonic C++20 steady_clock adapter with injected fake clock, rational integer fixed tick timeline, explicit pause/single-step/interpolation and bounded catch-up policies for offline/server modes. Tick ordering and numeric physics determinism are separate obligations. [Architecture](architecture/core-04-time-simulation.md), [technology matrix](research/core-04-technology-matrix.md), [ADR-0006 PROPOSED](adr/0006-core-04-time-policy.md). No implementation or benchmark.
+
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
