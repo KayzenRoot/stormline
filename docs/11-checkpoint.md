@@ -2,9 +2,9 @@
 
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
-**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-01` — Physics 2D, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #175:** `dabbec4840bf43885f884a6c6a1fd3bc5bac4048`.  
-**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-01](evidence/NLE-P00-WO-002-SIM-01.md).
+**Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-SIM-02` — Physics 3D, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
+**Main SHA comprovado após o merge da PR #178:** `351d1bd60b2922297691ffcfaff3547d9a888eff`.  
+**Evidence Bundle mais recente:** [NLE-P00-WO-002-SIM-02](evidence/NLE-P00-WO-002-SIM-02.md).
 
 ## 1. Fundação previamente aprovada
 - `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
@@ -296,8 +296,18 @@
 - **All 159 future tests** IDN/UNT/BOD/SHP/EVT/QRY/CCD/JNT/TIM/INT/SEC/BEN **NOT EXECUTED**: no C++/WASM native binaries, headless physics, CCD/contacts, world stream source, stability/stack/joint tests, deterministic replay golden, memory/CPU p95/p99 or security fuzz. ADR-0031 PROPOSED, release class UNDECIDED and mandatory WORLD-01+TWO-01 CODE absent, issue #46 BLOCKED.
 - Registry after this checkpoint: **28/80 research modules documented (35%)**, **52 research pending** including historic CORE-04 gap. **All 80 coding WOs** remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS/executor_ready=false, approved_adr=null, zero engine implemented.
 
-## 36. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-NLE-P00-WO-002-SIM-02: **Physics 3D**, catalog_order=29 canonical next documentary research. Future code prerequisites WORLD-02 and CORE-03 not integrated; historical CORE-04 research pending remains explicit. Start SIM-02 research only after checkpoint exact final HEAD CI/audit/normal squash and main readback; coding never auto-unlocked.
+## 36. SIM-02 — Physics 3D (research APPROVED, documentation only)
+- [Research issue #177](https://github.com/KayzenRoot/stormline/issues/177), WO NLE-P00-WO-002-SIM-02, **APPROVED DOCUMENTARY RESEARCH ONLY**. Future code [issue #47](https://github.com/KayzenRoot/stormline/issues/47) remains OPEN/BLOCKED with prerequisites WORLD-02+CORE-03 CODE missing.
+- [Research PR #178](https://github.com/KayzenRoot/stormline/pull/178): BASE main 6099128ead915e010ef252f57cd880f441303d59; initial HEAD 6dbe3995bb9236e8e1ea94e5b123a6a89a7226b9 passed Docs Validation [#43643764457](https://github.com/KayzenRoot/stormline/actions/runs/43643764457), but Socket PR Alerts NEUTRAL because external report service/API failed (NOT a success). Evidence Bundle updated; final audited HEAD 33250c7955aee929008ae952c0ab9fbb79a6aeab passed exact [Docs Validation #43643912007](https://github.com/KayzenRoot/stormline/actions/runs/43643912007) SUCCESS, SonarCloud SUCCESS (0 new issues/hotspots reported) and Socket Security Project Report SUCCESS. Socket PR Alerts SUCCESS with `SKIPPED no net dependency changes`, meaning it did NOT scan a changed-dependency diff, not a claim of a completed vulnerability diff analysis. Objective pt-BR audit APPROVED documentary scope 11 files, no known HIGH/CRITICAL scoped defect, normal squash main 351d1bd60b2922297691ffcfaff3547d9a888eff, Git readback verified. Separate same-WO checkpoint PR with own CI/audit.
+- [Architecture](architecture/sim-02-physics-3d.md), [technology/license matrix](research/sim-02-physics-3d-technology-license-matrix.md), [ADR-0032 PROPOSED](adr/0032-sim-02-engine-owned-3d-physics-and-collider-publication.md), [semantic API](contracts/sim-02-physics-3d-api.md), [170 FUTURE cases](testing/sim-02-acceptance-matrix.md), [reproducible headless/CPU benchmark](research/sim-02-physics-benchmark-protocol.md), [Evidence Bundle](evidence/NLE-P00-WO-002-SIM-02.md).
+- Engine-owned CPU-first 3D PhysicsWorld/Body/Shape/Constraint opaque WorldEpoch+generation, WORLD-01/02 ECS/prefab source, CORE-03 allocator and CORE-06 fixed tick/queued commands/poststep immutable contacts, global/local origin via CORE-05, native/headless no GPU. Sphere/box/capsule/convex/compound and static triangle mesh/heightfield terrain, exact narrowphase after broadphase candidates, CCD/queries/sensors and capability-gated constraints. WORLD-03/04/DATA-05 source rights/revision stage and PHYS ACK required before active traversable ground, unsafe dynamic mesh/native listener mutation forbidden. SIM-03 character, SIM-04 ragdoll, SIM-05 vehicles and SIM-06 deformables separate.
+- Jolt C++ MIT **LEADING CANDIDATE NOT ADOPTED** (CROSS_PLATFORM_DETERMINISTIC flag vendor caveats: same source/defines/command ordering and parallel broadphase query nondeterminism); PhysX5 CPU BSD-3-Clause and CUDA GPU binary optional platform-specific, Rapier3D Rust Apache-2.0 and Bullet core zlib with separate Extras rights. No source/code/SDK/library sample installed. S3P optional PROVE-OR-DROP, no hardware speed claim.
+- **All 170 FUTURE tests** IDN/UNI/SHP/BOD/BRD/CTK/CON/CCD/TER/DET/SEC/INT/BEN **NOT EXECUTED**: no actual 3D physics engine, Win/Linux/macOS/ARM/WASM/headless binary, stream collider, real joint/CCD/constraint state, rollback/snapshot, security fuzz, CPU p95/p99 or memory benchmark. ADR-0032 PROPOSED, release class UNDECIDED, #47 BLOCKED.
+- **Research tally after this checkpoint:** **29/80 documented (36.25%)**, **51 RESEARCH_PENDING** including historical CORE-04 gap unresolved. All 80 coding WOs BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS/executor_ready=false, approved_adr=null; zero runtime engine implemented.
+
+## 37. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
+NLE-P00-WO-002-SIM-03: **Character Controller & Movement**, catalog_order=30 canonical next documentary research. Future code prerequisites SIM-01+SIM-02 runtime are NOT implemented; historical CORE-04 research pending remains explicit. Do not start SIM-03 before checkpoint own exact final HEAD CI/audit/squash/main readback; no coding unlock.
+
 
 
 
