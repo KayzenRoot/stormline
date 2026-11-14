@@ -1,11 +1,11 @@
 # Free CI & Tooling Policy
-Status: POLÍTICA APROVADA; baseline DOCS-CI incluída nesta proposta, execução pendente.
+Status: POLÍTICA APROVADA; DOCS-CI integrada via PR #1; run 43586339976 docs-validation SUCCESS na PR; proteções de main pendentes de verificação.
 
 ## Restrições
 Custo obrigatório de serviço R$0, repo público. Não integrar CodeRabbit ou serviços que exijam assinatura, créditos pagos, cartão ou overage. Nunca assumir que todas as ferramentas são ilimitadas: conferir termos, rate limits, retenção, concorrência e políticas de uso do GitHub.
 
 ## Camada P00 (agora)
-- GitHub Actions em runner padrão ubuntu-latest para documentação; actions/checkout confiável; permissions: contents: read.
+- GitHub Actions em runner padrão ubuntu-latest para documentação; actions/checkout@v7; permissions: contents: read.
 - Python da imagem hospedada, biblioteca padrão, scripts/validate_docs.py (sem pip/npm/credenciais).
 - Job estável docs-validation, acionado por PR e push em main.
 - Bloquear merge por checks somente depois de primeiro run PASS confirmado.
