@@ -121,7 +121,7 @@
       "catalog_acceptance": "Captura reproduzível de CPU frame/jobs, falha e rastreabilidade por build.",
       "id": "NLE-EXEC-WO-CORE-06-001",
       "file": "docs/queue/work-orders/CORE-06.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
