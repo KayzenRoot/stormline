@@ -26,9 +26,9 @@ Use the [issue templates](.github/ISSUE_TEMPLATE). For reproducible defects incl
 ## Technical baseline
 The repository currently contains documentation and a documentation-validation script. There is no engine build process to run. To check Source Pack links locally:
 
-\`\`\`bash
+```bash
 python3 scripts/validate_docs.py
-\`\`\`
+```
 
 ## License
 No software license has been selected. Public visibility alone provides no permission to reuse the code or brand. Do not assume external contributions can be integrated under a particular license until the owner adopts a licensing policy.
