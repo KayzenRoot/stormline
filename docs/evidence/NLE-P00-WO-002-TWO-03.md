@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-TWO-03 2D Animation Research
 
-**State:** RESEARCH PR OPEN; INITIAL EXACT-HEAD CI SUCCESS, FINAL-HEAD REVALIDATION AND AUDIT PENDING | **Research issue #153** | **Future coding issue #39 OPEN/BLOCKED**.  
+**State:** RESEARCH DOCS APPROVED / MERGED; CHECKPOINT PR PENDING INDEPENDENT EXACT-HEAD CI/AUDIT | **Research issue #153** | **Future coding issue #39 OPEN/BLOCKED**.  
 **BASE main:** 8a104213bdd6d9d6fd88875d12a463200944975b | **Research branch:** docs/NLE-P00-WO-002-TWO-03-animation-research.
 
 ## Context and sources
@@ -20,10 +20,13 @@ These are observed Git blob SHA-1 object IDs, **not SHA-256 of raw file bytes**.
 
 ## Truthful evidence status (to fill from GitHub)
 - [Research PR #154](https://github.com/KayzenRoot/stormline/pull/154), initial HEAD `77b7e332542e78a16a665b4b70bdaf211e05d10e`, [Docs Validation #43630552127](https://github.com/KayzenRoot/stormline/actions/runs/43630552127) **SUCCESS at INITIAL exact HEAD**; initial Socket Security Project Report SUCCESS. This Evidence edit changes HEAD; a NEW final exact-head CI is required before audit/merge.
-- Objective pt-BR audit, merge SHA and main readback: **PENDING**.
+- [Research PR #154](https://github.com/KayzenRoot/stormline/pull/154) **APPROVED documentation-only**, normal squash merged 28ade29693e407e781946769b5f559e0ec1d3d9d after final HEAD 9e3d8bc369465311a9bc18602a203cf2c1acaec8 and [Docs Validation #43630601311](https://github.com/KayzenRoot/stormline/actions/runs/43630601311) SUCCESS; Socket Security and SonarCloud SUCCESS, objective pt-BR review no known HIGH/CRITICAL documentary defect. Checkpoint still requires separate CI and audit.
 - **All 106 future acceptance tests NOT EXECUTED**, no output animation, audio sample measurement, cutscene export/video, sound file, shader/build/GPU capture, device/codec license test, event replay fuzz or CPU perf benchmark.
 - Future risk ELEVATED for clip/event/physics authority, source asset and library/codec licensing, cross-platform audio-clock drift and renderer device loss. None of these risks passed runtime validation.
 - ADR-0024 remains PROPOSED, future #39 OPEN/BLOCKED, implementation WOs not promoted; no "sample accurate audio export achieved" claim.
 
 ## Proposed checkpoint delta, NOT applied
 After research PR approved and squash merged, separate SAME WO checkpoint PR may update ONLY registry TWO-03.research_status from RESEARCH_PENDING to RESEARCH_DOCUMENTED_ADR_PROPOSED, checkpoint/backlog/research WO/evidence to observed true SHA/CI, without changing 80 blocked code WOs, release_class UNDECIDED, approved_adr=null or future implementation #39 OPEN. Require independent exact-final-HEAD docs CI/audit/squash and main readback before TWO-04 next.
+
+## Checkpoint Delta exact semantics, this separate same-WO PR
+Only TWO-03.research_status changes RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED; do not change work_order_status/risk/release_class/approved_adr/executor_ready on any of 80 coding WOs. Code #39 OPEN/BLOCKED, ADR-0024 PROPOSED. All 106 CPU/GPU/native/Web/audio-export tests NOT EXECUTED and no playable animation/rendered film. Separate checkpoint PR's own exact-final-HEAD GitHub Docs Validation + objective audit required before squash/readback and next TWO-04.
