@@ -24,7 +24,7 @@ User-facing quality references: military combined-arms games for world/network/v
 | 03 · Rendering, Lighting & VFX | 8 | Prioridade máxima de pesquisa: qualidade medida por hardware, estabilidade temporal e custos reais de CPU/GPU. |
 | 04 · 2D & 2.5D Native Workflows | 4 | 2D é um pipeline de primeira classe, não apenas um plano/mesh dentro do renderizador 3D. |
 | 05 · Scene, Worlds & Spatial Systems | 5 | Modelo de mundo compartilhado por gameplay, editor, MCP, física e networking. |
-| 06 · Physics, Animation & AI Gameplay | 6 | Simulação física e de personagens separada de gráficos, inclusive modo servidor dedicado. |
+| 06 · Physics, Animation & AI Gameplay | 7 | Simulação física e de personagens separada de gráficos, inclusive modo servidor dedicado. |
 | 07 · Audio & Interactive Sound | 4 | Áudio será módulo com telemetria e autoria próprios, e não integração secundária. |
 | 08 · Gameplay Framework & Genres | 5 | O runtime deve habilitar muitos gêneros sem hardcoded de regras militares ou ARPG no Core. |
 | 09 · Multiplayer & Online | 6 | Cliente/servidor confiável e seguro, com limites claros; serviços cloud pagos não são pré-requisitos. |
@@ -33,7 +33,7 @@ User-facing quality references: military combined-arms games for world/network/v
 | 12 · Platforms, Packaging & Runtime Targets | 5 | Mesmos dados de projeto com builds específicos e redução de recursos por plataforma. |
 | 13 · Quality, Security & Performance Engineering | 5 | Metas de qualidade são parte da especificação do produto, não um plugin instalado no fim. |
 | 14 · Commercial Product & Ecosystem | 3 | A engine só estará pronta para uso comercial após distribuição, documentação e acordos claros. |
-| **TOTAL** | **78** | **Proposed catalog, not 78 delivered modules or fixed scope.** |
+| **TOTAL** | **79** | **Proposed catalog, not 79 delivered modules or fixed scope.** |
 
 ## Catalog by subsystem
 
@@ -112,6 +112,7 @@ Simulação física e de personagens separada de gráficos, inclusive modo servi
 | `SIM-04` | **Skeletal Animation & Motion** | Retargeting, blend trees, IK, ragdoll, compressão, sync e root motion. | SIM-03 · DATA-03 | Animação de locomotion/combat com transições coerentes e custo medido. |
 | `SIM-05` | **Navigation & Behavior** | Navmesh, steering, behavior trees/statecharts e percepção de NPCs. | WORLD-03 · SIM-02 | NPCs navegam em mundo dinâmico e sob streaming. |
 | `SIM-06` | **Destruction & Environmental Response** | Fraturas/debris opcionais por tiers, impactos, marcas, física e VFX coordenados. | SIM-02 · GFX-08 · WORLD-03 | Degradação controlada, orçamento de fragmentos e sincronização. |
+| `SIM-07` | **Vehicles & Flight Dynamics** | Wheeled/tracked vehicles, suspension, boats, rotor/wing flight dynamics, control interfaces, audiovisual hooks and networked simulation. | SIM-02 · SIM-03 · GAME-01 | Original drivable tank, truck and aircraft/rotorcraft reference tests with reproducible physics and network timing. |
 
 ### 07 · Audio & Interactive Sound
 
