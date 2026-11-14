@@ -11,6 +11,9 @@ Implement an independently verifiable, production-grade first necessary incremen
 ## CONTEXT
 Stormline is an original commercial 2D/2.5D/3D/Web engine with Windows/Linux/macOS editor and export targets, AI-native Editor/CLI/MCP parity, no public MVP. The approved catalog contains module `GFX-02`, but implementation details and release class are not yet approved.
 
+## RESEARCH-ONLY CONTEXT (NOT EXECUTOR READY)
+The [GFX-02 architecture](../../architecture/gfx-02-shader-material-compilation.md), [technology matrix](../../research/gfx-02-shader-technology-matrix.md), [ADR-0015 PROPOSED](../../adr/0015-gfx-02-shader-compilation-policy.md), [semantic API](../../contracts/gfx-02-shader-api.md), [future SHD tests](../../testing/gfx-02-acceptance-matrix.md), and [research Work Order](../../work-orders/NLE-P00-WO-002-GFX-02.md) are **not** implementation approval. Slang, DXC, glslang, SPIRV-Tools, SPIRV-Cross, Tint/Naga and Apple tools remain candidate stacks, no toolchain/backend versions or release class selected. GFX-02 code issue #30 and all 80 implementation WOs remain BLOCKED / executor_ready=false.
+
 ## DEPENDENCIES
 `GFX-01`, `DATA-03`. Require objective approval and integration evidence for every mandatory predecessor. Dependencies are **capability-level**, and may need finer-grained contract dependencies during module design.
 

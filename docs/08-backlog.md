@@ -16,6 +16,7 @@ Status: PLANNING; module implementation issues #18–#97 exist but remain BLOCKE
 | NLE-P00-WO-002-DATA-04 | Serialization & Scene Format, schema migrations and semantic diff technology research (issue #117) | DATA-03 checkpoint APPROVED | RESEARCH DOCS APPROVED / MERGED PR #118; ADR-0012 PROPOSED, implementation #27 BLOCKED |
 | NLE-P00-WO-002-DATA-05 | Cooking, streaming bundles, incremental patching, target profiles (research #120) | DATA-04 checkpoint APPROVED / MERGED | RESEARCH DOCS APPROVED / MERGED PR #121; ADR-0013 PROPOSED; implementation #28 BLOCKED |
 | NLE-P00-WO-002-GFX-01 | Graphics RHI/backends, resources, GPU feature tiers and device loss (research #123) | DATA-05 checkpoint APPROVED / MERGED; CORE-01/02 research documented | RESEARCH DOCS APPROVED / MERGED PR #124; ADR-0014 PROPOSED; implementation #29 BLOCKED |
+| NLE-P00-WO-002-GFX-02 | Shader & Material Compilation, reflection, variants, cross-target IR and safe hot reload (research #126) | GFX-01 checkpoint APPROVED / MERGED; DATA-03 research documented | RESEARCH IN PROGRESS; ADR-0015 PROPOSED; implementation #30 BLOCKED |
 | NLE-P00-WO-003 | Arquitetura Core, memória, jobs, tempo, contratos | WO-002 APPROVED | PLANNED |
 | NLE-P00-WO-004 | Arquitetura renderer, shaders, iluminação, VFX | WO-003 APPROVED | PLANNED |
 | NLE-P00-WO-005 | World/terrain/physics/assets/audio | WO-003/004 APPROVED | PLANNED |
