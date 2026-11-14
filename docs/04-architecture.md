@@ -73,3 +73,6 @@ Stormline-owned conservative geometry visibility and screen-space LOD/HLOD contr
 
 ## Gates
 Arquitetura executável dependerá de NLE-P00-WO-003+ e aceite formal. Definições de rede, segurança, persistência e compatibilidade antecedem integração.
+
+## GFX-05 — Materials, Texture Systems & PBR (research PROPOSED)
+Research-only physical/stylized material semantics, glTF metallic-roughness and optional Khronos extensions, color-correct texture/mip/normal/alpha handling, typed portability tiers, bounded residency and decals. KTX2/Basis Universal and MaterialX are **candidates**, not installed or approved runtime dependencies; no hardware sparse residency assumption, no fabricated benchmark. GFX-02 shader compiler, DATA-03 importer, DATA-05 cooker, GFX-03 VRAM/fences and GFX-06 lighting remain separate owners. See [architecture](architecture/gfx-05-materials-textures-pbr.md), [matrix](research/gfx-05-material-technology-matrix.md), [ADR-0018 PROPOSED](adr/0018-gfx-05-material-texture-policy.md), [semantic API](contracts/gfx-05-material-texture-api.md), [44 future tests](testing/gfx-05-acceptance-matrix.md). Implementation #33 remains BLOCKED; no GPU art/tests/code executed.
