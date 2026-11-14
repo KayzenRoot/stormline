@@ -1,30 +1,41 @@
 # Checkpoint — Stormline
 
-**Situação em 2026-11-14:** NLE-P00-WO-001 — **APPROVED (fundação documental)**. Nenhuma implementação da engine iniciada.
-**Repository:** KayzenRoot/stormline (public).
-**Main SHA após squash merge da PR #1:** 926fa0c64706619354ad365e1a942d303c6ca58d.
-**Original base SHA:** 72d3ccaeb58b7aaefbcda40a96f7ac1be98dc422.
-**PR #1 último HEAD auditado:** 62c4eb03a54efb89de56ddad86a9bdf56dec5463.
-**Evidence Bundle:** docs/evidence/NLE-P00-WO-001.md.
+**Data de verificação:** 2026-11-14  
+**Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
+**Última Work Order de apresentação concluída:** `NLE-P00-WO-001-EXT-001` — **APPROVED / MERGED**.  
+**Main SHA comprovado após o merge da PR #3:** `e41274bb841094630ba71843b0876bb5d79370f4`.  
+**Evidence Bundle:** [NLE-P00-WO-001-EXT-001](evidence/NLE-P00-WO-001-EXT-001.md).
 
-## Fonte de verdade e resultado
-- Owner-selected: Stormline; motor original NexLabs com bibliotecas especializadas.
-- Owner-approved: governança solo, sem revisores humanos externos; ferramentas de CI gratuitas para projeto público; sem CodeRabbit.
-- Source Pack, especificação detalhada de marca, ADRs, manual de Codex/Zcode e CI documental estão na main como resultado do merge #1.
-- GitHub Actions Docs Validation em PR com checkout@v7: run 43586339976, job docs-validation **SUCCESS**. A primeira execução também passou; aviso Node20/checkout@v4 corrigido antes do merge.
-- Auditoria objetiva em pt-BR na PR #1: APPROVED; diff de 28 arquivos, nenhuma alteração em engine/runtime, nenhum revisor solicitado; squash merge confirmado.
-- Read-back após o merge confirmou o SHA da main 926fa0c64706619354ad365e1a942d303c6ca58d.
+## 1. Fundação previamente aprovada
+- `NLE-P00-WO-001`: Source Pack, identidade da marca **documentada como proposta**, governança solo e CI documental.
+- PR #1 integrada por squash, commit `926fa0c64706619354ad365e1a942d303c6ca58d`, HEAD auditado `62c4eb03a54efb89de56ddad86a9bdf56dec5463`.
+- PR #2 de reconciliação documental integrada, commit `dcd6c81d092d629caf2f4f143bdd9377a262f87d`.
+- Evidence Bundle anterior: [NLE-P00-WO-001](evidence/NLE-P00-WO-001.md).
 
-## O que NÃO foi feito / pendências verificáveis
-- Proteção de main e required checks: NOT VERIFIED / NOT CONFIGURED BY THIS CHANGE. O acesso ao conector usado não expôs settings para ler/configurar as rules. É obrigatório verificar esse estado antes de declarar proteção técnica.
-- Marca registrada/domínio: NOT VERIFIED; nome Stormline é seleção criativa, não liberação jurídica.
-- Paleta, monograma, tagline, motion e áudio: PROPOSED; logo, vídeo e arquivos de som finais NOT PRODUCED.
-- Licença de distribuição do código: OPEN. Repo público não implica open source.
-- Código C++, renderer, física, networking, benchmark de GPU, deploy e runtime: NOT STARTED.
-- CI de push em main: o workflow foi configurado; somente os resultados de PR foram verificados nesta auditoria.
+## 2. Apresentação e organização do repositório
+- Solicitação do proprietário: README internacional muito profissional e repositório público com organização de startup.
+- `NLE-P00-WO-001-EXT-001` foi autorizada como **extensão documental** da fundação, sem iniciar a pesquisa técnica `NLE-P00-WO-002`.
+- Branch `docs/NLE-P00-WO-001-EXT-001-repo-presentation`.
+- Base SHA `dcd6c81d092d629caf2f4f143bdd9377a262f87d`, último HEAD auditado `ab5b315923329053bccd20699ea8e8deb76c0132`.
+- PR #3: 20 arquivos (README inglês, README pt-BR, versões, comunidade, issue templates, standards, validator, Scope/DoD/Backlog). Diff documental, sem código de engine.
+- GitHub Actions `Docs Validation` run `43587690479`, job `docs-validation`: **SUCCESS** no HEAD auditado.
+- Auditoria técnica em pt-BR: **APPROVED** para o escopo documental, sem defeitos HIGH/CRITICAL identificados no diff revisado.
+- Squash merge normal da PR #3 confirmado com SHA `e41274bb841094630ba71843b0876bb5d79370f4`. README e workflow relidos na main após merge.
+- Evidência e checkpoint reconciliados por mudança documental pós-merge sujeita a validação automatizada antes de integração.
 
-## Próxima decisão
-NLE-P00-WO-002 (pesquisa de tecnologias, licenças e comparações de arquitetura) está PLANNED e NÃO INICIADA. Iniciar apenas por Work Order própria, após confirmar que não há novas inconsistências de fontes. Se as configurações de proteção forem requisito de uma WO futura, marcá-la BLOCKED até serem verificadas.
+## 3. Diretrizes aprovadas pelo proprietário
+- Nome Stormline; motor próprio NexLabs com integração criteriosa de bibliotecas especializadas.
+- Governança do proprietário com IA como arquitetura/auditoria/execução: sem exigência de revisores humanos externos.
+- Qualidade verificável e CI gratuito para repositório público; **sem CodeRabbit**, sem subscrições pagas obrigatórias.
+- Tecnologia original pretendida para renderização/iluminação, VFX, áudio, performance e experiências como shooters e ARPGs. Nenhuma novidade técnica ou superioridade foi comprovada.
 
-## Política
-Reabrir o mesmo ID de Work Order para correções documentais desta fundação quando necessário; Checkpoint Delta só promovido mediante auditoria objetiva, sem autoaprovação pelo executor.
+## 4. Pendências explícitas
+- `main` protections, required checks e configurações administrativas do GitHub: **NOT VERIFIED / NOT APPLIED** via conexão disponível; somente documentadas como recomendações.
+- Description, topics, website e imagem social-preview do campo About: **NOT APPLIED**; descrição/tópicos candidatos em [repository-standards](engineering/repository-standards.md).
+- Private vulnerability reporting: **NOT VERIFIED**. Security.md não anuncia canal como habilitado.
+- Licença para código, trademark/domínio, aprovação de paleta/logo/intro/sonic signature: OPEN ou PROPOSED, conforme Ledger.
+- Nenhum build de C++, renderer, VFX, áudio, física, multiplayer ou GPU benchmark existe.
+- Badges indicam apenas CI documental, não qualidade de runtime nem aprovação de produto.
+
+## 5. Próxima Work Order
+`NLE-P00-WO-002`: pesquisa técnica de stack, licenças, alternativas e requisitos de benchmarking. **PLANNED / NOT STARTED**. Só iniciar após auditada a reconciliação documental e revalidado o Context Lock. Não promover automaticamente propostas tecnológicas ou identidade visual.

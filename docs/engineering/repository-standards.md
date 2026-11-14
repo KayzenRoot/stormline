@@ -1,5 +1,5 @@
 # Repository Presentation & Administration Standards
-Work Order: NLE-P00-WO-001-EXT-001 | Status: PROPOSED until audited/merged.
+Work Order: NLE-P00-WO-001-EXT-001 | Status: DOCUMENTED AND AUDITED in PR #3. GitHub administration settings remain NOT VERIFIED / NOT APPLIED.
 
 ## Presentation
 - Main README in English, pt-BR companion, direct navigation to Source Pack and current checkpoint.

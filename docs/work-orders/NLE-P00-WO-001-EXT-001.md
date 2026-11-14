@@ -1,5 +1,5 @@
 # NLE-P00-WO-001-EXT-001 — Professional Repository Presentation
-**Risk:** LOW | **Type:** owner-requested extension to P00 documentation | **State:** track audit/merge in Checkpoint.
+**Risk:** LOW | **Type:** owner-requested extension to P00 documentation | **State:** APPROVED / MERGED for documentation; see Checkpoint and Evidence Bundle.
 
 ## OBJECTIVE
 Transform Stormline's public GitHub entry into an accurate, polished, international, startup-grade presentation while retaining the owner-approved P00 scope and solo/free governance.
