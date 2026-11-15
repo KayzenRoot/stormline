@@ -27,8 +27,9 @@ No code/vendor license has been incorporated, accepted for shipment or tested.
 | Gate | Status |
 |---|---|
 | Research #208 and branch from exact main | OBSERVED |
-| Exactly 8 scoped Markdown files and PR diff | PR #209 Draft inspected, exactly 8 added Markdown files, no runtime/source/SDK/CI changes |
-| Initial Docs Validation on previous HEAD | [Run #43699839456](https://github.com/KayzenRoot/stormline/actions/runs/43699839456) SUCCESS on `b0dc2193e794210ccc1c870808439b1fb17aaf1f`, job #132768343537, Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector all SUCCESS. This evidence revision changes the HEAD, so final-head revalidation is required. |
+| Exactly 8 scoped Markdown files and PR diff | Research PR #209 merged; exactly 8 new Markdown files, no runtime/source/SDK/CI changes |
+| Initial Docs Validation on previous HEAD | [Run #43699839456](https://github.com/KayzenRoot/stormline/actions/runs/43699839456) SUCCESS on `b0dc2193e794210ccc1c870808439b1fb17aaf1f`, job #132768343537, Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector all SUCCESS. Followed by exact-final-HEAD validation #43699919862, see next row. |
+| Research PR #209 exact-final-HEAD Docs Validation | [Run #43699919862](https://github.com/KayzenRoot/stormline/actions/runs/43699919862) SUCCESS, job #132768593933 on HEAD `dc89dfe830e813009f44e201ab4f1a6aa362fbf4`; Source Pack/local links, taxonomy DAG, registry, Zcode blocked selector all SUCCESS |
 | Relevant extra security/CodeQL/third-party scans | NOT VERIFIED |
 | Platform input event pump/device backend implemented | NO |
 | Editor/client/export or Web/headless runtime built | NO |
