@@ -38,7 +38,8 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 | Audio sync/latency/CPU/memory/xrun benchmark | NOT RUN |
 | Objective pt-BR documentary audit | APPROVED documentary only [comment #6886764559](https://github.com/KayzenRoot/stormline/pull/205#issuecomment-6886764559), no known HIGH/CRITICAL in scoped docs |
 | Research PR #205 squash/main readback | Normal squash merge `51c092719cfc7515233bbaf7ef74d3d6d24a536a`, main readback verified |
-| Checkpoint PR #206 exact-head CI | [Run #43659659164](https://github.com/KayzenRoot/stormline/actions/runs/43659659164) SUCCESS on pre-evidence-update HEAD `c932772ec4791b33360d65ebaf8066b604addb8c`, job #132645897013; all four Docs Validation steps SUCCESS. This Evidence update creates a new HEAD and must be revalidated. |\n| Checkpoint PR #206 audit/squash/readback | PENDING; objective audit and normal squash/main readback required |
+| Checkpoint PR #206 exact-head CI | [Run #43659659164](https://github.com/KayzenRoot/stormline/actions/runs/43659659164) SUCCESS on pre-evidence-update HEAD `c932772ec4791b33360d65ebaf8066b604addb8c`, job #132645897013; all four Docs Validation steps SUCCESS. This Evidence update creates a new HEAD and must be revalidated. |
+| Checkpoint PR #206 audit/squash/readback | PENDING; objective audit and normal squash/main readback required |
 
 ## 5. Risk register (future ELEVATED; not runtime mitigated)
 - Music transition phase mismatch/click/gap, late stem prefetch, state flapping or duplicate stinger.
