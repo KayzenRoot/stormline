@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-03 Game UI, Text & Localization
 
-**STATUS: RESEARCH PR #217 APPROVED/SQUASH-MERGED; FINAL EXACT-HEAD DOCS VALIDATION SUCCESS; SEPARATE CHECKPOINT PR PENDING INDEPENDENT CI/AUDIT/SQUASH/READBACK. NO GAME UI ENGINE.**  
+**STATUS: RESEARCH PR #217 AND CHECKPOINT PR #218 BOTH APPROVED/SQUASH-MERGED; EACH PASSED EXACT-HEAD DOCS VALIDATION AND PT-BR OBJECTIVE AUDIT; MAIN CHECKPOINT/REGISTRY READBACK VERIFIED AT `d3d438bca99a68a83fa58147c918c2f500677001`, ISSUE #216 CLOSED; PR #219 RECORDS READBACK. NO GAME UI ENGINE.**  
 **2026-11-15 | Research [#216](https://github.com/KayzenRoot/stormline/issues/216) | Future code [#59](https://github.com/KayzenRoot/stormline/issues/59) OPEN/BLOCKED | BASE main `eabf7cd8420e72c017a0e2aa3fdfe0eb0b309dd1`.**
 
 ## 1. Canonical source and preflight
@@ -34,7 +34,9 @@ Last GAME-02 research issue #212, PR #213, checkpoint PR #214, readback PR #215 
 | Fuzz/ASan/UBSan/TSan or hostile font/markup exploit test | NOT RUN |
 | Objective pt-BR research audit | APPROVED documentary-only [comment #6892914372](https://github.com/KayzenRoot/stormline/pull/217#issuecomment-6892914372), no known HIGH/CRITICAL scoped docs. |
 | Research PR squash/main readback | Normal squash main `9dc38f439a27f90b8e636f2202a50df044727dac`, main readback verified. |
-| Separate checkpoint PR CI/audit/squash/readback | PENDING own exact-head Docs Validation/pt-BR objective audit/normal squash/main readback. |
+| Separate checkpoint PR #218 exact-head CI | [Docs Validation #43703929860](https://github.com/KayzenRoot/stormline/actions/runs/43703929860) SUCCESS, job #132780822521 on final HEAD `8f9d3cf5d76b805d1632b9b50789fd7b1a4ae5c6`, all four docs steps SUCCESS. |
+| Checkpoint PR #218 pt-BR objective audit | APPROVED documentary-only [comment #6892952929](https://github.com/KayzenRoot/stormline/pull/218#issuecomment-6892952929), no known HIGH/CRITICAL scoped doc diff. |
+| Checkpoint PR #218 squash/main readback | Normal squash `d3d438bca99a68a83fa58147c918c2f500677001`, registry main 80 total, 41 documented, 39 pending, 0 ready, ALL 80 code BLOCKED; #59 OPEN/BLOCKED; research #216 CLOSED. |
 
 ## 5. Risk register and negative evidence
 - **Trust:** hostile font binaries, SVG/markup, malicious locale placeholders/bidi controls, deep recursive layout, hidden external resource fetch, PII from game data into UI/MCP.
@@ -45,8 +47,8 @@ Last GAME-02 research issue #212, PR #213, checkpoint PR #214, readback PR #215 
 - **Software license:** engine NLE-D009 OPEN; candidate libraries and font binaries separate legal chains. No adoption/pin/ship. Documentation risk LOW; future runtime ELEVATED.
 No runtime mitigations are implemented. All **128 tests remain FUTURE/NOT EXECUTED**; no native/Web/headless build, UI screenshots, measured CPU/GPU, font raster, assistive user test or independent high-risk parser proof.
 
-## 6. Proposed checkpoint delta (NOT PROMOTED)
-After research PR final exact-HEAD CI/audit/squash/main readback and separate checkpoint PR own exact-HEAD CI/audit/squash/main readback, update **ONLY GAME-03** `research_status` `RESEARCH_PENDING` → `RESEARCH_DOCUMENTED_ADR_PROPOSED`. Result **41/80 research documented (51.25%)**, **39 pending**, **0 runtime modules**. All **80 coding packets** still `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`; #59 OPEN/BLOCKED, ADR-0044 PROPOSED, release class UNDECIDED. Next GAME-04 #60 research only after checkpoint approval. No Zcode implementation permission.
+## 6. Applied checkpoint delta and main readback
+Research PR #217 and separate checkpoint PR #218 passed exact-final-HEAD CI/audit/squash/main readback. Exactly one registry field was changed: GAME-03 `research_status` `RESEARCH_PENDING` → `RESEARCH_DOCUMENTED_ADR_PROPOSED`. Main readback `d3d438bca99a68a83fa58147c918c2f500677001` shows **41/80 research documented (51.25%)**, **39 pending**, **0 runtime modules**, ALL 80 coding packets `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`. Code #59 OPEN/BLOCKED; research #216 CLOSED; ADR-0044 PROPOSED, release class UNDECIDED. Next GAME-04 #60 research only after readback-closeout PR #219; no Zcode coding authorization.
 
 ## 7. Objective audit output
 pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED with base/head, exact eight-file diff, source fingerprints, licenses and font asset rights, Unicode/CLDR/MF2 status, GFX/TWO/GAME ownership, untrusted input/IME/privacy and accessibility, actual CI steps, future tests NOT RUN, high/critical risk review and separate checkpoint readback. No statement "completed" without verifiable evidence.
