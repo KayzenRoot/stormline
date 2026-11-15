@@ -79,3 +79,8 @@ Refresh these from the actual branch before writes; if any source changes, mark 
 
 ## EVIDENCE BUNDLE
 See [Evidence](../evidence/NLE-P00-WO-002-EDIT-05.md); record only observed Git SHA, file diff, exact-head CI, audit, merge and readback. No inferred test/benchmark success.
+
+## Research PR #269 APPROVED/MERGED and checkpoint PR initiated
+- [Research PR #269](https://github.com/KayzenRoot/stormline/pull/269): BASE `7034fdce1d1d0220b349e8b333dc67cc6d19c515`, audited final HEAD `87b3cbb1c7972746ffab823b4d81e5b6767f7cba`, exactly eight NEW Markdown. [Docs Validation #43734362638](https://github.com/KayzenRoot/stormline/actions/runs/43734362638) SUCCESS job #132873573815, all Source Pack/links, DAG, registry and blocked selector steps SUCCESS. [Pt-BR audit #6897463018](https://github.com/KayzenRoot/stormline/pull/269#issuecomment-6897463018) APPROVED documentary only; normal squash and factual main/API readback `b64b327b81bc2286eccf0aa3f3725daec168f09f`. No engine, SDK, CI, checkpoint, backlog or registry changes in research PR.
+- 128 E05 IDs unique, all FUTURE/NOT EXECUTED. ADR-0057 PROPOSED, NLE-D009 OPEN, #72 OPEN/BLOCKED. No graph editor/compiler/GPU preview/validated export or native/Web/a11y/perf tests.
+- Independent checkpoint PR from research main `b64b327b81bc2286eccf0aa3f3725daec168f09f` modifies exactly checkpoint/backlog/registry/this WO/Evidence. Only registry semantic delta is EDIT-05 research_status to RESEARCH_DOCUMENTED_ADR_PROPOSED. Own CI/audit/merge/readback required before research #268 closure. Target 54/80, 26 pending, zero engine, all 80 code WOs blocked.
