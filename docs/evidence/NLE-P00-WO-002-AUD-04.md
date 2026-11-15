@@ -1,10 +1,10 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-04 Music, Dialogue & Cinematic Audio Research
 
-**STATUS: PR #205 OPEN; FIRST DOCS VALIDATION FAILED ON ESCAPED INLINE BACKTICKS, CORRECTED; RETRY SUCCESS ON HEAD `f1c9d71af080e36540558f6dd03a8b1bc56f3da9`; EVIDENCE RECORDS SUCCESS ON PRIOR HEAD `15c8b2bab9cd91ac24da0676e422cef6a3ea95c3`; THIS REVISION REQUIRES ITS OWN FINAL-HEAD CI/AUDIT/MERGE/CHECKPOINT. NO ENGINE CODE OR AUDIO CONTENT.**  
+**STATUS: RESEARCH PR #205 APPROVED/SQUASH-MERGED; EXACT FINAL-HEAD DOCS VALIDATION SUCCESS; OBJECTIVE AUDIT APPROVED; SEPARATE CHECKPOINT PR PENDING ITS OWN CI/AUDIT. NO ENGINE CODE OR AUDIO CONTENT.**  
 **2026-11-14 | Research [#204](https://github.com/KayzenRoot/stormline/issues/204) | Future coding [#55](https://github.com/KayzenRoot/stormline/issues/55) OPEN/BLOCKED | BASE main `1d0280674385a034b68573aeb6a98db243f34ae1`**.
 
 ## 1. Canonical source check and Context Lock
-AUD-03 research #201/PR #202 and separate checkpoint PR #203 were merged; main readback verified at `1d0280674385a034b68573aeb6a98db243f34ae1`. Baseline: **37/80** research documented (46.25%), **43 pending**, **0/80 runtime modules implemented**. All 80 implementation packets remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`. AUD-04 catalog_order=38, future coding #55 OPEN/BLOCKED. Registry's next catalog module is **GAME-01 Input & Control Mapping #56**, not AUD-05.
+AUD-03 research #201/PR #202 and checkpoint #203 were merged. AUD-04 research [#204](https://github.com/KayzenRoot/stormline/issues/204), [PR #205](https://github.com/KayzenRoot/stormline/pull/205) merged normally; post-research main readback `51c092719cfc7515233bbaf7ef74d3d6d24a536a`. Baseline before AUD-04 checkpoint: **37/80** research documented (46.25%), **43 pending**, **0/80 runtime modules implemented**. All 80 implementation packets remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`. AUD-04 catalog_order=38, future coding #55 OPEN/BLOCKED. Registry's next catalog module is **GAME-01 Input & Control Mapping #56**, not AUD-05.
 Source Pack fingerprints at preflight are in the Work Order Context Lock. Canonical priority: checkpoint > ledger/approved ADRs > Scope > DoD > Architecture > Requirements > AGENTS > module catalog > registry > relevant module contracts. AUD-01/02/03, TWO-03, CORE-04 and DATA-03/04/05 are dependencies/owners but **not implemented**.
 
 ## 2. Proposed artifacts (documentation only)
@@ -36,9 +36,9 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 | 128 future acceptance cases | ALL FUTURE / NOT EXECUTED |
 | Accessibility user/assistive-tech test | NOT RUN |
 | Audio sync/latency/CPU/memory/xrun benchmark | NOT RUN |
-| Objective pt-BR documentary audit | PENDING |
-| Research PR squash/main readback | PENDING |
-| Separate checkpoint PR CI/audit/squash/readback | PENDING |
+| Objective pt-BR documentary audit | APPROVED documentary only [comment #6886764559](https://github.com/KayzenRoot/stormline/pull/205#issuecomment-6886764559), no known HIGH/CRITICAL in scoped docs |
+| Research PR #205 squash/main readback | Normal squash merge `51c092719cfc7515233bbaf7ef74d3d6d24a536a`, main readback verified |
+| Separate checkpoint PR CI/audit/squash/readback | PENDING at this draft, own exact-head Docs Validation/audit/squash/main readback required |
 
 ## 5. Risk register (future ELEVATED; not runtime mitigated)
 - Music transition phase mismatch/click/gap, late stem prefetch, state flapping or duplicate stinger.
