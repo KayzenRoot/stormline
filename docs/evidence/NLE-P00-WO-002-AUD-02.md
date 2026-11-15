@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-02 Spatial Audio & Acoustic World
 
-**STATUS: RESEARCH BRANCH IN PROGRESS; RESEARCH PR/CI/AUDIT/MERGE AND SEPARATE CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #199 DRAFT, INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT/MERGE AND SEPARATE CHECKPOINT PENDING. NO ENGINE CODE.**  
 2026-11-14 | Research [#198](https://github.com/KayzenRoot/stormline/issues/198) | Future implementation [#53](https://github.com/KayzenRoot/stormline/issues/53) OPEN/BLOCKED. BASE main `90125e6885603ad260f0d355067991699577a9f6`. Branch `docs/NLE-P00-WO-002-AUD-02-spatial-acoustics-research`.
 
 ## 1. Source check, Context Lock, planning baseline
@@ -22,8 +22,8 @@ No imported third-party vendor sources, SOFA HRTF datasets, real recording/IR, 3
 | Gate | Observation |
 |---|---|
 | Research issue #198 and branch from exact main base | OBSERVED |
-| Research PR number, exact HEAD and diff | PENDING |
-| GitHub Docs Validation final exact HEAD | NOT VERIFIED |
+| Research PR and initial HEAD | [PR #199](https://github.com/KayzenRoot/stormline/pull/199) Draft, BASE `90125e6885603ad260f0d355067991699577a9f6`, initial HEAD `7fa7be4ec3c265d9f869333bfad36077d1cca407`, exactly eight new Markdown files; updating Evidence Bundle produces a new final HEAD. |
+| Initial Docs Validation (not final after Evidence revision) | [Run #43656383853](https://github.com/KayzenRoot/stormline/actions/runs/43656383853) SUCCESS on initial HEAD `7fa7be4ec3c265d9f869333bfad36077d1cca407`, job #132635710684; Source Pack/local links, module taxonomy/DAG, WO registry and blocked Zcode selector all SUCCESS. New HEAD must be independently revalidated. |
 | Other SonarCloud/Socket/security CI at exact HEAD | NOT VERIFIED |
 | Native/Web/headless audio engine or DSP performance | NOT IMPLEMENTED / NOT TESTED |
 | 128 future runtime/perceptual/security/benchmark cases | ALL FUTURE / NOT EXECUTED |
