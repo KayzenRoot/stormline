@@ -975,7 +975,7 @@
       "catalog_acceptance": "Testes com latência, jitter, perda e desconexão.",
       "id": "NLE-EXEC-WO-NET-01-001",
       "file": "docs/queue/work-orders/NET-01.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
