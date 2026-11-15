@@ -1,0 +1,55 @@
+# AI-03 — Capability Registry & Schemas Architecture v0.1
+
+**2026-11-15 | P00 RESEARCH ONLY, NOT IMPLEMENTED | [research #289](https://github.com/KayzenRoot/stormline/issues/289) | NLE-P00-WO-002-AI-03 | [future code #77](https://github.com/KayzenRoot/stormline/issues/77) OPEN/BLOCKED | BASE `1db368aa555f7a8eb2fa1a1eb3a38744a23ef6bb`.** 58/80 researched at baseline, 22 pending, zero engine, all 80 implementation packets BLOCKED. Formal dependency **AI-01 ONLY**; ADR-0060 PROPOSED and code #75 OPEN/BLOCKED. NLE-D009 engine license OPEN.
+
+## 1. Product goal and independent acceptance oracle
+Catalog acceptance: **"100% das ações públicas de autoria enumeradas e rastreáveis."** The independently maintained reference universe is the union of all OWNER-APPROVED public authoring operations exposed via UI buttons/menus/shortcuts/palette, CLI and AI-01 owner command manifests, excluding deliberately internal operations by an explicit audited exclusion ledger. Do NOT compute coverage by dividing registry entries by the registry itself. Every eligible operation must resolve to one stable owner CommandId, typed input/output and errors, revisioned contract, project/target authorization, UI/CLI route, test mapping, and MCP projection eligibility; a path's availability may be UNSUPPORTED/BLOCKED without faking implementation.
+
+Acceptance formula: coverage = independently inventoried eligible public operations having complete valid registry binding / independently inventoried eligible public operations. **Target 100%, no unapproved omissions**; pair with independent route/handler reverse audit to detect invented orphan capabilities and ghost commands. Until real source actions/AI-01 implementation exist the denominator is only a planning fixture, not proof of product coverage.
+
+## 2. Boundary and authoritative ownership
+- **AI-01 is the SOLE formal dependency**. AI-01 owns CommandIdV1, CommandDescriptorV1, CommandInvocationV1, route/owner checks, principal/grant and version negotiation, owner receipt/error. AI-03 consumes those descriptors through a validated signed/identified build-time manifest / explicit owner registration boundary. Registry is a **derived, immutable generation** of authorized descriptor projections, not a second command bus, authorization source, or owner data store.
+- **AI-03** owns registry compilation, descriptor reflection, schema dialect/profile validation, capability discovery/read projections, schema/version fingerprints, derived documentation and coverage/compatibility report. Publishing a descriptor never grants an operation.
+- WORLD-02/DATA-04/GAME-02 remain AI-01's formal owner dependencies. EDIT-01 UI actions, AI-02 semantic index, AI-04 MCP adapter, AI-05 resource templates, AI-06 future richer authorization, AI-07 change plans, QA-02/04 and PLAT targets are INTEGRATIONS, not new formal DAG edges.
+- A command disabled by missing owner/build, target, runtime environment, policy or insufficient grant is **not executable** even if its schema appears in docs. No synthetic handler; no MCP-only privileged shortcuts or raw filesystem/VM/GPU handles.
+
+## 3. Proposed lifecycle: declarative source, validation, publication
+`OWNER DECLARE -> COMPILE/VERIFY -> STAGE GENERATION -> COVERAGE/COMPATIBILITY GATE -> ATOMIC GENERATION PUBLISH -> AUTHORIZED READ PROJECTION -> AI-01 INVOKE/OWNER REVALIDATE`.
+
+1. Owner declaration binds stable namespaced CommandId, semantic contract major/minor, ModuleId, owner handler symbol/receipt mapping, canonical schema references, input/output/error contracts, side effect class, permission/scope, required feature and target matrix, UI/CLI route ID, migration and deprecation epoch.
+2. Build pipeline validates duplicate IDs, owner collisions, unresolved schema refs, unsupported dialect/vocabulary, recursion/depth budgets, forbidden nondeterministic/sensitive schema metadata, ambiguous version ranges, missing permissions, unavailable target and unbound handler/route; **fail closed**, no partially live invalid generation.
+3. Schema store is content-addressed with constrained canonicalization policy and explicit dialect URI; offline allowlisted local `$ref` graph. Dynamic references are allowed only within bounded, validated local graph. Never auto-fetch remote refs, use unrestricted regex, execute schema code or interpret documentation as privileges.
+4. Staged generation includes owner/command manifest digest, provenance, feature/target and policy-version references, coverage ledger, stable sorted IDs, immutable schema blobs and rollback pointer; commit/publish only once all checks pass. Startup without a valid generation yields SAFE_UNAVAILABLE, not a permissive fallback.
+5. Read discovery accepts verified Principal/ProjectId/target, locale, command version supported range, required feature, result budget and cursor. Filter secret/internal descriptors and fields BEFORE counts, pagination and digest/ETag to prevent side channels. Results are project-scoped immutable snapshots with scope/actor/policy epoch-bound cursors and revocation invalidation.
+6. Invocation is always AI-01 command path and owner-side authorization/CAS. Discovery visibility (even a `readOnlyHint`) is never authorization; permission change, schema version change or source revision between discovery and invoke must fail/re-negotiate.
+
+## 4. Descriptor family
+| Registry type (PROPOSED) | Fields and rules |
+|---|---|
+| `CapabilityIdV1` | owner-scoped stable CommandId alias; no new identity competing with AI-01 |
+| `CapabilityDescriptorV1` | CommandId, ModuleId, semantic version, schema IDs/hash, feature/target, sideEffect, risk, permission, handler binding, route bindings, availability, deprecation metadata, safe description |
+| `CapabilitySchemaRefV1` | dialect URI + schema ID, immutable digest, media type, compatible range, validation profile and optional local dependency refs |
+| `CapabilityRegistryGenerationV1` | generation ID/digest, build/owner inputs, schema profile, supported targets, coverage manifest hash, provenance, policy epoch, created version, prior-good |
+| `CapabilityInventoryEntryV1` | independently observed Editor/CLI/owner action, owning module, surface, eligibility, exclusion justification/approver, CommandId, test ID |
+| `CapabilityDiscoveryQueryV1` | ProjectId, verified principal grant, target, feature, visibility profile, supported versions, stable cursor, byte/row/deadline budgets |
+| `CapabilityDiscoveryPageV1` | safe redacted entries, snapshot generation, per-scope opaque cursor, truncation/partial status, total only if policy permits |
+| `CapabilityCompatibilityReportV1` | old/new contract fingerprint, audience/target, input/output/error compatibility, required migration, deprecated version sunset |
+| `CapabilityErrorV1` | stable code, stage, owner, command version, safe retryability/recovery, correlation ID; no internal secrets or path leakage |
+
+## 5. Schema/version rules, future experimental alternatives
+Preferred candidate: JSON Schema Draft 2020-12 for **public JSON transport boundaries**, with strictly documented dialect/vocabularies and separate semantic owner validations. Required input schema shape **object root** for MCP tool input; output may be arbitrary JSON for MCP 2026-07-28; AI-01 internal C++ types must not be flattened into writable internals. `format` is annotation by default; format-assertion is a distinct vocabulary/config. Bound `$ref`/`$dynamicRef`, pattern complexity, `unevaluatedProperties`, union discriminators, and numeric precision/UTF-8 behavior; canonical wire numbers >2^53 use constrained strings where necessary. JSON Schema cannot prove actor permission, source revision, transactional success or right to publish.
+
+Compatibility gate: major = incompatible input semantics/result/error/permission interpretation; minor = demonstrably backward-compatible additive fields/features with optionality and negative conformance tests; patch = no observable semantics. Do **not** assume that adding optional output or a new enum member is safe to exhaustive clients. Pin owner-supported range per adapter, avoid silent fallback, explicit deprecation notice / sunset / alternatives / telemetry and rollback. No auto migration of project files.
+
+## 6. MCP, Editor and CLI projections
+AI-04 later maps filtered registry entries to MCP `tools/list` with deterministic ordering, optional pagination/continuations only when negotiated, `inputSchema`/`outputSchema`, names in protocol's allowed portable character set/length and collision-safe namespace. MCP 2026-07-28 is stateless per request; do not depend on connection-granted auth, special sessions or older discovery assumptions. Tool annotations including readOnly/idempotent/destructive are **untrusted hints**, never policy. Reject mismatched dialect and version; current host conformance is not yet proven.
+
+Editor menu/button and CLI bindings point to same AI-01 CommandId, with compile-time/static consistency and runtime availability; no UI-only authoring mutator. CLI `capabilities list/describe/diff` is a proposed discovery projection, NOT a production command. AI-02 may index **authorized public descriptor summaries** by exact immutable generation; no private schema hydration or embedding by default. Errors and deprecation must be communicated as typed actionable structured outputs across surfaces.
+
+## 7. Threat model and safe failure
+Attackers: malicious project/schema/plugin, prompt-injected description, compromised MCP adapter, cross-project principal, stale authorization, version downgrade, regex/recursive-schema DoS, remote `$ref` SSRF, ETag/cursor/count oracle, malicious handler registration, hidden feature or internal operation enumeration. Defenses: trusted owner provenance, explicit registration, allowlist module IDs + local-only reference resolution, bounded parse/compile/evaluate/response, strict UTF-8, duplicate-key rejection, per-principal redaction, indistinguishable unauthorized/nonexistent external results, constant-shape error where appropriate, grant revalidation at AI-01 owner, atomic publish/revert, logging via CORE-06 redaction, audit with zero stored secrets. Security HIGH/CRITICAL blocks advancement.
+
+## 8. Reproducibility / platform / future integration proof
+Targets: Windows x64 desktop/headless, Linux x64 desktop/headless, macOS Apple Silicon desktop/headless and Web adapter when relevant; exact OS/CPU/compiler/SDK release matrix is TBD. Discovery must operate without GPU/network. Test deterministic order and schema hash across compilers/locale, static vs plugin manifests, hot-reload invalidation, registration/read concurrency and offline recovery. Quantitative budgets require measured baseline and owner-approved target tiers; no executed benchmark exists. No claim that UI/CLI/MCP, schema validator or registry currently runs.
+
+[API](../contracts/ai-03-capability-registry-api.md) · [ADR-0062](../adr/0062-ai-03-authorized-capability-reflection.md) · [128 future tests](../testing/ai-03-acceptance-matrix.md) · [Benchmark](../research/ai-03-capability-benchmark-protocol.md).
