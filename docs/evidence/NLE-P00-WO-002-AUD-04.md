@@ -57,4 +57,5 @@ Report pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED with exact base/final SHA, eig
 
 ## 8. Correction history
 - Initial PR HEAD `6e8909767cc2b5c8677c0cd861839f1f46bb5775` failed run #43659008716 because six documents had backslash-escaped Markdown inline-code delimiters. Corrected only the formatting in the same research branch/WO, no scope or semantic change.
-- Corrected HEAD `f1c9d71af080e36540558f6dd03a8b1bc56f3da9` passed retry run #43659101359, job #132644185778, all four Docs Validation steps. The next Evidence Bundle revision records the previous pass and must be revalidated on its own resulting final HEAD.
+- Corrected HEAD `f1c9d71af080e36540558f6dd03a8b1bc56f3da9` passed retry run #43659101359, job #132644185778. Evidence revisions were validated by #43659175263 and #43659270973; the final research PR HEAD `75e5ce591339c964f72cd629d178f4c7373027ee` passed exact-head [Docs Validation #43659362639](https://github.com/KayzenRoot/stormline/actions/runs/43659362639), job #132644993832, with all four steps SUCCESS.
+- [PR #205](https://github.com/KayzenRoot/stormline/pull/205) was audited APPROVED documentary-only (comment #6886764559) and squash-merged normally at `51c092719cfc7515233bbaf7ef74d3d6d24a536a`; main readback verified. This separate checkpoint PR remains subject to its own final-head CI/audit/squash/readback.
