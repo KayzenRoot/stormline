@@ -1064,7 +1064,7 @@
       "catalog_acceptance": "Criar/join/leave, reconexão e falhas previsíveis sem SaaS obrigatório.",
       "id": "NLE-EXEC-WO-NET-05-001",
       "file": "docs/queue/work-orders/NET-05.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
