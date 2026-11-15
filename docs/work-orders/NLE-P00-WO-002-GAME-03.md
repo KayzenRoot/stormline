@@ -3,6 +3,8 @@
 **Date:** 2026-11-15 | Research issue **#216** | Future implementation issue **#59 OPEN/BLOCKED**  
 **BASE main:** `eabf7cd8420e72c017a0e2aa3fdfe0eb0b309dd1` | **P00 DOCUMENTATION ONLY.** Research risk LOW; future native UI/font/image parsing, accessibility/security and color-integrity risk ELEVATED. Release class UNDECIDED; engine code license NLE-D009 OPEN.
 
+**RESEARCH PR #217 APPROVED/MERGED:** [PR #217](https://github.com/KayzenRoot/stormline/pull/217), final audited HEAD `dbd6b3e3d13513dd83c81f1f5168fc1d936a0b5e`, [Docs Validation #43703637595](https://github.com/KayzenRoot/stormline/actions/runs/43703637595) SUCCESS job #132779928220, pt-BR objective audit comment #6892914372 APPROVED documentary-only; normal squash main `9dc38f439a27f90b8e636f2202a50df044727dac` and main readback verified. Separate checkpoint PR requires its own CI/audit/squash/main readback. 128 future tests NOT EXECUTED, coding #59 OPEN/BLOCKED.
+
 ## OBJECTIVE
 Deeply research the Stormline-owned Game UI, Text & Localization semantic tree, widgets/HUD, responsive layout with DPI/safe areas, Unicode 18 shaping/segmentation/bidi/line break, HarfBuzz+FreeType raster/font fallback, ICU79.1/CLDR49 and controlled MessageFormat2/locale packaging, GFX-07/TWO-01 rendering ownership, GAME-01 device/focus/IME, GAME-02 typed scoped data bindings/authoritative action intents, text/font/translation asset rights, privacy/denial, real future test/benchmark/CI plan.
 
@@ -86,4 +88,4 @@ BASE `eabf7cd8420e72c017a0e2aa3fdfe0eb0b309dd1`.
 - AUD-04 `8104ddac546ab5133372859e71e771b66750ccf0`
 
 ## EVIDENCE
-[Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-03.md). At first write, research PR/CI/audit/merge/checkpoint PENDING.
+[Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-03.md). Research PR #217 exact-final-head Docs Validation, pt-BR audit, normal squash and main readback complete. Separate checkpoint PR remains pending its own gates.
