@@ -38,3 +38,10 @@ After research PR exact-final-HEAD Docs Validation, objective pt-BR audit APPROV
 
 ## 6. Stop conditions
 Stop on stale canonical Source Pack, changed DAG, duplicate owner source/serializer/VM, lack of owner capability enforcement, arbitrary eval/shell, unapproved listener/SDK/license, false parity or cross-service ACID, raw filesystem writes, failed CI, tests not unique 128, unexpected files, HIGH/CRITICAL defect or code unlock. Docs risk LOW; future transactions ELEVATED and privileged irreversible actions HIGH_ASSURANCE. No runtime or benchmark proof.
+
+## Research PR #282 — actual approval, squash and main readback
+- [PR #282](https://github.com/KayzenRoot/stormline/pull/282) BASE `dd59a60d4280884dacbb2ec1834a4a5023d9b90c`, final HEAD `05372546a5342d830ed219f028d86b2d3f52c464`, exactly eight NEW Markdown. [Docs Validation #43756174999](https://github.com/KayzenRoot/stormline/actions/runs/43756174999) SUCCESS at exact final HEAD, job #132940644361 (Source Pack/local links, module DAG, registry and Zcode blocked selector). [Pt-BR audit #6900529035](https://github.com/KayzenRoot/stormline/pull/282#issuecomment-6900529035) APPROVED docs only. Normal squash/main and API readback `70ecfab2fe1a82b5e7bdd38c256fd5564fd0c68f`, PR merged. Registry deliberately unchanged in research PR.
+- Actual main at this readback remained 56/80 researches documented, 24 pending, AI-01 RESEARCH_PENDING, all 80 code WOs BLOCKED and #75 OPEN/BLOCKED. 128 A01 tests FUTURE/NOT EXECUTED, ADR-0060 PROPOSED, no CLI/MCP/kernel runtime or source parity.
+
+## Independent checkpoint PR — proposed delta, not yet approved
+- BASE `70ecfab2fe1a82b5e7bdd38c256fd5564fd0c68f`, five files checkpoint/backlog/registry/WO/Evidence, SOLE registry delta AI-01 `research_status=RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`. Target 57/80 researched (71.25%), 23 pending, zero engine; 80 code WOs remain BLOCKED/executor_ready=false/approved_adr=null/release_class=UNDECIDED. #75 OPEN/BLOCKED; research #281 only closes after checkpoint factual readback; checkpoint CI/audit/merge/readback pending.
