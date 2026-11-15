@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-02 Gameplay Scripting & API
 
-**STATUS: RESEARCH BRANCH AUTHORED; PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO SCRIPT ENGINE.**  
+**STATUS: RESEARCH PR #213 OPEN; INITIAL DOCS VALIDATION SUCCESS ON PRE-EVIDENCE HEAD `614c0b6bc1a85bd137fab874789bf354cc446838`; THIS EVIDENCE UPDATE REQUIRES ITS OWN FINAL-HEAD CI; AUDIT/MERGE/CHECKPOINT PENDING. NO SCRIPT ENGINE.**  
 **2026-11-15 | Research [#212](https://github.com/KayzenRoot/stormline/issues/212) | Future code [#58](https://github.com/KayzenRoot/stormline/issues/58) OPEN/BLOCKED | BASE main `8b12b71f090974e7c909265cb249f3fec297c89e`.**
 
 ## 1. Source Pack and Context Lock
@@ -26,8 +26,8 @@ GAME-01 research #208/PR #209, checkpoint #210 and closeout #211 merged; main SH
 | Gate | Current status |
 |---|---|
 | Research issue #212 and branch from exact base main | OBSERVED |
-| Exactly eight Markdown files and research PR changed-file diff | PENDING until PR |
-| Docs Validation final exact HEAD | PENDING |
+| Exactly eight Markdown files and research PR changed-file diff | [PR #213](https://github.com/KayzenRoot/stormline/pull/213) Draft inspected: exactly 8 newly added Markdown files; no code, SDK, dataset or CI change. |
+| Initial Docs Validation | [Run #43701653288](https://github.com/KayzenRoot/stormline/actions/runs/43701653288) SUCCESS on pre-Evidence-update head `614c0b6bc1a85bd137fab874789bf354cc446838`, job #132773892137; Source Pack/local links, module DAG, WO registry and Zcode blocked selector all SUCCESS. New Evidence commit must be revalidated. |
 | CodeQL/SonarCloud/Socket or other scanner exact HEAD | NOT VERIFIED |
 | Compiler/VM/runtime/host API integrated | NO |
 | Native/Web/headless executable, VM sandbox built | NO |
