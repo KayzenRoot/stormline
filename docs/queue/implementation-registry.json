@@ -1173,7 +1173,7 @@
       "catalog_acceptance": "Projeto 2D completo construído pela interface sem acesso direto a arquivos.",
       "id": "NLE-EXEC-WO-EDIT-04-001",
       "file": "docs/queue/work-orders/EDIT-04.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
