@@ -3,7 +3,7 @@
 **Data de verificação:** 2026-11-15  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
 **Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GAME-03` — Game UI, Text & Localization, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #217 (pesquisa GAME-03):** `9dc38f439a27f90b8e636f2202a50df044727dac`.  
+**Main SHA comprovado após o merge da PR #218 (checkpoint GAME-03):** `d3d438bca99a68a83fa58147c918c2f500677001`.  
 **Evidence Bundle mais recente:** [NLE-P00-WO-002-GAME-03](evidence/NLE-P00-WO-002-GAME-03.md).
 
 ## 1. Fundação previamente aprovada
@@ -424,5 +424,7 @@
 - **All 128 FUTURE tests NOT EXECUTED**, no UI widget, native/Web/headless executable or glyph atlas, GPU screenshot, shaping font asset, locale/runtime, real gamepad/IME/accessibility user test, sanitizer/fuzz or p50/p95/p99 CPU/GPU benchmark. No 60 FPS, correct complex-script or universal language/accessibility claims. ADR-0044 remains PROPOSED; release class UNDECIDED.
 - **Tally after checkpoint reconciliation:** **41/80 research modules documented (51.25%)**, **39 RESEARCH_PENDING**, **0 runtime modules implemented**. All 80 coding packets remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`; coding #59 OPEN/BLOCKED. No Zcode coding authorization.
 
-## 49. Próximo módulo de pesquisa (somente após auditoria/merge desta reconciliação)
-`NLE-P00-WO-002-GAME-04`: **GAME-04 — Gameplay Systems & Event Bus**, catalog_order=42, future coding [#60](https://github.com/KayzenRoot/stormline/issues/60) OPEN/BLOCKED. Documentary research only after separate GAME-03 checkpoint PR exact-final-HEAD Docs Validation, pt-BR audit, normal squash and main readback. All 80 implementations remain blocked.
+- **Checkpoint PR #218 independently validated/merged/read back:** [PR #218](https://github.com/KayzenRoot/stormline/pull/218), BASE `9dc38f439a27f90b8e636f2202a50df044727dac`, final audited HEAD `8f9d3cf5d76b805d1632b9b50789fd7b1a4ae5c6`, [Docs Validation #43703929860](https://github.com/KayzenRoot/stormline/actions/runs/43703929860) SUCCESS job #132780822521, objective pt-BR [audit comment #6892952929](https://github.com/KayzenRoot/stormline/pull/218#issuecomment-6892952929) APPROVED documentary-only, normal squash merge and main readback `d3d438bca99a68a83fa58147c918c2f500677001`. Only GAME-03 research_status changed; 41/80 documented, 39 pending, ALL 80 code packets remain blocked. Research issue #216 CLOSED. Recorded in separate readback-closeout PR #219, which requires its own CI/audit/squash/main readback.
+
+## 49. Próximo módulo de pesquisa
+`NLE-P00-WO-002-GAME-04`: **GAME-04 — Gameplay Systems & Event Bus**, catalog_order=42, future coding [#60](https://github.com/KayzenRoot/stormline/issues/60) OPEN/BLOCKED. GAME-03 checkpoint PR #218 passed exact-final-head Docs Validation, pt-BR objective audit, normal squash and main readback. Next GAME-04 research only after GAME-03 readback-closeout PR #219 itself passes CI/audit/squash/main readback. All 80 implementations remain blocked.
