@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-03 Game UI, Text & Localization
 
-**STATUS: RESEARCH BRANCH AUTHORED; PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO GAME UI ENGINE.**  
+**STATUS: RESEARCH PR #217 OPEN; INITIAL DOCS VALIDATION SUCCESS ON PRE-EVIDENCE HEAD `6c1038481188f58f29a028085085b2b1e6e77480`; THIS EVIDENCE UPDATE REQUIRES EXACT-FINAL-HEAD REVALIDATION; AUDIT/MERGE/CHECKPOINT PENDING. NO GAME UI ENGINE.**  
 **2026-11-15 | Research [#216](https://github.com/KayzenRoot/stormline/issues/216) | Future code [#59](https://github.com/KayzenRoot/stormline/issues/59) OPEN/BLOCKED | BASE main `eabf7cd8420e72c017a0e2aa3fdfe0eb0b309dd1`.**
 
 ## 1. Canonical source and preflight
@@ -23,8 +23,8 @@ Last GAME-02 research issue #212, PR #213, checkpoint PR #214, readback PR #215 
 | Gate | Current status |
 |---|---|
 | Research issue #216 / dedicated branch from exact baseline | OBSERVED |
-| Exactly 8 new scoped Markdown files / research PR diff | PENDING until PR |
-| Docs Validation exact FINAL HEAD | PENDING |
+| Exactly 8 new scoped Markdown files / research PR diff | [PR #217](https://github.com/KayzenRoot/stormline/pull/217) Draft changed-file readback: exactly eight new Markdown documents; no runtime/code/font/SDK/CI changes. |
+| Initial Docs Validation (prior HEAD) | [Run #43703576222](https://github.com/KayzenRoot/stormline/actions/runs/43703576222) SUCCESS on pre-Evidence-update HEAD `6c1038481188f58f29a028085085b2b1e6e77480`, job #132779747216; Source Pack/local links, taxonomy/dependency DAG, WO registry and Zcode blocked selector all SUCCESS. This update creates a new HEAD, requiring own exact-final-head CI. |
 | CodeQL/SonarCloud/Socket extra security scanners exact HEAD | NOT VERIFIED |
 | Game UI, layout or widget runtime implemented | NO |
 | HarfBuzz/FreeType/ICU library installed, font imported or translation asset cooked | NO |
