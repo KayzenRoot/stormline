@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-04 Music, Dialogue & Cinematic Audio Research
 
-**STATUS: RESEARCH PR #205 APPROVED/SQUASH-MERGED; EXACT FINAL-HEAD DOCS VALIDATION SUCCESS; OBJECTIVE AUDIT APPROVED; SEPARATE CHECKPOINT PR PENDING ITS OWN CI/AUDIT. NO ENGINE CODE OR AUDIO CONTENT.**  
+**STATUS: RESEARCH PR #205 APPROVED/SQUASH-MERGED; CHECKPOINT PR #206 OPEN; ITS DOCS VALIDATION PASSED ON PRIOR HEAD `c932772ec4791b33360d65ebaf8066b604addb8c`; FINAL EVIDENCE UPDATE REQUIRES REVALIDATION; CHECKPOINT AUDIT/MERGE PENDING. NO ENGINE CODE OR AUDIO CONTENT.**  
 **2026-11-14 | Research [#204](https://github.com/KayzenRoot/stormline/issues/204) | Future coding [#55](https://github.com/KayzenRoot/stormline/issues/55) OPEN/BLOCKED | BASE main `1d0280674385a034b68573aeb6a98db243f34ae1`**.
 
 ## 1. Canonical source check and Context Lock
@@ -27,10 +27,10 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 | Gate | Current evidence |
 |---|---|
 | Research issue #204 and branch from checked main | OBSERVED |
-| Exactly eight docs authored and final PR diff | PENDING |
+| Exactly eight docs authored and final PR diff | PR #205 merged, exactly eight Markdown files; no code/assets/SDK |
 | First Docs Validation | [Run #43659008716](https://github.com/KayzenRoot/stormline/actions/runs/43659008716) FAILED at Source Pack/local link validation because six Markdown docs contained escaped inline backticks; no taxonomy/registry/Zcode checks ran. Corrected in same branch/WO. |
 | Retry Docs Validation after correction | [Run #43659101359](https://github.com/KayzenRoot/stormline/actions/runs/43659101359) SUCCESS on branch HEAD `f1c9d71af080e36540558f6dd03a8b1bc56f3da9`, job #132644185778; Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector all SUCCESS. Evidence update below creates a new HEAD, so rerun is required. |
-| Evidence snapshot exact-head CI | [Run #43659175263](https://github.com/KayzenRoot/stormline/actions/runs/43659175263) SUCCESS on HEAD `15c8b2bab9cd91ac24da0676e422cef6a3ea95c3`, job #132644418550; all four Docs Validation steps SUCCESS. This Evidence Bundle revision records that result; its new commit requires one more final-head run. |
+| Final research PR exact-head CI | [Run #43659362639](https://github.com/KayzenRoot/stormline/actions/runs/43659362639) SUCCESS on final research HEAD `75e5ce591339c964f72cd629d178f4c7373027ee`, job #132644993832; all four Docs Validation steps SUCCESS. |
 | SonarCloud/Socket or additional security check exact HEAD | NOT VERIFIED |
 | Native/Web/headless build, playback, assets, codecs | NOT IMPLEMENTED / NOT TESTED |
 | 128 future acceptance cases | ALL FUTURE / NOT EXECUTED |
@@ -38,7 +38,7 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 | Audio sync/latency/CPU/memory/xrun benchmark | NOT RUN |
 | Objective pt-BR documentary audit | APPROVED documentary only [comment #6886764559](https://github.com/KayzenRoot/stormline/pull/205#issuecomment-6886764559), no known HIGH/CRITICAL in scoped docs |
 | Research PR #205 squash/main readback | Normal squash merge `51c092719cfc7515233bbaf7ef74d3d6d24a536a`, main readback verified |
-| Separate checkpoint PR CI/audit/squash/readback | PENDING at this draft, own exact-head Docs Validation/audit/squash/main readback required |
+| Checkpoint PR #206 exact-head CI | [Run #43659659164](https://github.com/KayzenRoot/stormline/actions/runs/43659659164) SUCCESS on pre-evidence-update HEAD `c932772ec4791b33360d65ebaf8066b604addb8c`, job #132645897013; all four Docs Validation steps SUCCESS. This Evidence update creates a new HEAD and must be revalidated. |\n| Checkpoint PR #206 audit/squash/readback | PENDING; objective audit and normal squash/main readback required |
 
 ## 5. Risk register (future ELEVATED; not runtime mitigated)
 - Music transition phase mismatch/click/gap, late stem prefetch, state flapping or duplicate stinger.
