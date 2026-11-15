@@ -1,0 +1,87 @@
+# NET-04 — Client Prediction, Server Reconciliation, Timing, Lag and Bounded Rewind v0.1
+
+**2026-11-15 | RESEARCH ONLY / NO ENGINE CODE / NO RUNTIME TESTS** | Research [#240](https://github.com/KayzenRoot/stormline/issues/240), WO `NLE-P00-WO-002-NET-04`, future implementation [#65](https://github.com/KayzenRoot/stormline/issues/65) OPEN/BLOCKED. BASE main `6701b8f6e99654112a6bf792c8b33d565ad71b42`. Catalog_order 47/80, **formal predecessors NET-03 + SIM-03, documented PROPOSED only**. All 80 code WOs BLOCKED. This document describes no executable prediction, physics, hitscan, net client, measured synchronization, patch, benchmark, game session or production anti-cheat.
+
+## 1. Goal and falsifiable acceptance
+Catalog scope: **"Client-side prediction, rollback quando cabível, interpolação e lag compensation."** Catalog acceptance: **"Replay de entrada gera estados toleráveis e métricas de correção."** That acceptance requires actual deterministic replay evidence, defined thresholds by game/target hardware, error distributions, visual correction measurements, negative authoritative spoof tests, gameplay hit verification and CPU/latency/cost tradeoffs **later**. Future tests must separate (a) presentational smoothness and responsiveness from (b) server-authoritative correctness. Low input-to-presentation latency is not proof of fair hit registration or a secure multiplayer game.
+
+**Unambiguous principle:** The **server remains authoritative**. A predicted state is a local, disposable view derived from client **input intents**, not permission to mutate NET-02/WORLD-01 health, position, items, inventory, cooldown, quests, physics collision truth, loot or hit outcome. Never trust client-reported hit target/history timestamp as canonical. History/rewind, when game-mode approved, is a **read-only bounded historical query** for server hit validation, not server-world rewinding of irreversible commits.
+
+## 2. Strict owners, not parallel implementations
+| Integration | Owner of truth / API consumed | NET-04 forbidden to own |
+|---|---|---|
+| **NET-03 (formal predecessor)** | authenticated, authorized immutable world/actor snapshots and per-recipient `ReplicationSnapshotId/WorldEpoch/VisibilityEpoch`; baseline-applied ACK and spawn/despawn/correctness | broadasting world, interest ACL, snapshot codec, quantization or hidden actor leaks |
+| **SIM-03 (formal predecessor)** | canonical character movement/motor math + ability-independent movement and collision constraints for supported 2D/3D controllers, with approved replay-compatible policy | separate "cheap movement" algorithm claimed equivalent without golden replay and collision proof |
+| NET-02 | authoritative session/match/world state, actor ownership, command admission, hit validation through server game policy | authority transfer to client prediction or unvalidated late commands |
+| NET-01 | secure transport, connection epoch, RTT/loss/jitter/backpressure and transport ACK/crypto | custom UDP retransmit/congestion, client timesync trust bypass or plaintext fallback |
+| CORE-04 | server TickId, fixed-step simulation timeline, monotonic clock and versioned tick-rate policy | new authoritative wallclock, UTC-based server simulation tick, modified server time from client estimates |
+| CORE-03, CORE-05 | simulation scheduler barriers, stable deterministic ordering and coordinate units/origin/version | uncontrolled async ECS mutation, nondeterministic replay from job completion order |
+| WORLD-01, WORLD-02 | generational EntityId/WorldEpoch, committed state, scenes and immutable historical views if approved | direct writes to server ECS, stale resurrect/predicted scene authority |
+| GAME-04 | authoritative gameplay command, abilities/cooldowns/damage/loot/inventory/quest and idempotent commit receipts | speculative irreversible reward, duplicated VFX event counted as damage, silent cooldown cheating |
+| NET-05 | join/session issuer, resume/rebind and role/actor permissions | relying on previous session epoch without reauth |
+| NET-06 | anti-abuse, input manipulation/clock and lag-comp exploitation, rate, audit/privacy | declaring client prediction secure anti-cheat or trusting claimed latency |
+| DATA-04 | versioned schema, source/CAS and durable checkpoint/side-effect log | ephemeral prediction history as persistent save or rewind of durable transactions |
+| GFX/UI/AI-01/EDIT/CLI/MCP | presentation-only render smoothing and authorized profile preview, tool audit | untrusted script/editor issuing live server rewind or actor correction as admin |
+
+**Formal registry dependencies NET-03 · SIM-03 only.** The other components are ownership/integration contracts, not added catalog DAG edges. NONE of these gameplay/network runtime APIs has been implemented.
+
+## 3. Four distinct timelines, one authority
+1. **Server present:** CORE-04 authoritative WorldEpoch + ServerTick and a fixed simulation delta selected by an approved game/benchmark policy; tick wrapping and pause/step/reset versioned.
+2. **Client prediction present:** estimation of *which server tick* the server will simulate for a player's pending inputs. It may be ahead of the latest authoritative snapshot, is **estimated** from authenticated NET-01 roundtrip/time samples, and never changes server time.
+3. **Client interpolated presentation:** delayed state between two **received and authorized** NET-03 snapshots for *remote/non-owned* actors; buffer delay adapts slowly from jitter, loss and snapshot cadence and remains bounded.
+4. **Client local render time:** possibly variable-rate visual presentation + comfort/camera correction offsets, not gameplay tick.
+
+TimeSync must use monotonic clocks and authenticated server tick samples, reject unreasonable/negative RTT and offset jumps/outlier packets, treat one-way delay as **uncertain without synchronized clock**, and cap slew/speed to avoid timeline reversal. **Do not use NTP wallclock/OS UTC as trusted game tick.** Estimate a bounded prediction lead under variable RTT; resync on new WorldEpoch or NET-05 reconnect; never allow a client to claim "my clock is slow, extend rewind 500 ms". Jitter-buffer safety cannot remove real latency for remote actors, only smooth its presentation.
+
+### Conceptual state correction loop
+```text
+GAME-01 InputActionFrame and SIM-03 owned motor intent, locally predicted
+  -> immutable bounded InputHistory {Match/WorldEpoch, ActorGen, TickId, Sequence, InputDigest}
+  -> NET-01 authenticated send of intents -> NET-02 validates; GAME-04 authoritative commit
+  -> NET-03 recipient-authorized Snapshot {ServerTick, WorldEpoch, ActorGen, LastProcessedInput,
+      canonical movement state, schema/visibility revision, quant-error policy}
+  -> if valid owner/epoch/sequence and bounded history:
+       restore authoritative base of *predictable subset* in CLIENT prediction sandbox
+       discard confirmed inputs and replay unconfirmed inputs (side effects suppressed)
+       compare predicted result vs authoritative state; apply visual smoothing offset
+     else:
+       typed hard-reset/resync/spectator fallback, never guessing private/world state
+  -> remote objects: interpolate delayed received frames; bounded extrapolation only if policy allows
+  -> GUI/render uses decoupled smoothed visual transform and safe cosmetic cues
+```
+
+NET-03 *baseline application ACK* is not NET-02 *processed input sequence*, and neither is NET-01 *transport ACK*. Replay requires server-authenticated processed-input cursor/receipt linked to actor/world epoch; absence of such cursor returns UNSUPPORTED until adopted.
+
+## 4. Input ring, replay and deterministic constraints
+- `PredictedInputHistoryV1` per actor/session is bounded by **max ticks / bytes / CPU**; stores canonical schema, input sequence/tick, local predicted movement subset, RNG seed or substream identity when necessary, motor version, WorldEpoch and SideEffectGeneration. Entries are immutable; never blindly replay arbitrary scripts or network events. Use wrap-safe modular sequence comparisons and generation fences.
+- Predictions have **one source of motor semantics**: SIM-03 deterministic/pinned fixed-step movement subset, ideally shared pure update function invoked with fixed CORE-04 `dt` and stable collision-world inputs. With dynamic physics/partial snapshots, exact replay may be impossible; require approximate error envelope and explicit freeze/interpolation/hard correct fallback rather than making a false cross-platform bitwise guarantee. Floating point, SIMD, FMA, CPU arch, broadphase contact ordering and different assets can diverge. Golden replay must pin toolchain, FP mode, scene geometry revision, deterministic RNG and event order.
+- When authoritative snapshot for TickId T arrives: ensure actor/world/schema/visibility epoch and complete dependency set; restore only predicted locally owned movement subset to T, apply authoritative correction to prediction state, suppress one-time gameplay side effects during replay, re-run unacknowledged local actions T+1..current bounded max frames; compare position/orientation/velocity/contact and error. The server never rewinds its current WORLD-01 just to reconcile a client.
+- **Partial snapshot hazard:** if collision participants/vehicle/player body states are at inconsistent ticks, selectively predicting only one object against frozen stale others can generate wrong contacts. A declared dependency graph or rewind cohort must cover relevant interacting objects, and if missing, use non-predictive conservative mode, not simulated physics "as if" complete. Predicted spawns need temporary client ID -> server spawned EntityGen mapping and rollback policy; client-created projectiles/hits never become real without server authorization and canonical receipt.
+- **Replayed side effects** must not repeatedly execute sounds/particles, issue inventory mutations, money transactions, persistent save, grant loot or send input/network RPC. Event ledger `PredictedCosmeticEventIdV1` dedups purely cosmetic cues and revokes/updates predicted VFX under correction. GAME-04 owns accepted durable events; no client-side exactly-once gameplay guarantee.
+
+## 5. Interpolation, extrapolation and smoothing
+- Remote authoritative snapshots at times `t0,t1` can be interpolated using position lerp and quaternion slerp/normalized orientation where appropriate, with velocities for Hermite-like methods **only with validated finite values**. Render delay chosen per transport/jitter/variance, bounded and smoothed across ticks; if missing both sample endpoints, hold/slowly decay to last safe pose and surface connectivity state. Extrapolate at most approved ticks/time with max velocity/accel/turn cap, then freeze; never move a visible hidden entity into a new authorized-visibility region based on guessed data.
+- For local authoritative misprediction, **gameplay collision/ownership immediately uses new authoritative value**, while render offset may smooth small errors over short bounded window; large errors/teleport/dash/scene load/respawn cut to hard snap, avoid interpolating through walls. Camera anchor smoothing separate from SIM movement, don't ever feed smoothed render transform back into collision/hit detection.
+- Jitter buffer reorder handling with snapshot time, epoch, policy revocation, drop duplicates, max buffer bytes and time; anti-sawtooth monotonic estimate, bounded catch-up and explicit no predictive extrapolation if the target is uncertain. Quantization error and allowable correction thresholds depend on movement speed, game mode, platform tier and ownership, TBD with real benchmark.
+
+## 6. Lag compensation and hit validation: opt-in and abuse-limited
+- **Baseline: server-authoritative hit validation with no rewind**. Competitive shooters may need server-side lag-comp historical query to evaluate what a shooter was likely shown when command was emitted. That query is **bounded, trusted and narrowly scoped** per game mode, never global rollback of server now.
+- If enabled after owner/security ADR: collect bounded immutable history of **only approved collider/pose/query subset** after authoritative tick and before NET-03 projection. History indexes ServerTick, WorldEpoch, EntityGen, scene/physics content hash, hitbox version and data classification, with per-match bytes and TTL. Avoid persistent or hidden unauthorized history grants; history is server-only.
+- Command admission (NET-02/NET-06) validates authenticated sender/actor/weapon/match, ammo/cooldown, fire sequence/position origin, viewpoint, allowed view direction, firing rate, range, cover and rate. Derive candidate shot time from **server-observed receipt + constrained verified timesync/RTT window**, NOT a client-chosen "rewind 900ms" timestamp. Clamp shot age by game-type anti-peeker rules; high RTT does not entitle arbitrary historical visibility or increased range. Forged latency/delay/packet queue games need negative tests.
+- Rewind **read-only** collision/visibility query at bounded historical tick; validate sight line and collider world in approved fairness policy, generate canonical **GAME-04 damage intent** applied at *current* server tick only after permission, no mutation of historical WORLD-01 or replay of durable rewards. Occlusion/wall/door/destruction between shot and now needs explicit game-specific semantics; moving doors, teleport, same-actor double hit, projectiles/area-of-effect are not automatically hitscan rewind compatible. Security event logs are redacted.
+- Fairness is a **policy tradeoff**: latency compensation can improve high-RTT player experience and also disadvantage low-RTT victims ("shot behind cover"). Record fairness slices by RTT group, hit valid/rejected, error, peek exposure/target visibility and confidence; no one universal perfect setting, targets TBD after controlled pilot.
+
+## 7. Replay budgets, fallback and player experience
+Candidate profiles: `PREDICT_OWNER_MOTOR_ONLY`, `INTERPOLATE_REMOTE`, `NO_PREDICTION`, `PREDICT_SELECTED_INTERACTIONS` (latter experimental), `BOUNDED_SERVER_HIT_REWIND` opt-in. All return capabilities/UNKNOWN truthful; no assumption every game genre (RTS turn-based, ARPG ability animation, vehicle suspension, platform 2D) needs same policy. Avoid enabling all-world physics rollback as first implementation. Cpu replay worst-case = pending ticks × predicted actor/system work; fail gracefully on performance regression: upper bound resimulation ticks/frame and heap/history, oldest history eviction prompts hard reset/resync or prediction disable, never infinite catch-up/recursive jobs.
+Smoothing introduces visual error and perceived delay, not gameplay semantics. Allow user accessibility/sensory comfort smoothing within non-cheating bounds, but don't silently reduce server hitbox or run-time authority. Negative tests include visibility revocation during jitter, speculative VFX repeated, alt-tab/resume, tick wrap, reconnect with epoch change and low FPS.
+
+## 8. Security and data contracts
+- Bound client inputs per NET-02 principal (session, capability, actor gen), signed/authenticated NET-01 channel (crypto does not equal gameplay auth); ignore client health/position/hit result. No trusted client timestamp, clock offset, latency claims or local replay hash; hashes are diagnostics and can be forged.
+- On reconnect/role change NET-05 reauth, NET-03 visibility policy reset, old history invalidated, no stale client prediction applied to new server entity. NET-06 controls replay/flood/packet/clock spoof/hit exploit and logs; read-only lag-comp access remains server-side no external tool endpoint.
+- Editor/CLI/MCP operations only `Inspect/Preview/Validate/Stage/CommitPredictionProfile` via DATA-04 CAS and capability checks, no live privileged server rewind or hitbox edits. Game scripts may request cosmetic intent but not arbitrary predictor advancement or server state.
+- NFR privacy: redact player addresses, exact unseen collider traces, secret actor inventories/hits and tokens. Timing telemetry is aggregate/consented when relevant; allow logout/retention policy. Lack of measured confidence prevents calling synchronization “precise”.
+
+## 9. Necessary/important/future and stop gates
+**NECESSARY after owner-approved ADR and implemented prereqs:** one owned SIM-03 motor, NET-01 encrypted input/NET-02 validated server, NET-03 authenticated snapshot with processed-input cursor and CORE-04 tick, bounded client input ring/resimulation and error correction, remote interpolation, virtual impairment harness, negative client authority test and seeded replay. One local server+two clients, no paid service or external SDK required.
+**IMPORTANT:** optional limited server historical hit query for one approved game mode, hybrid predicted interactions, predicted spawn mapping, adaptive jitter buffer, 2D/3D/vehicle policies and full native/Web proving. **FUTURE:** all-world game rollback, multiregion split authoritative sim, sophisticated anti-wallhack and game-specific GPU prediction. No package or dependency unlocked in P00.
+See [ADR-0050](../adr/0050-net-04-bounded-client-prediction-authoritative-reconciliation.md), [matrix](../research/net-04-prediction-technology-license-matrix.md), [contracts](../contracts/net-04-prediction-reconciliation-api.md), [128 FUTURE tests](../testing/net-04-acceptance-matrix.md), and [benchmark protocol](../research/net-04-prediction-benchmark-protocol.md).
