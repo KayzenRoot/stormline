@@ -3,7 +3,7 @@
 **Data de verificação:** 2026-11-15  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
 **Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-NET-02` — Authoritative Dedicated Server, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main comprovada após pesquisa NET-02 PR #233:** `f0eb9cf8d02c7ce2d5e8a83314e638eb4bc457a0`, Docs Validation, auditoria, squash e readback objetivos. Reconciliação de checkpoint NET-02 ocorre em PR independente e depende de CI/auditoria próprios.  
+**Main comprovada após checkpoint NET-02 PR #234:** `56bcf317f5d5cc24a286f99a9f9bd1faf6e78cd6`, com Docs Validation, auditoria, squash e readback objetivos. Pesquisa PR #233 também integrou main `f0eb9cf8d02c7ce2d5e8a83314e638eb4bc457a0`.  
 **Evidence Bundle mais recente:** [NLE-P00-WO-002-NET-02](evidence/NLE-P00-WO-002-NET-02.md).
 
 ## 1. Fundação previamente aprovada
@@ -497,3 +497,9 @@
 
 ## 57. Próximo módulo após NET-02 checkpoint
 `NLE-P00-WO-002-NET-03`: **NET-03 — Replication & Interest Management**, catalog_order=46; future coding [#64](https://github.com/KayzenRoot/stormline/issues/64) OPEN/BLOCKED. Research only after NET-02 closeout audited/read back, no code unlocked.
+
+
+### 56.1 NET-02 — checkpoint PR #234 postmerge factual readback (VERIFIED)
+- Checkpoint [PR #234](https://github.com/KayzenRoot/stormline/pull/234) base research main `f0eb9cf8d02c7ce2d5e8a83314e638eb4bc457a0`, final audited HEAD `1fb87a888aff0f9d29e73b8d05c1657bc1f303af`, [Docs Validation #43712307674](https://github.com/KayzenRoot/stormline/actions/runs/43712307674) **SUCCESS** job #132806329013 (Source Pack/local links, DAG, registry, Zcode blocked selector), [pt-BR audit #6894088168](https://github.com/KayzenRoot/stormline/pull/234#issuecomment-6894088168) **APPROVED documentary-only**, normal squash main `56bcf317f5d5cc24a286f99a9f9bd1faf6e78cd6`. [Actual readback #6894095820](https://github.com/KayzenRoot/stormline/pull/234#issuecomment-6894095820) verified main/PR/registry and future coding issue #63 OPEN/BLOCKED. Research [#232](https://github.com/KayzenRoot/stormline/issues/232) CLOSED after this objective readback.
+- Actual merged registry: **45/80 research documented (56.25%), 35 pending, 0 runtime**, all **80/80** `work_order_status=BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`, `release_class=UNDECIDED`. Sole registry NET-02 research_status changed and no code/SDK/dependencies adopted.
+- ADR-0048 remains PROPOSED, NLE-D009 engine license OPEN; 128 N02-T001..T128 **FUTURE/NOT EXECUTED**. No dedicated server/native headless GPUless proof, game build, cloud hosting, anti-cheat or measured performance. This independent historical closeout PR changes only checkpoint/backlog/research WO/Evidence, NOT registry/CI/code and itself requires exact-final-HEAD Docs Validation, pt-BR audit, squash and main readback before NET-03 research.
