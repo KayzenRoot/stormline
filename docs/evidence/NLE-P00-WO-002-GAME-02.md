@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-02 Gameplay Scripting & API
 
-**STATUS: RESEARCH PR #213 OPEN; INITIAL DOCS VALIDATION SUCCESS ON PRE-EVIDENCE HEAD `614c0b6bc1a85bd137fab874789bf354cc446838`; THIS EVIDENCE UPDATE REQUIRES ITS OWN FINAL-HEAD CI; AUDIT/MERGE/CHECKPOINT PENDING. NO SCRIPT ENGINE.**  
+**STATUS: RESEARCH PR #213 APPROVED/SQUASH-MERGED; FINAL EXACT-HEAD DOCS VALIDATION SUCCESS; SEPARATE CHECKPOINT PR PENDING ITS OWN CI/AUDIT/SQUASH/READBACK. NO SCRIPT ENGINE.**  
 **2026-11-15 | Research [#212](https://github.com/KayzenRoot/stormline/issues/212) | Future code [#58](https://github.com/KayzenRoot/stormline/issues/58) OPEN/BLOCKED | BASE main `8b12b71f090974e7c909265cb249f3fec297c89e`.**
 
 ## 1. Source Pack and Context Lock
@@ -36,9 +36,9 @@ GAME-01 research #208/PR #209, checkpoint #210 and closeout #211 merged; main SH
 | 128 FUTURE acceptance tests | NOT EXECUTED |
 | VM CPU/memory/GC/host call/latency/p95/p99 benchmark | NOT RUN |
 | Fuzz/ASan/UBSan/TSan/security exploit proof | NOT RUN |
-| Objective pt-BR documentary audit | PENDING |
-| Research PR squash/main readback | PENDING |
-| Separate checkpoint PR CI/audit/squash/readback | PENDING |
+| Objective pt-BR documentary audit | APPROVED documentary-only [comment #6892661141](https://github.com/KayzenRoot/stormline/pull/213#issuecomment-6892661141), no known HIGH/CRITICAL in scoped eight-doc diff. |
+| Research PR squash/main readback | PR #213 normal squash main `bfefc3075947bd984c70b0013b44c4e34d253190`, readback verified. |
+| Separate checkpoint PR CI/audit/squash/readback | PENDING own exact-final-HEAD Docs Validation/pt-BR objective audit/normal squash/main readback. |
 
 ## 5. Risk register and negative evidence
 - **Host callback privilege:** Luau sandbox can be defeated by unsafe C++ bindings; no raw entity pointers, FFI, OS/network or unchecked reflection. Source typecheck is not sandbox proof.
@@ -56,3 +56,8 @@ Only after exact-final-HEAD research PR CI/audit/squash/main readback and **sepa
 
 ## 7. Audit output contract
 Objective pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED; BASE/HEAD SHA, changed docs and canonical fingerprints, official license/VM/host API/adversarial security/capability/hot reload ownership and preview/recovery, actual CI and negative evidence, 128 tests FUTURE, exact research-status diff and postmerge readback. No "completed" based solely on a comment.
+
+## 8. Audited research merge evidence
+- Research [PR #213](https://github.com/KayzenRoot/stormline/pull/213), exactly eight Markdown documents, BASE `8b12b71f090974e7c909265cb249f3fec297c89e`, final HEAD `03f2b2a15cfeeb65631cfdd1912183e5e4f25e11`, [Docs Validation #43701714741](https://github.com/KayzenRoot/stormline/actions/runs/43701714741) SUCCESS job #132774084828; objective pt-BR audit #6892661141 APPROVED documentary only.
+- Normal squash main `bfefc3075947bd984c70b0013b44c4e34d253190`, readback verified. No Luau/Lua/WASM code built or executed, no VM rights adopted; 128 future cases NOT EXECUTED.
+- Separate checkpoint PR shall be independently validated before registry research status is canonical. Future code #58 remains OPEN/BLOCKED.
