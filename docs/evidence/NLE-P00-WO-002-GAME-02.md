@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-02 Gameplay Scripting & API
 
-**STATUS: RESEARCH PR #213 APPROVED/SQUASH-MERGED; FINAL EXACT-HEAD DOCS VALIDATION SUCCESS; SEPARATE CHECKPOINT PR PENDING ITS OWN CI/AUDIT/SQUASH/READBACK. NO SCRIPT ENGINE.**  
+**STATUS: RESEARCH PR #213 AND CHECKPOINT PR #214 BOTH APPROVED/SQUASH-MERGED; EACH HAD EXACT-HEAD DOCS VALIDATION AND PT-BR OBJECTIVE AUDIT; MAIN CHECKPOINT/REGISTRY READBACK VERIFIED AT `5c5d3db6c4f58ebc2c23fcc89fb3091864e8d98e`; ISSUE #212 CLOSED. PR #215 RECORDS READBACK; NO SCRIPT ENGINE.**  
 **2026-11-15 | Research [#212](https://github.com/KayzenRoot/stormline/issues/212) | Future code [#58](https://github.com/KayzenRoot/stormline/issues/58) OPEN/BLOCKED | BASE main `8b12b71f090974e7c909265cb249f3fec297c89e`.**
 
 ## 1. Source Pack and Context Lock
@@ -38,7 +38,9 @@ GAME-01 research #208/PR #209, checkpoint #210 and closeout #211 merged; main SH
 | Fuzz/ASan/UBSan/TSan/security exploit proof | NOT RUN |
 | Objective pt-BR documentary audit | APPROVED documentary-only [comment #6892661141](https://github.com/KayzenRoot/stormline/pull/213#issuecomment-6892661141), no known HIGH/CRITICAL in scoped eight-doc diff. |
 | Research PR squash/main readback | PR #213 normal squash main `bfefc3075947bd984c70b0013b44c4e34d253190`, readback verified. |
-| Separate checkpoint PR CI/audit/squash/readback | PENDING own exact-final-HEAD Docs Validation/pt-BR objective audit/normal squash/main readback. |
+| Separate checkpoint PR #214 exact-head CI | [Docs Validation #43701981386](https://github.com/KayzenRoot/stormline/actions/runs/43701981386) SUCCESS, job #132774894348 on final HEAD `66a153b53fb660f4b602f6e0ab598b1aa8ef9fe3`, all four steps SUCCESS. |
+| Checkpoint #214 pt-BR objective audit | APPROVED documentary only [comment #6892695993](https://github.com/KayzenRoot/stormline/pull/214#issuecomment-6892695993), no known HIGH/CRITICAL scoped doc diff. |
+| Checkpoint #214 squash/main readback | Normal squash merge `5c5d3db6c4f58ebc2c23fcc89fb3091864e8d98e`, main readback 80 total, 40 researched, 40 pending, 0 ready, ALL 80 BLOCKED; #58 OPEN/BLOCKED. Research issue #212 CLOSED. |
 
 ## 5. Risk register and negative evidence
 - **Host callback privilege:** Luau sandbox can be defeated by unsafe C++ bindings; no raw entity pointers, FFI, OS/network or unchecked reflection. Source typecheck is not sandbox proof.
@@ -51,8 +53,8 @@ GAME-01 research #208/PR #209, checkpoint #210 and closeout #211 merged; main SH
 - **Privacy:** debugger, exception trace or MCP could leak secret game/world/player state; permissioned sanitized telemetry only. Third-party rights/SBOM and NLE-D009 engine software license open.
 No known HIGH/CRITICAL in purely documentary scope can be concluded only after PR audit; live risk mitigation and sandbox security are NOT PROVEN.
 
-## 6. Proposed checkpoint delta (NOT PROMOTED)
-Only after exact-final-HEAD research PR CI/audit/squash/main readback and **separate checkpoint PR** exact-final-HEAD CI/audit/squash/main readback, GAME-02 research_status alone changes RESEARCH_PENDING → RESEARCH_DOCUMENTED_ADR_PROPOSED. Then **40/80 (50%) researched, 40 pending, 0 runtime modules**. All 80 code WOs remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null. Coding issue #58 OPEN/BLOCKED, ADR-0043 PROPOSED, software license NLE-D009 OPEN. Next GAME-03 #59 research only; NO Zcode coding unlock.
+## 6. Applied checkpoint delta and main readback
+Both research PR #213 and separate checkpoint PR #214 passed exact-final-HEAD CI/audit/squash/readback. Exactly one registry delta was applied: GAME-02 research_status RESEARCH_PENDING → RESEARCH_DOCUMENTED_ADR_PROPOSED. **40/80 (50%) research documented, 40 pending, 0 runtime modules**. All 80 coding WOs remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null. Code #58 OPEN/BLOCKED; ADR-0043 PROPOSED; release class UNDECIDED; engine license NLE-D009 OPEN. Main readback SHA `5c5d3db6c4f58ebc2c23fcc89fb3091864e8d98e`; issue #212 CLOSED. Next GAME-03 #59 research only after readback-closeout #215, not coding.
 
 ## 7. Audit output contract
 Objective pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED; BASE/HEAD SHA, changed docs and canonical fingerprints, official license/VM/host API/adversarial security/capability/hot reload ownership and preview/recovery, actual CI and negative evidence, 128 tests FUTURE, exact research-status diff and postmerge readback. No "completed" based solely on a comment.
