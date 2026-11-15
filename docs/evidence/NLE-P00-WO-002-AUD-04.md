@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-04 Music, Dialogue & Cinematic Audio Research
 
-**STATUS: RESEARCH PR #205 APPROVED/SQUASH-MERGED; CHECKPOINT PR #206 OPEN; ITS DOCS VALIDATION PASSED ON PRIOR HEAD `c932772ec4791b33360d65ebaf8066b604addb8c`; FINAL EVIDENCE UPDATE REQUIRES REVALIDATION; CHECKPOINT AUDIT/MERGE PENDING. NO ENGINE CODE OR AUDIO CONTENT.**  
+**STATUS: RESEARCH PR #205 AND CHECKPOINT PR #206 APPROVED/SQUASH-MERGED; BOTH EXACT-HEAD DOCS VALIDATION AND OBJECTIVE AUDITS PASSED; MAIN READBACK VERIFIED AT `7cc271300709b41e00ff9a42bc71f4eb0a304a39`; PR #207 RECORDS READBACK CLOSEOUT. NO ENGINE CODE OR AUDIO CONTENT.**  
 **2026-11-14 | Research [#204](https://github.com/KayzenRoot/stormline/issues/204) | Future coding [#55](https://github.com/KayzenRoot/stormline/issues/55) OPEN/BLOCKED | BASE main `1d0280674385a034b68573aeb6a98db243f34ae1`**.
 
 ## 1. Canonical source check and Context Lock
@@ -38,8 +38,9 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 | Audio sync/latency/CPU/memory/xrun benchmark | NOT RUN |
 | Objective pt-BR documentary audit | APPROVED documentary only [comment #6886764559](https://github.com/KayzenRoot/stormline/pull/205#issuecomment-6886764559), no known HIGH/CRITICAL in scoped docs |
 | Research PR #205 squash/main readback | Normal squash merge `51c092719cfc7515233bbaf7ef74d3d6d24a536a`, main readback verified |
-| Checkpoint PR #206 exact-head CI | [Run #43659659164](https://github.com/KayzenRoot/stormline/actions/runs/43659659164) SUCCESS on pre-evidence-update HEAD `c932772ec4791b33360d65ebaf8066b604addb8c`, job #132645897013; all four Docs Validation steps SUCCESS. This Evidence update creates a new HEAD and must be revalidated. |
-| Checkpoint PR #206 audit/squash/readback | PENDING; objective audit and normal squash/main readback required |
+| Checkpoint PR #206 exact-head CI | [Run #43659789339](https://github.com/KayzenRoot/stormline/actions/runs/43659789339) SUCCESS on final HEAD `48c09e9a1b2f77c92a7ccfed02fa3d9cb8250386`, job #132646289280; all four Docs Validation steps SUCCESS. |
+| Checkpoint PR #206 objective audit | APPROVED documentary-only [comment #6886818593](https://github.com/KayzenRoot/stormline/pull/206#issuecomment-6886818593), no known HIGH/CRITICAL in five-file diff. |
+| Checkpoint PR #206 squash/readback | Normal squash merge `7cc271300709b41e00ff9a42bc71f4eb0a304a39`; main registry/checkpoint readback verified. |
 
 ## 5. Risk register (future ELEVATED; not runtime mitigated)
 - Music transition phase mismatch/click/gap, late stem prefetch, state flapping or duplicate stinger.
@@ -50,8 +51,8 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 - FMOD/Wwise license boundary misunderstood; unlicensed music/recording/voice/translation content shipped.
 Proposed controls are described in ADR/architecture/contracts. **None is implemented or validated.**
 
-## 6. Proposed checkpoint delta (not promoted)
-Only after research PR exact-final-HEAD CI/audit/squash/readback and separate checkpoint PR exact-final-HEAD CI/audit/squash/readback: change only AUD-04 `research_status` from `RESEARCH_PENDING` to `RESEARCH_DOCUMENTED_ADR_PROPOSED`; count becomes **38/80 (47.5%)** documented, **42 pending**, **0 runtime modules implemented**. All 80 coding packets remain blocked, `executor_ready=false`, `approved_adr=null`; #55 OPEN/BLOCKED; ADR-0041 PROPOSED. Next research is **GAME-01 #56**, subject to checkpoint approval/readback. No implementation authorization.
+## 6. Applied checkpoint delta and main readback
+Research PR #205 and separate checkpoint PR #206 are merged and read back. The only registry delta is AUD-04 `research_status` from `RESEARCH_PENDING` to `RESEARCH_DOCUMENTED_ADR_PROPOSED`. Count: **38/80 (47.5%)** research documented, **42 pending**, **0 runtime modules implemented**. All 80 coding packets remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`; #55 OPEN/BLOCKED; ADR-0041 PROPOSED; release class UNDECIDED. Checkpoint merge/readback SHA `7cc271300709b41e00ff9a42bc71f4eb0a304a39`. Next research is **GAME-01 #56** after readback-closeout PR #207. No implementation authorization.
 
 ## 7. Objective review contract
 Report pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED with exact base/final SHA, eight-file diff, Source Pack fingerprints, actual Docs Validation workflow/job, license/rights/privacy and ownership review, 128 cases NOT EXECUTED, no runtime/benchmark claims, and exact checkpoint delta.

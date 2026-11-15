@@ -3,7 +3,7 @@
 **Data de verificação:** 2026-11-14  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
 **Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-AUD-04` — Music, Dialogue & Cinematic Audio, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #205:** `51c092719cfc7515233bbaf7ef74d3d6d24a536a`.  
+**Main SHA comprovado após o merge da PR #206 (checkpoint AUD-04):** `7cc271300709b41e00ff9a42bc71f4eb0a304a39`.  
 **Evidence Bundle mais recente:** [NLE-P00-WO-002-AUD-04](evidence/NLE-P00-WO-002-AUD-04.md).
 
 ## 1. Fundação previamente aprovada
@@ -386,5 +386,7 @@
 - **All 128 FUTURE runtime cases NOT EXECUTED**; no audio playback/PCM fixtures, music stems, dialogue/VO assets, caption renderer, timeline integration, native/Web/headless build, beat/sample drift measurement, A/V loopback, xrun/CPU/memory benchmark, accessibility user test, fuzz/ASan/TSan or voice/plugin execution. No claim of glitch-free, sample-accurate audible, WCAG-certified, intelligible or cross-platform-parity audio. ADR-0041 remains PROPOSED, release class UNDECIDED.
 - **Research tally after this checkpoint reconciliation:** **38/80 research modules documented (47.5%)**, **42 RESEARCH_PENDING**, **0/80 runtime modules implemented**. All 80 coding packets remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`; future code #55 OPEN/BLOCKED. No Zcode coding authorization.
 
-## 46. Próximo módulo de pesquisa (somente após aprovação desta reconciliação)
-`NLE-EXEC-WO-GAME-01-001`: **GAME-01 — Input & Control Mapping**, catalog_order=39, future implementation issue [#56](https://github.com/KayzenRoot/stormline/issues/56) OPEN/BLOCKED. Start only after AUD-04 checkpoint PR exact-HEAD Docs Validation, pt-BR audit, normal squash and main readback. Research only; all 80 code packets remain blocked.
+- **Checkpoint reconciliation completed:** [PR #206](https://github.com/KayzenRoot/stormline/pull/206), BASE `51c092719cfc7515233bbaf7ef74d3d6d24a536a`, final HEAD `48c09e9a1b2f77c92a7ccfed02fa3d9cb8250386`, [Docs Validation #43659789339](https://github.com/KayzenRoot/stormline/actions/runs/43659789339) SUCCESS job #132646289280, objective pt-BR audit [comment #6886818593](https://github.com/KayzenRoot/stormline/pull/206#issuecomment-6886818593) APPROVED, normal squash merge `7cc271300709b41e00ff9a42bc71f4eb0a304a39`; main readback confirms the 80-module registry and checkpoint. Only AUD-04 research_status changed.
+
+## 46. Próximo módulo de pesquisa
+`NLE-EXEC-WO-GAME-01-001`: **GAME-01 — Input & Control Mapping**, catalog_order=39, future implementation issue [#56](https://github.com/KayzenRoot/stormline/issues/56) OPEN/BLOCKED. AUD-04 checkpoint PR #206 has passed CI, audit, normal squash and main readback. Start this next research only after the AUD-04 readback-closeout PR #207 is integrated and read back. Research only; all 80 code packets remain blocked.
