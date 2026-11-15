@@ -64,3 +64,8 @@ Base `9bc9d04006d3a13726a21cd43992561d663586c7`; checkpoint `51f4baa3950d98b4aee
 
 ## EVIDENCE
 [NET-01 evidence bundle](../evidence/NLE-P00-WO-002-NET-01.md); initial PR/CI/merge/checkpoint pending, no invented result.
+
+
+## Observed research PR #229 and independent checkpoint proposal
+- Research [PR #229](https://github.com/KayzenRoot/stormline/pull/229) BASE `9bc9d04006d3a13726a21cd43992561d663586c7`, audited final HEAD `52bd5efbf217424317b8a6e7b6f448bb964b560e`, 8 new Markdown (542 additions, zero deletions), [Docs Validation #43710700928](https://github.com/KayzenRoot/stormline/actions/runs/43710700928) **SUCCESS** job #132801392100, all critical steps Source Pack/link/DAG/registry/Zcode blocked selector SUCCESS, [pt-BR audit #6893862073](https://github.com/KayzenRoot/stormline/pull/229#issuecomment-6893862073) **APPROVED documentary-only**, normal squash main `2605e4572abde9349841cfa63d50cb72b861d33c`, main/PR/contract readback verified. Exactly 128 unique tests N01-T001..T128 specified, ALL FUTURE/NOT EXECUTED, no networking code/benchmark.
+- Separate checkpoint PR BASE `2605e4572abde9349841cfa63d50cb72b861d33c` scoped to five files checkpoint/backlog/registry/research WO/Evidence Bundle with **sole NET-01 research_status transition**. Expected 44/80 research, 36 pending, zero engine, all 80/80 code packets BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null, release_class=UNDECIDED. Future coding #62 OPEN/BLOCKED, ADR-0047 PROPOSED. Checkpoint own exact-final-HEAD CI/audit/squash/readback PENDING at creation. No SDK/crypto/backend adopted.
