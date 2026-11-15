@@ -777,7 +777,7 @@
       "catalog_acceptance": "Cenário de posições/obstáculos com áudio validado e custos medidos.",
       "id": "NLE-EXEC-WO-AUD-02-001",
       "file": "docs/queue/work-orders/AUD-02.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",

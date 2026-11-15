@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-02 Spatial Audio & Acoustic World
 
-**STATUS: RESEARCH PR #199 DRAFT, INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT/MERGE AND SEPARATE CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #199 APPROVED/SQUASH-MERGED; SEPARATE CHECKPOINT PR PENDING ITS OWN CI/AUDIT. NO ENGINE CODE.**  
 2026-11-14 | Research [#198](https://github.com/KayzenRoot/stormline/issues/198) | Future implementation [#53](https://github.com/KayzenRoot/stormline/issues/53) OPEN/BLOCKED. BASE main `90125e6885603ad260f0d355067991699577a9f6`. Branch `docs/NLE-P00-WO-002-AUD-02-spatial-acoustics-research`.
 
 ## 1. Source check, Context Lock, planning baseline
@@ -22,14 +22,15 @@ No imported third-party vendor sources, SOFA HRTF datasets, real recording/IR, 3
 | Gate | Observation |
 |---|---|
 | Research issue #198 and branch from exact main base | OBSERVED |
-| Research PR and initial HEAD | [PR #199](https://github.com/KayzenRoot/stormline/pull/199) Draft, BASE `90125e6885603ad260f0d355067991699577a9f6`, initial HEAD `7fa7be4ec3c265d9f869333bfad36077d1cca407`, exactly eight new Markdown files; updating Evidence Bundle produces a new final HEAD. |
-| Initial Docs Validation (not final after Evidence revision) | [Run #43656383853](https://github.com/KayzenRoot/stormline/actions/runs/43656383853) SUCCESS on initial HEAD `7fa7be4ec3c265d9f869333bfad36077d1cca407`, job #132635710684; Source Pack/local links, module taxonomy/DAG, WO registry and blocked Zcode selector all SUCCESS. New HEAD must be independently revalidated. |
-| Other SonarCloud/Socket/security CI at exact HEAD | NOT VERIFIED |
+| Research PR and final HEAD | [PR #199](https://github.com/KayzenRoot/stormline/pull/199) MERGED, base `90125e6885603ad260f0d355067991699577a9f6`, final audited HEAD `5ddd0fb31fdcb0fb245ffd59e611d8966cfc6820`, exactly eight new Markdown files, no code/registry edit. |
+| Initial Docs Validation (not final after Evidence revision) | [Run #43656383853](https://github.com/KayzenRoot/stormline/actions/runs/43656383853) SUCCESS on initial HEAD `7fa7be4ec3c265d9f869333bfad36077d1cca407`, job #132635710684; Source Pack/local links, module taxonomy/DAG, WO registry and blocked Zcode selector all SUCCESS. Final exact-head run also succeeded, separately observed as recorded below. |
+| Final exact-HEAD Docs Validation | [Run #43656427484](https://github.com/KayzenRoot/stormline/actions/runs/43656427484) SUCCESS at HEAD `5ddd0fb31fdcb0fb245ffd59e611d8966cfc6820`, job #132635839155: Source Pack/local links, taxonomy/DAG, registry and Zcode blocked selector all SUCCESS. | 
+| Other SonarCloud/Socket/security CI at exact HEAD | NOT VERIFIED on final HEAD, not marked PASS |
 | Native/Web/headless audio engine or DSP performance | NOT IMPLEMENTED / NOT TESTED |
 | 128 future runtime/perceptual/security/benchmark cases | ALL FUTURE / NOT EXECUTED |
-| Objective pt-BR audit | PENDING |
-| Research PR normal squash/main readback | PENDING |
-| Distinct checkpoint PR exact HEAD CI/audit/squash/readback | PENDING |
+| Objective pt-BR audit | APPROVED documentary only [comment #6886329762](https://github.com/KayzenRoot/stormline/pull/199#issuecomment-6886329762) after final-head CI, no known HIGH/CRITICAL documentary diff; no runtime security proof |
+| Research PR normal squash/main readback | PR #199 normal squash main `cf781105e653a67d646aa97ff3ec72a8124c2686`, readback verified |
+| Distinct checkpoint PR exact HEAD CI/audit/squash/readback | PENDING at this draft; requires separate exact HEAD CI, objective audit, normal squash and main readback |
 
 ## 4. Security and error risks, explicitly NOT mitigated yet
 FUTURE HIGH concerns: malicious SOFA/HDF5 metadata and decompression bombs, IR/path/room graph DoS, unbounded ray jobs starving AUD-01 decoder, stale acoustic mesh/World/Origin/DeviceEpoch causing use-after-free, client/acoustic debug leaking hidden NPC positions, personal biometric-like HRTF profile handling without consent, inaccurate fallback in unloaded world, proprietary/dataset redistribution. Architectural mitigations include DATA-03 sandbox/quotas/rights, CORE-03 bounded ray jobs, WORLD-03 leases, generation-scoped accepted acoustic samples, AUD-01 RT immutable plans and deferred lifetime, privacy roles and opt-in personalized HRTF; **none implemented or security-tested**. No claim engine ready.
