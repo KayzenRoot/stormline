@@ -3,6 +3,8 @@
 **Date:** 2026-11-15 | **Research issue:** #212 | **Future implementation:** #58 OPEN/BLOCKED  
 **BASE main:** `8b12b71f090974e7c909265cb249f3fec297c89e`. **P00 DOCUMENTATION ONLY.** Research risk LOW; future script-host sandbox + privileges ELEVATED; hostile untrusted scripts or irreversible privileged capabilities require independent HIGH_ASSURANCE review/proof before authorization. Release class UNDECIDED; engine code license NLE-D009 OPEN.
 
+**RESEARCH PR #213 APPROVED AND MERGED:** [PR #213](https://github.com/KayzenRoot/stormline/pull/213), final audited HEAD `03f2b2a15cfeeb65631cfdd1912183e5e4f25e11`, [Docs Validation #43701714741](https://github.com/KayzenRoot/stormline/actions/runs/43701714741) SUCCESS job #132774084828, pt-BR audit comment #6892661141 APPROVED documentary only, normal squash main `bfefc3075947bd984c70b0013b44c4e34d253190`, main readback verified. Separate checkpoint PR requires own exact-head CI/audit/squash/main readback. 128 future tests NOT EXECUTED; code #58 OPEN/BLOCKED.
+
 ## OBJECTIVE
 Research and specify the Stormline-owned gameplay scripting and public API layer across native Windows/Linux/macOS, headless server, future Web: Luau/Lua 5.4/Wasm runtime candidates, sandbox/capabilities and C++ binding safety, typed graph/text shared IR, deterministic WORLD-01 ECS snapshot/commands, CORE-03 job schedule/tick fences, GAME-01 action frames, hot reload/state migrations, diagnostics/debug/telemetry, reliable authoring via Editor/CLI/MCP, official SDK/licenses, 128 future tests and benchmark proof plan.
 
@@ -88,4 +90,4 @@ BASE main `8b12b71f090974e7c909265cb249f3fec297c89e`.
 - DATA-04 serialization `7e88d4fecaa83c9922f255087df9f97f6300b61f`
 
 ## EVIDENCE
-[Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-02.md). At first write, PR/CI/audit/merge CHECKS pending.
+[Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-02.md). Research PR #213 exact-final-head Docs Validation, pt-BR audit, normal squash and main readback complete. Separate checkpoint PR pending its own CI/audit/squash/readback.

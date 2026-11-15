@@ -886,7 +886,7 @@
       "catalog_acceptance": "Modificar regras sem recompilar Core e com limites de segurança.",
       "id": "NLE-EXEC-WO-GAME-02-001",
       "file": "docs/queue/work-orders/GAME-02.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
