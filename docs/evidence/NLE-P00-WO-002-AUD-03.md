@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-03 DSP & Sound Graph Research
 
-**STATUS: RESEARCH BRANCH IN PROGRESS; PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #202 DRAFT, INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE.**  
 **2026-11-14 | Research [#201](https://github.com/KayzenRoot/stormline/issues/201) | Future coding [#54](https://github.com/KayzenRoot/stormline/issues/54) OPEN/BLOCKED | BASE main `f4e954dc41ac86b8b6dfb310743adc27d3ba6d41`**, research branch `docs/NLE-P00-WO-002-AUD-03-dsp-research`.
 
 ## 1. Canonical source check and Context Lock
@@ -22,8 +22,8 @@ No C++/Web/WASM engine, audio playback/output, original PCM fixture, waveform, F
 | Gate | Observation |
 |---|---|
 | Research issue #201 and branch from exact checked main | OBSERVED |
-| Research PR exact HEAD, diff and links | PENDING |
-| GitHub Docs Validation final exact HEAD | NOT VERIFIED |
+| Research PR and initial HEAD | [PR #202](https://github.com/KayzenRoot/stormline/pull/202) DRAFT, BASE `f4e954dc41ac86b8b6dfb310743adc27d3ba6d41`, initial HEAD `737ae93e43c5d9a4b0e30fe83a93dcaeb9ff660a`, exactly eight new Markdown docs; Evidence update creates a new final HEAD. |
+| Initial Docs Validation (not final after Evidence revision) | [Run #43657613023](https://github.com/KayzenRoot/stormline/actions/runs/43657613023) SUCCESS on initial HEAD `737ae93e43c5d9a4b0e30fe83a93dcaeb9ff660a`, job #132639555082; Source Pack/local links, module DAG, WO registry and blocked Zcode selector all SUCCESS. Revalidate the resulting final HEAD. |
 | SonarCloud/Socket or other security check exact HEAD | NOT VERIFIED |
 | Native/headless/Web engine or DSP/audio output | NOT IMPLEMENTED / NOT TESTED |
 | 128 future runtime/security/performance tests | ALL FUTURE / NOT EXECUTED |
