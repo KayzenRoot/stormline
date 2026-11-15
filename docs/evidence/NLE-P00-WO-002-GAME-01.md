@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-01 Input & Control Mapping Research
 
-**STATUS: RESEARCH BRANCH AUTHORED; PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. DOCUMENTATION ONLY / NO GAME INPUT ENGINE.**  
+**STATUS: RESEARCH PR #209 OPEN; initial Docs Validation PASS on pre-evidence HEAD `b0dc2193e794210ccc1c870808439b1fb17aaf1f`; final evidence update requires its own exact-head CI; audit/merge/checkpoint PENDING. DOCUMENTATION ONLY / NO GAME INPUT ENGINE.**  
 **2026-11-15 | Research [#208](https://github.com/KayzenRoot/stormline/issues/208) | Future coding [#56](https://github.com/KayzenRoot/stormline/issues/56) OPEN/BLOCKED | BASE main `0a3aa77229f5663e55fdf9b8b99a786c9edb1cc9`.**
 
 ## 1. Canonical source and preflight
@@ -27,8 +27,8 @@ No code/vendor license has been incorporated, accepted for shipment or tested.
 | Gate | Status |
 |---|---|
 | Research #208 and branch from exact main | OBSERVED |
-| Exactly 8 scoped Markdown files and PR diff | PENDING |
-| Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector exact HEAD | PENDING |
+| Exactly 8 scoped Markdown files and PR diff | PR #209 Draft inspected, exactly 8 added Markdown files, no runtime/source/SDK/CI changes |
+| Initial Docs Validation on previous HEAD | [Run #43699839456](https://github.com/KayzenRoot/stormline/actions/runs/43699839456) SUCCESS on `b0dc2193e794210ccc1c870808439b1fb17aaf1f`, job #132768343537, Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector all SUCCESS. This evidence revision changes the HEAD, so final-head revalidation is required. |
 | Relevant extra security/CodeQL/third-party scans | NOT VERIFIED |
 | Platform input event pump/device backend implemented | NO |
 | Editor/client/export or Web/headless runtime built | NO |
