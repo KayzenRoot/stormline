@@ -46,3 +46,10 @@ After research PR exact-final-HEAD Docs Validation, audit APPROVED, normal squas
 
 ## 6. Stop conditions
 Stop on stale source, unexpected diff, DAG inflation, duplicated owner evaluator/clock/mixer, unsupported codec/license, arbitrary executable plugin, RT callback allocation/lock/IO, timeline drift, editor/runtime mismatch, failed CI, count mismatch, HIGH/CRITICAL or code unlock. Research risk LOW; future runtime/audio/VFX/sync risk ELEVATED. No runtime security claim.
+
+## Research PR #273 — actual approval, merge and main readback
+- [PR #273](https://github.com/KayzenRoot/stormline/pull/273) BASE `67e6af436f4985474b2e6dc5aa47183c32113230`, final HEAD `9e2d6164b27d8bdcb9518bbc34d2b387e71b3c23), exactly eight new Markdown. [Docs Validation #43736503999](https://github.com/KayzenRoot/stormline/actions/runs/43736503999) SUCCESS exact final HEAD/job #132880165544; [audit #6897757289](https://github.com/KayzenRoot/stormline/pull/273#issuecomment-6897757289) APPROVED docs only. Normal squash merge SHA `692fdf625102c4f82f451c78683dddca6d1882b2`, main identical, API readback verified. Registry unchanged in research PR.
+- Registry actual EDIT-06 remains RESEARCH_PENDING, code #73 OPEN/BLOCKED, 54/80 research, 26 pending, all 80 code WOs BLOCKED. 128 E06 tests FUTURE/NOT EXECUTED; ADR-0058 PROPOSED; no editor/runtime/audio/VFX/animation/export.
+
+## Independent checkpoint PR — proposed, not yet approved
+- BASE `692fdf625102c4f82f451c78683dddca6d1882b2`, exactly FIVE modified files: checkpoint, backlog, registry, WO and Evidence. Sole registry delta EDIT-06 `research_status=RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`. Target 55/80 (68.75%), 25 pending, zero engine; all 80 code packets remain BLOCKED, executor_ready=false, approved_adr=null, release_class=UNDECIDED. Code #73 OPEN/BLOCKED; #272 closes only after checkpoint readback. Own CI/audit/merge/readback pending.

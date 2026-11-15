@@ -85,3 +85,8 @@ Refresh before writes; any critical source change makes Context Lock STALE and r
 
 ## EVIDENCE BUNDLE
 See [Evidence](../evidence/NLE-P00-WO-002-EDIT-06.md); record only observed base/head/diff/CI/audit/merge/readback. No inferred runtime/test/benchmark success.
+
+## Research PR #273 APPROVED/MERGED; checkpoint PR initiated
+- [Research PR #273](https://github.com/KayzenRoot/stormline/pull/273): BASE `67e6af436f4985474b2e6dc5aa47183c32113230`, final HEAD `9e2d6164b27d8bdcb9518bbc34d2b387e71b3c23`, exactly eight new Markdown. [Docs Validation #43736503999](https://github.com/KayzenRoot/stormline/actions/runs/43736503999) SUCCESS job #132880165544, all Source Pack/links, DAG, registry and blocked selector steps SUCCESS. [Audit #6897757289](https://github.com/KayzenRoot/stormline/pull/273#issuecomment-6897757289) APPROVED documentary only; normal squash and factual main/API readback `692fdf625102c4f82f451c78683dddca6d1882b2`. No code/SDK/CI/checkpoint/backlog/registry changes in research PR.
+- 128 E06 IDs unique, FUTURE/NOT EXECUTED. ADR-0058 PROPOSED, NLE-D009 OPEN, #73 OPEN/BLOCKED. No runtime, preview, export, sample sync or native/Web tests.
+- Independent checkpoint PR from main `692fdf625102c4f82f451c78683dddca6d1882b2` modifies exactly checkpoint/backlog/registry/this WO/Evidence. Only registry semantic delta is EDIT-06 research_status. Own CI/audit/merge/readback required before #272 closure. Target 55/80, 25 pending, all 80 code WOs blocked.
