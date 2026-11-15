@@ -1086,7 +1086,7 @@
       "catalog_acceptance": "Testes adversariais e ausência de bypass de autoridade.",
       "id": "NLE-EXEC-WO-NET-06-001",
       "file": "docs/queue/work-orders/NET-06.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
