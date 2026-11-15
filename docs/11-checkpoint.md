@@ -3,7 +3,7 @@
 **Data de verificação:** 2026-11-15  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
 **Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GAME-04` — Gameplay Systems & Event Bus, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Última main comprovada após o merge da PR #221 (pesquisa GAME-04):** `a85b49b184354a3aa7d1420a40dbfd78cec5f309`. Reconciliação GAME-04 realizada nesta PR de checkpoint separada, ainda sujeita a Docs Validation/auditoria/squash/readback próprios.  
+**Main comprovada após o merge da PR #222 (checkpoint GAME-04):** `64e530fbf1e0685af089c613e8a300060c87ab1e`, via leitura independente de main/PR/registry. Pesquisa PR #221 também foi squash/readback `a85b49b184354a3aa7d1420a40dbfd78cec5f309`.  
 **Evidence Bundle mais recente:** [NLE-P00-WO-002-GAME-04](evidence/NLE-P00-WO-002-GAME-04.md).
 
 ## 1. Fundação previamente aprovada
@@ -442,3 +442,9 @@
 
 ## 51. Próximo módulo de pesquisa após checkpoint GAME-04
 `NLE-P00-WO-002-GAME-05`: **GAME-05 — Genre Templates & Systems**, future implementation issue determined by registry, **BLOCKED**. No code work starts. Research only after the GAME-04 checkpoint PR is validated, approved, squashed and main read back; all 80 coding packets remain blocked.
+
+
+### 50.1 GAME-04 — readback pós-merge do checkpoint #222 (comprovado)
+- [Checkpoint PR #222](https://github.com/KayzenRoot/stormline/pull/222) base `a85b49b184354a3aa7d1420a40dbfd78cec5f309`, final HEAD auditado `6f57b728392021acf74d797bfc436d401ab1795c`, [Docs Validation #43706534525](https://github.com/KayzenRoot/stormline/actions/runs/43706534525) **SUCCESS** job #132788735155, incluídas Source Pack/links, DAG, registry e Zcode blocked selector. [Auditoria pt-BR #6893319967](https://github.com/KayzenRoot/stormline/pull/222#issuecomment-6893319967) **APPROVED documentary-only**; PR #222 squash normal para main `64e530fbf1e0685af089c613e8a300060c87ab1e`. [Readback factual #6893330582](https://github.com/KayzenRoot/stormline/pull/222#issuecomment-6893330582): main SHA, PR merged=true, Source Pack header e registro lidos da main após merge.
+- GAME-04 [research issue #220](https://github.com/KayzenRoot/stormline/issues/220) **CLOSED após readback**, future code issue #60 **OPEN/BLOCKED** e sem autorização. Pesquisas **42/80 (52,5%)**, 38 pendentes, runtime **0/80**. Registro na main confirmado: 80/80 `work_order_status=BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, 80/80 `executor_ready=false`, 80/80 `approved_adr=null`, 80/80 `release_class=UNDECIDED`. Apenas research_status de GAME-04 mudou; nenhum source ou dependência adotado. ADR-0045 **PROPOSED**; 128 futuros testes GAME-04 **NOT EXECUTED**.
+- Este registro histórico de readback é uma **PR documental de closeout independente**, sem modificação de registry/CI/código; a própria PR de closeout requer Docs Validation/auditoria/squash/readback antes de alegar integração. Não autoriza GAME-05 coding nem qualquer outro pacote.
