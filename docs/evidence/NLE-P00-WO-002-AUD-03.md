@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-03 DSP & Sound Graph Research
 
-**STATUS: RESEARCH PR #202 DRAFT, INITIAL DOCS CI PASS; FINAL-HEAD CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE.**  
+**STATUS: RESEARCH PR #202 APPROVED/SQUASH-MERGED; SEPARATE CHECKPOINT PR PENDING ITS OWN CI/AUDIT. NO ENGINE CODE.**  
 **2026-11-14 | Research [#201](https://github.com/KayzenRoot/stormline/issues/201) | Future coding [#54](https://github.com/KayzenRoot/stormline/issues/54) OPEN/BLOCKED | BASE main `f4e954dc41ac86b8b6dfb310743adc27d3ba6d41`**, research branch `docs/NLE-P00-WO-002-AUD-03-dsp-research`.
 
 ## 1. Canonical source check and Context Lock
@@ -22,14 +22,15 @@ No C++/Web/WASM engine, audio playback/output, original PCM fixture, waveform, F
 | Gate | Observation |
 |---|---|
 | Research issue #201 and branch from exact checked main | OBSERVED |
-| Research PR and initial HEAD | [PR #202](https://github.com/KayzenRoot/stormline/pull/202) DRAFT, BASE `f4e954dc41ac86b8b6dfb310743adc27d3ba6d41`, initial HEAD `737ae93e43c5d9a4b0e30fe83a93dcaeb9ff660a`, exactly eight new Markdown docs; Evidence update creates a new final HEAD. |
-| Initial Docs Validation (not final after Evidence revision) | [Run #43657613023](https://github.com/KayzenRoot/stormline/actions/runs/43657613023) SUCCESS on initial HEAD `737ae93e43c5d9a4b0e30fe83a93dcaeb9ff660a`, job #132639555082; Source Pack/local links, module DAG, WO registry and blocked Zcode selector all SUCCESS. Revalidate the resulting final HEAD. |
-| SonarCloud/Socket or other security check exact HEAD | NOT VERIFIED |
+| Research PR and final HEAD | [PR #202](https://github.com/KayzenRoot/stormline/pull/202) MERGED, base `f4e954dc41ac86b8b6dfb310743adc27d3ba6d41`, final audited HEAD `b51f3b2b43fb7336a659df444cf3fea1bdaa6222`, eight new Markdown files, no engine code or registry change. |
+| Initial Docs Validation (not final after Evidence revision) | [Run #43657613023](https://github.com/KayzenRoot/stormline/actions/runs/43657613023) SUCCESS on initial HEAD `737ae93e43c5d9a4b0e30fe83a93dcaeb9ff660a`, job #132639555082; Source Pack/local links, module DAG, WO registry and blocked Zcode selector all SUCCESS. The independently run final exact-head CI also succeeded, recorded below. |
+| Final exact-head Docs Validation | [Run #43657661621](https://github.com/KayzenRoot/stormline/actions/runs/43657661621) SUCCESS on HEAD `b51f3b2b43fb7336a659df444cf3fea1bdaa6222`, job #132639702149: Source Pack/local links, module DAG, WO registry, Zcode blocked selector all SUCCESS. | 
+| SonarCloud/Socket or other security check exact HEAD | NOT VERIFIED, not marked PASS |
 | Native/headless/Web engine or DSP/audio output | NOT IMPLEMENTED / NOT TESTED |
 | 128 future runtime/security/performance tests | ALL FUTURE / NOT EXECUTED |
-| Objective pt-BR documentary audit | PENDING |
-| Research PR normal squash/readback | PENDING |
-| Separate checkpoint PR CI/audit/squash/main readback | PENDING |
+| Objective pt-BR documentary audit | APPROVED documentary only [comment #6886504110](https://github.com/KayzenRoot/stormline/pull/202#issuecomment-6886504110) after final-head CI, no known HIGH/CRITICAL in scoped docs; no runtime security or plugin proof |
+| Research PR normal squash/readback | PR #202 normal squash main `3bfb59e4140428f4c4a24e64bbd8854832f40e86`, main readback verified |
+| Separate checkpoint PR CI/audit/squash/main readback | PENDING at this draft, requiring own exact-final-head CI, objective audit, normal squash and main readback |
 
 ## 4. Risk register, mitigations proposed only
 Future HIGH risk: zero-delay graph cycle or excessive feedback causing speaker output or CPU failure, unstable filter coefficient/NaN/denormal, compression/IR source bomb, external native plugin executing host code/secret/audio exfiltration, callback allocation/lock/IPC inducing xrun, stale graph/state pointer UAF on hot reload/device resume, unauthorized client RTPC, copyleft-included Faust library or FFTW mismatch and unlicensed IR/sample. Suggested mitigations: deterministic typed DAG, preallocated graph plan and bounded state, off-RT source scanning/FFT/IR compile, audioblock atomic publish and deferred release, hard quotas/rate limits/finite math and null output fallback, actor security, external plugin disabled until isolation/opt-in, exact source rights/SBOM/license, ASan/TSan/fuzz and measured RT golden. **Not implemented or validated**; documentary risk LOW.
