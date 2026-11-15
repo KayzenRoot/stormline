@@ -1,7 +1,9 @@
 # Research Work Order — NLE-P00-WO-002-GAME-01
 
 **Date:** 2026-11-15 | **Research issue:** #208 | **Future implementation issue:** #56 OPEN/BLOCKED  
-**BASE main:** `0a3aa77229f5663e55fdf9b8b99a786c9edb1cc9` | **P00 DOCUMENTATION ONLY.** Research risk LOW; future runtime implementation ELEVATED for privacy/focus, multi-device input spoofing, malformed input profiles, critical bindings, cross-platform consistency and accessibility. Release class UNDECIDED; engine code license NLE-D009 OPEN.
+**BASE main at research branch:** `0a3aa77229f5663e55fdf9b8b99a786c9edb1cc9` | **Research PR #209 merged; post-research main:** `34285d76e0027cb0f0bb79c49b507fc8a8d905b6`. **P00 DOCUMENTATION ONLY.** Research risk LOW; future runtime implementation ELEVATED for privacy/focus, multi-device input spoofing, malformed input profiles, critical bindings, cross-platform consistency and accessibility. Release class UNDECIDED; engine code license NLE-D009 OPEN.
+
+**RESEARCH APPROVED/MERGED:** [PR #209](https://github.com/KayzenRoot/stormline/pull/209), final audited HEAD `dc89dfe830e813009f44e201ab4f1a6aa362fbf4`, [Docs Validation #43699919862](https://github.com/KayzenRoot/stormline/actions/runs/43699919862) SUCCESS, job #132768593933; objective pt-BR [audit comment #6892417069](https://github.com/KayzenRoot/stormline/pull/209#issuecomment-6892417069) APPROVED documentary-only; normal squash main `34285d76e0027cb0f0bb79c49b507fc8a8d905b6`, readback verified. Separate checkpoint PR pending CI/audit/squash/readback. 128 tests FUTURE/NOT EXECUTED. Coding #56 OPEN/BLOCKED.
 
 ## OBJECTIVE
 Research and specify engine-owned keyboard/mouse/gamepad/touch semantic input and action mapping, focus/context routing, player seats, accessible remapping, tick-scoped action frames and replay, CORE-01/04 integration, native and Web adapters, security/privacy, official technology/license matrix and future test/benchmark protocols.
@@ -85,4 +87,4 @@ Main base `0a3aa77229f5663e55fdf9b8b99a786c9edb1cc9`.
 - DATA-04 `7e88d4fecaa83c9922f255087df9f97f6300b61f`
 
 ## EVIDENCE
-[Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-01.md). At initial drafting, PR/CI/audit/merge remain PENDING.
+[Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-01.md). Research PR #209 and its exact-final-HEAD CI/audit/squash/readback are complete; separate checkpoint PR pending its own gates.
