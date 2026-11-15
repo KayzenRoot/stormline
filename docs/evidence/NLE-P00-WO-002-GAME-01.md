@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-01 Input & Control Mapping Research
 
-**STATUS: RESEARCH PR #209 OPEN; initial Docs Validation PASS on pre-evidence HEAD `b0dc2193e794210ccc1c870808439b1fb17aaf1f`; final evidence update requires its own exact-head CI; audit/merge/checkpoint PENDING. DOCUMENTATION ONLY / NO GAME INPUT ENGINE.**  
+**STATUS: RESEARCH PR #209 APPROVED/SQUASH-MERGED; FINAL EXACT-HEAD DOCS VALIDATION SUCCESS; CHECKPOINT PR PENDING SEPARATE CI/AUDIT/SQUASH/READBACK. DOCUMENTATION ONLY / NO GAME INPUT ENGINE.**  
 **2026-11-15 | Research [#208](https://github.com/KayzenRoot/stormline/issues/208) | Future coding [#56](https://github.com/KayzenRoot/stormline/issues/56) OPEN/BLOCKED | BASE main `0a3aa77229f5663e55fdf9b8b99a786c9edb1cc9`.**
 
 ## 1. Canonical source and preflight
@@ -27,16 +27,17 @@ No code/vendor license has been incorporated, accepted for shipment or tested.
 | Gate | Status |
 |---|---|
 | Research #208 and branch from exact main | OBSERVED |
-| Exactly 8 scoped Markdown files and PR diff | PR #209 Draft inspected, exactly 8 added Markdown files, no runtime/source/SDK/CI changes |
-| Initial Docs Validation on previous HEAD | [Run #43699839456](https://github.com/KayzenRoot/stormline/actions/runs/43699839456) SUCCESS on `b0dc2193e794210ccc1c870808439b1fb17aaf1f`, job #132768343537, Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector all SUCCESS. This evidence revision changes the HEAD, so final-head revalidation is required. |
+| Exactly 8 scoped Markdown files and PR diff | Research PR #209 merged; exactly 8 new Markdown files, no runtime/source/SDK/CI changes |
+| Initial Docs Validation on previous HEAD | [Run #43699839456](https://github.com/KayzenRoot/stormline/actions/runs/43699839456) SUCCESS on `b0dc2193e794210ccc1c870808439b1fb17aaf1f`, job #132768343537, Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector all SUCCESS. Followed by exact-final-HEAD validation #43699919862, see next row. |
+| Research PR #209 exact-final-HEAD Docs Validation | [Run #43699919862](https://github.com/KayzenRoot/stormline/actions/runs/43699919862) SUCCESS, job #132768593933 on HEAD `dc89dfe830e813009f44e201ab4f1a6aa362fbf4`; Source Pack/local links, taxonomy DAG, registry, Zcode blocked selector all SUCCESS |
 | Relevant extra security/CodeQL/third-party scans | NOT VERIFIED |
 | Platform input event pump/device backend implemented | NO |
 | Editor/client/export or Web/headless runtime built | NO |
 | Device/peripheral/keyboard layout and assistive user tests | NOT EXECUTED |
 | 128 prospective cases | ALL FUTURE / NOT EXECUTED |
 | Input latency, p50/p95/p99, CPU/memory/event loss benchmarks | NOT RUN |
-| Objective pt-BR documentary audit | PENDING |
-| Research PR squash and main readback | PENDING |
+| Objective pt-BR documentary audit | APPROVED documentary-only [comment #6892417069](https://github.com/KayzenRoot/stormline/pull/209#issuecomment-6892417069), no known HIGH/CRITICAL scoped documentary defect |
+| Research PR squash and main readback | Normal squash merge main `34285d76e0027cb0f0bb79c49b507fc8a8d905b6`, readback verified |
 | Separate checkpoint PR CI/audit/squash/readback | PENDING |
 
 ## 5. Risk register and negative evidence
@@ -48,8 +49,13 @@ No code/vendor license has been incorporated, accepted for shipment or tested.
 - Third-party SDL3/GLFW/HIDAPI/ControllerDB and platform SDK precise license/redistribution rights not frozen. NLE-D009 OPEN.
 The architecture proposes controls, but **none is implemented**. No tests, real hardware trace, compatibility matrices, verified input latency/CPU/memory or accessibility certification exist. Documentation research risk LOW; future runtime ELEVATED.
 
-## 6. Proposed checkpoint delta (DO NOT PROMOTE without separate PR)
+## 6. Proposed checkpoint delta (only after separate PR)
 After research PR exact-final-HEAD CI/audit/squash/main readback and distinct checkpoint PR exact-final-HEAD CI/audit/squash/main readback, change ONLY GAME-01 `research_status` from `RESEARCH_PENDING` to `RESEARCH_DOCUMENTED_ADR_PROPOSED`; counts **39/80 research documented (48.75%)**, **41 RESEARCH_PENDING**, **0 runtime modules implemented**. All 80 coding packets remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null; #56 OPEN/BLOCKED, ADR-0042 PROPOSED. Next GAME-02 #58 research only. No Zcode coding permission.
 
 ## 7. Audit format
 Objective pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED with exact base/final HEAD, eight-file diff, canonical fingerprints, actual Docs Validation/other checks status, risk/license/security/privacy/accessibility/fallback, future tests NOT RUN, and registry checkpoint delta. No "completed" without evidence.
+
+## 8. Research PR verified result
+- [PR #209](https://github.com/KayzenRoot/stormline/pull/209) exact final audited HEAD `dc89dfe830e813009f44e201ab4f1a6aa362fbf4`, [Docs Validation #43699919862](https://github.com/KayzenRoot/stormline/actions/runs/43699919862) SUCCESS, job #132768593933. Source Pack, module taxonomy, registry and blocked selector SUCCESS.
+- pt-BR audit comment #6892417069 APPROVED for research documents only; squash merged main `34285d76e0027cb0f0bb79c49b507fc8a8d905b6`, readback verified. No runtime, SDK, dataset or tests.
+- Separate checkpoint PR must pass its own exact-head CI/audit/squash/main readback before research_status is canonical and #208 can close.
