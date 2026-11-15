@@ -64,3 +64,8 @@ BASE main `6701b8f6e99654112a6bf792c8b33d565ad71b42`; checkpoint `8b54d45112e89c
 
 ## EVIDENCE
 [Evidence Bundle](../evidence/NLE-P00-WO-002-NET-04.md); PR/CI/checkpoint pending at drafting; no runtime or code security proof.
+
+
+## Observed research PR #241 and separate checkpoint proposal
+- [Research PR #241](https://github.com/KayzenRoot/stormline/pull/241), BASE `6701b8f6e99654112a6bf792c8b33d565ad71b42`, audited final HEAD `7ae14978fb71dcf6809b608f493276be214655fb`, exactly eight NEW Markdown (506 adds, 0 deletes), [Docs Validation #43715830922](https://github.com/KayzenRoot/stormline/actions/runs/43715830922) **SUCCESS** job #132817045630 all Source Pack/local links/DAG/registry/Zcode blocked selector SUCCESS, [pt-BR objective audit #6894577101](https://github.com/KayzenRoot/stormline/pull/241#issuecomment-6894577101) **APPROVED documentary-only**, normal squash main `2cc7228cffe56d2e73d26e9af78ed998127a1366` and main/PR/contract readback. 128 N04-T001..128 unique specified **FUTURE/NOT EXECUTED**; no runtime/build/security/fairness/bench proof.
+- This independent checkpoint PR base `2cc7228cffe56d2e73d26e9af78ed998127a1366` changes exactly five files checkpoint/backlog/registry/research WO/Evidence and **only NET-04 research_status** field. Proposed **47/80 researched (58.75%), 33 pending, zero executable engine**, all 80 coding WOs BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null, release_class UNDECIDED. Coding #65 OPEN/BLOCKED, research #240 OPEN until checkpoint readback, ADR-0050 PROPOSED, NLE-D009 OPEN. Own exact-final-HEAD Docs Validation/audit/squash/main readback PENDING at writing. No code/library/cloud adoption.
