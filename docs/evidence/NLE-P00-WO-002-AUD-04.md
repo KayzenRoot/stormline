@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-04 Music, Dialogue & Cinematic Audio Research
 
-**STATUS: RESEARCH BRANCH IN PROGRESS; PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE OR AUDIO CONTENT.**  
+**STATUS: PR #205 OPEN; FIRST DOCS VALIDATION FAILED ON ESCAPED INLINE BACKTICKS, CORRECTED; RETRY SUCCESS ON HEAD `f1c9d71af080e36540558f6dd03a8b1bc56f3da9`; FINAL EVIDENCE UPDATE AND FINAL-HEAD CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE OR AUDIO CONTENT.**  
 **2026-11-14 | Research [#204](https://github.com/KayzenRoot/stormline/issues/204) | Future coding [#55](https://github.com/KayzenRoot/stormline/issues/55) OPEN/BLOCKED | BASE main `1d0280674385a034b68573aeb6a98db243f34ae1`**.
 
 ## 1. Canonical source check and Context Lock
@@ -28,7 +28,7 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 |---|---|
 | Research issue #204 and branch from checked main | OBSERVED |
 | Exactly eight docs authored and final PR diff | PENDING |
-| GitHub Docs Validation exact final HEAD | PENDING |
+| First Docs Validation | [Run #43659008716](https://github.com/KayzenRoot/stormline/actions/runs/43659008716) FAILED at Source Pack/local link validation because six Markdown docs contained escaped inline backticks; no taxonomy/registry/Zcode checks ran. Corrected in same branch/WO. |\n| Retry Docs Validation after correction | [Run #43659101359](https://github.com/KayzenRoot/stormline/actions/runs/43659101359) SUCCESS on branch HEAD `f1c9d71af080e36540558f6dd03a8b1bc56f3da9`, job #132644185778; Source Pack/local links, module DAG, Work Order registry and Zcode blocked selector all SUCCESS. Evidence update below creates a new HEAD, so rerun is required. |
 | SonarCloud/Socket or additional security check exact HEAD | NOT VERIFIED |
 | Native/Web/headless build, playback, assets, codecs | NOT IMPLEMENTED / NOT TESTED |
 | 128 future acceptance cases | ALL FUTURE / NOT EXECUTED |
@@ -52,3 +52,4 @@ Only after research PR exact-final-HEAD CI/audit/squash/readback and separate ch
 
 ## 7. Objective review contract
 Report pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED with exact base/final SHA, eight-file diff, Source Pack fingerprints, actual Docs Validation workflow/job, license/rights/privacy and ownership review, 128 cases NOT EXECUTED, no runtime/benchmark claims, and exact checkpoint delta.
+\n## 8. Correction history\n- Initial PR HEAD `6e8909767cc2b5c8677c0cd861839f1f46bb5775` failed run #43659008716 because six documents had backslash-escaped Markdown inline-code delimiters. Corrected only the formatting in the same research branch/WO, no scope or semantic change.\n- Corrected HEAD `f1c9d71af080e36540558f6dd03a8b1bc56f3da9` passed retry run #43659101359, job #132644185778, all four Docs Validation steps. This Evidence Bundle update itself must be revalidated on its resulting final HEAD.\n
