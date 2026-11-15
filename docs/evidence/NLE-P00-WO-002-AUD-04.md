@@ -1,10 +1,10 @@
 # Evidence Bundle — NLE-P00-WO-002-AUD-04 Music, Dialogue & Cinematic Audio Research
 
 **STATUS: RESEARCH BRANCH IN PROGRESS; PR/CI/AUDIT/MERGE/CHECKPOINT PENDING. NO ENGINE CODE OR AUDIO CONTENT.**  
-**2026-11-14 | Research [#204](https://github.com/KayzenRoot/stormline/issues/204) | Future coding [#55](https://github.com/KayzenRoot/stormline/issues/55) OPEN/BLOCKED | BASE main \`1d0280674385a034b68573aeb6a98db243f34ae1\`**.
+**2026-11-14 | Research [#204](https://github.com/KayzenRoot/stormline/issues/204) | Future coding [#55](https://github.com/KayzenRoot/stormline/issues/55) OPEN/BLOCKED | BASE main `1d0280674385a034b68573aeb6a98db243f34ae1`**.
 
 ## 1. Canonical source check and Context Lock
-AUD-03 research #201/PR #202 and separate checkpoint PR #203 were merged; main readback verified at \`1d0280674385a034b68573aeb6a98db243f34ae1\`. Baseline: **37/80** research documented (46.25%), **43 pending**, **0/80 runtime modules implemented**. All 80 implementation packets remain \`BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS\`, \`executor_ready=false\`, \`approved_adr=null\`. AUD-04 catalog_order=38, future coding #55 OPEN/BLOCKED. Registry's next catalog module is **GAME-01 Input & Control Mapping #56**, not AUD-05.
+AUD-03 research #201/PR #202 and separate checkpoint PR #203 were merged; main readback verified at `1d0280674385a034b68573aeb6a98db243f34ae1`. Baseline: **37/80** research documented (46.25%), **43 pending**, **0/80 runtime modules implemented**. All 80 implementation packets remain `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`. AUD-04 catalog_order=38, future coding #55 OPEN/BLOCKED. Registry's next catalog module is **GAME-01 Input & Control Mapping #56**, not AUD-05.
 Source Pack fingerprints at preflight are in the Work Order Context Lock. Canonical priority: checkpoint > ledger/approved ADRs > Scope > DoD > Architecture > Requirements > AGENTS > module catalog > registry > relevant module contracts. AUD-01/02/03, TWO-03, CORE-04 and DATA-03/04/05 are dependencies/owners but **not implemented**.
 
 ## 2. Proposed artifacts (documentation only)
@@ -48,7 +48,7 @@ Source Pack fingerprints at preflight are in the Work Order Context Lock. Canoni
 Proposed controls are described in ADR/architecture/contracts. **None is implemented or validated.**
 
 ## 6. Proposed checkpoint delta (not promoted)
-Only after research PR exact-final-HEAD CI/audit/squash/readback and separate checkpoint PR exact-final-HEAD CI/audit/squash/readback: change only AUD-04 \`research_status\` from \`RESEARCH_PENDING\` to \`RESEARCH_DOCUMENTED_ADR_PROPOSED\`; count becomes **38/80 (47.5%)** documented, **42 pending**, **0 runtime modules implemented**. All 80 coding packets remain blocked, \`executor_ready=false\`, \`approved_adr=null\`; #55 OPEN/BLOCKED; ADR-0041 PROPOSED. Next research is **GAME-01 #56**, subject to checkpoint approval/readback. No implementation authorization.
+Only after research PR exact-final-HEAD CI/audit/squash/readback and separate checkpoint PR exact-final-HEAD CI/audit/squash/readback: change only AUD-04 `research_status` from `RESEARCH_PENDING` to `RESEARCH_DOCUMENTED_ADR_PROPOSED`; count becomes **38/80 (47.5%)** documented, **42 pending**, **0 runtime modules implemented**. All 80 coding packets remain blocked, `executor_ready=false`, `approved_adr=null`; #55 OPEN/BLOCKED; ADR-0041 PROPOSED. Next research is **GAME-01 #56**, subject to checkpoint approval/readback. No implementation authorization.
 
 ## 7. Objective review contract
 Report pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED with exact base/final SHA, eight-file diff, Source Pack fingerprints, actual Docs Validation workflow/job, license/rights/privacy and ownership review, 128 cases NOT EXECUTED, no runtime/benchmark claims, and exact checkpoint delta.
