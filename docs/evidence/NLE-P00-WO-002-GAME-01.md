@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-GAME-01 Input & Control Mapping Research
 
-**STATUS: RESEARCH PR #209 APPROVED/SQUASH-MERGED; FINAL EXACT-HEAD DOCS VALIDATION SUCCESS; CHECKPOINT PR PENDING SEPARATE CI/AUDIT/SQUASH/READBACK. DOCUMENTATION ONLY / NO GAME INPUT ENGINE.**  
+**STATUS: RESEARCH PR #209 AND CHECKPOINT PR #210 BOTH APPROVED/SQUASH-MERGED; EACH HAD EXACT-HEAD DOCS VALIDATION AND PT-BR OBJECTIVE AUDIT; MAIN REGISTRY/CHECKPOINT READBACK VERIFIED AT `eb9ee228fffabd816a59d35d9bd4e180b5c41041`. PR #211 RECORDS READBACK. NO GAME INPUT ENGINE.**  
 **2026-11-15 | Research [#208](https://github.com/KayzenRoot/stormline/issues/208) | Future coding [#56](https://github.com/KayzenRoot/stormline/issues/56) OPEN/BLOCKED | BASE main `0a3aa77229f5663e55fdf9b8b99a786c9edb1cc9`.**
 
 ## 1. Canonical source and preflight
@@ -38,7 +38,9 @@ No code/vendor license has been incorporated, accepted for shipment or tested.
 | Input latency, p50/p95/p99, CPU/memory/event loss benchmarks | NOT RUN |
 | Objective pt-BR documentary audit | APPROVED documentary-only [comment #6892417069](https://github.com/KayzenRoot/stormline/pull/209#issuecomment-6892417069), no known HIGH/CRITICAL scoped documentary defect |
 | Research PR squash and main readback | Normal squash merge main `34285d76e0027cb0f0bb79c49b507fc8a8d905b6`, readback verified |
-| Separate checkpoint PR CI/audit/squash/readback | PENDING |
+| Separate checkpoint PR #210 CI | [Run #43700246652](https://github.com/KayzenRoot/stormline/actions/runs/43700246652) SUCCESS, job #132769594070 on final HEAD `c3f60a4aabc50259a4f5d5ff6bf0c9ae73b3c68c`, all four docs steps SUCCESS |
+| Checkpoint PR #210 objective pt-BR audit | APPROVED documentary-only [comment #6892459612](https://github.com/KayzenRoot/stormline/pull/210#issuecomment-6892459612), no HIGH/CRITICAL scoped defect |
+| Checkpoint #210 squash and main readback | Normal squash merge `eb9ee228fffabd816a59d35d9bd4e180b5c41041`, 80 total, 39 researched, 41 pending, all 80 blocked, #56 OPEN/BLOCKED |
 
 ## 5. Risk register and negative evidence
 - Inaccessible remapping locking users out of Back/Cancel/Menu; keyboard layout/IME gameplay leakage; focus capture security.
@@ -49,8 +51,8 @@ No code/vendor license has been incorporated, accepted for shipment or tested.
 - Third-party SDL3/GLFW/HIDAPI/ControllerDB and platform SDK precise license/redistribution rights not frozen. NLE-D009 OPEN.
 The architecture proposes controls, but **none is implemented**. No tests, real hardware trace, compatibility matrices, verified input latency/CPU/memory or accessibility certification exist. Documentation research risk LOW; future runtime ELEVATED.
 
-## 6. Proposed checkpoint delta (only after separate PR)
-After research PR exact-final-HEAD CI/audit/squash/main readback and distinct checkpoint PR exact-final-HEAD CI/audit/squash/main readback, change ONLY GAME-01 `research_status` from `RESEARCH_PENDING` to `RESEARCH_DOCUMENTED_ADR_PROPOSED`; counts **39/80 research documented (48.75%)**, **41 RESEARCH_PENDING**, **0 runtime modules implemented**. All 80 coding packets remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null; #56 OPEN/BLOCKED, ADR-0042 PROPOSED. Next GAME-02 #58 research only. No Zcode coding permission.
+## 6. Applied checkpoint delta and readback
+Research PR #209 and separate checkpoint PR #210 have both passed exact-final-HEAD CI/audit/squash/readback. The only registry change is GAME-01 `research_status` from `RESEARCH_PENDING` to `RESEARCH_DOCUMENTED_ADR_PROPOSED`. Confirmed **39/80 researched (48.75%)**, **41 RESEARCH_PENDING**, **0 runtime modules implemented**. All 80 coding packets remain BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null; #56 OPEN/BLOCKED, ADR-0042 PROPOSED, release class UNDECIDED. Main readback SHA `eb9ee228fffabd816a59d35d9bd4e180b5c41041`. Next GAME-02 #58 research only after readback-closeout #211; no code permission.
 
 ## 7. Audit format
 Objective pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED with exact base/final HEAD, eight-file diff, canonical fingerprints, actual Docs Validation/other checks status, risk/license/security/privacy/accessibility/fallback, future tests NOT RUN, and registry checkpoint delta. No "completed" without evidence.

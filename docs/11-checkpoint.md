@@ -3,7 +3,7 @@
 **Data de verificação:** 2026-11-15  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
 **Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GAME-01` — Input & Control Mapping, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main SHA comprovado após o merge da PR #209 (pesquisa GAME-01):** `34285d76e0027cb0f0bb79c49b507fc8a8d905b6`.  
+**Main SHA comprovado após o merge da PR #210 (checkpoint GAME-01):** `eb9ee228fffabd816a59d35d9bd4e180b5c41041`.  
 **Evidence Bundle mais recente:** [NLE-P00-WO-002-GAME-01](evidence/NLE-P00-WO-002-GAME-01.md).
 
 ## 1. Fundação previamente aprovada
@@ -399,5 +399,7 @@
 - **All 128 FUTURE input/adapter/accessibility tests NOT EXECUTED.** No native/Web/headless executable, real peripheral or keyboard-layout test, input-to-action/p95/p99 benchmark, accessibility user study, fuzz/sanitizers or proof of cross-platform parity. ADR-0042 remains PROPOSED; release class UNDECIDED.
 - **Research tally after checkpoint reconciliation:** **39/80 modules documented (48.75%)**, **41 RESEARCH_PENDING**, **0/80 runtime modules implemented**. Every one of the 80 implementation work orders stays `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`; #56 OPEN/BLOCKED; no Zcode coding authorization.
 
-## 47. Próximo módulo de pesquisa (somente após auditoria e merge desta reconciliação)
-`NLE-P00-WO-002-GAME-02`: **GAME-02 — Gameplay Scripting & API**, catalog_order=40, future coding [#58](https://github.com/KayzenRoot/stormline/issues/58) OPEN/BLOCKED. Research planning only after GAME-01 checkpoint separate PR exact-final-HEAD Docs Validation, pt-BR audit, normal squash/main readback; do not unlock any of 80 code packets.
+- **Checkpoint reconciliation verified:** [PR #210](https://github.com/KayzenRoot/stormline/pull/210), BASE `34285d76e0027cb0f0bb79c49b507fc8a8d905b6`, audited final HEAD `c3f60a4aabc50259a4f5d5ff6bf0c9ae73b3c68c`, [Docs Validation #43700246652](https://github.com/KayzenRoot/stormline/actions/runs/43700246652) SUCCESS job #132769594070, objective pt-BR [audit comment #6892459612](https://github.com/KayzenRoot/stormline/pull/210#issuecomment-6892459612) APPROVED documentary-only, normal squash merge/main readback `eb9ee228fffabd816a59d35d9bd4e180b5c41041`. Only GAME-01 research_status changed; all 80 implementation packets still blocked. Readback facts are recorded in separate closeout PR #211 with its own CI/audit/squash gate.
+
+## 47. Próximo módulo de pesquisa
+`NLE-P00-WO-002-GAME-02`: **GAME-02 — Gameplay Scripting & API**, catalog_order=40, future coding [#58](https://github.com/KayzenRoot/stormline/issues/58) OPEN/BLOCKED. GAME-01 checkpoint PR #210 passed exact-head CI, audit, normal squash and main readback. Next research only after readback-closeout PR #211 is integrated and checked. Do not unlock any of 80 code packets.
