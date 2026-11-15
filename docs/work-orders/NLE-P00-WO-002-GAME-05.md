@@ -64,3 +64,8 @@ BASE `3101c3c956d4fa876261433ee258fe174e00cf77`. Checkpoint `c8caaee00c5fd2bae47
 
 ## EVIDENCE
 [Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-05.md); until verified, PR/CI/tests/bench/merge **PENDING**, no claim of code.
+
+
+## Verified research PR #225 and independent checkpoint work
+- [Research PR #225](https://github.com/KayzenRoot/stormline/pull/225) base `3101c3c956d4fa876261433ee258fe174e00cf77`, final audit HEAD `8a1154f4f3886a54822ed2e545b34d25d2f052c2`, exactly eight added Markdown, [Docs Validation #43708083380](https://github.com/KayzenRoot/stormline/actions/runs/43708083380) **SUCCESS**, job #132793442410 including Source Pack/links/DAG/registry/blocked selector, [pt-BR audit #6893506208](https://github.com/KayzenRoot/stormline/pull/225#issuecomment-6893506208) **APPROVED documentary-only**, normal squash/readback main `b3ac4fb2dd473c40281957cc4f17e9d77e5b6ea0`.
+- This separate checkpoint PR base `b3ac4fb2dd473c40281957cc4f17e9d77e5b6ea0`, five files only, exactly one registry field GAME-05 research_status changed. Total research 43/80, pending 37, runtime zero. All 80 implementation WOs blocked, executor_ready=false, approved_adr=null, release class UNDECIDED; future code #61 OPEN/BLOCKED. Checkpoint own CI/audit/squash/readback PENDING at document creation. No unexecuted tests called PASS.

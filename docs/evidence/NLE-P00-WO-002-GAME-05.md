@@ -30,3 +30,9 @@ After research CI/audit/squash main readback, independently update only `docs/11
 
 ## Audit format
 Pt-BR APPROVED/CORRECTION REQUIRED/BLOCKED; exact BASE/HEAD SHA, file diff count, canonical source fingerprint, docs CI run/job and truth, software/content licenses, security rights/capabilities and quotas, target performance UNKNOWN, 128 FUTURE tests NOT RUN, risks, known HIGH/CRITICAL, rollback and checkpoint proposal. No false PASS or premature promotion.
+
+
+## Research #225 observed evidence and independent checkpoint proposal
+- Research base `3101c3c956d4fa876261433ee258fe174e00cf77`, exact final HEAD `8a1154f4f3886a54822ed2e545b34d25d2f052c2`, eight new Markdown files, 486 additions/0 deletions; [Docs Validation #43708083380](https://github.com/KayzenRoot/stormline/actions/runs/43708083380) **SUCCESS** job #132793442410 (links/DAG/registry/Zcode selector), objective [pt-BR audit #6893506208](https://github.com/KayzenRoot/stormline/pull/225#issuecomment-6893506208) APPROVED documentary-only; ordinary squash merge and main/contract readback `b3ac4fb2dd473c40281957cc4f17e9d77e5b6ea0`. No known HIGH/CRITICAL in scoped diff, not a runtime security certification.
+- Original sample assets and code NOT PRODUCED; 128 future tests G05-T001..T128 defined, 0 EXECUTED. No real game, Win/Linux/macOS/Web/headless export, benchmark, source assets or SDK adopted. ADR-0046 PROPOSED; NLE-D009 license OPEN.
+- **Checkpoint PR base** `b3ac4fb2dd473c40281957cc4f17e9d77e5b6ea0` changes checkpoint, backlog, registry (sole GAME-05 research_status), research WO and this Evidence Bundle; machine-checked expected 43/80 research, 37 pending, 80/80 coding blocked/ready false/approved_adr null/release UNDECIDED. Checkpoint exact-HEAD CI/audit/squash/main readback **PENDING at document creation** and research #224 remains OPEN until that proof. Rollback documentary diff only, no data migrations/runtime work.
