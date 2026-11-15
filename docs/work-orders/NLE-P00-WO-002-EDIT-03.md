@@ -1,0 +1,68 @@
+# NLE-P00-WO-002-EDIT-03 — Scene/World/Terrain Editor Documentary Research Work Order
+
+**2026-11-15 | [Research issue #260](https://github.com/KayzenRoot/stormline/issues/260) | future coding [#70](https://github.com/KayzenRoot/stormline/issues/70) OPEN/BLOCKED | catalog order 52/80 | VERIFIED BASE main `e0463818e6dda79cabd26e49f81eca38cd507782`.** P00 document-only risk LOW. Future scene writes, untrusted asset/plugin and durable terrain operations ELEVATED/HIGH_ASSURANCE per actual change. No Zcode implementation authority.
+
+## OBJECTIVE
+Research and specify original professional 2D/3D scene and world editor with stable hierarchy and typed property reflection, multi-selection, transform gizmos (local/global/parent, pivot, snapping and numeric accessibility), transactional scene undo/redo, versioned prefabs/nested instance overrides, world partition/streaming edit cells, non-destructive terrain heightfield/brush/masks/foliage/procedural layers/LOD, safe GFX preview and editor/runtime isolation, save/reopen/crash and permission recovery, future collaboration architecture and optional AI/MCP tool parity. Thoroughly review technology choices and license/security, exactly **128 future tests** and reproducible benchmark.
+
+## CONTEXT
+Previous EDIT-02 [research PR #257](https://github.com/KayzenRoot/stormline/pull/257), [checkpoint PR #258](https://github.com/KayzenRoot/stormline/pull/258), [closeout PR #259](https://github.com/KayzenRoot/stormline/pull/259) separately validated CI exact HEAD, audited pt-BR, normal squash and readback. Final main `e0463818e6dda79cabd26e49f81eca38cd507782`. At base **51/80 research documented (63.75%), 29 pending, ZERO engine executable, 80/80 coding WOs BLOCKED**. **Formal prerequisites EDIT-02 and WORLD-04** researched/ADRs PROPOSED only, no game engine, scene or terrain. Integrations EDIT-01/04/07, WORLD-01, GFX-01/05/06/07, TWO-01/02, CORE-04/05/06, DATA-01/02/04, QA-04 and AI/MCP are separate owners, **not additional formal DAG edges**.
+
+## SCOPE
+Create **EXACTLY EIGHT NEW Markdown** under research branch `docs/NLE-P00-WO-002-EDIT-03-scene-terrain`:
+1. [Architecture](../architecture/edit-03-scene-world-terrain-editor.md)
+2. [ADR-0055 PROPOSED](../adr/0055-edit-03-transactional-scene-terrain-editing.md)
+3. [Technology/license, risk and architecture matrix](../research/edit-03-scene-terrain-technology-license-matrix.md)
+4. [Typed semantic API](../contracts/edit-03-scene-terrain-api.md)
+5. [Exactly 128 FUTURE tests](../testing/edit-03-acceptance-matrix.md)
+6. [Reproducible scene/terrain benchmark and failure protocol](../research/edit-03-scene-terrain-benchmark-protocol.md)
+7. This research Work Order
+8. [Evidence Bundle](../evidence/NLE-P00-WO-002-EDIT-03.md)
+
+Research PR own exact-final-HEAD Docs Validation, objective pt-BR audit, ordinary squash and merged-main+typed API readback. **Independent checkpoint PR** exactly docs/11-checkpoint.md, docs/08-backlog.md, docs/queue/implementation-registry.json **sole** EDIT-03 research_status, this WO and Evidence; independent exact-final-HEAD CI/audit/squash/main readback. Optional historical four-doc closeout own final gates. Target **52/80 researched (65%), 28 pending, 0 engine**; research #260 closes only after checkpoint factual main proof, coding #70 stays OPEN/BLOCKED, next EDIT-04 only research after closeout.
+
+## OUT OF SCOPE
+No C++/Rust/GLSL engine code, native GUI, GFX renderer or game server, actual hierarchy/terrain/prefab scene file writes, SDK/dependency/SBOM import, UI prototype, render/heightfield creation, public benchmark, cloud terrain subscription, external Unreal/Unity/Epic content, plugin execution, undocumented game simulation, terrain procedural graph implementation, distributed collaborative edit/CRDT, destructive rollback/merge, paid services, test runner, change to CI or implementation code registry. Never import Unreal editor source or paid assets. No external human review mandate, paid CodeRabbit/CI, force push, history rewrite or security bypass.
+
+## FILES / SOURCES TO READ
+**Canonical order:** `docs/11-checkpoint.md` > `docs/10-decisions-ledger.md` / approved ADRs > `docs/03-scope.md` > `docs/09-definition-of-done.md` > `docs/04-architecture.md` > `docs/02-requirements.md` > `AGENTS.md` > `docs/product/module-catalog.md` > `docs/queue/implementation-registry.json` > `docs/queue/work-orders/EDIT-03.md`. Consult [EDIT-02 API](../contracts/edit-02-project-management-api.md), CORE-04/05 time and reflection, WORLD-01/04 authoritative terrain and entity contracts, DATA-01/02/04 VFS/asset/schema contracts, GFX-01/05/06/07 viewport, TWO-01/02, EDIT-01/04/07, QA-04 and AI/MCP permissions where available. Official Godot 4.6, Unreal 5.8, Unity Terrain/Prefabs, OpenUSD, ImGuizmo, meshoptimizer, Assimp, OpenVDB, FastNoise2 upstream and licenses linked in matrix. No source code available to inspect for runtime.
+
+## REQUIREMENTS
+GOV-001..005, NLE-D013..020, owner directive original proprietary-technology-independent 2D/2.5D/3D/Web engine and desktop Windows/Linux/macOS, high graphics quality, AI-native authorized Editor/CLI/MCP, zero free-to-use paid dependency, no unfinished public MVP and source-first DoD. **Catalog acceptance "Editar terreno/objetos, salvar e restaurar sem regressão"** is FUTURE true runtime proof, not achieved by documents. Native UI/graphics/scene type, release class, risk, quantization tolerances, FPS/CPU p99, data source format, engine license NLE-D009 and ADR-0055 not approved.
+
+## ARCHITECTURE RULES
+EDIT-03 owns **semantic scene editing orchestration and UI tools** only. WORLD-01 owns ECS/generation/lifecycle; WORLD-04 owns canonical terrain/environment/streaming; CORE-05 reflection; CORE-04 sim time; DATA-04 serialization/CAS/scene persistence/migrations; DATA-02 AssetId/provenance; DATA-01 VFS and path grant; GFX graphics/gizmos drawing/LOD GPU; EDIT-01 shell/layout/accessibility host; EDIT-02 project lifecycle; EDIT-07 preview isolated from source; TWO-01/02 and EDIT-04 2D asset/tilemap edit; CORE-06 diagnostics; QA-04 secure tooling; AI/MCP capability/approvals. Stable IDs not paths, no second scene graph or direct GPU source. No untrusted assets/plugin scripts or silent apply-to-prefab-source. Undo scoped and single grouped transaction, non-destructive terrain layer/source and bounded brush, data recovery with hashes and last-good. Local-first single writer/scene CAS; future distributed collaboration separate.
+
+## CONSTRAINTS
+P00 DOCS ONLY, no engine code/CI/SDK/registry/status modification in research PR; no real cloud/OS filesystem actions except GitHub documentary PR. No fabricated benchmark, crash/ASan/a11y/render pass. Avoid claims that one-file rename gives atomic multi-document commit or that GPU preview is canonical. Source and sample license decisions not inferred from official docs, current OpenUSD dev Tomorrow license not generic Apache-2, Unreal EULA restrictions. 80/80 implementation packets remain blocked.
+
+## ACCEPTANCE CRITERIA
+- [ ] Research PR **EXACTLY EIGHT NEW Markdown** and internal Source Pack links, zero code/SDK/CI/checkpoint/registry mutation.
+- [ ] ADR-0055 **PROPOSED** and original typed semantic SceneEdit plan→preview→commit under DATA-04 and WORLD authority; no duplicate ECS/serialization/viewport, owner separation clear.
+- [ ] Scene hierarchy stable IDs/reflection, multi-object inspector, full transform math (pivot/local/world/negative scale/invalid), versioned prefabs and three-way override conflict, separate scene undo vs EDIT-01 host/EDIT-07 play.
+- [ ] WORLD-04 terrain heightfields/masks/foliage/deterministic seeds and non-destructive manual procedural layers, streaming dirty cells/LOD neighbor seams, fallback GPU and persistence design with crash/disk/fault/rollback.
+- [ ] Security malicious scene/prefab/heightmap/asset, symlinks/VFS, resource caps and untrusted scripts, AI/MCP same scoped permission+CAs+consent, accessibility/keyboard, Windows/Linux/macOS future targets without unsupported claims.
+- [ ] Technology/license matrix official sources: ImGuizmo MIT, meshoptimizer MIT, Assimp BSD-3-Clause main plus 3P, OpenVDB MPL-2.0, FastNoise2 MIT, OpenUSD dev Tomorrow license not plain Apache-2, Unreal Editor EULA restrictions; **none adopted/imported** and NLE-D009 OPEN.
+- [ ] **Exactly 128 E03-T001..E03-T128 FUTURE/NOT EXECUTED**, reproducible original synthetic scene/terrain benchmark, no actual tests or p99 claimed.
+- [ ] Research PR exact-final-HEAD Docs Validation SUCCESS (Source Pack links, taxonomy/DAG, registry/Zcode blocked selector), objective pt-BR audit APPROVED docs-only, normal squash/main+API readback.
+- [ ] Separate checkpoint PR own final HEAD CI/audit/squash/main+registry/issue readback; **sole EDIT-03** `research_status=RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`, **52/80 researched (65%), 28 pending, 0 engine**.
+- [ ] 80/80 implementation `work_order_status=BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, `executor_ready=false`, `approved_adr=null`, `release_class=UNDECIDED`, coding issue #70 OPEN/BLOCKED, research #260 CLOSED only after real checkpoint readback, historical 4-doc closeout with its own gates before next EDIT-04 research.
+- [ ] No known HIGH/CRITICAL in documentary diff, future code quality/security/data risks explicitly retained with stop gates.
+
+## TESTS
+Only GitHub Docs Validation exact PR final HEAD, local links, taxonomy/DAG, registry and Zcode selector, plus **static 128 unique test case count**. No native game/editor, hierarchy, GPU, world/terrain/prefab/scene save, OS permissions, accessibility, crash/fuzz/sanitizer or benchmark actually performed. All E03 tests FUTURE/NOT EXECUTED.
+
+## DELIVERABLES
+Research issue #260, eight Markdown, research PR own CI/audit/squash/main readback; independent checkpoint exactly five scoped files own gates; historical closeout four docs if applied own gates; evidence bundle and factual/proposed checkpoint delta, pt-BR audit. Future coding #70 unchanged OPEN/BLOCKED.
+
+## REVIEW FORMAT
+Objective pt-BR **APPROVED / CORRECTION REQUIRED / BLOCKED**, exact baseline and PR HEAD, Git critical blob hashes, scope/changed file list, exact Docs Validation jobs/steps, scene authority/undo/rollback/error, license and data exposure, 128 future test count and no runtime, known HIGH/CRITICAL, checkpoint delta, all 80 blocks. On correction fix only same WO/PR before next increment.
+
+## STOP CONDITION
+STALE approved Source Pack/checkpoint/Scope/DoD/Architecture or decision => re-read and rebase. Any imported engine code, unapproved license/asset, broken data/scene ownership, high-risk silent terrain/prefab overwrite, plugin security bypass, unintended registry/coding unlock, failed CI/audit, paid service, known HIGH/CRITICAL => CORRECTION REQUIRED/BLOCKED. Do not start later module until exact postmerge readback.
+
+## CONTEXT LOCK (Git object blob IDs, not SHA256 content hashes)
+BASE main `e0463818e6dda79cabd26e49f81eca38cd507782`; checkpoint `5713772fff6aefbfc05419d6987e2fc5f04f257e`; Decisions Ledger `d47abc54aa3aa1826d6a0a3c67dbfcaf1853ae9e`; Scope `4ef605c74632ece080b2650e37dd83a415b63310`; DoD `160b3054db9ea1961308934b401488b838d24c3e`; Architecture `df62574cb3956c3ac9881631a4cf66be4e1abff1`; Requirements `14c84b5cd7334b81f63e6a2ba8a07bef73fdee7b`; Backlog `4778037b26b5c5c9d3c79d55e14459d620a7b5df`; Registry `6fdb8d843585ee77ea8569dea41424fa6cfba6c3`; Catalog `18d69bca439831d65982cb0f8acbca1dbaa2eee9`; coding WO `3b7fb95542eee2ff6fc38a216eee14124dd60ed9`; AGENTS `3e57b719f8651407879ebb641707a048773ea4c2`; EDIT-02 API `d2ce33b3d52f9a73bbf7de51af80ab800ce4e720`. Current Git/evidence outranks chat; actual code sha only after separate activation.
+
+## EVIDENCE
+[Evidence Bundle](../evidence/NLE-P00-WO-002-EDIT-03.md); only observed GitHub states promote checkpoint after audit, no "completed" runtime inferred.
