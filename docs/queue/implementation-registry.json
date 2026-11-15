@@ -820,7 +820,7 @@
       "catalog_acceptance": "Troca de estado musical sem glitches, acessibilidade e fallback.",
       "id": "NLE-EXEC-WO-AUD-04-001",
       "file": "docs/queue/work-orders/AUD-04.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
