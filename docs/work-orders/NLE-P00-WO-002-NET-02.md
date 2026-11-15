@@ -64,3 +64,8 @@ BASE main `ef1eb35c8b11d239801e73c112b8c936835b9cdc`; checkpoint `8ddab25b3539a0
 
 ## EVIDENCE
 [Evidence Bundle](../evidence/NLE-P00-WO-002-NET-02.md); initial CI/PR/merge/checkpoint pending. Do not assert runnable server or implemented mitigations.
+
+
+## Research PR #233 objectively APPROVED/MERGED and proposed separate checkpoint
+- [Research PR #233](https://github.com/KayzenRoot/stormline/pull/233), BASE `ef1eb35c8b11d239801e73c112b8c936835b9cdc`, audited final HEAD `e810c0063ae209e475285fdd58668bbcb3e45435`, eight NEW Markdown docs (531 additions, zero deletions), [Docs Validation #43712085692](https://github.com/KayzenRoot/stormline/actions/runs/43712085692) **SUCCESS** job #132805649089 incl Source Pack/local links, DAG, registry and blocked Zcode selector; objective [pt-BR audit #6894059027](https://github.com/KayzenRoot/stormline/pull/233#issuecomment-6894059027) **APPROVED documentary-only**. Normal squash main `f0eb9cf8d02c7ce2d5e8a83314e638eb4bc457a0`, main/PR/contract readback confirmed. Exactly 128 unique N02-T001..N02-T128 FUTURE/NOT EXECUTED, no server runtime.
+- This separate checkpoint PR BASE `f0eb9cf8d02c7ce2d5e8a83314e638eb4bc457a0` changes exactly 5 files checkpoint/backlog/registry/this research WO/Evidence; registry **sole NET-02 research_status** transition. Expected 45/80 researched (56.25%), 35 pending, 0 executable engine, all 80/80 code packets BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null, release_class=UNDECIDED. Future code #63 remains OPEN/BLOCKED, ADR-0048 PROPOSED. Independent checkpoint exact HEAD Docs Validation, audit, squash/main readback PENDING at this writing. No source or SDK imported, no GameLift/PlayFab billing/Agones deployed.
