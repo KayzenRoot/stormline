@@ -36,3 +36,10 @@ After exact-final-HEAD research PR Docs Validation SUCCESS, objective pt-BR APPR
 
 ## 6. Risk and stop conditions
 Docs LOW, future derived-cache integrity/ACL/security ELEVATED, privileged cross-project/remote export HIGH_ASSURANCE separately. Stop on Source Pack STALE, wrong DAG, second canonical DB or unchecked AssetId, authorization missing before candidate retrieval/hydration, cursor/ACL leak, wrong FTS backfill/delete, false ready/atomicity, hidden remote upload, unapproved library/license, CI or test count mismatch, unexpected file or HIGH/CRITICAL, or code unlock. No runtime evidence currently.
+
+## Research PR #286 — actual CI, audit, squash and readback
+- [PR #286](https://github.com/KayzenRoot/stormline/pull/286): BASE `a3a36248ffa6da5b5d3b1329a969b52b63bca49d`, final HEAD `47e864575ce499c639a836fafe9d867738a13421`, exactly eight new Markdown. [Docs Validation #43760148458](https://github.com/KayzenRoot/stormline/actions/runs/43760148458) SUCCESS at exact final HEAD job #132952909850; all Source Pack/local links, DAG, registry and blocked selector steps SUCCESS. [Pt-BR audit #6901145780](https://github.com/KayzenRoot/stormline/pull/286#issuecomment-6901145780) APPROVED documentary only. Normal squash/main and AI-02 API readback `4bbb783f8710bca676a89a2bce62a3de1cb84e04`, PR merged; registry intentionally unchanged in research PR.
+- Actual main baseline still 57/80 researched, 23 pending, AI-02 RESEARCH_PENDING, all 80 code WOs BLOCKED and #76 OPEN/BLOCKED. ADR-0061 PROPOSED, 128 A02 future tests NOT EXECUTED, no SQLite/FTS/search/native/MCP runtime.
+
+## Independent checkpoint PR — proposed, NOT approved yet
+- BASE `4bbb783f8710bca676a89a2bce62a3de1cb84e04`, exactly 5 modified files: checkpoint/backlog/registry/research WO/Evidence. Sole AI-02 `research_status=RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`. Target 58/80 research documented (72.5%), 22 pending, zero engine, all 80 coding WOs BLOCKED/executor_ready=false/approved_adr=null/release_class=UNDECIDED. Research issue #285 closes only AFTER checkpoint readback; own CI/audit/squash/main readback PENDING.
