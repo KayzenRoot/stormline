@@ -81,3 +81,8 @@ Re-fetch critical inputs and compare current HEAD before any write. If changed, 
 
 ## EVIDENCE BUNDLE
 See [Evidence](../evidence/NLE-P00-WO-002-EDIT-07.md). Record only observed diff, hashes, CI, audit, merge and actual readback. A successful check suite is not a profiler/GPU/runtime benchmark.
+
+## Research PR #277 APPROVED/MERGED and checkpoint PR initiated
+- [Research PR #277](https://github.com/KayzenRoot/stormline/pull/277): BASE `64c7ea06a547742209cd11f5d949ab9c8989aa66`, audited final HEAD `e8a7ba59405d9e04eed809d584b3db1c050f0f2d`, exactly eight NEW Markdown. [Docs Validation #43745473379](https://github.com/KayzenRoot/stormline/actions/runs/43745473379) SUCCESS job #132907698119, all Source Pack/links, DAG, registry and blocked Zcode selector SUCCESS. [Pt-BR audit #6899000403](https://github.com/KayzenRoot/stormline/pull/277#issuecomment-6899000403) APPROVED documentary only; normal squash and factual main/API readback `432e561d526b7cf3044d3d26cf762fefe50ec1a1`. No engine, SDK, CI, checkpoint, backlog or registry mutation in research PR.
+- E07 128 IDs unique FUTURE/NOT EXECUTED. ADR-0059 PROPOSED, NLE-D009 OPEN, #74 OPEN/BLOCKED. CORE-06 typed ProjectId/AssetId correlation is still owner extension request; no live asset tracing/PIE/debugger/runtime/benchmark.
+- Independent checkpoint PR starts from main `432e561d526b7cf3044d3d26cf762fefe50ec1a1`, exactly checkpoint/backlog/registry/this WO/Evidence. Sole registry delta EDIT-07 research_status; own CI/audit/merge/readback before #276 closure. Target 56/80 (70%), 24 pending, all 80 code WOs BLOCKED.
