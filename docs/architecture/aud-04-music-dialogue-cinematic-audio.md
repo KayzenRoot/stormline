@@ -1,7 +1,7 @@
 # AUD-04 — Music, Dialogue & Cinematic Audio Architecture
 
 **Research WO:** NLE-P00-WO-002-AUD-04 | **Research issue:** #204 | **Future coding issue:** #55 OPEN/BLOCKED  
-**BASE main:** \`1d0280674385a034b68573aeb6a98db243f34ae1\` | **P00 DOCUMENTATION ONLY / ADR-0041 PROPOSED.** No audio playback, music assets, dialogue/voice assets, caption files, runtime, SDK, build, subtitle renderer, timeline integration or benchmark exists. Research risk LOW; future integration ELEVATED because sample synchronization, voice/asset rights, untrusted media, localization fallback, timeline interruption, accessibility and audio starvation can break critical game presentation.
+**BASE main:** `1d0280674385a034b68573aeb6a98db243f34ae1` | **P00 DOCUMENTATION ONLY / ADR-0041 PROPOSED.** No audio playback, music assets, dialogue/voice assets, caption files, runtime, SDK, build, subtitle renderer, timeline integration or benchmark exists. Research risk LOW; future integration ELEVATED because sample synchronization, voice/asset rights, untrusted media, localization fallback, timeline interruption, accessibility and audio starvation can break critical game presentation.
 
 ## 1. Mission, product outcome and acceptance truth
 Catalog scope: **"Adaptive music, diálogos, legendas/locais e sincronismo com cutscenes."** Catalog acceptance: **"Troca de estado musical sem glitches, acessibilidade e fallback."** Design an original Stormline-owned system that coordinates:
@@ -16,24 +16,24 @@ The system is an **orchestrator and content policy layer**, not a second audio e
 ## 2. Ownership and dependency boundaries
 | Owner | AUD-04 consumes / publishes | Must not duplicate or bypass |
 |---|---|---|
-| **AUD-01 — sole output owner** | \`AudioEngineEpoch\`, \`DeviceEpoch\`, \`AudioClockMapV1\`, \`SampleFrameId\`, voice handles/states, bus GUIDs, command queues and playback receipts | AudioDevice/backend, PCM callback/mixer, voice allocation, bus topology/routing, sample clock, decoder, streaming ring or a second master bus |
+| **AUD-01 — sole output owner** | `AudioEngineEpoch`, `DeviceEpoch`, `AudioClockMapV1`, `SampleFrameId`, voice handles/states, bus GUIDs, command queues and playback receipts | AudioDevice/backend, PCM callback/mixer, voice allocation, bus topology/routing, sample clock, decoder, streaming ring or a second master bus |
 | **AUD-02 — spatial acoustic owner** | read-only listener/spatial voice profiles, room/acoustic snapshot IDs and spatialized voice routing requests | room/portal geometry, HRTF source, acoustic ray/path solver or second spatializer |
 | **AUD-03 — DSP owner** | immutable DSP graph revisions, sidechain ports, compressor/ducking node, parameter/automation/snapshot contracts and latency receipts | effect graph/compiler/kernel, second DSP chain, hidden mixer or custom compressor implementation |
-| **TWO-03 — sequence/animation owner** | \`SequenceAssetV1\`, \`AnimationTimeV1\`, rational track/clip markers, scene/shot/viseme event intents and timeline epoch/revision | second cutscene timeline, animation state, visual frame clock, camera/scene authority |
-| **CORE-04 — simulation time owner** | \`TickId\` and simulation-to-audio mapping through AUD-01 clock map | audio sample clock, wall-clock scheduling or presentation-FPS time |
+| **TWO-03 — sequence/animation owner** | `SequenceAssetV1`, `AnimationTimeV1`, rational track/clip markers, scene/shot/viseme event intents and timeline epoch/revision | second cutscene timeline, animation state, visual frame clock, camera/scene authority |
+| **CORE-04 — simulation time owner** | `TickId` and simulation-to-audio mapping through AUD-01 clock map | audio sample clock, wall-clock scheduling or presentation-FPS time |
 | **CORE-03/06** | non-RT asset prefetch/transition planning and drained diagnostics/profiling | worker-pool ownership, blocking callbacks, real-time logging/telemetry allocation |
-| **DATA-02/03/04/05** | durable \`AssetId\`/revision/provenance, secure audio/VO/caption import, staged authored dialogue/music/sequence references and target-cooked banks/chunks | alternate asset database, decoder/importer, direct host file/network, private packfile or rights inference |
+| **DATA-02/03/04/05** | durable `AssetId`/revision/provenance, secure audio/VO/caption import, staged authored dialogue/music/sequence references and target-cooked banks/chunks | alternate asset database, decoder/importer, direct host file/network, private packfile or rights inference |
 | **GAME/NET/QUEST** | authenticated immutable context snapshot, conversation/quest/game state and authoritative event sequence | deciding or changing quest outcomes, dialogue choices that mutate game state, client-authoritative gameplay or secret data leakage |
 | **EDIT/UI/CLI/MCP** | common typed stage/preview/validate/commit authoring operations and accessibility settings | arbitrary scripts, raw voice/audio buffers, filesystem paths or direct RT callback writes |
 
 **Dependency state:** AUD-01/02/03 and TWO-03 are documentary research only; their runtime APIs are not implemented. The catalog dependencies AUD-03 and AUD-02 are necessary but not sufficient for implementation. AUD-04 must not be marked code-ready because upstream dependencies have not been implemented and no release class/ABI is approved.
 
 ## 3. Clock, timebase and synchronization model
-- **Live audio master:** AUD-01 \`AudioClockMapV1\` and \`SampleFrameId\` are the only source for the actual output timeline. Every accepted voice/music/cinematic cue returns requested vs accepted vs actual sample frame, \`DeviceEpoch\`, lateness/underrun and fallback reason. Do not claim physical audible time from command submission alone.
-- **Simulation:** CORE-04 \`TickId\` is gameplay intent time. Convert through the versioned AUD-01 clock map with rational remainder/drift estimate; never schedule to \`steady_clock\`, UTC, render frame or wall clock directly.
-- **Sequence/editor:** TWO-03 \`AnimationTimeV1\` remains rational numerator/denominator with explicit frame-rate/timebase, e.g. 24000/1001, 24/1, 30/1. Use checked reduced rational conversion to sample frames; do not accumulate floating-point seconds or use GPU FPS. Live preview maps sequence time to the actual AUD-01 sample cursor; offline export maps both video frames and audio samples from the same exact rational origin.
-- **Musical clock:** \`TempoMapV1\` uses piecewise tempo markers, rational BPM and time-signature numerator/denominator, beat/bar anchors and explicit pickup/loop semantics. Beat/bar quantization computes a future \`SampleFrameId\` from AUD-01's current cursor and tempo map. Tempo changes do not reset the device clock. Missing or invalid beat metadata returns a typed unsynchronized fallback, not guessed 120 BPM unless the author explicitly set that tempo.
-- **Clock discontinuity:** device hotplug/rate change increments \`DeviceEpoch\`; invalidate stale pending schedule plans, recompile mapping off-RT and return typed receipts. Pause/seek/skip/reverse/loop and scene reload advance the appropriate sequence/transport epoch and cancel/deduplicate old cues. No silent drift or duplicate line.
+- **Live audio master:** AUD-01 `AudioClockMapV1` and `SampleFrameId` are the only source for the actual output timeline. Every accepted voice/music/cinematic cue returns requested vs accepted vs actual sample frame, `DeviceEpoch`, lateness/underrun and fallback reason. Do not claim physical audible time from command submission alone.
+- **Simulation:** CORE-04 `TickId` is gameplay intent time. Convert through the versioned AUD-01 clock map with rational remainder/drift estimate; never schedule to `steady_clock`, UTC, render frame or wall clock directly.
+- **Sequence/editor:** TWO-03 `AnimationTimeV1` remains rational numerator/denominator with explicit frame-rate/timebase, e.g. 24000/1001, 24/1, 30/1. Use checked reduced rational conversion to sample frames; do not accumulate floating-point seconds or use GPU FPS. Live preview maps sequence time to the actual AUD-01 sample cursor; offline export maps both video frames and audio samples from the same exact rational origin.
+- **Musical clock:** `TempoMapV1` uses piecewise tempo markers, rational BPM and time-signature numerator/denominator, beat/bar anchors and explicit pickup/loop semantics. Beat/bar quantization computes a future `SampleFrameId` from AUD-01's current cursor and tempo map. Tempo changes do not reset the device clock. Missing or invalid beat metadata returns a typed unsynchronized fallback, not guessed 120 BPM unless the author explicitly set that tempo.
+- **Clock discontinuity:** device hotplug/rate change increments `DeviceEpoch`; invalidate stale pending schedule plans, recompile mapping off-RT and return typed receipts. Pause/seek/skip/reverse/loop and scene reload advance the appropriate sequence/transport epoch and cancel/deduplicate old cues. No silent drift or duplicate line.
 - **Audio vs visual sync:** caption onset should follow the actual voice cursor/receipt; cinematic animation can consume authored viseme/phoneme markers mapped from the same sequence/voice sample position. A planned timestamp is not measured speaker output latency.
 
 ## 4. Adaptive music transport
@@ -46,9 +46,9 @@ Proposed NECESSARY model combines:
 5. **Music states/parameters:** exploration, tension, combat, boss, victory, defeat, menu and cinematic are sample vocabulary, not engine-owned gameplay truth. GAME supplies a versioned context snapshot or state intent; AUD-04 resolves it into a musical target and may blend bounded intensity/danger/phase parameters.
 
 ### 4.2 Transport and transition guarantees
-- \`MusicProgramV1\` is a versioned authored graph of segments, stems, loop regions, tempo maps, markers, transitions and asset-rights references.
-- \`MusicTransportV1\` has transport generation, current/target segment, loop iteration, beat/bar/phase, deterministic seed and sample-clock epoch. Repeated request with the same command/event ID is idempotent.
-- \`MusicTransitionPlanV1\` is compiled/validated off-RT. It contains exact source exit frame, destination start frame, quantization rule, fade duration in beats and frames, transition/stinger refs, prefetch deadline and bounded voice/buffer budget.
+- `MusicProgramV1` is a versioned authored graph of segments, stems, loop regions, tempo maps, markers, transitions and asset-rights references.
+- `MusicTransportV1` has transport generation, current/target segment, loop iteration, beat/bar/phase, deterministic seed and sample-clock epoch. Repeated request with the same command/event ID is idempotent.
+- `MusicTransitionPlanV1` is compiled/validated off-RT. It contains exact source exit frame, destination start frame, quantization rule, fade duration in beats and frames, transition/stinger refs, prefetch deadline and bounded voice/buffer budget.
 - **No-click proof:** crossfade must use phase/loop metadata where available, authored fades or bounded equal-power/linear curves, and a future output golden/loopback test. If metadata or prefetch is late, keep current safe loop or use an authored fallback. Never abruptly stop the current theme merely because a new segment is unavailable.
 - **No state flapping:** state requests use priority, hysteresis, minimum dwell/cooldown, explicit interruption and deterministic tie-break. Repeated enemy threat changes or network jitter must not produce rapid music churn.
 - **Deterministic variation:** random choices use a recorded project/program/sequence seed plus stable event/loop identifiers. No unseeded worker scheduling or wall-clock randomness in replayable music.
@@ -56,9 +56,9 @@ Proposed NECESSARY model combines:
 
 ## 5. Dialogue, voice-over and narrative scheduling
 ### 5.1 Dialogue resolution
-- \`DialogueLineIdV1\` is stable across locale versions, transcript, captions, voice recordings and reimport. \`DialogueEventV1\` contains a finite typed argument schema (speaker, quest/gameplay state, relationship/branch, line purpose), source revision and allowed fallback paths.
-- GAME/QUEST provides an authoritative, immutable \`DialogueContextSnapshotV1\`; AUD-04 may select a matching authored line/variant but **cannot mutate quest, inventory, relationship, combat or server state**.
-- A default/fallback line is authored for missing or unmatched arguments. If no legal line exists, return \`DIALOGUE_VARIANT_UNAVAILABLE\`; do not improvise a line, synthesize voice or silently play a different semantic response.
+- `DialogueLineIdV1` is stable across locale versions, transcript, captions, voice recordings and reimport. `DialogueEventV1` contains a finite typed argument schema (speaker, quest/gameplay state, relationship/branch, line purpose), source revision and allowed fallback paths.
+- GAME/QUEST provides an authoritative, immutable `DialogueContextSnapshotV1`; AUD-04 may select a matching authored line/variant but **cannot mutate quest, inventory, relationship, combat or server state**.
+- A default/fallback line is authored for missing or unmatched arguments. If no legal line exists, return `DIALOGUE_VARIANT_UNAVAILABLE`; do not improvise a line, synthesize voice or silently play a different semantic response.
 - Spoken dialogue and non-verbal vocalizations have separate locale policies. Non-verbal grunts/breaths may be locale-neutral only when the asset's rights and authoring manifest say so.
 - Voice variants reference DATA-02 AssetId/revision, source hash, language tag, speaker/performer ID, recording provenance, rights and duration/seek/loop metadata. No direct filenames or arbitrary paths.
 
@@ -67,7 +67,7 @@ Proposed NECESSARY model combines:
 - Every line declares concurrency class, max instances, interruption policy (NEVER, AT_SAFE_MARKER, FADE, REPLACE_IF_HIGHER_PRIORITY), expiry/deadline, ducking profile and whether it is allowed to overlap. No hidden infinite queue.
 - Dialogue can be queued, cancelled, resumed or expired by stable command/event ID and transport epoch. If a line is stolen/late/unavailable, publish a typed receipt and matching caption policy.
 - Prefetch localized voice assets before dialogue windows; CORE-03/DATA-05 decode/stream outside RT. AUD-01 alone owns the playback voice and actual sample cursor.
-- Dialogue subtitles bind to the same \`DialogueLineIdV1\` and actual playback receipt; if a voice is interrupted, captions stop/continue only according to explicit cue policy. Lip-sync uses authored viseme/phoneme markers consumed by TWO-03, not a new animation system or mandatory speech-recognition/voice-AI pipeline.
+- Dialogue subtitles bind to the same `DialogueLineIdV1` and actual playback receipt; if a voice is interrupted, captions stop/continue only according to explicit cue policy. Lip-sync uses authored viseme/phoneme markers consumed by TWO-03, not a new animation system or mandatory speech-recognition/voice-AI pipeline.
 
 ## 6. Subtitles, captions, localization and timed text
 ### 6.1 Distinct content modes
@@ -78,7 +78,7 @@ Proposed NECESSARY model combines:
 - These are not interchangeable flags on one string. Each cue has a typed content mode, locale, speaker/source, start/end, display group, style intent and provenance.
 
 ### 6.2 Internal canonical cue model and formats
-- Internal \`TimedTextCueV1\` is versioned and independent of vendor ABI: CueId, LineId/AssetId refs, cue kind, BCP-47 language, speaker/voice tag, start/end rational time or actual sample frame, text key/resolved text, safe inline emphasis, optional direction/sound category, display region, overlap group, source/translation revision.
+- Internal `TimedTextCueV1` is versioned and independent of vendor ABI: CueId, LineId/AssetId refs, cue kind, BCP-47 language, speaker/voice tag, start/end rational time or actual sample frame, text key/resolved text, safe inline emphasis, optional direction/sound category, display region, overlap group, source/translation revision.
 - Keep subtitle, SDH, audio-description and metadata tracks separate. Preserve overlapping cues and original Unicode; do not normalize text as a hidden import side effect.
 - **WebVTT** is a candidate import/export adapter for timed captions/subtitles/metadata and speaker/language spans; W3C page consulted is a **Candidate Recommendation Draft dated 2026-05-20**, not a claim that every target renderer conforms. A WebVTT file is one declared data kind; do not mix caption/subtitle/audio-description kinds in a single file.
 - **TTML2** is an optional interchange adapter for authoring/distribution workflows where its XML timing/style/language model is required. It is not the canonical Stormline scene schema.
@@ -87,14 +87,14 @@ Proposed NECESSARY model combines:
 ### 6.3 Locale and fallback policy
 - Locale identifiers use BCP-47 language tags with Unicode CLDR normalization/matching data. Distinguish language tag, locale/region, script and voice locale; do not hardcode a two-letter-only list.
 - Dialogue text, voice recording, captions/SDH and audio description are independent assets/translation units linked by stable line/cue keys. A voice file being present does not prove transcript or caption is translated.
-- Resolve exact locale first, then only the configured and visible fallback chain (e.g. pt-BR → pt → project reference locale). Return \`EXACT\`, \`PARENT_FALLBACK\`, \`REFERENCE_FALLBACK\`, \`TEXT_ONLY\` or \`MISSING\` receipt. Never silently replace a selected language with another locale.
+- Resolve exact locale first, then only the configured and visible fallback chain (e.g. pt-BR → pt → project reference locale). Return `EXACT`, `PARENT_FALLBACK`, `REFERENCE_FALLBACK`, `TEXT_ONLY` or `MISSING` receipt. Never silently replace a selected language with another locale.
 - Runtime locale change is staged and committed at a safe boundary; current line may finish or be cancelled by explicit policy. No mid-phoneme asset swap, duplicate cue or mismatched caption.
 - Translation status and voice recording status are versioned; machine translation/TTS is not silently used as final localized content. Human approval and source rights are required.
 
 ## 7. Cinematic timeline, cutscenes and lip-sync
-- TWO-03 remains the sole owner of \`SequenceAssetV1\`, rational timebase, shots, animation tracks, camera intents, visual event markers and nested sequence rules. AUD-04 adds semantic audio track/cue definitions and returns playback receipts; it does not implement another timeline editor, cutscene player or clock.
-- Tracks may include \`MusicTrack\`, \`DialogueTrack\`, \`VoiceOverTrack\`, \`SfxCueTrack\`, \`CaptionTrack\`, \`AudioDescriptionTrack\` and \`AudioAutomationTrack\`. All cues carry stable TrackId/CueId, sequence revision, rational start/end, AssetId/LineId and event policy.
-- Live playback: sequence cue is translated to an AUD-01 \`AudioCommandV1\` sample target using \`AudioClockMapV1\`; actual playback/caption onset uses the accepted/audible cursor receipt. TWO-03 consumes optional authored viseme/phoneme markers at the matching rational/sample position.
+- TWO-03 remains the sole owner of `SequenceAssetV1`, rational timebase, shots, animation tracks, camera intents, visual event markers and nested sequence rules. AUD-04 adds semantic audio track/cue definitions and returns playback receipts; it does not implement another timeline editor, cutscene player or clock.
+- Tracks may include `MusicTrack`, `DialogueTrack`, `VoiceOverTrack`, `SfxCueTrack`, `CaptionTrack`, `AudioDescriptionTrack` and `AudioAutomationTrack`. All cues carry stable TrackId/CueId, sequence revision, rational start/end, AssetId/LineId and event policy.
+- Live playback: sequence cue is translated to an AUD-01 `AudioCommandV1` sample target using `AudioClockMapV1`; actual playback/caption onset uses the accepted/audible cursor receipt. TWO-03 consumes optional authored viseme/phoneme markers at the matching rational/sample position.
 - Offline export: a deterministic frame schedule and audio sample schedule share one rational sequence origin and are delivered to a separate authorized future export/mux owner. AUD-04 does not choose a host path, spawn FFmpeg, encode media or promise identical output across codec builds.
 - Pause, resume, single-step, seek/scrub, time remap, skip, loop, branch, restart, scene unload and device loss each define whether music holds/fades/restarts, voice is cancelled/completed, stingers are suppressed, captions seek/recompute, and stale event generations are rejected.
 - Cutscene skip/fast-forward must not fire skipped dialogue, music stingers or gameplay events twice. Gameplay/quest changes are not authorized by cinematic audio cues.
@@ -110,7 +110,7 @@ Proposed NECESSARY model combines:
 ### 8.2 Ducking ownership and priority
 - AUD-04 owns the **policy** (when dialogue/AD starts, target buses, priority and release conditions), AUD-03 owns the **sidechain/ducking DSP node and parameter automation**, and AUD-01 owns buses/routing/mix application.
 - Proposed dialogue key input is the dialogue/AD bus or voice envelope. Targets may include music and ambience; ordinary gameplay SFX are ducked only by an explicit profile. Critical gameplay warning cues must remain audible by priority policy.
-- \`DuckingPolicyV1\` declares depth ceiling, threshold, ratio, attack, hold, release, lookahead/latency, pre-roll and overlap arbitration. All parameters are finite, bounded and versioned. Multiple voices use max/priority/combined envelope rules declared in authoring; no uncontrolled double ducking.
+- `DuckingPolicyV1` declares depth ceiling, threshold, ratio, attack, hold, release, lookahead/latency, pre-roll and overlap arbitration. All parameters are finite, bounded and versioned. Multiple voices use max/priority/combined envelope rules declared in authoring; no uncontrolled double ducking.
 - Crossfades and user volume settings combine deterministically with accessibility profile, cinematic snapshot and gameplay snapshot. No competing AUD-04/AUD-03/AUD-01 volume owners or hidden double gain.
 
 ## 9. Asset provenance, rights, security and privacy
