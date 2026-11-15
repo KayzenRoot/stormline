@@ -3,7 +3,7 @@
 **Data de verificação:** 2026-11-15  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
 **Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-GAME-05` — Genre Templates & Systems, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Última main comprovada após a PR de pesquisa GAME-05 #225:** `b3ac4fb2dd473c40281957cc4f17e9d77e5b6ea0` (squash e readback). PR de checkpoint GAME-05 separada, dependente de CI/auditoria próprios.  
+**Main comprovada após o merge da PR #226 (checkpoint GAME-05):** `9c5cdd36cec08d9673f9e18fc8d893609edeb3b9`, Docs Validation/auditoria/squash/readback confirmados. Research PR #225 igualmente integrada e relida `b3ac4fb2dd473c40281957cc4f17e9d77e5b6ea0`.  
 **Evidence Bundle mais recente:** [NLE-P00-WO-002-GAME-05](evidence/NLE-P00-WO-002-GAME-05.md).
 
 ## 1. Fundação previamente aprovada
@@ -461,3 +461,9 @@
 
 ## 53. Próximo módulo após GAME-05 checkpoint aprovado
 `NLE-P00-WO-002-NET-01`: **NET-01 — Transport & Connection Layer**, catalog_order 44, coding [#62](https://github.com/KayzenRoot/stormline/issues/62) OPEN/BLOCKED, next documentary research ONLY; no coding authorization.
+
+
+### 52.1 GAME-05 — readback pós-merge do checkpoint #226 (VERIFICADO)
+- [Checkpoint PR #226](https://github.com/KayzenRoot/stormline/pull/226) BASE `b3ac4fb2dd473c40281957cc4f17e9d77e5b6ea0`, final HEAD `93114603d86df6e4aef5ba2e111cc50fb9544e28`, [Docs Validation #43708368102](https://github.com/KayzenRoot/stormline/actions/runs/43708368102) **SUCCESS** job #132794326367: Source Pack, links, module DAG, registry e Zcode blocked selector. [Auditoria pt-BR #6893542334](https://github.com/KayzenRoot/stormline/pull/226#issuecomment-6893542334) **APPROVED documental**. Normal squash main `9c5cdd36cec08d9673f9e18fc8d893609edeb3b9`. [Readback factual #6893548670](https://github.com/KayzenRoot/stormline/pull/226#issuecomment-6893548670) confirmou main, PR e registro. Pesquisa [#224](https://github.com/KayzenRoot/stormline/issues/224) CLOSED após readback. Coding #61 OPEN/BLOCKED.
+- **43/80 pesquisados (53,75%), 37 pendentes, 0 implementados**. Registry main verificado: 80/80 `work_order_status=BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, 80/80 `executor_ready=false`, 80/80 `approved_adr=null`, 80/80 `release_class=UNDECIDED`. Exatamente GAME-05 research_status mudou; não adotou stack, SDK, assets ou código.
+- ADR-0046 permanece PROPOSED e os **128 testes G05 são FUTURE/NOT EXECUTED**. Nenhuma amostra de gênero foi construída/exportada, nenhuma métrica de runtime comprovada. Esta PR final de readback modifica somente checkpoint/backlog/WO/evidência, não altera registry nem código, e requer seus próprios CI/auditoria/squash/readback antes da próxima pesquisa NET-01.
