@@ -64,3 +64,8 @@ BASE `b64194591d761cd3e785337b10a524d085ec04d1`. Checkpoint `00b761597da9d10970f
 
 ## EVIDENCE
 [Evidence Bundle](../evidence/NLE-P00-WO-002-GAME-04.md). Initial state: no CI, no runtime tests, checkpoint not yet updated; source of truth is final GitHub CI/PR evidence, not this draft.
+
+
+## Research PR APPROVED; separate checkpoint reconciliation (evidence as of 2026-11-15)
+- Research [PR #221](https://github.com/KayzenRoot/stormline/pull/221) final HEAD `4ee8839c93f5e1782993f40178a8f71b2321073d` from base `b64194591d761cd3e785337b10a524d085ec04d1`: exactly eight added docs; [Docs Validation run #43706155959](https://github.com/KayzenRoot/stormline/actions/runs/43706155959) SUCCESS, job #132787563990 (links, DAG, registry, Zcode selector) and [objective pt-BR audit #6893260379](https://github.com/KayzenRoot/stormline/pull/221#issuecomment-6893260379) APPROVED documentary-only, normal squash/readback main `a85b49b184354a3aa7d1420a40dbfd78cec5f309`.
+- This **separate** checkpoint PR from main `a85b49b184354a3aa7d1420a40dbfd78cec5f309` updates only checkpoint, backlog, **single registry field for GAME-04 research_status**, this WO and Evidence Bundle. Research 42/80, pending 38/80, runtime 0/80; ALL 80 coding packets blocked and #60 remains OPEN/BLOCKED. Checkpoint CI/audit/merge/readback pending at document write time, no fabricated success. Repo Source Pack base fingerprints in initial Context Lock unchanged apart from explicit this PR files. Next GAME-05 is documentation only after checkpoint approval.
