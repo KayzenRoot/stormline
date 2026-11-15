@@ -149,7 +149,7 @@ Every run records engine/editor SHA, SequenceAsset/timebase, GFX-08/AUD-03/AUD-0
 ## Owner mapping and exit proof
 TWO-03 owns SequenceAsset/timebase; CORE-04 TickId; AUD-01 SampleFrameId/DeviceEpoch; GFX-08 VFX; AUD-03 DSP; AUD-04 music/dialogue/timed text; SIM-04 animation/pose; SIM-03 root motion acceptance; SIM-02 physics. EDIT-01/02, DATA-01..05, GFX-01/03/06/07, EDIT-07, QA-04 and AI/MCP retain existing authority.
 
-**E06-T127/T128** prove catalog acceptance: author sequence + VFX + audio + animation via GUI, save/reopen, preview and runtime playback, compare owner evaluator/source digests and event receipts. Hand-authored JSON or editor-only evaluator does not count. Missing device/API is NOT AVAILABLE/NOT SUPPORTED, never zero/green. Numeric thresholds TBD pending measured baseline and owner-approved DoD.
+**E06-T128** proves catalog acceptance: author sequence + VFX + audio + animation via GUI, save/reopen, preview and runtime playback, compare owner evaluator/source digests and event receipts. Hand-authored JSON or editor-only evaluator does not count. Missing device/API is NOT AVAILABLE/NOT SUPPORTED, never zero/green. Numeric thresholds TBD pending measured baseline and owner-approved DoD.
 
 **All 128 cases FUTURE / NOT EXECUTED.** No runtime/editor/OS/audio/particle/animation/export/benchmark/accessibility test has run.
 
