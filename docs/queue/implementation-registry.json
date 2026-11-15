@@ -1020,7 +1020,7 @@
       "catalog_acceptance": "Teste de 8/16/32/64 clientes quando perf target definido.",
       "id": "NLE-EXEC-WO-NET-03-001",
       "file": "docs/queue/work-orders/NET-03.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
