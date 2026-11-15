@@ -1241,7 +1241,7 @@
       "catalog_acceptance": "Erro rastreável do projeto até subsistema e asset.",
       "id": "NLE-EXEC-WO-EDIT-07-001",
       "file": "docs/queue/work-orders/EDIT-07.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",

@@ -41,3 +41,10 @@ Only after research PR exact-final-HEAD Docs Validation, objective pt-BR audit A
 
 ## 6. Stop conditions
 Stop on canonical source STALE, unexpected file diff, DAG inflation, duplicate CORE-06 event schema, false asset correlation, unisolated preview, arbitrary eval or remote debugger, raw dump/consent leak, license uncertainty treated as approval, failed Docs Validation, test count mismatch, HIGH/CRITICAL or code unlock. Docs risk LOW, runtime ELEVATED, sensitive dump/remote access HIGH_ASSURANCE separate approval. No runtime claim.
+
+## Research PR #277 — actual approval/merge/readback
+- [PR #277](https://github.com/KayzenRoot/stormline/pull/277) BASE `64c7ea06a547742209cd11f5d949ab9c8989aa66`, final HEAD `e8a7ba59405d9e04eed809d584b3db1c050f0f2d`, exactly eight NEW Markdown. [Docs Validation #43745473379](https://github.com/KayzenRoot/stormline/actions/runs/43745473379) SUCCESS exact final HEAD job #132907698119 (links/Source Pack, 80-module DAG, registry, blocked Zcode selector). [Pt-BR audit #6899000403](https://github.com/KayzenRoot/stormline/pull/277#issuecomment-6899000403) APPROVED documentary only. Normal squash and factual main/API readback `432e561d526b7cf3044d3d26cf762fefe50ec1a1`, PR merged. Registry deliberately unchanged in research PR.
+- Main research baseline still 55/80 researched, 25 pending, EDIT-07 RESEARCH_PENDING, all 80 code WOs BLOCKED, #74 OPEN/BLOCKED. E07-T001..T128 FUTURE/NOT EXECUTED, no binaries/profiler/crash/preview/asset-tracing tests.
+
+## Independent checkpoint PR — proposed, not yet approved
+- BASE `432e561d526b7cf3044d3d26cf762fefe50ec1a1`, exactly FIVE modified files: checkpoint, backlog, registry, Work Order, Evidence. Sole registry semantic delta EDIT-07 `research_status=RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`. Target after factual merge: **56/80 researched (70%), 24 pending**, zero engine; all 80 code WOs BLOCKED, executor_ready=false, approved_adr=null, release_class=UNDECIDED; #74 OPEN/BLOCKED. Research #276 closes only after checkpoint readback; own CI/audit/squash/readback pending.
