@@ -3,7 +3,7 @@
 **Data de verificação:** 2026-11-15  
 **Fase:** P00, planejamento documental. Nenhuma engine executável, SDK, demo, build, release ou benchmark gráfico entregue.  
 **Último incremento de pesquisa documental aprovado:** `NLE-P00-WO-002-EDIT-02` — Project Creation & Management, ARQUITETURA PROPOSTA, SEM ENGINE IMPLEMENTADA.  
-**Main comprovada após pesquisa EDIT-02 PR #257:** `0d3929f92b638923bd0a44fc7366c58d2e59fc43`, Docs Validation, auditoria, squash e readback objetivos. O checkpoint EDIT-02 será validado em PR separada, com CI/auditoria/squash/readback próprios.  
+**Main comprovada após checkpoint EDIT-02 PR #258:** `0c5b865eaae17aea281c17c0e5214a0f58326fee`, Docs Validation, auditoria, squash e readback objetivos. Pesquisa #257 também integrada/relida em main `0d3929f92b638923bd0a44fc7366c58d2e59fc43`.  
 **Evidence Bundle mais recente:** [NLE-P00-WO-002-EDIT-02](evidence/NLE-P00-WO-002-EDIT-02.md).
 
 ## 1. Fundação previamente aprovada
@@ -601,3 +601,8 @@
 
 ## 69. Next module after EDIT-02 checkpoint/closeout
 `NLE-P00-WO-002-EDIT-03`: **EDIT-03 — Scene/World/Terrain Editor**, catalog_order=52, future coding [#70](https://github.com/KayzenRoot/stormline/issues/70) OPEN/BLOCKED. Documentary research only after EDIT-02 final readback; no implementation unlock.
+
+### 68.1 EDIT-02 — checkpoint PR #258 factual postmerge readback (VERIFIED)
+- [Checkpoint PR #258](https://github.com/KayzenRoot/stormline/pull/258) BASE research main `0d3929f92b638923bd0a44fc7366c58d2e59fc43`, final audited HEAD `098bac5d1d6301ce1c3d6dc55b12d10616b0c8fc`, [Docs Validation #43724946510](https://github.com/KayzenRoot/stormline/actions/runs/43724946510) **SUCCESS** job #132844745197 (Source Pack/local links, module taxonomy/DAG, registry and Zcode blocked selector), [objective pt-BR audit #6896159494](https://github.com/KayzenRoot/stormline/pull/258#issuecomment-6896159494) **APPROVED DOCUMENTARY ONLY**; normal squash main `0c5b865eaae17aea281c17c0e5214a0f58326fee`. [Actual postmerge readback #6896167954](https://github.com/KayzenRoot/stormline/pull/258#issuecomment-6896167954) verified main, merged PR, registry and coding [#69](https://github.com/KayzenRoot/stormline/issues/69) OPEN/BLOCKED; research [#256](https://github.com/KayzenRoot/stormline/issues/256) CLOSED only after that factual checkpoint proof.
+- Actual merged registry **51/80 research documented (63.75%), 29 pending, ZERO executable engine/editor**, ALL 80/80 `work_order_status=BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, zero `executor_ready`, zero `approved_adr` and all `release_class=UNDECIDED`. Sole EDIT-02 `research_status` changed; no code, CI, SDK, manifest, scene or project filesystem modified.
+- ADR-0054 PROPOSED, NLE-D009 code license OPEN, all exactly 128 E02 FUTURE/NOT EXECUTED, zero Windows/Linux/macOS native project creation, archive import, filesystem fault/migration, hardware power-loss or benchmark proof. This historical closeout PR edits **only four Markdown** checkpoint/backlog/this research WO/Evidence; no registry/source/CI and it has its own exact-final-HEAD Docs Validation, objective pt-BR audit, normal squash and final main readback required before EDIT-03 documentary research.
