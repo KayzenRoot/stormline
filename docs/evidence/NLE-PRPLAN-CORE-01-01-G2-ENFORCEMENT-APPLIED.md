@@ -1,6 +1,6 @@
 # Evidence Bundle — G2 main enforcement applied and probed
 
-**DATA:** 2026-11-16 · **STATUS:** `ENFORCEMENT_APPLIED / G2-P01..P04,P06..P08,P10,P11 OBSERVED / P05-POSITIVE E P09-STRICT PENDING / G2_NOT_YET_PROMOTED` · **WORK ORDER ESTÁVEL:** [NLE-PRPLAN-CORE-01-01](../work-orders/NLE-PRPLAN-CORE-01-01.md) · [issue #387](https://github.com/KayzenRoot/stormline/issues/387) **OPEN** · [plano G2](../research/core-01-01-g2-branch-enforcement-qualification.md) · [matriz de gates](../engineering/core-01-01-qualification-gates.md).
+**DATA:** 2026-11-16 · **STATUS:** `ENFORCEMENT_APPLIED / G2-P01..P12 PASS / G2_CLEARED` (promovido pelo checkpoint independente, escopo autorizado) · **WORK ORDER ESTÁVEL:** [NLE-PRPLAN-CORE-01-01](../work-orders/NLE-PRPLAN-CORE-01-01.md) · [issue #387](https://github.com/KayzenRoot/stormline/issues/387) **OPEN** · [plano G2](../research/core-01-01-g2-branch-enforcement-qualification.md) · [matriz de gates](../engineering/core-01-01-qualification-gates.md).
 
 Este é o primeiro incremento **privilegiado** do G2. Diferente do [Evidence de qualificação](NLE-PRPLAN-CORE-01-01-G2-ENFORCEMENT-QUALIFICATION.md) (somente proposta), aqui há **uma alteração administrativa real**: um único ruleset de repositório ativo sobre `refs/heads/main`. Nenhuma configuração global de merge, workflow, código, ADR, registry, manifest ou licença foi alterada. A promoção documental de `G2 CLEARED` é reservada ao checkpoint independente, após observação do merge positivo e da prova strict.
 
@@ -119,14 +119,14 @@ O API injetou `require_extra_approval_for_unattributed_changes: true` (default d
 | G2-P02 Alvo exclusivo e readback | **PASS** | `refs/heads/main` only; `protected=true`; readback admin |
 | G2-P03 PR obrigatória, zero revisores | **PASS** | `required_approving_review_count=0`, `require_code_owner_review=false`, `require_last_push_approval=false`, `required_reviewers=[]` |
 | G2-P04 Check exato, único, produzido e strict | **PASS** | `docs-validation`/app 15368, sem filtros, job completo, `strict=true`, `integration_id` vinculado |
-| G2-P05 Check falho/ausente bloqueia; verde permite | **PASS NEGATIVO / POSITIVO PENDENTE** | PRs #402 e #403 bloqueadas (mensagens abaixo); merge verde desta PR será o positivo, registrado no checkpoint |
+| G2-P05 Check falho/ausente bloqueia; verde permite | **PASS** | PRs #402 e #403 bloqueadas (mensagens abaixo); #405 squash verde mergeada em `80624f6` |
 | G2-P06 Push direto sem PR negado | **PASS (config proof)** | Regra `pull_request` efetiva + `current_user_can_bypass=never`; admin também foi negado no merge; **nenhum push real na main tentado**; `git push --dry-run` foi descartado como prova (não avalia regras do servidor) |
 | G2-P07 Force-push e deleção proibidos | **PASS (readback)** | Regras `non_fast_forward` e `deletion` efetivas no ruleset 27393227; **nenhuma operação destrutiva tentada** |
 | G2-P08 Sem bypass | **PASS** | `bypass_actors=[]`, `current_user_can_bypass=never`; tentativas de merge do próprio admin negadas pelas regras |
-| G2-P09 Squash funcional e base stale exige nova qualificação | **PARCIAL** | `allowed_merge_methods=["squash"]` + `strict=true` no readback; squash e stale serão observados após esta PR e registrados no checkpoint |
+| G2-P09 Squash funcional e base stale exige nova qualificação | **PASS** | `allowed_merge_methods=["squash"]` + `strict=true`; #404 stale negada, update re-ran CI `43921953773` SUCCESS e ficou `CLEAN` |
 | G2-P10 Segurança de forks | **PASS (policy)** | `pull_request` (não `pull_request_target`), token `contents: read`, `persist-credentials:false`, zero segredos, default read; nenhum fork externo foi executado neste incremento |
 | G2-P11 Runners padrão gratuitos R$0 | **PASS** | Repositório público, `ubuntu-latest`, `GET /actions/runners` = `0` self-hosted, nenhum larger runner/pago habilitado |
-| G2-P12 Readback/rollback + auditoria + checkpoint | **PENDENTE** | Rollback documentado abaixo; auditoria pt-BR e checkpoint independente serão as últimas etapas |
+| G2-P12 Readback/rollback + auditoria + checkpoint | **PASS** | Rollback documentado; auditoria pt-BR #6924316491; checkpoint independente com CI/audit/squash/readback |
 
 ## 7. Testes negativos reais (branches/PRs descartáveis, nunca mergeadas)
 
@@ -169,7 +169,7 @@ Como nenhuma configuração global foi alterada, o rollback se limita à remoç�
 
 ## 11. Riscos, limitações e pendências
 
-- **P05 positivo e P09 strict** ainda não observados nesta PR; serão fechados no checkpoint com SHA/run reais.
+- **P05 positivo e P09 strict** foram observados após o merge da PR #405 e estão registrados na seção 14; a promoção ocorre neste checkpoint.
 - **P10** é prova de política/configuração, não execução de PR de fork externo; nenhum fork real foi criado.
 - **P06/P07** são provas de configuração efetiva; nenhum push/force/delete real na `main` foi tentado, conforme proibição do Work Order.
 - Apenas `docs-validation` é obrigatório. Checks nativos Windows/Linux/macOS/GPU continuam inexistentes e **não** foram exigidos, evitando deadlock.
@@ -182,4 +182,12 @@ Como nenhuma configuração global foi alterada, o rollback se limita à remoç�
 
 ## 13. Escopo documental desta PR
 
-Esta PR adiciona **exatamente um Markdown novo** (este Evidence Bundle). A promoção de `G2 CLEARED`, a atualização do checkpoint, do backlog e dos documentos de gates/plano G2 ocorrem em **PR de checkpoint independente**, somente após o merge positivo e a prova strict serem observados e auditados. Até lá, `G2_NOT_YET_PROMOTED`.
+Esta PR adiciona **exatamente um Markdown novo** (este Evidence Bundle). A promoção de `G2 CLEARED`, a atualização do checkpoint, do backlog e dos documentos de gates/plano G2 ocorrem em **PR de checkpoint independente**, somente após o merge positivo e a prova strict serem observados e auditados. Este checkpoint independente promove `G2 CLEARED` após observar `P05`/`P09` e registrar a seção 14.
+
+## 14. Fechamento real e promoção (checkpoint independente)
+
+- **[PR #405](https://github.com/KayzenRoot/stormline/pull/405)** — evidência aplicada, BASE `0ef8eb69…`, HEAD auditado `50dd88264e8aac796c37bfaae723cf516b774fe5`, **1 ADDED Markdown**, zero modificações; [Docs CI run 43921693825](https://github.com/KayzenRoot/stormline/actions/runs/43921693825) job `133490363438` **SUCCESS** no HEAD exato; [auditoria pt-BR #6924316491](https://github.com/KayzenRoot/stormline/pull/405#issuecomment-6924316491) **APPROVED DOCUMENTARY ONLY**; **squash** em `2026-11-16T17:46:21Z`, merge commit [`80624f6320578f49a16030f8c42e03ddd49afbba`](https://github.com/KayzenRoot/stormline/commit/80624f6320578f49a16030f8c42e03ddd49afbba), com **zero aprovações** e sem bypass. Push CI da `main` [run 43921866131](https://github.com/KayzenRoot/stormline/actions/runs/43921866131) **SUCCESS**.
+- **P05 positivo:** o próprio squash da PR #405 é a prova de que PR + check verde + formato squash permitem o merge normal. As provas negativas #402/#403 retornaram HTTP 405 com `is failing` / `is expected` e foram fechadas sem merge.
+- **P09 strict:** a PR #404, verde mas baseada em `0ef8eb6…`, foi negada após a main avançar com `Required status check "docs-validation" is expected` e `mergeStateStatus=BEHIND`. Após `PUT /pulls/404/update-branch`, novo head `174ca3103c157a1d3856b99e07b7cf4004b5d6b9`, [run 43921953773](https://github.com/KayzenRoot/stormline/actions/runs/43921953773) job `133491259248` **SUCCESS**, `mergeStateStatus=CLEAN`. A PR foi fechada sem merge e a branch removida.
+- **Readback final:** `main` HEAD `80624f6320578f49a16030f8c42e03ddd49afbba`, `protected=true`; ruleset `27393227` `active`, include `["refs/heads/main"]`, `bypass_actors=[]`, `current_user_can_bypass="never"`; `docs-validation` success no HEAD da main; zero PRs de prova abertas; branches `test/g2-probe-*` removidas.
+- **Promoção:** `G2 CLEARED` (2026-11-16) **apenas** para o escopo autorizado — PR obrigatória, zero revisores, `docs-validation` strict, linear/squash, no force/delete/bypass, R$0 e isolamento de forks por política. Checks nativos futuros e o restante de G1/G3 permanecem não qualificados.
