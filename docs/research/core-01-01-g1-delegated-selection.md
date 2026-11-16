@@ -29,8 +29,8 @@
 
 **STOP:** The eight choices are owner-ratified **as bounded requirements only**; this does not constitute passed tests, certified platforms, completed G1 or DoD, C++ implementation, native CI, registry promotion, ADR approval or authorization for package 02.
 
-## Stable Work Order addendum / acceptance
-- **OBJECTIVE:** choose among the eight G1 alternatives under explicit owner delegation, without self-ratifying.
+## Historical agent-selection Work Order terms (pre-ratification)
+- **OBJECTIVE (historical):** initially choose among the eight G1 alternatives under owner delegation without self-ratifying; the owner **later ratified** all eight explicitly as bounded requirements.
 - **CONTEXT:** PRs #388–#391 integrated; main at fixed baseline above; issue #387 open.
 - **SCOPE:** these eight justified choices and immutable evidence under one documentary PR, plus independent checkpoint if approved.
 - **OUT OF SCOPE:** Ledger/Scope/DoD/registry/manifest/ADR updates, CI/branch settings, code, tests of engine or release license.
@@ -38,7 +38,7 @@
 - **REQUIREMENTS:** preserve G1 limits D01/D08/D09/D14 and GOV-001..005, NLE-D009 OPEN.
 - **ARCHITECTURE RULES:** CPU-only real headless, portable host independent of GPU/audio/server, no vendor API leakage into unapproved ABI.
 - **CONSTRAINTS:** zero paid required CI, no external human reviewer mandatory, no false certification.
-- **ACCEPTANCE CRITERIA:** exactly eight agent selections, all `PENDING_OWNER`; no change in implementation gates, code/registry or four prior ratifications.
+- **ACCEPTANCE CRITERIA (historical):** eight agent selections were pending owner ratification **at the time of the earlier PR #392**. Current status after later explicit owner statement: eight `OWNER_RATIFIED_G1_BOUNDED`, with no implementation gate, code/registry or four prior C01 ratifications changed.
 - **TESTS:** existing GitHub Docs Validation on exact PR HEAD, links and blocked queue guard; native/physical `NOT_EXECUTED`.
 - **DELIVERABLES:** selected option matrix, Evidence Bundle, PR/CI/audit, squash/readback; factual checkpoint separately if due.
 - **REVIEW FORMAT:** objective pt-BR APPROVED for documentary selection / CORRECTION REQUIRED / BLOCKED; never APPROVED G1 technical.
