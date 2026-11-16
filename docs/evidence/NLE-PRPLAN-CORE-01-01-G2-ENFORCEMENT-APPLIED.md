@@ -86,7 +86,7 @@ O estado anterior era inequívoco e restaurável: **nenhum** ruleset, **nenhuma*
 }
 ```
 
-**Resposta real:** HTTP 201, `id=27393227`, `node_id=RRS_lACqUmVwb3NpdG9yec5W4cXHzgGh_Ms`, `created_at=2026-11-16T14:36:12.180-03:00`, `enforcement=active`, `bypass_actors=[]`, **`current_user_can_bypass="never"`**. Resposta `sha256=587c99fc81ed850ceea7856f74134a86363dd92f6b1fa05faa9cc7e195bdd5be`.
+**Resposta real (corpo capturado):** criação aceita, `id=27393227`, `node_id=RRS_lACqUmVwb3NpdG9yec5W4cXHzgGh_Ms`, `created_at=2026-11-16T14:36:12.180-03:00`, `enforcement=active`, `bypass_actors=[]`, **`current_user_can_bypass="never"`**. Resposta `sha256=587c99fc81ed850ceea7856f74134a86363dd92f6b1fa05faa9cc7e195bdd5be`.
 
 O API injetou `require_extra_approval_for_unattributed_changes: true` (default do GitHub). A documentação oficial afirma que esse campo **não tem efeito quando `required_approving_review_count=0`**; portanto a política autorizada de zero aprovações permanece íntegra. Nenhum bypass foi criado.
 
@@ -108,7 +108,7 @@ O API injetou `require_extra_approval_for_unattributed_changes: true` (default d
 | Unicidade | Único workflow no repositório (`GET /actions/workflows` → 1); único Check Run `docs-validation` por commit/PR observado |
 | Evento | workflow dispara em `pull_request` e `push: main`; sem filtros `paths`, sem `if` de job, sem `pull_request_target` |
 | Isolamento | `permissions: contents: read`, `persist-credentials: false`, default do repositório `read`, `can_approve_pull_request_reviews=false`, nenhum segredo referenciado |
-| Execução real | [PR #404](https://github.com/KayzenRoot/stormline/pull/404), head `391e5036…`, [run 43920602387](https://github.com/KayzenRoot/stormline/actions/runs/43920602387), job `133486539980`: **success**, 10 steps de validação todos `success`, nenhum `skipped` |
+| Execução real | [PR #404](https://github.com/KayzenRoot/stormline/pull/404), head `391e5036…`, [run 43920602387](https://github.com/KayzenRoot/stormline/actions/runs/43920602387), job `133486539980`: **success**, steps 1–10 (setup, checkout e 8 validações) e post/complete todos `success`, nenhum `skipped` |
 | Runner | `ubuntu-latest`, grupo `GitHub Actions`, runner hospedado padrão |
 
 ## 6. Matriz de provas G2-P01..P12
@@ -144,7 +144,7 @@ As mensagens acima são a resposta literal do GitHub API, não interpretação. 
 
 - `bypass_actors=[]` e `current_user_can_bypass="never"`: o próprio proprietário/admin não contorna o ruleset.
 - Observados Check Runs de terceiros já instalados: SonarCloud (`app_id=12526`) e Socket Security (`app_id=156372`). Eles **não** estão na lista de bypass e não foram modificados; continuam apenas reportando checks informativos.
-- O check suite listing revelou 16 apps com suites vazias/queued (integrações de conta). Nenhum recebeu bypass; qualquer merge futuro continua sujeito às mesmas cinco regras.
+- O listing de check suites revelou **16 suites**, sendo 14 vazias/queued de integrações de conta e 2 concluídas (SonarCloud e Socket). Nenhum app recebeu bypass; qualquer merge futuro continua sujeito às mesmas cinco regras.
 - A automação Codex usa a credencial do proprietário; não há bypass específico. Merge só é permitido com a PR exigida e `docs-validation` verde no commit atualizado.
 - Efeito prático: pushes diretos e merges que não sejam squash deixam de ser aceitos na `main`; PRs precisam ser atualizadas após mudança da base. O fluxo documental existente já usa PR + squash, portanto não há quebra de processo.
 
