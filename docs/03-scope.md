@@ -27,3 +27,13 @@ Nenhuma implementação C++, shader, build Vulkan, editor, física, VFX, runtime
 
 ## Expansão
 Somente incluir uma funcionalidade no incremento quando houver evidência de que o DoD vigente a exige. Planejamento futuro não é autorização para programar.
+
+## CORE-01 G1 — escopo 1.0 ratificado com limites (2026-11-16)
+Ratificação **somente** de C01-D01, C01-D08, C01-D09 e C01-D14, mediante declaração expressa do proprietário. Fonte: [Ledger](10-decisions-ledger.md), [dossiê](research/core-01-01-owner-technical-decision-dossier.md) e [evidência](evidence/NLE-PRPLAN-CORE-01-01-G1-RATIFICATION.md). O incremento atual é exclusivamente documental.
+
+- **D01:** o *mínimo* do CORE-01 é requisito pretendido para a 1.0: inicializar, gerenciar eventos/estados/erros, desligar e operar com/sem janela nos hosts de Editor, cliente/jogo, servidor e teste. Capacidades avançadas são condicionais, sem tornar todo módulo ou os 80 módulos mandatórios. MANDATORY_1_0 é ratificação **de direção do escopo mínimo**, não modificação automática do campo de registry.
+- **D08:** Windows x86_64, Linux x86_64 e macOS arm64 (Apple Silicon) são os perfis iniciais desktop a qualificar. Wayland/X11 conforme capacidade real; macOS Intel e Windows arm64 condicionais. Versões mínimas de SO/SDK/glibc/CRT não foram escolhidas; Web é alvo separado PLAT-03, sem revogar a visão aprovada.
+- **D09:** headless CPU-only verdadeiro, sem GPU, display/janela, sessão gráfica, áudio ou editor obrigatórios; servidor autoritativo NET-02 permanece módulo distinto.
+- **D14:** protocolo de qualificação futura de 200 boots headless, 100 ciclos de janela por SO aprovado, 10.000 eventos e 30 cold + 30 warm amostras; nenhuma suíte foi executada.
+
+**Não há ratificação de todo Scope/DoD 1.0 nem Gate G1 encerrado.** Mínimos de hardware, exclusões específicas e limites complementares permanecem abertos; release_class/risk dos 80 WOs seguem UNDECIDED/UNCLASSIFIED. ADR-0003 permanece PROPOSED, NLE-D009 OPEN; CORE-01-01/02 PLANNED_BLOCKED, nenhum código autorizado.

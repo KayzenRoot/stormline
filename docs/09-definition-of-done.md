@@ -41,3 +41,14 @@ Funcional, testado, documentado, deployado quando aplicável e validado em ambie
 
 ## Falha
 CORRECTION REQUIRED: corrigir somente na mesma WO/PR; BLOCKED: resolver pré-requisito. Nenhum próximo incremento até aprovação válida.
+
+## CORE-01 G1 — DoD e obrigações de prova ratificados parcialmente (2026-11-16)
+O proprietário ratificou **C01-D01/D08/D09/D14** como contrato de projeto e proposta de mensuração futura. Isto **não comprova funcionalidade**, não libera o pacote 02, nem define os limiares complementares da versão 1.0. Ver [Ledger](10-decisions-ledger.md), [Evidence G1](evidence/NLE-PRPLAN-CORE-01-01-G1-RATIFICATION.md).
+
+1. **D01:** núcleo mínimo de Platform & Lifecycle para Editor, cliente/jogo, servidor e testes; lifecycle e erros tipados com modo janela e modo headless. Especificar funcionalidades avançadas e exceções antes de fechar release classes.
+2. **D08:** para cada alvo desktop inicial Windows x86_64, Linux x86_64, macOS arm64, fixar versão mínima de OS, CPU, SDK/runtime, build e testes em ambiente real. macOS Intel/Windows ARM64 condicionais; Web sob PLAT-03.
+3. **D09:** o modo CPU-only headless deverá inicializar/encerrar sem GPU, janela, DISPLAY/WAYLAND_DISPLAY, sessão gráfica, editor ou dispositivo de áudio obrigatórios; tratar falhas parciais, eventos e vazamentos de recursos. NET-02 não é pré-requisito do host.
+4. **D14:** os critérios numéricos futuros incluem **200/200** boots headless e **100/100** ciclos de janela por plataforma aprovada, replay de **10.000** eventos sintéticos, **30 cold + 30 warm** amostras de tempos, ausência de leaks detectáveis e recibos de CI/sanitizer/hardware/driver/compilador. Limites ainda não especificados de tempo/memória e a matriz física devem ser aprovados antes de declarar qualificação; 30 amostras não bastam para alegação robusta de p99.
+5. **Prova e gate:** manter 32 casos C01-Q001..Q032 como FUTURE_NOT_EXECUTED, exigir registros reprodutíveis, testes negativos e regressão conforme risco. G1 fica PARTIALLY_RATIFIED_NOT_CLEARED; G2 e G3 abertos. Nenhuma ADR, tecnologia, licença ou classe do registry promovida por esta ratificação.
+
+**DoD documental deste delta:** PR restrita aos registros de decisão/Scope/DoD/dossiê/gates/WO/evidência, GitHub Docs Validation no HEAD revisado, auditoria objetiva pt-BR, squash, readback e checkpoint independente. O DoD da engine 1.0 e G1 integral não foram cumpridos.
