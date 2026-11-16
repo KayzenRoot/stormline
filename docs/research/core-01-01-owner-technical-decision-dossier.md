@@ -9,7 +9,7 @@ This is **packet 01/16, GOVERNANCE** from [the prospective PR map](../pr-plans/C
 
 The original technical candidates remain proposals except four decisions expressly ratified by the owner on 2026-11-16: C01-D01, C01-D08, C01-D09 and C01-D14 with their limits/proof obligations. Eleven are still AWAITING_OWNER; no vendor, ABI, runtime capability, ADR or registry item is promoted.
 
-| Key | Decision | Preferred candidate (NOT ACCEPTED) | Explicit alternatives | Owner acceptance/exit criteria | Current |
+| Key | Decision | Original recommendation (four G1 bounded ratified) | Explicit alternatives | Owner acceptance/exit criteria | Current |
 |---|---|---|---|---|---|
 | `C01-D01` | Escopo/release 1.0 | CORE-01 como pré-requisito MANDATORY_1_0 para host de editor/game/client/server desktop; Web (PLAT-03) integrações separadas; mobile (PLAT-04) condicional | CORE-01 inteiro obrigatório vs host minimal + capacidades condicionais | Definir min OS/CPU/arquitetura e profundidade das funcionalidades; excluir formalmente opcionais. Não escrever release_class até aceite. | `OWNER_RATIFIED_G1_BOUNDED` |
 | `C01-D02` | Linguagem e restrições | C++20 baseline interna, sem módulos C++20 obrigatórios e sem uso de C++23 por padrão; versão de compiler+stdlib a fixar | C++23 primeiro / C++17 mais restrito | Verificar nas três famílias MSVC, GCC/Clang, AppleClang + binários x64/arm64; compliance/libstdc++/CRT. | `AWAITING_OWNER` |
