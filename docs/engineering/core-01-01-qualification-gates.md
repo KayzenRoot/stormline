@@ -9,7 +9,7 @@
 |---|---|---|
 | G0 research | 80/80 documented + catalog DAG, ADR proposal, evidence links | COVERAGE DOCUMENTED; research ≠ owner approval |
 | G1 scope/DoD/release | Owner ratifies CORE-01 minimum desktop/headless requirements, version 1.0 mandatory vs conditional features, support matrix and full product DoD | `PARTIALLY_RATIFIED_NOT_CLEARED`: four bounded C01 G1 directions plus eight bounded G1-M minima; SDK/physical tests, p95/RSS and complete product 1.0 DoD still open; registry UNDECIDED |
-| G2 repository | Confirm protected PR flow, required docs/native checks by **actual job name**, zero external reviewers, no bypass, no public-fork secret access, R$0 | `BLOCKED_NOT_VERIFIED`: main.protected=false, GET /rulesets=[], GET detailed protection=403 |
+| G2 repository | Confirm protected PR flow, required checks by **actual job name**, zero external reviewers, no bypass, no public-fork secret access, R$0 | `CLEARED` (2026-11-16): ruleset `27393227` active only on main, PR required/0 approvals, `docs-validation` (app 15368) strict, linear/squash, no force/delete/bypass; real negative probes and green squash `80624f6`; ver [Evidence aplicado](../evidence/NLE-PRPLAN-CORE-01-01-G2-ENFORCEMENT-APPLIED.md) |
 | G3 architecture/stack | Owner chooses C++ standard, host adapter, CMake Presets schema/toolchains, ABI ownership/third party terms and explicit cost/scope | `OWNER_DIRECTIONS_RATIFIED_NOT_TECHNICALLY_CLEARED`: 11 bounded option-A directions, compiler/SDK/version/ABI, OS tests/licensing and ADR-0003/0075 PROPOSED |
 | G4 CORE-01 technical approval | Signed/traceable owner decision + objective comparison evidence to approve revised or superseding ADR-0003; preserve historical PROPOSED text until separate decision PR | `NOT_STARTED` |
 | G5 execution proof plan | Risk classification per slice, pin versions/checksums, numerical acceptance and actual hardware matrix, full typed API/version/rollback spec | `NOT_STARTED` |
@@ -32,8 +32,8 @@
 
 **CI policy:** Linux/Windows/macOS runner labels and public standard execution appear in [GitHub official docs](https://docs.github.com/en/actions/reference/runners/github-hosted-runners). The actual future CI must pin compiler/OS/arch, environment, source SHA, dependency hashes and exact cost/retention; windowed VM tests are smoke, **not GPU physics/driver qualification**. Do not add QA-01 native workflow before authorized code.
 
-## 32 future test and benchmark cases: NONE RAN
-These are *negotiation-ready test oracles*. The test case count does not retroactively change historical CORE-01 research nor create an approved contract. Each record remains `FUTURE_NOT_EXECUTED` until CI logs and physical target evidence exist.
+## 32 future test and benchmark cases: 31 NOT RUN; C01-Q031 executed via G2 proofs
+These are *negotiation-ready test oracles*. The test case count does not retroactively change historical CORE-01 research nor create an approved contract. C01-Q001..Q030 and C01-Q032 remain `FUTURE_NOT_EXECUTED`; only C01-Q031 (governance) is `PASS` via the real G2 enforcement proofs. Native tests still require CI logs and physical target evidence.
 
 | ID | Area | Future scenario | Proposed numeric / pass oracle | Result |
 |---|---|---|---|---|
@@ -67,7 +67,7 @@ These are *negotiation-ready test oracles*. The test case count does not retroac
 | C01-Q028 | Reliability | Physical OS/display/driver/graphics fallback qualification | NOT_QUALIFIED until real device matrix and test artifacts; CI VM not GPU certification | `FUTURE_NOT_EXECUTED` |
 | C01-Q029 | Governance | Pin SDL3/SDL3 third-party license, Ninja/CMake/vendor toolchain rights | SPDX/provenance/version/sha256/redistribution scope; source license remains OPEN | `FUTURE_NOT_EXECUTED` |
 | C01-Q030 | Governance | Verify public CI R$0, 3 OS standard-runner labels and artifact retention | No paid larger runner/secret-bearing workflow; owner-approved quota and evidence | `FUTURE_NOT_EXECUTED` |
-| C01-Q031 | Governance | Verify GitHub main branch protection/rulesets/required check enforcement | Actual enforcement not verified; configuration action separate and authorized | `FUTURE_NOT_EXECUTED` |
+| C01-Q031 | Governance | Verify GitHub main branch protection/rulesets/required check enforcement | Actual enforcement not verified; configuration action separate and authorized | `PASS` — G2-P01..P12, 2026-11-16 ([Evidence aplicado](../evidence/NLE-PRPLAN-CORE-01-01-G2-ENFORCEMENT-APPLIED.md)) |
 | C01-Q032 | Governance | Owner ratifies 1.0 Scope/DoD/risk/release/ABI/ADR and no HIGH/CRITICAL | Explicit approval with traceable record, not approval by this documentary PR | `FUTURE_NOT_EXECUTED` |
 
 ### Numerical gates are **candidates**, not requirements or PASS
@@ -89,7 +89,7 @@ These are *negotiation-ready test oracles*. The test case count does not retroac
 [Decision dossier](../research/core-01-01-owner-technical-decision-dossier.md) · [Work Order](../work-orders/NLE-PRPLAN-CORE-01-01.md) · [Evidence](../evidence/NLE-PRPLAN-CORE-01-01.md).
 
 ## G1 owner ratification delta (2026-11-16)
-The owner expressly ratified C01-D01/D08/D09/D14 with limitations and future proof obligations; see [Ledger](../10-decisions-ledger.md), [Scope](../03-scope.md), [DoD](../09-definition-of-done.md), [Evidence G1](../evidence/NLE-PRPLAN-CORE-01-01-G1-RATIFICATION.md). **G1 remains NOT CLEARED** until full Scope/DoD, minimum OS/CPU/runtime and approved hardware/threshold matrix. All 32 C01-Q001..Q032 scenarios stay FUTURE_NOT_EXECUTED. G2/G3 stay open, ADR-0003 PROPOSED, registry/manifest unchanged and packet 02 PLANNED_BLOCKED.
+The owner expressly ratified C01-D01/D08/D09/D14 with limitations and future proof obligations; see [Ledger](../10-decisions-ledger.md), [Scope](../03-scope.md), [DoD](../09-definition-of-done.md), [Evidence G1](../evidence/NLE-PRPLAN-CORE-01-01-G1-RATIFICATION.md). **G1 remains NOT CLEARED** until full Scope/DoD, minimum OS/CPU/runtime and approved hardware/threshold matrix. C01-Q001..Q030 and C01-Q032 stay `FUTURE_NOT_EXECUTED`; C01-Q031 is `PASS` via G2 (2026-11-16). **G2 is CLEARED**; **G3 stays open**; ADR-0003 PROPOSED, registry/manifest unchanged and packet 02 PLANNED_BLOCKED.
 
 ## Gate G1 after explicit owner ratification of minima (2026-11-16; newest status)
 
@@ -97,13 +97,13 @@ The owner expressly ratified C01-D01/D08/D09/D14 with limitations and future pro
 
 **G1 remains `PARTIALLY_RATIFIED_NOT_CLEARED`, not `APPROVED`:** Windows 11 25H2 floor is provisional and requires lifecycle revalidation; Ubuntu 24.04/glibc 2.39 and macOS 15 arm64 are future support reference constraints, not passed native tests. Physical target/driver/kernel/SO patch/Xcode/CRT, x86 ISA dispatch, 2/4 GiB headless fixture, 4/8 GiB windowed fixture, negative/display-failure in ≤5 s, 200/100/10k/30+30, event delivery, sanitizer leaks/UAF, and release-date 90 day requalification are obligations **NOT EXECUTED**. Final p95/RSS thresholds still unratified, product 1.0 Scope/DoD unclosed and other 11 C01-Dxx await owner.
  
-**G2** branch enforcement `NOT_VERIFIED`, **G3** stack/ABI/licensing `OPEN`, **G4-G8** still blocked. ADR-0003 and ADR-0075 PROPOSED, NLE-D009 OPEN, 80/80 code WOs BLOCKED, CORE-01-01/02 PLANNED_BLOCKED, release classes/risk registry undecided/unclassified, engine_implemented=false. No native CI, build, release, editor or server test performed.
+**G2** branch enforcement `CLEARED` (ruleset `27393227` ativo, provas reais; [Evidence aplicado](../evidence/NLE-PRPLAN-CORE-01-01-G2-ENFORCEMENT-APPLIED.md)), **G3** stack/ABI/licensing `OPEN`, **G4-G8** still blocked. ADR-0003 and ADR-0075 PROPOSED, NLE-D009 OPEN, 80/80 code WOs BLOCKED, CORE-01-01/02 PLANNED_BLOCKED, release classes/risk registry undecided/unclassified, engine_implemented=false. No native CI, build, release, editor or server test performed.
 
 ## G2/G3 after explicit ratification of eleven C01 option-A directions (2026-11-16, newest status)
 
 The owner **expressly ratified** C01-D02/D03/D04/D05/D06/D07/D10/D11/D12/D13/D15 exactly as qualified, preserving alternatives as unselected and all proof obligations. [Decision Ledger](../10-decisions-ledger.md) · [owner-options matrix](../research/core-01-01-g2-g3-owner-decision-options.md) · [Evidence Bundle](../evidence/NLE-PRPLAN-CORE-01-01-G2G3-OWNER-RATIFICATION.md). Earlier source-check/board sections above are historical research inputs, not live approvals.
 
-- **G2: `BLOCKED_NOT_VERIFIED`**. Read-only GitHub source: `main.protected=false`, `GET /rulesets=[]`, details GET 403. Ratified D12 describes **desired** standard R$0 runner/PR/required-check/security policy; rules are neither configured nor proven. **No branch settings change** in this increment. G2 must be separately authorized, enforced and tested with negative evidence; passing Docs Validation is insufficient.
+- **G2: `CLEARED` (2026-11-16)**. O proprietário autorizou separadamente a escrita administrativa; ruleset `g2-main-enforcement` id `27393227`, `active`, apenas `refs/heads/main`, `bypass_actors=[]`, `current_user_can_bypass="never"`. `docs-validation` (app 15368) é o único check obrigatório, strict; PR obrigatória com 0 aprovações; linear/squash; force-push e deletion proibidos. Provas reais: #402 (falha) e #403 (ausente) negadas, #404 (stale) negada até nova qualificação, #405 squash verde com CI exata e auditoria. [Evidence aplicado](../evidence/NLE-PRPLAN-CORE-01-01-G2-ENFORCEMENT-APPLIED.md). Checks nativos futuros continuam não exigidos e exigirão nova qualificação.
 - **G3: `OWNER_DIRECTIONS_RATIFIED_NOT_TECHNICALLY_CLEARED`**. Eleven design directions are accepted conceptually. Pin versions/digests/third-party SPDX, verify supported C++20 toolchains, SDL3 main-thread/headless, CMake Presets/CTest, ABI/HostHandle lifecycle, capabilities, risk per slice and future runner requirements before considering the technical gate. ADR-0003 and ADR-0075 remain `PROPOSED`. No plugin/SDK or engine license chosen.
 - **G1: `PARTIALLY_RATIFIED_NOT_CLEARED`**. Previous 12 bounded decisions still require hardware/patch/SDK/testing proof, p95/RSS explicit thresholds, release classes and complete global DoD. **G4–G8 not approved**. D15 does NOT authorize creating a test-code WO or starting implementation; such an experiment requires a new express owner authorization and separate gate assessment.
-- **Guardrails:** NLE-D009 engine license OPEN; registry 80/80 coding WOs BLOCKED, 0 ready/approved ADR, release_class UNDECIDED, risk UNCLASSIFIED; CORE-01-01/02 PLANNED_BLOCKED; C01-Q001..Q032 FUTURE_NOT_EXECUTED; `engine_implemented=false`.
+- **Guardrails:** NLE-D009 engine license OPEN; registry 80/80 coding WOs BLOCKED, 0 ready/approved ADR, release_class UNDECIDED, risk UNCLASSIFIED; CORE-01-01/02 PLANNED_BLOCKED; C01-Q001..Q030/Q032 FUTURE_NOT_EXECUTED e Q031 PASS via G2; `engine_implemented=false`.
