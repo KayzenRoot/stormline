@@ -37,13 +37,18 @@
 | Windows/Linux/macOS/Web target matrix | no real cross-target ABI/SDK consumer build or physical hardware test |
 | 128 future B02-T001..B02-T128 cases | FUTURE/NOT EXECUTED, ZERO PASS, all hypothetical |
 | License and commercial distribution rights | engine source NLE-D009 OPEN, no SDK/export grant or notices from package |
-| CI exact PR head and objective audit | PENDING until observed; docs-only CI cannot prove product |
+| CI exact PR head and objective audit | [Docs Validation #43845155975](https://github.com/KayzenRoot/stormline/actions/runs/43845155975) SUCCESS on actual research HEAD; pt-BR audit #6913320019 APPROVED documentary; **no runtime proof** |
 
-## 5. Research integration pending actual observation
-- Prepared branch `docs/NLE-P00-WO-002-BIZ-02-research`, source `0ee74d476b7c5ff09744b323cfde7423c06673b2`. PR number, HEAD, diff exactly eight ADDED .md, CI run/job SUCCESS, pt-BR audit, squash/main readback must be appended only after real events.
+## 5. Research PR integration observed (prior pending superseded)
+- Branch `docs/NLE-P00-WO-002-BIZ-02-research`, BASE `0ee74d476b7c5ff09744b323cfde7423c06673b2`, HEAD `2fe8643df421109f2caf9583286a3a936e3a62d4`. [PR #367](https://github.com/KayzenRoot/stormline/pull/367) **exactly 8 ADDED Markdown, no others**; [Docs Validation #43845155975](https://github.com/KayzenRoot/stormline/actions/runs/43845155975) **SUCCESS**, job #133223354776 (links, DAG, 80 registry, selector blocked); [objective pt-BR audit #6913320019](https://github.com/KayzenRoot/stormline/pull/367#issuecomment-6913320019) APPROVED documentary, no HIGH/CRITICAL known in research diff. Squash merged and main readback `29ca0fa90215e13b09135d2330357354a35aba85` observed.
 - No license decision, release, public SDK, package publication, expense, private data upload or implementation issue activation. Research P00 risk LOW; future native plugin untrusted isolation and public source rights are HIGH_ASSURANCE.
 
-## 6. Proposed independent checkpoint / historical closeout
+## 6. Independent checkpoint being audited (historical proposal recorded)
 - Once research PR merged/read back, **independent** checkpoint five modified files: checkpoint, backlog, registry, blocked BIZ-02 code WO, this Evidence. **Sole semantic registry delta** BIZ-02 `research_status: RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`, other 79 full module objects and all root keys intact. Target 78/80 (97.5%), 2 pending, 80/80 coding BLOCKED, 0 executor_ready/approved ADR, license OPEN.
 - Research issue #366 CLOSE only after checkpoint CI/audit/squash/main readback; coding issue #96 remains OPEN/BLOCKED. Then independent historical closeout **four Markdown only** checkpoint/backlog/BIZ-02 WO/Evidence, own CI/audit/squash/main readback before next real catalog module.
 - Next actual catalog module after BIZ-02 is **BIZ-03 Release, Installer & Lifecycle**, ordinal 79/80, formal PLAT-05 + BIZ-01 + QA-04 (verify from catalog), future code #97 BLOCKED. No increment automatically authorized.
+
+## Independent checkpoint candidate (five MODIFIED), verify before calling completed
+- Current baseline research main `29ca0fa90215e13b09135d2330357354a35aba85`, accepted [PR #367](https://github.com/KayzenRoot/stormline/pull/367). Only BIZ-02 registry `research_status RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED` changes semantically; all other 79 full module objects and root fields identical. Other 4 edits are narrative checkpoint/backlog/BIZ-02 future blocked WO/this Evidence.
+- Expected count 78/80 documented (97.5%), 2 pending, all 80 coding WOs BLOCKED, zero ready/approved ADR, all release classes UNDECIDED, engine=false, source license OPEN. **No source license, plugin API/ABI, releases or tests were approved or executed.**
+- Checkpoint PR number/head/actual CI/job/audit/merge/readback must be recorded when independently observed; no self-approval. After verified: close research issue #366, retain code #96 OPEN/BLOCKED, separate 4-Markdown factual history PR with its OWN CI/audit/squash/readback. BIZ-03 next real catalog module, no implementation authorization.

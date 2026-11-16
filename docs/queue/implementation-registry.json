@@ -1729,7 +1729,7 @@
       "catalog_acceptance": "Plugin/sample compatível com API publicada, teste de atualização.",
       "id": "NLE-EXEC-WO-BIZ-02-001",
       "file": "docs/queue/work-orders/BIZ-02.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
