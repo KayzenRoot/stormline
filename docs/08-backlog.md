@@ -1,5 +1,6 @@
 # Backlog (dependency ordered)
 Status: PLANNING; module implementation issues #18–#97 exist but remain BLOCKED. Research issues are separate.
+**Verificação P00, 2026-11-16:** 80/80 pesquisas DOCUMENTADAS, 80/80 implementações BLOCKED, zero ADR de implementação ratificado, zero executor-ready. Governança [NLE-P00-GOV-001](work-orders/NLE-P00-GOV-001.md) pesquisa documental [PR #376](https://github.com/KayzenRoot/stormline/pull/376) integrada; [plano de gates](engineering/p00-technical-approval-gates.md) é PROPOSED e não autoriza execução.
 
 | ID | Incremento | Predecessor | Estado |
 |---|---|---|---|
@@ -335,3 +336,8 @@ Pesquisa original [PR #100](https://github.com/KayzenRoot/stormline/pull/100) ba
 O único delta semântico do registro é `CORE-04.research_status: RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`; **79 outros objetos completos e todos os campos raiz permanecem idênticos**. Depois de auditado e integrado, o registro indica **80/80 pesquisas documentadas (não implementadas)**, 80/80 futuros WOs `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, 0 `executor_ready`, 0 `approved_adr`, 80 classes de release UNDECIDED, engine_implemented=false. Dependência formal CORE-04 **CORE-01 somente**, ADR-0006 PROPOSED; NLE-D009 licença OPEN, NLE-D010 marca OPEN, NLE-D013 proíbe MVP público antes de DoD integral. Nada garante ABI, compilação, desempenho, determinismo numérico entre plataformas, sandbox ou aprovação de código.
 
 **Lacuna não-bloqueante do status de pesquisa:** o CORE-04 foi aprovado no padrão de 14/11/2026, com contratos semânticos e testes conceituais na arquitetura, sem a padronização posterior de 128 casos por módulo ou contrato de API definitivo em arquivo separado. Não retroagir critérios documentais para reescrever pesquisa historicamente aprovada; essa lacuna permanece **BLOCKED como gate de implementação** e exige DoD/ADR final/contratos/testes/targets antes de Zcode. Green Docs CI não é benchmark ou teste de compilação/engine.
+
+
+## NLE-P00-GOV-001 — global P00 research audit documented; next ADR qualification NOT STARTED
+- [Research PR #376](https://github.com/KayzenRoot/stormline/pull/376) four new Markdown, Docs Validation [#43853049764](https://github.com/KayzenRoot/stormline/actions/runs/43853049764) SUCCESS job #133250259252, [audit #6914453449](https://github.com/KayzenRoot/stormline/pull/376#issuecomment-6914453449) APPROVED documentary only, squash/main readback `715148d9c57b6225a27d562ad21d82c882a5710e`. [Global 80 module report](research/p00-global-research-closure-audit.md), [proposal-only approval gates](engineering/p00-technical-approval-gates.md), [Evidence](evidence/NLE-P00-GOV-001.md). 80 ADRs remain PROPOSED and all implementation packets BLOCKED.
+- This checkpoint is separate, exactly 3 Markdown modified, with its own CI and pt-BR audit and main readback required. Next necessary decision proposal **CORE-01 ADR-0003** plus QA-01 preparation and owner Scope/DoD/release class, risk, Git protection and licensing gates; not a decision, not execution. NLE-D009 OPEN and NLE-D013 no public MVP unchanged.
