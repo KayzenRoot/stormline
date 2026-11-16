@@ -20,8 +20,8 @@ No edits to preexisting ADR/Source Pack/registry, 748 PR manifest, original 80 i
 
 ## Evidence state, to replace only when observed
 - Qualifying research [issue #384](https://github.com/KayzenRoot/stormline/issues/384) created; branch `docs/NLE-PRPLAN-CORE-01-01-qualification` created from `27ad407bbf0f66d1938c403bf32c28b0ebf1e910`.
-- Qualifying PR **PENDING exact number/HEAD/changed files/Docs CI run/job/objective audit/squash main readback**. Do not infer a PASS from this file.
-- Independent checkpoint PR **PENDING**, only after documentary audit/merge. Its purpose is **factual integration of proposal**, not promoting ADR-0003 or `PLANNED_BLOCKED` state; future packet 02 stays blocked.
+- **Qualifying PR evidence VERIFIED:** [#385](https://github.com/KayzenRoot/stormline/pull/385), BASE `27ad407bbf0f66d1938c403bf32c28b0ebf1e910`, HEAD `4800f8f5d4017bf8f60243fe0e61e3e4ea2aff50`, exactly **4 ADDED Markdown**, zero existing file changes. [Docs CI #43867098471](https://github.com/KayzenRoot/stormline/actions/runs/43867098471), job #133298356546 SUCCESS on exact HEAD; [pt-BR audit #6916489340](https://github.com/KayzenRoot/stormline/pull/385#issuecomment-6916489340) APPROVED **documentary only**; normal squash/main readback `81fed0b32fd17317ae334f4e8a056647a81292f4`. No native/test/owner approval PASS inferred.
+- Independent checkpoint PR **PENDING OWN CI/AUDIT/READBACK**. Research PR #385 merge and factual main evidence verified above. This separate checkpoint modifies only checkpoint/backlog/this Evidence, no ADR-0003/status change; **packet 01 and 02 stay PLANNED_BLOCKED**, 15 owner decisions AWAITING_OWNER.
 - **All 32 future test/benchmark cases NOT EXECUTED**, 0 C++ compiles, 0 cross-OS native results, 0 actual headless/windowed life cycles, 0 performance comparisons, no SDK/UI/engine artifact and no public release.
 - **Owner decision status C01-D01..D15 = AWAITING_OWNER**; no license/release/risk decision or architecture/version pin accepted through this PR.
 
@@ -29,3 +29,7 @@ No edits to preexisting ADR/Source Pack/registry, 748 PR manifest, original 80 i
 - Documentation CI only checks links, registry/plan, skills and blocked executor guard. CI green cannot prove technology/SDK/legal readiness, physical GPU, Apple devices or runtime.
 - Approval of **document quality** is distinct from authority to switch ADR to APPROVED, alter Scope/DoD/risk/release class, configure branch rules or start code. The owner must actively ratify relevant decisions separately and any governance defects HIGH/CRITICAL stop implementation.
 - Proposed Checkpoint Delta: [Work Order](../work-orders/NLE-PRPLAN-CORE-01-01.md) only after independently inspected PR/CI/squash; no alteration to 80 coding issue states or planned packet 02.
+
+## Independent checkpoint candidate, not yet owner gate closure
+- BASE `81fed0b32fd17317ae334f4e8a056647a81292f4`, exactly three existing Markdown **MODIFIED**: `docs/11-checkpoint.md`, `docs/08-backlog.md`, this Evidence. Source registry Git blob `abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024`, manifest, original ADR-0003, Scope/DoD/Ledger/CI, all 80 code WOs and engine remain unchanged.
+- Checkpoint PR number, HEAD, CI run/job, objective pt-BR audit and main readback must be observed **before** declaring documentary closeout and closing issue #384. **No owner technology ratification, packet 02 activation or code implementation** can follow automatically.
