@@ -50,3 +50,8 @@ Verified Git *blob SHA-1* fingerprints (Git object hashes, **not** raw file SHA-
 **Tests:** GitHub Docs Validation at exact PR HEAD (source links, registry/blocked selector, DAG and unit tests). Objective pt-BR audit of owner-delegation boundary, hashes, choices and no HIGH/CRITICAL defects; squash/readback and independently audited factual checkpoint if due. No completed PR/CI/audit is asserted before it exists.
 
 **STOP:** treating selection as owner ratification, any unsupported performance/compatibility claim, code or packet 02, stale base, failed CI, missing verified authority for canonical change.
+
+## PR #392 factual documentary closeout (independent checkpoint to follow)
+- [PR #392](https://github.com/KayzenRoot/stormline/pull/392), BASE `3fa9c59aaa971c8fbd99983b6a6656520dea8c5c`, audited HEAD `b1d66902b25a8e396ddaff2a60b4189893b96e8d`, exactly two ADDED Markdown, corrected wording on same PR, GitHub Docs Validation [run #43877823237](https://github.com/KayzenRoot/stormline/actions/runs/43877823237) SUCCESS, job `docs-validation` #133335397027, all steps successful.
+- Objective pt-BR [audit #6918061726](https://github.com/KayzenRoot/stormline/pull/392#issuecomment-6918061726) APPROVED only as selected proposal; normal squash/main readback [commit `be83079d00d931a72ab277a55b0a1e2782b8c759`](https://github.com/KayzenRoot/stormline/commit/be83079d00d931a72ab277a55b0a1e2782b8c759).
+- Checkpoint PR, CI, objective audit and readback are **independent future events**, not claimed as passed in advance. Issue #387 OPEN, eight G1 selections `PENDING_OWNER`, G1 partial, G2/G3 open, zero engine implementation.
