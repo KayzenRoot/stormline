@@ -1664,7 +1664,7 @@
       "catalog_acceptance": "Fuzzing e auditoria de riscos HIGH/CRITICAL antes de release.",
       "id": "NLE-EXEC-WO-QA-04-001",
       "file": "docs/queue/work-orders/QA-04.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
