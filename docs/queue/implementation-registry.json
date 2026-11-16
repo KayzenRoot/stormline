@@ -1641,7 +1641,7 @@
       "catalog_acceptance": "Benchmarks comparáveis p50/p95/p99 por hardware e quality tier.",
       "id": "NLE-EXEC-WO-QA-03-001",
       "file": "docs/queue/work-orders/QA-03.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
