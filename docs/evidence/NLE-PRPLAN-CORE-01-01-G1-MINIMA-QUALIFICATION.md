@@ -50,3 +50,8 @@
 **Tests to confirm:** GitHub Docs Validation exact PR-head SUCCESS (Source Pack, links, DAG, registry/blocked selector, Skills/unit, 748 PR plans/unit), objective pt-BR audit, normal squash/main readback. **Native/headless/windowed tests: NOT RUN**. No CI result/PR ID/merge date is asserted until observed; link real evidence in PR discussion and post-merge checkpoint.
 
 **Stop:** main/critical document STALE, new owner choice asserted without explicit statement, unsupported OS floor claimed as certified, unauthorized edits or code, CI failed, high/critical documentary fault, package 02 start or coding WO activation.
+
+## Actual PR #390 qualifying-document closure
+- [PR #390](https://github.com/KayzenRoot/stormline/pull/390): BASE `06edd79c9627fac0eb94d4d85130e09bc6034fa6`, final HEAD `3d62f35aa0ddc0fdbbd0484cc1e1c26ad1c3d122`, exactly 2 ADDED Markdown, zero preexisting file modifications.
+- Docs Validation [run #43874749881](https://github.com/KayzenRoot/stormline/actions/runs/43874749881) SUCCESS, job #133324754122, including blocked WO selector. Objective pt-BR audit [#6917601237](https://github.com/KayzenRoot/stormline/pull/390#issuecomment-6917601237) APPROVED **documentary proposal only**. Normal squash/main readback `2f8bf961851f9c54cbe13b86cb7c48f43bb2df58`.
+- Eight questions G1-M01..M08 remain `AWAITING_OWNER`, zero newly approved platform minima/hardware/thresholds. Four historic ratified C01 decisions unaffected; G1 still PARTIAL, G2/G3 open, 80 WOs blocked, engine false. Independent checkpoint has its **own** PR/CI/audit and must not self-promote any choice.
