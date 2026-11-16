@@ -76,8 +76,8 @@ The initial PR #396 **only qualified** 11 questions `C01-D02..D07/D10..D13/D15`,
 
 **Historical owner choice contract (before separate ratification):** the original proposal could not ratify owner choices or authorize canonical Ledger changes. **This contract was subsequently satisfied** when the owner expressly ratified all eleven named option A directions, with the exact constraints and proof obligations. See [G2/G3 ratification evidence](../evidence/NLE-PRPLAN-CORE-01-01-G2G3-OWNER-RATIFICATION.md).
 
-## Work Order increment contract (same stable ID)
-- **OBJECTIVE:** independently qualify 11 pending G2/G3 technical/proof decisions; no implementation.
+## Historical pre-ratification qualification Work Order contract (same stable ID)
+- **OBJECTIVE (historical PR #396):** independently qualify 11 then-pending G2/G3 technical/proof decisions; the owner later ratified their bounded option-A directions. No implementation.
 - **CONTEXT:** Git `main` base above, approved prior 12 G1 bounded decisions; issue #387 open.
 - **SCOPE:** technical options A/B/C, 11 owner-decision rows, observable G2 blockers, proof matrix, official sources and Context Lock.
 - **OUT OF SCOPE:** actual owner ratification, ADR promotion, NLE-D009 license, branch-settings writes, CI config, registry/manifest, code or CORE-01-02.
@@ -85,9 +85,9 @@ The initial PR #396 **only qualified** 11 questions `C01-D02..D07/D10..D13/D15`,
 - **REQUIREMENTS:** governance gates 0–8, 80/80 BLOCKED, C++ cross-OS and CPU-only headless accepted G1, public no-MVP.
 - **ARCHITECTURE RULES:** keep SDL hidden, headless not dependent on video/audio, engine ABI not exposed, GFX/NET ownership boundaries.
 - **CONSTRAINTS:** no paid required CI, no required external reviewers, no bypass/destructive writes, no false test evidence.
-- **ACCEPTANCE CRITERIA:** exactly eleven non-ratified decision options, alternatives and exit proofs, two ADDED Markdown only, all canonical/queue files byte-identical.
+- **ACCEPTANCE CRITERIA (historical PR #396 only):** eleven options remained unratified *at the time that proposal PR merged*, and the two ADDED Markdown did not change canonical files. The subsequent express owner ratification now recorded in Ledger/Scope/DoD and this document is separate, with no code, ADR, registry or settings changes.
 - **TESTS:** GitHub Docs Validation exact PR head (links, dependencies, selector guard, skills and packet plan tests), objective pt-BR audit; native and physical tests **NOT RUN**.
-- **DELIVERABLES:** this board, evidence file, documentary PR, CI/audit/readback, independent factual checkpoint if approved and necessary, issue #387 pointer.
+- **DELIVERABLES (historical qualification):** original options board and Evidence, documentary PR #396 and checkpoint PR #397. Current owner ratification uses a separate documentary change and Evidence Bundle; issue #387 stays open for G2/G3 technical proofs.
 - **REVIEW FORMAT:** APPROVED DOCUMENTARY / CORRECTION REQUIRED / BLOCKED with scope and negative evidence in pt-BR.
 - **STOP CONDITION:** stale critical SHA, inferred approval, CI failure, HIGH/CRITICAL known defect, unauthorized code/CI settings/branch/license/ADR/reg/manifest write, CORE-01-02 progress.
 
