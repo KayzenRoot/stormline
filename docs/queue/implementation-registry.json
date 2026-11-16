@@ -1596,7 +1596,7 @@
       "catalog_acceptance": "CI verde em targets permitidos, builds e versões rastreáveis.",
       "id": "NLE-EXEC-WO-QA-01-001",
       "file": "docs/queue/work-orders/QA-01.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
