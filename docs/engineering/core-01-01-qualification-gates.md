@@ -2,13 +2,13 @@
 
 **Source Check:** `main=27ad407bbf0f66d1938c403bf32c28b0ebf1e910`, Git tree `56b27016ed092be5297a63dabd6b6884144da40a`, 2026-11-16. [Issue de qualificação #384](https://github.com/KayzenRoot/stormline/issues/384). CORE-01 tem zero predecessores formais; [issue de código #18](https://github.com/KayzenRoot/stormline/issues/18) permanece OPEN/BLOCKED. **Todo este pacote é proposta documental, não deliberação do proprietário.** `NLE-D009` licença da engine OPEN, `NLE-D010` marca OPEN, `ADR-0003` e `ADR-0075` PROPOSED, 80/80 WOs de código BLOCKED, zero `approved_adr`, zero `executor_ready`, `engine_implemented=false`.
 
-**Status:** This document establishes **proposed** acceptance criteria, not executed tests or assigned module risk. The [CORE-01 decision dossier](../research/core-01-01-owner-technical-decision-dossier.md) has 15 open owner decisions C01-D01..D15. Existing [global G0..G8](p00-technical-approval-gates.md) and [queue guard](../queue/work-orders/CORE-01.md) prevail.
+**Status:** This document establishes **proposed** acceptance criteria, not executed tests or assigned module risk. The [CORE-01 decision dossier](../research/core-01-01-owner-technical-decision-dossier.md) has four bounded G1 owner-ratified decisions (C01-D01/D08/D09/D14) and eleven remaining AWAITING_OWNER. Existing [global G0..G8](p00-technical-approval-gates.md) and [queue guard](../queue/work-orders/CORE-01.md) prevail.
 
 ## Gates in strict decision order (nothing self-promoted)
 | Gate | Proposed completion proof | CURRENT |
 |---|---|---|
 | G0 research | 80/80 documented + catalog DAG, ADR proposal, evidence links | COVERAGE DOCUMENTED; research ≠ owner approval |
-| G1 scope/DoD/release | Owner ratifies CORE-01 minimum desktop/headless requirements, version 1.0 mandatory vs conditional features, support matrix and full product DoD | `OPEN_OWNER_DECISION`, registry release_class UNDECIDED |
+| G1 scope/DoD/release | Owner ratifies CORE-01 minimum desktop/headless requirements, version 1.0 mandatory vs conditional features, support matrix and full product DoD | `PARTIALLY_RATIFIED_NOT_CLEARED`: four decisions D01/D08/D09/D14; minimum OS/CPU/runtime, exclusions and full 1.0 DoD still open; registry UNDECIDED |
 | G2 repository | Confirm protected PR flow, required docs/native checks by **actual job name**, zero external reviewers, no bypass, no public-fork secret access, R$0 | `BLOCKED_NOT_VERIFIED`: main.protected=false, GET /rulesets=[], GET detailed protection=403 |
 | G3 architecture/stack | Owner chooses C++ standard, host adapter, CMake Presets schema/toolchains, ABI ownership/third party terms and explicit cost/scope | `OPEN_OWNER_DECISION`, ADR-0003/0075 PROPOSED |
 | G4 CORE-01 technical approval | Signed/traceable owner decision + objective comparison evidence to approve revised or superseding ADR-0003; preserve historical PROPOSED text until separate decision PR | `NOT_STARTED` |
@@ -87,3 +87,6 @@ These are *negotiation-ready test oracles*. The test case count does not retroac
 6. **Never progress to packet 02** until G1/G2/G3 and owner qualification gate 01 are actually satisfied; a proposal-only CI approval is insufficient.
 
 [Decision dossier](../research/core-01-01-owner-technical-decision-dossier.md) · [Work Order](../work-orders/NLE-PRPLAN-CORE-01-01.md) · [Evidence](../evidence/NLE-PRPLAN-CORE-01-01.md).
+
+## G1 owner ratification delta (2026-11-16)
+The owner expressly ratified C01-D01/D08/D09/D14 with limitations and future proof obligations; see [Ledger](../10-decisions-ledger.md), [Scope](../03-scope.md), [DoD](../09-definition-of-done.md), [Evidence G1](../evidence/NLE-PRPLAN-CORE-01-01-G1-RATIFICATION.md). **G1 remains NOT CLEARED** until full Scope/DoD, minimum OS/CPU/runtime and approved hardware/threshold matrix. All 32 C01-Q001..Q032 scenarios stay FUTURE_NOT_EXECUTED. G2/G3 stay open, ADR-0003 PROPOSED, registry/manifest unchanged and packet 02 PLANNED_BLOCKED.
