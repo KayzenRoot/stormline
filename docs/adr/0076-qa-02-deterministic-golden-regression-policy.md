@@ -1,0 +1,45 @@
+# ADR-0076 — Deterministic Fixture, Layered Golden Image/Audio Oracles and Controlled Baseline Promotion
+
+**2026-11-16 | P00 DOCUMENTATION ONLY | [research #345](https://github.com/KayzenRoot/stormline/issues/345) | NLE-P00-WO-002-QA-02 | future code [#91](https://github.com/KayzenRoot/stormline/issues/91) OPEN/BLOCKED | source HEAD `3ffd1c76092c65a355a57ce2e713291dc83d2a72`.** QA-02 catalog order 73/80, **FORMAL DEPENDENCIES EXACTLY QA-01 + GFX-03** (ADR-0075 and ADR-0016 PROPOSED), initial 72/80 research documented, 8 pending, all 80/80 code WOs BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, 0 ready/approved ADR, all release classes UNDECIDED, engine_implemented=false, NLE-D009 source license OPEN and no public MVP per NLE-D013.
+
+
+**STATUS: PROPOSED / NOT OWNER-RATIFIED / NO RUNTIME TESTS, NATIVE CODE OR GRAPHICS ENGINE IMPLEMENTED.**
+
+## Problem
+A complete game engine needs reproducible proof that authored 2D/2.5D/3D scenes and browser/native runtime behavior remain correct. Pixel-perfect snapshots frequently differ between real Vulkan, D3D12, Metal and browser GPU/driver/font/ICC stacks even when visually equivalent; permissive thresholds can also hide catastrophic layout/color/z-order regressions. Gameplay random seeds, simulation clocks, GPU history, asynchronous capture, audio resampling and baseline updates can make “CI green” untrustworthy. QA-02's acceptance **"Falhas de regressão reproduzíveis; tolerância documentada para drivers"** is not met by docs-only CI.
+
+## Proposed decision, not adopted
+1. **Formal DAG exactly QA-01 + GFX-03**. QA-01 owns C++20 multi-OS CI/CTest run/evidence, prior ADR-0075 PROPOSED; GFX-03 owns render pass DAG, GPU memory resource/alias lifecycle and access/readback synchronization, prior ADR-0016 PROPOSED. CORE/GAME/GFX other modules, QA-03 perf, QA-04 security, QA-05 physical compatibility, AUD and PLAY/EDIT/PLAT **integration owners only** not additional formal prerequisites. This P00 ADR cannot approve their implementation or open coding #91.
+2. Define **versioned, content-addressed deterministic `TestFixtureManifestV1` and `RenderCaptureProfileV1`**: original rights-cleared scenes/assets/fonts/audio; exact source & cook hashes, OS/driver/backend/software/hardware, camera/exposure/colorspace/format, fixed-tick seed/input trace and expected logical outcomes; record capture fence/device generation. Never compare frames from different conditions as if same oracle.
+3. **Layered oracle from strict to perceptual**: T0 C++ state IDs/graph integrity/event ticks and explicit error; T1 pixel-exact on same deterministic headless software renderer/pass where defined; T2 explicit GPU/backend/driver-tier tolerant pixel thresholds; T3 SSIM/edge/perceptual only supplementary with hard semantic invariants, authorized per fixture; T4 CTest integration/playtests/browser Playwright visual+ARIA; T5 buffered PCM audio assertions; T6 security/a11y; T7 evidence and historical baseline promotion. Set acceptance thresholds only after real calibration with approved hardware and before regression evaluation; no single global “SSIM 0.9 allows everything”.
+4. **Software rendering never proves real native GPU**. SwiftShader Apache-2.0 CPU Vulkan candidate for headless semantic validation, but Vulkan Validation Layers and actual physical D3D12/Metal/Vulkan/OpenGL/WebGPU require target-specific smoke. Chromium's automatic SwiftShader WebGL fallback is deprecated/unsafe for untrusted code and should not be force-enabled for arbitrary projects. No game code present yet.
+5. Choose **GoogleTest** BSD-3 + CMake/CTest discovery candidate for native CI, compare Catch2 BSL-1.0/doctest MIT after owner acceptance. `gtest_discover_tests` executes test binary for discovery and requires a valid `CROSSCOMPILING_EMULATOR` when cross compiling; do not pretend a Windows/macOS executable runs on Linux. Run expected >0 tests, JUnit and deterministic first mismatch. Playwright MIT browser + pixelmatch + ARIA snapshots candidate for *web UI/game and browser* only; native Editor/VoiceOver/Narrator requires separate OS accessibility proof. Pin browser/OS/DPR/font/locale/viewport/animation and snapshot namespaces.
+6. **Golden provenance and signed promotion gate**: baseline ID+hash and fixture source/rights, owner-approved measured tolerance by backend/driver tier, independent review of expected/actual/diff with semantic meaning. Failing PR cannot automatically run `--update-snapshots`, replace master goldens, or ignore metadata/threshold; any intentional baseline update requires separate approved work/evidence with non-regression proof. AI-generated assertions only proposals requiring human owner decision, no automatic approval.
+7. **Audio offline deterministic acceptance**: synthesized/original test PCM via owner AUD integration at fixed sample rate/channel layout/seed/clock, compare silence, onset/latency, gain/pan, RMS/peak/true-peak/clipping, spectral and cross-correlation bounded error, exact same algorithm if deterministic; independent of OS speakers/input device. No copyrighted sound playback in CI and no universal bitwise equality across SIMD/resamplers.
+8. **R$0/trust and privacy**: use QA-01 public standard hosted jobs only where no paid storage/outbound service; artifact retention/size and baseline corpus content-addressed, approved licenses/rights. Rejection of untrusted images/audio/shaders/archives, path/symlink/zip-slip and decompression limits, no user private project screenshot in public CI, no privileged GPU/self-hosted runner for fork code, no hidden OCR/paid ML API. ML models/weights only if owner and license/security approved.
+9. **Failure is reproducible**: TestResultV1 binds source HEAD, fixture SHA, engine/shader revision, actual runner/GPU driver, input replay and seed, first failing tick/frame, comparison actual/expected/mask/heatmap, CTest nonzero exit, reasons (GOLDEN_DIFF/COLOR_PROFILE_UNKNOWN/DEVICE_LOST/AUDIO_MISMATCH/INFRA_FAIL/MISSING_BASELINE), and audited exception expiry. Missing baseline/golden update is NOT PASS.
+10. **No test executes in this research**. All 128 Q02-T001..Q02-T128 are FUTURE/NOT EXECUTED, current CI docs-only, all 80 future code WOs remain BLOCKED, ADR-0076 not accepted/implemented and no source license chosen.
+
+## Alternatives and rejected shortcuts
+| Alternative | Appeal | Why not default |
+|---|---|---|
+| Exact PNG pixels across all GPUs | easy oracle | driver MSAA, float and font differences produce false failures |
+| Single broad SSIM threshold for all | easy fewer reds | can hide wrong layer, missing text, color and gameplay state |
+| Update goldens automatically on PR failure | makes CI green | baseline poisoning and removal of regression evidence |
+| Headless Chromium/SwiftShader means Metal verified | free test | software Vulkan/WebGL ≠ real Apple Metal/D3D12/hardware |
+| Force Chromium unsafe SwiftShader fallback on arbitrary content | headless coverage | Chromium warns about security/JIT risk and deprecates general automatic fallback |
+| Compare HDR/PQ floating image directly to gamma PNG | quick diff | invalid color and dynamic range coordinate system |
+| Trust final frame without GPU fence | fast | stale transient/aliased resource and unsynchronized readback |
+| Assert audio sample-exact across platform hardware | clear test | resampler/device latency/dither variants, audio semantics differ |
+| CI Playwright accessibility snapshot certifies native Editor accessibility | low cost | browser ARIA ≠ native screen reader/keyboard automation |
+| Generate golden scenes from third-party copyrighted games | familiar graphics | asset redistribution and use rights unproven |
+| Allow any fixture script and file path | flexible | arbitrary code/data exfiltration, malicious parser inputs |
+| Require paid GPU lab or proprietary visual diff SaaS | polished report | R$0 budget and owner approval absent |
+| Claim tests PASS from 128 planned scenarios | quick milestone | test engine does not exist |
+| Add CORE/GFX-01/AUD/PLAT to QA-02 DAG formally | convenience | violates approved catalog exact QA-01 + GFX-03 |
+| Mark missing GPU baseline SKIP and gate green | cheap compatibility | actual coverage gap hidden; explicit BLOCKED/UNSUPPORTED |
+
+## Owner approvals and future proof
+Pin exact backend+GPU/driver/OS classes, golden sample thresholds/rights/software colorspace/alpha/HDR capture, C++ test runner, SSIM implementation and model weights, semantic invariants, playwright browsers and accessible fixtures, audio compare tolerances and CI artifact quotas. After QA-01 and GFX-03 actual approved code exists, generate reproducible original 2D/2.5D/3D+web fixtures; run CTest and physical graphics/accessibility, verify references with owner review, audit high severity and update checkpoint only after real tests. None of this happened in P00.
+
+[Architecture](../architecture/qa-02-functional-visual-test-oracles.md) · [technology/license matrix](../research/qa-02-test-framework-graphics-audio-license-matrix.md) · [semantic API](../contracts/qa-02-test-fixture-evidence-api.md).
