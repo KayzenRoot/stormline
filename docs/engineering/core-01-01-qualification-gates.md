@@ -90,3 +90,11 @@ These are *negotiation-ready test oracles*. The test case count does not retroac
 
 ## G1 owner ratification delta (2026-11-16)
 The owner expressly ratified C01-D01/D08/D09/D14 with limitations and future proof obligations; see [Ledger](../10-decisions-ledger.md), [Scope](../03-scope.md), [DoD](../09-definition-of-done.md), [Evidence G1](../evidence/NLE-PRPLAN-CORE-01-01-G1-RATIFICATION.md). **G1 remains NOT CLEARED** until full Scope/DoD, minimum OS/CPU/runtime and approved hardware/threshold matrix. All 32 C01-Q001..Q032 scenarios stay FUTURE_NOT_EXECUTED. G2/G3 stay open, ADR-0003 PROPOSED, registry/manifest unchanged and packet 02 PLANNED_BLOCKED.
+
+## Gate G1 after explicit owner ratification of minima (2026-11-16; newest status)
+
+**C01-D01/D08/D09/D14:** remain `OWNER_RATIFIED_G1_BOUNDED`. **G1-M01..M08:** each was explicitly ratified as a **bounded future requirement** by the owner after [delegated selection](../research/core-01-01-g1-delegated-selection.md), with detailed limits in the [Ledger](../10-decisions-ledger.md) and [Evidence Bundle](../evidence/NLE-PRPLAN-CORE-01-01-G1-MINIMA-RATIFICATION.md). The historical table above is the original qualified proposal and is not an override of this newer status.
+
+**G1 remains `PARTIALLY_RATIFIED_NOT_CLEARED`, not `APPROVED`:** Windows 11 25H2 floor is provisional and requires lifecycle revalidation; Ubuntu 24.04/glibc 2.39 and macOS 15 arm64 are future support reference constraints, not passed native tests. Physical target/driver/kernel/SO patch/Xcode/CRT, x86 ISA dispatch, 2/4 GiB headless fixture, 4/8 GiB windowed fixture, negative/display-failure in ≤5 s, 200/100/10k/30+30, event delivery, sanitizer leaks/UAF, and release-date 90 day requalification are obligations **NOT EXECUTED**. Final p95/RSS thresholds still unratified, product 1.0 Scope/DoD unclosed and other 11 C01-Dxx await owner.
+ 
+**G2** branch enforcement `NOT_VERIFIED`, **G3** stack/ABI/licensing `OPEN`, **G4-G8** still blocked. ADR-0003 and ADR-0075 PROPOSED, NLE-D009 OPEN, 80/80 code WOs BLOCKED, CORE-01-01/02 PLANNED_BLOCKED, release classes/risk registry undecided/unclassified, engine_implemented=false. No native CI, build, release, editor or server test performed.

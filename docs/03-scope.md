@@ -37,3 +37,14 @@ Ratificação **somente** de C01-D01, C01-D08, C01-D09 e C01-D14, mediante decla
 - **D14:** protocolo de qualificação futura de 200 boots headless, 100 ciclos de janela por SO aprovado, 10.000 eventos e 30 cold + 30 warm amostras; nenhuma suíte foi executada.
 
 **Não há ratificação de todo Scope/DoD 1.0 nem Gate G1 encerrado.** Mínimos de hardware, exclusões específicas e limites complementares permanecem abertos; release_class/risk dos 80 WOs seguem UNDECIDED/UNCLASSIFIED. ADR-0003 permanece PROPOSED, NLE-D009 OPEN; CORE-01-01/02 PLANNED_BLOCKED, nenhum código autorizado.
+
+## CORE-01 G1 — parâmetros mínimos 1.0 expressamente ratificados, sujeitos a qualificação (2026-11-16)
+
+O proprietário ratificou individualmente por conjunto identificado `G1-M01..M08`, mantendo o escopo original `C01-D01/D08/D09/D14`. Ver [Ledger](10-decisions-ledger.md), [seleção que delimita as alternativas](research/core-01-01-g1-delegated-selection.md) e [Evidence Bundle](evidence/NLE-PRPLAN-CORE-01-01-G1-MINIMA-RATIFICATION.md).
+
+- **M01/M02/M03:** matriz inicial de Windows 11 25H2 x64 piso **provisório** (26H2 compatível), Ubuntu 24.04 LTS x64 com glibc 2.39 de referência e macOS 15 Apple Silicon arm64 (26 compatível). Fixação de builds, patches, toolchains e **comprovação de compatibilidade** pendentes. Reavaliar pisos que percam suporte antes da distribuição. Windows ARM64 e macOS Intel condicionais; Web continua PLAT-03.
+- **M04/M05:** não impor AVX/AVX2 no host mínimo x86_64; otimizações dependem de ISA detectada e CPUs oficiais do SO. **Hardware de prova** headless: 2 processadores lógicos/4 GiB; com janela: 4 lógicos/8 GiB, sem estabelecer mínimo comercial da engine/Editor nem requisito de GPU do renderer.
+- **M06:** núcleo mínimo de CORE-01 é obrigatório como objetivo 1.0: init/teardown, lifecycle, estados/erros tipados, eventos delimitados, paths essenciais e modos janela/headless. Recursos avançados condicionais; não adotar classes MANDATORY_1_0 para os 80 módulos por inferência.
+- **M07/M08:** protocolo futuro conforme [DoD](09-definition-of-done.md), sem teste executado. Requalificação 90 dias antes de eventual release pública, sem MVP público; nenhuma data de lançamento aprovada.
+
+**G1 permanece parcialmente ratificado e NÃO CLEARED:** arquitetura tecnológica, SDKs exatos, provas de hardware, thresholds p95/RSS, escopo produto 1.0 e classes globais seguem pendentes. Registro de código e manifesto PLANNED_BLOCKED, ADR-0003 PROPOSED e NLE-D009 OPEN continuam intactos. Este incremento autoriza **somente documentação** das oito escolhas.
