@@ -1,6 +1,6 @@
 # Evidence Bundle — NLE-P00-WO-002-BIZ-03 Release, Installer & Lifecycle P00
 
-**2026-11-16 · research #370 OPEN until approved checkpoint · future code #97 OPEN/BLOCKED · BASE `3d2ad393ab4b70460e7d5cb46f82e03d2f5c9935` · formal PLAT-05 + BIZ-01 + QA-04 only.** Current status: RESEARCH WORK, not approved ADR/public license/installer/engine. Actual CI/PR/audit fields below **PENDING until observed**.
+**2026-11-16 · research #370 OPEN until approved checkpoint · future code #97 OPEN/BLOCKED · BASE `3d2ad393ab4b70460e7d5cb46f82e03d2f5c9935` · formal PLAT-05 + BIZ-01 + QA-04 only.** Current status: RESEARCH PR MERGED/READBACK, ADR remains PROPOSED, not public license/installer/engine. The checkpoint PR-specific CI/audit is pending until independently observed.
 
 ## 1. Source Check observed
 - Repo GitHub `KayzenRoot/stormline` `main` exact `3d2ad393ab4b70460e7d5cb46f82e03d2f5c9935`; initial 0 open PR, tree `eac5c67cfae7f44e0604986e1894cf974350e638`. Source hierarchy checkpoint, Decisions Ledger, Scope, DoD, Architecture, Requirements, catalog, existing upstream ADR and contracts checked. Owner NLE-D009 engine source license **OPEN**, NLE-D010 brand OPEN, NLE-D013 no public MVP until full v1.0 DoD, D017 Windows/Linux/macOS editor and game export, Web targeted.
@@ -47,7 +47,11 @@
 | license commercial release | NLE-D009 OPEN and BIZ-01 ADR-0080 PROPOSED, not authorized |
 | security/perf/OS qualification | docs CI only, no native C++/GPU/browser/hardware benchmarks |
 
-## 5. Pending research PR and independent gates
-- Research branch `docs/NLE-P00-WO-002-BIZ-03-research` from `3d2ad393ab4b70460e7d5cb46f82e03d2f5c9935`; PR HEAD/CI/job/audit/merge must be filled only when observed. 8 newly added markdown and no registry/source/license edits. Any failed Docs Validation corrected in SAME PR, no push-force.
+## 5. Research PR completed; independent checkpoint/historical gates pending
+- Research branch `docs/NLE-P00-WO-002-BIZ-03-research`, BASE `3d2ad393ab4b70460e7d5cb46f82e03d2f5c9935`, HEAD `1e3b21ccebd1619a868c9e78bb180258dbc2f18b`, [PR #371](https://github.com/KayzenRoot/stormline/pull/371) EXACTLY EIGHT ADDED Markdown and no registry/code/license edits, [Docs Validation #43848200892](https://github.com/KayzenRoot/stormline/actions/runs/43848200892) SUCCESS job #133233677478, [pt-BR objective audit #6913747938](https://github.com/KayzenRoot/stormline/pull/371#issuecomment-6913747938) APPROVED documentary, normal squash/main readback `afccb5872603b845b449a43b48f3d2fab206e1c9` observed.
 - After research green CI/objective pt-BR APPROVED audit and normal squash/main readback, separate 5-MODIFIED checkpoint with sole semantic registry BIZ-03 `research_status RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED`, all other 79 module objects and root untouched. Target **79/80 researched, 1 pending CORE-04**, **80/80 coding WOs blocked**, zero ready/approved ADR, license OPEN. Close #370 only after verified checkpoint readback; code #97 OPEN/BLOCKED.
 - Third historical closeout four Markdown only checkpoint/backlog/BIZ-03 future blocked WO/Evidence, own CI/audit/squash/readback; no premature "catalog 80/80 researched" statement. Next actual work candidate **CORE-04 Source Check / registry checkpoint reconciliation** (history PR #100/doc ADR-0006 already exists, but research status pending); avoid duplicating approved prior work without proof.
+
+## 6. Independent checkpoint proposal awaiting own audited GitHub proof
+- BASE `afccb5872603b845b449a43b48f3d2fab206e1c9`, research PR #371 already green/audited/merged/readback. This checkpoint should change FIVE MODIFIED files checkpoint/backlog/registry/BIZ-03 blocked future code WO/Evidence. Registry sole semantic BIZ-03 research_status RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED; other 79 full module records/root fields unchanged. Expected 79/80 documented, CORE-04 sole pending, 80/80 coding WOs BLOCKED, zero ready/approved ADR, license OPEN, engine false. No tests actually executed.
+- Checkpoint PR number/head/run/job/audit/merge/readback must be written only after observed, then close #370 if verified (coding #97 stays OPEN/BLOCKED). Historical closure follows with a separate FOUR-Markdown-only PR and own CI/audit/squash/readback. CORE-04 next must reconcile existing historical research rather than blindly duplicating 8 docs.
