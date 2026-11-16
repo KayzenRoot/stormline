@@ -1,0 +1,81 @@
+# CORE-01-01 — Technical Decision Dossier for Owner Ratification (PROPOSED)
+
+**Source Check:** `main=27ad407bbf0f66d1938c403bf32c28b0ebf1e910`, Git tree `56b27016ed092be5297a63dabd6b6884144da40a`, 2026-11-16. [Issue de qualificação #384](https://github.com/KayzenRoot/stormline/issues/384). CORE-01 tem zero predecessores formais; [issue de código #18](https://github.com/KayzenRoot/stormline/issues/18) permanece OPEN/BLOCKED. **Todo este pacote é proposta documental, não deliberação do proprietário.** `NLE-D009` licença da engine OPEN, `NLE-D010` marca OPEN, `ADR-0003` e `ADR-0075` PROPOSED, 80/80 WOs de código BLOCKED, zero `approved_adr`, zero `executor_ready`, `engine_implemented=false`.
+
+## Scope and formal authority
+This is **packet 01/16, GOVERNANCE** from [the prospective PR map](../pr-plans/CORE-01.md) and machine [manifest](../pr-plans/manifest.json). It qualifies existing [ADR-0003](../adr/0003-core-01-platform-technology.md) but **does not amend its status**. Module architecture is [CORE-01 proposal](../architecture/core-01-platform-lifecycle.md). Only CORE-01 itself is the zero-dependency root. [QA-01 ADR-0075](../adr/0075-qa-01-ci-matrix-security-policy.md) is an integration **consumer** formally dependent upon CORE-01, not a new prerequisite to CORE-01. Platform-specific feature owners PLAT-01/02/06 and GFX-01/NET-02 remain independent modules; PLAT-03 is the future browser host.
+
+## Owner decision board: fifteen discrete questions, zero self-approvals
+
+Every row is a *recommended candidate to evaluate*, not a selected technology or owner approval. No decision has been recorded as OWNER-APPROVED and no registry field changes by this PR.
+
+| Key | Decision | Preferred candidate (NOT ACCEPTED) | Explicit alternatives | Owner acceptance/exit criteria | Current |
+|---|---|---|---|---|---|
+| `C01-D01` | Escopo/release 1.0 | CORE-01 como pré-requisito MANDATORY_1_0 para host de editor/game/client/server desktop; Web (PLAT-03) integrações separadas; mobile (PLAT-04) condicional | CORE-01 inteiro obrigatório vs host minimal + capacidades condicionais | Definir min OS/CPU/arquitetura e profundidade das funcionalidades; excluir formalmente opcionais. Não escrever release_class até aceite. | `AWAITING_OWNER` |
+| `C01-D02` | Linguagem e restrições | C++20 baseline interna, sem módulos C++20 obrigatórios e sem uso de C++23 por padrão; versão de compiler+stdlib a fixar | C++23 primeiro / C++17 mais restrito | Verificar nas três famílias MSVC, GCC/Clang, AppleClang + binários x64/arm64; compliance/libstdc++/CRT. | `AWAITING_OWNER` |
+| `C01-D03` | Adaptador OS | SDL3 fina camada host; não espalhar headers SDL na API; comparar GLFW/direct native e custo de manutenção | GLFW / native Win32-Cocoa-Wayland-X11 | Pin SDL3 tag+archive SHA256 e licença exata; hotplug/foco/IME/HiDPI/eventos reais; falha => reabrir alternativa. | `AWAITING_OWNER` |
+| `C01-D04` | SDL3 host mode/thread | Windowed usa SDL_INIT_VIDEO main thread, cleanup SDL_Quit na main thread; headless não inicia vídeo/áudio sem necessidade; testar paths de SDL_main | Loop de app SDL callbacks ou own main adaptado | Contratos de ownership de SDL_InitSubSystem refcount, teardown em falha, SDL_RunOnMainThread sem deadlock; nenhuma escolha de entrypoint implícita. | `AWAITING_OWNER` |
+| `C01-D05` | Build system | CMake Presets + CTest Presets + Ninja como candidato; snapshots compiler/cache metadata | Meson/Bazel, MSBuild/Xcode nativos | Aprovar CMake mínimo/esquema JSON, SDK e geradores, determinismo do build e fallback para tooling nativo. | `AWAITING_OWNER` |
+| `C01-D06` | ABI/API pública | API interna C++20 com types/opacos; **preferir avaliar ABI C estável com handles opacos** somente para plugins/SDK ou fronteira externa; nunca prometer C++ ABI universal | Expôr STL, SDL_Window* ou templates em ABI pública | Definir ownership de HostHandle, lifetime, versão, result codes, UTF-8, alinhamento, calling convention e cross-DLL behavior; contrato no packet 02. | `AWAITING_OWNER` |
+| `C01-D07` | Lifecycle / erros | Estados explícitos Uninitialized→Initializing→Running→Suspending→Running→ShuttingDown→Terminated, InitFailed recoverable; erros tipados | Singleton global implícito, abort/exit em erro | Bloquear duplicate starts, partial init unwinding, cancel/timeout, CPU-only headless e sane resource release. | `AWAITING_OWNER` |
+| `C01-D08` | OS e alvos mínimos | Windows x64, Linux x64 e macOS Apple Silicon arm64 como **candidatos obrigatórios desktop**; Wayland/X11 por capacidade; macOS Intel em estudo; Windows arm64 condicional | Somente Windows ou portabilidade teórica | Owner precisa aprovar versões mínimas, libs/CRT/GLIBC, apple arm64/Intel matrix e limitações reais; Web deve ficar no PLAT-03. | `AWAITING_OWNER` |
+| `C01-D09` | Headless | Server e tests NÃO exigem GPU, DISPLAY, janela, audio device ou editor; sem dependência circular para GFX/AUD/NET | Criar janela invisível/virtual para server | Verificar processo e libraries loaded, estados/erros, 200 boot cycles; servidor pertence NET-02. | `AWAITING_OWNER` |
+| `C01-D10` | Capacidades e SAPL | Capacidade tri-state SUPPORTED/UNSUPPORTED/UNKNOWN e confidence/source; **thin SDL3 first**, SAPL only if measurable advantage and no semantic regression | Capability graph proprietário obrigatório sem prova | Comparar CPU/RAM/complexidade com baseline, rejeitar se sem benefício; feature selection renderer GFX-01. | `AWAITING_OWNER` |
+| `C01-D11` | Risco por slice | STANDARD candidato para base host docs/code; ELEVATED condicional para bridge native, path privileged/OS lifecycle; signing/updates futuro HIGH_ASSURANCE | Marcar todos LOW ou aprovar risco em lote | Owner classifica cada WO segundo DoD e proof obligations; registry hoje UNCLASSIFIED. | `AWAITING_OWNER` |
+| `C01-D12` | Custo/CI e segurança GitHub | Standard public runners R$0 ubuntu-24.04/windows-2025/macos-15 arm64 como candidatos; Jobs read-only no forks, no secrets; job docs-validation estável | Paid larger runners, secrets em PR, notarização obrigatória em P00 | Enforcement de main/protection/required checks deve ser comprovado, hoje branch.protected=false, rulesets=[], GET protection 403; não mudar settings neste pacote. | `AWAITING_OWNER` |
+| `C01-D13` | Licenças e redistribuição | SDL3 licença zlib oficial; Ninja Apache-2.0; toolchains e CMake termos exatos a conferir antes de bundling; engine source NLE-D009 OPEN | Presumir que GPL/proprietary/royalties estão escolhidos | Travar versão/SHA/licenças/transitivos e export notices; não adicionar LICENSE, publisher/copyright, assinatura ou distribuição. | `AWAITING_OWNER` |
+| `C01-D14` | Medições/aceite | Protocolo futuro para 200 headless boots, 100 window cycles por OS, sanitizer/handle count, 10k eventos e 30 amostras temporais | 100% compat ou 60 FPS sem teste físico | Owner valida hardware e limiares antes do teste; números são PROPOSED NOT RUN, falhas de hardware ⇒ NOT_QUALIFIED. | `AWAITING_OWNER` |
+| `C01-D15` | Governança da prova inicial | Separar adoção conceitual da pilha vs validação de produção; se ADR exige build experimental antes da aprovação plena, abrir **WO experimental distinta com autorização explícita** | Aprovar ADR-0003 implicitamente por CI de docs ou forçar code para provar stack | Explicitar a dependência circular e decisão de owner, sem liberar 80 codings ou CORE-01-02. | `AWAITING_OWNER` |
+
+**Owner must later record an affirmative disposition for each relevant decision**: `ACCEPT_CANDIDATE / REJECT_WITH_ALTERNATIVE / DEFER_WITH_BLOCKER`, exact target release/version and maintainer, evidence links, date and effect on ADR/Scope/DoD/registry. A proposed recommendation is not equivalent to approval. No release class, API version, risk class or source license can be inferred from this proposal.
+
+## Comparative architecture: trade-offs and acceptance
+
+| Dimension | Candidate | Useful properties | Risks / comparison oracle |
+|---|---|---|---|
+| C++20 vs C++23 | C++20 common baseline | Mature native tooling, RAII, standard concurrency and ownership primitives | Compiler standard library and ABI across MSVC/GCC/AppleClang differ; require multi-OS compiler CI. C++23 only when proven on every mandatory target. |
+| SDL3 vs GLFW vs native | SDL3 thin adapter | Windows/Linux/macOS host, events, input devices and windows with zlib licensing | JNI/IME/HiDPI/hotplug/main-thread semantics still need actual tests; GLFW is smaller alternative, native API multiplies maintenance. |
+| Build | CMake Presets+CTest, Ninja | Native generator support with portable build/test presets | Presets schema vs min CMake version conflict; pin compiler/SDK, avoid nondeterministic auto downloads. Native Xcode/MSBuild alternatives for debugging. |
+| ABI external vs internal | C++20 internally; opaque, versioned C ABI candidate only at SDK boundary | Limits compiler/runtime ABI coupling; plugin isolation can be audited later | ABI exposed via STL/templates, `SDL_Window*`, exceptions, allocator/free across CRT is fragile. **No C ABI adopted yet**. |
+| Host modes | Explicit headless/windowed capability | Dedicated server works on minimal systems, windows on main thread | An SDL video requirement for headless is a bug; no hidden GPU/audio dependencies. |
+| Device capabilities | Simple tri-state + opaque native handles | Unknown ≠ unsupported, controlled fallback, no renderer type leakage | SAPL may cost complexity; compare against direct SDL3 before adoption. |
+| Target platforms | Win x64, Linux x64, macOS arm64 as initial shortlist | Satisfies owner desktop coverage without claiming real support | Old Win, glibc floor, macOS minimum & Intel x86_64 to ratify; no valid GPU benchmark in hosted CI. |
+| Build pipeline trust | Public standard runners, fork jobs read only | GitHub docs indicate standard hosted runner execution R$0 for public repos | Artifacts/caches/third parties/large runners may cost; pin actions SHA and prevent privileged untrusted PR execution in future QA-01. |
+
+## Concrete decision protocol: owner signoff is a later separate event
+1. Owner first ratifies **G1** complete Stormline 1.0 Scope/DoD depth and release classification (including CORE-01 necessary host capabilities, OS minima, browser separation). NLE-D013 forbids public MVP. `release_class` is currently **UNDECIDED** and remains so.
+2. Owner explicitly addresses **G2** repository branch protection and CI required checks. GitHub API reads on 2026-11-16: `main.protected=false`, `/rulesets=[]`; detailed protection endpoint 403. Requirement enforcement **NOT VERIFIED / BLOCKER FOR FUTURE CODING**, no implicit change or permission.
+3. Owner selects **G3** candidate language/build/host ABI and permitted costs and legal sources. Pin **exact** SDL3 release/tag and archive SHA256; compare 3.4.16 as a 2026-09-02 bugfix candidate (not ratified); obtain current source/release provenance and notices. Pin CMake executable/version and compatible JSON schema, Ninja, compiler SDKs and runtime licensing. Do not substitute a vaguely labelled latest version.
+4. Independent pt-BR audit on the **decision action** only after actual owner consent, preserve original ADR history: amend ADR-0003 through separately versioned decision/supersession, rather than silently rewriting proposal text. The current documentary auditor can approve proposal accuracy **only**.
+5. Separate packet `NLE-PRPLAN-CORE-01-02` (typed public ABI/errors/contracts) is **still blocked** until relevant G1–G4 approvals and no known HIGH/CRITICAL. The packet 01 may be documentarily closed, while its **technology/owner ratification gate remains OPEN**.
+
+### Bridge and API invariants (proposed)
+```text
+Editor / Game Client / Headless Server / Test Harness
+                ↕ Engine-Owned Host Facade
+HostConfig | HostResult | HostCapabilities | HostEvent | OpaqueWindowToken
+                ↕ Internal host lifecycle and platform services
+SDL3 slim adapter (candidate) | Win32/Cocoa/Linux optional hooks
+                ↕ Platform-specific OS facilities
+```
+
+- No SDL, renderer/RHI, game rules, network auth or AI/MCP types in proposed CORE-01 public header; separate API owner and process authority.
+- The *draft* HostConfig shape is `{mode: HEADLESS|WINDOWED, product: EDITOR|CLIENT|SERVER|TEST, capability_requests, project_root_reference, diagnostics_opt_in}`. This is not a compiled schema.
+- Draft state transitions `UNINITIALIZED→INITIALIZING→RUNNING→SUSPENDING↔RUNNING→SHUTTING_DOWN→TERMINATED`, plus `INIT_FAILED` with deterministic cleanup; define cancellation/error status and idempotency in packet 02.
+- Plan `HostResult{error_code, diagnostic_id, user_action, retryable}`; `PlatformCapabilities` has `SUPPORTED|UNSUPPORTED|UNKNOWN` and source/confidence, not a persistent unique device fingerprint. Native handles are opaque with generation validity and thread affinity; owner controls foreign reference disposal.
+- Prohibit accidental privileged host commands from scripting/MCP; AI-06 later owns grants. No user paths or hardware signatures uploaded by default.
+
+## Official reference and verification register (2026-11-16)
+- [SDL3 initialization and main thread](https://wiki.libsdl.org/SDL3/SDL_Init): `SDL_Init` and `SDL_InitSubSystem` must run on main thread; initialized subsystem reference counts matter, video implies events. [SDL_Quit](https://wiki.libsdl.org/SDL3/SDL_Quit) must run on main thread and is valid after init error. [Main thread probe](https://wiki.libsdl.org/SDL3/SDL_IsMainThread) has platform-specific semantics. No app-mode decision adopted.
+- [SDL3 project LICENSE.txt](https://github.com/libsdl-org/SDL/blob/main/LICENSE.txt) is the zlib license, not a license for Stormline. [SDL3 releases](https://github.com/libsdl-org/SDL/releases) lists 3.4.16 published 2026-09-02, with release tarball SHA256 available. Treat 3.4.16 as candidate only and recertify at later pin.
+- [CMake Presets](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html): versioned schema, `CMakePresets.json` tracked, `CMakeUserPresets.json` untracked, configure/build/test presets and minimum-version interplay. [CMake toolchains](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html): cross-compilation and early toolchain selection.
+- [Ninja COPYING](https://github.com/ninja-build/ninja/blob/master/COPYING) is Apache-2.0; **check versioned source and transitive notices before distributing tools**.
+- [GitHub standard hosted runners](https://docs.github.com/en/actions/reference/runners/github-hosted-runners): standard public-repo execution free; listed Linux/Windows/macOS arm64 labels available as candidate CI matrix. Storage/artifacts/cost and runtime limits need review on actual plan.
+- [GitHub branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches) can require passing checks/PR and protect deletions/force push; repository `main` is currently reported unprotected, detailed perms not accessible via this integration.
+- [MSVC C++20 conformance options](https://learn.microsoft.com/en-us/cpp/build/reference/permissive-standards-conformance): `/std:c++20`, `/permissive-` support; no compiler matrix has been executed.
+- Ownership/billing/OS capability claims must refer to specific real builds, SDK versions and physical test metadata. This dossier is not legal counsel, official trademark clearance, an engine performance claim or a certification.
+
+## Explicit status
+**Decision qualification proposal documented**, **C01-D01...D15 ALL AWAITING_OWNER**, ADR-0003 PROPOSED, G1/G2/G3 not objectively cleared, code WO #18 BLOCKED and packet 02 NOT STARTED. No technology, licence, risk or release class decided here.
+
+[Future evidence/test gates](../engineering/core-01-01-qualification-gates.md) · [Work Order](../work-orders/NLE-PRPLAN-CORE-01-01.md) · [Evidence Bundle](../evidence/NLE-PRPLAN-CORE-01-01.md).
