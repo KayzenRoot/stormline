@@ -1618,7 +1618,7 @@
       "catalog_acceptance": "Falhas de regressão reproduzíveis; tolerância documentada para drivers.",
       "id": "NLE-EXEC-WO-QA-02-001",
       "file": "docs/queue/work-orders/QA-02.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
