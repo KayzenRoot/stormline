@@ -76,7 +76,7 @@ P00 only actual GitHub Docs Validation (Source Pack/relative links, catalog DAG,
 Issue #345 research, 8 new Markdown ADR/architecture/matrix/API/tests/benchmark/WO/Evidence, GitHub research PR exact source/head, Doc CI run/job, objective pt-BR audit/squash/main readback; checkpoint five-file independent PR, CI/audit/squash/readback and close #345; factual historical four-Markdown independent PR CI/audit/squash/readback. No release/engine.
 
 ## REVIEW FORMAT
-pt-BR APPPROVED [sic should read APPROVED] / CORRECTION REQUIRED / BLOCKED, exact BASE/HEAD/changed statuses, source-lock Git blob vs raw SHA, exact formal DAG, tool/rights/privacy/security/cost, future 128 case IDs and NOT_EXECUTED vs actual CI docs, defect severity and risks, checkpoint delta, merge readback. Independent objective review no external human reviewer mandated.
+pt-BR APPROVED / CORRECTION REQUIRED / BLOCKED, exact BASE/HEAD/changed statuses, source-lock Git blob vs raw SHA, exact formal DAG, tool/rights/privacy/security/cost, future 128 case IDs and NOT_EXECUTED vs actual CI docs, defect severity and risks, checkpoint delta, merge readback. Independent objective review no external human reviewer mandated.
 
 ## STOP CONDITION
 STALE source, wrong deps/files/128 IDs, CI failed, false baseline/GPU/PCM/engine claims, license/asset rights/security HIGH/CRITICAL, unexpected privileged/paid tool or runner or unapproved branch action => BLOCKED or CORRECTION REQUIRED same WO/PR. Do not advance QA-03 or unlock QA-02 code until current documentary gates complete.
