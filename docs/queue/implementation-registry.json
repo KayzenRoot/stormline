@@ -1528,7 +1528,7 @@
       "catalog_acceptance": "Editor and exported 2D/2.5D/3D game open/build/close on a macOS test matrix, with platform-native graphics checks and recoverable errors.",
       "id": "NLE-EXEC-WO-PLAT-06-001",
       "file": "docs/queue/work-orders/PLAT-06.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
