@@ -1482,7 +1482,7 @@
       "catalog_acceptance": "Build e smoke test em Linux definido.",
       "id": "NLE-EXEC-WO-PLAT-02-001",
       "file": "docs/queue/work-orders/PLAT-02.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
