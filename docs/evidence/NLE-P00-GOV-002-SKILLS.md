@@ -15,8 +15,8 @@
 - Preflight checks 36 unique skill descriptions/paths, 80 modules exactly, no gaps/duplicate, no Apple copyrighted UI asset, no engine source.
 
 ## Evidence status (must be filled only after observed)
-- Primary research/skills PR: **PENDING** number, exact head, CI run+job, objective pt-BR audit, squash/main SHA.
-- Skill validator/unit tests: **NOT EXECUTED until exact-head GitHub Actions observed**; only planned.
+- Primary skill pack [PR #379](https://github.com/KayzenRoot/stormline/pull/379) **VERIFIED**: BASE `356695b078001f4f9caa94d1119ae045bf391375`, final audited HEAD `c87bab2e06e679584b14d958d0901b248c640c9c`, 44 files (43 ADDED + one existing Docs workflow modified); [Docs Validation #43856725502](https://github.com/KayzenRoot/stormline/actions/runs/43856725502) SUCCESS job #133262797717; [objective pt-BR audit #6914997346](https://github.com/KayzenRoot/stormline/pull/379#issuecomment-6914997346) APPROVED documentary and tooling; normal squash main readback `3b46595c483cac8bf6767b10c9e2512aec90c140`.
+- **Executed** the skill validator and its unit tests on corrected PR HEAD: `Skill Pack PASS: 36 valid SKILL.md files; 80 registry modules mapped`, `Ran 11 tests ... OK`. [Initial failing run #43856348482](https://github.com/KayzenRoot/stormline/actions/runs/43856348482) overconstrained trigger capitalization/wording; [second failing run #43856574425](https://github.com/KayzenRoot/stormline/actions/runs/43856574425) found a syntax parenthesis in new unit test. Both issues fixed in same PR with no force push. Final CI SUCCESS #43856725502, no engine tests executed.
 - Independent factual checkpoint PR: **PENDING**, exactly 3 modified Markdown (checkpoint/backlog/this Evidence), own CI/audit/squash/main readback.
 - Design system visual proof: **NOT PRODUCED**. No UI screenshots, icon assets, SVG/PNG, native application build, screen reader test, real performance benchmark or trademark clearance.
 - Every skill remains an instruction/specification. It cannot turn any of 80 blocked code WOs READY, approve 80 module ADRs, choose release class or license, publish MVP or charge accounts.
@@ -25,3 +25,7 @@
 - Unsafe prompt instructions or misleading "auto-permissions" must fail review; validator guards metadata and path correctness but **does not prove model behavior or security**. Human owner/agent audit still required.
 - 36 skills may increase discovery metadata tokens; keep descriptions concise and use only task-matched skills by progressive disclosure. No dependency is pinned to Apple SF Symbols, proprietary fonts, commercial art packs or paid APIs.
 - After primary PR is independently audited and read back, update checkpoint/backlog/Evidence with observed facts only and preserve registry/DoD/license statuses; close issue #378 after checkpoint readback. No user permission implied beyond requested versioned skills.
+
+## Independent checkpoint evidence (pending its own audit)
+- BASE now `3b46595c483cac8bf6767b10c9e2512aec90c140`, exact three existing Markdown: checkpoint, backlog and this Evidence. No `docs/queue/implementation-registry.json`, skill files, scripts, CI, approved ADR, brand/license or code changed. Scope 36 repo-scoped instructional skills and proposed visual system only; no final SVG/icon, software functionality or third-party paid asset.
+- Need this checkpoint PR exact HEAD + Docs Validation (including 11 Skill Pack unit tests), pt-BR objective audit, normal squash and main readback to conclude; close research/skills issue #378 only after checkpoint readback. Proposed plan technical qualification CORE-01, no executor authorization.
