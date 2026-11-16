@@ -1416,7 +1416,7 @@
       "catalog_acceptance": "Cenários completos gerados por tool calls com zero edição manual obrigatória.",
       "id": "NLE-EXEC-WO-AI-08-001",
       "file": "docs/queue/work-orders/AI-08.md",
-      "research_status": "RESEARCH_PENDING",
+      "research_status": "RESEARCH_DOCUMENTED_ADR_PROPOSED",
       "work_order_status": "BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS",
       "risk": "UNCLASSIFIED",
       "release_class": "UNDECIDED",
