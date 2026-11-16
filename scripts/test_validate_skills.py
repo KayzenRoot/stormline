@@ -77,6 +77,16 @@ class SkillValidatorTests(unittest.TestCase):
             VALID.replace('name: stormline-test-example\n',
                           'name: stormline-test-example\nname: stormline-test-example\n')))
 
+    def test_verb_variants_use_for_and_use_to(self):
+        self.assertEqual([], self.check(VALID.replace("Use when reviewing", "Use for reviewing")))
+        self.assertEqual([], self.check(VALID.replace("Use when reviewing", "Use to review")))
+
+    def test_fail_closed_case_insensitive(self):
+        self.assertEqual([], self.check(VALID.replace("Work Order must be BLOCKED until approved.",
+                                                       "Work Order must block until approved.")
+                                         .replace("BLOCKED without owner approval.",
+                                                  "Block without owner approval.")))
+
     def test_full_repository_manifest(self):
         self.assertEqual([], v.validate_repository(v.ROOT))
 

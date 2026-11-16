@@ -44,7 +44,7 @@ def validate_skill_document(path: Path, root: Path) -> list[str]:
         description = json.loads(headers.get("description", ""))
         if not isinstance(description, str) or not description.strip() or len(description) > 1024:
             raise ValueError("description must be 1..1024 characters")
-        if "Use " not in description[:20] or "when" not in description[:90]:
+        if not description.startswith(("Use when ", "Use for ", "Use to ")):
             errors.append(f"{path}: description must declare a clear use-when trigger")
     except (ValueError, json.JSONDecodeError):
         errors.append(f"{path}: description must be a valid quoted YAML/JSON string")
@@ -54,7 +54,7 @@ def validate_skill_document(path: Path, root: Path) -> list[str]:
             errors.append(f"{path}: missing {section}")
     if "[AGENTS.md]" not in body:
         errors.append(f"{path}: must link canonical AGENTS.md")
-    if "BLOCKED" not in body or "Work Order" not in body:
+    if not re.search(r"\bblock(?:ed)?\b", body, re.IGNORECASE) or not re.search(r"\bwork order\b", body, re.IGNORECASE):
         errors.append(f"{path}: missing work-order and fail-closed safeguards")
     root_abs = root.resolve()
     for reference in LINK.findall(body):
