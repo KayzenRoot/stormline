@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "pack_id": "NLE-P00-GOV-002-SKILLS",
+  "status": "REPOSITORY_SKILLS_DOCUMENTED_NOT_IMPLEMENTATION_AUTHORIZATION",
+  "source_base_sha": "356695b078001f4f9caa94d1119ae045bf391375",
+  "expected_count": 36,
+  "skills": [
+    {
+      "name": "stormline-source-check",
+      "category": "governance"
+    },
+    {
+      "name": "stormline-work-orders",
+      "category": "governance"
+    },
+    {
+      "name": "stormline-adr-qualification",
+      "category": "governance"
+    },
+    {
+      "name": "stormline-evidence-audit",
+      "category": "governance"
+    },
+    {
+      "name": "stormline-license-compliance",
+      "category": "governance"
+    },
+    {
+      "name": "stormline-visual-direction",
+      "category": "design"
+    },
+    {
+      "name": "stormline-design-tokens",
+      "category": "design"
+    },
+    {
+      "name": "stormline-responsive-layout",
+      "category": "design"
+    },
+    {
+      "name": "stormline-iconography",
+      "category": "design"
+    },
+    {
+      "name": "stormline-editor-ux",
+      "category": "design"
+    },
+    {
+      "name": "stormline-motion-microinteractions",
+      "category": "design"
+    },
+    {
+      "name": "stormline-accessibility",
+      "category": "design"
+    },
+    {
+      "name": "stormline-visual-review",
+      "category": "design"
+    },
+    {
+      "name": "stormline-platform-build",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-core-runtime",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-asset-pipeline",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-rendering-rhi",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-shaders-materials",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-world-ecs",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-world-streaming",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-2d-hybrid",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-physics-animation",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-audio-systems",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-gameplay-scripting",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-network-backend",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-ai-mcp",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-editor-tools",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-sdk-plugins",
+      "category": "engine"
+    },
+    {
+      "name": "stormline-test-planning",
+      "category": "qa"
+    },
+    {
+      "name": "stormline-deterministic-regression",
+      "category": "qa"
+    },
+    {
+      "name": "stormline-performance-benchmarks",
+      "category": "qa"
+    },
+    {
+      "name": "stormline-security-review",
+      "category": "qa"
+    },
+    {
+      "name": "stormline-cross-platform-testing",
+      "category": "qa"
+    },
+    {
+      "name": "stormline-crash-soak-recovery",
+      "category": "qa"
+    },
+    {
+      "name": "stormline-ci-quality-gates",
+      "category": "qa"
+    },
+    {
+      "name": "stormline-release-lifecycle",
+      "category": "qa"
+    }
+  ],
+  "modules": {
+    "CORE-01": [
+      "stormline-platform-build",
+      "stormline-core-runtime",
+      "stormline-ci-quality-gates"
+    ],
+    "CORE-02": [
+      "stormline-core-runtime",
+      "stormline-deterministic-regression"
+    ],
+    "CORE-03": [
+      "stormline-core-runtime",
+      "stormline-deterministic-regression"
+    ],
+    "CORE-04": [
+      "stormline-core-runtime",
+      "stormline-deterministic-regression"
+    ],
+    "CORE-05": [
+      "stormline-core-runtime",
+      "stormline-deterministic-regression"
+    ],
+    "CORE-06": [
+      "stormline-core-runtime",
+      "stormline-deterministic-regression"
+    ],
+    "DATA-01": [
+      "stormline-asset-pipeline",
+      "stormline-deterministic-regression"
+    ],
+    "DATA-02": [
+      "stormline-asset-pipeline",
+      "stormline-deterministic-regression"
+    ],
+    "DATA-03": [
+      "stormline-asset-pipeline",
+      "stormline-deterministic-regression"
+    ],
+    "DATA-04": [
+      "stormline-asset-pipeline",
+      "stormline-deterministic-regression"
+    ],
+    "DATA-05": [
+      "stormline-asset-pipeline",
+      "stormline-deterministic-regression"
+    ],
+    "GFX-01": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "GFX-02": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "GFX-03": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "GFX-04": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "GFX-05": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "GFX-06": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "GFX-07": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "GFX-08": [
+      "stormline-rendering-rhi",
+      "stormline-shaders-materials",
+      "stormline-performance-benchmarks"
+    ],
+    "TWO-01": [
+      "stormline-2d-hybrid",
+      "stormline-visual-review"
+    ],
+    "TWO-02": [
+      "stormline-2d-hybrid",
+      "stormline-visual-review"
+    ],
+    "TWO-03": [
+      "stormline-2d-hybrid",
+      "stormline-visual-review"
+    ],
+    "TWO-04": [
+      "stormline-2d-hybrid",
+      "stormline-visual-review"
+    ],
+    "WORLD-01": [
+      "stormline-world-ecs",
+      "stormline-asset-pipeline"
+    ],
+    "WORLD-02": [
+      "stormline-world-ecs",
+      "stormline-asset-pipeline"
+    ],
+    "WORLD-03": [
+      "stormline-world-streaming",
+      "stormline-world-ecs"
+    ],
+    "WORLD-04": [
+      "stormline-world-streaming",
+      "stormline-world-ecs"
+    ],
+    "WORLD-05": [
+      "stormline-world-streaming",
+      "stormline-world-ecs"
+    ],
+    "SIM-01": [
+      "stormline-physics-animation",
+      "stormline-deterministic-regression"
+    ],
+    "SIM-02": [
+      "stormline-physics-animation",
+      "stormline-deterministic-regression"
+    ],
+    "SIM-03": [
+      "stormline-physics-animation",
+      "stormline-deterministic-regression"
+    ],
+    "SIM-04": [
+      "stormline-physics-animation",
+      "stormline-deterministic-regression"
+    ],
+    "SIM-05": [
+      "stormline-physics-animation",
+      "stormline-deterministic-regression"
+    ],
+    "SIM-06": [
+      "stormline-physics-animation",
+      "stormline-deterministic-regression"
+    ],
+    "AUD-01": [
+      "stormline-audio-systems",
+      "stormline-performance-benchmarks"
+    ],
+    "AUD-02": [
+      "stormline-audio-systems",
+      "stormline-performance-benchmarks"
+    ],
+    "AUD-03": [
+      "stormline-audio-systems",
+      "stormline-performance-benchmarks"
+    ],
+    "AUD-04": [
+      "stormline-audio-systems",
+      "stormline-performance-benchmarks"
+    ],
+    "GAME-01": [
+      "stormline-gameplay-scripting",
+      "stormline-test-planning"
+    ],
+    "SIM-07": [
+      "stormline-physics-animation",
+      "stormline-deterministic-regression"
+    ],
+    "GAME-02": [
+      "stormline-gameplay-scripting",
+      "stormline-test-planning"
+    ],
+    "GAME-03": [
+      "stormline-2d-hybrid",
+      "stormline-accessibility"
+    ],
+    "GAME-04": [
+      "stormline-gameplay-scripting",
+      "stormline-test-planning"
+    ],
+    "GAME-05": [
+      "stormline-gameplay-scripting",
+      "stormline-test-planning"
+    ],
+    "NET-01": [
+      "stormline-network-backend",
+      "stormline-security-review"
+    ],
+    "NET-02": [
+      "stormline-network-backend",
+      "stormline-security-review"
+    ],
+    "NET-03": [
+      "stormline-network-backend",
+      "stormline-security-review"
+    ],
+    "NET-04": [
+      "stormline-network-backend",
+      "stormline-security-review"
+    ],
+    "NET-05": [
+      "stormline-network-backend",
+      "stormline-security-review"
+    ],
+    "NET-06": [
+      "stormline-network-backend",
+      "stormline-security-review"
+    ],
+    "EDIT-01": [
+      "stormline-editor-tools",
+      "stormline-editor-ux",
+      "stormline-responsive-layout"
+    ],
+    "EDIT-02": [
+      "stormline-editor-tools",
+      "stormline-editor-ux",
+      "stormline-responsive-layout"
+    ],
+    "EDIT-03": [
+      "stormline-editor-tools",
+      "stormline-editor-ux",
+      "stormline-responsive-layout"
+    ],
+    "EDIT-04": [
+      "stormline-editor-tools",
+      "stormline-editor-ux",
+      "stormline-responsive-layout"
+    ],
+    "EDIT-05": [
+      "stormline-editor-tools",
+      "stormline-editor-ux",
+      "stormline-responsive-layout"
+    ],
+    "EDIT-06": [
+      "stormline-editor-tools",
+      "stormline-editor-ux",
+      "stormline-responsive-layout"
+    ],
+    "EDIT-07": [
+      "stormline-editor-tools",
+      "stormline-editor-ux",
+      "stormline-responsive-layout"
+    ],
+    "AI-01": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-02": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-03": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-04": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-05": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-06": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-07": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-08": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "AI-09": [
+      "stormline-ai-mcp",
+      "stormline-security-review"
+    ],
+    "PLAT-01": [
+      "stormline-platform-build",
+      "stormline-cross-platform-testing"
+    ],
+    "PLAT-02": [
+      "stormline-platform-build",
+      "stormline-cross-platform-testing"
+    ],
+    "PLAT-03": [
+      "stormline-platform-build",
+      "stormline-cross-platform-testing"
+    ],
+    "PLAT-06": [
+      "stormline-platform-build",
+      "stormline-cross-platform-testing"
+    ],
+    "PLAT-04": [
+      "stormline-platform-build",
+      "stormline-cross-platform-testing"
+    ],
+    "PLAT-05": [
+      "stormline-platform-build",
+      "stormline-release-lifecycle"
+    ],
+    "QA-01": [
+      "stormline-ci-quality-gates",
+      "stormline-test-planning",
+      "stormline-security-review"
+    ],
+    "QA-02": [
+      "stormline-ci-quality-gates",
+      "stormline-test-planning",
+      "stormline-security-review"
+    ],
+    "QA-03": [
+      "stormline-ci-quality-gates",
+      "stormline-test-planning",
+      "stormline-security-review"
+    ],
+    "QA-04": [
+      "stormline-ci-quality-gates",
+      "stormline-test-planning",
+      "stormline-security-review"
+    ],
+    "QA-05": [
+      "stormline-ci-quality-gates",
+      "stormline-test-planning",
+      "stormline-security-review"
+    ],
+    "BIZ-01": [
+      "stormline-license-compliance",
+      "stormline-security-review"
+    ],
+    "BIZ-02": [
+      "stormline-sdk-plugins",
+      "stormline-license-compliance"
+    ],
+    "BIZ-03": [
+      "stormline-release-lifecycle",
+      "stormline-license-compliance"
+    ]
+  }
+}
