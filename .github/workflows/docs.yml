@@ -33,3 +33,7 @@ jobs:
           set -e
           test "$status" -eq 2
           python3 -c "import json; x=json.load(open('/tmp/stormline-wo-guard.json')); assert x['executor_ready'] is False; assert x['status'].startswith('BLOCKED_')"
+      - name: Skill Pack format, links and 80-module mapping
+        run: python3 scripts/validate_skills.py
+      - name: Skill Pack validator unit tests
+        run: python3 -m unittest discover -s scripts -p test_validate_skills.py
