@@ -38,12 +38,16 @@
 | Privacy/legal basis, consent, transfers | no service processing, consent receipt, DPA or GDPR/LGPD certification |
 | Accessible OS/Web exports and global markets | no running editor/game, accessibility test, global seller legal opinion |
 | 128 test cases B01-T001..B01-T128 | ALL FUTURE/NOT EXECUTED, ZERO PASS |
-| Docs Validation exact-head PR CI | PENDING until observed, not runtime rights proof |
+| Docs Validation exact-head PR CI | [#43841571657](https://github.com/KayzenRoot/stormline/actions/runs/43841571657) SUCCESS (docs-only); NOT runtime, legal clearance or release proof |
 
-## Research PR and audit results: PENDING until observed
-- Branch docs/NLE-P00-WO-002-BIZ-01-research, base 81aded1f42dffd9a7f36f0c3fd30a3168db15344. Commit/PR number, actual changed-file count, GitHub Actions run/job/HEAD, pt-BR review verdict, squash commit and main readback must be inserted **only after** proof.
+## Research PR and audit results: actual observed after merge (earlier pending text superseded)
+- Branch docs/NLE-P00-WO-002-BIZ-01-research, base `81aded1f42dffd9a7f36f0c3fd30a3168db15344`, initial head `495525346821a3f0555744f80b195b3e1e9dcf84` (CI #43841419086 FAILED LF/newline); exact corrected HEAD `c213b787066cfa40272e78209114131259c06c77`, [PR #363](https://github.com/KayzenRoot/stormline/pull/363), exactly EIGHT ADDED Markdown, no modified/deleted. [Docs CI #43841571657](https://github.com/KayzenRoot/stormline/actions/runs/43841571657) SUCCESS, job #133211247529, all four docs/links/DAG/registry/blocked selector steps. [Objective pt-BR audit #6912825571](https://github.com/KayzenRoot/stormline/pull/363#issuecomment-6912825571) APPROVED documentary. Normal squash/main readback `c9e5acc96884f2e1b0c292278c82348581d334ed`. Defeito corrigido na mesma PR sem reescrever histórico.
 - Must have exact eight added Markdown and no modifications to catalog/registry/checkpoint/Source Pack/README or code; otherwise CORRECTION REQUIRED.
 - Legal/privacy risks potentially HIGH_ASSURANCE for product launch, planning changes LOW. No paid service/tool, no published user data or owner-approved legal contract.
 
-## Checkpoint Delta proposed, NOT APPLIED
+## Independent checkpoint under objective review (not self-approved by executor)
 After research PR successful CI/pt-BR audit/squash/main readback: **independent checkpoint PR** to change exactly checkpoint, backlog, registry, future BIZ-01 packet and this Evidence. Sole semantic registry BIZ-01 research_status RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED; all other 79 records/root exactly unchanged. Target 77/80 researched (96.25%), 3 pending, all 80 future code WOs BLOCKED, 0 executor ready/approved ADR, releases all UNDECIDED, engine false; license remains OPEN. Close research #362 only after checkpoint objective readback; then **separate four-Markdown historical closeout PR**. Next real catalog BIZ-02 (78/80), formal GAME-02 + AI-01 (verify from catalog).
+
+## Checkpoint proposal — actual five-file independent diff
+- Research is merged and visible at `c9e5acc96884f2e1b0c292278c82348581d334ed`. Independent checkpoint branch must be audited/merged before research issue #362 closes. **ONLY registry semantic change BIZ-01 research_status RESEARCH_PENDING -> RESEARCH_DOCUMENTED_ADR_PROPOSED**, other 79 module objects/root immutable; research count 76 -> 77. Checkpoint, backlog, this Evidence and blocked BIZ-01 code WO are documentary updates, not owner license approvals.
+- 80/80 implementation WOs still BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS, executor_ready=false, approved_adr=null, all releases UNDECIDED, engine=false, NLE-D009 license OPEN and NLE-D010 mark OPEN. Exact checkpoint PR/CI/audit/squash/readback to be appended only once observed. All 128 tests future and NOT EXECUTED, no C++ build, legal opinion, GDPR/LGPD certification, NOTICE from real export, royalty EULA or signed redistribution.
