@@ -1,0 +1,7 @@
+# Future individual PR activation policy (PROPOSED)
+[80 module/packet index](../pr-plans/index.md) and [manifest](../pr-plans/manifest.json).
+The planning state is PLANNED_BLOCKED, not an open GitHub code PR. Every packet has stable NLE-PRPLAN-MODULE-NN but github_pr null; count is provisional, adjustable only by audited owner-approved scope. Code issues #18-97 remain blocked.
+Before first code: recheck checkpoint > Ledger/approved ADR > Scope > DoD > Architecture > Requirements and registry; verify Git main, SHA256 source fingerprints and no concurrent PR; owner approve ABI/tech, rights, release class, risk, exact files, tests and formal predecessor modules. Establish PR/check enforcement and free native CI.
+Only promote ONE necessary packet into full Work Order after its preceding actual packet is audited and merged. Executor creates branch with real code/tests, CI/profiling/hardware where required, Evidence Bundle, audit pt-BR, correction same PR, squash/main readback and independently verified checkpoint. Never bypass protections or open bulk code PR shells.
+CORE-01 SDL3/CMake/C++20 are proposed under ADR-0003 only. SDL3 main-thread init/quit, errors, headless and windowed modes require real proof after approval; no SAPL layer without comparison.
+License NLE-D009 OPEN; NLE-D013 prohibits public MVP. Current docs CI validates plan structure, not C++ or GPU; no runtime PASS. Repo skills guide future executor but do not authorize implementation.
