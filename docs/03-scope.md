@@ -48,3 +48,14 @@ O proprietário ratificou individualmente por conjunto identificado `G1-M01..M08
 - **M07/M08:** protocolo futuro conforme [DoD](09-definition-of-done.md), sem teste executado. Requalificação 90 dias antes de eventual release pública, sem MVP público; nenhuma data de lançamento aprovada.
 
 **G1 permanece parcialmente ratificado e NÃO CLEARED:** arquitetura tecnológica, SDKs exatos, provas de hardware, thresholds p95/RSS, escopo produto 1.0 e classes globais seguem pendentes. Registro de código e manifesto PLANNED_BLOCKED, ADR-0003 PROPOSED e NLE-D009 OPEN continuam intactos. Este incremento autoriza **somente documentação** das oito escolhas.
+
+## CORE-01 G2/G3 — escolha arquitetural limitada, sem autorização de implementação (2026-11-16)
+
+O proprietário ratificou as opções A de **C01-D02/D03/D04/D05/D06/D07/D10/D11/D12/D13/D15**, todas com ressalvas do [dossiê de qualificação](research/core-01-01-g2-g3-owner-decision-options.md) e [Evidence](evidence/NLE-PRPLAN-CORE-01-01-G2G3-OWNER-RATIFICATION.md). **Escopo imediato: somente formalização documental.**
+
+- **Host e build:** direção de C++20 interno sem módulos C++20 obrigatórios; SDL3 através de adapter interno não vazando headers/tipos na ABI; modo janela em main thread e headless sem vídeo/áudio obrigatórios; CMake/CTest Presets + Ninja com fallback nativo. Versões concretas de compiladores/CMake/SDL/SDK, hashes e smoke nativo permanecem **não definidos/não executados**.
+- **API e comportamento:** C++/RAII internamente e HostHandle opaco; futura C ABI versionada só para fronteira externa *se plugin/SDK tiver aprovação própria*; lifecycle tipado com init parcial/cleanup, capacidade tri-state; SAPL proprietária somente mediante benefício demonstrado.
+- **Segurança e governança:** escolha de framework de risco por slice, CI padrão GitHub R$0 e futura proteção obrigatória da main dependente de autorização/execução e prova separadas. Verificação G2 atual indica `protected=false` e rulesets `[]`; nenhuma proteção foi aplicada. Licenças **terceirizadas** serão verificadas, sem definir a licença do código da Stormline (`NLE-D009 OPEN`).
+- **Dependência experimental:** qualquer experimento para validar a pilha exige **Work Order própria e autorização futura explícita**, não é automaticamente iniciado pela decisão D15. O pacote `CORE-01-02` e as 80 WOs de código continuam bloqueados.
+
+Estas direções **não** estabelecem alcance de plugin/SDK, risco específico, release_class, mecanismo de build já funcional, compatibilidade certificada nem DoD 1.0 concluído. As 12 ratificações anteriores de G1 permanecem, G1 parcial, G2 não verificado, G3 não tecnicamente liberado e ADR-0003/0075 PROPOSED.

@@ -1,11 +1,11 @@
-# CORE-01 / G2–G3 — Eleven owner decisions, technology qualification and proof gates
+# CORE-01 / G2–G3 — Eleven option-A directions explicitly ratified, qualification still open
 
-**STATUS: ALL 11 `AWAITING_OWNER`; PROPOSAL ONLY.** Date: 2026-11-16. **Stable WO:** [NLE-PRPLAN-CORE-01-01](../work-orders/NLE-PRPLAN-CORE-01-01.md) · **Issue:** [#387](https://github.com/KayzenRoot/stormline/issues/387) · **BASE main:** `2c88ac3ba88c3c0dde639fbf3969c24860c9de3f` · [Evidence + Context Lock](../evidence/NLE-PRPLAN-CORE-01-01-G2G3-OPTIONS.md).
+**CURRENT STATUS (after separate explicit owner statement): ALL 11 `OWNER_RATIFIED_G2G3_BOUNDED`, but G2/G3 TECHNICAL GATES NOT CLEARED.** Historical option research retained below.  Date: 2026-11-16. **Stable WO:** [NLE-PRPLAN-CORE-01-01](../work-orders/NLE-PRPLAN-CORE-01-01.md) · **Issue:** [#387](https://github.com/KayzenRoot/stormline/issues/387) · **BASE main:** `2c88ac3ba88c3c0dde639fbf3969c24860c9de3f` · [Evidence + Context Lock](../evidence/NLE-PRPLAN-CORE-01-01-G2G3-OPTIONS.md).
 
 ## Objective and authority boundary
-Qualify 11 questions `C01-D02..D07/D10..D13/D15`, select **provisional technical recommendation A** per question, document B/C alternatives, explicit risk, measurable exit proofs and dependency on G2/G3. **No owner ratification is inferred from request to continue or from the proposal's eventual documentary merge.** The four existing `C01-D01/D08/D09/D14` and eight `G1-M01..M08` are owner-ratified bounded; their source decisions must not be altered. Current gate state: G1 PARTIALLY_RATIFIED_NOT_CLEARED, G2 BLOCKED_NOT_VERIFIED, G3 OPEN_OWNER_DECISION, G4-G8 not started/blocked.
+The initial PR #396 **only qualified** 11 questions `C01-D02..D07/D10..D13/D15`, with option A as a provisional technical recommendation and B/C as alternatives; its documentary merge **did not** confer ratification. **Later, the owner expressly ratified all 11 A options by ID on 2026-11-16 at main `139a874c69e6a358777bc3356ba4e51eb4ae1253`, with every exception, trade-off and proof obligation.** The four existing `C01-D01/D08/D09/D14` and eight `G1-M01..M08` are owner-ratified bounded; their source decisions must not be altered. Current gate state: G1 PARTIALLY_RATIFIED_NOT_CLEARED, G2 BLOCKED_NOT_VERIFIED, G3 OWNER_DIRECTIONS_RATIFIED_NOT_TECHNICALLY_CLEARED, G4-G8 not started/blocked.
 
-## Eleven independent owner options (A is preferred, NOT OWNER-RATIFIED)
+## Eleven independent A choices now owner-ratified BOUNDED (original alternatives and proofs retained)
 
 ### C01-D02 · Language baseline and toolchain [G3]
 - **A | recommended:** internal C++20, no mandatory named C++ modules and no default C++23/preview; **compiler+stdlib+runtime versions are separate future sign-offs**. MSVC `/std:c++20 /permissive-`, GCC/Clang `-std=c++20` (not executable tests here).
@@ -74,10 +74,10 @@ Qualify 11 questions `C01-D02..D07/D10..D13/D15`, select **provisional technical
 | **G7** | Actual C++ compilation/test/sanitizer/physical hardware receipts | `NOT_EXECUTED` |
 | **G8** | All 1.0 DoD, security, compatibility, license, distribution and release authorization | `NOT_AUTHORIZED` |
 
-**Owner choice contract:** For each ID reply **`C01-Dxx: RATIFICAR A`**, **`MODIFICAR: ...`**, or **`ADIAR`**; the document itself and its documentary PR/CI never records a user approval for any of the 11 IDs. Explicit itemized approval is required before any canonical Ledger ratification change. Partial responses keep other IDs `AWAITING_OWNER`.
+**Historical owner choice contract (before separate ratification):** the original proposal could not ratify owner choices or authorize canonical Ledger changes. **This contract was subsequently satisfied** when the owner expressly ratified all eleven named option A directions, with the exact constraints and proof obligations. See [G2/G3 ratification evidence](../evidence/NLE-PRPLAN-CORE-01-01-G2G3-OWNER-RATIFICATION.md).
 
-## Work Order increment contract (same stable ID)
-- **OBJECTIVE:** independently qualify 11 pending G2/G3 technical/proof decisions; no implementation.
+## Historical pre-ratification qualification Work Order contract (same stable ID)
+- **OBJECTIVE (historical PR #396):** independently qualify 11 then-pending G2/G3 technical/proof decisions; the owner later ratified their bounded option-A directions. No implementation.
 - **CONTEXT:** Git `main` base above, approved prior 12 G1 bounded decisions; issue #387 open.
 - **SCOPE:** technical options A/B/C, 11 owner-decision rows, observable G2 blockers, proof matrix, official sources and Context Lock.
 - **OUT OF SCOPE:** actual owner ratification, ADR promotion, NLE-D009 license, branch-settings writes, CI config, registry/manifest, code or CORE-01-02.
@@ -85,9 +85,9 @@ Qualify 11 questions `C01-D02..D07/D10..D13/D15`, select **provisional technical
 - **REQUIREMENTS:** governance gates 0–8, 80/80 BLOCKED, C++ cross-OS and CPU-only headless accepted G1, public no-MVP.
 - **ARCHITECTURE RULES:** keep SDL hidden, headless not dependent on video/audio, engine ABI not exposed, GFX/NET ownership boundaries.
 - **CONSTRAINTS:** no paid required CI, no required external reviewers, no bypass/destructive writes, no false test evidence.
-- **ACCEPTANCE CRITERIA:** exactly eleven non-ratified decision options, alternatives and exit proofs, two ADDED Markdown only, all canonical/queue files byte-identical.
+- **ACCEPTANCE CRITERIA (historical PR #396 only):** eleven options remained unratified *at the time that proposal PR merged*, and the two ADDED Markdown did not change canonical files. The subsequent express owner ratification now recorded in Ledger/Scope/DoD and this document is separate, with no code, ADR, registry or settings changes.
 - **TESTS:** GitHub Docs Validation exact PR head (links, dependencies, selector guard, skills and packet plan tests), objective pt-BR audit; native and physical tests **NOT RUN**.
-- **DELIVERABLES:** this board, evidence file, documentary PR, CI/audit/readback, independent factual checkpoint if approved and necessary, issue #387 pointer.
+- **DELIVERABLES (historical qualification):** original options board and Evidence, documentary PR #396 and checkpoint PR #397. Current owner ratification uses a separate documentary change and Evidence Bundle; issue #387 stays open for G2/G3 technical proofs.
 - **REVIEW FORMAT:** APPROVED DOCUMENTARY / CORRECTION REQUIRED / BLOCKED with scope and negative evidence in pt-BR.
 - **STOP CONDITION:** stale critical SHA, inferred approval, CI failure, HIGH/CRITICAL known defect, unauthorized code/CI settings/branch/license/ADR/reg/manifest write, CORE-01-02 progress.
 
@@ -97,4 +97,9 @@ Qualify 11 questions `C01-D02..D07/D10..D13/D15`, select **provisional technical
 - [GitHub standard public runners (free)](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) · [GitHub rulesets/required checks](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets) · [GitHub untrusted PR security](https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target).
 
 ## FINAL INVARIANTS
-`C01-D02..D07/D10..D13/D15` = **11/11 AWAITING_OWNER**. `C01-D01/D08/D09/D14` and `G1-M01..M08` remain only 12 bounded owner ratifications. `G1 PARTIALLY_RATIFIED_NOT_CLEARED`, `G2 BLOCKED_NOT_VERIFIED`, `G3 OPEN_OWNER_DECISION`, ADR-0003/0075 PROPOSED, engine-source license NLE-D009 OPEN. 80 code WOs `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, 0 executor_ready/approved_adr, 80 release_class UNDECIDED, 80 risk UNCLASSIFIED, `engine_implemented=false`. CORE-01-01 and CORE-01-02 both `PLANNED_BLOCKED`. No C++/runtime/engine tests executed. This document is an options dossier only.
+`C01-D02..D07/D10..D13/D15` = **11/11 `OWNER_RATIFIED_G2G3_BOUNDED`** after separate owner declaration. Prior 12 G1 bounded owner ratifications remain valid. `G1 PARTIALLY_RATIFIED_NOT_CLEARED`, `G2 BLOCKED_NOT_VERIFIED`, `G3 OWNER_DIRECTIONS_RATIFIED_NOT_TECHNICALLY_CLEARED`, ADR-0003/0075 PROPOSED, engine-source license NLE-D009 OPEN. 80 code WOs `BLOCKED_PENDING_TECHNOLOGY_AND_CONTRACTS`, 0 executor_ready/approved_adr, 80 release_class UNDECIDED, 80 risk UNCLASSIFIED, `engine_implemented=false`. CORE-01-01 and CORE-01-02 both `PLANNED_BLOCKED`. No C++/runtime/engine tests executed. This document is an options dossier only.
+
+## Explicit ratification addendum — later owner decision (2026-11-16)
+The owner expressly **RATIFIED all eleven option A directions** C01-D02/D03/D04/D05/D06/D07/D10/D11/D12/D13/D15 as specified in this decision document, with all existing trade-offs and proof obligations, at base `139a874c69e6a358777bc3356ba4e51eb4ae1253`. The original candidate/proposal wording, Work Order instructions, and historical CLI/GitHub findings in this file describe the *earlier* research phase; they are not a revocation of this subsequent authorization. [Ledger](../10-decisions-ledger.md), [Scope](../03-scope.md), [DoD](../09-definition-of-done.md), [Evidence G2/G3](../evidence/NLE-PRPLAN-CORE-01-01-G2G3-OWNER-RATIFICATION.md).
+
+**This is approval of *design direction*, NOT G2/G3 technical gate closure.** A G2 ruleset is not enforced (`main.protected=false`, rulesets `[]`, protection API 403); C++20, SDL3, CMake/Ninja, versioned ABI and native CI remain unimplemented/unproven, and any experimental code requires **another separately approved WO**. ADR-0003/0075 still PROPOSED, NLE-D009 OPEN, no library/engine-license/release distribution signed off, 80 coding WOs BLOCKED, CORE-01-01/02 PLANNED_BLOCKED, engine_implemented=false.
