@@ -37,3 +37,7 @@ jobs:
         run: python3 scripts/validate_skills.py
       - name: Skill Pack validator unit tests
         run: python3 -m unittest discover -s scripts -p test_validate_skills.py
+      - name: Future PR packet plan registry and dependency validation
+        run: python3 scripts/validate_pr_plans.py
+      - name: Future PR packet plan unit tests
+        run: python3 -m unittest discover -s scripts -p test_validate_pr_plans.py
