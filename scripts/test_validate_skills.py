@@ -75,7 +75,7 @@ class SkillValidatorTests(unittest.TestCase):
     def test_duplicate_field(self):
         self.assertTrue(any("duplicate field" in s for s in self.check(
             VALID.replace('name: stormline-test-example\n',
-                          'name: stormline-test-example\nname: stormline-test-example\n')))
+                          'name: stormline-test-example\nname: stormline-test-example\n'))))
 
     def test_verb_variants_use_for_and_use_to(self):
         self.assertEqual([], self.check(VALID.replace("Use when reviewing", "Use for reviewing")))
