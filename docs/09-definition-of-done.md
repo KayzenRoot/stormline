@@ -79,3 +79,17 @@ As direções **C01-D02..D07/D10..D13/D15** foram expressamente ratificadas, **n
 7. **Vinculações obrigatórias:** evidências G1 anteriores (200/100 ciclos, 10k eventos, 30+30 amostras) e requalificação OS continuam **FUTURE_NOT_EXECUTED**. p95/RSS permanecem sujeitos a calibração/ratificação posterior; DoD global, release classes, compatibilidade e segurança/recuperação ainda não cumpridos.
 
 **Veredito de DoD:** passou somente a aprovação das **direções de arquitetura**, não os testes/gates. G1 `PARTIALLY_RATIFIED_NOT_CLEARED`, G2 `BLOCKED_NOT_VERIFIED`, G3 `OWNER_DIRECTIONS_RATIFIED_NOT_TECHNICALLY_CLEARED`; ADR-0003/0075 `PROPOSED`, NLE-D009 `OPEN`, 80 code WOs `BLOCKED`, `engine_implemented=false`, CORE-01-02 `PLANNED_BLOCKED`. CI documental não demonstra plataforma nativa.
+
+## CORE-01 G3-V05 — ratificacao de fatia interna — DoD de liberacao interna proposta (2026-11-17)
+
+**Delimitacao owner-ratificada:** somente a primeira fatia CORE-01 `INTERNAL_ONLY` C++20, CPU-only/headless, risco STANDARD, sem SDL3. A capacidade completa de CORE-01 permanece objetivo `MANDATORY_1_0` futuro; este texto **nao** conclui DoD 1.0 nem aprova ADR-0003 integral.
+
+**Para qualificar o contrato (-02) e a prontidao individual (-03), exigir ANTES de implementar:**
+1. API interna tipada para `HostConfig`, `HostState`, `HostError`, falhas de start/stop, transicoes e ownership RAII, rollback de init parcial, stop idempotente, sem ABI de plugin nem tipos SDL/OS expostos.
+2. Fatiar explicitamente estados, invariantes, fontes de erro, testes negativos/injecao de falhas e fluxo de recuperacao, com contratos e arquivos concretos aprovados, hash/fingerprint do Context Lock atual.
+3. `STANDARD`: unit + integracao relevante + lint/analisador aplicavel + build nativo + regressao negativa; no primeiro incremento, 200/200 ciclos headless por ambiente CI provisoriamente aceito, duplicate init/stop, falha parcial/cleanup, 0 leak reportado por instrumentacao disponivel; sem prometer ausencia de leak sem sanitizer/medicao.
+4. CI de referencia limitada a ambientes observados em PR #421: Ubuntu/GCC13.3, Windows/MSVC14.51 e macOS/AppleClang17. Registrar versoes/imagens/arquiteturas e diferenciar os candidatos G3-V01 nao qualificados. Nao declarar G3-P integral PASS com base na fixture.
+5. Sem instalar novas ferramentas, sem dependencias com custo ou licencas nao avaliadas, sem segredos, sem modificacao de G2, sem release ou pagamento; resultado objetivo pt-BR com CI no HEAD exato.
+6. Aprovacao tecnica limitada (G4), classificacao de prova da fatia (G5) e ativacao individual auditada (G6) devem preceder **qualquer PR de codigo de producao `NLE-PRPLAN-CORE-01-03`**. O modulo CORE-01 original (#18) permanece BLOCKED ate transicao formal especifica; outros 79 nao sofrem alteracao.
+
+**Estado:** aceite das direcoes acima nao constitui prova de todos os criterios. `G1 PARTIAL`, `G3 NOT_CLEARED`, `ADR-0003/0075 PROPOSED`, `NLE-D009 OPEN`, `0 executor-ready`, `80 WOs BLOCKED`. As declaracoes legadas de `G2 NOT_VERIFIED` neste arquivo sao snapshots historicos; o estado comprovado posterior e `G2 CLEARED` limitado a `docs-validation` via ruleset 27393227.

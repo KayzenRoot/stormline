@@ -56,3 +56,9 @@ Not code, not a compiler proof, not a license legal opinion, not a finished plat
 - https://github.com/ninja-build/ninja
 - https://developer.apple.com/documentation/metal
 - https://docs.github.com/en/actions/reference/runners/github-hosted-runners
+
+## CORE-01 G3-V05 — ratificacao de fatia interna (ratificacao limitada, SEM promocao da ADR integral)
+
+Em 2026-11-17 o proprietario ratificou **apenas** a direcao para a primeira fatia interna CORE-01: C++20 `CPU_ONLY_HEADLESS` sem SDL3, `INTERNAL_ONLY`, futura capacidade minima `MANDATORY_1_0` do CORE-01, risco `STANDARD` limitado ao primeiro incremento, estados/erros tipados, RAII e rollback, CI provisoria conforme [PR #421](https://github.com/KayzenRoot/stormline/pull/421). A proposta anterior encontra-se na [issue #387 #6954081280](https://github.com/KayzenRoot/stormline/issues/387#issuecomment-6954081280); o voto expresso foi dado nesta conversa, nao presumido a partir do comentario de proposta.
+
+**A ADR-0003 continua `PROPOSED TECHNOLOGY SELECTION (NOT FROZEN)` no conjunto.** SDL3 3.4.20, ABI HostHandle externa, API de janelas/input, instalacao e pin de SDKs/candidatos, distribuicao, perf e macOS hardware nao foram aprovados por este voto. A decisao limitada necessita contratos concretos e qualificação G4/G5/G6 por PRs auditadas antes de virar implementacao; nao altera ADR-0075, NLE-D009, registry ou 80 WOs. Candidatos globais G3-V01 permanecem inalterados.
