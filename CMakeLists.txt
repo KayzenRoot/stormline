@@ -142,6 +142,20 @@ target_link_libraries(stormline_core01_window_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core01_window_test PRIVATE)
 
+add_library(stormline_core02_memory STATIC
+    src/stormline/core/memory/memory_block.cpp
+)
+target_include_directories(stormline_core02_memory PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+stormline_core01_apply_options(stormline_core02_memory PUBLIC)
+
+add_executable(stormline_core02_memory_test
+    tests/core/memory_block_tests.cpp
+)
+target_link_libraries(stormline_core02_memory_test PRIVATE stormline_core02_memory)
+stormline_core01_apply_options(stormline_core02_memory_test PRIVATE)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -217,6 +231,34 @@ add_test(NAME core01_window_lifetime
     COMMAND stormline_core01_window_test lifetime
 )
 
+add_test(NAME core02_memory_basic
+    COMMAND stormline_core02_memory_test basic
+)
+add_test(NAME core02_memory_invalid
+    COMMAND stormline_core02_memory_test invalid
+)
+add_test(NAME core02_memory_owned
+    COMMAND stormline_core02_memory_test owned
+)
+add_test(NAME core02_memory_move
+    COMMAND stormline_core02_memory_test move
+)
+add_test(NAME core02_memory_release
+    COMMAND stormline_core02_memory_test release
+)
+add_test(NAME core02_memory_resource
+    COMMAND stormline_core02_memory_test resource
+)
+add_test(NAME core02_memory_oom
+    COMMAND stormline_core02_memory_test oom
+)
+add_test(NAME core02_memory_cross_thread
+    COMMAND stormline_core02_memory_test cross_thread
+)
+add_test(NAME core02_memory_lifetime
+    COMMAND stormline_core02_memory_test lifetime
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -241,6 +283,15 @@ set_tests_properties(
     core01_window_wrong_thread
     core01_window_not_initialized
     core01_window_lifetime
+    core02_memory_basic
+    core02_memory_invalid
+    core02_memory_owned
+    core02_memory_move
+    core02_memory_release
+    core02_memory_resource
+    core02_memory_oom
+    core02_memory_cross_thread
+    core02_memory_lifetime
     PROPERTIES TIMEOUT 180
 )
 
