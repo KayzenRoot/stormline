@@ -250,6 +250,22 @@ target_link_libraries(stormline_core01_soak_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core01_soak_test PRIVATE)
 
+add_executable(stormline_core01_qualification_test
+    tests/core/core01_qualification_tests.cpp
+)
+target_link_libraries(stormline_core01_qualification_test PRIVATE
+    stormline_core01_headless
+    stormline_core01_sdl
+    stormline_core01_window
+    stormline_core01_event_queue
+    stormline_core01_display
+    stormline_core01_native_bridge
+    stormline_core01_lifecycle
+    stormline_core01_capability_graph
+    SDL3::SDL3-static
+)
+stormline_core01_apply_options(stormline_core01_qualification_test PRIVATE)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -445,6 +461,9 @@ add_test(NAME core01_capability_benchmark
 add_test(NAME core01_soak
     COMMAND stormline_core01_soak_test soak
 )
+add_test(NAME core01_qualification
+    COMMAND stormline_core01_qualification_test qualify
+)
 
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
@@ -532,6 +551,7 @@ set_tests_properties(
     core01_capability_wrong_thread
     core01_capability_benchmark
     core01_soak
+    core01_qualification
     core02_memory_basic
     core02_memory_invalid
     core02_memory_owned
@@ -595,5 +615,6 @@ set_tests_properties(
     core01_native_lifetime
     core01_capability_real
     core01_soak
+    core01_qualification
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=${STORMLINE_WINDOW_VIDEO_DRIVER}"
 )
