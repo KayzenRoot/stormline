@@ -51,3 +51,9 @@ The one CTest executable on each OS runs 200 full start/stop loops (400 acquired
 **Audit boundaries:** Windows/MSVC14.51 and Linux/GCC13.3 are provisional internal CI as owner ratified, **not** qualified global G3 candidates MSVC14.50/14.52, SDK10.0.26100.9457, GCC16.2/Clang23.1.5. SDL3 absent. Global G3 NOT_CLEARED; ADR-0003/0075 PROPOSED; license NLE-D009 OPEN; 80 module WOs BLOCKED; 745 other planned packets BLOCKED.
 
 **Receipt revision note:** this append changes only the Evidence Markdown, so the final PR HEAD differs from the initial tested source HEAD. The final exact-HEAD Docs Validation and native jobs MUST be rerun and audited. Do not mark final HEAD APPROVED until confirmed.
+
+## Correction Delta at first production-code PR review
+
+**COR-01 (STANDARD / CI observability):** Initial native run `#44132870268` and subsequent exact-head rerun `#44133209091` showed 4/4 CTest PASS, but Windows diagnostic `cl /Bv` reported `D8003: missing source filename` even though the CMake compile and test were successful. Because the command was not followed by an immediate `if errorlevel 1` the later commands masked the diagnostic failure. This is a logging/CI-guard defect, not a C++ compile failure. On the SAME PR, replaced that diagnostic with `where cl`, immediate exit-code check, and `VCToolsVersion` metadata logging; CMake's MSVC compiler identification remains the source for full compiler version. No source, contract, testing logic, target versions or module queue was widened.
+
+**COR-01 verification:** exact new PR HEAD Docs Validation and 4 native/sanitizer jobs **PENDING** after the workflow/evidence correction. No claim that the correction passed until receipt appears. No code product result was promoted based on a diagnostic error. Reviewer must inspect final Windows log for absence of D8003 and exact CTest PASS.
