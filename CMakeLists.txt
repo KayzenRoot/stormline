@@ -161,6 +161,26 @@ target_link_libraries(stormline_core01_event_queue_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core01_event_queue_test PRIVATE)
 
+add_library(stormline_core01_display STATIC
+    src/stormline/core/internal/display.cpp
+)
+target_include_directories(stormline_core01_display PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core01_display PRIVATE SDL3::SDL3-static)
+stormline_core01_apply_options(stormline_core01_display PUBLIC)
+
+add_executable(stormline_core01_display_test
+    tests/core/display_tests.cpp
+)
+target_link_libraries(stormline_core01_display_test PRIVATE
+    stormline_core01_display
+    stormline_core01_window
+    stormline_core01_sdl
+    SDL3::SDL3-static
+)
+stormline_core01_apply_options(stormline_core01_display_test PRIVATE)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -275,6 +295,28 @@ add_test(NAME core01_events_lifetime
     COMMAND stormline_core01_event_queue_test lifetime
 )
 
+add_test(NAME core01_display_displays
+    COMMAND stormline_core01_display_test displays
+)
+add_test(NAME core01_display_errors
+    COMMAND stormline_core01_display_test errors
+)
+add_test(NAME core01_display_wrong_thread
+    COMMAND stormline_core01_display_test wrong_thread
+)
+add_test(NAME core01_display_surface
+    COMMAND stormline_core01_display_test surface
+)
+add_test(NAME core01_display_surface_errors
+    COMMAND stormline_core01_display_test surface_errors
+)
+add_test(NAME core01_display_stability
+    COMMAND stormline_core01_display_test stability
+)
+add_test(NAME core01_display_lifetime
+    COMMAND stormline_core01_display_test lifetime
+)
+
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
 )
@@ -335,6 +377,13 @@ set_tests_properties(
     core01_events_not_initialized
     core01_events_empty_clear
     core01_events_lifetime
+    core01_display_displays
+    core01_display_errors
+    core01_display_wrong_thread
+    core01_display_surface
+    core01_display_surface_errors
+    core01_display_stability
+    core01_display_lifetime
     core02_memory_basic
     core02_memory_invalid
     core02_memory_owned
@@ -362,6 +411,13 @@ set_tests_properties(
     core01_events_not_initialized
     core01_events_empty_clear
     core01_events_lifetime
+    core01_display_displays
+    core01_display_errors
+    core01_display_wrong_thread
+    core01_display_surface
+    core01_display_surface_errors
+    core01_display_stability
+    core01_display_lifetime
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=dummy"
 )
 
