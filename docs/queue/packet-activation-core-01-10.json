@@ -11,7 +11,7 @@
   "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-10.md",
   "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-10-G6-ACTIVATION.md",
   "gate_base_sha": "7e42b48f19272498c732d75f2051704f5b82311f",
-  "gate_pr": 0,
+  "gate_pr": 446,
   "requires_fresh_context_lock": true,
   "sdl3": {
     "version": "3.4.20",
