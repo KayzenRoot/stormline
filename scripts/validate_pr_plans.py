@@ -12,6 +12,7 @@ REGISTRY = ROOT / "docs/queue/implementation-registry.json"
 MANIFEST = ROOT / "docs/pr-plans/manifest.json"
 ACTIVATION_FILE = ROOT / "docs/queue/packet-activations.json"
 ACTIVATED_STATUS = "ONE_BOUNDED_CORE01_INTERNAL_PACKET_READY"
+COMPLETED_STATUS = "CORE01_03_COMPLETED_REST_BLOCKED"
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
 
 
@@ -55,13 +56,17 @@ def validate_activation(activation: dict) -> list[str]:
     return errors
 
 
-def expected_packet_state(module_id: str, idx: int, activation: dict | None) -> tuple[str, int | None]:
+def expected_packet_state(
+    module_id: str, idx: int, activation: dict | None, manifest_status: str | None
+) -> tuple[str, int | None]:
     if activation is not None and module_id == "CORE-01":
         if idx == 1:
             return "APPROVED_GOVERNANCE", 422
         if idx == 2:
             return "APPROVED_CONTRACT", 424
         if idx == 3:
+            if manifest_status == COMPLETED_STATUS:
+                return "COMPLETED", 428
             return "EXECUTOR_READY", None
     return "PLANNED_BLOCKED", None
 
@@ -86,8 +91,8 @@ def validate_manifest(manifest: dict, registry: dict, activation: dict | None = 
         if manifest.get("status") != "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS":
             issues.append("manifest must remain blocked without G6 activation")
     else:
-        if manifest.get("status") != ACTIVATED_STATUS:
-            issues.append("manifest activation status mismatch")
+        if manifest.get("status") not in (ACTIVATED_STATUS, COMPLETED_STATUS):
+            issues.append("manifest activation/completion status mismatch")
         issues.extend(validate_activation(activation))
     by_id = {x.get("module_id"): x for x in source}
     all_ids: set[str] = set()
@@ -138,15 +143,15 @@ def validate_manifest(manifest: dict, registry: dict, activation: dict | None = 
             if ident in all_ids:
                 issues.append(f"{mid}: duplicate packet ID {ident}")
             all_ids.add(ident)
-            want_status, want_pr = expected_packet_state(mid, idx, activation)
+            want_status, want_pr = expected_packet_state(mid, idx, activation, manifest.get("status"))
             if packet.get("status") != want_status or packet.get("github_pr") != want_pr:
                 issues.append(f"{mid}: code PR must not be opened/authorized by documentary map; expected {want_status}/{want_pr}")
-            if want_status == "EXECUTOR_READY":
+            if want_status in ("EXECUTOR_READY", "COMPLETED"):
                 if (packet.get("risk") != "STANDARD"
                         or packet.get("release_class") != "INTERNAL_ONLY"
                         or packet.get("approved_adr") != "docs/adr/0083-core-01-internal-headless-slice.md"
                         or packet.get("activation_evidence") != "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md"):
-                    issues.append(f"{mid}: ready packet lacks bounded risk/ADR/evidence")
+                    issues.append(f"{mid}: ready/completed packet lacks bounded risk/ADR/evidence")
             elif any(field in packet for field in ("risk", "release_class", "approved_adr", "activation_evidence")):
                 issues.append(f"{mid}: blocked or documentary packet claims executor metadata")
             if packet.get("depends_on") != ([] if idx == 1 else [f"NLE-PRPLAN-{mid}-{idx-1:02}"]):
@@ -163,6 +168,10 @@ def validate_manifest(manifest: dict, registry: dict, activation: dict | None = 
         issues.append("manifest packet count differs from actual unique IDs")
     if len(all_ids) < 600:
         issues.append("unexpectedly low candidate PR breakdown")
+    if manifest.get("status") == COMPLETED_STATUS:
+        statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
+        if statuses.count("COMPLETED") != 1 or "EXECUTOR_READY" in statuses:
+            issues.append("completed activation must have exactly one COMPLETED and zero EXECUTOR_READY packets")
     return issues
 
 
@@ -175,7 +184,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         return [f"Cannot read JSON: {err}"]
     issues = []
     activation = None
-    if manifest.get("status") == ACTIVATED_STATUS:
+    if manifest.get("status") in (ACTIVATED_STATUS, COMPLETED_STATUS):
         path = root / "docs/queue/packet-activations.json"
         try:
             activation = json.loads(path.read_text(encoding="utf-8"))
@@ -226,7 +235,8 @@ def main() -> int:
     statuses = [p["status"] for m in data["modules"] for p in m["packets"]]
     print(f"PR plan PASS: {data['module_count']} module WOs stay BLOCKED; "
           f"{data['planned_packet_count']} packets: {statuses.count('PLANNED_BLOCKED')} blocked, "
-          f"{statuses.count('EXECUTOR_READY')} individually ready, 0 code PRs opened by this validator.")
+          f"{statuses.count('EXECUTOR_READY')} individually ready, "
+          f"{statuses.count('COMPLETED')} completed, 0 code PRs opened by this validator.")
     return 0
 
 

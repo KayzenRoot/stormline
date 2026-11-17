@@ -1,5 +1,7 @@
 # NLE-PRPLAN-CORE-01-03 — CORE-01 INTERNAL_ONLY C++20 CPU-only headless harness
 
+**STATUS: COMPLETED — implemented and merged via [PR #428](https://github.com/KayzenRoot/stormline/pull/428), merge `afdd4ec1ab28eea85c16e459e2f412d5089dcd76`. This packet must not be re-executed; no next packet or module is authorized.**
+
 **Gate:** G6 ONLY for this packet, conditional on the gate PR audit/merge and executor fresh Source Check. **Formal predecessor:** approved NLE-PRPLAN-CORE-01-02 [PR #424](https://github.com/KayzenRoot/stormline/pull/424); G1/G3/G4/G5 bounded as recorded in Ledger and ADR-0083. **Issue:** #18. **G6 baseline main before activation:** `c355de53bca5be1d64dedb4d7111bd40c8859e83`; new executor must confirm latest main and raw SHA-256 of canonical sources before code. All module-level 80 WOs including CORE-01 remain blocked; only this packet may become individually ready.
 
 ## OBJECTIVE
