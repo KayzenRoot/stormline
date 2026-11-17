@@ -1,0 +1,129 @@
+# CORE-01 internal headless slice. Standard public runners only, read-only
+# token, no secrets, no cache/artifact upload, no installation and no paid
+# runner. Checkout is pinned to the reviewed commit used by the approved G3
+# experiments.
+name: CORE-01 internal headless
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/stormline/core/internal/**'
+      - 'tests/core/**'
+      - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - '.github/workflows/core01-internal-headless.yml'
+      - 'docs/work-orders/NLE-PRPLAN-CORE-01-03.md'
+      - 'docs/evidence/NLE-PRPLAN-CORE-01-03.md'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core01-internal-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Toolchain provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "ImageVersion=$ImageVersion"
+          uname -a
+          ldd --version | sed -n '1p' || true
+          c++ --version | sed -n '1p'
+          cmake --version | sed -n '1p'
+          ninja --version
+      - name: Configure, build and test
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmake --preset core01-internal-debug
+          cmake --build --preset core01-internal-debug
+          env -u DISPLAY -u WAYLAND_DISPLAY ctest --preset core01-internal-debug --output-on-failure
+
+  linux-sanitizers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Detect preinstalled ASan/UBSan support
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          if printf 'int main() { return 0; }\n' | c++ -x c++ -std=c++20 -fsanitize=address,undefined -o /tmp/stormline-sanitizer-probe - >/dev/null 2>&1; then
+            echo "supported=true" >> "$GITHUB_OUTPUT"
+            echo "ASan/UBSan supported by preinstalled toolchain"
+          else
+            echo "supported=false" >> "$GITHUB_OUTPUT"
+            echo "**SANITIZERS_NOT_QUALIFIED**: preinstalled toolchain does not support ASan/UBSan; no sanitizer tests ran." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Configure, build and test with sanitizers
+        if: steps.detect.outputs.supported == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          c++ --version | sed -n '1p'
+          cmake --version | sed -n '1p'
+          ninja --version
+          cmake --preset core01-internal-asan
+          cmake --build --preset core01-internal-asan
+          env -u DISPLAY -u WAYLAND_DISPLAY ctest --preset core01-internal-asan --output-on-failure
+
+  windows:
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Toolchain provenance, configure, build and test
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          if errorlevel 1 exit /b 1
+          echo ImageVersion=%ImageVersion%
+          cl /Bv
+          cmake --version
+          ninja --version
+          cmake --preset core01-internal-debug
+          if errorlevel 1 exit /b 1
+          cmake --build --preset core01-internal-debug
+          if errorlevel 1 exit /b 1
+          ctest --preset core01-internal-debug --output-on-failure
+          if errorlevel 1 exit /b 1
+
+  macos:
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Toolchain provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "ImageVersion=$ImageVersion"
+          uname -m
+          sw_vers
+          c++ --version | sed -n '1p'
+          cmake --version | sed -n '1p'
+          ninja --version
+      - name: Configure, build and test
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmake --preset core01-internal-debug
+          cmake --build --preset core01-internal-debug
+          env -u DISPLAY ctest --preset core01-internal-debug --output-on-failure

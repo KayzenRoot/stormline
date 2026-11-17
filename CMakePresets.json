@@ -1,0 +1,63 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 27,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "core01-internal-debug",
+      "displayName": "CORE-01 internal headless (Debug)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/core01-internal-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+        "CMAKE_CXX_EXTENSIONS": "OFF"
+      }
+    },
+    {
+      "name": "core01-internal-asan",
+      "displayName": "CORE-01 internal headless (ASan/UBSan)",
+      "inherits": "core01-internal-debug",
+      "binaryDir": "${sourceDir}/build/core01-internal-asan",
+      "cacheVariables": {
+        "STORMLINE_CORE01_ENABLE_SANITIZERS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "core01-internal-debug",
+      "configurePreset": "core01-internal-debug"
+    },
+    {
+      "name": "core01-internal-asan",
+      "configurePreset": "core01-internal-asan"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "core01-internal-debug",
+      "configurePreset": "core01-internal-debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "core01-internal-asan",
+      "configurePreset": "core01-internal-asan",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
+    }
+  ]
+}
