@@ -1,15 +1,15 @@
 # NLE-PRPLAN-CORE-01-09 — Event queue and replay
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-09`. **ADR:** [ADR-0088](../adr/0088-core-01-event-queue-slice.md). **Contract:** [core-01-event-queue-v0](../contracts/core-01-event-queue-v0.md). **WO:** [NLE-PRPLAN-CORE-01-09](../work-orders/NLE-PRPLAN-CORE-01-09.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-09`. **ADR:** [ADR-0088](../adr/0088-core-01-event-queue-slice.md). **Contract:** [core-01-event-queue-v0](../contracts/core-01-event-queue-v0.md). **WO:** [NLE-PRPLAN-CORE-01-09](../work-orders/NLE-PRPLAN-CORE-01-09.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First real CORE-01 host-event path: normalize selected SDL3 events into internal values, enqueue them in a fixed-capacity queue with monotonic sequence/timestamps, surface overflow without silent loss, and replay captured events deterministically. No gamepad, IME, DPI, hotplug, gameplay mapping, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #443](https://github.com/KayzenRoot/stormline/pull/443) squash-merged as `a4de0bc1aebda7e32e3db149cdd8e968a9733506`; audit #6958755709 **APPROVED**.
-- **Code PR:** [PR #444](https://github.com/KayzenRoot/stormline/pull/444), HEAD auditado `05621561e755887fbb4676da89c457fad5d4db91`.
+- **Code PR:** [PR #444](https://github.com/KayzenRoot/stormline/pull/444), HEAD auditado `50bd03618710cc4cf702ec70be38404b1245e87b`, [auditoria pt-BR #6958962473](https://github.com/KayzenRoot/stormline/pull/444#issuecomment-6958962473) **APPROVED**; squash-merged as `7a50cce74bdc5bf59d28058f91ae0cc65ba71f24`.
 - **Base:** `a4de0bc1aebda7e32e3db149cdd8e968a9733506`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-09 --json` → `EXECUTOR_READY`, exit 0; `-10`, `CORE-02-04` and every other ID exit 2.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-01-09 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Predecessors:** `-03`..`-08` completed; CORE-02-03 ownership completed via PR #441.
 
 SDL3 remains `3.4.20`, commit `f00dc919ca35b9756316e86c4777392de442f9b2`, zlib, static build-time `FetchContent`.
@@ -79,3 +79,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the fifth real CORE-01 slice, exact PR/CI/audit/merge SHA, 8 `core01_events_*` tests and 40 total CTests across Linux, Linux ASan/UBSan, Windows and macOS, and the explicit statement that this is event queue/replay only — not physical input, gamepad, IME, DPI, hotplug, gameplay mapping, public ABI or release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #444](https://github.com/KayzenRoot/stormline/pull/444) **squash-merged** at `2026-11-17T19:44:06Z`, merge `7a50cce74bdc5bf59d28058f91ae0cc65ba71f24`; [auditoria pt-BR #6958962473](https://github.com/KayzenRoot/stormline/pull/444#issuecomment-6958962473) **APPROVED**.
+- Final-head Docs Validation [44161260512](https://github.com/KayzenRoot/stormline/actions/runs/44161260512) **SUCCESS**; native [44161260519](https://github.com/KayzenRoot/stormline/actions/runs/44161260519) **SUCCESS**, **40/40 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-01-09` becomes `COMPLETED` with `github_pr=444`; the manifest has **736 `PLANNED_BLOCKED`, 8 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; `select_packet.py` denies every ID. No next packet or module is authorized. CORE-01 remains incomplete; `-10`..`-16` are blocked.
