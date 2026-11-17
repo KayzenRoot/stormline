@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-09 — Event queue and replay (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE; not executable while the manifest is in a blocked state.** **Gate:** G6 individual, conditional on that merge and a fresh executor Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-09`. **Predecessor:** `-08` `COMPLETED` via PR #438. **Issue:** #18. **Base:** `27cd592ec235a63def60f04757ac27700babd334`. **ADR:** [ADR-0088](../adr/0088-core-01-event-queue-slice.md). **Contract:** [core-01-event-queue-v0](../contracts/core-01-event-queue-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #444](https://github.com/KayzenRoot/stormline/pull/444), merge `7a50cce74bdc5bf59d28058f91ae0cc65ba71f24`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual, granted by [PR #443](https://github.com/KayzenRoot/stormline/pull/443). **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-09`. **Predecessor:** `-08` `COMPLETED` via PR #438. **Issue:** #18. **Base:** `27cd592ec235a63def60f04757ac27700babd334`. **ADR:** [ADR-0088](../adr/0088-core-01-event-queue-slice.md). **Contract:** [core-01-event-queue-v0](../contracts/core-01-event-queue-v0.md).
 
 ## OBJECTIVE
 
