@@ -215,6 +215,25 @@ add_executable(stormline_core01_lifecycle_test
 target_link_libraries(stormline_core01_lifecycle_test PRIVATE stormline_core01_lifecycle)
 stormline_core01_apply_options(stormline_core01_lifecycle_test PRIVATE)
 
+add_library(stormline_core01_capability_graph STATIC
+    src/stormline/core/internal/capability_graph.cpp
+)
+target_include_directories(stormline_core01_capability_graph PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core01_capability_graph PRIVATE SDL3::SDL3-static)
+stormline_core01_apply_options(stormline_core01_capability_graph PUBLIC)
+
+add_executable(stormline_core01_capability_graph_test
+    tests/core/capability_graph_tests.cpp
+)
+target_link_libraries(stormline_core01_capability_graph_test PRIVATE
+    stormline_core01_capability_graph
+    stormline_core01_sdl
+    SDL3::SDL3-static
+)
+stormline_core01_apply_options(stormline_core01_capability_graph_test PRIVATE)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -389,6 +408,25 @@ add_test(NAME core01_lifecycle_recovery
     COMMAND stormline_core01_lifecycle_test recovery
 )
 
+add_test(NAME core01_capability_states
+    COMMAND stormline_core01_capability_graph_test states
+)
+add_test(NAME core01_capability_uninitialized
+    COMMAND stormline_core01_capability_graph_test uninitialized
+)
+add_test(NAME core01_capability_dummy
+    COMMAND stormline_core01_capability_graph_test dummy
+)
+add_test(NAME core01_capability_real
+    COMMAND stormline_core01_capability_graph_test real
+)
+add_test(NAME core01_capability_wrong_thread
+    COMMAND stormline_core01_capability_graph_test wrong_thread
+)
+add_test(NAME core01_capability_benchmark
+    COMMAND stormline_core01_capability_graph_test benchmark
+)
+
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
 )
@@ -468,6 +506,12 @@ set_tests_properties(
     core01_lifecycle_invalid
     core01_lifecycle_wrong_thread
     core01_lifecycle_recovery
+    core01_capability_states
+    core01_capability_uninitialized
+    core01_capability_dummy
+    core01_capability_real
+    core01_capability_wrong_thread
+    core01_capability_benchmark
     core02_memory_basic
     core02_memory_invalid
     core02_memory_owned
@@ -503,6 +547,10 @@ set_tests_properties(
     core01_display_stability
     core01_display_lifetime
     core01_native_unavailable
+    core01_capability_uninitialized
+    core01_capability_dummy
+    core01_capability_wrong_thread
+    core01_capability_benchmark
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=dummy"
 )
 
@@ -525,5 +573,6 @@ set_tests_properties(
     core01_native_errors
     core01_native_wrong_thread
     core01_native_lifetime
+    core01_capability_real
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=${STORMLINE_WINDOW_VIDEO_DRIVER}"
 )
