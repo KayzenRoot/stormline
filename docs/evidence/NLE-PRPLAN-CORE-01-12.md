@@ -1,15 +1,15 @@
 # NLE-PRPLAN-CORE-01-12 — Lifecycle request state machine
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-12`. **ADR:** [ADR-0091](../adr/0091-core-01-lifecycle-request-state-machine.md). **Contract:** [core-01-lifecycle-requests-v0](../contracts/core-01-lifecycle-requests-v0.md). **WO:** [NLE-PRPLAN-CORE-01-12](../work-orders/NLE-PRPLAN-CORE-01-12.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-12`. **ADR:** [ADR-0091](../adr/0091-core-01-lifecycle-request-state-machine.md). **Contract:** [core-01-lifecycle-requests-v0](../contracts/core-01-lifecycle-requests-v0.md). **WO:** [NLE-PRPLAN-CORE-01-12](../work-orders/NLE-PRPLAN-CORE-01-12.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First CORE-01 lifecycle request state machine: owner-thread suspend/resume/shutdown/terminate transitions with typed errors and observation of quit/window-close host events. No OS signal handlers, forced process kill, persistence, renderer teardown, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #452](https://github.com/KayzenRoot/stormline/pull/452) squash-merged as `3223fb771312a0f6a80de656361b0cfa42b3a711`; audit #6960639796 **APPROVED**.
-- **Code PR:** [PR #453](https://github.com/KayzenRoot/stormline/pull/453), HEAD auditado `30a0cbe5b8ccb959fa72a2a1b897b05485b3a910`.
+- **Code PR:** [PR #453](https://github.com/KayzenRoot/stormline/pull/453), HEAD auditado `908ae4c06fb98f11eb552861058560844c9b89d6`, [auditoria pt-BR #6960816176](https://github.com/KayzenRoot/stormline/pull/453#issuecomment-6960816176) **APPROVED**; squash-merged as `5ef63600fb42ae6f1f65c095e92c5fba7d87f89f`.
 - **Base:** `3223fb771312a0f6a80de656361b0cfa42b3a711`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-12 --json` → `EXECUTOR_READY`, exit 0; `-13`, `CORE-02-04` and every other ID exit 2.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-01-12 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Predecessors:** `-03`..`-11` completed; CORE-02-03 ownership completed via PR #441.
 
 ## 2. Implemented behavior
@@ -77,3 +77,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the eighth real CORE-01 slice, exact PR/CI/audit/merge SHA, 6 `core01_lifecycle_*` tests and 59 total CTests across Linux, Linux ASan/UBSan, Windows and macOS, and the explicit statement that this is an internal request state machine only — not OS signal/termination, persistence, renderer recovery, public ABI or release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #453](https://github.com/KayzenRoot/stormline/pull/453) **squash-merged** at `2026-11-17T20:57:52Z`, merge `5ef63600fb42ae6f1f65c095e92c5fba7d87f89f`; [auditoria pt-BR #6960816176](https://github.com/KayzenRoot/stormline/pull/453#issuecomment-6960816176) **APPROVED**.
+- Final-head Docs Validation [44174435953](https://github.com/KayzenRoot/stormline/actions/runs/44174435953) **SUCCESS**; native [44174436112](https://github.com/KayzenRoot/stormline/actions/runs/44174436112) **SUCCESS**, **59/59 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-01-12` becomes `COMPLETED` with `github_pr=453`; the manifest has **733 `PLANNED_BLOCKED`, 11 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; `select_packet.py` denies every ID. No next packet or module is authorized. CORE-01 remains incomplete; `-13`..`-16` are blocked.
