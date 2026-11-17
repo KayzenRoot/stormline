@@ -1,0 +1,85 @@
+name: CORE-01 internal headless C++20
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/stormline/core/internal/**"
+      - "tests/core/**"
+      - "CMakeLists.txt"
+      - "CMakePresets.json"
+      - ".github/workflows/core01-internal-headless.yml"
+      - "docs/work-orders/NLE-PRPLAN-CORE-01-03.md"
+      - "docs/evidence/NLE-PRPLAN-CORE-01-03.md"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core01-internal-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  unix-headless:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'code/nle-prplan-core-01-03-headless'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: C++20 configure build and CTest
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "ImageVersion=${ImageVersion:-unknown}"
+          cmake --version
+          ninja --version
+          c++ --version | head -n 1
+          cmake --preset core01-internal-debug
+          cmake --build --preset core01-internal-debug
+          ctest --preset core01-internal-debug --output-on-failure --no-tests=error
+
+  linux-sanitizer:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'code/nle-prplan-core-01-03-headless'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Linux ASan UBSan configure build and CTest
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmake --preset core01-internal-sanitized
+          cmake --build --preset core01-internal-sanitized
+          ctest --preset core01-internal-sanitized --output-on-failure --no-tests=error
+
+  windows-headless:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'code/nle-prplan-core-01-03-headless'
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: MSVC C++20 configure build and CTest
+        shell: cmd
+        run: |
+          echo ImageVersion=%ImageVersion%
+          call "C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          if errorlevel 1 exit /b 1
+          cl /Bv
+          cmake --version
+          ninja --version
+          cmake --preset core01-internal-debug
+          if errorlevel 1 exit /b 1
+          cmake --build --preset core01-internal-debug
+          if errorlevel 1 exit /b 1
+          ctest --preset core01-internal-debug --output-on-failure --no-tests=error
+          if errorlevel 1 exit /b 1

@@ -51,3 +51,8 @@ Gate baseline `c355de53bca5be1d64dedb4d7111bd40c8859e83`; reference blobs in `do
 ## EVIDENCE BUNDLE
 Pending separate code PR -03 with actual builds/tests. G6 gate approval evidence must never masquerade as implemented engine code or native tests.
 
+## EXECUTOR SOURCE CHECK — first real code PR (2026-11-17)
+
+Fresh BASE `50b3775d02047a9c3480cc1a2ff7585d8ea056d3`, after audited G6 [#426](https://github.com/KayzenRoot/stormline/pull/426) and checkpoint [#427](https://github.com/KayzenRoot/stormline/pull/427) squash/readback. A single manifest packet `NLE-PRPLAN-CORE-01-03` was `EXECUTOR_READY`, 745 other planned packets remain blocked and all 80 original broad module WOs BLOCKED. The full actual source SHA-256 Context Lock is provided in [Evidence](../evidence/NLE-PRPLAN-CORE-01-03.md) for this exact BASE, not inferred from Git blob SHA-1.
+
+Implementation allowlist is exactly the eight paths in DELIVERABLES. C++20 stdlib internal-only with RAII and typed errors, no SDL3/window/renderer/audio/OS-specific external API. Risk STANDARD for this slice. Workflow uses standard preinstalled runner tools, CMake/CTest, no secrets, paid service, caches or artifact upload. G3 global NOT_CLEARED and ADR-0003/0075 remain PROPOSED. Do not proceed to another packet if any native/Docs CI fails; record actual results on PR head, correct in same PR, audit pt-BR.
