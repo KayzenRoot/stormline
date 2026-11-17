@@ -28,7 +28,7 @@ void expect(bool condition, const char* description) {
     }
 }
 
-void note(const char* description) {
+[[maybe_unused]] void note(const char* description) {
     std::printf("NOT_QUALIFIED: %s\n", description);
 }
 
@@ -45,6 +45,7 @@ bool initialize_runtime(SdlRuntime& runtime, const char* description) {
         return true;
     }
 #if defined(__APPLE__)
+    (void)description;
     note("cocoa video driver unavailable on this runner");
     return false;
 #else
@@ -59,6 +60,7 @@ bool create_window(Window& window, const WindowConfig& config, const char* descr
         return true;
     }
 #if defined(__APPLE__)
+    (void)description;
     note("cocoa window creation unavailable on this runner");
     return false;
 #else
