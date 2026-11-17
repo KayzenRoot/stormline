@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-15 — Integrated CI qualification
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-01-15`. **ADR:** [ADR-0094](../adr/0094-core-01-integrated-ci-qualification.md). **Contract:** [core-01-integrated-qualification-v0](../contracts/core-01-integrated-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-01-15](../work-orders/NLE-PRPLAN-CORE-01-15.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Formal packet:** `NLE-PRPLAN-CORE-01-15`. **ADR:** [ADR-0094](../adr/0094-core-01-integrated-ci-qualification.md). **Contract:** [core-01-integrated-qualification-v0](../contracts/core-01-integrated-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-01-15](../work-orders/NLE-PRPLAN-CORE-01-15.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 Integrated CI qualification: 200 headless cycles with zero live resources, 10 SDL init/quit + window cycles, 25 extra window cycles, 10,000 key events, display/capability/lifecycle and teardown. No physical-hardware, 30+30 timing, 32-scenario, security, performance or release claim.
 
@@ -8,7 +8,7 @@ Integrated CI qualification: 200 headless cycles with zero live resources, 10 SD
 
 - **Gate:** [PR #461](https://github.com/KayzenRoot/stormline/pull/461) squash-merged as `022ec54218e08489a30e3cb01f9fd00e5f4217ec`; audit #6961979730 **APPROVED**.
 - **Base:** `022ec54218e08489a30e3cb01f9fd00e5f4217ec`.
-- **Code PR:** [PR #462](https://github.com/KayzenRoot/stormline/pull/462), HEAD auditado `52ab4f84fa19ba35bcb744e6cef4fa5c514abed3`.
+- **Code PR:** [PR #462](https://github.com/KayzenRoot/stormline/pull/462), HEAD auditado `ec1c02f…`, [auditoria pt-BR #6962148641](https://github.com/KayzenRoot/stormline/pull/462#issuecomment-6962148641) **APPROVED**; squash-merged as `0286171…`.
 - **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-01-15 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 
 ## 2. Harness behavior and real counts
@@ -73,3 +73,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the integrated CI qualification, exact PR/CI/audit/merge SHA, the counts/output, 67 total CTests, and the explicit statement that physical hardware, 30+30 timing, 32 scenarios, Wayland runtime, security clearance, performance and release remain `NOT_QUALIFIED`. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #462](https://github.com/KayzenRoot/stormline/pull/462) **squash-merged** at `2026-11-17T21:56:19Z`, merge `0286171…`; auditoria #6962148641 **APPROVED**.
+- Final-head Docs Validation [44184687788](https://github.com/KayzenRoot/stormline/actions/runs/44184687788) **SUCCESS**; native [44184687710](https://github.com/KayzenRoot/stormline/actions/runs/44184687710) **SUCCESS**, **67/67 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-01-15` becomes `COMPLETED` with `github_pr=462`; manifest **730 `PLANNED_BLOCKED`, 14 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID. Physical hardware, 30+30 timing, 32 scenarios, Wayland runtime, security clearance, performance and release remain **NOT_QUALIFIED**; `CORE-01-16` closeout remains blocked.

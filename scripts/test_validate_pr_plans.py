@@ -84,7 +84,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual(["NLE-PRPLAN-CORE-01-15"], ready)
+        self.assertEqual([], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -93,7 +93,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-01-09", "NLE-PRPLAN-CORE-01-10",
                           "NLE-PRPLAN-CORE-01-11", "NLE-PRPLAN-CORE-01-12",
                           "NLE-PRPLAN-CORE-01-13", "NLE-PRPLAN-CORE-01-14",
-                          "NLE-PRPLAN-CORE-02-03"], completed)
+                          "NLE-PRPLAN-CORE-01-15", "NLE-PRPLAN-CORE-02-03"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -106,7 +106,8 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(456, self.manifest["modules"][0]["packets"][12]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][13]["status"])
         self.assertEqual(459, self.manifest["modules"][0]["packets"][13]["github_pr"])
-        self.assertEqual("EXECUTOR_READY", self.manifest["modules"][0]["packets"][14]["status"])
+        self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][14]["status"])
+        self.assertEqual(462, self.manifest["modules"][0]["packets"][14]["github_pr"])
         core02 = self.manifest["modules"][1]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core02[0]["status"])
         self.assertEqual("APPROVED_CONTRACT", core02[1]["status"])
@@ -198,17 +199,11 @@ class PrPlanValidationTests(unittest.TestCase):
         reg["modules"][0]["executor_ready"] = True
         self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
 
-    def test_selector_cli_only_core01_15_is_ready(self):
+    def test_selector_cli_all_denied_after_core01_15_completion(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
-        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-01-15", "--json"],
-                               capture_output=True, text=True, timeout=20, check=False)
-        self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
-        payload = json.loads(ready.stdout)
-        self.assertTrue(payload["executor_ready"])
-        self.assertEqual("docs/work-orders/NLE-PRPLAN-CORE-01-15.md", payload["work_order"])
-        for packet_id in ("NLE-PRPLAN-CORE-01-14", "NLE-PRPLAN-CORE-01-16",
-                          "NLE-PRPLAN-CORE-02-03", "NLE-PRPLAN-CORE-02-04",
-                          "NLE-PRPLAN-CORE-01-99"):
+        for packet_id in ("NLE-PRPLAN-CORE-01-14", "NLE-PRPLAN-CORE-01-15",
+                          "NLE-PRPLAN-CORE-01-16", "NLE-PRPLAN-CORE-02-03",
+                          "NLE-PRPLAN-CORE-02-04", "NLE-PRPLAN-CORE-01-99"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
@@ -254,7 +249,7 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_core02_capability_source_must_be_completed(self):
         def wrong(d):
-            d["modules"][1]["packets"][2]["capability_admission"]["required_capabilities"][0]["satisfied_by"] = "NLE-PRPLAN-CORE-01-15"
+            d["modules"][1]["packets"][2]["capability_admission"]["required_capabilities"][0]["satisfied_by"] = "NLE-PRPLAN-CORE-01-16"
         self.assertTrue(any("lacks a completed packet" in x for x in self.check(wrong)))
 
     def test_core02_cannot_claim_module_completion(self):
