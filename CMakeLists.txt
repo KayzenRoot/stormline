@@ -46,10 +46,10 @@ set(SDL_HIDAPI OFF CACHE BOOL "" FORCE)
 set(SDL_SENSOR OFF CACHE BOOL "" FORCE)
 set(SDL_POWER OFF CACHE BOOL "" FORCE)
 set(SDL_CAMERA OFF CACHE BOOL "" FORCE)
-set(SDL_X11 OFF CACHE BOOL "" FORCE)
-set(SDL_WAYLAND OFF CACHE BOOL "" FORCE)
+set(SDL_X11 ON CACHE BOOL "" FORCE)
+set(SDL_WAYLAND ON CACHE BOOL "" FORCE)
 set(SDL_KMSDRM OFF CACHE BOOL "" FORCE)
-set(SDL_UNIX_CONSOLE_BUILD ON CACHE BOOL "" FORCE)
+set(SDL_UNIX_CONSOLE_BUILD OFF CACHE BOOL "" FORCE)
 set(SDL_RENDER OFF CACHE BOOL "" FORCE)
 set(SDL_RENDER_GPU OFF CACHE BOOL "" FORCE)
 set(SDL_RENDER_VULKAN OFF CACHE BOOL "" FORCE)
@@ -124,6 +124,24 @@ add_executable(stormline_core01_sdl_test
 target_link_libraries(stormline_core01_sdl_test PRIVATE stormline_core01_sdl)
 stormline_core01_apply_options(stormline_core01_sdl_test PRIVATE)
 
+add_library(stormline_core01_window STATIC
+    src/stormline/core/internal/window.cpp
+)
+target_include_directories(stormline_core01_window PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core01_window PRIVATE SDL3::SDL3-static)
+stormline_core01_apply_options(stormline_core01_window PUBLIC)
+
+add_executable(stormline_core01_window_test
+    tests/core/window_tests.cpp
+)
+target_link_libraries(stormline_core01_window_test PRIVATE
+    stormline_core01_window
+    stormline_core01_sdl
+)
+stormline_core01_apply_options(stormline_core01_window_test PRIVATE)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -183,6 +201,22 @@ add_test(NAME core01_sdl_header
     COMMAND stormline_core01_sdl_test header
 )
 
+add_test(NAME core01_window_basic
+    COMMAND stormline_core01_window_test basic
+)
+add_test(NAME core01_window_invalid
+    COMMAND stormline_core01_window_test invalid
+)
+add_test(NAME core01_window_wrong_thread
+    COMMAND stormline_core01_window_test wrong_thread
+)
+add_test(NAME core01_window_not_initialized
+    COMMAND stormline_core01_window_test not_initialized
+)
+add_test(NAME core01_window_lifetime
+    COMMAND stormline_core01_window_test lifetime
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -202,6 +236,11 @@ set_tests_properties(
     core01_sdl_destructor
     core01_sdl_version
     core01_sdl_header
+    core01_window_basic
+    core01_window_invalid
+    core01_window_wrong_thread
+    core01_window_not_initialized
+    core01_window_lifetime
     PROPERTIES TIMEOUT 180
 )
 
@@ -213,4 +252,21 @@ set_tests_properties(
     core01_sdl_version
     core01_sdl_header
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=dummy"
+)
+
+if(WIN32)
+    set(STORMLINE_WINDOW_VIDEO_DRIVER windows)
+elseif(APPLE)
+    set(STORMLINE_WINDOW_VIDEO_DRIVER cocoa)
+else()
+    set(STORMLINE_WINDOW_VIDEO_DRIVER x11)
+endif()
+
+set_tests_properties(
+    core01_window_basic
+    core01_window_invalid
+    core01_window_wrong_thread
+    core01_window_not_initialized
+    core01_window_lifetime
+    PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=${STORMLINE_WINDOW_VIDEO_DRIVER}"
 )
