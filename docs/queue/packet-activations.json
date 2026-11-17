@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-CORE-01-03",
+  "module_id": "CORE-01",
+  "risk": "STANDARD",
+  "release_class": "INTERNAL_ONLY",
+  "owner_ratification_pr": 422,
+  "contract_pr": 424,
+  "checkpoint_pr": 425,
+  "approved_adr": "docs/adr/0083-core-01-internal-headless-slice.md",
+  "approved_contract": "docs/contracts/core-01-internal-headless-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-03.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md",
+  "gate_base_sha": "c355de53bca5be1d64dedb4d7111bd40c8859e83",
+  "requires_fresh_context_lock": true,
+  "source_blob_sha1": {
+    "checkpoint": "5090dfa5fc39f3e26e5df038c6e23bce2ff1e26a",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0083": "82d4968e37f0400f092e885d9fe201df772f4719",
+    "contract_v0": "4ea41263bcfd412ca35df2abb32a158706b64e48"
+  }
+}

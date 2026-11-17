@@ -16,11 +16,12 @@ class PrPlanValidationTests(unittest.TestCase):
     def setUpClass(cls):
         cls.manifest = json.loads(v.MANIFEST.read_text(encoding="utf-8"))
         cls.registry = json.loads(v.REGISTRY.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
         edit(d)
-        return v.validate_manifest(d, self.registry)
+        return v.validate_manifest(d, self.registry, self.activation)
 
     def test_real_manifest(self):
         self.assertEqual([], v.validate_repository(v.ROOT))
@@ -57,6 +58,40 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_wrong_count(self):
         self.assertTrue(any("packet count" in x for x in
                             self.check(lambda d: d.update(planned_packet_count=20))))
+
+
+    def test_only_single_scoped_packet_can_be_ready(self):
+        ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
+                 if p["status"] == "EXECUTOR_READY"]
+        self.assertEqual(["NLE-PRPLAN-CORE-01-03"], ready)
+        self.assertTrue(v.packet_readiness(self.manifest, self.registry, self.activation, ready[0]))
+        self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-01-04"))
+        self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-02-03"))
+
+    def test_no_activation_record_denies_ready(self):
+        self.assertTrue(v.validate_manifest(self.manifest, self.registry, None))
+        self.assertFalse(v.packet_readiness(self.manifest, self.registry, None, "NLE-PRPLAN-CORE-01-03"))
+
+    def test_forged_approval_or_risk_denied(self):
+        bad = copy.deepcopy(self.activation)
+        bad["owner_ratification_pr"] = 999
+        self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
+        bad = copy.deepcopy(self.activation)
+        bad["risk"] = "LOW"
+        self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
+        bad = copy.deepcopy(self.activation)
+        bad["source_blob_sha1"]["checkpoint"] = "bad"
+        self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
+
+    def test_any_second_packet_activation_denied(self):
+        def wrong(d):
+            d["modules"][0]["packets"][3]["status"] = "EXECUTOR_READY"
+        self.assertTrue(self.check(wrong))
+
+    def test_module_level_promotion_remains_forbidden(self):
+        reg = copy.deepcopy(self.registry)
+        reg["modules"][0]["executor_ready"] = True
+        self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
 
     def test_missing_document(self):
         with tempfile.TemporaryDirectory() as temp:
