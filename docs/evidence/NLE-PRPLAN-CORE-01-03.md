@@ -8,21 +8,22 @@ This is the first real Stormline engine code packet. It is **INTERNAL_ONLY**, CP
 
 - **Owner authorization:** master program `STORM-CORE-01-IMPL-001`, granted 2026-11-17 for progressive real construction subject to individual gates. The formal repository packet remains `NLE-PRPLAN-CORE-01-03`; the master ID is an umbrella, not a second packet or a bulk module unlock.
 - **G6 activation:** [PR #426](https://github.com/KayzenRoot/stormline/pull/426) merged by the owner as `aad8a0997fcce182bedb9fac8acdebdd6a8cda13`. The activation allowlist, selector and validator passed before this code was written.
-- **Base SHA:** `aad8a0997fcce182bedb9fac8acdebdd6a8cda13` (current `main` at branch creation; the owner work-order reference `dfd3451…` was 5 commits behind and was therefore superseded by a fresh Context Lock).
+- **Base SHA:** `50b3775d02047a9c3480cc1a2ff7585d8ea056d3` (current `main` at the final branch update; the branch was created at `aad8a09…` and later merged with `50b3775` after PR #427 added one checkpoint readback line. The owner work-order reference `dfd3451…` was superseded by a fresh Context Lock).
+- **Context Lock update:** `main` advanced from `aad8a09` to `50b3775` via [PR #427](https://github.com/KayzenRoot/stormline/pull/427), which added a readback line to `docs/11-checkpoint.md`. Ledger, Scope, DoD, ADR-0083 and contract v0 are byte-identical. The activation JSON's Git blob for the checkpoint is historical, as the packet Work Order states; the fresh raw SHA-256 below is the executor's authoritative lock.
 - **Packet selector:** `python scripts/select_packet.py NLE-PRPLAN-CORE-01-03 --json` → `status=EXECUTOR_READY`, `executor_ready=true`, exit 0. `select_packet.py NLE-PRPLAN-CORE-01-02` and `select_wo.py CORE-01` both exit 2; the 80 module WOs remain locked.
 
 ### Fresh source fingerprints
 
 | Source | Raw SHA-256 | Git blob SHA-1 |
 |---|---|---|
-| `docs/11-checkpoint.md` | `2ef1b3a2ca6fe52f53132cce6716f90eeb1d47d2ae5d3f80f9b8bea742796a22` | `5090dfa5fc39f3e26e5df038c6e23bce2ff1e26a` |
+| `docs/11-checkpoint.md` | `9eb7d26856712ffdfc35e97d820d2ae0b8633631b7b2880fc7ee7ac45e56bff1` | `4449a3a631c79eae4b3d18464b805bd1b3030b4e` |
 | `docs/10-decisions-ledger.md` | `420220915e0600bb84167106d3384b28e27cd2f4375c1e16ccb8374d701e216c` | `01aa967790dc1ea5e72c2ebebae7b832ec579981` |
 | `docs/03-scope.md` | `39ad13b45738516904b767a8997551cccce2a9ff8ea8642c152bb815fa67c0c7` | `0b65820507d946d2b2b4ed3a2b869e60cafaaf22` |
 | `docs/09-definition-of-done.md` | `7fc04cc33aad22197b68bcda43fbd356726f11e401cf0e2b68c97f685b12778e` | `e0b7c2466ebec9790a715e47490c015cfb502db4` |
 | `docs/adr/0083-core-01-internal-headless-slice.md` | `c484fb10aec5a4b61919967b9026494484f6ae11461f90b94cb1e38fdbdc99a9` | `82d4968e37f0400f092e885d9fe201df772f4719` |
 | `docs/contracts/core-01-internal-headless-v0.md` | `b4457feaf74379b5ffd3f8e744727a48cc7673383cd5c259073b495dfd10f38b` | `4ea41263bcfd412ca35df2abb32a158706b64e48` |
 
-The six Git blob IDs match `docs/queue/packet-activations.json` exactly. Any change to these canonical sources invalidates the selector and requires a new authorized gate.
+Five of the six Git blob IDs match `docs/queue/packet-activations.json` exactly; the checkpoint blob is `4449a3a6…`, reflecting the post-activation readback in PR #427. The activation's declared Git blob is historical per the Work Order; the fresh raw SHA-256 above is the executor's authoritative lock. Any substantive change to Ledger, Scope, DoD, ADR-0083 or the contract invalidates the packet and requires a new authorized gate.
 
 ## 2. Implemented behavior
 
