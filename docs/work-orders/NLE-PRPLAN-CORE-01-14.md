@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-14 — Multi-OS soak harness (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-14`. **Predecessor:** `-13` `COMPLETED` via PR #456. **Issue:** #18. **Base:** `9bfbed5901947a3073b2910a48b4c9873702d37f`. **ADR:** [ADR-0093](../adr/0093-core-01-multi-os-soak-harness.md). **Contract:** [core-01-multi-os-soak-v0](../contracts/core-01-multi-os-soak-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #459](https://github.com/KayzenRoot/stormline/pull/459), merge `562290a…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-14`. **Predecessor:** `-13` `COMPLETED` via PR #456. **Issue:** #18. **Base:** `9bfbed5901947a3073b2910a48b4c9873702d37f`. **ADR:** [ADR-0093](../adr/0093-core-01-multi-os-soak-harness.md). **Contract:** [core-01-multi-os-soak-v0](../contracts/core-01-multi-os-soak-v0.md).
 
 ## OBJECTIVE
 
