@@ -74,7 +74,9 @@ jobs:
           echo ImageVersion=%ImageVersion%
           call "C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           if errorlevel 1 exit /b 1
-          cl /Bv
+          where cl
+          if errorlevel 1 exit /b 1
+          echo VCToolsVersion=%VCToolsVersion%
           cmake --version
           ninja --version
           cmake --preset core01-internal-debug
