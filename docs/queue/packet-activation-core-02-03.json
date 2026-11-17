@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-CORE-02-03",
+  "module_id": "CORE-02",
+  "risk": "STANDARD",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+  "approved_adr": "docs/adr/0087-core-02-ownership-slice.md",
+  "approved_contract": "docs/contracts/core-02-ownership-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-CORE-02-03.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-02-03-G6-ACTIVATION.md",
+  "gate_base_sha": "bb7229496a5c015ae4d2e31be444381cefc49c1f",
+  "gate_pr": 440,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "CORE-01",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_SDL3_BUILD_BASELINE",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-07"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      }
+    ],
+    "not_required": [
+      "window_runtime",
+      "input",
+      "dpi",
+      "ime",
+      "hotplug",
+      "sleep_resume",
+      "soak",
+      "renderer",
+      "gpu",
+      "audio",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "cfa158f175f82d79c91e6cb825bf8c341c1e5ff3",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0004": "e6c1639a96d6d484385476358bde50b38cc5b2ec",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0087": "fb93a02bc07c8ecfdc70953aff33783d508ef1e2",
+    "core02_architecture": "f2b531fc1d2814d51ce59a136ed60320343a5625",
+    "core02_contract": "897546dab541cab50a0c5d9f4ec1b7a0c5ef360f",
+    "core01_headless_contract": "4ea41263bcfd412ca35df2abb32a158706b64e48",
+    "core01_paths_contract": "e551ad7b3c8112f79b88a65c33050059762b71fc",
+    "core01_sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
+    "core01_window_contract": "5bf7eaee2d0aea3f0dc4cc89a419f79f8442b479",
+    "core02_plan": "73901b368e5583c087254cf901bc4379b05deca3",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}
