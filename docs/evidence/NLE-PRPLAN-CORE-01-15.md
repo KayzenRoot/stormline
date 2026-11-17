@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-15 — Integrated CI qualification
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-01-15`. **ADR:** [ADR-0094](../adr/0094-core-01-integrated-ci-qualification.md). **Contract:** [core-01-integrated-qualification-v0](../contracts/core-01-integrated-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-01-15](../work-orders/NLE-PRPLAN-CORE-01-15.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-01-15`. **ADR:** [ADR-0094](../adr/0094-core-01-integrated-ci-qualification.md). **Contract:** [core-01-integrated-qualification-v0](../contracts/core-01-integrated-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-01-15](../work-orders/NLE-PRPLAN-CORE-01-15.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 Integrated CI qualification: 200 headless cycles with zero live resources, 10 SDL init/quit + window cycles, 25 extra window cycles, 10,000 key events, display/capability/lifecycle and teardown. No physical-hardware, 30+30 timing, 32-scenario, security, performance or release claim.
 
@@ -8,7 +8,8 @@ Integrated CI qualification: 200 headless cycles with zero live resources, 10 SD
 
 - **Gate:** [PR #461](https://github.com/KayzenRoot/stormline/pull/461) squash-merged as `022ec54218e08489a30e3cb01f9fd00e5f4217ec`; audit #6961979730 **APPROVED**.
 - **Base:** `022ec54218e08489a30e3cb01f9fd00e5f4217ec`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-15 --json` → `EXECUTOR_READY`, exit 0; `-16`, `CORE-02-04` and every other ID exit 2.
+- **Code PR:** [PR #462](https://github.com/KayzenRoot/stormline/pull/462), HEAD auditado `52ab4f84fa19ba35bcb744e6cef4fa5c514abed3`.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-01-15 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 
 ## 2. Harness behavior and real counts
 
@@ -42,11 +43,19 @@ No production engine code changed.
 
 An initial count included window/background events (10,075 total popped); the harness now counts only normalized `KeyDown` events and confirms exactly 10,000. This was a harness counting defect, not an engine defect.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with run IDs and observed CTest counts after they complete; no native PASS is claimed yet.
+All jobs ran at the exact HEAD `52ab4f84fa19ba35bcb744e6cef4fa5c514abed3`:
 
-Expected matrix: existing 66 CTests plus qualification = **67 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44184279547](https://github.com/KayzenRoot/stormline/actions/runs/44184279547) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **67/67 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **67/67 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **67/67 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **67/67 CTest passed** |
+
+Native workflow run: [44184279556](https://github.com/KayzenRoot/stormline/actions/runs/44184279556) **SUCCESS**. Job IDs: Linux `134396499003`, sanitizers `134396498931`, Windows `134396498261`, macOS `134396498922`. The qualification test executed in every job; 66 CTests anteriores continuam passando. No correction was required.
 
 ## 5. Security, licensing and limitations
 
