@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-07 — SDL3 runtime init/quit
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PENDING / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-07` · **ADR:** [ADR-0084](../adr/0084-core-01-sdl3-runtime-slice.md) · **Contract:** [core-01-sdl3-runtime-v0](../contracts/core-01-sdl3-runtime-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-07](../work-orders/NLE-PRPLAN-CORE-01-07.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-07` · **ADR:** [ADR-0084](../adr/0084-core-01-sdl3-runtime-slice.md) · **Contract:** [core-01-sdl3-runtime-v0](../contracts/core-01-sdl3-runtime-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-07](../work-orders/NLE-PRPLAN-CORE-01-07.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First real SDL3 integration in Stormline: a bounded internal runtime that initializes and shuts down SDL video/events on the owner thread. No window, input, renderer, GPU, audio, network, public ABI or release.
 
@@ -56,16 +56,33 @@ No other path changed.
 
 No CMake/Ninja is installed locally; installing is not authorized. The official SDL3 3.4.20 release tarball was downloaded to a temporary directory (SHA-256 `f3bb06f55bed9557227a700af2ea62e49497ebdf58037732a731a5fb3ef8581f`), and `sdl_runtime.cpp` was compiled against its exact headers with preinstalled MSVC 14.44 `/std:c++20 /W4 /WX /EHsc` → **OK**. This is a header/API compile check only, not a link/run or target qualification. The real SDL3 build/link/test evidence is the native CI below. No local runtime PASS is claimed.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-The code PR must build/link SDL3 from the pinned commit and run on `ubuntu-24.04`, `windows-2025-vs2026` and `macos-15`, plus Linux ASan/UBSan when supported. It must execute the existing 12 CTests and the six new SDL CTests: basic 20 cycles, wrong thread, invalid-driver failure/recovery, destructor, version 3.4.20, header isolation. The dummy video driver is set via `SDL_VIDEODRIVER=dummy`. The PR remains Draft until exact-head Docs Validation and native results are observed and recorded here.
+The code-bearing head `c529aab74b68d9081d3069fd05032a9cb7077ddb` passed the required Docs Validation and all native jobs. A later documentation-only evidence update re-runs Docs Validation; the code and native matrix are unchanged, and the final-head run is recorded in the PR audit.
+
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44142614815](https://github.com/KayzenRoot/stormline/actions/runs/44142614815) job `134249173788` **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC 13.3.0, CMake 3.31.6, Ninja 1.13.2 | **18/18 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan supported and enabled | **18/18 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC 14.51.36231, CMake 4.4.5 | **18/18 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang 17.0.0, CMake 4.4.5 | **18/18 CTest passed** |
+
+Native workflow run: [44142614434](https://github.com/KayzenRoot/stormline/actions/runs/44142614434) (`pull_request`, head `c529aab…`) **SUCCESS**. Job IDs: Linux `134249170815`, sanitizers `134249171384`, Windows `134249171418`, macOS `134249171310`. The 12 existing CTests and the six SDL CTests all executed; none skipped. `core01_sdl_version` passed (linked SDL 3.4.20); `core01_sdl_init_failure`, `core01_sdl_wrong_thread`, `core01_sdl_destructor`, `core01_sdl_basic` (20 cycles) and `core01_sdl_header` all passed on every OS.
+
+### Corrections found by real CI (same PR)
+
+1. **Linux configure:** SDL3 3.4.20 refuses to configure without X11/Wayland unless `SDL_UNIX_CONSOLE_BUILD=ON`; the dummy-only slice now sets it. This is the documented upstream escape for console builds.
+2. **Windows compile:** `/W4 /WX` rejected `std::getenv` (C4996). The test now uses `_dupenv_s` on Windows behind a platform helper; POSIX keeps `getenv`.
+
+After both corrections, the full matrix passed. No test was skipped and no PASS was claimed before the real run.
 
 ## 5. Security, licensing and limitations
 
 - SDL3 is fetched at **build time only** from the official repository at the full pinned commit; no system install, vendor copy, package manager, runtime download or paid service. zlib notice must be preserved in any future distribution; `NLE-D009` remains `OPEN`.
 - No window/renderer/audio/GPU/network/public ABI; real display/driver proof is `NOT_QUALIFIED` and deferred to `-08`/PLAT.
 - No secret, cache/upload, paid runner or workflow permission change; standard public runners R$0.
-- No HIGH/CRITICAL known; subject to exact-head CI and audit.
+- No HIGH/CRITICAL known; native CI passed at the code head and the result remains subject to the independent audit and final documentation-head Docs Validation.
 
 ## 6. Rollback
 
