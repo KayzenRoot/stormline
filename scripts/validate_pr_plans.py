@@ -11,14 +11,26 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs/queue/implementation-registry.json"
 MANIFEST = ROOT / "docs/pr-plans/manifest.json"
-ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-08.json"
-ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
-COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
+CORE01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-08.json"
+CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
+# The selector reads this path; it is the activation for the current manifest state.
+ACTIVATION_FILE = CORE02_ACTIVATION_FILE
+CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
+CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
+CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
+CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
+ACTIVE_STATUSES = {
+    CORE01_ACTIVATED_STATUS,
+    CORE01_COMPLETED_STATUS,
+    CORE02_ACTIVATED_STATUS,
+    CORE02_COMPLETED_STATUS,
+}
 BLOCKED_STATUS = "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS"
 CORE01_08_CODE_PR = 438
+CORE02_03_CODE_PR = 0  # updated by the -03 closeout; inert in the activated state
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
 
-PINNED_SOURCE_BLOBS = {
+CORE01_PINNED_SOURCE_BLOBS = {
     "checkpoint": "9241c67f35a149b9070dd23007536f1370d4d5dd",
     "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
@@ -33,7 +45,7 @@ PINNED_SOURCE_BLOBS = {
     "window_contract": "5bf7eaee2d0aea3f0dc4cc89a419f79f8442b479",
 }
 
-ACTIVATION_SOURCES = {
+CORE01_ACTIVATION_SOURCES = {
     "checkpoint": "docs/11-checkpoint.md",
     "decisions_ledger": "docs/10-decisions-ledger.md",
     "scope": "docs/03-scope.md",
@@ -47,6 +59,75 @@ ACTIVATION_SOURCES = {
     "sdl3_contract": "docs/contracts/core-01-sdl3-runtime-v0.md",
     "window_contract": "docs/contracts/core-01-window-lifecycle-v0.md",
 }
+
+CORE02_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "cfa158f175f82d79c91e6cb825bf8c341c1e5ff3",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0004": "e6c1639a96d6d484385476358bde50b38cc5b2ec",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0087": "fb93a02bc07c8ecfdc70953aff33783d508ef1e2",
+    "core02_architecture": "f2b531fc1d2814d51ce59a136ed60320343a5625",
+    "core02_contract": "591d35b557e558b793813bf458cdb9361d7ef777",
+    "core01_headless_contract": "4ea41263bcfd412ca35df2abb32a158706b64e48",
+    "core01_paths_contract": "e551ad7b3c8112f79b88a65c33050059762b71fc",
+    "core01_sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
+    "core01_window_contract": "5bf7eaee2d0aea3f0dc4cc89a419f79f8442b479",
+    "core02_plan": "73901b368e5583c087254cf901bc4379b05deca3",
+    "implementation_registry": "a5acbc89bb43f53f67f8c5485a5262dc381a7ec1",
+}
+
+CORE02_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0004": "docs/adr/0004-core-02-memory-policy.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0087": "docs/adr/0087-core-02-ownership-slice.md",
+    "core02_architecture": "docs/architecture/core-02-memory-allocators.md",
+    "core02_contract": "docs/contracts/core-02-ownership-v0.md",
+    "core01_headless_contract": "docs/contracts/core-01-internal-headless-v0.md",
+    "core01_paths_contract": "docs/contracts/core-01-process-paths-v0.md",
+    "core01_sdl3_contract": "docs/contracts/core-01-sdl3-runtime-v0.md",
+    "core01_window_contract": "docs/contracts/core-01-window-lifecycle-v0.md",
+    "core02_plan": "docs/pr-plans/CORE-02.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+CORE02_CAPABILITY_ADMISSION = {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "CORE-01",
+    "module_completion_claimed": False,
+    "required_capabilities": [
+        {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
+        {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
+        {"id": "CORE01_SDL3_BUILD_BASELINE", "satisfied_by": "NLE-PRPLAN-CORE-01-07"},
+        {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"},
+    ],
+    "not_required": [
+        "window_runtime",
+        "input",
+        "dpi",
+        "ime",
+        "hotplug",
+        "sleep_resume",
+        "soak",
+        "renderer",
+        "gpu",
+        "audio",
+        "network",
+        "public_abi",
+        "release",
+    ],
+}
+
+# Compatibility aliases for the current CORE-02 activation and existing tooling.
+ACTIVATED_STATUS = CORE02_ACTIVATED_STATUS
+COMPLETED_STATUS = CORE02_COMPLETED_STATUS
+PINNED_SOURCE_BLOBS = CORE02_PINNED_SOURCE_BLOBS
+ACTIVATION_SOURCES = CORE02_ACTIVATION_SOURCES
 
 SLICE_METADATA = {
     3: ("docs/adr/0083-core-01-internal-headless-slice.md",
@@ -63,6 +144,11 @@ SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-CORE-01-08-G6-ACTIVATION.md"),
 }
 
+CORE02_SLICE_METADATA = {
+    3: ("docs/adr/0087-core-02-ownership-slice.md",
+        "docs/evidence/NLE-PRPLAN-CORE-02-03-G6-ACTIVATION.md"),
+}
+
 
 def git_blob_sha1(data: bytes) -> str:
     header = b"blob " + str(len(data)).encode("ascii") + b"\0"
@@ -73,9 +159,10 @@ def file_blob_sha1(path: Path) -> str:
     return git_blob_sha1(path.read_bytes())
 
 
-def verify_source_blobs(fingerprints: dict, root: Path) -> list[str]:
+def verify_source_blobs(fingerprints: dict, root: Path, sources: dict | None = None) -> list[str]:
+    sources = ACTIVATION_SOURCES if sources is None else sources
     errors = []
-    for key, rel in ACTIVATION_SOURCES.items():
+    for key, rel in sources.items():
         path = root / rel
         try:
             actual = file_blob_sha1(path)
@@ -87,84 +174,125 @@ def verify_source_blobs(fingerprints: dict, root: Path) -> list[str]:
     return errors
 
 
+def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | None:
+    selected = activation.get("selected_packet_id")
+    if selected == "NLE-PRPLAN-CORE-01-08":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-CORE-01-08",
+            "module_id": "CORE-01",
+            "risk": "STANDARD",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+            "approved_adr": "docs/adr/0085-core-01-window-lifecycle-slice.md",
+            "approved_contract": "docs/contracts/core-01-window-lifecycle-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-08.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-08-G6-ACTIVATION.md",
+            "gate_base_sha": "b54f19c252fda9c06a7d7289a853bd4cf957cf53",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, CORE01_ACTIVATION_SOURCES, CORE01_PINNED_SOURCE_BLOBS, {
+            "source_blob_sha1", "sdl3", "window_slice"
+        }
+    if selected == "NLE-PRPLAN-CORE-02-03":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-CORE-02-03",
+            "module_id": "CORE-02",
+            "risk": "STANDARD",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+            "approved_adr": "docs/adr/0087-core-02-ownership-slice.md",
+            "approved_contract": "docs/contracts/core-02-ownership-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-CORE-02-03.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-02-03-G6-ACTIVATION.md",
+            "gate_base_sha": "bb7229496a5c015ae4d2e31be444381cefc49c1f",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, CORE02_ACTIVATION_SOURCES, CORE02_PINNED_SOURCE_BLOBS, {
+            "source_blob_sha1", "gate_pr", "capability_admission"
+        }
+    return None
+
+
 def validate_activation(activation: dict, root: Path = ROOT, verify_sources: bool = False) -> list[str]:
-    """Hard-stop on a broad or forged G6 transition. Only packet -08 is authorized."""
-    expected = {
-        "schema_version": 2,
-        "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
-        "selected_packet_id": "NLE-PRPLAN-CORE-01-08",
-        "module_id": "CORE-01",
-        "risk": "STANDARD",
-        "release_class": "INTERNAL_ONLY",
-        "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
-        "approved_adr": "docs/adr/0085-core-01-window-lifecycle-slice.md",
-        "approved_contract": "docs/contracts/core-01-window-lifecycle-v0.md",
-        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-08.md",
-        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-08-G6-ACTIVATION.md",
-        "gate_base_sha": "b54f19c252fda9c06a7d7289a853bd4cf957cf53",
-        "requires_fresh_context_lock": True,
-    }
-    expected_sdl3 = {
-        "version": "3.4.20",
-        "repository": "https://github.com/libsdl-org/SDL.git",
-        "commit": "f00dc919ca35b9756316e86c4777392de442f9b2",
-        "license": "zlib",
-        "linkage": "static",
-        "build_time_fetch": True,
-    }
-    expected_window_slice = {
-        "linux_drivers_built": ["x11", "wayland"],
-        "linux_runtime_tested": "x11",
-        "linux_runtime_not_qualified": "wayland",
-        "windows_runtime": "win32",
-        "macos_runtime": "cocoa_or_not_qualified",
-        "linux_display": "xvfb+openbox",
-        "render_gpu_audio": "disabled",
-        "linux_packages": [
-            "libx11-dev",
-            "libxext-dev",
-            "libxrandr-dev",
-            "libxcursor-dev",
-            "libxfixes-dev",
-            "libxi-dev",
-            "libxss-dev",
-            "libxtst-dev",
-            "libxinerama-dev",
-            "libxrender-dev",
-            "libxkbcommon-dev",
-            "libxkbcommon-x11-dev",
-            "libwayland-dev",
-            "libdecor-0-dev",
-            "wayland-protocols",
-            "libdbus-1-dev",
-            "libibus-1.0-dev",
-            "libthai-dev",
-            "libfribidi-dev",
-            "libgl1-mesa-dev",
-            "libegl1-mesa-dev",
-            "libgles2-mesa-dev",
-            "xvfb",
-            "x11-utils",
-            "openbox",
-        ],
-    }
+    """Hard-stop on a broad or forged G6 transition. Only the audited packet is authorized."""
+    spec = activation_spec(activation)
+    if spec is None:
+        return ["activation selected packet is not an audited G6 packet"]
+    expected, sources, pinned, extra_keys = spec
     errors = []
-    if set(activation) != set(expected) | {"source_blob_sha1", "sdl3", "window_slice"}:
+    if set(activation) != set(expected) | extra_keys:
         errors.append("activation keys must match exactly one audited G6 packet")
     for key, value in expected.items():
         if activation.get(key) != value:
             errors.append(f"activation {key} mismatch: no bulk owner authority")
-    if activation.get("sdl3") != expected_sdl3:
-        errors.append("activation SDL3 pin mismatch: only static 3.4.20 at the exact commit is authorized")
-    if activation.get("window_slice") != expected_window_slice:
-        errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
+    if "gate_pr" in extra_keys:
+        gate_pr = activation.get("gate_pr")
+        if not isinstance(gate_pr, int) or gate_pr < 0:
+            errors.append("activation gate_pr must be a non-negative integer")
+    if "sdl3" in extra_keys:
+        expected_sdl3 = {
+            "version": "3.4.20",
+            "repository": "https://github.com/libsdl-org/SDL.git",
+            "commit": "f00dc919ca35b9756316e86c4777392de442f9b2",
+            "license": "zlib",
+            "linkage": "static",
+            "build_time_fetch": True,
+        }
+        if activation.get("sdl3") != expected_sdl3:
+            errors.append("activation SDL3 pin mismatch: only static 3.4.20 at the exact commit is authorized")
+    if "window_slice" in extra_keys:
+        expected_window_slice = {
+            "linux_drivers_built": ["x11", "wayland"],
+            "linux_runtime_tested": "x11",
+            "linux_runtime_not_qualified": "wayland",
+            "windows_runtime": "win32",
+            "macos_runtime": "cocoa_or_not_qualified",
+            "linux_display": "xvfb+openbox",
+            "render_gpu_audio": "disabled",
+            "linux_packages": [
+                "libx11-dev",
+                "libxext-dev",
+                "libxrandr-dev",
+                "libxcursor-dev",
+                "libxfixes-dev",
+                "libxi-dev",
+                "libxss-dev",
+                "libxtst-dev",
+                "libxinerama-dev",
+                "libxrender-dev",
+                "libxkbcommon-dev",
+                "libxkbcommon-x11-dev",
+                "libwayland-dev",
+                "libdecor-0-dev",
+                "wayland-protocols",
+                "libdbus-1-dev",
+                "libibus-1.0-dev",
+                "libthai-dev",
+                "libfribidi-dev",
+                "libgl1-mesa-dev",
+                "libegl1-mesa-dev",
+                "libgles2-mesa-dev",
+                "xvfb",
+                "x11-utils",
+                "openbox",
+            ],
+        }
+        if activation.get("window_slice") != expected_window_slice:
+            errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
+    if "capability_admission" in extra_keys:
+        if activation.get("capability_admission") != CORE02_CAPABILITY_ADMISSION:
+            errors.append("activation capability admission mismatch: only the exact CORE-02 ownership set is authorized")
     fingerprints = activation.get("source_blob_sha1")
-    if not isinstance(fingerprints, dict) or set(fingerprints) != set(ACTIVATION_SOURCES):
+    if not isinstance(fingerprints, dict) or set(fingerprints) != set(sources):
         errors.append("activation source_blob_sha1 must contain exactly the pinned sources")
-    elif fingerprints != PINNED_SOURCE_BLOBS:
+    elif fingerprints != pinned:
         errors.append("activation source fingerprints do not match approved baseline")
     elif verify_sources:
-        errors.extend(verify_source_blobs(fingerprints, root))
+        errors.extend(verify_source_blobs(fingerprints, root, sources))
     return errors
 
 
@@ -183,8 +311,21 @@ def expected_packet_state(
         if idx == 7:
             return "COMPLETED", 435
         if idx == 8:
-            if manifest_status == COMPLETED_STATUS:
+            if manifest_status in (CORE01_COMPLETED_STATUS, CORE02_ACTIVATED_STATUS,
+                                   CORE02_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_08_CODE_PR
+            return "EXECUTOR_READY", None
+    if (activation is not None
+            and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-02-03"
+            and module_id == "CORE-02"):
+        gate_pr = activation.get("gate_pr")
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", gate_pr
+        if idx == 2:
+            return "APPROVED_CONTRACT", gate_pr
+        if idx == 3:
+            if manifest_status == CORE02_COMPLETED_STATUS:
+                return "COMPLETED", CORE02_03_CODE_PR
             return "EXECUTOR_READY", None
     return "PLANNED_BLOCKED", None
 
@@ -192,7 +333,34 @@ def expected_packet_state(
 def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
     if module_id == "CORE-01" and idx in SLICE_METADATA:
         return SLICE_METADATA[idx]
+    if module_id == "CORE-02" and idx in CORE02_SLICE_METADATA:
+        return CORE02_SLICE_METADATA[idx]
     return None
+
+
+def validate_capability_admission(
+    packet: dict, status_by_packet: dict[str, str | None], formal_dependency: str
+) -> list[str]:
+    errors = []
+    admission = packet.get("capability_admission")
+    if not isinstance(admission, dict):
+        return ["CORE-02-03 capability admission must match the audited exact set"]
+    if admission != CORE02_CAPABILITY_ADMISSION:
+        errors.append("CORE-02-03 capability admission must match the audited exact set")
+    if admission.get("formal_dependency") != formal_dependency:
+        errors.append("CORE-02-03 capability admission changes the formal module dependency")
+    if admission.get("module_completion_claimed") is not False:
+        errors.append("CORE-02-03 capability admission must not claim module completion")
+    for capability in admission.get("required_capabilities", []):
+        if not isinstance(capability, dict) or "satisfied_by" not in capability:
+            errors.append("CORE-02-03 capability admission has an invalid capability entry")
+            continue
+        satisfied_by = capability["satisfied_by"]
+        if not isinstance(satisfied_by, str) or not satisfied_by.startswith("NLE-PRPLAN-CORE-01-"):
+            errors.append("CORE-02-03 capability admission accepts only CORE-01 packets")
+        if status_by_packet.get(satisfied_by) != "COMPLETED":
+            errors.append(f"CORE-02-03 capability {capability.get('id')} lacks a completed packet")
+    return errors
 
 
 def packet_readiness(
@@ -223,10 +391,14 @@ def validate_manifest(
         if manifest.get("status") != BLOCKED_STATUS:
             issues.append("manifest must remain blocked without G6 activation")
     else:
-        if manifest.get("status") not in (ACTIVATED_STATUS, COMPLETED_STATUS):
+        if manifest.get("status") not in ACTIVE_STATUSES:
             issues.append("manifest activation/completion status mismatch")
         issues.extend(validate_activation(activation, root, verify_sources))
     by_id = {x.get("module_id"): x for x in source}
+    status_by_packet = {
+        packet.get("packet_id"): packet.get("status")
+        for entry in plans for packet in entry.get("packets", [])
+    }
     all_ids: set[str] = set()
     module_ids: list[str] = []
     if len(source) != 80 or len(plans) != 80:
@@ -288,7 +460,13 @@ def validate_manifest(
                       or packet.get("approved_adr") != adr
                       or packet.get("activation_evidence") != evidence):
                     issues.append(f"{mid}: ready/completed slice lacks bounded risk/ADR/evidence")
-            elif any(field in packet for field in ("risk", "release_class", "approved_adr", "activation_evidence")):
+                if mid == "CORE-02" and idx == 3:
+                    issues.extend(validate_capability_admission(
+                        packet, status_by_packet, original["dependencies"][0]))
+            elif any(field in packet for field in (
+                "risk", "release_class", "approved_adr", "activation_evidence",
+                "capability_admission"
+            )):
                 issues.append(f"{mid}: blocked or documentary packet claims executor metadata")
             if packet.get("depends_on") != ([] if idx == 1 else [f"NLE-PRPLAN-{mid}-{idx-1:02}"]):
                 issues.append(f"{mid}: broken PR packet dependency at {idx}")
@@ -304,14 +482,20 @@ def validate_manifest(
         issues.append("manifest packet count differs from actual unique IDs")
     if len(all_ids) < 600:
         issues.append("unexpectedly low candidate PR breakdown")
-    if manifest.get("status") == ACTIVATED_STATUS:
-        statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
-        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 5:
-            issues.append("activated state must have exactly one ready packet and five completed predecessors")
-    if manifest.get("status") == COMPLETED_STATUS:
-        statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
-        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 6:
-            issues.append("completed state must have zero ready packets and six completed slices")
+    statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
+    approved = statuses.count("APPROVED_GOVERNANCE") + statuses.count("APPROVED_CONTRACT")
+    if manifest.get("status") == CORE01_ACTIVATED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 5 or approved != 2:
+            issues.append("CORE-01 activated state must have one ready packet, five completed slices and two approved gates")
+    if manifest.get("status") == CORE01_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 6 or approved != 2:
+            issues.append("CORE-01 completed state must have zero ready packets, six completed slices and two approved gates")
+    if manifest.get("status") == CORE02_ACTIVATED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
+            issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
+    if manifest.get("status") == CORE02_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 7 or approved != 4:
+            issues.append("CORE-02 completed state must have zero ready packets, seven completed slices and four approved gates")
     return issues
 
 
@@ -324,19 +508,30 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         return [f"Cannot read JSON: {err}"]
     issues = []
     activation = None
-    if manifest.get("status") in (ACTIVATED_STATUS, COMPLETED_STATUS):
-        path = root / "docs/queue/packet-activation-core-01-08.json"
+    status = manifest.get("status")
+    if status in (CORE01_ACTIVATED_STATUS, CORE01_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-core-01-08.json"
+    elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-core-02-03.json"
+    else:
+        activation_path = None
+    if activation_path is not None:
         try:
-            activation = json.loads(path.read_text(encoding="utf-8"))
+            activation = json.loads(activation_path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, ValueError) as err:
             issues.append(f"Missing/invalid bounded G6 activation record: {err}")
-    verify_sources = manifest.get("status") == ACTIVATED_STATUS
+    verify_sources = status in (CORE01_ACTIVATED_STATUS, CORE02_ACTIVATED_STATUS)
     issues.extend(validate_manifest(manifest, reg, activation, root, verify_sources))
     if activation is not None:
         for key in ("approved_adr", "approved_contract", "work_order", "activation_evidence"):
             path = root / activation[key]
             if not path.is_file():
                 issues.append(f"G6 evidence file missing: {path}")
+        admission = activation.get("capability_admission")
+        if isinstance(admission, dict):
+            adr_path = root / admission["adr"]
+            if not adr_path.is_file():
+                issues.append(f"capability admission ADR missing: {adr_path}")
     for required in (
         "docs/pr-plans/index.md",
         "docs/engineering/pr-decomposition-policy.md",
@@ -374,10 +569,12 @@ def main() -> int:
         return 1
     data = json.loads(MANIFEST.read_text(encoding="utf-8"))
     statuses = [p["status"] for m in data["modules"] for p in m["packets"]]
+    approved = statuses.count("APPROVED_GOVERNANCE") + statuses.count("APPROVED_CONTRACT")
     print(f"PR plan PASS: {data['module_count']} module WOs stay BLOCKED; "
           f"{data['planned_packet_count']} packets: {statuses.count('PLANNED_BLOCKED')} blocked, "
           f"{statuses.count('EXECUTOR_READY')} individually ready, "
-          f"{statuses.count('COMPLETED')} completed, 0 code PRs opened by this validator.")
+          f"{statuses.count('COMPLETED')} completed, {approved} approved gates, "
+          f"0 code PRs opened by this validator.")
     return 0
 
 
