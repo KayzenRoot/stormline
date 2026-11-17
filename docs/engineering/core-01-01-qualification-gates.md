@@ -107,3 +107,19 @@ The owner **expressly ratified** C01-D02/D03/D04/D05/D06/D07/D10/D11/D12/D13/D15
 - **G3: `OWNER_DIRECTIONS_RATIFIED_NOT_TECHNICALLY_CLEARED`**. Eleven design directions are accepted conceptually. Pin versions/digests/third-party SPDX, verify supported C++20 toolchains, SDL3 main-thread/headless, CMake Presets/CTest, ABI/HostHandle lifecycle, capabilities, risk per slice and future runner requirements before considering the technical gate. ADR-0003 and ADR-0075 remain `PROPOSED`. No plugin/SDK or engine license chosen.
 - **G1: `PARTIALLY_RATIFIED_NOT_CLEARED`**. Previous 12 bounded decisions still require hardware/patch/SDK/testing proof, p95/RSS explicit thresholds, release classes and complete global DoD. **G4–G8 not approved**. D15 does NOT authorize creating a test-code WO or starting implementation; such an experiment requires a new express owner authorization and separate gate assessment.
 - **Guardrails:** NLE-D009 engine license OPEN; registry 80/80 coding WOs BLOCKED, 0 ready/approved ADR, release_class UNDECIDED, risk UNCLASSIFIED; CORE-01-01/02 PLANNED_BLOCKED; C01-Q001..Q030/Q032 FUTURE_NOT_EXECUTED e Q031 PASS via G2; `engine_implemented=false`.
+
+## CORE-01 G3-V05 — ratificacao de fatia interna — interpretacao dos gates sem autopromocao
+
+**Autoridade:** ratificacao explicitamente limitada pelo owner em 2026-11-17, retomando [proposta da issue #387](https://github.com/KayzenRoot/stormline/issues/387#issuecomment-6954081280). A fixture da [PR #421](https://github.com/KayzenRoot/stormline/pull/421), [CI nativa #44124073355](https://github.com/KayzenRoot/stormline/actions/runs/44124073355) 3/3 jobs e [docs-validation #44124073329](https://github.com/KayzenRoot/stormline/actions/runs/44124073329) PASS provam **somente prototipo experimental**.
+
+| Gate | Estado SOMENTE da fatia CORE-01 interna | Condicao de avancar |
+|---|---|---|
+| G1 | `OWNER_RATIFIED_INTERNAL_DIRECTION`; G1 global ainda `PARTIAL` | Tracar release `MANDATORY_1_0` futuro versus codigo `INTERNAL_ONLY`, aceites e exclusoes para esta fatia |
+| G2 | `CLEARED_BOUNDED` ruleset 27393227 | Nao modificar protecao/required docs check |
+| G3 | `OWNER_RATIFIED_PROVISIONAL_CI`; G3 global `NOT_CLEARED` | Nunca promover 14.51/GCC13.3/AppleClang17 a candidatos de release; preservar 14.50/14.52, .9457, GCC16.2/Clang23.1.5 |
+| G4 | `PENDING_SLICE_TECHNICAL_AUDIT` | Decisao registrada, delta da ADR-0003 e interfaces comparadas e auditadas sem aprovar ADR geral |
+| G5 | `PENDING_CONTRACT_AND_PROOF_PLAN` | Contratos -02, risco STANDARD, testes por OS, falhas/rollback, custo/licencas, arquivos e fingerprints |
+| G6 | `BLOCKED` | Ativacao individual -03 somente apos G1/G3/G4/G5 suficientes para fatia, auditoria objetiva e registro delimitado |
+| G7 | `NOT_STARTED` | PR codigo -03 somente quando G6 estiver validamente liberado |
+
+**STOP:** Nenhum codigo de producao novo, nao aprovar ADR integral, nao declarar G3 global CLEARED; 80 code WOs e 748 PR packets continuam BLOCKED/PLANNED_BLOCKED, 0 executor-ready, `engine_implemented=false`. A PR de decisao registra apenas a ratificacao ja expressa; ela nao constitui aprovacao de G4/G5/G6.
