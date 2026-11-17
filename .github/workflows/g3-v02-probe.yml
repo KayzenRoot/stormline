@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: g3-v02-${ github.event.pull_request.number }
+  group: g3-v02-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 jobs:
   linux:
