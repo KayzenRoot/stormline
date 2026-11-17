@@ -1,0 +1,170 @@
+# G3-V02 single-purpose probe. No installers, cache, artifacts, secrets or paid runners.
+name: G3-V02 bounded C++20 probe
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/g3-v02/**'
+      - '.github/workflows/g3-v02-probe.yml'
+      - 'docs/work-orders/NLE-G3-V02-EXP-001-PROPOSED.md'
+      - 'docs/evidence/NLE-G3-V02-EXP-001-EXECUTION.md'
+permissions:
+  contents: read
+concurrency:
+  group: g3-v02-${ github.event.pull_request.number }
+  cancel-in-progress: true
+jobs:
+  linux:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'experiment/nle-g3-v02-exp-001'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Exact preflight GCC and Clang, conditional CTest
+        shell: bash
+        working-directory: experiments/g3-v02
+        run: |
+          set -euo pipefail
+          uname -a
+          echo "ImageVersion=$ImageVersion"
+          ldd --version | sed -n '1p' || true
+          sha256sum main.cpp CMakeLists.txt CMakePresets.json
+          cmake_v=$(cmake --version | sed -n '1p')
+          ninja_v=$(ninja --version)
+          echo "CMake=$cmake_v Ninja=$ninja_v"
+          for target in gcc clang; do
+            compiler=""
+            if [[ "$target" == gcc ]]; then
+              for c in g++-16 g++; do
+                if command -v "$c" >/dev/null; then
+                  v=$("$c" -dumpfullversion -dumpversion || true)
+                  echo "$c: $v"
+                  if [[ "$v" == 16.2 || "$v" == 16.2.0 ]]; then compiler="$c"; break; fi
+                fi
+              done
+              preset=linux-gcc
+            else
+              for c in clang++-23 clang++; do
+                if command -v "$c" >/dev/null; then
+                  v=$("$c" --version | sed -n '1p')
+                  echo "$c: $v"
+                  if [[ "$v" == *"clang version 23.1.5"* ]]; then compiler="$c"; break; fi
+                fi
+              done
+              preset=linux-clang
+            fi
+            if [[ -z "$compiler" || "$cmake_v" != "cmake version 4.4.5" || "$ninja_v" != "1.13.2" ]]; then
+              echo "**Linux $target NOT_QUALIFIED**, no exact preinstalled match; 0 tests" >> "$GITHUB_STEP_SUMMARY"
+              continue
+            fi
+            CXX="$compiler" cmake --preset "$preset"
+            cmake --build --preset "$preset"
+            ctest --preset "$preset" --output-on-failure
+            cmake --build --preset "$preset"
+            sha256sum "build/$preset/stormline_g3_v02_probe"
+            echo "**Linux $target SMOKE_PASS**: one CTest, fixture only" >> "$GITHUB_STEP_SUMMARY"
+          done
+  macos:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'experiment/nle-g3-v02-exp-001'
+    runs-on: macos-15
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Xcode 26.3 exact preflight and conditional CTest
+        shell: bash
+        working-directory: experiments/g3-v02
+        run: |
+          set -euo pipefail
+          uname -a
+          sw_vers
+          echo "ImageVersion=$ImageVersion"
+          shasum -a 256 main.cpp CMakeLists.txt CMakePresets.json
+          export DEVELOPER_DIR=/Applications/Xcode_26.3.app/Contents/Developer
+          if [[ -d "$DEVELOPER_DIR" ]]; then
+            xcode_v=$(xcodebuild -version | sed -n '1p')
+            clang_v=$(xcrun clang++ --version | sed -n '1p')
+            sdk_v=$(xcrun --sdk macosx --show-sdk-version)
+          else
+            xcode_v=UNAVAILABLE; clang_v=UNAVAILABLE; sdk_v=UNAVAILABLE
+          fi
+          cmake_v=$(cmake --version | sed -n '1p')
+          ninja_v=$(ninja --version)
+          echo "Xcode=$xcode_v AppleClang=$clang_v SDK=$sdk_v CMake=$cmake_v Ninja=$ninja_v"
+          if [[ "$(uname -m)" != arm64 || "$(sw_vers -productVersion)" != 15.* || "$xcode_v" != "Xcode 26.3" || "$clang_v" != *"Apple clang version"* || "$cmake_v" != "cmake version 4.4.5" || "$ninja_v" != "1.13.2" ]]; then
+            echo "**macOS NOT_QUALIFIED**, exact candidate absent; 0 tests" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          export CXX="$(xcrun --find clang++)"
+          export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
+          export MACOSX_DEPLOYMENT_TARGET=15.0
+          cmake --preset macos-xcode
+          cmake --build --preset macos-xcode
+          ctest --preset macos-xcode --output-on-failure
+          cmake --build --preset macos-xcode
+          shasum -a 256 build/macos-xcode/stormline_g3_v02_probe
+          otool -L build/macos-xcode/stormline_g3_v02_probe
+          echo "**macOS SMOKE_PASS**: one CTest, fixture only" >> "$GITHUB_STEP_SUMMARY"
+  windows:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'experiment/nle-g3-v02-exp-001'
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: MSVC and SDK exact preflight, conditional CTest
+        shell: pwsh
+        working-directory: experiments/g3-v02
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "ImageVersion=$env:ImageVersion"
+          Get-FileHash main.cpp,CMakeLists.txt,CMakePresets.json -Algorithm SHA256 | Format-Table Path,Hash
+          $root = [Environment]::GetFolderPath('ProgramFilesX86')
+          $vswhere = Join-Path $root 'Microsoft Visual Studio\Installer\vswhere.exe'
+          $vs = if (Test-Path $vswhere) { (& $vswhere -latest -products '*' -property installationPath | Select-Object -First 1) } else { $null }
+          $installed = @()
+          if ($vs -and (Test-Path (Join-Path $vs 'VC\Tools\MSVC'))) {
+            $installed = @(Get-ChildItem (Join-Path $vs 'VC\Tools\MSVC') -Directory | Select-Object -ExpandProperty Name)
+          }
+          $sdk = Join-Path $root 'Windows Kits\10\Lib\10.0.26100.9457'
+          $cmake_v = (& cmake --version | Select-Object -First 1)
+          $ninja_v = (& ninja --version | Select-Object -First 1)
+          Write-Host "VS=$vs MSVC=$($installed -join ',') SDKexact=$(Test-Path $sdk) CMake=$cmake_v Ninja=$ninja_v"
+          foreach ($target in @('14.50','14.52')) {
+            $match = @($installed | Where-Object { $_ -like "$target.*" })
+            if ($match.Count -eq 0 -or -not (Test-Path $sdk) -or $cmake_v -ne 'cmake version 4.4.5' -or $ninja_v -ne '1.13.2') {
+              "**MSVC $target NOT_QUALIFIED**, exact preinstalled tools absent; 0 tests" >> $env:GITHUB_STEP_SUMMARY
+              continue
+            }
+            $vcvars = Join-Path $vs 'VC\Auxiliary\Build\vcvars64.bat'
+            $batch = 'call "' + $vcvars + '" -vcvars_ver=' + $target + ' >nul && set'
+            $lines = & cmd.exe /d /c $batch
+            if ($LASTEXITCODE -ne 0) { throw "MSVC environment setup failed $target" }
+            foreach ($line in $lines) {
+              $i = $line.IndexOf('=')
+              if ($i -gt 0) { [Environment]::SetEnvironmentVariable($line.Substring(0,$i),$line.Substring($i+1),'Process') }
+            }
+            $clv = (& cl /Bv 2>&1 | Out-String)
+            Write-Host $clv
+            $minor = $target.Split('.')[1]
+            if ($clv -notmatch "Version 19\.$minor\.") {
+              "**MSVC $target NOT_QUALIFIED**, compiler mismatch; 0 tests" >> $env:GITHUB_STEP_SUMMARY
+              continue
+            }
+            $env:CC = 'cl'; $env:CXX = 'cl'
+            $preset = 'windows-msvc-' + $target.Replace('.','-')
+            cmake --preset $preset
+            if ($LASTEXITCODE -ne 0) { throw "configure failed $target" }
+            cmake --build --preset $preset
+            if ($LASTEXITCODE -ne 0) { throw "build failed $target" }
+            ctest --preset $preset --output-on-failure
+            if ($LASTEXITCODE -ne 0) { throw "CTest failed $target" }
+            cmake --build --preset $preset
+            if ($LASTEXITCODE -ne 0) { throw "incremental failed $target" }
+            Get-FileHash "build/$preset/stormline_g3_v02_probe.exe" -Algorithm SHA256 | Format-Table Path,Hash
+            "**MSVC $target SMOKE_PASS**: one CTest, fixture only" >> $env:GITHUB_STEP_SUMMARY
+          }
