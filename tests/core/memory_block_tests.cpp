@@ -193,7 +193,8 @@ bool run_move() {
                == MemoryError::None,
            "self-move allocation succeeds");
     void* const self_pointer = self.data();
-    self = std::move(self);
+    MemoryBlock* volatile self_alias = &self;
+    self = std::move(*self_alias);
     expect(self.valid(), "self-move assignment leaves the block valid");
     expect(self.data() == self_pointer, "self-move assignment preserves the pointer");
     expect(self.release() == MemoryError::None, "self-move block releases");
