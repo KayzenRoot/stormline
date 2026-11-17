@@ -4,6 +4,7 @@
 #error "SDL header/type leaked through the internal sdl_runtime header"
 #endif
 
+#include <cstddef>
 #include <cstdio>
 #include <cstdlib>
 #include <exception>
@@ -49,6 +50,29 @@ bool unset_env(const char* name) {
     return _putenv_s(name, "") == 0;
 #else
     return ::unsetenv(name) == 0;
+#endif
+}
+
+bool read_env(const char* name, std::string& value) {
+#if defined(_WIN32)
+    char* buffer = nullptr;
+    std::size_t length = 0;
+    if (_dupenv_s(&buffer, &length, name) != 0) {
+        return false;
+    }
+    const bool present = buffer != nullptr;
+    if (present) {
+        value = buffer;
+    }
+    std::free(buffer);
+    return present;
+#else
+    const char* raw = std::getenv(name);
+    if (raw == nullptr) {
+        return false;
+    }
+    value = raw;
+    return true;
 #endif
 }
 
@@ -98,9 +122,8 @@ bool run_wrong_thread() {
 
 bool run_init_failure() {
     begin_case();
-    const char* previous = std::getenv("SDL_VIDEODRIVER");
-    const std::string saved = previous != nullptr ? previous : "";
-    const bool had_previous = previous != nullptr;
+    std::string saved;
+    const bool had_previous = read_env("SDL_VIDEODRIVER", saved);
 
     SdlRuntime runtime;
     expect(set_env("SDL_VIDEODRIVER", "stormline_invalid_driver"), "invalid driver env set");
