@@ -11,24 +11,26 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs/queue/implementation-registry.json"
 MANIFEST = ROOT / "docs/pr-plans/manifest.json"
-ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-07.json"
-ACTIVATED_STATUS = "CORE01_07_READY_PREDECESSORS_COMPLETED"
-COMPLETED_STATUS = "CORE01_07_COMPLETED_REST_BLOCKED"
+ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-08.json"
+ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
+COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 BLOCKED_STATUS = "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS"
-CORE01_07_CODE_PR = 435
+CORE01_08_CODE_PR = 0  # updated by the -08 closeout; inert in the activated state
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
 
 PINNED_SOURCE_BLOBS = {
-    "checkpoint": "a84d295988979d0920668b795fb11eb84b140d38",
+    "checkpoint": "9241c67f35a149b9070dd23007536f1370d4d5dd",
     "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
     "adr_0003": "50d028c7a28acc25164256c5f4547c14ac7192d4",
     "adr_0083": "82d4968e37f0400f092e885d9fe201df772f4719",
     "adr_0084": "15067edecb676996c08949f9e0c1e7dc02bb5273",
+    "adr_0085": "e4ba773dadd33a4fa439a8da988eac02850c2d2a",
     "contract_v0": "4ea41263bcfd412ca35df2abb32a158706b64e48",
     "process_paths_contract": "e551ad7b3c8112f79b88a65c33050059762b71fc",
     "sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
+    "window_contract": "5bf7eaee2d0aea3f0dc4cc89a419f79f8442b479",
 }
 
 ACTIVATION_SOURCES = {
@@ -39,9 +41,11 @@ ACTIVATION_SOURCES = {
     "adr_0003": "docs/adr/0003-core-01-platform-technology.md",
     "adr_0083": "docs/adr/0083-core-01-internal-headless-slice.md",
     "adr_0084": "docs/adr/0084-core-01-sdl3-runtime-slice.md",
+    "adr_0085": "docs/adr/0085-core-01-window-lifecycle-slice.md",
     "contract_v0": "docs/contracts/core-01-internal-headless-v0.md",
     "process_paths_contract": "docs/contracts/core-01-process-paths-v0.md",
     "sdl3_contract": "docs/contracts/core-01-sdl3-runtime-v0.md",
+    "window_contract": "docs/contracts/core-01-window-lifecycle-v0.md",
 }
 
 SLICE_METADATA = {
@@ -55,6 +59,8 @@ SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md"),
     7: ("docs/adr/0084-core-01-sdl3-runtime-slice.md",
         "docs/evidence/NLE-PRPLAN-CORE-01-07-G6-ACTIVATION.md"),
+    8: ("docs/adr/0085-core-01-window-lifecycle-slice.md",
+        "docs/evidence/NLE-PRPLAN-CORE-01-08-G6-ACTIVATION.md"),
 }
 
 
@@ -82,20 +88,20 @@ def verify_source_blobs(fingerprints: dict, root: Path) -> list[str]:
 
 
 def validate_activation(activation: dict, root: Path = ROOT, verify_sources: bool = False) -> list[str]:
-    """Hard-stop on a broad or forged G6 transition. Only packet -06 is authorized."""
+    """Hard-stop on a broad or forged G6 transition. Only packet -08 is authorized."""
     expected = {
         "schema_version": 2,
         "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
-        "selected_packet_id": "NLE-PRPLAN-CORE-01-07",
+        "selected_packet_id": "NLE-PRPLAN-CORE-01-08",
         "module_id": "CORE-01",
         "risk": "STANDARD",
         "release_class": "INTERNAL_ONLY",
         "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
-        "approved_adr": "docs/adr/0084-core-01-sdl3-runtime-slice.md",
-        "approved_contract": "docs/contracts/core-01-sdl3-runtime-v0.md",
-        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-07.md",
-        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-07-G6-ACTIVATION.md",
-        "gate_base_sha": "80a6fdafb2cc0f1f923af83367f21e9260e53323",
+        "approved_adr": "docs/adr/0085-core-01-window-lifecycle-slice.md",
+        "approved_contract": "docs/contracts/core-01-window-lifecycle-v0.md",
+        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-08.md",
+        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-08-G6-ACTIVATION.md",
+        "gate_base_sha": "b54f19c252fda9c06a7d7289a853bd4cf957cf53",
         "requires_fresh_context_lock": True,
     }
     expected_sdl3 = {
@@ -106,14 +112,52 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
         "linkage": "static",
         "build_time_fetch": True,
     }
+    expected_window_slice = {
+        "linux_drivers_built": ["x11", "wayland"],
+        "linux_runtime_tested": "x11",
+        "linux_runtime_not_qualified": "wayland",
+        "windows_runtime": "win32",
+        "macos_runtime": "cocoa_or_not_qualified",
+        "linux_display": "xvfb+openbox",
+        "render_gpu_audio": "disabled",
+        "linux_packages": [
+            "libx11-dev",
+            "libxext-dev",
+            "libxrandr-dev",
+            "libxcursor-dev",
+            "libxfixes-dev",
+            "libxi-dev",
+            "libxss-dev",
+            "libxtst-dev",
+            "libxinerama-dev",
+            "libxrender-dev",
+            "libxkbcommon-dev",
+            "libxkbcommon-x11-dev",
+            "libwayland-dev",
+            "libdecor-0-dev",
+            "wayland-protocols",
+            "libdbus-1-dev",
+            "libibus-1.0-dev",
+            "libthai-dev",
+            "libfribidi-dev",
+            "libgl1-mesa-dev",
+            "libegl1-mesa-dev",
+            "libgles2-mesa-dev",
+            "xvfb",
+            "x11-utils",
+            "openbox",
+        ],
+    }
     errors = []
-    if set(activation) != set(expected) | {"source_blob_sha1", "sdl3"}:
+    if set(activation) != set(expected) | {"source_blob_sha1", "sdl3", "window_slice"}:
         errors.append("activation keys must match exactly one audited G6 packet")
     for key, value in expected.items():
         if activation.get(key) != value:
             errors.append(f"activation {key} mismatch: no bulk owner authority")
     if activation.get("sdl3") != expected_sdl3:
         errors.append("activation SDL3 pin mismatch: only static 3.4.20 at the exact commit is authorized")
+    if activation.get("window_slice") != expected_window_slice:
+        errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
     fingerprints = activation.get("source_blob_sha1")
     if not isinstance(fingerprints, dict) or set(fingerprints) != set(ACTIVATION_SOURCES):
         errors.append("activation source_blob_sha1 must contain exactly the pinned sources")
@@ -137,13 +181,15 @@ def expected_packet_state(
         if idx == 6:
             return "COMPLETED", 432
         if idx == 7:
+            return "COMPLETED", 435
+        if idx == 8:
             if manifest_status == COMPLETED_STATUS:
-                return "COMPLETED", CORE01_07_CODE_PR
+                return "COMPLETED", CORE01_08_CODE_PR
             return "EXECUTOR_READY", None
     return "PLANNED_BLOCKED", None
 
 
-def expected_metadata(module_id: str, idx: int) -> str | None:
+def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
     if module_id == "CORE-01" and idx in SLICE_METADATA:
         return SLICE_METADATA[idx]
     return None
@@ -260,12 +306,12 @@ def validate_manifest(
         issues.append("unexpectedly low candidate PR breakdown")
     if manifest.get("status") == ACTIVATED_STATUS:
         statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
-        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 4:
-            issues.append("activated state must have exactly one ready packet and four completed predecessors")
+        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 5:
+            issues.append("activated state must have exactly one ready packet and five completed predecessors")
     if manifest.get("status") == COMPLETED_STATUS:
         statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
-        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 5:
-            issues.append("completed state must have zero ready packets and five completed slices")
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 6:
+            issues.append("completed state must have zero ready packets and six completed slices")
     return issues
 
 
@@ -279,7 +325,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     issues = []
     activation = None
     if manifest.get("status") in (ACTIVATED_STATUS, COMPLETED_STATUS):
-        path = root / "docs/queue/packet-activation-core-01-07.json"
+        path = root / "docs/queue/packet-activation-core-01-08.json"
         try:
             activation = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, ValueError) as err:

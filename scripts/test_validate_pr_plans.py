@@ -72,9 +72,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(432, packets[5]["github_pr"])
         self.assertEqual("COMPLETED", packets[6]["status"])
         self.assertEqual(435, packets[6]["github_pr"])
+        self.assertEqual("EXECUTOR_READY", packets[7]["status"])
+        self.assertIsNone(packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
+        self.assertEqual(["NLE-PRPLAN-CORE-01-08"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -99,17 +101,17 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_ready_packet_requires_bounded_evidence(self):
         def wrong(d):
-            d["modules"][0]["packets"][6]["activation_evidence"] = "docs/evidence/wrong.md"
+            d["modules"][0]["packets"][7]["activation_evidence"] = "docs/evidence/wrong.md"
         self.assertTrue(any("lacks bounded risk/ADR/evidence" in x for x in self.check(wrong)))
 
     def test_ready_packet_requires_correct_adr(self):
         def wrong(d):
-            d["modules"][0]["packets"][6]["approved_adr"] = "docs/adr/0083-core-01-internal-headless-slice.md"
+            d["modules"][0]["packets"][7]["approved_adr"] = "docs/adr/0084-core-01-sdl3-runtime-slice.md"
         self.assertTrue(any("lacks bounded risk/ADR/evidence" in x for x in self.check(wrong)))
 
     def test_no_activation_record_denies_ready(self):
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, None))
-        self.assertFalse(v.packet_readiness(self.manifest, self.registry, None, "NLE-PRPLAN-CORE-01-07"))
+        self.assertFalse(v.packet_readiness(self.manifest, self.registry, None, "NLE-PRPLAN-CORE-01-08"))
 
     def test_forged_activation_denied(self):
         bad = copy.deepcopy(self.activation)
@@ -135,9 +137,24 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["sdl3"]["commit"] = "deadbeef"
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
 
+    def test_window_slice_is_exact(self):
+        window_slice = self.activation["window_slice"]
+        self.assertEqual(["x11", "wayland"], window_slice["linux_drivers_built"])
+        self.assertEqual("x11", window_slice["linux_runtime_tested"])
+        self.assertEqual("wayland", window_slice["linux_runtime_not_qualified"])
+        self.assertEqual("win32", window_slice["windows_runtime"])
+        self.assertEqual("cocoa_or_not_qualified", window_slice["macos_runtime"])
+        self.assertEqual("xvfb+openbox", window_slice["linux_display"])
+        self.assertEqual("disabled", window_slice["render_gpu_audio"])
+        self.assertIn("libx11-dev", window_slice["linux_packages"])
+        self.assertIn("openbox", window_slice["linux_packages"])
+        bad = copy.deepcopy(self.activation)
+        bad["window_slice"]["linux_packages"].append("forbidden-package")
+        self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
+
     def test_any_second_packet_activation_denied(self):
         def wrong(d):
-            d["modules"][0]["packets"][7]["status"] = "EXECUTOR_READY"
+            d["modules"][0]["packets"][8]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
     def test_module_level_promotion_remains_forbidden(self):
@@ -145,11 +162,15 @@ class PrPlanValidationTests(unittest.TestCase):
         reg["modules"][0]["executor_ready"] = True
         self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
 
-    def test_selector_cli_all_denied_after_07_completion(self):
+    def test_selector_cli_only_08_allowed(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
+        allowed = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-01-08", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, allowed.returncode, allowed.stderr)
+        self.assertTrue(json.loads(allowed.stdout)["executor_ready"])
         for packet_id in ("NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
                           "NLE-PRPLAN-CORE-01-05", "NLE-PRPLAN-CORE-01-06",
-                          "NLE-PRPLAN-CORE-01-07", "NLE-PRPLAN-CORE-01-08",
+                          "NLE-PRPLAN-CORE-01-07", "NLE-PRPLAN-CORE-01-09",
                           "NLE-PRPLAN-CORE-02-03", "NLE-PRPLAN-CORE-01-99"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
