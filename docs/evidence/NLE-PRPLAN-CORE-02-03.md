@@ -1,12 +1,13 @@
 # NLE-PRPLAN-CORE-02-03 — Ownership (`MemoryBlock`)
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-02-03`. **ADR:** [ADR-0087](../adr/0087-core-02-ownership-slice.md). **Capability admission:** [ADR-0086](../adr/0086-capability-based-l1-dependency.md). **Contract:** [core-02-ownership-v0](../contracts/core-02-ownership-v0.md). **WO:** [NLE-PRPLAN-CORE-02-03](../work-orders/NLE-PRPLAN-CORE-02-03.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-02-03`. **ADR:** [ADR-0087](../adr/0087-core-02-ownership-slice.md). **Capability admission:** [ADR-0086](../adr/0086-capability-based-l1-dependency.md). **Contract:** [core-02-ownership-v0](../contracts/core-02-ownership-v0.md). **WO:** [NLE-PRPLAN-CORE-02-03](../work-orders/NLE-PRPLAN-CORE-02-03.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First real CORE-02 code: an internal, move-only `MemoryBlock` over an explicit `std::pmr::memory_resource`, with exact allocation metadata, typed errors and single release. No global allocator replacement, third-party allocator, arena, budget, leak tracker, telemetry, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #440](https://github.com/KayzenRoot/stormline/pull/440) squash-merged as `2b5f8fa032f3544fd0ba52683ac2ff7be17b3496`; audit [#6957966885](https://github.com/KayzenRoot/stormline/pull/440#issuecomment-6957966885) **APPROVED**.
+- **Code PR:** [PR #441](https://github.com/KayzenRoot/stormline/pull/441), HEAD auditado `4e4b80a10933789cf537fe8c5ad7e1db272e41ba`.
 - **Base:** `2b5f8fa032f3544fd0ba52683ac2ff7be17b3496`.
 - **Selector:** `select_packet.py NLE-PRPLAN-CORE-02-03 --json` → `EXECUTOR_READY`, exit 0; `CORE-02-04`, `CORE-01-09` and every other ID exit 2.
 - **Capability admission:** `CORE01_HEADLESS_BUILD_AND_TEST` (`-03`), `CORE01_PORTABLE_PATHS` (`-06`), `CORE01_SDL3_BUILD_BASELINE` (`-07`) and `CORE01_NATIVE_CI_MATRIX` (`-08`) are completed; no CORE-01 window/input/DPI capability is used. CORE-01 is not claimed complete.
@@ -53,11 +54,26 @@ No other path changed. Existing CORE-01 targets/tests are unchanged except addit
 - CMake configure with the pinned local SDL3 3.4.20 source, `stormline_core02_memory_test` build and `ctest -R core02_`: **9/9 passed**.
 - The first link failed because the private `MemoryBlock` constructor was declared but not defined; the definition was added and the rebuild passed. This was a local preflight defect, not a CI PASS.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with the run IDs and observed CTest counts only after they complete; no native PASS is claimed yet.
+All jobs ran at the exact HEAD `4e4b80a10933789cf537fe8c5ad7e1db272e41ba`:
 
-Expected matrix: existing 23 CORE-01 CTests plus 9 CORE-02 CTests = **32 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44155586578](https://github.com/KayzenRoot/stormline/actions/runs/44155586578) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC 13.3.0, X11 via Xvfb/openbox | **32/32 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan, X11 via Xvfb/openbox | **32/32 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **32/32 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **32/32 CTest passed** |
+
+Native workflow run: [44155586606](https://github.com/KayzenRoot/stormline/actions/runs/44155586606) **SUCCESS**. Job IDs: Linux `134295325459`, sanitizers `134295324701`, Windows `134295325161`, macOS `134295325170`. The nine `core02_memory_*` tests executed in every job in addition to the existing 23 CORE-01 tests; none skipped. The Linux sanitizer job kept ASan/UBSan and the narrow `leak:X11_` SDL3 X11-driver suppression from the window slice; no ownership-test leak was reported.
+
+### Corrections found by real CI (same PR)
+
+1. **GCC/Clang `-Werror=self-move` in the test:** the intentional self-move-assignment case used the direct `self = std::move(self)` form. It was changed to an opaque pointer alias so the semantic test remains while the compiler warning is not triggered. MSVC had accepted the direct form; the Linux/macOS failures were real and are fixed in this PR.
+2. The earlier private-constructor link defect was caught by local preflight before the PR and fixed in the same code packet.
+
+No test was skipped and no PASS was claimed before the real runs.
 
 ## 5. Security, licensing and limitations
 
@@ -65,7 +81,7 @@ Expected matrix: existing 23 CORE-01 CTests plus 9 CORE-02 CTests = **32 CTests*
 - No global allocator override; no `malloc`/`new` replacement; no SDL/platform call.
 - The custom test resource must outlive blocks; a resource that violates the `std::pmr` contract can still cause undefined behavior outside this wrapper. Concurrent access to one block is not synchronized; cross-thread release is safe only with a thread-safe resource (the default `new_delete_resource` is).
 - This is not CORE-02 complete, not an allocator comparison/benchmark, not arenas/budgets/leaks/telemetry, not a public ABI, not a release. ADR-0004 remains `PROPOSED`; G3 global `NOT_CLEARED`; NLE-D009 `OPEN`; 80/80 module WOs `BLOCKED`; `engine_implemented=false` at module/product level.
-- No HIGH/CRITICAL known; final status subject to exact-head CI and independent pt-BR audit.
+- No HIGH/CRITICAL known; native CI passed at the code head and the result remains subject to the independent pt-BR audit.
 
 ## 6. Rollback
 
