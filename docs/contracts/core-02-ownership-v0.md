@@ -104,7 +104,7 @@ The header includes only C++ standard headers. It must not include SDL, platform
    - any other exception → `InternalFailure`.
    - null pointer without an exception → `OutOfMemory`; no `deallocate`.
 6. On success, `out` owns the pointer and the exact `bytes`, `alignment`, resource and domain; return `None`.
-7. The returned pointer must be aligned to `alignment`; the implementation checks this and fails safely before handing out an unaligned block.
+7. The returned pointer must be aligned to `alignment`. If it is not, call `deallocate` with the same bytes/alignment and return `InternalFailure` instead of handing out an unaligned block.
 
 ### `release()`
 
