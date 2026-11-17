@@ -1,5 +1,7 @@
 # NLE-PRPLAN-CORE-01-07 — SDL3 runtime init/quit (INTERNAL_ONLY)
 
+**STATUS: COMPLETED — implemented and merged via [PR #435](https://github.com/KayzenRoot/stormline/pull/435), merge `1195cdbf97b72894f7fc7f67f827aed70e2e7a51`. This packet must not be re-executed; no next packet or module is authorized.**
+
 **Gate:** G6 individual, conditional on gate PR audit/merge and executor fresh Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-07`. **Predecessor:** `-06` `COMPLETED` via PR #432. **Issue:** #18. **Base:** `80a6fdafb2cc0f1f923af83367f21e9260e53323`. **ADR:** [ADR-0084](../adr/0084-core-01-sdl3-runtime-slice.md). **Contract:** [core-01-sdl3-runtime-v0](../contracts/core-01-sdl3-runtime-v0.md).
 
 ## OBJECTIVE

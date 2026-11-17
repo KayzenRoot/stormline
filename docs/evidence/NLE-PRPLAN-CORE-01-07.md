@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-07 — SDL3 runtime init/quit
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-07` · **ADR:** [ADR-0084](../adr/0084-core-01-sdl3-runtime-slice.md) · **Contract:** [core-01-sdl3-runtime-v0](../contracts/core-01-sdl3-runtime-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-07](../work-orders/NLE-PRPLAN-CORE-01-07.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-07` · **ADR:** [ADR-0084](../adr/0084-core-01-sdl3-runtime-slice.md) · **Contract:** [core-01-sdl3-runtime-v0](../contracts/core-01-sdl3-runtime-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-07](../work-orders/NLE-PRPLAN-CORE-01-07.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First real SDL3 integration in Stormline: a bounded internal runtime that initializes and shuts down SDL video/events on the owner thread. No window, input, renderer, GPU, audio, network, public ABI or release.
 
@@ -88,6 +88,13 @@ After both corrections, the full matrix passed. No test was skipped and no PASS 
 
 Unmerged: close the branch; `main` untouched. After a merge: normal revert PR, never force push. SDL3 is a build-time subproject, not a vendored source tree; reverting CMake/target removes it.
 
-## 7. Proposed checkpoint delta (not promoted)
+## 7. Proposed checkpoint delta (promoted by the independent closeout)
 
-After an approved squash merge and readback, a separate checkpoint PR may record the third real CORE-01 slice, exact PR/CI/audit/merge SHA, SDL3 pin/license, 18 CTests including SDL init/quit, and the explicit statement that this is still an internal init/quit adapter, not window/renderer/audio/ABI/release. This evidence does not self-promote that checkpoint.
+After an approved squash merge and readback, a separate checkpoint PR records the third real CORE-01 slice, exact PR/CI/audit/merge SHA, SDL3 pin/license, 18 CTests including SDL init/quit, and the explicit statement that this is still an internal init/quit adapter, not window/renderer/audio/ABI/release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #435](https://github.com/KayzenRoot/stormline/pull/435) **squash-merged** at `2026-11-17T18:04:13Z`, merge `1195cdbf97b72894f7fc7f67f827aed70e2e7a51`; [auditoria pt-BR #6956555785](https://github.com/KayzenRoot/stormline/pull/435#issuecomment-6956555785) **APPROVED**.
+- Final-head Docs Validation [44143428257](https://github.com/KayzenRoot/stormline/actions/runs/44143428257) **SUCCESS**; native [44143428260](https://github.com/KayzenRoot/stormline/actions/runs/44143428260) **SUCCESS**, 18/18 CTest on Linux, Linux ASan/UBSan, Windows and macOS.
+- SDL3 build scope: static 3.4.20 from the pinned commit; render/GPU/Vulkan/Metal/OpenGL/OpenGLES/D3D and audio backends disabled; dummy/offscreen video only.
+- Packet `-07` becomes `COMPLETED` with `github_pr=435`; manifest has **741 `PLANNED_BLOCKED`, 5 `COMPLETED`, 0 `EXECUTOR_READY`**; `select_packet.py` denies `-07` and every other ID. No next packet or module is authorized.
