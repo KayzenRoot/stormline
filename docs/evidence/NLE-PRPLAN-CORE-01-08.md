@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-08 — Native window lifecycle
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-08` · **ADR:** [ADR-0085](../adr/0085-core-01-window-lifecycle-slice.md) · **Contract:** [core-01-window-lifecycle-v0](../contracts/core-01-window-lifecycle-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-08](../work-orders/NLE-PRPLAN-CORE-01-08.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-08` · **ADR:** [ADR-0085](../adr/0085-core-01-window-lifecycle-slice.md) · **Contract:** [core-01-window-lifecycle-v0](../contracts/core-01-window-lifecycle-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-08](../work-orders/NLE-PRPLAN-CORE-01-08.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First real native window lifecycle in Stormline: X11/Win32/Cocoa window create/resize/show/raise-focus/destroy with verified handle lifetime. No renderer, GPU, audio, input pump, DPI/IME/hotplug, public ABI or release.
 
@@ -89,6 +89,12 @@ After these corrections, the full 23/23 matrix passed. No test was skipped and n
 
 Unmerged: close the branch; `main` untouched. After merge: normal revert PR, never force push. Removing the window target and the install/Xvfb step restores the previous state.
 
-## 7. Proposed checkpoint delta (not promoted)
+## 7. Proposed checkpoint delta (promoted by the independent closeout)
 
-After an approved squash merge and readback, a separate checkpoint PR may record the fourth real CORE-01 slice, exact PR/CI/audit/merge SHA, X11/Xvfb/openbox and Win32/Cocoa results, 23 CTests, and the explicit statement that this is a window lifecycle slice, not renderer/GPU/audio/ABI/release. This evidence does not self-promote that checkpoint.
+After an approved squash merge and readback, a separate checkpoint PR records the fourth real CORE-01 slice, exact PR/CI/audit/merge SHA, X11/Xvfb/openbox and Win32/Cocoa results, 23 CTests, and the explicit statement that this is a window lifecycle slice, not renderer/GPU/audio/ABI/release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #438](https://github.com/KayzenRoot/stormline/pull/438) **squash-merged** at `2026-11-17T18:40:29Z`, merge `69d1f96eb9df36a56eb4a0d34cc452bf11095cb1`; [auditoria pt-BR #6957424101](https://github.com/KayzenRoot/stormline/pull/438#issuecomment-6957424101) **APPROVED**.
+- Final-head Docs Validation [44149927902](https://github.com/KayzenRoot/stormline/actions/runs/44149927902) **SUCCESS**; native [44149927997](https://github.com/KayzenRoot/stormline/actions/runs/44149927997) **SUCCESS**, 23/23 CTest on Linux X11/Xvfb, Linux ASan/UBSan, Windows Win32 and macOS Cocoa.
+- Packet `-08` becomes `COMPLETED` with `github_pr=438`; manifest has **740 `PLANNED_BLOCKED`, 6 `COMPLETED`, 0 `EXECUTOR_READY`**; `select_packet.py` denies `-08` and every other ID. No next packet or module is authorized.
