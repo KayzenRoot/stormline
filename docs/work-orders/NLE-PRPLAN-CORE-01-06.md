@@ -1,5 +1,7 @@
 # NLE-PRPLAN-CORE-01-06 — Portable process paths (INTERNAL_ONLY)
 
+**STATUS: COMPLETED — implemented and merged via [PR #432](https://github.com/KayzenRoot/stormline/pull/432), merge `002162790e61ad64123fb6b187f026b685de7c47`. This packet must not be re-executed; no next packet or module is authorized.**
+
 **Gate:** G6 individual, conditional on gate PR audit/merge and executor fresh Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-06`. **Predecessors:** `-04` and `-05` reconciled as already covered by the merged `-03` code/tests (see [G6 evidence](../evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md)); `-03` is `COMPLETED` via PR #428. **Issue:** #18. **Base:** `b3638de6c6918e36b49726af63abeb09bd35f140`. **Contract:** [core-01-process-paths-v0](../contracts/core-01-process-paths-v0.md).
 
 ## OBJECTIVE

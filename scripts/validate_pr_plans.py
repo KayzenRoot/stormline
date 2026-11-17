@@ -113,7 +113,7 @@ def expected_packet_state(
             return "COMPLETED", 428
         if idx == 6:
             if manifest_status == COMPLETED_STATUS:
-                return "COMPLETED", 428
+                return "COMPLETED", 432
             return "EXECUTOR_READY", None
     return "PLANNED_BLOCKED", None
 
