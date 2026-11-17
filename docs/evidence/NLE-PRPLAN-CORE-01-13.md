@@ -1,12 +1,13 @@
 # NLE-PRPLAN-CORE-01-13 — Capability graph prototype and report-only measurement
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-13`. **ADR:** [ADR-0092](../adr/0092-core-01-capability-graph-prototype.md). **Contract:** [core-01-capability-graph-v0](../contracts/core-01-capability-graph-v0.md). **WO:** [NLE-PRPLAN-CORE-01-13](../work-orders/NLE-PRPLAN-CORE-01-13.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-13`. **ADR:** [ADR-0092](../adr/0092-core-01-capability-graph-prototype.md). **Contract:** [core-01-capability-graph-v0](../contracts/core-01-capability-graph-v0.md). **WO:** [NLE-PRPLAN-CORE-01-13](../work-orders/NLE-PRPLAN-CORE-01-13.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 Fixed-capacity capability graph prototype with explicit Unknown/Supported/Unsupported states, a thin SDL3 probe, and a **report-only** benchmark against direct `SDL_WasInit`. Not a SAPL adoption, not a performance PASS, no threshold.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #455](https://github.com/KayzenRoot/stormline/pull/455) squash-merged as `92fba81b9d0966b211db1003284577296d223567`; audit #6961080626 **APPROVED**.
+- **Code PR:** [PR #456](https://github.com/KayzenRoot/stormline/pull/456), HEAD auditado `06fe2376bf26c0b1730771cb59730afc3913272e`.
 - **Base:** `92fba81b9d0966b211db1003284577296d223567`.
 - **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-13 --json` → `EXECUTOR_READY`, exit 0; `-14`, `CORE-02-04` and every other ID exit 2.
 - **Predecessors:** `-03`..`-12` completed; CORE-02-03 ownership completed via PR #441.
@@ -44,11 +45,21 @@ No other path changed. Existing CORE-01/CORE-02 targets are unchanged except add
   `CAPABILITY_BENCHMARK graph_ns_per_op=24.554 direct_ns_per_op=18.107 ratio=1.356 iterations=1000000`
 - This single local number is noisy and must not be read as a speedup/regression decision.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with run IDs, CTest counts and the benchmark output captured in CI logs. No native or performance PASS is claimed yet.
+All jobs ran at the exact HEAD `06fe2376bf26c0b1730771cb59730afc3913272e`:
 
-Expected matrix: existing 59 CTests plus 6 capability tests = **65 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44177204647](https://github.com/KayzenRoot/stormline/actions/runs/44177204647) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **65/65 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan, X11 via Xvfb/openbox | **65/65 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **65/65 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **65/65 CTest passed** |
+
+Native workflow run: [44177204744](https://github.com/KayzenRoot/stormline/actions/runs/44177204744) **SUCCESS**. Job IDs: Linux `134371632448`, sanitizers `134371632394`, Windows `134371631890`, macOS `134371632340`. The six `core01_capability_*` tests executed in every job in addition to the existing 59 CTests; none skipped. CTest suppressed benchmark stdout on success, so **no CI timing numbers are claimed**; only the single local MSVC measurement above is reported, with its noise caveat.
+
+No correction was required by the native matrix.
 
 ## 5. Security, licensing and limitations
 
@@ -56,7 +67,7 @@ Expected matrix: existing 59 CTests plus 6 capability tests = **65 CTests** per 
 - The graph is fixed-capacity and allocation-free; it is not thread-safe for concurrent mutation. The probe is owner-thread only.
 - The benchmark is report-only: shared CI runners are noisy, no owner-approved hardware/threshold exists, and **no SAPL adoption or performance verdict** is made.
 - ADR-0003/0075 remain `PROPOSED`; G3 global `NOT_CLEARED`; NLE-D009 `OPEN`; 80/80 module WOs `BLOCKED`; `engine_implemented=false` at module/product level.
-- No HIGH/CRITICAL known; final status subject to exact-head CI and independent pt-BR audit.
+- No HIGH/CRITICAL known; native CI passed at the code head and the result remains subject to the independent pt-BR audit.
 
 ## 6. Rollback
 
