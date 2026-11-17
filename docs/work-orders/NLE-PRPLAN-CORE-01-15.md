@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-15 — Integrated CI qualification (QUALIFICATION)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-15`. **Predecessor:** `-14` `COMPLETED` via PR #459. **Issue:** #18. **Base:** `ee7f3188eee314b7f051ef39ce4c88ab74492fb1`. **ADR:** [ADR-0094](../adr/0094-core-01-integrated-ci-qualification.md). **Contract:** [core-01-integrated-qualification-v0](../contracts/core-01-integrated-qualification-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #462](https://github.com/KayzenRoot/stormline/pull/462), merge `0286171…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-15`. **Predecessor:** `-14` `COMPLETED` via PR #459. **Issue:** #18. **Base:** `ee7f3188eee314b7f051ef39ce4c88ab74492fb1`. **ADR:** [ADR-0094](../adr/0094-core-01-integrated-ci-qualification.md). **Contract:** [core-01-integrated-qualification-v0](../contracts/core-01-integrated-qualification-v0.md).
 
 ## OBJECTIVE
 
