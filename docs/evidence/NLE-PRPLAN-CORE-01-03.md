@@ -32,3 +32,22 @@ STANDARD risk limited to first internal slice; PR-only branch guard, pinned chec
 
 ## Review and checkpoint delta PROPOSED
 Audit pt-BR against Scope/DoD/Architecture, acceptance C01-INT-01..10, actual tests, sanitizer, regressions, no HIGH/CRITICAL and source integrity. Checkpoint proposal can record first INTERNAL_ONLY source after proven native CI/audit/merge; never imply full engine, G3/global ADR approval or next packet unlocked. Keep Draft until evidence verified.
+
+## Real CI run on code PR #429: initial tested head b9637b7 (2026-11-17)
+
+**Docs Validation:** [run #44132870459](https://github.com/KayzenRoot/stormline/actions/runs/44132870459), `docs-validation` completed/success for initial source HEAD.
+
+**Native and sanitizer CI:** [run #44132870268](https://github.com/KayzenRoot/stormline/actions/runs/44132870268), all 4 jobs completed/success at initial source HEAD, with compiled/linked genuine `src/stormline/core/internal` code and one registered CTest in each job:
+
+| Platform / job | Image and toolchain observed | Test |
+|---|---|---|
+| [Windows #134214413743](https://github.com/KayzenRoot/stormline/actions/runs/44132870268/job/134214413743) | image `20261103.298.1`, MSVC toolset `14.51.36231`, `cl.exe 19.51.36260.0`, CMake `4.4.5`, Ninja preinstalled | **1/1 CTest PASS**, warnings as errors |
+| [Ubuntu #134214414084](https://github.com/KayzenRoot/stormline/actions/runs/44132870268/job/134214414084) | image `20261111.370.1`, GCC `13.3.0`, CMake `3.31.6`, Ninja preinstalled | **1/1 CTest PASS** |
+| [macOS #134214414059](https://github.com/KayzenRoot/stormline/actions/runs/44132870268/job/134214414059) | image `20261104.0514.1`, AppleClang `17.0.0.17000013`, CMake `4.4.5` | **1/1 CTest PASS** |
+| [Linux ASan+UBSan #134214414038](https://github.com/KayzenRoot/stormline/actions/runs/44132870268/job/134214414038) | GCC `13.3.0`, sanitized preset `STORMLINE_ENABLE_SANITIZERS=ON` | **1/1 CTest PASS**, zero sanitizer errors reported in job |
+
+The one CTest executable on each OS runs 200 full start/stop loops (400 acquired/400 released simulated internal leases), duplicate start and idempotent stop, non-headless rejection, three controlled partial init failures with rollback/recovery, injected cleanup failures, failed state and recovery, destructor RAII cleanup. This verifies only an internal resource model, **not** OS-level handles, real GPU/display/audio independence, leak-free general runtime or product ABI.
+
+**Audit boundaries:** Windows/MSVC14.51 and Linux/GCC13.3 are provisional internal CI as owner ratified, **not** qualified global G3 candidates MSVC14.50/14.52, SDK10.0.26100.9457, GCC16.2/Clang23.1.5. SDL3 absent. Global G3 NOT_CLEARED; ADR-0003/0075 PROPOSED; license NLE-D009 OPEN; 80 module WOs BLOCKED; 745 other planned packets BLOCKED.
+
+**Receipt revision note:** this append changes only the Evidence Markdown, so the final PR HEAD differs from the initial tested source HEAD. The final exact-HEAD Docs Validation and native jobs MUST be rerun and audited. Do not mark final HEAD APPROVED until confirmed.
