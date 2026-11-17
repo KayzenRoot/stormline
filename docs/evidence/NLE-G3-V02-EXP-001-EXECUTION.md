@@ -1,5 +1,5 @@
 # G3-V02 EXP-001 — Native C++20 toolchain smoke Evidence Bundle
-**STABLE WO:** [NLE-G3-V02-EXP-001](../work-orders/NLE-G3-V02-EXP-001-PROPOSED.md) | **Parent qualification WO:** `NLE-PRPLAN-CORE-01-01` | **Issue:** [#387](https://github.com/KayzenRoot/stormline/issues/387) | **Owner's explicit bounded experimental authorization:** [comment #6949434774](https://github.com/KayzenRoot/stormline/issues/387#issuecomment-6949434774) on 2026-11-17. **Context BASE/main:** `f360ff021021b54bbb0697c39c6a70cd37961e01`. **HEAD/PR/CI:** PENDING at creation; fill with actual readback before objective audit.
+**STABLE WO:** [NLE-G3-V02-EXP-001](../work-orders/NLE-G3-V02-EXP-001-PROPOSED.md) | **Parent qualification WO:** `NLE-PRPLAN-CORE-01-01` | **Issue:** [#387](https://github.com/KayzenRoot/stormline/issues/387) | **Owner's explicit bounded experimental authorization:** [comment #6949434774](https://github.com/KayzenRoot/stormline/issues/387#issuecomment-6949434774) on 2026-11-17. **Context BASE/main:** `f360ff021021b54bbb0697c39c6a70cd37961e01`. **PR:** [#419](https://github.com/KayzenRoot/stormline/pull/419). **First observed native workflow HEAD:** `a254f0ca39fd41f63afe379db7444e64a537dcfc`, run [#44093744034](https://github.com/KayzenRoot/stormline/actions/runs/44093744034), `completed/success` for all 3 OS jobs; **Docs Validation** [run #44093743880](https://github.com/KayzenRoot/stormline/actions/runs/44093743880), `completed/success`. The final HEAD changes only this evidence document and requires a new exact-HEAD CI readback and objective audit before merge.
 **Risk:** `ELEVATED` only for this experimental WO. Never classify the 80 engine coding WOs or release class via this result. **Scope:** EXACTLY seven files. No native result means `NOT_RUN`, not PASS.
 
 ## Source Check / Context Lock
@@ -42,11 +42,11 @@ Checkpoint > Decisions Ledger/ADRs > Scope > DoD > Architecture > Requirements >
 ## Preflight target matrix: ACTUAL GITHUB JOB RESULTS PENDING
 | Target | Ratified evaluation candidate | Status | Actual tests | Qualification scope |
 |---|---|---|---|---|
-| Linux x64 GCC | GCC 16.2, CMake 4.4.5, Ninja 1.13.2 | `PENDING_NATIVE_RUN` | 0 until readback | P03 Linux not applicable; P04/P06/P07 partial only |
-| Linux x64 Clang | Clang 23.1.5, CMake 4.4.5, Ninja 1.13.2 | `PENDING_NATIVE_RUN` | 0 until readback | P04/P06/P07 partial only |
-| Windows x64 MSVC | MSVC 14.50, SDK 10.0.26100.9457, CMake 4.4.5, Ninja 1.13.2 | `PENDING_NATIVE_RUN` | 0 until readback | P03/P06/P07 partial only |
-| Windows x64 MSVC | MSVC 14.52 comparator, same SDK/build | `PENDING_NATIVE_RUN` | 0 until readback | P03/P06/P07 partial only |
-| macOS 15 arm64 | Xcode 26.3, AppleClang full build UNKNOWN, CMake 4.4.5, Ninja 1.13.2 | `PENDING_NATIVE_RUN` | 0 until readback | P05/P06/P07 partial only |
+| Linux x64 GCC | GCC 16.2, CMake 4.4.5, Ninja 1.13.2 | `NOT_QUALIFIED` | 0 | P03 Linux not applicable; P04/P06/P07 partial only |
+| Linux x64 Clang | Clang 23.1.5, CMake 4.4.5, Ninja 1.13.2 | `NOT_QUALIFIED` | 0 | P04/P06/P07 partial only |
+| Windows x64 MSVC | MSVC 14.50, SDK 10.0.26100.9457, CMake 4.4.5, Ninja 1.13.2 | `NOT_QUALIFIED` | 0 | P03/P06/P07 partial only |
+| Windows x64 MSVC | MSVC 14.52 comparator, same SDK/build | `NOT_QUALIFIED` | 0 | P03/P06/P07 partial only |
+| macOS 15 arm64 | Xcode 26.3, AppleClang exact build captured, CMake 4.4.5, Ninja 1.13.2 | `SMOKE_PASS` limited to fixture | 1/1 CTest | P05/P06/P07 partial only |
 
 **Status definitions:** `SMOKE_PASS` requires real exact-head C++20 compile/link, >=1 CTest pass, binary SHA; `NOT_QUALIFIED` means unavailable/mismatched preinstalled toolchain or SDK and **0 tests** (workflow job may still conclude `success` for accurate inventory, which is NOT native PASS); `FAIL` means qualified toolchain's build/CTest fails; `BLOCKED` for security/cost/scope; `PENDING_NATIVE_RUN` means no recorded CI evidence. No silent fallback or install.
 
@@ -61,7 +61,20 @@ Checkpoint > Decisions Ledger/ADRs > Scope > DoD > Architecture > Requirements >
 ## Security / rights / cost / rollback
 Source fixture uses only C++20 standard-library headers and original test logic; no SDL3 or proprietary dependency linked/redistributed. GitHub-hosted standard runners used in public repo are documented free for compute; no larger runner/self-hosted/installer, secrets, upload-artifact, cache, signing or published binary. Exact owner-account monetary readback NOT_AVAILABLE; if a paid resource or privilege is required, stop. First-party `actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683` was verified as v4.2.2 from GitHub tag metadata before use. Binaries are ephemeral runner-local files; preserve only logs and SHA, not binaries. No G2 ruleset/required job modifications. Security risks HIGH/CRITICAL cause BLOCKED. Errors in this experiment are corrected on SAME branch/PR only.
 
-## CI / audit / verdict (pending actual readback)
-- Experiment PR and exact HEAD: `PENDING`; native job IDs and results: `PENDING`; `docs-validation`: `PENDING`; objective pt-BR audit: `PENDING`.
+## OBSERVED NATIVE RECEIPT, FIRST EXACT TESTED HEAD a254f0ca39fd41f63afe379db7444e64a537dcfc (2026-11-17)
+**Runs:** [native workflow #44093744034](https://github.com/KayzenRoot/stormline/actions/runs/44093744034), [docs workflow #44093743880](https://github.com/KayzenRoot/stormline/actions/runs/44093743880). Three native jobs show `completed/success` for preflight/conditional tests. This means OS workflow ran successfully; it does **NOT** mean all five candidate toolchains passed. `docs-validation` `completed/success`. **Objective pt-BR audit, final PR HEAD and merge: PENDING at this evidence edit.**
+
+| GitHub job | Runner image / actual observations | Native truth and log |
+|---|---|---|
+| [Linux #134075331128](https://github.com/KayzenRoot/stormline/actions/runs/44093744034/job/134075331128) | Ubuntu 24.04 x64, image `20261111.370.1`, glibc `2.39-0ubuntu8.9`, GCC `13.3.0`, Ubuntu Clang `18.1.3`, CMake `3.31.6`, Ninja `1.13.2` | Both exact GCC16.2 and Clang23.1.5 `NOT_QUALIFIED`; **0 native tests** |
+| [Windows #134075330689](https://github.com/KayzenRoot/stormline/actions/runs/44093744034/job/134075330689) | Image `20261103.298.1`, MSVC directories `14.29.30133`, `14.44.35207`, `14.51.36231`; exact SDK `10.0.26100.9457` check FALSE; CMake `4.4.5`, Ninja `1.13.2` | MSVC14.50 and MSVC14.52 `NOT_QUALIFIED`; **0 native tests**. Did not substitute 14.51 or install SDK |
+| [macOS #134075331342](https://github.com/KayzenRoot/stormline/actions/runs/44093744034/job/134075331342) | macOS `15.8.2` ARM64, image `20261112.0539.3`; Xcode `26.3`; `Apple clang version 17.0.0 (clang-1700.6.4.2)`, CMake compiler identity `AppleClang 17.0.0.17000604`; macOS SDK `26.2`; CMake `4.4.5`, Ninja `1.13.2` | **`SMOKE_PASS`**, C++20 compiled + linked, `g3_v02_cpp20_smoke` **1/1 CTest PASS**, second incremental Ninja build `no work to do`; Mach-O linkage inspected via `otool -L` |
+
+**macOS executable SHA-256:** `b0cff092deb5b9b8cc18e2909f1b591539b400d15f783465ec0ad8dd61afcdfc`. Linked `/usr/lib/libc++.1.dylib` and `/usr/lib/libSystem.B.dylib`. Fixture source SHA-256 on Linux/macOS: `main.cpp ba6df43a13737ed5d434fc491f74a3107ffcb294f57ff9d28e163a40cc2ffbbe`; `CMakeLists.txt 3021afac500574b19496c80b7fa9f3ebe383dedb7a51cc628a26cf8f34665649`; `CMakePresets.json d2858e86e0c38148d541ba1ff887ef80837dff0e77a93526966388dea354727d`. Windows checked-out file hashes printed differently in PowerShell output, so do not infer cross-OS bit-for-bit source identity without examining line-ending normalization.
+
+**Interpretation:** the first fixture gives limited evidence for `G3-P05` (macOS compiler/SDK smoke), `G3-P06` (macOS CMake/CTest/Ninja) and `G3-P07` (runner provenance; only incremental rebuild), plus a narrow implementation check relevant to `G3-P14` (three public standard jobs, least privilege and fork guard). It does NOT prove full P02 SBOM/signatures/CVE state, Windows P03 or Linux P04, compatible CMake 4.5.0 comparator/floor, deterministic independent clean rebuild, SDL3, true headless, ABI/HostHandle, lifecycle, SAPL, benchmarks or final G3 approval. **No canonical G3-P status is promoted to PASS by this bundle.** Report missing toolchains as NOT_QUALIFIED, not FAIL or PASS. No paid runner, cache, artifact upload or secrets used in these workflow steps. GitHub account billing readback not obtained.
+
+## CI / audit / verdict (final audit pending)
+- PR #419, initial tested HEAD `a254f0ca39fd41f63afe379db7444e64a537dcfc`; observed native job results and IDs above; initial docs-validation SUCCESS. **Final HEAD checks, audit and merge are still pending** after this evidence update.
 - DO NOT infer `SMOKE_PASS` from green docs validation or from a runner doing only preflight.
 - Stop after this PR's objective audit; any next experimental setup/installs/PRs or engine development requires another explicit owner authorization. No checkpoint outside the allowlist; propose a factual delta only, do NOT apply it autonomously.
