@@ -52,3 +52,6 @@ python3 scripts/select_wo.py --list
 python3 scripts/select_wo.py CORE-01
 ```
 `select_wo.py` returns non-zero for BLOCKED packets. Do not circumvent that gate to begin programming. No API credentials or paid AI provider is required for reading the queue.
+
+## First bounded CORE-01 packet selector (G6, subject to audited merge)
+For **only** `NLE-PRPLAN-CORE-01-03`, after owner-ratified G1/G3 slice and approved G4/G5 contracts, use `python3 scripts/select_packet.py NLE-PRPLAN-CORE-01-03 --json`. Require `executor_ready=true` plus the actual G6 PR merged into main, current main/head, source SHA-256 Context Lock recomputed, original Work Order and all native test/CI gates. Other packet IDs MUST exit 2. The original `python3 scripts/select_wo.py CORE-01 --json` MUST continue to exit 2 because the full module remains blocked. Any contradiction, missing activation proof or drift => BLOCKED. The user did not authorize a bulk unlock or a release.

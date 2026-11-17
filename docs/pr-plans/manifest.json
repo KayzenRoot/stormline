@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS",
+  "status": "ONE_BOUNDED_CORE01_INTERNAL_PACKET_READY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -22,8 +22,8 @@
           "acceptance": "Owner ratification required; nothing approved by planning",
           "depends_on": [],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "APPROVED_GOVERNANCE",
+          "github_pr": 422
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-01-02",
@@ -34,8 +34,8 @@
             "NLE-PRPLAN-CORE-01-01"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "APPROVED_CONTRACT",
+          "github_pr": 424
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-01-03",
@@ -46,8 +46,12 @@
             "NLE-PRPLAN-CORE-01-02"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "release_class": "INTERNAL_ONLY",
+          "risk": "STANDARD",
+          "approved_adr": "docs/adr/0083-core-01-internal-headless-slice.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-01-04",

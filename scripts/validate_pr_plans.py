@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate proposed Stormline PR packet plans against the canonical blocked queue."""
+"""Validate Stormline packet planning and at most one bounded owner-approved activation."""
 from __future__ import annotations
 
 import json
@@ -10,17 +10,85 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs/queue/implementation-registry.json"
 MANIFEST = ROOT / "docs/pr-plans/manifest.json"
+ACTIVATION_FILE = ROOT / "docs/queue/packet-activations.json"
+ACTIVATED_STATUS = "ONE_BOUNDED_CORE01_INTERNAL_PACKET_READY"
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
 
 
-def validate_manifest(manifest: dict, registry: dict) -> list[str]:
+
+def validate_activation(activation: dict) -> list[str]:
+    """Hard-stop on a broad or forged G6 transition. This is only the first reviewed packet."""
+    expected = {
+        "schema_version": 1,
+        "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+        "selected_packet_id": "NLE-PRPLAN-CORE-01-03",
+        "module_id": "CORE-01",
+        "risk": "STANDARD",
+        "release_class": "INTERNAL_ONLY",
+        "owner_ratification_pr": 422,
+        "contract_pr": 424,
+        "checkpoint_pr": 425,
+        "approved_adr": "docs/adr/0083-core-01-internal-headless-slice.md",
+        "approved_contract": "docs/contracts/core-01-internal-headless-v0.md",
+        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-03.md",
+        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md",
+        "gate_base_sha": "c355de53bca5be1d64dedb4d7111bd40c8859e83",
+        "requires_fresh_context_lock": True,
+    }
+    errors = []
+    if set(activation) != set(expected) | {"source_blob_sha1"}:
+        errors.append("activation keys must match exactly one audited G6 packet")
+    for key, value in expected.items():
+        if activation.get(key) != value:
+            errors.append(f"activation {key} mismatch: no bulk owner authority")
+    fingerprints = activation.get("source_blob_sha1")
+    required = {
+        "checkpoint": "5090dfa5fc39f3e26e5df038c6e23bce2ff1e26a",
+        "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+        "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+        "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+        "adr_0083": "82d4968e37f0400f092e885d9fe201df772f4719",
+        "contract_v0": "4ea41263bcfd412ca35df2abb32a158706b64e48",
+    }
+    if fingerprints != required:
+        errors.append("activation source fingerprints do not match approved baseline")
+    return errors
+
+
+def expected_packet_state(module_id: str, idx: int, activation: dict | None) -> tuple[str, int | None]:
+    if activation is not None and module_id == "CORE-01":
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", 422
+        if idx == 2:
+            return "APPROVED_CONTRACT", 424
+        if idx == 3:
+            return "EXECUTOR_READY", None
+    return "PLANNED_BLOCKED", None
+
+
+def packet_readiness(manifest: dict, registry: dict, activation: dict | None, packet_id: str) -> bool:
+    if validate_manifest(manifest, registry, activation):
+        return False
+    if activation is None or activation.get("selected_packet_id") != packet_id:
+        return False
+    matches = [packet for entry in manifest.get("modules", [])
+               for packet in entry.get("packets", []) if packet.get("packet_id") == packet_id]
+    return len(matches) == 1 and matches[0].get("status") == "EXECUTOR_READY"
+
+
+def validate_manifest(manifest: dict, registry: dict, activation: dict | None = None) -> list[str]:
     issues: list[str] = []
     source = registry.get("modules", [])
     plans = manifest.get("modules", [])
     if manifest.get("schema_version") != 1 or manifest.get("module_count") != 80:
         issues.append("schema_version=1 and module_count=80 required")
-    if manifest.get("status") != "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS":
-        issues.append("manifest must remain documentary and blocked")
+    if activation is None:
+        if manifest.get("status") != "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS":
+            issues.append("manifest must remain blocked without G6 activation")
+    else:
+        if manifest.get("status") != ACTIVATED_STATUS:
+            issues.append("manifest activation status mismatch")
+        issues.extend(validate_activation(activation))
     by_id = {x.get("module_id"): x for x in source}
     all_ids: set[str] = set()
     module_ids: list[str] = []
@@ -70,8 +138,17 @@ def validate_manifest(manifest: dict, registry: dict) -> list[str]:
             if ident in all_ids:
                 issues.append(f"{mid}: duplicate packet ID {ident}")
             all_ids.add(ident)
-            if packet.get("status") != "PLANNED_BLOCKED" or packet.get("github_pr") is not None:
-                issues.append(f"{mid}: code PR must not be opened/authorized by documentary map")
+            want_status, want_pr = expected_packet_state(mid, idx, activation)
+            if packet.get("status") != want_status or packet.get("github_pr") != want_pr:
+                issues.append(f"{mid}: code PR must not be opened/authorized by documentary map; expected {want_status}/{want_pr}")
+            if want_status == "EXECUTOR_READY":
+                if (packet.get("risk") != "STANDARD"
+                        or packet.get("release_class") != "INTERNAL_ONLY"
+                        or packet.get("approved_adr") != "docs/adr/0083-core-01-internal-headless-slice.md"
+                        or packet.get("activation_evidence") != "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md"):
+                    issues.append(f"{mid}: ready packet lacks bounded risk/ADR/evidence")
+            elif any(field in packet for field in ("risk", "release_class", "approved_adr", "activation_evidence")):
+                issues.append(f"{mid}: blocked or documentary packet claims executor metadata")
             if packet.get("depends_on") != ([] if idx == 1 else [f"NLE-PRPLAN-{mid}-{idx-1:02}"]):
                 issues.append(f"{mid}: broken PR packet dependency at {idx}")
             if packet.get("kind") in ("IMPLEMENTATION", "QUALIFICATION"):
@@ -96,7 +173,20 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         manifest = json.loads((root / "docs/pr-plans/manifest.json").read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ValueError) as err:
         return [f"Cannot read JSON: {err}"]
-    issues = validate_manifest(manifest, reg)
+    issues = []
+    activation = None
+    if manifest.get("status") == ACTIVATED_STATUS:
+        path = root / "docs/queue/packet-activations.json"
+        try:
+            activation = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, ValueError) as err:
+            issues.append(f"Missing/invalid bounded G6 activation record: {err}")
+    issues.extend(validate_manifest(manifest, reg, activation))
+    if activation is not None:
+        for key in ("approved_adr", "approved_contract", "work_order", "activation_evidence"):
+            path = root / activation[key]
+            if not path.is_file():
+                issues.append(f"G6 evidence file missing: {path}")
     for required in (
         "docs/pr-plans/index.md",
         "docs/engineering/pr-decomposition-policy.md",
@@ -133,8 +223,10 @@ def main() -> int:
             print("PR PLAN FAILED:", e, file=sys.stderr)
         return 1
     data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    print(f"PR plan PASS: {data['module_count']} modules, "
-          f"{data['planned_packet_count']} candidate packets, all BLOCKED, 0 live code PRs.")
+    statuses = [p["status"] for m in data["modules"] for p in m["packets"]]
+    print(f"PR plan PASS: {data['module_count']} module WOs stay BLOCKED; "
+          f"{data['planned_packet_count']} packets: {statuses.count('PLANNED_BLOCKED')} blocked, "
+          f"{statuses.count('EXECUTOR_READY')} individually ready, 0 code PRs opened by this validator.")
     return 0
 
 

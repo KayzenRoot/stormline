@@ -121,3 +121,6 @@ DELIVERABLES/REVIEW: future full 13-field Work Order, exact files, CI, Evidence 
 
 Completion requires all actual approved code PRs, real cross-target tests, rights/security proof, independent audit and checkpoint. These counts may change after owner ADR ratification.
 [All 80 plans](index.md) · [Manifest](manifest.json) · [Gate policy](../engineering/p00-technical-approval-gates.md).
+
+## CURRENT G6 bounded activation, subject to dedicated audit/merge (2026-11-17)
+The original 16 packet pre-briefs above are historical `PLANNED_BLOCKED` entries. The owner explicitly ratified the C++20 CPU-only headless INTERNAL_ONLY slice (PR #422; contract PR #424; checkpoints #423/#425). The dedicated [G6 activation](../queue/packet-activations.json) and [WO -03](../work-orders/NLE-PRPLAN-CORE-01-03.md) allow **exactly** packet `NLE-PRPLAN-CORE-01-03` to become `EXECUTOR_READY` **only after** a green, objectively audited and merged G6 PR. Earlier -01/-02 packet statuses become documentary/contract APPROVED; all other 745 remain PLANNED_BLOCKED. **The original 80 module implementation WOs remain BLOCKED** and `scripts/select_wo.py CORE-01` must still reject module-level execution. G3 global remains NOT_CLEARED, ADR-0003/0075 PROPOSED, NLE-D009 OPEN, engine=false. Packet-specific selector must deny every unauthorized id and missing source authorization.
