@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-06 — Portable process paths implementation
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-06` · **Contract:** [core-01-process-paths-v0](../contracts/core-01-process-paths-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-06](../work-orders/NLE-PRPLAN-CORE-01-06.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-06` · **Contract:** [core-01-process-paths-v0](../contracts/core-01-process-paths-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-06](../work-orders/NLE-PRPLAN-CORE-01-06.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 This is the second real CORE-01 code slice. It is internal-only, read-only, CPU-only, standard-library C++20, with no SDL3, window, GPU, audio, network, public ABI, VFS, file creation/write or release.
 
@@ -95,6 +95,12 @@ Platform-specific honesty: Linux/macOS run the real POSIX access-denial case whe
 - Unmerged rollback: close the branch; `main` untouched. After a future merge: normal revert PR, never force push.
 - Risk `STANDARD`, release `INTERNAL_ONLY` only for this slice. 80/80 module WOs remain `BLOCKED`; no next packet or module is unlocked.
 
-## 7. Proposed checkpoint delta (not promoted)
+## 7. Proposed checkpoint delta (promoted by the independent closeout)
 
-After an approved squash merge and readback, a separate checkpoint PR may record the second real CORE-01 slice, exact PR/CI/audit/merge SHA, the 5+7 CTest matrix including sanitizers, the `NOT_QUALIFIED` ACL/symlink notes and the explicit statement that this is still an internal read-only utility, not CORE-01 completion, SDL3, public ABI or release. This evidence does not self-promote that checkpoint.
+After an approved squash merge and readback, a separate checkpoint PR records the second real CORE-01 slice, exact PR/CI/audit/merge SHA, the 5+7 CTest matrix including sanitizers, the `NOT_QUALIFIED` ACL/symlink notes and the explicit statement that this is still an internal read-only utility, not CORE-01 completion, SDL3, public ABI or release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #432](https://github.com/KayzenRoot/stormline/pull/432) **squash-merged** at `2026-11-17T17:37:00Z`, merge `002162790e61ad64123fb6b187f026b685de7c47`; [auditoria pt-BR #6955904499](https://github.com/KayzenRoot/stormline/pull/432#issuecomment-6955904499) **APPROVED**.
+- Final-head Docs Validation [44138675852](https://github.com/KayzenRoot/stormline/actions/runs/44138675852) **SUCCESS**; native [44138675586](https://github.com/KayzenRoot/stormline/actions/runs/44138675586) **SUCCESS**, 12/12 CTest on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `-06` becomes `COMPLETED` with `github_pr=432`; manifest has **742 `PLANNED_BLOCKED`, 4 `COMPLETED`, 0 `EXECUTOR_READY`**; `select_packet.py` denies `-06` and every other ID. No next packet or module is authorized.
