@@ -26,11 +26,43 @@ concurrency:
 jobs:
   linux:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
+      - name: Install authorized Linux window dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libx11-dev \
+            libxext-dev \
+            libxrandr-dev \
+            libxcursor-dev \
+            libxfixes-dev \
+            libxi-dev \
+            libxss-dev \
+            libxtst-dev \
+            libxinerama-dev \
+            libxrender-dev \
+            libxkbcommon-dev \
+            libxkbcommon-x11-dev \
+            libwayland-dev \
+            libdecor-0-dev \
+            wayland-protocols \
+            libdbus-1-dev \
+            libibus-1.0-dev \
+            libthai-dev \
+            libfribidi-dev \
+            libgl1-mesa-dev \
+            libegl1-mesa-dev \
+            libgles2-mesa-dev \
+            xvfb \
+            x11-utils \
+            openbox
       - name: Toolchain provenance
         shell: bash
         run: |
@@ -45,17 +77,61 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          Xvfb :99 -screen 0 1280x720x24 &
+          xvfb_pid=$!
+          export DISPLAY=:99
+          for attempt in {1..20}; do
+            if xdpyinfo -display :99 >/dev/null 2>&1; then
+              break
+            fi
+            sleep 0.5
+          done
+          openbox --sm-disable >/dev/null 2>&1 &
+          sleep 1
           cmake --preset core01-internal-debug
           cmake --build --preset core01-internal-debug
-          env -u DISPLAY -u WAYLAND_DISPLAY ctest --preset core01-internal-debug --output-on-failure
+          ctest --preset core01-internal-debug --output-on-failure
+          kill "$xvfb_pid" || true
 
   linux-sanitizers:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
+      - name: Install authorized Linux window dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libx11-dev \
+            libxext-dev \
+            libxrandr-dev \
+            libxcursor-dev \
+            libxfixes-dev \
+            libxi-dev \
+            libxss-dev \
+            libxtst-dev \
+            libxinerama-dev \
+            libxrender-dev \
+            libxkbcommon-dev \
+            libxkbcommon-x11-dev \
+            libwayland-dev \
+            libdecor-0-dev \
+            wayland-protocols \
+            libdbus-1-dev \
+            libibus-1.0-dev \
+            libthai-dev \
+            libfribidi-dev \
+            libgl1-mesa-dev \
+            libegl1-mesa-dev \
+            libgles2-mesa-dev \
+            xvfb \
+            x11-utils \
+            openbox
       - name: Detect preinstalled ASan/UBSan support
         id: detect
         shell: bash
@@ -73,12 +149,24 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          Xvfb :99 -screen 0 1280x720x24 &
+          xvfb_pid=$!
+          export DISPLAY=:99
+          for attempt in {1..20}; do
+            if xdpyinfo -display :99 >/dev/null 2>&1; then
+              break
+            fi
+            sleep 0.5
+          done
+          openbox --sm-disable >/dev/null 2>&1 &
+          sleep 1
           c++ --version | sed -n '1p'
           cmake --version | sed -n '1p'
           ninja --version
           cmake --preset core01-internal-asan
           cmake --build --preset core01-internal-asan
-          env -u DISPLAY -u WAYLAND_DISPLAY ctest --preset core01-internal-asan --output-on-failure
+          ctest --preset core01-internal-asan --output-on-failure
+          kill "$xvfb_pid" || true
 
   windows:
     runs-on: windows-2025-vs2026
