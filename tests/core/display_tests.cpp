@@ -200,7 +200,7 @@ bool run_surface_errors() {
     expect(window.create(WindowConfig{}) == WindowError::None, "window create succeeds");
 
     WindowError worker_query = WindowError::None;
-    std::thread worker([&window, &worker_query, &metrics] {
+    std::thread worker([&window, &worker_query] {
         SurfaceMetrics worker_metrics{};
         worker_query = window.query_surface(worker_metrics);
     });
