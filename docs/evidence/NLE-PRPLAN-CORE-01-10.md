@@ -1,12 +1,13 @@
 # NLE-PRPLAN-CORE-01-10 — Display, DPI and surface validity
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-10`. **ADR:** [ADR-0089](../adr/0089-core-01-display-surface-slice.md). **Contract:** [core-01-display-surface-v0](../contracts/core-01-display-surface-v0.md). **WO:** [NLE-PRPLAN-CORE-01-10](../work-orders/NLE-PRPLAN-CORE-01-10.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-10`. **ADR:** [ADR-0089](../adr/0089-core-01-display-surface-slice.md). **Contract:** [core-01-display-surface-v0](../contracts/core-01-display-surface-v0.md). **WO:** [NLE-PRPLAN-CORE-01-10](../work-orders/NLE-PRPLAN-CORE-01-10.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First real CORE-01 display/surface metadata path: owner-thread display enumeration, bounds/usable bounds/content scale, additive window surface metrics and generation-based invalidation on resize or observed display/pixel-size change. No renderer/GPU/VRAM, physical hotplug/DPI certification, IME/fullscreen/HDR, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #446](https://github.com/KayzenRoot/stormline/pull/446) squash-merged as `2cba52ba439a631249dba7d1e1aaf49ac9e9d93d`; audit #6959494877 **APPROVED**.
+- **Code PR:** [PR #447](https://github.com/KayzenRoot/stormline/pull/447), HEAD auditado `ef091cb93bd7e592aa31107edadc54bdd65a4e07`.
 - **Base:** `2cba52ba439a631249dba7d1e1aaf49ac9e9d93d`.
 - **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-10 --json` → `EXECUTOR_READY`, exit 0; `-11`, `CORE-02-04` and every other ID exit 2.
 - **Predecessors:** `-03`..`-09` completed; CORE-02-03 ownership completed via PR #441.
@@ -49,11 +50,25 @@ No other path changed. Existing CORE-01/CORE-02 targets are unchanged except add
 - Full local matrix after rebuild: **47/47 CTests passed** (40 previous + 7 display tests).
 - Display tests exercise a dummy display, surface metrics, resize generation invalidation, wrong-thread rejection, argument/buffer errors, stability and 100 resize/query cycles.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with run IDs and observed CTest counts only after they complete; no native PASS is claimed yet.
+All jobs ran at the exact HEAD `ef091cb93bd7e592aa31107edadc54bdd65a4e07`:
 
-Expected matrix: existing 40 CTests plus 7 display tests = **47 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44166897206](https://github.com/KayzenRoot/stormline/actions/runs/44166897206) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **47/47 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan, X11 via Xvfb/openbox | **47/47 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **47/47 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **47/47 CTest passed** |
+
+Native workflow run: [44166897286](https://github.com/KayzenRoot/stormline/actions/runs/44166897286) **SUCCESS**. Job IDs: Linux `134335260716`, sanitizers `134335260138`, Windows `134335261017`, macOS `134335260656`. The seven `core01_display_*` tests executed in every job in addition to the existing 40 CTests; none skipped. Display tests used `SDL_VIDEODRIVER=dummy`; the window tests continued using the platform drivers and Xvfb on Linux.
+
+### Corrections found by real CI (same PR)
+
+1. **macOS `-Werror,-Wunused-lambda-capture`:** the wrong-thread surface test captured `metrics` without using it. The capture was removed; the semantic test is unchanged. The final matrix passed on all four jobs.
+
+No test was skipped and no PASS was claimed before the real runs.
 
 ## 5. Security, licensing and limitations
 
@@ -62,7 +77,7 @@ Expected matrix: existing 40 CTests plus 7 display tests = **47 CTests** per nat
 - `SDL_GetDisplays` returns SDL-owned memory; it is copied to caller storage and freed before return. `DisplayInfo` contains no pointer/string.
 - Physical multi-monitor/hotplug/DPI changes remain **NOT_QUALIFIED**: the test driver exposes a single dummy display. `query_surface` re-reads display/pixel state on every call, but this is not a physical hotplug PASS.
 - ADR-0003/0075 remain `PROPOSED`; G3 global `NOT_CLEARED`; NLE-D009 `OPEN`; 80/80 module WOs `BLOCKED`; `engine_implemented=false` at module/product level.
-- No HIGH/CRITICAL known; final status subject to exact-head CI and independent pt-BR audit.
+- No HIGH/CRITICAL known; native CI passed at the code head and the result remains subject to the independent pt-BR audit.
 
 ## 6. Rollback
 
