@@ -27,7 +27,7 @@ ACTIVE_STATUSES = {
 }
 BLOCKED_STATUS = "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS"
 CORE01_08_CODE_PR = 438
-CORE02_03_CODE_PR = 0  # updated by the -03 closeout; inert in the activated state
+CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
 
 CORE01_PINNED_SOURCE_BLOBS = {
@@ -368,7 +368,8 @@ def validate_capability_admission(
 def packet_readiness(
     manifest: dict, registry: dict, activation: dict | None, packet_id: str, root: Path = ROOT
 ) -> bool:
-    if validate_manifest(manifest, registry, activation, root, True):
+    verify_sources = manifest.get("status") in (CORE01_ACTIVATED_STATUS, CORE02_ACTIVATED_STATUS)
+    if validate_manifest(manifest, registry, activation, root, verify_sources):
         return False
     if activation is None or activation.get("selected_packet_id") != packet_id:
         return False

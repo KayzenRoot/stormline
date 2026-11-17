@@ -1,13 +1,13 @@
 # NLE-PRPLAN-CORE-02-03 — Ownership (`MemoryBlock`)
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-02-03`. **ADR:** [ADR-0087](../adr/0087-core-02-ownership-slice.md). **Capability admission:** [ADR-0086](../adr/0086-capability-based-l1-dependency.md). **Contract:** [core-02-ownership-v0](../contracts/core-02-ownership-v0.md). **WO:** [NLE-PRPLAN-CORE-02-03](../work-orders/NLE-PRPLAN-CORE-02-03.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-02-03`. **ADR:** [ADR-0087](../adr/0087-core-02-ownership-slice.md). **Capability admission:** [ADR-0086](../adr/0086-capability-based-l1-dependency.md). **Contract:** [core-02-ownership-v0](../contracts/core-02-ownership-v0.md). **WO:** [NLE-PRPLAN-CORE-02-03](../work-orders/NLE-PRPLAN-CORE-02-03.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First real CORE-02 code: an internal, move-only `MemoryBlock` over an explicit `std::pmr::memory_resource`, with exact allocation metadata, typed errors and single release. No global allocator replacement, third-party allocator, arena, budget, leak tracker, telemetry, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #440](https://github.com/KayzenRoot/stormline/pull/440) squash-merged as `2b5f8fa032f3544fd0ba52683ac2ff7be17b3496`; audit [#6957966885](https://github.com/KayzenRoot/stormline/pull/440#issuecomment-6957966885) **APPROVED**.
-- **Code PR:** [PR #441](https://github.com/KayzenRoot/stormline/pull/441), HEAD auditado `4e4b80a10933789cf537fe8c5ad7e1db272e41ba`.
+- **Code PR:** [PR #441](https://github.com/KayzenRoot/stormline/pull/441), HEAD auditado `a84574b6664f4b68bcdd4f7a55a20ed09d31fc80`, [auditoria pt-BR #6958320627](https://github.com/KayzenRoot/stormline/pull/441#issuecomment-6958320627) **APPROVED**; squash-merged as `ab12abd51499abfe9f0c7e5bac27227516c49ca2`.
 - **Base:** `2b5f8fa032f3544fd0ba52683ac2ff7be17b3496`.
 - **Selector:** `select_packet.py NLE-PRPLAN-CORE-02-03 --json` → `EXECUTOR_READY`, exit 0; `CORE-02-04`, `CORE-01-09` and every other ID exit 2.
 - **Capability admission:** `CORE01_HEADLESS_BUILD_AND_TEST` (`-03`), `CORE01_PORTABLE_PATHS` (`-06`), `CORE01_SDL3_BUILD_BASELINE` (`-07`) and `CORE01_NATIVE_CI_MATRIX` (`-08`) are completed; no CORE-01 window/input/DPI capability is used. CORE-01 is not claimed complete.
@@ -90,3 +90,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the first real CORE-02 slice, exact PR/CI/audit/merge SHA, 9 `core02_memory_*` tests and 32 total CTests across Linux, Linux ASan/UBSan, Windows and macOS, and the explicit statement that this is ownership only — not allocator selection, arenas, budgets, leaks, telemetry, public ABI or release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #441](https://github.com/KayzenRoot/stormline/pull/441) **squash-merged** at `2026-11-17T19:17:53Z`, merge `ab12abd51499abfe9f0c7e5bac27227516c49ca2`; [auditoria pt-BR #6958320627](https://github.com/KayzenRoot/stormline/pull/441#issuecomment-6958320627) **APPROVED**.
+- Final-head Docs Validation [44156511585](https://github.com/KayzenRoot/stormline/actions/runs/44156511585) **SUCCESS**; native [44156511747](https://github.com/KayzenRoot/stormline/actions/runs/44156511747) **SUCCESS**, **32/32 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-02-03` becomes `COMPLETED` with `github_pr=441`; the manifest has **737 `PLANNED_BLOCKED`, 7 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; `select_packet.py` denies every ID. No next packet or module is authorized. CORE-02 remains incomplete; ADR-0004 remains `PROPOSED`.
