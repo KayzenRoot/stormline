@@ -16,7 +16,10 @@ def main() -> int:
     issues = gates.validate_repository()
     manifest = json.loads(gates.MANIFEST.read_text(encoding="utf-8"))
     registry = json.loads(gates.REGISTRY.read_text(encoding="utf-8"))
-    activation = json.loads(gates.ACTIVATION_FILE.read_text(encoding="utf-8")) if gates.ACTIVATION_FILE.is_file() else None
+    try:
+        activation = json.loads(gates.ACTIVATION_FILE.read_text(encoding="utf-8")) if gates.ACTIVATION_FILE.is_file() else None
+    except (OSError, UnicodeError, ValueError):
+        activation = None  # Fail closed; validate_repository already reports malformed activation.
     ready = not issues and gates.packet_readiness(manifest, registry, activation, args.packet_id)
     entry = next((p for m in manifest["modules"] for p in m["packets"]
                   if p["packet_id"] == args.packet_id), None)

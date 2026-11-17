@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Positive and negative tests for proposed Stormline PR plan validation."""
 import copy
+import subprocess
 import json
 from pathlib import Path
 import sys
@@ -92,6 +93,20 @@ class PrPlanValidationTests(unittest.TestCase):
         reg = copy.deepcopy(self.registry)
         reg["modules"][0]["executor_ready"] = True
         self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
+
+
+    def test_selector_cli_fail_closed_and_one_allowed(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        allowed = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-01-03", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, allowed.returncode, allowed.stderr)
+        self.assertTrue(json.loads(allowed.stdout)["executor_ready"])
+        for packet_id in ("NLE-PRPLAN-CORE-01-04", "NLE-PRPLAN-CORE-02-03",
+                          "NLE-PRPLAN-NET-01-03", "NLE-PRPLAN-CORE-01-99"):
+            blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
+                                     capture_output=True, text=True, timeout=20, check=False)
+            self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
+            self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
     def test_missing_document(self):
         with tempfile.TemporaryDirectory() as temp:
