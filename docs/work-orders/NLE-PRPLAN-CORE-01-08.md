@@ -1,5 +1,7 @@
 # NLE-PRPLAN-CORE-01-08 — Native window lifecycle (INTERNAL_ONLY)
 
+**STATUS: COMPLETED — implemented and merged via [PR #438](https://github.com/KayzenRoot/stormline/pull/438), merge `69d1f96eb9df36a56eb4a0d34cc452bf11095cb1`. This packet must not be re-executed; no next packet or module is authorized.**
+
 **Gate:** G6 individual, conditional on gate PR audit/merge and executor fresh Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-08`. **Predecessor:** `-07` `COMPLETED` via PR #435. **Issue:** #18. **Base:** `b54f19c252fda9c06a7d7289a853bd4cf957cf53`. **ADR:** [ADR-0085](../adr/0085-core-01-window-lifecycle-slice.md). **Contract:** [core-01-window-lifecycle-v0](../contracts/core-01-window-lifecycle-v0.md).
 
 ## OBJECTIVE
