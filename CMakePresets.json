@@ -1,0 +1,50 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "core01-internal-debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/core01-internal",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_TESTING": "ON",
+        "STORMLINE_INTERNAL_HEADLESS_ONLY": "ON",
+        "STORMLINE_ENABLE_SANITIZERS": "OFF"
+      }
+    },
+    {
+      "name": "core01-internal-sanitized",
+      "inherits": "core01-internal-debug",
+      "binaryDir": "${sourceDir}/build/core01-sanitized",
+      "cacheVariables": {
+        "STORMLINE_ENABLE_SANITIZERS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "core01-internal-debug",
+      "configurePreset": "core01-internal-debug"
+    },
+    {
+      "name": "core01-internal-sanitized",
+      "configurePreset": "core01-internal-sanitized"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "core01-internal-debug",
+      "configurePreset": "core01-internal-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "core01-internal-sanitized",
+      "configurePreset": "core01-internal-sanitized",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}

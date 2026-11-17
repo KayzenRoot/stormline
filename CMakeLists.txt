@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.27)
+project(StormlineCore01Internal LANGUAGES CXX)
+
+option(STORMLINE_INTERNAL_HEADLESS_ONLY "Only internal CORE-01 headless build is permitted" ON)
+option(STORMLINE_ENABLE_SANITIZERS "Enable ASan/UBSan on Linux" OFF)
+if(NOT STORMLINE_INTERNAL_HEADLESS_ONLY)
+    message(FATAL_ERROR "Only the INTERNAL_ONLY CORE-01 headless scope is authorized")
+endif()
+
+include(CTest)
+add_library(stormline_core01_internal STATIC src/stormline/core/internal/headless_host.cpp)
+target_include_directories(stormline_core01_internal PUBLIC src)
+target_compile_features(stormline_core01_internal PUBLIC cxx_std_20)
+set_target_properties(stormline_core01_internal PROPERTIES
+    CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
+
+add_executable(stormline_core01_headless_tests tests/core/headless_host_tests.cpp)
+target_link_libraries(stormline_core01_headless_tests PRIVATE stormline_core01_internal)
+
+foreach(target stormline_core01_internal stormline_core01_headless_tests)
+    if(MSVC)
+        target_compile_options(${target} PRIVATE /W4 /WX)
+    else()
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+    if(STORMLINE_ENABLE_SANITIZERS)
+        if(NOT (UNIX AND NOT APPLE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang"))
+            message(FATAL_ERROR "Sanitizer profile only supported on Linux GCC/Clang")
+        endif()
+        target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+        target_link_options(${target} PRIVATE -fsanitize=address,undefined)
+    endif()
+endforeach()
+
+if(BUILD_TESTING)
+    add_test(NAME stormline_core01_headless_tests COMMAND stormline_core01_headless_tests)
+    set_tests_properties(stormline_core01_headless_tests PROPERTIES TIMEOUT 20)
+endif()
