@@ -1,15 +1,15 @@
 # NLE-PRPLAN-CORE-01-13 — Capability graph prototype and report-only measurement
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-13`. **ADR:** [ADR-0092](../adr/0092-core-01-capability-graph-prototype.md). **Contract:** [core-01-capability-graph-v0](../contracts/core-01-capability-graph-v0.md). **WO:** [NLE-PRPLAN-CORE-01-13](../work-orders/NLE-PRPLAN-CORE-01-13.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-13`. **ADR:** [ADR-0092](../adr/0092-core-01-capability-graph-prototype.md). **Contract:** [core-01-capability-graph-v0](../contracts/core-01-capability-graph-v0.md). **WO:** [NLE-PRPLAN-CORE-01-13](../work-orders/NLE-PRPLAN-CORE-01-13.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 Fixed-capacity capability graph prototype with explicit Unknown/Supported/Unsupported states, a thin SDL3 probe, and a **report-only** benchmark against direct `SDL_WasInit`. Not a SAPL adoption, not a performance PASS, no threshold.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #455](https://github.com/KayzenRoot/stormline/pull/455) squash-merged as `92fba81b9d0966b211db1003284577296d223567`; audit #6961080626 **APPROVED**.
-- **Code PR:** [PR #456](https://github.com/KayzenRoot/stormline/pull/456), HEAD auditado `06fe2376bf26c0b1730771cb59730afc3913272e`.
+- **Code PR:** [PR #456](https://github.com/KayzenRoot/stormline/pull/456), HEAD auditado `cbf4bcbf9e06eb5b12e2dd007721980c5faac25a`, [auditoria pt-BR #6961255542](https://github.com/KayzenRoot/stormline/pull/456#issuecomment-6961255542) **APPROVED**; squash-merged as `f744914c113c0e272cc26259480632272b1d25e3`.
 - **Base:** `92fba81b9d0966b211db1003284577296d223567`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-13 --json` → `EXECUTOR_READY`, exit 0; `-14`, `CORE-02-04` and every other ID exit 2.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-01-13 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Predecessors:** `-03`..`-12` completed; CORE-02-03 ownership completed via PR #441.
 
 ## 2. Implemented behavior
@@ -76,3 +76,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the ninth real CORE-01 slice, exact PR/CI/audit/merge SHA, 6 `core01_capability_*` tests and 65 total CTests across Linux, Linux ASan/UBSan, Windows and macOS, plus the CI benchmark stdout. It explicitly records that this is a **prototype/report-only** measurement, not SAPL adoption, a performance budget or a product decision. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #456](https://github.com/KayzenRoot/stormline/pull/456) **squash-merged** at `2026-11-17T21:15:09Z`, merge `f744914c113c0e272cc26259480632272b1d25e3`; [auditoria pt-BR #6961255542](https://github.com/KayzenRoot/stormline/pull/456#issuecomment-6961255542) **APPROVED**.
+- Final-head Docs Validation [44177673919](https://github.com/KayzenRoot/stormline/actions/runs/44177673919) **SUCCESS**; native [44177673810](https://github.com/KayzenRoot/stormline/actions/runs/44177673810) **SUCCESS**, **65/65 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-01-13` becomes `COMPLETED` with `github_pr=456`; the manifest has **732 `PLANNED_BLOCKED`, 12 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; `select_packet.py` denies every ID. No next packet or module is authorized. This remains a prototype/report-only measurement, not SAPL adoption or a performance PASS.

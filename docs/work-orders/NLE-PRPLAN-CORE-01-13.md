@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-13 — Capability graph prototype and comparative measurement (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE; not executable while the manifest is in a blocked state.** **Gate:** G6 individual, conditional on that merge and a fresh executor Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-13`. **Predecessor:** `-12` `COMPLETED` via PR #453. **Issue:** #18. **Base:** `967e136d517c6d78430bcde1fd66ef97a283efe5`. **ADR:** [ADR-0092](../adr/0092-core-01-capability-graph-prototype.md). **Contract:** [core-01-capability-graph-v0](../contracts/core-01-capability-graph-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #456](https://github.com/KayzenRoot/stormline/pull/456), merge `f744914c113c0e272cc26259480632272b1d25e3`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual, conditional on that merge and a fresh executor Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-13`. **Predecessor:** `-12` `COMPLETED` via PR #453. **Issue:** #18. **Base:** `967e136d517c6d78430bcde1fd66ef97a283efe5`. **ADR:** [ADR-0092](../adr/0092-core-01-capability-graph-prototype.md). **Contract:** [core-01-capability-graph-v0](../contracts/core-01-capability-graph-v0.md).
 
 ## OBJECTIVE
 
