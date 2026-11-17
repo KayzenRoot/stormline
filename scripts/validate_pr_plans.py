@@ -75,7 +75,7 @@ CORE02_PINNED_SOURCE_BLOBS = {
     "core01_sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
     "core01_window_contract": "5bf7eaee2d0aea3f0dc4cc89a419f79f8442b479",
     "core02_plan": "73901b368e5583c087254cf901bc4379b05deca3",
-    "implementation_registry": "a5acbc89bb43f53f67f8c5485a5262dc381a7ec1",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
 }
 
 CORE02_ACTIVATION_SOURCES = {
@@ -156,7 +156,9 @@ def git_blob_sha1(data: bytes) -> str:
 
 
 def file_blob_sha1(path: Path) -> str:
-    return git_blob_sha1(path.read_bytes())
+    # Match Git's blob identity for LF-normalized repository text on Windows
+    # working trees that may materialize CRLF.
+    return git_blob_sha1(path.read_bytes().replace(b"\r\n", b"\n"))
 
 
 def verify_source_blobs(fingerprints: dict, root: Path, sources: dict | None = None) -> list[str]:
