@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-10 — Display, DPI and surface validity (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE; not executable while the manifest is in a blocked state.** **Gate:** G6 individual, conditional on that merge and a fresh executor Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-10`. **Predecessor:** `-09` `COMPLETED` via PR #444. **Issue:** #18. **Base:** `7e42b48f19272498c732d75f2051704f5b82311f`. **ADR:** [ADR-0089](../adr/0089-core-01-display-surface-slice.md). **Contract:** [core-01-display-surface-v0](../contracts/core-01-display-surface-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #447](https://github.com/KayzenRoot/stormline/pull/447), merge `ec622f556ec4e6f1404bfd0f628794cde3777b8e`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual, granted by [PR #446](https://github.com/KayzenRoot/stormline/pull/446). **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-10`. **Predecessor:** `-09` `COMPLETED` via PR #444. **Issue:** #18. **Base:** `7e42b48f19272498c732d75f2051704f5b82311f`. **ADR:** [ADR-0089](../adr/0089-core-01-display-surface-slice.md). **Contract:** [core-01-display-surface-v0](../contracts/core-01-display-surface-v0.md).
 
 ## OBJECTIVE
 
