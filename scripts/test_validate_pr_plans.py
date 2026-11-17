@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Positive and negative tests for proposed Stormline PR plan validation."""
+"""Positive and negative tests for Stormline PR plan and G6 activation validation."""
 import copy
-import subprocess
 import json
+import subprocess
 from pathlib import Path
 import sys
 import tempfile
@@ -60,36 +60,43 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertTrue(any("packet count" in x for x in
                             self.check(lambda d: d.update(planned_packet_count=20))))
 
-
-    def test_completed_packet_is_not_ready(self):
+    def test_predecessor_reconciliation(self):
+        packets = self.manifest["modules"][0]["packets"]
+        self.assertEqual("COMPLETED", packets[2]["status"])
+        self.assertEqual(428, packets[2]["github_pr"])
+        self.assertEqual("COMPLETED", packets[3]["status"])
+        self.assertEqual(428, packets[3]["github_pr"])
+        self.assertEqual("COMPLETED", packets[4]["status"])
+        self.assertEqual(428, packets[4]["github_pr"])
+        self.assertEqual("EXECUTOR_READY", packets[5]["status"])
+        self.assertIsNone(packets[5]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
-        completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
-                     if p["status"] == "COMPLETED"]
-        self.assertEqual(["NLE-PRPLAN-CORE-01-03"], completed)
-        self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-01-03"))
-        self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-01-04"))
-        self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-02-03"))
+        self.assertEqual(["NLE-PRPLAN-CORE-01-06"], ready)
 
-    def test_completed_packet_cannot_be_reopened(self):
+    def test_predecessor_cannot_be_reopened(self):
         def wrong(d):
-            d["modules"][0]["packets"][2]["status"] = "EXECUTOR_READY"
-            d["modules"][0]["packets"][2]["github_pr"] = None
+            d["modules"][0]["packets"][3]["status"] = "PLANNED_BLOCKED"
+            d["modules"][0]["packets"][3]["github_pr"] = None
         self.assertTrue(any("expected COMPLETED/428" in x for x in self.check(wrong)))
 
     def test_completed_packet_cannot_claim_wrong_pr(self):
         def wrong(d):
-            d["modules"][0]["packets"][2]["github_pr"] = 999
+            d["modules"][0]["packets"][4]["github_pr"] = 999
         self.assertTrue(any("expected COMPLETED/428" in x for x in self.check(wrong)))
+
+    def test_ready_packet_requires_bounded_evidence(self):
+        def wrong(d):
+            d["modules"][0]["packets"][5]["activation_evidence"] = "docs/evidence/wrong.md"
+        self.assertTrue(any("lacks bounded risk/ADR/evidence" in x for x in self.check(wrong)))
 
     def test_no_activation_record_denies_ready(self):
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, None))
-        self.assertFalse(v.packet_readiness(self.manifest, self.registry, None, "NLE-PRPLAN-CORE-01-03"))
+        self.assertFalse(v.packet_readiness(self.manifest, self.registry, None, "NLE-PRPLAN-CORE-01-06"))
 
-    def test_forged_approval_or_risk_denied(self):
+    def test_forged_activation_denied(self):
         bad = copy.deepcopy(self.activation)
-        bad["owner_ratification_pr"] = 999
+        bad["owner_authorization_ref"] = "forged"
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
         bad = copy.deepcopy(self.activation)
         bad["risk"] = "LOW"
@@ -100,7 +107,7 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_any_second_packet_activation_denied(self):
         def wrong(d):
-            d["modules"][0]["packets"][3]["status"] = "EXECUTOR_READY"
+            d["modules"][0]["packets"][6]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
     def test_module_level_promotion_remains_forbidden(self):
@@ -108,16 +115,32 @@ class PrPlanValidationTests(unittest.TestCase):
         reg["modules"][0]["executor_ready"] = True
         self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
 
-
-    def test_selector_cli_denies_all_after_completion(self):
+    def test_selector_cli_only_06_allowed(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
+        allowed = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-01-06", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, allowed.returncode, allowed.stderr)
+        self.assertTrue(json.loads(allowed.stdout)["executor_ready"])
         for packet_id in ("NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
-                          "NLE-PRPLAN-CORE-02-03", "NLE-PRPLAN-NET-01-03",
-                          "NLE-PRPLAN-CORE-01-99"):
+                          "NLE-PRPLAN-CORE-01-05", "NLE-PRPLAN-CORE-01-07",
+                          "NLE-PRPLAN-CORE-02-03", "NLE-PRPLAN-CORE-01-99"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
             self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_live_source_drift_is_detected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            fingerprints = {}
+            for key, rel in v.ACTIVATION_SOURCES.items():
+                path = root / rel
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"x")
+                fingerprints[key] = v.file_blob_sha1(path)
+            self.assertEqual([], v.verify_source_blobs(fingerprints, root))
+            (root / v.ACTIVATION_SOURCES["checkpoint"]).write_bytes(b"y")
+            self.assertTrue(any("source drift" in x for x in v.verify_source_blobs(fingerprints, root)))
 
     def test_missing_document(self):
         with tempfile.TemporaryDirectory() as temp:

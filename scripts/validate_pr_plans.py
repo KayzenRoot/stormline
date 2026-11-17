@@ -2,6 +2,7 @@
 """Validate Stormline packet planning and at most one bounded owner-approved activation."""
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -10,30 +11,78 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs/queue/implementation-registry.json"
 MANIFEST = ROOT / "docs/pr-plans/manifest.json"
-ACTIVATION_FILE = ROOT / "docs/queue/packet-activations.json"
-ACTIVATED_STATUS = "ONE_BOUNDED_CORE01_INTERNAL_PACKET_READY"
-COMPLETED_STATUS = "CORE01_03_COMPLETED_REST_BLOCKED"
+ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-06.json"
+ACTIVATED_STATUS = "CORE01_06_READY_PREDECESSORS_RECONCILED"
+COMPLETED_STATUS = "CORE01_06_COMPLETED_REST_BLOCKED"
+BLOCKED_STATUS = "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS"
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
 
+PINNED_SOURCE_BLOBS = {
+    "checkpoint": "a5575fa0fa8d4f72f0e0cde2c22af7f6d80dfcb3",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0083": "82d4968e37f0400f092e885d9fe201df772f4719",
+    "contract_v0": "4ea41263bcfd412ca35df2abb32a158706b64e48",
+    "process_paths_contract": "e551ad7b3c8112f79b88a65c33050059762b71fc",
+}
+
+ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0083": "docs/adr/0083-core-01-internal-headless-slice.md",
+    "contract_v0": "docs/contracts/core-01-internal-headless-v0.md",
+    "process_paths_contract": "docs/contracts/core-01-process-paths-v0.md",
+}
+
+SLICE_METADATA = {
+    3: "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md",
+    4: "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
+    5: "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
+    6: "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
+}
 
 
-def validate_activation(activation: dict) -> list[str]:
-    """Hard-stop on a broad or forged G6 transition. This is only the first reviewed packet."""
+def git_blob_sha1(data: bytes) -> str:
+    header = b"blob " + str(len(data)).encode("ascii") + b"\0"
+    return hashlib.sha1(header + data).hexdigest()
+
+
+def file_blob_sha1(path: Path) -> str:
+    return git_blob_sha1(path.read_bytes())
+
+
+def verify_source_blobs(fingerprints: dict, root: Path) -> list[str]:
+    errors = []
+    for key, rel in ACTIVATION_SOURCES.items():
+        path = root / rel
+        try:
+            actual = file_blob_sha1(path)
+        except OSError as err:
+            errors.append(f"activation source missing: {rel}: {err}")
+            continue
+        if fingerprints.get(key) != actual:
+            errors.append(f"activation source drift: {rel} expected {fingerprints.get(key)} got {actual}")
+    return errors
+
+
+def validate_activation(activation: dict, root: Path = ROOT, verify_sources: bool = False) -> list[str]:
+    """Hard-stop on a broad or forged G6 transition. Only packet -06 is authorized."""
     expected = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
-        "selected_packet_id": "NLE-PRPLAN-CORE-01-03",
+        "selected_packet_id": "NLE-PRPLAN-CORE-01-06",
         "module_id": "CORE-01",
         "risk": "STANDARD",
         "release_class": "INTERNAL_ONLY",
-        "owner_ratification_pr": 422,
-        "contract_pr": 424,
-        "checkpoint_pr": 425,
+        "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17",
         "approved_adr": "docs/adr/0083-core-01-internal-headless-slice.md",
-        "approved_contract": "docs/contracts/core-01-internal-headless-v0.md",
-        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-03.md",
-        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md",
-        "gate_base_sha": "c355de53bca5be1d64dedb4d7111bd40c8859e83",
+        "approved_contract": "docs/contracts/core-01-process-paths-v0.md",
+        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-06.md",
+        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
+        "gate_base_sha": "b3638de6c6918e36b49726af63abeb09bd35f140",
         "requires_fresh_context_lock": True,
     }
     errors = []
@@ -43,16 +92,12 @@ def validate_activation(activation: dict) -> list[str]:
         if activation.get(key) != value:
             errors.append(f"activation {key} mismatch: no bulk owner authority")
     fingerprints = activation.get("source_blob_sha1")
-    required = {
-        "checkpoint": "5090dfa5fc39f3e26e5df038c6e23bce2ff1e26a",
-        "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
-        "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
-        "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
-        "adr_0083": "82d4968e37f0400f092e885d9fe201df772f4719",
-        "contract_v0": "4ea41263bcfd412ca35df2abb32a158706b64e48",
-    }
-    if fingerprints != required:
+    if not isinstance(fingerprints, dict) or set(fingerprints) != set(ACTIVATION_SOURCES):
+        errors.append("activation source_blob_sha1 must contain exactly the pinned sources")
+    elif fingerprints != PINNED_SOURCE_BLOBS:
         errors.append("activation source fingerprints do not match approved baseline")
+    elif verify_sources:
+        errors.extend(verify_source_blobs(fingerprints, root))
     return errors
 
 
@@ -64,15 +109,25 @@ def expected_packet_state(
             return "APPROVED_GOVERNANCE", 422
         if idx == 2:
             return "APPROVED_CONTRACT", 424
-        if idx == 3:
+        if idx in (3, 4, 5):
+            return "COMPLETED", 428
+        if idx == 6:
             if manifest_status == COMPLETED_STATUS:
                 return "COMPLETED", 428
             return "EXECUTOR_READY", None
     return "PLANNED_BLOCKED", None
 
 
-def packet_readiness(manifest: dict, registry: dict, activation: dict | None, packet_id: str) -> bool:
-    if validate_manifest(manifest, registry, activation):
+def expected_metadata(module_id: str, idx: int) -> str | None:
+    if module_id == "CORE-01" and idx in SLICE_METADATA:
+        return SLICE_METADATA[idx]
+    return None
+
+
+def packet_readiness(
+    manifest: dict, registry: dict, activation: dict | None, packet_id: str, root: Path = ROOT
+) -> bool:
+    if validate_manifest(manifest, registry, activation, root, True):
         return False
     if activation is None or activation.get("selected_packet_id") != packet_id:
         return False
@@ -81,19 +136,25 @@ def packet_readiness(manifest: dict, registry: dict, activation: dict | None, pa
     return len(matches) == 1 and matches[0].get("status") == "EXECUTOR_READY"
 
 
-def validate_manifest(manifest: dict, registry: dict, activation: dict | None = None) -> list[str]:
+def validate_manifest(
+    manifest: dict,
+    registry: dict,
+    activation: dict | None = None,
+    root: Path = ROOT,
+    verify_sources: bool = False,
+) -> list[str]:
     issues: list[str] = []
     source = registry.get("modules", [])
     plans = manifest.get("modules", [])
     if manifest.get("schema_version") != 1 or manifest.get("module_count") != 80:
         issues.append("schema_version=1 and module_count=80 required")
     if activation is None:
-        if manifest.get("status") != "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS":
+        if manifest.get("status") != BLOCKED_STATUS:
             issues.append("manifest must remain blocked without G6 activation")
     else:
         if manifest.get("status") not in (ACTIVATED_STATUS, COMPLETED_STATUS):
             issues.append("manifest activation/completion status mismatch")
-        issues.extend(validate_activation(activation))
+        issues.extend(validate_activation(activation, root, verify_sources))
     by_id = {x.get("module_id"): x for x in source}
     all_ids: set[str] = set()
     module_ids: list[str] = []
@@ -146,12 +207,15 @@ def validate_manifest(manifest: dict, registry: dict, activation: dict | None = 
             want_status, want_pr = expected_packet_state(mid, idx, activation, manifest.get("status"))
             if packet.get("status") != want_status or packet.get("github_pr") != want_pr:
                 issues.append(f"{mid}: code PR must not be opened/authorized by documentary map; expected {want_status}/{want_pr}")
-            if want_status in ("EXECUTOR_READY", "COMPLETED"):
-                if (packet.get("risk") != "STANDARD"
-                        or packet.get("release_class") != "INTERNAL_ONLY"
-                        or packet.get("approved_adr") != "docs/adr/0083-core-01-internal-headless-slice.md"
-                        or packet.get("activation_evidence") != "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md"):
-                    issues.append(f"{mid}: ready/completed packet lacks bounded risk/ADR/evidence")
+            evidence = expected_metadata(mid, idx)
+            if evidence is not None:
+                if want_status not in ("EXECUTOR_READY", "COMPLETED"):
+                    issues.append(f"{mid}: slice metadata on a non-completed packet")
+                elif (packet.get("risk") != "STANDARD"
+                      or packet.get("release_class") != "INTERNAL_ONLY"
+                      or packet.get("approved_adr") != "docs/adr/0083-core-01-internal-headless-slice.md"
+                      or packet.get("activation_evidence") != evidence):
+                    issues.append(f"{mid}: ready/completed slice lacks bounded risk/ADR/evidence")
             elif any(field in packet for field in ("risk", "release_class", "approved_adr", "activation_evidence")):
                 issues.append(f"{mid}: blocked or documentary packet claims executor metadata")
             if packet.get("depends_on") != ([] if idx == 1 else [f"NLE-PRPLAN-{mid}-{idx-1:02}"]):
@@ -168,10 +232,14 @@ def validate_manifest(manifest: dict, registry: dict, activation: dict | None = 
         issues.append("manifest packet count differs from actual unique IDs")
     if len(all_ids) < 600:
         issues.append("unexpectedly low candidate PR breakdown")
+    if manifest.get("status") == ACTIVATED_STATUS:
+        statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
+        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 3:
+            issues.append("activated state must have exactly one ready packet and three completed predecessors")
     if manifest.get("status") == COMPLETED_STATUS:
         statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
-        if statuses.count("COMPLETED") != 1 or "EXECUTOR_READY" in statuses:
-            issues.append("completed activation must have exactly one COMPLETED and zero EXECUTOR_READY packets")
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 4:
+            issues.append("completed state must have zero ready packets and four completed slices")
     return issues
 
 
@@ -185,12 +253,13 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     issues = []
     activation = None
     if manifest.get("status") in (ACTIVATED_STATUS, COMPLETED_STATUS):
-        path = root / "docs/queue/packet-activations.json"
+        path = root / "docs/queue/packet-activation-core-01-06.json"
         try:
             activation = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, ValueError) as err:
             issues.append(f"Missing/invalid bounded G6 activation record: {err}")
-    issues.extend(validate_manifest(manifest, reg, activation))
+    verify_sources = manifest.get("status") == ACTIVATED_STATUS
+    issues.extend(validate_manifest(manifest, reg, activation, root, verify_sources))
     if activation is not None:
         for key in ("approved_adr", "approved_contract", "work_order", "activation_evidence"):
             path = root / activation[key]
