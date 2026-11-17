@@ -16,6 +16,8 @@ Scope: Ownership, alocadores, arenas, budgets, leak tracking e telemetria de mem
 | 9 | NLE-PRPLAN-CORE-02-09 | QUALIFICATION | Integrated functionality, real OS/security/soak qualification | NLE-PRPLAN-CORE-02-08 | BLOCKED |
 | 10 | NLE-PRPLAN-CORE-02-10 | CLOSEOUT | Evidence, review, recovery and checkpoint | NLE-PRPLAN-CORE-02-09 | BLOCKED |
 
+The table above is the historical all-blocked map. The owner-approved capability-based gate [PR #440](https://github.com/KayzenRoot/stormline/pull/440) activated only `NLE-PRPLAN-CORE-02-03`; [PR #441](https://github.com/KayzenRoot/stormline/pull/441) merged the ownership slice as `ab12abd…`. `CORE-02-03` is now `COMPLETED`; `CORE-02-01/-02` are approved gate entries; every other CORE-02 packet remains `PLANNED_BLOCKED`. This does not approve ADR-0004, complete CORE-02 or authorize `-04`.
+
 ## Packet pre-briefs (NOT executable)
 ### NLE-PRPLAN-CORE-02-01 / Explicit owner ADR, Scope/DoD, release and risk gates
 OBJECTIVE / SCOPE: Explicit owner ADR, Scope/DoD, release and risk gates. CONTEXT: CORE-02 predecessors CORE-01. OUT OF SCOPE: unapproved stack, new module edges, public release and unrelated work.
