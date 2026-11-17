@@ -70,9 +70,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(428, packets[4]["github_pr"])
         self.assertEqual("COMPLETED", packets[5]["status"])
         self.assertEqual(432, packets[5]["github_pr"])
+        self.assertEqual("EXECUTOR_READY", packets[6]["status"])
+        self.assertIsNone(packets[6]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
+        self.assertEqual(["NLE-PRPLAN-CORE-01-07"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -91,12 +93,17 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_ready_packet_requires_bounded_evidence(self):
         def wrong(d):
-            d["modules"][0]["packets"][5]["activation_evidence"] = "docs/evidence/wrong.md"
+            d["modules"][0]["packets"][6]["activation_evidence"] = "docs/evidence/wrong.md"
+        self.assertTrue(any("lacks bounded risk/ADR/evidence" in x for x in self.check(wrong)))
+
+    def test_ready_packet_requires_correct_adr(self):
+        def wrong(d):
+            d["modules"][0]["packets"][6]["approved_adr"] = "docs/adr/0083-core-01-internal-headless-slice.md"
         self.assertTrue(any("lacks bounded risk/ADR/evidence" in x for x in self.check(wrong)))
 
     def test_no_activation_record_denies_ready(self):
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, None))
-        self.assertFalse(v.packet_readiness(self.manifest, self.registry, None, "NLE-PRPLAN-CORE-01-06"))
+        self.assertFalse(v.packet_readiness(self.manifest, self.registry, None, "NLE-PRPLAN-CORE-01-07"))
 
     def test_forged_activation_denied(self):
         bad = copy.deepcopy(self.activation)
@@ -109,9 +116,22 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "bad"
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
 
+    def test_sdl3_pin_is_exact(self):
+        self.assertEqual({
+            "version": "3.4.20",
+            "repository": "https://github.com/libsdl-org/SDL.git",
+            "commit": "f00dc919ca35b9756316e86c4777392de442f9b2",
+            "license": "zlib",
+            "linkage": "static",
+            "build_time_fetch": True,
+        }, self.activation["sdl3"])
+        bad = copy.deepcopy(self.activation)
+        bad["sdl3"]["commit"] = "deadbeef"
+        self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
+
     def test_any_second_packet_activation_denied(self):
         def wrong(d):
-            d["modules"][0]["packets"][6]["status"] = "EXECUTOR_READY"
+            d["modules"][0]["packets"][7]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
     def test_module_level_promotion_remains_forbidden(self):
@@ -119,11 +139,15 @@ class PrPlanValidationTests(unittest.TestCase):
         reg["modules"][0]["executor_ready"] = True
         self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
 
-    def test_selector_cli_all_denied_after_completion(self):
+    def test_selector_cli_only_07_allowed(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
+        allowed = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-01-07", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, allowed.returncode, allowed.stderr)
+        self.assertTrue(json.loads(allowed.stdout)["executor_ready"])
         for packet_id in ("NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
                           "NLE-PRPLAN-CORE-01-05", "NLE-PRPLAN-CORE-01-06",
-                          "NLE-PRPLAN-CORE-01-07", "NLE-PRPLAN-CORE-02-03",
+                          "NLE-PRPLAN-CORE-01-08", "NLE-PRPLAN-CORE-02-03",
                           "NLE-PRPLAN-CORE-01-99"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)

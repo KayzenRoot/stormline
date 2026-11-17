@@ -11,20 +11,24 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs/queue/implementation-registry.json"
 MANIFEST = ROOT / "docs/pr-plans/manifest.json"
-ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-06.json"
-ACTIVATED_STATUS = "CORE01_06_READY_PREDECESSORS_RECONCILED"
-COMPLETED_STATUS = "CORE01_06_COMPLETED_REST_BLOCKED"
+ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-07.json"
+ACTIVATED_STATUS = "CORE01_07_READY_PREDECESSORS_COMPLETED"
+COMPLETED_STATUS = "CORE01_07_COMPLETED_REST_BLOCKED"
 BLOCKED_STATUS = "ALL_PROPOSED_BLOCKED_NOT_ACTUAL_CODE_PRS"
+CORE01_07_CODE_PR = 0  # updated by the -07 closeout; inert in the activated state
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
 
 PINNED_SOURCE_BLOBS = {
-    "checkpoint": "a5575fa0fa8d4f72f0e0cde2c22af7f6d80dfcb3",
+    "checkpoint": "a84d295988979d0920668b795fb11eb84b140d38",
     "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0003": "50d028c7a28acc25164256c5f4547c14ac7192d4",
     "adr_0083": "82d4968e37f0400f092e885d9fe201df772f4719",
+    "adr_0084": "15067edecb676996c08949f9e0c1e7dc02bb5273",
     "contract_v0": "4ea41263bcfd412ca35df2abb32a158706b64e48",
     "process_paths_contract": "e551ad7b3c8112f79b88a65c33050059762b71fc",
+    "sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
 }
 
 ACTIVATION_SOURCES = {
@@ -32,16 +36,25 @@ ACTIVATION_SOURCES = {
     "decisions_ledger": "docs/10-decisions-ledger.md",
     "scope": "docs/03-scope.md",
     "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0003": "docs/adr/0003-core-01-platform-technology.md",
     "adr_0083": "docs/adr/0083-core-01-internal-headless-slice.md",
+    "adr_0084": "docs/adr/0084-core-01-sdl3-runtime-slice.md",
     "contract_v0": "docs/contracts/core-01-internal-headless-v0.md",
     "process_paths_contract": "docs/contracts/core-01-process-paths-v0.md",
+    "sdl3_contract": "docs/contracts/core-01-sdl3-runtime-v0.md",
 }
 
 SLICE_METADATA = {
-    3: "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md",
-    4: "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
-    5: "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
-    6: "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
+    3: ("docs/adr/0083-core-01-internal-headless-slice.md",
+        "docs/evidence/NLE-PRPLAN-CORE-01-03-G6-ACTIVATION.md"),
+    4: ("docs/adr/0083-core-01-internal-headless-slice.md",
+        "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md"),
+    5: ("docs/adr/0083-core-01-internal-headless-slice.md",
+        "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md"),
+    6: ("docs/adr/0083-core-01-internal-headless-slice.md",
+        "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md"),
+    7: ("docs/adr/0084-core-01-sdl3-runtime-slice.md",
+        "docs/evidence/NLE-PRPLAN-CORE-01-07-G6-ACTIVATION.md"),
 }
 
 
@@ -73,24 +86,34 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
     expected = {
         "schema_version": 2,
         "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
-        "selected_packet_id": "NLE-PRPLAN-CORE-01-06",
+        "selected_packet_id": "NLE-PRPLAN-CORE-01-07",
         "module_id": "CORE-01",
         "risk": "STANDARD",
         "release_class": "INTERNAL_ONLY",
-        "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17",
-        "approved_adr": "docs/adr/0083-core-01-internal-headless-slice.md",
-        "approved_contract": "docs/contracts/core-01-process-paths-v0.md",
-        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-06.md",
-        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-06-G6-ACTIVATION.md",
-        "gate_base_sha": "b3638de6c6918e36b49726af63abeb09bd35f140",
+        "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+        "approved_adr": "docs/adr/0084-core-01-sdl3-runtime-slice.md",
+        "approved_contract": "docs/contracts/core-01-sdl3-runtime-v0.md",
+        "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-07.md",
+        "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-07-G6-ACTIVATION.md",
+        "gate_base_sha": "80a6fdafb2cc0f1f923af83367f21e9260e53323",
         "requires_fresh_context_lock": True,
     }
+    expected_sdl3 = {
+        "version": "3.4.20",
+        "repository": "https://github.com/libsdl-org/SDL.git",
+        "commit": "f00dc919ca35b9756316e86c4777392de442f9b2",
+        "license": "zlib",
+        "linkage": "static",
+        "build_time_fetch": True,
+    }
     errors = []
-    if set(activation) != set(expected) | {"source_blob_sha1"}:
+    if set(activation) != set(expected) | {"source_blob_sha1", "sdl3"}:
         errors.append("activation keys must match exactly one audited G6 packet")
     for key, value in expected.items():
         if activation.get(key) != value:
             errors.append(f"activation {key} mismatch: no bulk owner authority")
+    if activation.get("sdl3") != expected_sdl3:
+        errors.append("activation SDL3 pin mismatch: only static 3.4.20 at the exact commit is authorized")
     fingerprints = activation.get("source_blob_sha1")
     if not isinstance(fingerprints, dict) or set(fingerprints) != set(ACTIVATION_SOURCES):
         errors.append("activation source_blob_sha1 must contain exactly the pinned sources")
@@ -112,8 +135,10 @@ def expected_packet_state(
         if idx in (3, 4, 5):
             return "COMPLETED", 428
         if idx == 6:
+            return "COMPLETED", 432
+        if idx == 7:
             if manifest_status == COMPLETED_STATUS:
-                return "COMPLETED", 432
+                return "COMPLETED", CORE01_07_CODE_PR
             return "EXECUTOR_READY", None
     return "PLANNED_BLOCKED", None
 
@@ -207,13 +232,14 @@ def validate_manifest(
             want_status, want_pr = expected_packet_state(mid, idx, activation, manifest.get("status"))
             if packet.get("status") != want_status or packet.get("github_pr") != want_pr:
                 issues.append(f"{mid}: code PR must not be opened/authorized by documentary map; expected {want_status}/{want_pr}")
-            evidence = expected_metadata(mid, idx)
-            if evidence is not None:
+            metadata = expected_metadata(mid, idx)
+            if metadata is not None:
+                adr, evidence = metadata
                 if want_status not in ("EXECUTOR_READY", "COMPLETED"):
                     issues.append(f"{mid}: slice metadata on a non-completed packet")
                 elif (packet.get("risk") != "STANDARD"
                       or packet.get("release_class") != "INTERNAL_ONLY"
-                      or packet.get("approved_adr") != "docs/adr/0083-core-01-internal-headless-slice.md"
+                      or packet.get("approved_adr") != adr
                       or packet.get("activation_evidence") != evidence):
                     issues.append(f"{mid}: ready/completed slice lacks bounded risk/ADR/evidence")
             elif any(field in packet for field in ("risk", "release_class", "approved_adr", "activation_evidence")):
@@ -234,12 +260,12 @@ def validate_manifest(
         issues.append("unexpectedly low candidate PR breakdown")
     if manifest.get("status") == ACTIVATED_STATUS:
         statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
-        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 3:
-            issues.append("activated state must have exactly one ready packet and three completed predecessors")
+        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 4:
+            issues.append("activated state must have exactly one ready packet and four completed predecessors")
     if manifest.get("status") == COMPLETED_STATUS:
         statuses = [p.get("status") for entry in plans for p in entry.get("packets", [])]
-        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 4:
-            issues.append("completed state must have zero ready packets and four completed slices")
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 5:
+            issues.append("completed state must have zero ready packets and five completed slices")
     return issues
 
 
@@ -253,7 +279,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     issues = []
     activation = None
     if manifest.get("status") in (ACTIVATED_STATUS, COMPLETED_STATUS):
-        path = root / "docs/queue/packet-activation-core-01-06.json"
+        path = root / "docs/queue/packet-activation-core-01-07.json"
         try:
             activation = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, ValueError) as err:
