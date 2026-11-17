@@ -51,7 +51,7 @@ No other path changed. Existing CORE-01 targets/tests are unchanged except addit
 
 - Direct MSVC 14.44.35207 compile/link with `/std:c++20 /W4 /WX /EHsc /I src`: **OK**.
 - All nine modes executed from the linked binary: `basic`, `invalid`, `owned`, `move`, `release`, `resource`, `oom`, `cross_thread`, `lifetime` → **exit 0**.
-- CMake configure with the pinned local SDL3 3.4.20 source, `stormline_core02_memory_test` build and `ctest -R core02_`: **9/9 passed**.
+- CMake configure with a local SDL3 3.4.20 source override (CI uses the exact pinned commit), `stormline_core02_memory_test` build and `ctest -R core02_`: **9/9 passed**.
 - The first link failed because the private `MemoryBlock` constructor was declared but not defined; the definition was added and the rebuild passed. This was a local preflight defect, not a CI PASS.
 
 ### Native CI (authoritative, observed)
