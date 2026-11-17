@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-06 — Portable process paths implementation
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_MSVC_SUPPLEMENTARY / NATIVE_CI_PENDING / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-06` · **Contract:** [core-01-process-paths-v0](../contracts/core-01-process-paths-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-06](../work-orders/NLE-PRPLAN-CORE-01-06.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-06` · **Contract:** [core-01-process-paths-v0](../contracts/core-01-process-paths-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-06](../work-orders/NLE-PRPLAN-CORE-01-06.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 This is the second real CORE-01 code slice. It is internal-only, read-only, CPU-only, standard-library C++20, with no SDL3, window, GPU, audio, network, public ABI, VFS, file creation/write or release.
 
@@ -65,16 +65,28 @@ The local machine has no CMake/Ninja in `PATH`; installing new tooling is prohib
 
 MSVC 14.44 is **not** the approved provisional target (14.51); this is supplementary evidence only.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-The code PR must run the existing workflow on `ubuntu-24.04`, `windows-2025-vs2026` and `macos-15`, plus Linux ASan/UBSan when preinstalled. It must execute the 5 existing headless CTests and the 7 new paths CTests. The PR stays Draft until exact-head Docs Validation and native results are observed and recorded here. No native PASS is claimed before that.
+The code-bearing head `3e3d2b0365c91373da4b16f56ad6b087911e7fde` passed the required Docs Validation and all native jobs. A later documentation-only evidence update re-runs Docs Validation; the code and native jobs are unchanged, and the final-head Docs Validation is recorded in the PR audit.
+
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44138390889](https://github.com/KayzenRoot/stormline/actions/runs/44138390889), job `134234121713` **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC 13.3.0, CMake 3.31.6, Ninja 1.13.2 | **12/12 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan supported and enabled | **12/12 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC 14.51.36231 / 19.51.36260, CMake 4.4.5 | **12/12 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang 17.0.0, CMake 4.4.5 | **12/12 CTest passed** |
+
+Native workflow run: [44138390817](https://github.com/KayzenRoot/stormline/actions/runs/44138390817) (`pull_request`, head `3e3d2b0…`) **SUCCESS**. Job IDs: Linux `134234121738`, sanitizers `134234121495`, Windows `134234122141`, macOS `134234121229`. The 5 existing headless CTests and 7 new paths CTests all executed; none skipped.
+
+Platform-specific honesty: Linux/macOS run the real POSIX access-denial case when not root and the real symlink cases; Windows prints `NOT_QUALIFIED` for real ACL denial (environment-dependent) while the deterministic `permission_denied` mapping test passes. If Windows symlink creation lacks privilege, the symlink case is also `NOT_QUALIFIED`; no false PASS is claimed for an unexecuted OS condition.
 
 ## 5. Contract mapping and limitations
 
 - Covers PATH-01..PATH-12: cwd/temp absolute and existing, Unicode round-trip, invalid input, traversal, contained normalization, denied/unavailable typed errors, symlink escape, no-write proof, 200 repetitions and full headless regression.
 - No Unicode normalization library is added; composed/decomposed forms are preserved per OS. Real Windows ACL denial is environment-dependent and recorded `NOT_QUALIFIED` if unavailable; the deterministic mapping test still runs.
 - No real physical hardware, SDL3, window, GPU, audio, ABI, packaging or release certification is claimed.
-- No HIGH/CRITICAL defect is known; subject to exact-head native CI and independent audit.
+- No HIGH/CRITICAL defect is known; native CI passed at the code head and the result remains subject to the independent audit and final documentation-head Docs Validation.
 
 ## 6. Security, licensing and rollback
 
