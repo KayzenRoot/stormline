@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-CORE-01-12",
+  "module_id": "CORE-01",
+  "risk": "STANDARD",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+  "approved_adr": "docs/adr/0091-core-01-lifecycle-request-state-machine.md",
+  "approved_contract": "docs/contracts/core-01-lifecycle-requests-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-12.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-12-G6-ACTIVATION.md",
+  "gate_base_sha": "df551006982868e616d867c7daaa3fc5a7c51ee8",
+  "gate_pr": 0,
+  "requires_fresh_context_lock": true,
+  "source_blob_sha1": {
+    "checkpoint": "5c0b7e4fe5a0121c533be73fad2e0e22b913ab7d",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0003": "50d028c7a28acc25164256c5f4547c14ac7192d4",
+    "adr_0088": "c0a0d8b3f53ffa5ce7e537cb1b58a9778f013d97",
+    "adr_0091": "ef717de769255cdf9d68ee82d70a8dbc51ca7687",
+    "core01_architecture": "11c7ec4125f40cf0172aa552a1e9835e84d2c172",
+    "event_queue_contract": "7d8659ccf5235d36fc2d982589c16f5b8574ac5d",
+    "lifecycle_contract": "173a328ac8a1fa802f68519dcf2332743a1fbec7",
+    "core01_plan": "88a144291b4149109cf2f90907cd724bde196651",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}
