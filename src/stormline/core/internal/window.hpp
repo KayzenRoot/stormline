@@ -1,5 +1,7 @@
 #pragma once
 
+#include "stormline/core/internal/native_bridge.hpp"
+
 #include <cstdint>
 #include <memory>
 #include <thread>
@@ -36,7 +38,8 @@ enum class WindowError : std::uint8_t {
     FocusFailed,
     AllocationFailed,
     InternalFailure,
-    SurfaceQueryFailed
+    SurfaceQueryFailed,
+    NativeHandleUnavailable
 };
 
 // A SdlRuntime must be initialized on the same owner thread and outlive this
@@ -58,6 +61,8 @@ public:
     [[nodiscard]] WindowError focus() noexcept;
     [[nodiscard]] WindowError query_surface(SurfaceMetrics& out) noexcept;
     [[nodiscard]] bool surface_valid(std::uint64_t generation) const noexcept;
+    [[nodiscard]] WindowError query_native_handle(NativeWindowHandle& out) noexcept;
+    [[nodiscard]] bool native_handle_valid(const NativeWindowHandle& handle) const noexcept;
     [[nodiscard]] bool valid() const noexcept;
 
 private:
