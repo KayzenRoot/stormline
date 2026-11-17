@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-11 — Opaque native window-handle bridge (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE; not executable while the manifest is in a blocked state.** **Gate:** G6 individual, conditional on that merge and a fresh executor Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-11`. **Predecessor:** `-10` `COMPLETED` via PR #447. **Issue:** #18. **Base:** `44b37d4b6e67314e7317257707a3064bd69c6830`. **ADR:** [ADR-0090](../adr/0090-core-01-native-window-handle-bridge.md). **Contract:** [core-01-native-window-handle-v0](../contracts/core-01-native-window-handle-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #450](https://github.com/KayzenRoot/stormline/pull/450), merge `b062053a2d1513c39ac49d101e6eb189570b51f6`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual, granted by [PR #449](https://github.com/KayzenRoot/stormline/pull/449). **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-11`. **Predecessor:** `-10` `COMPLETED` via PR #447. **Issue:** #18. **Base:** `44b37d4b6e67314e7317257707a3064bd69c6830`. **ADR:** [ADR-0090](../adr/0090-core-01-native-window-handle-bridge.md). **Contract:** [core-01-native-window-handle-v0](../contracts/core-01-native-window-handle-v0.md).
 
 ## OBJECTIVE
 

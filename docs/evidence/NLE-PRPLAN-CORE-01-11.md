@@ -1,15 +1,15 @@
 # NLE-PRPLAN-CORE-01-11 — Opaque native window-handle bridge
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-11`. **ADR:** [ADR-0090](../adr/0090-core-01-native-window-handle-bridge.md). **Contract:** [core-01-native-window-handle-v0](../contracts/core-01-native-window-handle-v0.md). **WO:** [NLE-PRPLAN-CORE-01-11](../work-orders/NLE-PRPLAN-CORE-01-11.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-11`. **ADR:** [ADR-0090](../adr/0090-core-01-native-window-handle-bridge.md). **Contract:** [core-01-native-window-handle-v0](../contracts/core-01-native-window-handle-v0.md). **WO:** [NLE-PRPLAN-CORE-01-11](../work-orders/NLE-PRPLAN-CORE-01-11.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First internal native window-handle bridge: identify the active window system, expose the SDL-owned platform window handle as an opaque non-owning token (kind/value/generation), and invalidate it on window destroy. No direct OS implementation, permissions, renderer/VRAM, clipboard/DnD/IME/hotplug, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #449](https://github.com/KayzenRoot/stormline/pull/449) squash-merged as `c77a55a70d79dd3cec23b46ba252bbb97138ba9b`; audit #6960180269 **APPROVED**.
-- **Code PR:** [PR #450](https://github.com/KayzenRoot/stormline/pull/450), HEAD auditado `4d383612252baa3e8cf565890d042d8d3d3fe0b1`.
+- **Code PR:** [PR #450](https://github.com/KayzenRoot/stormline/pull/450), HEAD auditado `08b65afe2f064862f0d5085b41919814b10b16dd`, [auditoria pt-BR #6960412059](https://github.com/KayzenRoot/stormline/pull/450#issuecomment-6960412059) **APPROVED**; squash-merged as `b062053a2d1513c39ac49d101e6eb189570b51f6`.
 - **Base:** `c77a55a70d79dd3cec23b46ba252bbb97138ba9b`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-11 --json` → `EXECUTOR_READY`, exit 0; `-12`, `CORE-02-04` and every other ID exit 2.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-01-11 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Predecessors:** `-03`..`-10` completed; CORE-02-03 ownership completed via PR #441.
 
 SDL3 remains `3.4.20`, commit `f00dc919ca35b9756316e86c4777392de442f9b2`, zlib, static build-time `FetchContent`.
@@ -81,3 +81,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the seventh real CORE-01 slice, exact PR/CI/audit/merge SHA, 6 `core01_native_*` tests and 53 total CTests across Linux, Linux ASan/UBSan, Windows and macOS, and the explicit statement that this is an opaque non-owning handle bridge only — not direct OS APIs, permissions, renderer/GPU/VRAM, IME, hotplug, public ABI or release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #450](https://github.com/KayzenRoot/stormline/pull/450) **squash-merged** at `2026-11-17T20:42:11Z`, merge `b062053a2d1513c39ac49d101e6eb189570b51f6`; [auditoria pt-BR #6960412059](https://github.com/KayzenRoot/stormline/pull/450#issuecomment-6960412059) **APPROVED**.
+- Final-head Docs Validation [44171487097](https://github.com/KayzenRoot/stormline/actions/runs/44171487097) **SUCCESS**; native [44171487124](https://github.com/KayzenRoot/stormline/actions/runs/44171487124) **SUCCESS**, **53/53 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-01-11` becomes `COMPLETED` with `github_pr=450`; the manifest has **734 `PLANNED_BLOCKED`, 10 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; `select_packet.py` denies every ID. No next packet or module is authorized. CORE-01 remains incomplete; `-12`..`-16` are blocked.

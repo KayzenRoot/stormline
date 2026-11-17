@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "CORE01_11_READY_PREDECESSORS_COMPLETED",
+  "status": "CORE01_11_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -174,8 +174,8 @@
             "NLE-PRPLAN-CORE-01-10"
           ],
           "requires_modules_merged": [],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 450,
           "release_class": "INTERNAL_ONLY",
           "risk": "STANDARD",
           "approved_adr": "docs/adr/0090-core-01-native-window-handle-bridge.md",
