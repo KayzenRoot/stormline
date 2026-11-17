@@ -25,7 +25,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.core12_activation = json.loads(v.CORE01_12_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core13_activation = json.loads(v.CORE01_13_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core14_activation = json.loads(v.CORE01_14_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.CORE01_15_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.core15_activation = json.loads(v.CORE01_15_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.CORE01_16_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -93,7 +94,8 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-01-09", "NLE-PRPLAN-CORE-01-10",
                           "NLE-PRPLAN-CORE-01-11", "NLE-PRPLAN-CORE-01-12",
                           "NLE-PRPLAN-CORE-01-13", "NLE-PRPLAN-CORE-01-14",
-                          "NLE-PRPLAN-CORE-01-15", "NLE-PRPLAN-CORE-02-03"], completed)
+                          "NLE-PRPLAN-CORE-01-15", "NLE-PRPLAN-CORE-01-16",
+                          "NLE-PRPLAN-CORE-02-03"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -249,7 +251,7 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_core02_capability_source_must_be_completed(self):
         def wrong(d):
-            d["modules"][1]["packets"][2]["capability_admission"]["required_capabilities"][0]["satisfied_by"] = "NLE-PRPLAN-CORE-01-16"
+            d["modules"][1]["packets"][2]["capability_admission"]["required_capabilities"][0]["satisfied_by"] = "NLE-PRPLAN-CORE-01-17"
         self.assertTrue(any("lacks a completed packet" in x for x in self.check(wrong)))
 
     def test_core02_cannot_claim_module_completion(self):
@@ -409,12 +411,12 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertTrue(v.validate_activation(bad))
 
     def test_core01_15_activation_is_exact(self):
-        self.assertEqual("NLE-PRPLAN-CORE-01-15", self.activation["selected_packet_id"])
-        self.assertEqual("CORE-01", self.activation["module_id"])
-        self.assertEqual("STANDARD", self.activation["risk"])
-        self.assertEqual("INTERNAL_ONLY", self.activation["release_class"])
-        self.assertIsInstance(self.activation["gate_pr"], int)
-        bad = copy.deepcopy(self.activation)
+        self.assertEqual("NLE-PRPLAN-CORE-01-15", self.core15_activation["selected_packet_id"])
+        self.assertEqual("CORE-01", self.core15_activation["module_id"])
+        self.assertEqual("STANDARD", self.core15_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.core15_activation["release_class"])
+        self.assertIsInstance(self.core15_activation["gate_pr"], int)
+        bad = copy.deepcopy(self.core15_activation)
         bad["gate_pr"] = -1
         self.assertTrue(v.validate_activation(bad))
 
@@ -424,6 +426,21 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertTrue(self.check(wrong))
 
     def test_core01_15_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.core15_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core01_16_closeout_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-CORE-01-16", self.activation["selected_packet_id"])
+        self.assertEqual("CORE-01", self.activation["module_id"])
+        self.assertEqual("STANDARD", self.activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.activation["release_class"])
+        self.assertIsInstance(self.activation["gate_pr"], int)
+        bad = copy.deepcopy(self.activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core01_16_closeout_source_drift_denied(self):
         bad = copy.deepcopy(self.activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
