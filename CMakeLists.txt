@@ -142,6 +142,25 @@ target_link_libraries(stormline_core01_window_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core01_window_test PRIVATE)
 
+add_library(stormline_core01_event_queue STATIC
+    src/stormline/core/internal/event_queue.cpp
+)
+target_include_directories(stormline_core01_event_queue PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core01_event_queue PRIVATE SDL3::SDL3-static)
+stormline_core01_apply_options(stormline_core01_event_queue PUBLIC)
+
+add_executable(stormline_core01_event_queue_test
+    tests/core/event_queue_tests.cpp
+)
+target_link_libraries(stormline_core01_event_queue_test PRIVATE
+    stormline_core01_event_queue
+    stormline_core01_sdl
+    SDL3::SDL3-static
+)
+stormline_core01_apply_options(stormline_core01_event_queue_test PRIVATE)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -231,6 +250,31 @@ add_test(NAME core01_window_lifetime
     COMMAND stormline_core01_window_test lifetime
 )
 
+add_test(NAME core01_events_basic
+    COMMAND stormline_core01_event_queue_test basic
+)
+add_test(NAME core01_events_sequence
+    COMMAND stormline_core01_event_queue_test sequence
+)
+add_test(NAME core01_events_overflow
+    COMMAND stormline_core01_event_queue_test overflow
+)
+add_test(NAME core01_events_replay
+    COMMAND stormline_core01_event_queue_test replay
+)
+add_test(NAME core01_events_wrong_thread
+    COMMAND stormline_core01_event_queue_test wrong_thread
+)
+add_test(NAME core01_events_not_initialized
+    COMMAND stormline_core01_event_queue_test not_initialized
+)
+add_test(NAME core01_events_empty_clear
+    COMMAND stormline_core01_event_queue_test empty_clear
+)
+add_test(NAME core01_events_lifetime
+    COMMAND stormline_core01_event_queue_test lifetime
+)
+
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
 )
@@ -283,6 +327,14 @@ set_tests_properties(
     core01_window_wrong_thread
     core01_window_not_initialized
     core01_window_lifetime
+    core01_events_basic
+    core01_events_sequence
+    core01_events_overflow
+    core01_events_replay
+    core01_events_wrong_thread
+    core01_events_not_initialized
+    core01_events_empty_clear
+    core01_events_lifetime
     core02_memory_basic
     core02_memory_invalid
     core02_memory_owned
@@ -302,6 +354,14 @@ set_tests_properties(
     core01_sdl_destructor
     core01_sdl_version
     core01_sdl_header
+    core01_events_basic
+    core01_events_sequence
+    core01_events_overflow
+    core01_events_replay
+    core01_events_wrong_thread
+    core01_events_not_initialized
+    core01_events_empty_clear
+    core01_events_lifetime
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=dummy"
 )
 
