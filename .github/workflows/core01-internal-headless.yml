@@ -160,6 +160,10 @@ jobs:
           done
           openbox --sm-disable >/dev/null 2>&1 &
           sleep 1
+          cat > /tmp/stormline-lsan.supp <<'EOF'
+          leak:X11_InitIM
+          EOF
+          export LSAN_OPTIONS=suppressions=/tmp/stormline-lsan.supp:print_suppressions=0
           c++ --version | sed -n '1p'
           cmake --version | sed -n '1p'
           ninja --version
