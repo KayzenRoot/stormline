@@ -123,3 +123,9 @@ The owner **expressly ratified** C01-D02/D03/D04/D05/D06/D07/D10/D11/D12/D13/D15
 | G7 | `NOT_STARTED` | PR codigo -03 somente quando G6 estiver validamente liberado |
 
 **STOP:** Nenhum codigo de producao novo, nao aprovar ADR integral, nao declarar G3 global CLEARED; 80 code WOs e 748 PR packets continuam BLOCKED/PLANNED_BLOCKED, 0 executor-ready, `engine_implemented=false`. A PR de decisao registra apenas a ratificacao ja expressa; ela nao constitui aprovacao de G4/G5/G6.
+
+## CORE-01 packet -02 — contract-level qualification candidate (G3-V05, 2026-11-17)
+
+A ratificacao limitada foi integrada nas [PRs #422](https://github.com/KayzenRoot/stormline/pull/422) e [#423](https://github.com/KayzenRoot/stormline/pull/423). [ADR-0083](../adr/0083-core-01-internal-headless-slice.md) e [contrato v0](../contracts/core-01-internal-headless-v0.md) estao PROPOSTOS para qualificacao **somente** da fatia `INTERNAL_ONLY`. O gate G4-slice fica `CONDITIONAL_UNTIL_OBJECTIVE_AUDIT_AND_MERGE`; G5-slice igualmente, exigindo todos C01-INT-01..10 como oraculos futuros, status STANDARD para a fatia, e testes CI por plataforma. O protocolo nao equivale a PASS do modulo ou G3 global. **G6 permanece BLOCKED** enquanto nao houver aprovacao independente de ativacao especifica; `scripts/validate_wo_registry.py` obriga os 80 bloqueados e nao pode ser burlado. Uma futura mudanca de selecao por pacote deve provar 79 outros ainda bloqueados, sem alterar G2/ruleset.
+
+Status global preservado: G1 PARTIAL, G2 CLEARED limitado, G3 NOT_CLEARED, ADR-0003/0075 PROPOSED, NLE-D009 OPEN, 80 blocked WOs, 748 PLANNED_BLOCKED, 0 ready, engine=false. Nenhuma PR -03 de codigo permitida a partir da mera aprovacão deste contrato.
