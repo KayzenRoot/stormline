@@ -18,9 +18,10 @@ CORE01_11_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-11.json
 CORE01_12_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-12.json"
 CORE01_13_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-13.json"
 CORE01_14_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-14.json"
+CORE01_15_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-01-15.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = CORE01_14_ACTIVATION_FILE
+ACTIVATION_FILE = CORE01_15_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -35,6 +36,8 @@ CORE01_13_ACTIVATED_STATUS = "CORE01_13_READY_PREDECESSORS_COMPLETED"
 CORE01_13_COMPLETED_STATUS = "CORE01_13_COMPLETED_REST_BLOCKED"
 CORE01_14_ACTIVATED_STATUS = "CORE01_14_READY_PREDECESSORS_COMPLETED"
 CORE01_14_COMPLETED_STATUS = "CORE01_14_COMPLETED_REST_BLOCKED"
+CORE01_15_ACTIVATED_STATUS = "CORE01_15_READY_PREDECESSORS_COMPLETED"
+CORE01_15_COMPLETED_STATUS = "CORE01_15_COMPLETED_REST_BLOCKED"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -52,6 +55,8 @@ ACTIVE_STATUSES = {
     CORE01_13_COMPLETED_STATUS,
     CORE01_14_ACTIVATED_STATUS,
     CORE01_14_COMPLETED_STATUS,
+    CORE01_15_ACTIVATED_STATUS,
+    CORE01_15_COMPLETED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -63,6 +68,7 @@ CORE01_11_CODE_PR = 450
 CORE01_12_CODE_PR = 453
 CORE01_13_CODE_PR = 456
 CORE01_14_CODE_PR = 459
+CORE01_15_CODE_PR = 0  # updated by the -15 closeout; inert in the activated state
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -201,6 +207,32 @@ CORE01_11_ACTIVATION_SOURCES = {
     "event_queue_contract": "docs/contracts/core-01-event-queue-v0.md",
     "display_contract": "docs/contracts/core-01-display-surface-v0.md",
     "native_bridge_contract": "docs/contracts/core-01-native-window-handle-v0.md",
+    "core01_plan": "docs/pr-plans/CORE-01.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+CORE01_15_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "a8d5b84373f30022ecb1cd2668166de798677278",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0003": "50d028c7a28acc25164256c5f4547c14ac7192d4",
+    "adr_0094": "66562b8f9e3125796681519dfbd656b37409cdaa",
+    "core01_architecture": "11c7ec4125f40cf0172aa552a1e9835e84d2c172",
+    "qualification_contract": "afa3ee17bcb6f22e0f304f2dd1f6e4ff0ad079a0",
+    "core01_plan": "88a144291b4149109cf2f90907cd724bde196651",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+CORE01_15_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0003": "docs/adr/0003-core-01-platform-technology.md",
+    "adr_0094": "docs/adr/0094-core-01-integrated-ci-qualification.md",
+    "core01_architecture": "docs/architecture/core-01-platform-lifecycle.md",
+    "qualification_contract": "docs/contracts/core-01-integrated-qualification-v0.md",
     "core01_plan": "docs/pr-plans/CORE-01.md",
     "implementation_registry": "docs/queue/implementation-registry.json",
 }
@@ -383,6 +415,8 @@ SLICE_METADATA = {
          "docs/evidence/NLE-PRPLAN-CORE-01-13-G6-ACTIVATION.md"),
     14: ("docs/adr/0093-core-01-multi-os-soak-harness.md",
          "docs/evidence/NLE-PRPLAN-CORE-01-14-G6-ACTIVATION.md"),
+    15: ("docs/adr/0094-core-01-integrated-ci-qualification.md",
+         "docs/evidence/NLE-PRPLAN-CORE-01-15-G6-ACTIVATION.md"),
 }
 
 CORE02_SLICE_METADATA = {
@@ -437,6 +471,25 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
         }
         return expected, CORE01_ACTIVATION_SOURCES, CORE01_PINNED_SOURCE_BLOBS, {
             "source_blob_sha1", "sdl3", "window_slice"
+        }
+    if selected == "NLE-PRPLAN-CORE-01-15":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-CORE-01-15",
+            "module_id": "CORE-01",
+            "risk": "STANDARD",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+            "approved_adr": "docs/adr/0094-core-01-integrated-ci-qualification.md",
+            "approved_contract": "docs/contracts/core-01-integrated-qualification-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-15.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-15-G6-ACTIVATION.md",
+            "gate_base_sha": "ee7f3188eee314b7f051ef39ce4c88ab74492fb1",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, CORE01_15_ACTIVATION_SOURCES, CORE01_15_PINNED_SOURCE_BLOBS, {
+            "source_blob_sha1", "gate_pr"
         }
     if selected == "NLE-PRPLAN-CORE-01-14":
         expected = {
@@ -674,7 +727,7 @@ def expected_packet_state(
                                    CORE01_11_COMPLETED_STATUS, CORE01_12_ACTIVATED_STATUS,
                                    CORE01_12_COMPLETED_STATUS, CORE01_13_ACTIVATED_STATUS,
                                    CORE01_13_COMPLETED_STATUS, CORE01_14_ACTIVATED_STATUS,
-                                   CORE01_14_COMPLETED_STATUS, CORE02_ACTIVATED_STATUS,
+                                   CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS, CORE02_ACTIVATED_STATUS,
                                    CORE02_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_08_CODE_PR
             return "EXECUTOR_READY", None
@@ -684,7 +737,7 @@ def expected_packet_state(
                                    CORE01_11_COMPLETED_STATUS, CORE01_12_ACTIVATED_STATUS,
                                    CORE01_12_COMPLETED_STATUS, CORE01_13_ACTIVATED_STATUS,
                                    CORE01_13_COMPLETED_STATUS, CORE01_14_ACTIVATED_STATUS,
-                                   CORE01_14_COMPLETED_STATUS):
+                                   CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_09_CODE_PR
             if manifest_status == CORE01_09_ACTIVATED_STATUS:
                 return "EXECUTOR_READY", None
@@ -693,7 +746,7 @@ def expected_packet_state(
                                    CORE01_11_COMPLETED_STATUS, CORE01_12_ACTIVATED_STATUS,
                                    CORE01_12_COMPLETED_STATUS, CORE01_13_ACTIVATED_STATUS,
                                    CORE01_13_COMPLETED_STATUS, CORE01_14_ACTIVATED_STATUS,
-                                   CORE01_14_COMPLETED_STATUS):
+                                   CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_10_CODE_PR
             if manifest_status == CORE01_10_ACTIVATED_STATUS:
                 return "EXECUTOR_READY", None
@@ -701,27 +754,34 @@ def expected_packet_state(
             if manifest_status in (CORE01_11_COMPLETED_STATUS, CORE01_12_ACTIVATED_STATUS,
                                    CORE01_12_COMPLETED_STATUS, CORE01_13_ACTIVATED_STATUS,
                                    CORE01_13_COMPLETED_STATUS, CORE01_14_ACTIVATED_STATUS,
-                                   CORE01_14_COMPLETED_STATUS):
+                                   CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_11_CODE_PR
             if manifest_status == CORE01_11_ACTIVATED_STATUS:
                 return "EXECUTOR_READY", None
         if idx == 12:
             if manifest_status in (CORE01_12_COMPLETED_STATUS, CORE01_13_ACTIVATED_STATUS,
                                    CORE01_13_COMPLETED_STATUS, CORE01_14_ACTIVATED_STATUS,
-                                   CORE01_14_COMPLETED_STATUS):
+                                   CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_12_CODE_PR
             if manifest_status == CORE01_12_ACTIVATED_STATUS:
                 return "EXECUTOR_READY", None
         if idx == 13:
             if manifest_status in (CORE01_13_COMPLETED_STATUS, CORE01_14_ACTIVATED_STATUS,
-                                   CORE01_14_COMPLETED_STATUS):
+                                   CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS,
+                                   CORE01_15_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_13_CODE_PR
             if manifest_status == CORE01_13_ACTIVATED_STATUS:
                 return "EXECUTOR_READY", None
         if idx == 14:
-            if manifest_status == CORE01_14_COMPLETED_STATUS:
+            if manifest_status in (CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS,
+                                   CORE01_15_COMPLETED_STATUS):
                 return "COMPLETED", CORE01_14_CODE_PR
             if manifest_status == CORE01_14_ACTIVATED_STATUS:
+                return "EXECUTOR_READY", None
+        if idx == 15:
+            if manifest_status == CORE01_15_COMPLETED_STATUS:
+                return "COMPLETED", CORE01_15_CODE_PR
+            if manifest_status == CORE01_15_ACTIVATED_STATUS:
                 return "EXECUTOR_READY", None
     if activation is not None and module_id == "CORE-02":
         if idx == 1:
@@ -737,7 +797,8 @@ def expected_packet_state(
                                    CORE01_11_COMPLETED_STATUS, CORE01_12_ACTIVATED_STATUS,
                                    CORE01_12_COMPLETED_STATUS, CORE01_13_ACTIVATED_STATUS,
                                    CORE01_13_COMPLETED_STATUS, CORE01_14_ACTIVATED_STATUS,
-                                   CORE01_14_COMPLETED_STATUS):
+                                   CORE01_14_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS, CORE01_15_ACTIVATED_STATUS,
+                                   CORE01_15_COMPLETED_STATUS):
                 return "COMPLETED", CORE02_03_CODE_PR
     return "PLANNED_BLOCKED", None
 
@@ -943,6 +1004,12 @@ def validate_manifest(
     if manifest.get("status") == CORE01_14_COMPLETED_STATUS:
         if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 13 or approved != 4:
             issues.append("CORE-01-14 completed state must have zero ready packets, thirteen completed slices and four approved gates")
+    if manifest.get("status") == CORE01_15_ACTIVATED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 13 or approved != 4:
+            issues.append("CORE-01-15 activated state must have one ready packet, thirteen completed slices and four approved gates")
+    if manifest.get("status") == CORE01_15_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 14 or approved != 4:
+            issues.append("CORE-01-15 completed state must have zero ready packets, fourteen completed slices and four approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -976,6 +1043,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-core-01-13.json"
     elif status in (CORE01_14_ACTIVATED_STATUS, CORE01_14_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-01-14.json"
+    elif status in (CORE01_15_ACTIVATED_STATUS, CORE01_15_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-core-01-15.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"
     else:
