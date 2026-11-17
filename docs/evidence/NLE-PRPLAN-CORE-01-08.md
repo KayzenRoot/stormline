@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-08 — Native window lifecycle
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_MSVC_HEADER_COMPILE / NATIVE_CI_PENDING / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-08` · **ADR:** [ADR-0085](../adr/0085-core-01-window-lifecycle-slice.md) · **Contract:** [core-01-window-lifecycle-v0](../contracts/core-01-window-lifecycle-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-08](../work-orders/NLE-PRPLAN-CORE-01-08.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING` · **Master program:** `STORM-CORE-01-IMPL-001` · **Formal packet:** `NLE-PRPLAN-CORE-01-08` · **ADR:** [ADR-0085](../adr/0085-core-01-window-lifecycle-slice.md) · **Contract:** [core-01-window-lifecycle-v0](../contracts/core-01-window-lifecycle-v0.md) · **WO:** [NLE-PRPLAN-CORE-01-08](../work-orders/NLE-PRPLAN-CORE-01-08.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First real native window lifecycle in Stormline: X11/Win32/Cocoa window create/resize/show/raise-focus/destroy with verified handle lifetime. No renderer, GPU, audio, input pump, DPI/IME/hotplug, public ABI or release.
 
@@ -56,16 +56,34 @@ No other path changed.
 
 The official SDL3 3.4.20 tarball was re-extracted in temp (SHA-256 `f3bb06f55bed9557227a700af2ea62e49497ebdf58037732a731a5fb3ef8581f`). `window.cpp` (against exact SDL3 headers) and `window_tests.cpp` compiled with preinstalled MSVC 14.44 `/std:c++20 /W4 /WX /EHsc` → **OK**. This is a header/API compile check only; no local link/run/target qualification.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-The code PR must run on `ubuntu-24.04` (X11 via Xvfb/openbox), `windows-2025-vs2026` (Win32), `macos-15` (Cocoa or NOT_QUALIFIED), plus Linux ASan/UBSan. It must execute the existing 18 CTests and the five new window CTests: basic, invalid, wrong_thread, not_initialized, lifetime (50 cycles). The PR remains Draft until exact-head Docs Validation and native results are observed and recorded here.
+The code-bearing head `98a8414aac2367a34af5307608baa06663968b81` passed the required Docs Validation and all native jobs. A later documentation-only evidence update re-runs Docs Validation; the code/native matrix is unchanged, and the final-head run is recorded in the PR audit.
+
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44149340397](https://github.com/KayzenRoot/stormline/actions/runs/44149340397) job `134273022272` **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC 13.3.0, CMake 3.31.6, Ninja 1.13.2; X11 via Xvfb/openbox | **23/23 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan, X11 via Xvfb/openbox | **23/23 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC 14.51.36231, CMake 4.4.5; Win32 video | **23/23 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang 17.0.0, CMake 4.4.5; Cocoa video ON | **23/23 CTest passed** |
+
+Native workflow run: [44149339941](https://github.com/KayzenRoot/stormline/actions/runs/44149339941) (`pull_request`, head `98a8414…`) **SUCCESS**. Job IDs: Linux `134273022298`, sanitizers `134273021691`, Windows `134273023827`, macOS `134273022263`. All 18 existing CTests and the five window CTests executed; none skipped. The Linux install step succeeded with the pinned Ubuntu packages (`libwayland-dev`, `openbox`, `libx11-dev`, etc.), and Xvfb/openbox started before CTest. macOS configured `SDL_COCOA ON` and the window tests passed without a `NOT_QUALIFIED` path.
+
+### Corrections found by real CI (same PR)
+
+1. **Linux/Clang warnings:** the test helper `note` was unused on non-Apple builds and `description` was unused on Apple; fixed with `[[maybe_unused]]` and `(void)description`.
+2. **LSan third-party X11 leaks:** ASan reported leaks inside SDL3's `X11_InitIM` and `X11_GetGlobalContentScale`/XRandR paths, not our code. The sanitizer job uses a narrow suppression file (`leak:X11_`) for the SDL3 X11 driver only; ASan/UBSan remain active and leak detection remains on for our headless/paths/SDL-init tests and for non-X11 frames.
+
+After these corrections, the full 23/23 matrix passed. No test was skipped and no PASS was claimed before the real run.
 
 ## 5. Security, licensing and limitations
 
 - Linux installs only the pinned official Ubuntu packages from the activation; `sudo` is limited to apt install on the ephemeral runner; no secret, cache/upload, paid runner or runtime download.
 - SDL3 zlib notice preserved for future distribution; `NLE-D009 OPEN`; no release/redistribution.
-- Real X11 is virtual-display (Xvfb/openbox), not physical monitor certification. Wayland runtime is `NOT_QUALIFIED`; macOS Cocoa is `NOT_QUALIFIED` if the runner has no window server. DPI/IME/hotplug/renderer/GPU/audio/public ABI are out of scope.
-- No HIGH/CRITICAL known; subject to exact-head CI and audit.
+- Real X11 is virtual-display (Xvfb/openbox), not physical monitor certification. Wayland runtime is `NOT_QUALIFIED`; macOS Cocoa was configured and exercised on the hosted runner, but that is not physical hardware/driver certification. DPI/IME/hotplug/renderer/GPU/audio/public ABI are out of scope.
+- The sanitizer job suppresses only `leak:X11_` frames from SDL3's X11 driver; ASan/UBSan and leak detection remain active for our code and non-X11 frames. This is a documented third-party limitation, not a blanket sanitizer disable.
+- No HIGH/CRITICAL known; native CI passed at the code head and the result remains subject to the independent audit and final documentation-head Docs Validation.
 
 ## 6. Rollback
 
