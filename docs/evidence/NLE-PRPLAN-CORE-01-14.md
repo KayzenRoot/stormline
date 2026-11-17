@@ -1,12 +1,13 @@
 # NLE-PRPLAN-CORE-01-14 — Multi-OS soak harness
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-01-14`. **ADR:** [ADR-0093](../adr/0093-core-01-multi-os-soak-harness.md). **Contract:** [core-01-multi-os-soak-v0](../contracts/core-01-multi-os-soak-v0.md). **WO:** [NLE-PRPLAN-CORE-01-14](../work-orders/NLE-PRPLAN-CORE-01-14.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-01-14`. **ADR:** [ADR-0093](../adr/0093-core-01-multi-os-soak-harness.md). **Contract:** [core-01-multi-os-soak-v0](../contracts/core-01-multi-os-soak-v0.md). **WO:** [NLE-PRPLAN-CORE-01-14](../work-orders/NLE-PRPLAN-CORE-01-14.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 Bounded CI soak harness: 200 headless cycles, 100 native window cycles, 10,000 synthetic events, display/lifecycle checks and teardown. No physical-hardware certification, 30+30 timing, 32 scenarios, performance budget or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #458](https://github.com/KayzenRoot/stormline/pull/458) squash-merged as `9d323a154ba8160bc13afe6afbb3b4f7e62cb48b`; audit #6961559495 **APPROVED**.
+- **Code PR:** [PR #459](https://github.com/KayzenRoot/stormline/pull/459), HEAD auditado `65baba8157fe3abcee6d9418af17b277905b4a8f`.
 - **Base:** `9d323a154ba8160bc13afe6afbb3b4f7e62cb48b`.
 - **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-14 --json` → `EXECUTOR_READY`, exit 0; `-15`, `CORE-02-04` and every other ID exit 2.
 
@@ -41,11 +42,19 @@ No production engine code changed.
 
 The initial batched push/poll version lost events after 33 batches; the harness was corrected to push the full 10,000 then drain, and the final run consumed all 10,000. This was a harness defect, not an engine defect.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with run IDs and observed CTest counts after they complete; no native PASS is claimed yet.
+All jobs ran at the exact HEAD `65baba8157fe3abcee6d9418af17b277905b4a8f`:
 
-Expected matrix: existing 65 CTests plus soak = **66 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44181450664](https://github.com/KayzenRoot/stormline/actions/runs/44181450664) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **66/66 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **66/66 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **66/66 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **66/66 CTest passed** |
+
+Native workflow run: [44181450631](https://github.com/KayzenRoot/stormline/actions/runs/44181450631) **SUCCESS**. Job IDs: Linux `134386533797`, sanitizers `134386534384`, Windows `134386534455`, macOS `134386534190`. The soak test executed in every job; 65 CTests anteriores continuam passando. No correction was required.
 
 ## 5. Security, licensing and limitations
 
@@ -53,7 +62,7 @@ Expected matrix: existing 65 CTests plus soak = **66 CTests** per native job, wi
 - No production API/ABI, renderer/GPU/audio, physical hardware, 30 cold + 30 warm timing, 32 scenarios, long-duration soak, OS suspend/resume signals, Wayland runtime or performance claim.
 - Linux X11 is virtual-display evidence under Xvfb/openbox, not physical hardware; macOS window-server absence yields explicit `NOT_QUALIFIED`.
 - ADR-0003/0075 remain `PROPOSED`; G3 global `NOT_CLEARED`; NLE-D009 `OPEN`; 80/80 module WOs `BLOCKED`; `engine_implemented=false` at module/product level.
-- No HIGH/CRITICAL known; final status subject to exact-head CI and independent pt-BR audit.
+- No HIGH/CRITICAL known; native CI passed at the code head and the result remains subject to the independent pt-BR audit.
 
 ## 6. Rollback
 
