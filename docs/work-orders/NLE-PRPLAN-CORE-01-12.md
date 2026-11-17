@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-12 — Lifecycle request state machine (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE; not executable while the manifest is in a blocked state.** **Gate:** G6 individual, conditional on that merge and a fresh executor Source Check. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-12`. **Predecessor:** `-11` `COMPLETED` via PR #450. **Issue:** #18. **Base:** `df551006982868e616d867c7daaa3fc5a7c51ee8`. **ADR:** [ADR-0091](../adr/0091-core-01-lifecycle-request-state-machine.md). **Contract:** [core-01-lifecycle-requests-v0](../contracts/core-01-lifecycle-requests-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #453](https://github.com/KayzenRoot/stormline/pull/453), merge `5ef63600fb42ae6f1f65c095e92c5fba7d87f89f`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual, granted by [PR #452](https://github.com/KayzenRoot/stormline/pull/452). **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-12`. **Predecessor:** `-11` `COMPLETED` via PR #450. **Issue:** #18. **Base:** `df551006982868e616d867c7daaa3fc5a7c51ee8`. **ADR:** [ADR-0091](../adr/0091-core-01-lifecycle-request-state-machine.md). **Contract:** [core-01-lifecycle-requests-v0](../contracts/core-01-lifecycle-requests-v0.md).
 
 ## OBJECTIVE
 
