@@ -16,6 +16,7 @@ bool on_owner_thread(const std::thread::id& owner) noexcept {
 struct Window::Impl final {
     SDL_Window* window{nullptr};
     std::uint64_t surface_generation{1};
+    std::uint64_t native_generation{1};
     std::uint32_t display_id{0};
     int pixel_width{0};
     int pixel_height{0};
@@ -203,6 +204,74 @@ WindowError Window::query_surface(SurfaceMetrics& out) noexcept {
 bool Window::surface_valid(std::uint64_t generation) const noexcept {
     return impl_ && impl_->window != nullptr && generation != 0
            && generation == impl_->surface_generation;
+}
+
+WindowError Window::query_native_handle(NativeWindowHandle& out) noexcept {
+    try {
+        if (!on_owner_thread(owner_thread_)) {
+            return WindowError::WrongThread;
+        }
+        if (!impl_) {
+            return WindowError::NotCreated;
+        }
+
+        const SDL_PropertiesID properties = SDL_GetWindowProperties(impl_->window);
+        if (properties == 0) {
+            return WindowError::NativeHandleUnavailable;
+        }
+
+        NativeHandleKind kind = NativeHandleKind::None;
+        std::uint64_t value = 0;
+
+        void* pointer = SDL_GetPointerProperty(
+            properties, SDL_PROP_WINDOW_WIN32_HWND_POINTER, nullptr);
+        if (pointer != nullptr) {
+            kind = NativeHandleKind::Win32Hwnd;
+            value = static_cast<std::uint64_t>(reinterpret_cast<std::uintptr_t>(pointer));
+        } else {
+            pointer = SDL_GetPointerProperty(
+                properties, SDL_PROP_WINDOW_COCOA_WINDOW_POINTER, nullptr);
+        }
+        if (kind == NativeHandleKind::None && pointer != nullptr) {
+            kind = NativeHandleKind::CocoaWindow;
+            value = static_cast<std::uint64_t>(reinterpret_cast<std::uintptr_t>(pointer));
+        }
+        if (kind == NativeHandleKind::None) {
+            pointer = SDL_GetPointerProperty(
+                properties, SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER, nullptr);
+        }
+        if (kind == NativeHandleKind::None && pointer != nullptr) {
+            kind = NativeHandleKind::WaylandSurface;
+            value = static_cast<std::uint64_t>(reinterpret_cast<std::uintptr_t>(pointer));
+        }
+        if (kind == NativeHandleKind::None) {
+            const Sint64 x11_window = SDL_GetNumberProperty(
+                properties, SDL_PROP_WINDOW_X11_WINDOW_NUMBER, 0);
+            if (x11_window != 0) {
+                kind = NativeHandleKind::X11Window;
+                value = static_cast<std::uint64_t>(x11_window);
+            }
+        }
+
+        if (kind == NativeHandleKind::None || value == 0) {
+            return WindowError::NativeHandleUnavailable;
+        }
+
+        out.kind = kind;
+        out.value = value;
+        out.generation = impl_->native_generation;
+        return WindowError::None;
+    } catch (...) {
+        return WindowError::InternalFailure;
+    }
+}
+
+bool Window::native_handle_valid(const NativeWindowHandle& handle) const noexcept {
+    return impl_ && impl_->window != nullptr
+           && handle.kind != NativeHandleKind::None
+           && handle.value != 0
+           && handle.generation != 0
+           && handle.generation == impl_->native_generation;
 }
 
 bool Window::valid() const noexcept {

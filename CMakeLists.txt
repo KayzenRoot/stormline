@@ -181,6 +181,26 @@ target_link_libraries(stormline_core01_display_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core01_display_test PRIVATE)
 
+add_library(stormline_core01_native_bridge STATIC
+    src/stormline/core/internal/native_bridge.cpp
+)
+target_include_directories(stormline_core01_native_bridge PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core01_native_bridge PRIVATE SDL3::SDL3-static)
+stormline_core01_apply_options(stormline_core01_native_bridge PUBLIC)
+
+add_executable(stormline_core01_native_bridge_test
+    tests/core/native_bridge_tests.cpp
+)
+target_link_libraries(stormline_core01_native_bridge_test PRIVATE
+    stormline_core01_native_bridge
+    stormline_core01_window
+    stormline_core01_sdl
+    SDL3::SDL3-static
+)
+stormline_core01_apply_options(stormline_core01_native_bridge_test PRIVATE)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -317,6 +337,25 @@ add_test(NAME core01_display_lifetime
     COMMAND stormline_core01_display_test lifetime
 )
 
+add_test(NAME core01_native_system
+    COMMAND stormline_core01_native_bridge_test system
+)
+add_test(NAME core01_native_handle
+    COMMAND stormline_core01_native_bridge_test handle
+)
+add_test(NAME core01_native_unavailable
+    COMMAND stormline_core01_native_bridge_test unavailable
+)
+add_test(NAME core01_native_errors
+    COMMAND stormline_core01_native_bridge_test errors
+)
+add_test(NAME core01_native_wrong_thread
+    COMMAND stormline_core01_native_bridge_test wrong_thread
+)
+add_test(NAME core01_native_lifetime
+    COMMAND stormline_core01_native_bridge_test lifetime
+)
+
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
 )
@@ -384,6 +423,12 @@ set_tests_properties(
     core01_display_surface_errors
     core01_display_stability
     core01_display_lifetime
+    core01_native_system
+    core01_native_handle
+    core01_native_unavailable
+    core01_native_errors
+    core01_native_wrong_thread
+    core01_native_lifetime
     core02_memory_basic
     core02_memory_invalid
     core02_memory_owned
@@ -418,6 +463,7 @@ set_tests_properties(
     core01_display_surface_errors
     core01_display_stability
     core01_display_lifetime
+    core01_native_unavailable
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=dummy"
 )
 
@@ -435,5 +481,10 @@ set_tests_properties(
     core01_window_wrong_thread
     core01_window_not_initialized
     core01_window_lifetime
+    core01_native_system
+    core01_native_handle
+    core01_native_errors
+    core01_native_wrong_thread
+    core01_native_lifetime
     PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=${STORMLINE_WINDOW_VIDEO_DRIVER}"
 )
