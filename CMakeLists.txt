@@ -201,6 +201,20 @@ target_link_libraries(stormline_core01_native_bridge_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core01_native_bridge_test PRIVATE)
 
+add_library(stormline_core01_lifecycle STATIC
+    src/stormline/core/internal/lifecycle.cpp
+)
+target_include_directories(stormline_core01_lifecycle PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+stormline_core01_apply_options(stormline_core01_lifecycle PUBLIC)
+
+add_executable(stormline_core01_lifecycle_test
+    tests/core/lifecycle_tests.cpp
+)
+target_link_libraries(stormline_core01_lifecycle_test PRIVATE stormline_core01_lifecycle)
+stormline_core01_apply_options(stormline_core01_lifecycle_test PRIVATE)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -356,6 +370,25 @@ add_test(NAME core01_native_lifetime
     COMMAND stormline_core01_native_bridge_test lifetime
 )
 
+add_test(NAME core01_lifecycle_normal
+    COMMAND stormline_core01_lifecycle_test normal
+)
+add_test(NAME core01_lifecycle_shutdown
+    COMMAND stormline_core01_lifecycle_test shutdown
+)
+add_test(NAME core01_lifecycle_events
+    COMMAND stormline_core01_lifecycle_test events
+)
+add_test(NAME core01_lifecycle_invalid
+    COMMAND stormline_core01_lifecycle_test invalid
+)
+add_test(NAME core01_lifecycle_wrong_thread
+    COMMAND stormline_core01_lifecycle_test wrong_thread
+)
+add_test(NAME core01_lifecycle_recovery
+    COMMAND stormline_core01_lifecycle_test recovery
+)
+
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
 )
@@ -429,6 +462,12 @@ set_tests_properties(
     core01_native_errors
     core01_native_wrong_thread
     core01_native_lifetime
+    core01_lifecycle_normal
+    core01_lifecycle_shutdown
+    core01_lifecycle_events
+    core01_lifecycle_invalid
+    core01_lifecycle_wrong_thread
+    core01_lifecycle_recovery
     core02_memory_basic
     core02_memory_invalid
     core02_memory_owned
