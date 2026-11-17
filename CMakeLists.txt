@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
-project(stormline_core01_internal LANGUAGES CXX)
+project(stormline_core01_internal LANGUAGES C CXX)
 
 option(STORMLINE_CORE01_ENABLE_SANITIZERS "Enable ASan/UBSan for the internal CORE-01 slice" OFF)
 
@@ -29,6 +29,43 @@ function(stormline_core01_apply_options target scope)
     endif()
 endfunction()
 
+include(FetchContent)
+
+# Pinned official SDL3 3.4.20 source, fetched at build time only. No system
+# install, vendor copy, package manager or runtime download.
+set(SDL_SHARED OFF CACHE BOOL "" FORCE)
+set(SDL_STATIC ON CACHE BOOL "" FORCE)
+set(SDL_TEST_LIBRARY OFF CACHE BOOL "" FORCE)
+set(SDL_TESTS OFF CACHE BOOL "" FORCE)
+set(SDL_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(SDL_INSTALL OFF CACHE BOOL "" FORCE)
+set(SDL_AUDIO OFF CACHE BOOL "" FORCE)
+set(SDL_JOYSTICK OFF CACHE BOOL "" FORCE)
+set(SDL_HAPTIC OFF CACHE BOOL "" FORCE)
+set(SDL_HIDAPI OFF CACHE BOOL "" FORCE)
+set(SDL_SENSOR OFF CACHE BOOL "" FORCE)
+set(SDL_POWER OFF CACHE BOOL "" FORCE)
+set(SDL_CAMERA OFF CACHE BOOL "" FORCE)
+set(SDL_X11 OFF CACHE BOOL "" FORCE)
+set(SDL_WAYLAND OFF CACHE BOOL "" FORCE)
+set(SDL_KMSDRM OFF CACHE BOOL "" FORCE)
+
+FetchContent_Declare(
+    SDL3
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG f00dc919ca35b9756316e86c4777392de442f9b2
+    GIT_SHALLOW FALSE
+)
+FetchContent_MakeAvailable(SDL3)
+
+if(TARGET SDL3::SDL3-static)
+    get_target_property(SDL3_INTERFACE_INCLUDES SDL3::SDL3-static INTERFACE_INCLUDE_DIRECTORIES)
+    if(SDL3_INTERFACE_INCLUDES)
+        set_property(TARGET SDL3::SDL3-static PROPERTY
+            INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${SDL3_INTERFACE_INCLUDES}")
+    endif()
+endif()
+
 add_library(stormline_core01_headless STATIC
     src/stormline/core/internal/headless_host.cpp
 )
@@ -56,6 +93,21 @@ add_executable(stormline_core01_paths_test
 )
 target_link_libraries(stormline_core01_paths_test PRIVATE stormline_core01_paths)
 stormline_core01_apply_options(stormline_core01_paths_test PRIVATE)
+
+add_library(stormline_core01_sdl STATIC
+    src/stormline/core/internal/sdl_runtime.cpp
+)
+target_include_directories(stormline_core01_sdl PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core01_sdl PRIVATE SDL3::SDL3-static)
+stormline_core01_apply_options(stormline_core01_sdl PUBLIC)
+
+add_executable(stormline_core01_sdl_test
+    tests/core/sdl_runtime_tests.cpp
+)
+target_link_libraries(stormline_core01_sdl_test PRIVATE stormline_core01_sdl)
+stormline_core01_apply_options(stormline_core01_sdl_test PRIVATE)
 
 enable_testing()
 
@@ -97,6 +149,25 @@ add_test(NAME core01_paths_access
     COMMAND stormline_core01_paths_test access
 )
 
+add_test(NAME core01_sdl_basic
+    COMMAND stormline_core01_sdl_test basic
+)
+add_test(NAME core01_sdl_wrong_thread
+    COMMAND stormline_core01_sdl_test wrong_thread
+)
+add_test(NAME core01_sdl_init_failure
+    COMMAND stormline_core01_sdl_test init_failure
+)
+add_test(NAME core01_sdl_destructor
+    COMMAND stormline_core01_sdl_test destructor
+)
+add_test(NAME core01_sdl_version
+    COMMAND stormline_core01_sdl_test version
+)
+add_test(NAME core01_sdl_header
+    COMMAND stormline_core01_sdl_test header
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -110,5 +181,21 @@ set_tests_properties(
     core01_paths_no_write
     core01_paths_symlink
     core01_paths_access
-    PROPERTIES TIMEOUT 60
+    core01_sdl_basic
+    core01_sdl_wrong_thread
+    core01_sdl_init_failure
+    core01_sdl_destructor
+    core01_sdl_version
+    core01_sdl_header
+    PROPERTIES TIMEOUT 180
+)
+
+set_tests_properties(
+    core01_sdl_basic
+    core01_sdl_wrong_thread
+    core01_sdl_init_failure
+    core01_sdl_destructor
+    core01_sdl_version
+    core01_sdl_header
+    PROPERTIES ENVIRONMENT "SDL_VIDEODRIVER=dummy"
 )
