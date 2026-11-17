@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-CORE-01-10",
+  "module_id": "CORE-01",
+  "risk": "STANDARD",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+  "approved_adr": "docs/adr/0089-core-01-display-surface-slice.md",
+  "approved_contract": "docs/contracts/core-01-display-surface-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-10.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-10-G6-ACTIVATION.md",
+  "gate_base_sha": "7e42b48f19272498c732d75f2051704f5b82311f",
+  "gate_pr": 0,
+  "requires_fresh_context_lock": true,
+  "sdl3": {
+    "version": "3.4.20",
+    "repository": "https://github.com/libsdl-org/SDL.git",
+    "commit": "f00dc919ca35b9756316e86c4777392de442f9b2",
+    "license": "zlib",
+    "linkage": "static",
+    "build_time_fetch": true
+  },
+  "source_blob_sha1": {
+    "checkpoint": "e1fa38bc5876feaa3c1076039a075a34234b92bc",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0003": "50d028c7a28acc25164256c5f4547c14ac7192d4",
+    "adr_0085": "e4ba773dadd33a4fa439a8da988eac02850c2d2a",
+    "adr_0088": "c0a0d8b3f53ffa5ce7e537cb1b58a9778f013d97",
+    "adr_0089": "3f6913b3bd1bd23215337d72b13101cca57ec66f",
+    "core01_architecture": "11c7ec4125f40cf0172aa552a1e9835e84d2c172",
+    "sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
+    "window_contract": "5bf7eaee2d0aea3f0dc4cc89a419f79f8442b479",
+    "event_queue_contract": "7d8659ccf5235d36fc2d982589c16f5b8574ac5d",
+    "display_contract": "dbcff81eb6e5442154c564609c7a8234a23803e9",
+    "core01_plan": "88a144291b4149109cf2f90907cd724bde196651",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}
