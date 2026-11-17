@@ -1,15 +1,15 @@
 # NLE-PRPLAN-CORE-01-10 — Display, DPI and surface validity
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-10`. **ADR:** [ADR-0089](../adr/0089-core-01-display-surface-slice.md). **Contract:** [core-01-display-surface-v0](../contracts/core-01-display-surface-v0.md). **WO:** [NLE-PRPLAN-CORE-01-10](../work-orders/NLE-PRPLAN-CORE-01-10.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-10`. **ADR:** [ADR-0089](../adr/0089-core-01-display-surface-slice.md). **Contract:** [core-01-display-surface-v0](../contracts/core-01-display-surface-v0.md). **WO:** [NLE-PRPLAN-CORE-01-10](../work-orders/NLE-PRPLAN-CORE-01-10.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First real CORE-01 display/surface metadata path: owner-thread display enumeration, bounds/usable bounds/content scale, additive window surface metrics and generation-based invalidation on resize or observed display/pixel-size change. No renderer/GPU/VRAM, physical hotplug/DPI certification, IME/fullscreen/HDR, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #446](https://github.com/KayzenRoot/stormline/pull/446) squash-merged as `2cba52ba439a631249dba7d1e1aaf49ac9e9d93d`; audit #6959494877 **APPROVED**.
-- **Code PR:** [PR #447](https://github.com/KayzenRoot/stormline/pull/447), HEAD auditado `ef091cb93bd7e592aa31107edadc54bdd65a4e07`.
+- **Code PR:** [PR #447](https://github.com/KayzenRoot/stormline/pull/447), HEAD auditado `8f350d2dd0171cb98074fc7de8ea08c407f37015`, [auditoria pt-BR #6959847275](https://github.com/KayzenRoot/stormline/pull/447#issuecomment-6959847275) **APPROVED**; squash-merged as `ec622f556ec4e6f1404bfd0f628794cde3777b8e`.
 - **Base:** `2cba52ba439a631249dba7d1e1aaf49ac9e9d93d`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-10 --json` → `EXECUTOR_READY`, exit 0; `-11`, `CORE-02-04` and every other ID exit 2.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-01-10 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Predecessors:** `-03`..`-09` completed; CORE-02-03 ownership completed via PR #441.
 
 SDL3 remains `3.4.20`, commit `f00dc919ca35b9756316e86c4777392de442f9b2`, zlib, static build-time `FetchContent`.
@@ -86,3 +86,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the sixth real CORE-01 slice, exact PR/CI/audit/merge SHA, 7 `core01_display_*` tests and 47 total CTests across Linux, Linux ASan/UBSan, Windows and macOS, and the explicit statement that this is display/surface metadata only — not renderer/GPU/VRAM, physical hotplug/DPI, IME, fullscreen, HDR, public ABI or release. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #447](https://github.com/KayzenRoot/stormline/pull/447) **squash-merged** at `2026-11-17T20:20:33Z`, merge `ec622f556ec4e6f1404bfd0f628794cde3777b8e`; [auditoria pt-BR #6959847275](https://github.com/KayzenRoot/stormline/pull/447#issuecomment-6959847275) **APPROVED**.
+- Final-head Docs Validation [44167432631](https://github.com/KayzenRoot/stormline/actions/runs/44167432631) **SUCCESS**; native [44167432453](https://github.com/KayzenRoot/stormline/actions/runs/44167432453) **SUCCESS**, **47/47 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-01-10` becomes `COMPLETED` with `github_pr=447`; the manifest has **735 `PLANNED_BLOCKED`, 9 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; `select_packet.py` denies every ID. No next packet or module is authorized. CORE-01 remains incomplete; `-11`..`-16` are blocked.
