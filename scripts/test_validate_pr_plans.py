@@ -61,13 +61,27 @@ class PrPlanValidationTests(unittest.TestCase):
                             self.check(lambda d: d.update(planned_packet_count=20))))
 
 
-    def test_only_single_scoped_packet_can_be_ready(self):
+    def test_completed_packet_is_not_ready(self):
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual(["NLE-PRPLAN-CORE-01-03"], ready)
-        self.assertTrue(v.packet_readiness(self.manifest, self.registry, self.activation, ready[0]))
+        self.assertEqual([], ready)
+        completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
+                     if p["status"] == "COMPLETED"]
+        self.assertEqual(["NLE-PRPLAN-CORE-01-03"], completed)
+        self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-01-03"))
         self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-01-04"))
         self.assertFalse(v.packet_readiness(self.manifest, self.registry, self.activation, "NLE-PRPLAN-CORE-02-03"))
+
+    def test_completed_packet_cannot_be_reopened(self):
+        def wrong(d):
+            d["modules"][0]["packets"][2]["status"] = "EXECUTOR_READY"
+            d["modules"][0]["packets"][2]["github_pr"] = None
+        self.assertTrue(any("expected COMPLETED/428" in x for x in self.check(wrong)))
+
+    def test_completed_packet_cannot_claim_wrong_pr(self):
+        def wrong(d):
+            d["modules"][0]["packets"][2]["github_pr"] = 999
+        self.assertTrue(any("expected COMPLETED/428" in x for x in self.check(wrong)))
 
     def test_no_activation_record_denies_ready(self):
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, None))
@@ -95,14 +109,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
 
 
-    def test_selector_cli_fail_closed_and_one_allowed(self):
+    def test_selector_cli_denies_all_after_completion(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
-        allowed = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-01-03", "--json"],
-                                 capture_output=True, text=True, timeout=20, check=False)
-        self.assertEqual(0, allowed.returncode, allowed.stderr)
-        self.assertTrue(json.loads(allowed.stdout)["executor_ready"])
-        for packet_id in ("NLE-PRPLAN-CORE-01-04", "NLE-PRPLAN-CORE-02-03",
-                          "NLE-PRPLAN-NET-01-03", "NLE-PRPLAN-CORE-01-99"):
+        for packet_id in ("NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
+                          "NLE-PRPLAN-CORE-02-03", "NLE-PRPLAN-NET-01-03",
+                          "NLE-PRPLAN-CORE-01-99"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))

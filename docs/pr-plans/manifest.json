@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "ONE_BOUNDED_CORE01_INTERNAL_PACKET_READY",
+  "status": "CORE01_03_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -46,8 +46,8 @@
             "NLE-PRPLAN-CORE-01-02"
           ],
           "requires_modules_merged": [],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 428,
           "release_class": "INTERNAL_ONLY",
           "risk": "STANDARD",
           "approved_adr": "docs/adr/0083-core-01-internal-headless-slice.md",
