@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-01-03 — first internal C++20 headless host slice
 
-**Status:** `CODE_PACKET_IMPLEMENTED / NATIVE_CI_PENDING / AUDIT_PENDING` · **Master program order:** `STORM-CORE-01-IMPL-001` (owner authorization 2026-11-17) · **Formal repository packet:** `NLE-PRPLAN-CORE-01-03` · **Work Order:** [NLE-PRPLAN-CORE-01-03](../work-orders/NLE-PRPLAN-CORE-01-03.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18) · **Contract:** [CORE-01 internal headless v0](../contracts/core-01-internal-headless-v0.md) · **ADR:** [ADR-0083](../adr/0083-core-01-internal-headless-slice.md).
+**Status:** `CODE_PACKET_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING` · **Master program order:** `STORM-CORE-01-IMPL-001` (owner authorization 2026-11-17) · **Formal repository packet:** `NLE-PRPLAN-CORE-01-03` · **Work Order:** [NLE-PRPLAN-CORE-01-03](../work-orders/NLE-PRPLAN-CORE-01-03.md) · **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18) · **Contract:** [CORE-01 internal headless v0](../contracts/core-01-internal-headless-v0.md) · **ADR:** [ADR-0083](../adr/0083-core-01-internal-headless-slice.md).
 
 This is the first real Stormline engine code packet. It is **INTERNAL_ONLY**, CPU-only, headless, standard-library C++20, with no SDL3, window, GPU, display, audio, network, public ABI, plugin boundary, release or product certification.
 
@@ -72,9 +72,19 @@ The local machine has no CMake/Ninja in `PATH`; installing new tooling is prohib
 
 Compiler output: `headless_host.cpp`, `headless_host_tests.cpp`, link success, 5/5 modes `PASS`.
 
-### Native CI (authoritative, pending observation)
+### Native CI (authoritative, observed)
 
-The code PR's exact head must run the new workflow on `ubuntu-24.04`, `windows-2025-vs2026` and `macos-15`, plus the Linux ASan/UBSan job when the preinstalled toolchain supports it. The PR remains Draft until these results and the exact-head `docs-validation` are observed and recorded here. No CI PASS is claimed before the runs exist.
+The code-bearing head `978ef1a042de01082358f98d42afc7283663fff3` passed the exact-head required check and the four native jobs. This is the code head; a later documentation-only evidence update re-runs the same workflows and its final-head run IDs are recorded in the PR audit.
+
+| Job | Runner / image | Toolchain | CTest |
+|---|---|---|---|
+| `docs-validation` | ubuntu (required G2 check) | existing repository workflow | [run 44132184013](https://github.com/KayzenRoot/stormline/actions/runs/44132184013), job `134211956058` **SUCCESS** |
+| `linux` | `ubuntu-24.04`, image `20261111.370.1`, glibc 2.39 | GCC 13.3.0, CMake 3.31.6, Ninja 1.13.2 | **5/5 passed, 0 failed** |
+| `linux-sanitizers` | `ubuntu-24.04` | same GCC/CMake/Ninja; ASan/UBSan supported by preinstalled toolchain | **5/5 passed, 0 failed** |
+| `windows` | `windows-2025-vs2026`, image `20261103.298.1` | MSVC 14.51.36231 / 19.51.36260, CMake 4.4.5, Ninja 1.13.2 | **5/5 passed, 0 failed** |
+| `macos` | `macos-15-arm64`, macOS 15.8.2 | Apple clang 17.0.0 (clang-1700.0.13.5), CMake 4.4.5, Ninja 1.13.2 | **5/5 passed, 0 failed** |
+
+Native workflow run: [44132183883](https://github.com/KayzenRoot/stormline/actions/runs/44132183883) (`pull_request`, head `978ef1a…`) **SUCCESS**. Job IDs: Linux `134211955594`, Linux sanitizers `134211956470`, Windows `134211955140`, macOS `134211955557`. Every job ran its steps; no native test was skipped. Sanitizers were genuinely enabled (`STORMLINE_CORE01_ENABLE_SANITIZERS=ON`) and executed; this is not a claim of complete memory-safety certification.
 
 ### Test oracles covered
 
@@ -111,7 +121,7 @@ The code PR's exact head must run the new workflow on `ubuntu-24.04`, `windows-2
 - Local native proof uses MSVC 14.44 and is supplementary; the provisional CI targets are GCC 13.3, MSVC 14.51 and AppleClang 17.
 - No physical hardware, GPU, SDL3, ABI, packaging or release certification is claimed.
 - `strict` G2 checks may require a rebase/rerun after `main` moves; normal PR flow applies.
-- No HIGH/CRITICAL defect is known at the time of writing; this remains subject to exact-head native CI and independent audit.
+- No HIGH/CRITICAL defect is known; native CI passed at the code head and the result remains subject to the independent audit and the final documentation-head re-run.
 
 ## 8. Rollback
 
