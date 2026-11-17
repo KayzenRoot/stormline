@@ -44,7 +44,7 @@ SDL3 API signatures were read from the pinned commit before coding: `SDL_Init` r
 | `src/stormline/core/internal/sdl_runtime.hpp` | Internal API, no SDL types |
 | `src/stormline/core/internal/sdl_runtime.cpp` | Pinned SDL3 init/quit/version implementation |
 | `tests/core/sdl_runtime_tests.cpp` | SDL-01..SDL-07 tests + header leak guard |
-| `CMakeLists.txt` | Pinned FetchContent, SDL target, 6 new CTests; existing 12 preserved |
+| `CMakeLists.txt` | Pinned FetchContent, SDL target, 6 new CTests; render/GPU/Vulkan/Metal/OpenGL/OpenGLES/D3D/audio backends disabled; existing 12 preserved |
 | `.github/workflows/core01-internal-headless.yml` | Timeout increase for the SDL3 build only |
 | `docs/evidence/NLE-PRPLAN-CORE-01-07.md` | This Evidence Bundle |
 
