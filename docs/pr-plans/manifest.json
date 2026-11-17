@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "CORE01_12_COMPLETED_REST_BLOCKED",
+  "status": "CORE01_13_READY_PREDECESSORS_COMPLETED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -206,8 +206,12 @@
             "NLE-PRPLAN-CORE-01-12"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "release_class": "INTERNAL_ONLY",
+          "risk": "STANDARD",
+          "approved_adr": "docs/adr/0092-core-01-capability-graph-prototype.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-13-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-01-14",

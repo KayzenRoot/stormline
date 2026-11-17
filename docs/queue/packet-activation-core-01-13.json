@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-CORE-01-13",
+  "module_id": "CORE-01",
+  "risk": "STANDARD",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-17/next-increments",
+  "approved_adr": "docs/adr/0092-core-01-capability-graph-prototype.md",
+  "approved_contract": "docs/contracts/core-01-capability-graph-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-CORE-01-13.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-01-13-G6-ACTIVATION.md",
+  "gate_base_sha": "967e136d517c6d78430bcde1fd66ef97a283efe5",
+  "gate_pr": 0,
+  "requires_fresh_context_lock": true,
+  "sdl3": {
+    "version": "3.4.20",
+    "repository": "https://github.com/libsdl-org/SDL.git",
+    "commit": "f00dc919ca35b9756316e86c4777392de442f9b2",
+    "license": "zlib",
+    "linkage": "static",
+    "build_time_fetch": true
+  },
+  "source_blob_sha1": {
+    "checkpoint": "85d753cc215ef1eb66767a09b2b247b12ffc0084",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0003": "50d028c7a28acc25164256c5f4547c14ac7192d4",
+    "adr_0092": "011113a1b6485fff424c11bf9cdd2c145090ba3d",
+    "core01_architecture": "11c7ec4125f40cf0172aa552a1e9835e84d2c172",
+    "sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
+    "capability_contract": "d1d9ab515a1be13532053666b25a498f9d812e0f",
+    "core01_plan": "88a144291b4149109cf2f90907cd724bde196651",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}
