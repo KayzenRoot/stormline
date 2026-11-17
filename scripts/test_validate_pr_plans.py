@@ -70,15 +70,21 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(428, packets[4]["github_pr"])
         self.assertEqual("COMPLETED", packets[5]["status"])
         self.assertEqual(432, packets[5]["github_pr"])
-        self.assertEqual("EXECUTOR_READY", packets[6]["status"])
-        self.assertIsNone(packets[6]["github_pr"])
+        self.assertEqual("COMPLETED", packets[6]["status"])
+        self.assertEqual(435, packets[6]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual(["NLE-PRPLAN-CORE-01-07"], ready)
+        self.assertEqual([], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
-                          "NLE-PRPLAN-CORE-01-05", "NLE-PRPLAN-CORE-01-06"], completed)
+                          "NLE-PRPLAN-CORE-01-05", "NLE-PRPLAN-CORE-01-06",
+                          "NLE-PRPLAN-CORE-01-07"], completed)
+
+    def test_completed_slice_07_cannot_claim_wrong_pr(self):
+        def wrong(d):
+            d["modules"][0]["packets"][6]["github_pr"] = 999
+        self.assertTrue(any("expected COMPLETED/435" in x for x in self.check(wrong)))
 
     def test_predecessor_cannot_be_reopened(self):
         def wrong(d):
@@ -139,16 +145,12 @@ class PrPlanValidationTests(unittest.TestCase):
         reg["modules"][0]["executor_ready"] = True
         self.assertTrue(v.validate_manifest(self.manifest, reg, self.activation))
 
-    def test_selector_cli_only_07_allowed(self):
+    def test_selector_cli_all_denied_after_07_completion(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
-        allowed = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-01-07", "--json"],
-                                 capture_output=True, text=True, timeout=20, check=False)
-        self.assertEqual(0, allowed.returncode, allowed.stderr)
-        self.assertTrue(json.loads(allowed.stdout)["executor_ready"])
         for packet_id in ("NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
                           "NLE-PRPLAN-CORE-01-05", "NLE-PRPLAN-CORE-01-06",
-                          "NLE-PRPLAN-CORE-01-08", "NLE-PRPLAN-CORE-02-03",
-                          "NLE-PRPLAN-CORE-01-99"):
+                          "NLE-PRPLAN-CORE-01-07", "NLE-PRPLAN-CORE-01-08",
+                          "NLE-PRPLAN-CORE-02-03", "NLE-PRPLAN-CORE-01-99"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
