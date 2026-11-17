@@ -1,12 +1,13 @@
 # NLE-PRPLAN-CORE-01-11 — Opaque native window-handle bridge
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-11`. **ADR:** [ADR-0090](../adr/0090-core-01-native-window-handle-bridge.md). **Contract:** [core-01-native-window-handle-v0](../contracts/core-01-native-window-handle-v0.md). **WO:** [NLE-PRPLAN-CORE-01-11](../work-orders/NLE-PRPLAN-CORE-01-11.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Master program:** `STORM-CORE-01-IMPL-001`. **Formal packet:** `NLE-PRPLAN-CORE-01-11`. **ADR:** [ADR-0090](../adr/0090-core-01-native-window-handle-bridge.md). **Contract:** [core-01-native-window-handle-v0](../contracts/core-01-native-window-handle-v0.md). **WO:** [NLE-PRPLAN-CORE-01-11](../work-orders/NLE-PRPLAN-CORE-01-11.md). **Issue:** [#18](https://github.com/KayzenRoot/stormline/issues/18).
 
 First internal native window-handle bridge: identify the active window system, expose the SDL-owned platform window handle as an opaque non-owning token (kind/value/generation), and invalidate it on window destroy. No direct OS implementation, permissions, renderer/VRAM, clipboard/DnD/IME/hotplug, public ABI or release.
 
 ## 1. Authorization and Context Lock
 
 - **Gate:** [PR #449](https://github.com/KayzenRoot/stormline/pull/449) squash-merged as `c77a55a70d79dd3cec23b46ba252bbb97138ba9b`; audit #6960180269 **APPROVED**.
+- **Code PR:** [PR #450](https://github.com/KayzenRoot/stormline/pull/450), HEAD auditado `4d383612252baa3e8cf565890d042d8d3d3fe0b1`.
 - **Base:** `c77a55a70d79dd3cec23b46ba252bbb97138ba9b`.
 - **Selector:** `select_packet.py NLE-PRPLAN-CORE-01-11 --json` → `EXECUTOR_READY`, exit 0; `-12`, `CORE-02-04` and every other ID exit 2.
 - **Predecessors:** `-03`..`-10` completed; CORE-02-03 ownership completed via PR #441.
@@ -48,11 +49,21 @@ No other path changed. Existing CORE-01/CORE-02 targets are unchanged except add
 - Full local matrix after rebuild: **53/53 CTests passed** (47 previous + 6 native bridge tests).
 - Tests cover system mapping, native handle kind/value/generation, dummy unavailable path, wrong-thread, before/after destroy, and 50 create/query/destroy cycles.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with run IDs and observed CTest counts only after they complete; no native PASS is claimed yet.
+All jobs ran at the exact HEAD `4d383612252baa3e8cf565890d042d8d3d3fe0b1`:
 
-Expected matrix: existing 47 CTests plus 6 native-bridge tests = **53 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44170903359](https://github.com/KayzenRoot/stormline/actions/runs/44170903359) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **53/53 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan, X11 via Xvfb/openbox | **53/53 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **53/53 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **53/53 CTest passed** |
+
+Native workflow run: [44170903412](https://github.com/KayzenRoot/stormline/actions/runs/44170903412) **SUCCESS**. Job IDs: Linux `134349389678`, sanitizers `134349390177`, Windows `134349390196`, macOS `134349390137`. The six `core01_native_*` tests executed in every job in addition to the existing 47 CTests; none skipped. The macOS job completed without a `NOT_QUALIFIED` skip.
+
+No correction was required by the native matrix.
 
 ## 5. Security, licensing and limitations
 
@@ -61,7 +72,7 @@ Expected matrix: existing 47 CTests plus 6 native-bridge tests = **53 CTests** p
 - No direct OS permission/sandbox model, multiple native windows, renderer surface/VRAM, clipboard/DnD/IME/hotplug, public ABI or release.
 - macOS window-server availability may make the native handle tests `NOT_QUALIFIED`; the final matrix records the real result.
 - ADR-0003/0075 remain `PROPOSED`; G3 global `NOT_CLEARED`; NLE-D009 `OPEN`; 80/80 module WOs `BLOCKED`; `engine_implemented=false` at module/product level.
-- No HIGH/CRITICAL known; final status subject to exact-head CI and independent pt-BR audit.
+- No HIGH/CRITICAL known; native CI passed at the code head and the result remains subject to the independent pt-BR audit.
 
 ## 6. Rollback
 
