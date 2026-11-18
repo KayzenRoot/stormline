@@ -1,4 +1,4 @@
-# NLE-CORE01-CORR-001 — Evidence Bundle (in progress)
+# NLE-CORE01-CORR-001 — Evidence Bundle (pre-merge qualification)
 
 **Work Order:** [NLE-CORE01-CORR-001](../work-orders/NLE-CORE01-CORR-001.md)  
 **PR:** [#477](https://github.com/KayzenRoot/stormline/pull/477), DRAFT / NOT MERGED  
@@ -32,18 +32,32 @@
 
 ## Tests and checks
 - Documentation validator: [run #44356126944](https://github.com/KayzenRoot/stormline/actions/runs/44356126944) SUCCESS after correcting a first-pass missing final newline in the Work Order. The earlier docs failure was a formatting problem introduced in this PR, now fixed.
-- Interim corrected CI [run #44356586024](https://github.com/KayzenRoot/stormline/actions/runs/44356586024) on superseded implementation: **92/92 CTest** on Linux, Linux ASan/UBSan, Windows, macOS. **That implementation was subsequently revised after architecture audit** and is no longer proof of the current branch. The newer architecture-compliant corrected HEAD requires **NEW EXACT-HEAD CI** before approval; do not claim PASS prematurely. Initial red reproduction remains [run #44354723368](https://github.com/KayzenRoot/stormline/actions/runs/44354723368).
+- Superseded implementation run [#44356586024](https://github.com/KayzenRoot/stormline/actions/runs/44356586024) passed 92/92 CTest on 4 environments but was replaced after architecture audit; it is *not* used as proof of the final code.
+- **Architecture-compliant implementation tested at exact HEAD `c80adfb61c565c87ec79f35c418b8ca41a92cac6`:** Docs Validation [#44358953673](https://github.com/KayzenRoot/stormline/actions/runs/44358953673) **SUCCESS**, native run [#44358953776](https://github.com/KayzenRoot/stormline/actions/runs/44358953776) **SUCCESS**, including Linux GCC **92/92**, Linux with ASan/UBSan enabled **92/92**, Windows MSVC **92/92** and macOS AppleClang **92/92**; full logs show 0 CTest failures and no ASan/UBSan errors or `NOT_QUALIFIED` masking. Four native jobs all have `conclusion=success`. The final Evidence-only amendment requires its own readback/check; do not treat this entry as its own head's CI proof.
+- Initial **RED reproduction** [#44354723368](https://github.com/KayzenRoot/stormline/actions/runs/44354723368) confirmed 4 failing CTest names on Linux/Windows/macOS. `core01_display_surface` was augmented with ABA checks for the pre-existing generation reset.
 - Check physical hardware, real Wayland runtime, IME/hotplug/long soak, distribution and release remain NOT_QUALIFIED.
 
 ## Risk, rollback and audit
 - Unsafe teardown previously allowed lifetime invalidation of a `SDL_Window*`. Regression test deliberately exits before use of that pointer.
 - No new mutable process-global Stormline adapter state remains, as the approved runtime/window contracts prohibit it. SDL-owned global state is queried on the main thread. Supported lifetime still requires Window teardown before SdlRuntime destruction; wrong destructor order fails safe by not calling SDL_Quit, but leaves an unsupported cleanup obligation, not a product guarantee.
 - Rollback: close unmerged PR; after merge require a normal revert PR, no force-push.
-- Exact-HEAD pt-BR audit: **PENDING** until this Evidence update's own Docs/native CI checks complete. The proof of current code is 92/92 CTest per OS on the immediately prior HEAD; validate again on the final PR head. Do not merge while CI red, tests skipped as PASS, or HIGH/CRITICAL is known.
+- Exact-HEAD pt-BR audit: **PENDING** until this Evidence-only amendment has its own Docs Validation and native checks on the final PR HEAD. Code test proof on `c80adfb61...` is 92/92 per OS. Owner-approved corrective scope remains ELEVATED; do not merge while CI red, tests skipped as PASS, or HIGH/CRITICAL is known.
 - Proposed Checkpoint Delta: record this corrective PR and evidence only after APPROVED, in a separate authorized checkpoint PR if required; **not promoted**.
 
 ## Changed-file review / correction scope
 12 total changed paths: 4 production files (`sdl_runtime.hpp/.cpp`, `window.hpp/.cpp`), 6 test files (`sdl_runtime_tests.cpp`, `window_tests.cpp`, `native_bridge_tests.cpp`, `display_tests.cpp`, `core01_soak_tests.cpp`, `core01_qualification_tests.cpp`) and this Evidence plus WO. No CMake, workflow, manifest, activation, registry, ledger, license, source hierarchy, or ADR mutation. A proposed checkpoint update is explicitly deferred to a separate audited PR if this correction is APPROVED and merged.
 
 ## Contract compliance check (CD-02)
-The approved `core-01-sdl3-runtime-v0.md` and `core-01-window-lifecycle-v0.md` prohibit mutable global adapter state and require that SdlRuntime outlive Window. The first green attempt introduced a private global ProcessState to defer SDL_Quit and was **not approved** despite green tests. That architecture violation was corrected in the same PR. SDL `SDL_GetWindows` provides the authoritative window count; `SDL_GetWindowID` provides a native per-window identifier; the per-Window revision counter persists across recreation, without global mutable state. Unsupported destructor order does not produce a claim of full recovery. Exact-head CI and audit pending.
+The approved `core-01-sdl3-runtime-v0.md` and `core-01-window-lifecycle-v0.md` prohibit mutable global adapter state and require that SdlRuntime outlive Window. The first green attempt introduced a private global ProcessState to defer SDL_Quit and was **not approved** despite green tests. That architecture violation was corrected in the same PR. SDL `SDL_GetWindows` provides the authoritative window count; `SDL_GetWindowID` provides a native per-window identifier; the per-Window revision counter persists across recreation, without global mutable state. Unsupported destructor order does not produce a claim of full recovery. Current implementation CI is fully green at `c80adfb61...`, with only this final Evidence-only change awaiting exact-HEAD gates and audit.
+
+## Final implementation qualification matrix
+
+| Environment | Current code HEAD CI | Result |
+|---|---|---|
+| Linux GCC / X11 virtual | #44358953776 | 92/92 PASS |
+| Linux GCC + ASan/UBSan | #44358953776 | 92/92 PASS; sanitizers detected enabled |
+| Windows MSVC | #44358953776 | 92/92 PASS |
+| macOS AppleClang/Cocoa hosted | #44358953776 | 92/92 PASS |
+| Docs Validation | #44358953673 | SUCCESS |
+
+**Scope of claim:** internal code regressions and Cocoa hosted runner on these jobs only. Real hardware, Wayland physical, long-soak, global G3, license and module completion remain NOT_QUALIFIED. Main must remain unchanged until a separate full exact-head audit returns APPROVED.
