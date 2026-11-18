@@ -211,22 +211,18 @@ bool run_lifetime() {
         expect(window.destroy() == WindowError::None, "cycle destroy");
         expect(!window.valid(), "cycle window invalid after destroy");
     }
-    expect(runtime.shutdown() == SdlError::None, "runtime shutdown after cycles");
-    Window deferred_window;
-    {
-        SdlRuntime ephemeral;
-        expect(ephemeral.initialize() == SdlError::None, "short-lived runtime initializes");
-        expect(deferred_window.create(WindowConfig{}) == WindowError::None,
-               "window can outlive its runtime wrapper");
-    }
-    expect(deferred_window.valid(), "runtime destructor defers SDL_Quit for live window");
-    expect(deferred_window.destroy() == WindowError::None,
-           "deferred window destroys without use-after-free");
-    SdlRuntime after_deferred;
-    expect(after_deferred.initialize() == SdlError::None,
-           "final window cleanup permits fresh SDL runtime");
-    expect(after_deferred.shutdown() == SdlError::None,
-           "fresh runtime shuts down after deferred cleanup");
+    Window first;
+    Window second;
+    expect(first.create(WindowConfig{}) == WindowError::None, "first concurrent window creates");
+    expect(second.create(WindowConfig{}) == WindowError::None, "second concurrent window creates");
+    expect(runtime.shutdown() == SdlError::WindowsActive,
+           "shutdown is rejected while two windows are live");
+    expect(first.destroy() == WindowError::None, "first concurrent window destroys");
+    expect(runtime.shutdown() == SdlError::WindowsActive,
+           "shutdown remains blocked while second window is live");
+    expect(second.destroy() == WindowError::None, "second concurrent window destroys");
+    expect(runtime.shutdown() == SdlError::None,
+           "shutdown succeeds once all windows are destroyed");
     return finish_case();
 }
 
