@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-04 — System allocator baseline and report-only measurement
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-02-04`. **ADR:** [ADR-0096](../adr/0096-core-02-system-allocator-baseline.md). **Contract:** [core-02-system-allocator-v0](../contracts/core-02-system-allocator-v0.md). **WO:** [NLE-PRPLAN-CORE-02-04](../work-orders/NLE-PRPLAN-CORE-02-04.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Formal packet:** `NLE-PRPLAN-CORE-02-04`. **ADR:** [ADR-0096](../adr/0096-core-02-system-allocator-baseline.md). **Contract:** [core-02-system-allocator-v0](../contracts/core-02-system-allocator-v0.md). **WO:** [NLE-PRPLAN-CORE-02-04](../work-orders/NLE-PRPLAN-CORE-02-04.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 Explicit `SystemMemoryResource` over ordinary/aligned `::operator new/delete`, integrated with `MemoryBlock`, plus a report-only benchmark against `std::pmr::new_delete_resource`, raw new/delete and malloc/free. No third-party allocator, global override, winner selection or performance PASS.
 
@@ -8,7 +8,7 @@ Explicit `SystemMemoryResource` over ordinary/aligned `::operator new/delete`, i
 
 - **Gate:** [PR #465](https://github.com/KayzenRoot/stormline/pull/465) squash-merged as `574bc4bfd13213a480c2bfa0b467754413269548`; audit #6964591046 **APPROVED**.
 - **Base:** `574bc4bfd13213a480c2bfa0b467754413269548`.
-- **Code PR:** [PR #466](https://github.com/KayzenRoot/stormline/pull/466), HEAD auditado `a5f783ef0531165e5dc7198f4cc17766c45e742d`.
+- **Code PR:** [PR #466](https://github.com/KayzenRoot/stormline/pull/466), HEAD auditado `58ca01f…`, [auditoria pt-BR #6965080349](https://github.com/KayzenRoot/stormline/pull/466#issuecomment-6965080349) **APPROVED**; squash-merged as `e04e2cd…`.
 - **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-04 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
@@ -76,3 +76,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the system allocator baseline, exact PR/CI/audit/merge SHA, 6 `core02_system_*` tests, 73 total CTests and the report-only benchmark output. It explicitly states that no third-party allocator was selected and no performance/RSS/fragmentation verdict was made. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #466](https://github.com/KayzenRoot/stormline/pull/466) **squash-merged** at `2026-11-18T00:17:58Z`, merge `e04e2cd…`; audit #6965080349 **APPROVED**.
+- Final-head Docs Validation [44206099358](https://github.com/KayzenRoot/stormline/actions/runs/44206099358) **SUCCESS**; native [44206099425](https://github.com/KayzenRoot/stormline/actions/runs/44206099425) **SUCCESS**, **73/73 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-02-04` becomes `COMPLETED` with `github_pr=466`; manifest **728 `PLANNED_BLOCKED`, 16 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID. No third-party allocator selected; no performance/RSS/fragmentation verdict. No next packet/module authorized.
