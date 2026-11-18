@@ -160,6 +160,14 @@ bool run_wrong_thread() {
     });
     creator.join();
     expect(worker_create == WindowError::WrongThread, "worker create rejected");
+    WindowError worker_owned_create = WindowError::None;
+    std::thread worker_owner([&worker_owned_create] {
+        Window worker_window;
+        worker_owned_create = worker_window.create(WindowConfig{});
+    });
+    worker_owner.join();
+    expect(worker_owned_create == WindowError::WrongThread,
+           "window constructed on background thread cannot create SDL video window");
     expect(!window.valid(), "worker create leaves window invalid");
 
     if (!create_window(window, WindowConfig{}, "owner create after worker rejection")) {
