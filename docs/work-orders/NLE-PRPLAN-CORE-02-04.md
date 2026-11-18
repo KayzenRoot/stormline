@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-04 — System allocator baseline (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-04`. **Predecessor:** `-03` `COMPLETED` via PR #441. **Issue:** #19. **Base:** `4920c2f4e3bf787f58c867c2df5bd321eaca8729`. **ADR:** [ADR-0096](../adr/0096-core-02-system-allocator-baseline.md). **Contract:** [core-02-system-allocator-v0](../contracts/core-02-system-allocator-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #466](https://github.com/KayzenRoot/stormline/pull/466), merge `e04e2cd…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-04`. **Predecessor:** `-03` `COMPLETED` via PR #441. **Issue:** #19. **Base:** `4920c2f4e3bf787f58c867c2df5bd321eaca8729`. **ADR:** [ADR-0096](../adr/0096-core-02-system-allocator-baseline.md). **Contract:** [core-02-system-allocator-v0](../contracts/core-02-system-allocator-v0.md).
 
 ## OBJECTIVE
 
