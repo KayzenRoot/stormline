@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-06 — Memory budget
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-06`. **ADR:** [ADR-0098](../adr/0098-core-02-memory-budget.md). **Contract:** [core-02-memory-budget-v0](../contracts/core-02-memory-budget-v0.md). **WO:** [NLE-PRPLAN-CORE-02-06](../work-orders/NLE-PRPLAN-CORE-02-06.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Formal packet:** `NLE-PRPLAN-CORE-02-06`. **ADR:** [ADR-0098](../adr/0098-core-02-memory-budget.md). **Contract:** [core-02-memory-budget-v0](../contracts/core-02-memory-budget-v0.md). **WO:** [NLE-PRPLAN-CORE-02-06](../work-orders/NLE-PRPLAN-CORE-02-06.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First memory-budget accounting primitive: explicit per-instance soft/hard limits, typed non-mutating reserve/release, pressure status and owner-thread enforcement. No allocation interception, SMF/reclaim graph, telemetry, leak tracking, frame/job barrier, global budget, third-party dependency, public ABI or release.
 
@@ -8,8 +8,8 @@ First memory-budget accounting primitive: explicit per-instance soft/hard limits
 
 - **Gate:** [PR #471](https://github.com/KayzenRoot/stormline/pull/471) squash-merged as `d59dd8ba0e8e958d31446276ceb39e3786af6f51`; audit #6974359786 **APPROVED**.
 - **Base:** `d59dd8ba0e8e958d31446276ceb39e3786af6f51`.
-- **Code PR:** [PR #472](https://github.com/KayzenRoot/stormline/pull/472); implementation HEAD `dac7c89df3370a6b1bf233cd1a2d9246ba162065`; CI and audit pending at the final documentation head.
-- **Selector:** after the gate merge, `select_packet.py NLE-PRPLAN-CORE-02-06 --json` → `EXECUTOR_READY`, exit 0; all other IDs exit 2.
+- **Code PR:** [PR #472](https://github.com/KayzenRoot/stormline/pull/472), HEAD auditado `d4df62c…`, [auditoria pt-BR #6974575732](https://github.com/KayzenRoot/stormline/pull/472#issuecomment-6974575732) **APPROVED**; squash-merged as `10ceaaeb960478b0fc7fa1be07facb881ace1f2f`.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-06 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
 ## 2. Implemented behavior
@@ -47,17 +47,17 @@ No other path changed. Existing targets unchanged except additive budget wiring.
 
 ### Native CI (authoritative, observed)
 
-All jobs ran at implementation HEAD `dac7c89df3370a6b1bf233cd1a2d9246ba162065`; the only subsequent delta is this Evidence Bundle text, revalidated by the PR head checks.
+All jobs ran at the final documentation HEAD `d4df62c51aa868349dca7e0fdb969af200b63e9c` (and at implementation HEAD `dac7c89…`); the only delta between them is this Evidence Bundle text.
 
 | Job | Runner / toolchain | Result |
 |---|---|---|
-| `docs-validation` | required G2 check | [run 44276151259](https://github.com/KayzenRoot/stormline/actions/runs/44276151259) **SUCCESS** |
+| `docs-validation` | required G2 check | [run 44276642188](https://github.com/KayzenRoot/stormline/actions/runs/44276642188) **SUCCESS** |
 | `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **86/86 CTest passed** |
 | `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **86/86 CTest passed** |
 | `windows` | windows-2025-vs2026, MSVC | **86/86 CTest passed** |
 | `macos` | macos-15-arm64, Apple clang | **86/86 CTest passed** |
 
-Native workflow run: [44276151253](https://github.com/KayzenRoot/stormline/actions/runs/44276151253) **SUCCESS**. Job IDs: Linux `134704683964`, sanitizers `134704683327`, Windows `134704683572`, macOS `134704682887`. All 6 budget tests executed; the 80 previous CTests continue passing. SonarCloud Code Analysis passed; Socket checks passed.
+Native workflow run: [44276642228](https://github.com/KayzenRoot/stormline/actions/runs/44276642228) **SUCCESS**. Job IDs: Linux `134706355832`, sanitizers `134706356421`, Windows `134706356317`, macOS `134706356284`. All 6 budget tests executed; the 80 previous CTests continue passing. SonarCloud Code Analysis passed; Socket checks passed.
 
 Docs validators: `validate_pr_plans.py` **PASS** (726 blocked, 1 ready, 17 completed, 4 approved gates), `validate_docs.py` **PASS** (42 required files, 976 Markdown), `validate_wo_registry.py` **PASS** (80 blocked packets), `test_validate_pr_plans.py` **66/66 OK**.
 
@@ -79,4 +79,6 @@ After an approved squash merge and readback, a separate closeout PR records the 
 
 ## 8. Actual closure
 
-Pending pt-BR audit, squash merge and the independent closeout PR.
+- [PR #472](https://github.com/KayzenRoot/stormline/pull/472) **squash-merged** at `2026-11-18T09:33:28Z`, merge `10ceaaeb…`; audit #6974575732 **APPROVED**.
+- Final-head Docs Validation [44276642188](https://github.com/KayzenRoot/stormline/actions/runs/44276642188) **SUCCESS**; native [44276642228](https://github.com/KayzenRoot/stormline/actions/runs/44276642228) **SUCCESS**, **86/86 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-02-06` becomes `COMPLETED` with `github_pr=472`; manifest **726 `PLANNED_BLOCKED`, 18 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID. Interception/SMF/reclaim/telemetry/leak/frame-barrier/global budget remain out of scope. No next packet/module authorized.
