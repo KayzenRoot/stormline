@@ -69,13 +69,19 @@ if(STORM_ABI_PLATFORM STREQUAL "Linux")
        NOT _hdr MATCHES "Advanced Micro Devices X86-64")
         message(FATAL_ERROR "ABI_FAIL ELF64/x86_64 header: ${_hdr_err}")
     endif()
-    execute_process(COMMAND "${_readelf}" -W -l -d -n "${STORM_ABI_BINARY}"
+    # Inspect separately: -n note decoding is optional and must not invalidate
+    # a valid dynamic table. Dynamic imports and version-info remain mandatory.
+    execute_process(COMMAND "${_readelf}" -W -d "${STORM_ABI_BINARY}"
         RESULT_VARIABLE _dep_rc OUTPUT_VARIABLE _dep ERROR_VARIABLE _dep_err TIMEOUT 15)
     execute_process(COMMAND "${_readelf}" -W --version-info "${STORM_ABI_BINARY}"
         RESULT_VARIABLE _ver_rc OUTPUT_VARIABLE _versions ERROR_VARIABLE _ver_err TIMEOUT 15)
+    execute_process(COMMAND "${_readelf}" -W -n "${STORM_ABI_BINARY}"
+        RESULT_VARIABLE _note_rc OUTPUT_VARIABLE _notes ERROR_VARIABLE _note_err TIMEOUT 15)
     if(NOT "${_dep_rc}" STREQUAL "0" OR NOT "${_ver_rc}" STREQUAL "0" OR
        NOT _dep MATCHES "NEEDED")
-        message(FATAL_ERROR "ABI_FAIL missing ELF dependencies or symbol-version inspection")
+        string(LENGTH "${_dep}" _dep_len)
+        string(LENGTH "${_versions}" _versions_len)
+        message(FATAL_ERROR "ABI_FAIL real ELF dynamic/version information missing: dynamic_rc=${_dep_rc} versions_rc=${_ver_rc} dep_bytes=${_dep_len} ver_bytes=${_versions_len} dynamic_err=${_dep_err} versions_err=${_ver_err}")
     endif()
     string(REGEX MATCHALL "GLIBC_[0-9]+([.][0-9]+)+" _glibc "${_versions}")
     string(REGEX MATCHALL "GLIBCXX_[0-9]+([.][0-9]+)+" _glibcxx "${_versions}")
@@ -92,11 +98,11 @@ if(STORM_ABI_PLATFORM STREQUAL "Linux")
     string(REPLACE ";" "," _libs "${_libs}")
     message(STATUS "ABI_ELF_OK class=ELF64 machine=x86_64 max_required_GLIBC=${_glibc_max} max_required_GLIBCXX=${_glibcxx_max}")
     message(STATUS "ABI_ELF_NEEDED=${_libs}")
-    if(_dep MATCHES "x86 ISA needed")
-        string(REGEX MATCH "x86 ISA needed: [^\r\n]+" _isa "${_dep}")
+    if("${_note_rc}" STREQUAL "0" AND _notes MATCHES "x86 ISA needed")
+        string(REGEX MATCH "x86 ISA needed: [^\r\n]+" _isa "${_notes}")
         message(STATUS "ABI_ELF_DECLARED_ISA=${_isa}")
     else()
-        message(STATUS "ABI_ELF_DECLARED_ISA=NOT_QUALIFIED_NO_NOTE_AVX_NOT_PROVEN")
+        message(STATUS "ABI_ELF_DECLARED_ISA=NOT_QUALIFIED_NO_GNU_NOTE_AVX_NOT_PROVEN note_rc=${_note_rc}")
     endif()
     message(STATUS "ABI_ELF_RUNTIME_GLIBC_FLOOR=NOT_QUALIFIED_OTHER_DISTROS_NOT_RUN")
 elseif(STORM_ABI_PLATFORM STREQUAL "Windows")
