@@ -184,7 +184,8 @@ bool run_surface() {
     expect(window.destroy() == WindowError::None, "window destroy succeeds");
     expect(!window.surface_valid(resized.generation), "destroy invalidates the generation");
     expect(window.create(WindowConfig{}) == WindowError::None, "window recreation succeeds");
-    expect(!window.surface_valid(resized.generation), "recreation must not revive old surface token");
+    expect(!window.surface_valid(original.generation), "recreation must not revive original surface token");
+    expect(!window.surface_valid(resized.generation), "recreation must not revive resized surface token");
     expect(window.destroy() == WindowError::None, "recreated window cleanup succeeds");
     expect(runtime.shutdown() == SdlError::None, "runtime shutdown succeeds");
     return finish_case();
