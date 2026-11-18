@@ -1,4 +1,5 @@
 #include "stormline/core/internal/window.hpp"
+#include "stormline/core/internal/sdl_runtime.hpp"
 
 #include <SDL3/SDL.h>
 
@@ -17,6 +18,7 @@ struct Window::Impl final {
     SDL_Window* window{nullptr};
     std::uint64_t surface_generation{1};
     std::uint64_t native_generation{1};
+    NativeWindowHandle issued_native{};
     std::uint32_t display_id{0};
     int pixel_width{0};
     int pixel_height{0};
@@ -29,6 +31,7 @@ Window::Window() noexcept
 Window::~Window() noexcept {
     if (impl_ && on_owner_thread(owner_thread_) && impl_->window != nullptr) {
         SDL_DestroyWindow(impl_->window);
+        SdlRuntime::window_destroyed();
     }
 }
 
@@ -43,7 +46,7 @@ WindowError Window::create(const WindowConfig& config) noexcept {
         if (config.width <= 0 || config.height <= 0) {
             return WindowError::InvalidSize;
         }
-        if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
+        if (SDL_WasInit(SDL_INIT_VIDEO) == 0 || !SdlRuntime::owns_runtime()) {
             return WindowError::VideoNotInitialized;
         }
 
@@ -61,7 +64,16 @@ WindowError Window::create(const WindowConfig& config) noexcept {
             SDL_DestroyWindow(window);
             return WindowError::AllocationFailed;
         }
+        std::uint64_t surface_generation = 0;
+        std::uint64_t native_generation = 0;
+        if (!SdlRuntime::window_created(surface_generation, native_generation)) {
+            SDL_DestroyWindow(window);
+            delete impl;
+            return WindowError::InternalFailure;
+        }
         impl->window = window;
+        impl->surface_generation = surface_generation;
+        impl->native_generation = native_generation;
         impl->display_id = static_cast<std::uint32_t>(SDL_GetDisplayForWindow(window));
         int pixel_width = 0;
         int pixel_height = 0;
@@ -86,6 +98,7 @@ WindowError Window::destroy() noexcept {
         }
         if (impl_->window != nullptr) {
             SDL_DestroyWindow(impl_->window);
+            SdlRuntime::window_destroyed();
         }
         impl_.reset();
         return WindowError::None;
@@ -108,7 +121,11 @@ WindowError Window::resize(int width, int height) noexcept {
         if (!SDL_SetWindowSize(impl_->window, width, height)) {
             return WindowError::ResizeFailed;
         }
-        ++impl_->surface_generation;
+        const std::uint64_t generation = SdlRuntime::next_generation();
+        if (generation == 0) {
+            return WindowError::InternalFailure;
+        }
+        impl_->surface_generation = generation;
         int pixel_width = 0;
         int pixel_height = 0;
         if (SDL_GetWindowSizeInPixels(impl_->window, &pixel_width, &pixel_height)) {
@@ -181,7 +198,11 @@ WindowError Window::query_surface(SurfaceMetrics& out) noexcept {
             && (impl_->display_id != display_id
                 || impl_->pixel_width != pixel_width
                 || impl_->pixel_height != pixel_height)) {
-            ++impl_->surface_generation;
+            const std::uint64_t generation = SdlRuntime::next_generation();
+            if (generation == 0) {
+                return WindowError::SurfaceQueryFailed;
+            }
+            impl_->surface_generation = generation;
         }
 
         impl_->display_id = display_id;
@@ -202,8 +223,8 @@ WindowError Window::query_surface(SurfaceMetrics& out) noexcept {
 }
 
 bool Window::surface_valid(std::uint64_t generation) const noexcept {
-    return impl_ && impl_->window != nullptr && generation != 0
-           && generation == impl_->surface_generation;
+    return on_owner_thread(owner_thread_) && impl_ && impl_->window != nullptr
+           && generation != 0 && generation == impl_->surface_generation;
 }
 
 WindowError Window::query_native_handle(NativeWindowHandle& out) noexcept {
@@ -260,6 +281,7 @@ WindowError Window::query_native_handle(NativeWindowHandle& out) noexcept {
         out.kind = kind;
         out.value = value;
         out.generation = impl_->native_generation;
+        impl_->issued_native = out;
         return WindowError::None;
     } catch (...) {
         return WindowError::InternalFailure;
@@ -267,10 +289,12 @@ WindowError Window::query_native_handle(NativeWindowHandle& out) noexcept {
 }
 
 bool Window::native_handle_valid(const NativeWindowHandle& handle) const noexcept {
-    return impl_ && impl_->window != nullptr
-           && handle.kind != NativeHandleKind::None
-           && handle.value != 0
+    return on_owner_thread(owner_thread_) && impl_ && impl_->window != nullptr
+           && handle.kind != NativeHandleKind::None && handle.value != 0
            && handle.generation != 0
+           && handle.kind == impl_->issued_native.kind
+           && handle.value == impl_->issued_native.value
+           && handle.generation == impl_->issued_native.generation
            && handle.generation == impl_->native_generation;
 }
 
