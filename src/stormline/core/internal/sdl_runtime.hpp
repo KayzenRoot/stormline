@@ -24,8 +24,6 @@ struct SdlVersion final {
 
 // One active instance per process; sequential init/quit cycles are supported.
 // All calls must happen on the thread that constructed the object.
-class Window;
-
 class SdlRuntime final {
 public:
     SdlRuntime() noexcept;
@@ -41,15 +39,6 @@ public:
     [[nodiscard]] bool initialized() const noexcept;
 
 private:
-    friend class Window;
-
-    // Process-scoped SDL ownership and window-lifetime accounting.
-    // All access is main-thread-only; no public runtime ABI is introduced.
-    [[nodiscard]] static bool owns_runtime() noexcept;
-    [[nodiscard]] static bool window_created(std::uint64_t& surface, std::uint64_t& native) noexcept;
-    static void window_destroyed() noexcept;
-    [[nodiscard]] static std::uint64_t next_generation() noexcept;
-
     bool initialized_{false};
     std::thread::id owner_thread_;
 };
