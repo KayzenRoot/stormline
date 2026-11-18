@@ -315,6 +315,20 @@ target_link_libraries(stormline_core02_arena_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core02_arena_test PRIVATE)
 
+add_library(stormline_core02_budget STATIC
+    src/stormline/core/memory/memory_budget.cpp
+)
+target_include_directories(stormline_core02_budget PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+stormline_core01_apply_options(stormline_core02_budget PUBLIC)
+
+add_executable(stormline_core02_budget_test
+    tests/core/memory_budget_tests.cpp
+)
+target_link_libraries(stormline_core02_budget_test PRIVATE stormline_core02_budget)
+stormline_core01_apply_options(stormline_core02_budget_test PRIVATE)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -569,6 +583,25 @@ add_test(NAME core02_arena_wrong_thread
     COMMAND stormline_core02_arena_test wrong_thread
 )
 
+add_test(NAME core02_budget_basic
+    COMMAND stormline_core02_budget_test basic
+)
+add_test(NAME core02_budget_invalid
+    COMMAND stormline_core02_budget_test invalid
+)
+add_test(NAME core02_budget_hard
+    COMMAND stormline_core02_budget_test hard
+)
+add_test(NAME core02_budget_underflow
+    COMMAND stormline_core02_budget_test underflow
+)
+add_test(NAME core02_budget_lifetime
+    COMMAND stormline_core02_budget_test lifetime
+)
+add_test(NAME core02_budget_wrong_thread
+    COMMAND stormline_core02_budget_test wrong_thread
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -650,6 +683,12 @@ set_tests_properties(
     core02_arena_resource
     core02_arena_lifetime
     core02_arena_wrong_thread
+    core02_budget_basic
+    core02_budget_invalid
+    core02_budget_hard
+    core02_budget_underflow
+    core02_budget_lifetime
+    core02_budget_wrong_thread
     PROPERTIES TIMEOUT 180
 )
 
