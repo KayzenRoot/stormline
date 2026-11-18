@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-06 — Memory budget (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-06`. **Predecessor:** `-05` `COMPLETED` via PR #469. **Issue:** #19. **Base:** `42ab4b74b686e9856c150101895a9e6182c964b5`. **ADR:** [ADR-0098](../adr/0098-core-02-memory-budget.md). **Contract:** [core-02-memory-budget-v0](../contracts/core-02-memory-budget-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #472](https://github.com/KayzenRoot/stormline/pull/472), merge `10ceaaeb…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-06`. **Predecessor:** `-05` `COMPLETED` via PR #469. **Issue:** #19. **Base:** `42ab4b74b686e9856c150101895a9e6182c964b5`. **ADR:** [ADR-0098](../adr/0098-core-02-memory-budget.md). **Contract:** [core-02-memory-budget-v0](../contracts/core-02-memory-budget-v0.md).
 
 ## OBJECTIVE
 
