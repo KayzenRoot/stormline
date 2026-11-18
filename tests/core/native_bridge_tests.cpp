@@ -109,6 +109,17 @@ bool run_handle() {
     expect(handle.value != 0, "native handle value is non-zero");
     expect(handle.generation != 0, "native handle generation is non-zero");
     expect(window.native_handle_valid(handle), "current native handle is valid");
+    NativeWindowHandle forged = handle;
+    forged.value ^= 1U;
+    expect(!window.native_handle_valid(forged), "forged native value must be rejected");
+    forged = handle;
+    forged.kind = NativeHandleKind::None;
+    expect(!window.native_handle_valid(forged), "forged native kind must be rejected");
+    Window other;
+    if (create_window(other)) {
+        expect(!other.native_handle_valid(handle), "foreign window must reject another window's handle");
+        expect(other.destroy() == WindowError::None, "second window destroy succeeds");
+    }
 
     expect(window.destroy() == WindowError::None, "window destroy succeeds");
     expect(!window.native_handle_valid(handle), "destroy invalidates the native handle");
@@ -203,8 +214,13 @@ bool run_lifetime() {
         ok = ok && window.native_handle_valid(handle);
         ok = ok && window.destroy() == WindowError::None;
         ok = ok && !window.native_handle_valid(handle);
+        if (ok) {
+            ok = create_window(window);
+            ok = ok && !window.native_handle_valid(handle);
+            ok = ok && window.destroy() == WindowError::None;
+        }
     }
-    expect(ok, "50 native-handle create/query/destroy cycles succeed");
+    expect(ok, "50 native-handle create/query/destroy cycles succeed, without ABA");
     expect(runtime.shutdown() == SdlError::None, "runtime shutdown succeeds");
     return finish_case();
 }
