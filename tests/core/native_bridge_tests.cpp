@@ -57,6 +57,7 @@ bool initialize_runtime(SdlRuntime& runtime) {
     }
 #if defined(__APPLE__)
     std::printf("NOT_QUALIFIED: cocoa window server unavailable\n");
+    expect(false, "NOT_QUALIFIED: required Cocoa runtime unavailable");
     return false;
 #else
     expect(false, "runtime initialize succeeds");
@@ -70,6 +71,7 @@ bool create_window(Window& window) {
     }
 #if defined(__APPLE__)
     std::printf("NOT_QUALIFIED: cocoa window creation unavailable\n");
+    expect(false, "NOT_QUALIFIED: required Cocoa window unavailable");
     return false;
 #else
     expect(false, "window create succeeds");
