@@ -19,6 +19,7 @@
 #include <sstream>
 #include <string>
 #include <string_view>
+#include <thread>
 #include <vector>
 
 #if defined(_WIN32)
@@ -431,10 +432,12 @@ int benchmark(const char* executable) {
 #endif
                 __VERSION__);
 #endif
-    std::printf("SDL=%d.%d.%d cold=fresh_process warm=reused_process "
+    std::printf("SDL=%d.%d.%d cpu_logical_cores=%u "
+                "cold=fresh_process warm=reused_process "
                 "measured=init_to_teardown_excludes_spawn "
                 "rss=process_peak_not_idle_or_leak_proof\n",
-                ver.major, ver.minor, ver.patch);
+                ver.major, ver.minor, ver.patch,
+                std::thread::hardware_concurrency());
     for (const char* mode : {"headless", "window"}) {
         std::vector<Sample> cold;
         cold.reserve(kSamples);
