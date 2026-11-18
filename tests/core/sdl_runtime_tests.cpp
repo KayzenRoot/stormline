@@ -84,6 +84,14 @@ bool run_basic() {
     expect(runtime.initialize() == SdlError::None, "initialize succeeds");
     expect(runtime.initialized(), "runtime reports initialized");
     expect(runtime.initialize() == SdlError::AlreadyInitialized, "duplicate initialize rejected");
+    {
+        SdlRuntime second;
+        const SdlError duplicate = second.initialize();
+        expect(duplicate == SdlError::AlreadyInitialized, "second runtime must not own global SDL state");
+        if (duplicate == SdlError::None) {
+            expect(second.shutdown() == SdlError::None, "baseline duplicate cleaned before continuing");
+        }
+    }
     expect(runtime.shutdown() == SdlError::None, "shutdown succeeds");
     expect(!runtime.initialized(), "runtime reports uninitialized");
     expect(runtime.shutdown() == SdlError::None, "repeated shutdown is idempotent");
