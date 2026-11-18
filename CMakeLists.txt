@@ -329,6 +329,20 @@ add_executable(stormline_core02_budget_test
 target_link_libraries(stormline_core02_budget_test PRIVATE stormline_core02_budget)
 stormline_core01_apply_options(stormline_core02_budget_test PRIVATE)
 
+add_library(stormline_core02_leak STATIC
+    src/stormline/core/memory/leak_tracker.cpp
+)
+target_include_directories(stormline_core02_leak PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+stormline_core01_apply_options(stormline_core02_leak PUBLIC)
+
+add_executable(stormline_core02_leak_test
+    tests/core/leak_tracker_tests.cpp
+)
+target_link_libraries(stormline_core02_leak_test PRIVATE stormline_core02_leak)
+stormline_core01_apply_options(stormline_core02_leak_test PRIVATE)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -602,6 +616,25 @@ add_test(NAME core02_budget_wrong_thread
     COMMAND stormline_core02_budget_test wrong_thread
 )
 
+add_test(NAME core02_leak_basic
+    COMMAND stormline_core02_leak_test basic
+)
+add_test(NAME core02_leak_invalid
+    COMMAND stormline_core02_leak_test invalid
+)
+add_test(NAME core02_leak_capacity
+    COMMAND stormline_core02_leak_test capacity
+)
+add_test(NAME core02_leak_token
+    COMMAND stormline_core02_leak_test token
+)
+add_test(NAME core02_leak_lifetime
+    COMMAND stormline_core02_leak_test lifetime
+)
+add_test(NAME core02_leak_wrong_thread
+    COMMAND stormline_core02_leak_test wrong_thread
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -689,6 +722,12 @@ set_tests_properties(
     core02_budget_underflow
     core02_budget_lifetime
     core02_budget_wrong_thread
+    core02_leak_basic
+    core02_leak_invalid
+    core02_leak_capacity
+    core02_leak_token
+    core02_leak_lifetime
+    core02_leak_wrong_thread
     PROPERTIES TIMEOUT 180
 )
 
