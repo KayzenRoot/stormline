@@ -54,7 +54,10 @@ WindowError Window::create(const WindowConfig& config) noexcept {
         if (config.width <= 0 || config.height <= 0) {
             return WindowError::InvalidSize;
         }
-        if (SDL_WasInit(SDL_INIT_VIDEO) == 0 || !SDL_IsMainThread()) {
+        if (!SDL_IsMainThread()) {
+            return WindowError::WrongThread;
+        }
+        if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
             return WindowError::VideoNotInitialized;
         }
 
