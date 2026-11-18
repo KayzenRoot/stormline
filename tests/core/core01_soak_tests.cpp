@@ -155,7 +155,8 @@ bool run_soak() {
     if (runtime.initialize() != SdlError::None) {
 #if defined(__APPLE__)
         std::printf("NOT_QUALIFIED: cocoa runtime unavailable\n");
-        return true;
+        expect(false, "NOT_QUALIFIED: required Cocoa runtime for soak unavailable");
+        return false;
 #else
         expect(false, "soak runtime initialize succeeds");
         return false;

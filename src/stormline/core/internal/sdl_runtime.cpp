@@ -13,6 +13,19 @@ bool on_owner_thread(const std::thread::id& owner) noexcept {
     return std::this_thread::get_id() == owner;
 }
 
+// SDL owns its process-wide video state. Query that native state rather than
+// adding mutable global adapter state forbidden by the bounded SDL contract.
+// NULL means an SDL query failure: fail closed, never call SDL_Quit.
+bool windows_exist_or_query_failed() noexcept {
+    int count = 0;
+    SDL_Window** windows = SDL_GetWindows(&count);
+    if (windows == nullptr) {
+        return true;
+    }
+    SDL_free(windows);
+    return count != 0;
+}
+
 } // namespace
 
 SdlRuntime::SdlRuntime() noexcept
@@ -20,18 +33,27 @@ SdlRuntime::SdlRuntime() noexcept
 }
 
 SdlRuntime::~SdlRuntime() noexcept {
-    if (initialized_ && on_owner_thread(owner_thread_)) {
+    if (!initialized_ || !on_owner_thread(owner_thread_) || !SDL_IsMainThread()) {
+        return;
+    }
+    // The existing contract requires Window to be destroyed before its
+    // SdlRuntime. Avoid UAF on erroneous destruction order, even though
+    // final SDL_Quit cannot be performed without the owner's lifetime.
+    if (!windows_exist_or_query_failed()) {
         SDL_Quit();
-        initialized_ = false;
     }
 }
 
 SdlError SdlRuntime::initialize() noexcept {
     try {
-        if (!on_owner_thread(owner_thread_)) {
+        if (!on_owner_thread(owner_thread_) || !SDL_IsMainThread()) {
             return SdlError::WrongThread;
         }
         if (initialized_) {
+            return SdlError::AlreadyInitialized;
+        }
+        // SDL's own process-wide initialized flags exclude a second owner.
+        if (SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
             return SdlError::AlreadyInitialized;
         }
 
@@ -50,11 +72,14 @@ SdlError SdlRuntime::initialize() noexcept {
 
 SdlError SdlRuntime::shutdown() noexcept {
     try {
-        if (!on_owner_thread(owner_thread_)) {
+        if (!on_owner_thread(owner_thread_) || !SDL_IsMainThread()) {
             return SdlError::WrongThread;
         }
         if (!initialized_) {
             return SdlError::None;
+        }
+        if (windows_exist_or_query_failed()) {
+            return SdlError::WindowsActive;
         }
 
         SDL_Quit();

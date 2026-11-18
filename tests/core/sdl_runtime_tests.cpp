@@ -84,6 +84,14 @@ bool run_basic() {
     expect(runtime.initialize() == SdlError::None, "initialize succeeds");
     expect(runtime.initialized(), "runtime reports initialized");
     expect(runtime.initialize() == SdlError::AlreadyInitialized, "duplicate initialize rejected");
+    {
+        SdlRuntime second;
+        const SdlError duplicate = second.initialize();
+        expect(duplicate == SdlError::AlreadyInitialized, "second runtime must not own global SDL state");
+        if (duplicate == SdlError::None) {
+            expect(second.shutdown() == SdlError::None, "baseline duplicate cleaned before continuing");
+        }
+    }
     expect(runtime.shutdown() == SdlError::None, "shutdown succeeds");
     expect(!runtime.initialized(), "runtime reports uninitialized");
     expect(runtime.shutdown() == SdlError::None, "repeated shutdown is idempotent");
@@ -115,6 +123,17 @@ bool run_wrong_thread() {
     });
     stopper.join();
     expect(worker_stop == SdlError::WrongThread, "worker shutdown rejected");
+    SdlError background_owner = SdlError::None;
+    std::thread background([&background_owner] {
+        SdlRuntime wrong_owner;
+        background_owner = wrong_owner.initialize();
+        if (background_owner == SdlError::None) {
+            (void)wrong_owner.shutdown();
+        }
+    });
+    background.join();
+    expect(background_owner == SdlError::WrongThread,
+           "runtime constructed off SDL main thread cannot initialize video");
     expect(runtime.initialized(), "worker shutdown leaves runtime initialized");
     expect(runtime.shutdown() == SdlError::None, "owner shutdown succeeds");
     return finish_case();

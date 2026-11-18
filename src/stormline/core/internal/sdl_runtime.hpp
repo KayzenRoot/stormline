@@ -12,7 +12,8 @@ enum class SdlError : std::uint8_t {
     AlreadyInitialized,
     WrongThread,
     InitFailed,
-    InternalFailure
+    InternalFailure,
+    WindowsActive
 };
 
 struct SdlVersion final {

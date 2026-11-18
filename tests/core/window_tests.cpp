@@ -6,6 +6,7 @@
 #endif
 
 #include <cstdio>
+#include <cstdlib>
 #include <exception>
 #include <iostream>
 #include <string_view>
@@ -47,6 +48,7 @@ bool initialize_runtime(SdlRuntime& runtime, const char* description) {
 #if defined(__APPLE__)
     (void)description;
     note("cocoa video driver unavailable on this runner");
+    expect(false, "NOT_QUALIFIED: required Cocoa runtime unavailable");
     return false;
 #else
     expect(false, description);
@@ -62,6 +64,7 @@ bool create_window(Window& window, const WindowConfig& config, const char* descr
 #if defined(__APPLE__)
     (void)description;
     note("cocoa window creation unavailable on this runner");
+    expect(false, "NOT_QUALIFIED: required Cocoa window unavailable");
     return false;
 #else
     expect(false, description);
@@ -84,6 +87,16 @@ bool run_basic() {
         return finish_case();
     }
     expect(window.valid(), "window is valid after create");
+    // The unfixed runtime calls SDL_Quit with a live SDL_Window. Exit this
+    // isolated CTest process immediately if that happens: never dereference
+    // or destroy a potentially freed window during the red reproduction.
+    const SdlError early_shutdown = runtime.shutdown();
+    if (early_shutdown == SdlError::None) {
+        std::fprintf(stderr, "FAIL: runtime shut down with a live window\n");
+        std::_Exit(1);
+    }
+    expect(early_shutdown == SdlError::WindowsActive, "active window blocks runtime shutdown with typed error");
+    expect(runtime.initialized(), "rejected shutdown leaves runtime active");
     expect(window.create(config) == WindowError::AlreadyCreated, "duplicate create rejected");
     expect(window.resize(800, 600) == WindowError::None, "resize succeeds");
     expect(window.show() == WindowError::None, "show succeeds");
@@ -147,6 +160,14 @@ bool run_wrong_thread() {
     });
     creator.join();
     expect(worker_create == WindowError::WrongThread, "worker create rejected");
+    WindowError worker_owned_create = WindowError::None;
+    std::thread worker_owner([&worker_owned_create] {
+        Window worker_window;
+        worker_owned_create = worker_window.create(WindowConfig{});
+    });
+    worker_owner.join();
+    expect(worker_owned_create == WindowError::WrongThread,
+           "window constructed on background thread cannot create SDL video window");
     expect(!window.valid(), "worker create leaves window invalid");
 
     if (!create_window(window, WindowConfig{}, "owner create after worker rejection")) {
@@ -198,7 +219,18 @@ bool run_lifetime() {
         expect(window.destroy() == WindowError::None, "cycle destroy");
         expect(!window.valid(), "cycle window invalid after destroy");
     }
-    expect(runtime.shutdown() == SdlError::None, "runtime shutdown after cycles");
+    Window first;
+    Window second;
+    expect(first.create(WindowConfig{}) == WindowError::None, "first concurrent window creates");
+    expect(second.create(WindowConfig{}) == WindowError::None, "second concurrent window creates");
+    expect(runtime.shutdown() == SdlError::WindowsActive,
+           "shutdown is rejected while two windows are live");
+    expect(first.destroy() == WindowError::None, "first concurrent window destroys");
+    expect(runtime.shutdown() == SdlError::WindowsActive,
+           "shutdown remains blocked while second window is live");
+    expect(second.destroy() == WindowError::None, "second concurrent window destroys");
+    expect(runtime.shutdown() == SdlError::None,
+           "shutdown succeeds once all windows are destroyed");
     return finish_case();
 }
 
