@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-04 — System allocator baseline and report-only measurement
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-02-04`. **ADR:** [ADR-0096](../adr/0096-core-02-system-allocator-baseline.md). **Contract:** [core-02-system-allocator-v0](../contracts/core-02-system-allocator-v0.md). **WO:** [NLE-PRPLAN-CORE-02-04](../work-orders/NLE-PRPLAN-CORE-02-04.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-02-04`. **ADR:** [ADR-0096](../adr/0096-core-02-system-allocator-baseline.md). **Contract:** [core-02-system-allocator-v0](../contracts/core-02-system-allocator-v0.md). **WO:** [NLE-PRPLAN-CORE-02-04](../work-orders/NLE-PRPLAN-CORE-02-04.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 Explicit `SystemMemoryResource` over ordinary/aligned `::operator new/delete`, integrated with `MemoryBlock`, plus a report-only benchmark against `std::pmr::new_delete_resource`, raw new/delete and malloc/free. No third-party allocator, global override, winner selection or performance PASS.
 
@@ -8,7 +8,8 @@ Explicit `SystemMemoryResource` over ordinary/aligned `::operator new/delete`, i
 
 - **Gate:** [PR #465](https://github.com/KayzenRoot/stormline/pull/465) squash-merged as `574bc4bfd13213a480c2bfa0b467754413269548`; audit #6964591046 **APPROVED**.
 - **Base:** `574bc4bfd13213a480c2bfa0b467754413269548`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-02-04 --json` → `EXECUTOR_READY`, exit 0; `-05`, `CORE-01-16` and every other ID exit 2.
+- **Code PR:** [PR #466](https://github.com/KayzenRoot/stormline/pull/466), HEAD auditado `a5f783ef0531165e5dc7198f4cc17766c45e742d`.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-04 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
 ## 2. Implemented behavior
@@ -45,11 +46,19 @@ No other path changed. Existing CORE-01/CORE-02 targets are unchanged except add
   `SYSTEM_ALLOC_BENCHMARK system_ns_op=1105.098 pmr_ns_op=652.083 new_ns_op=594.131 malloc_ns_op=566.510`
 - This order/warm-up-sensitive local number is not a winner selection or performance PASS.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with run IDs and observed CTest counts after they complete; no native or performance PASS is claimed yet.
+All jobs ran at the exact HEAD `a5f783ef0531165e5dc7198f4cc17766c45e742d`:
 
-Expected matrix: existing 67 CTests plus 6 system tests = **73 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44204175688](https://github.com/KayzenRoot/stormline/actions/runs/44204175688) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **73/73 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **73/73 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **73/73 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **73/73 CTest passed** |
+
+Native workflow run: [44204176376](https://github.com/KayzenRoot/stormline/actions/runs/44204176376) **SUCCESS**. Job IDs: Linux `134465742652`, sanitizers `134465742439`, Windows `134465742179`, macOS `134465742668`. The six `core02_system_*` tests executed in every job; 67 CTests anteriores continuam passando. No correction was required.
 
 ## 5. Security, licensing and limitations
 
