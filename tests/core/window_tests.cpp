@@ -48,6 +48,7 @@ bool initialize_runtime(SdlRuntime& runtime, const char* description) {
 #if defined(__APPLE__)
     (void)description;
     note("cocoa video driver unavailable on this runner");
+    expect(false, "NOT_QUALIFIED: required Cocoa runtime unavailable");
     return false;
 #else
     expect(false, description);
@@ -63,6 +64,7 @@ bool create_window(Window& window, const WindowConfig& config, const char* descr
 #if defined(__APPLE__)
     (void)description;
     note("cocoa window creation unavailable on this runner");
+    expect(false, "NOT_QUALIFIED: required Cocoa window unavailable");
     return false;
 #else
     expect(false, description);
@@ -88,10 +90,12 @@ bool run_basic() {
     // The unfixed runtime calls SDL_Quit with a live SDL_Window. Exit this
     // isolated CTest process immediately if that happens: never dereference
     // or destroy a potentially freed window during the red reproduction.
-    if (runtime.shutdown() == SdlError::None) {
+    const SdlError early_shutdown = runtime.shutdown();
+    if (early_shutdown == SdlError::None) {
         std::fprintf(stderr, "FAIL: runtime shut down with a live window\n");
         std::_Exit(1);
     }
+    expect(early_shutdown == SdlError::WindowsActive, "active window blocks runtime shutdown with typed error");
     expect(runtime.initialized(), "rejected shutdown leaves runtime active");
     expect(window.create(config) == WindowError::AlreadyCreated, "duplicate create rejected");
     expect(window.resize(800, 600) == WindowError::None, "resize succeeds");
@@ -208,6 +212,21 @@ bool run_lifetime() {
         expect(!window.valid(), "cycle window invalid after destroy");
     }
     expect(runtime.shutdown() == SdlError::None, "runtime shutdown after cycles");
+    Window deferred_window;
+    {
+        SdlRuntime ephemeral;
+        expect(ephemeral.initialize() == SdlError::None, "short-lived runtime initializes");
+        expect(deferred_window.create(WindowConfig{}) == WindowError::None,
+               "window can outlive its runtime wrapper");
+    }
+    expect(deferred_window.valid(), "runtime destructor defers SDL_Quit for live window");
+    expect(deferred_window.destroy() == WindowError::None,
+           "deferred window destroys without use-after-free");
+    SdlRuntime after_deferred;
+    expect(after_deferred.initialize() == SdlError::None,
+           "final window cleanup permits fresh SDL runtime");
+    expect(after_deferred.shutdown() == SdlError::None,
+           "fresh runtime shuts down after deferred cleanup");
     return finish_case();
 }
 
