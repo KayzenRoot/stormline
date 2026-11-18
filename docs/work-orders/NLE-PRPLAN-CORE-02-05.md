@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-05 — Monotonic arena (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-05`. **Predecessor:** `-04` `COMPLETED` via PR #466. **Issue:** #19. **Base:** `9d49dc3da22d245daf1df95d0f27ee56588904af`. **ADR:** [ADR-0097](../adr/0097-core-02-monotonic-arena.md). **Contract:** [core-02-monotonic-arena-v0](../contracts/core-02-monotonic-arena-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #469](https://github.com/KayzenRoot/stormline/pull/469), merge `1620dbe…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-05`. **Predecessor:** `-04` `COMPLETED` via PR #466. **Issue:** #19. **Base:** `9d49dc3da22d245daf1df95d0f27ee56588904af`. **ADR:** [ADR-0097](../adr/0097-core-02-monotonic-arena.md). **Contract:** [core-02-monotonic-arena-v0](../contracts/core-02-monotonic-arena-v0.md).
 
 ## OBJECTIVE
 

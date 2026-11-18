@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-05 — Monotonic arena
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-02-05`. **ADR:** [ADR-0097](../adr/0097-core-02-monotonic-arena.md). **Contract:** [core-02-monotonic-arena-v0](../contracts/core-02-monotonic-arena-v0.md). **WO:** [NLE-PRPLAN-CORE-02-05](../work-orders/NLE-PRPLAN-CORE-02-05.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Formal packet:** `NLE-PRPLAN-CORE-02-05`. **ADR:** [ADR-0097](../adr/0097-core-02-monotonic-arena.md). **Contract:** [core-02-monotonic-arena-v0](../contracts/core-02-monotonic-arena-v0.md). **WO:** [NLE-PRPLAN-CORE-02-05](../work-orders/NLE-PRPLAN-CORE-02-05.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First monotonic arena: one fixed-capacity backing `MemoryBlock`, bump allocation with alignment, explicit reset, high-water accounting, typed overflow and owner-thread enforcement. No per-slice free, pools, budgets, leak tracking, telemetry, global/static arena, third-party dependency, public ABI or release.
 
@@ -8,7 +8,7 @@ First monotonic arena: one fixed-capacity backing `MemoryBlock`, bump allocation
 
 - **Gate:** [PR #468](https://github.com/KayzenRoot/stormline/pull/468) squash-merged as `fdf04debc3a25e6f48b3aaa69aae116f28a11404`; audit #6965580258 **APPROVED** (Sonar duplication debt noted).
 - **Base:** `fdf04debc3a25e6f48b3aaa69aae116f28a11404`.
-- **Code PR:** [PR #469](https://github.com/KayzenRoot/stormline/pull/469), HEAD auditado `e837cd2…`.
+- **Code PR:** [PR #469](https://github.com/KayzenRoot/stormline/pull/469), HEAD auditado `3cd971c…`, [auditoria pt-BR #6966066352](https://github.com/KayzenRoot/stormline/pull/469#issuecomment-6966066352) **APPROVED**; squash-merged as `1620dbe…`.
 - **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-05 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
@@ -72,3 +72,9 @@ Unmerged: close the branch; `main` untouched. After merge: normal revert PR, nev
 ## 7. Proposed checkpoint delta (promoted only by the independent closeout)
 
 After an approved squash merge and readback, a separate closeout PR records the monotonic arena, exact PR/CI/audit/merge SHA, 7 `core02_arena_*` tests and 80 total CTests, with explicit no-pool/budget/leak/telemetry/ABI/release limitations. This evidence does not self-promote the checkpoint.
+
+## 8. Actual closure
+
+- [PR #469](https://github.com/KayzenRoot/stormline/pull/469) **squash-merged** at `2026-11-18T01:09:38Z`, merge `1620dbe…`; audit #6966066352 **APPROVED**.
+- Final-head Docs Validation [44213399540](https://github.com/KayzenRoot/stormline/actions/runs/44213399540) **SUCCESS**; native [44213399552](https://github.com/KayzenRoot/stormline/actions/runs/44213399552) **SUCCESS**, **80/80 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-02-05` becomes `COMPLETED` with `github_pr=469`; manifest **727 `PLANNED_BLOCKED`, 17 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID. Pools/budgets/leak/telemetry/frame barriers remain out of scope. No next packet/module authorized.
