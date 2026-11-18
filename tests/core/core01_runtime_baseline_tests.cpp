@@ -148,7 +148,7 @@ bool measure_once(std::string_view mode, Sample& sample) {
     const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(
         Clock::now() - start).count();
     const auto memory = peak_resident_bytes();
-    if (elapsed <= 0 || memory == 0) {
+    if (elapsed < 0 || memory == 0) {
         fail("invalid clock or process peak memory measurement");
         return false;
     }
@@ -196,7 +196,7 @@ bool parse_samples(const std::string& output, std::size_t expected,
     std::uint64_t rss = 0;
     while (stream >> marker) {
         if (marker != "SAMPLE" || !(stream >> ns >> rss) ||
-            ns == 0 || rss == 0 || out.size() >= expected) {
+            rss == 0 || out.size() >= expected) {
             return false;
         }
         out.push_back(Sample{ns, rss});
@@ -378,12 +378,16 @@ void report(std::string_view mode, std::string_view phase,
     }
     const std::string kind(mode);
     const std::string stage(phase);
+    const auto below_tick = static_cast<std::size_t>(
+        std::count(times.begin(), times.end(), std::uint64_t{0}));
     std::printf("BASELINE mode=%s phase=%s n=%zu p50_ms=%.6f p95_ms=%.6f "
-                "max_process_peak_rss_bytes=%llu rss_unit=bytes\n",
+                "max_process_peak_rss_bytes=%llu rss_unit=bytes "
+                "below_clock_tick=%zu zero_means_unresolved_not_instant\n",
                 kind.c_str(), stage.c_str(), samples.size(),
                 static_cast<double>(nearest_rank(times, 50)) / 1e6,
                 static_cast<double>(nearest_rank(times, 95)) / 1e6,
-                static_cast<unsigned long long>(*std::max_element(peaks.begin(), peaks.end())));
+                static_cast<unsigned long long>(*std::max_element(peaks.begin(), peaks.end())),
+                below_tick);
     std::printf("BASELINE_RAW_NS mode=%s phase=%s values=", kind.c_str(), stage.c_str());
     for (std::size_t i = 0; i < times.size(); ++i) {
         std::printf("%s%llu", i == 0 ? "" : ",",
@@ -471,13 +475,14 @@ int selftest() {
     std::vector<Sample> parsed;
     if (nearest_rank(input, 50) != 15 || nearest_rank(input, 95) != 29 ||
         nearest_rank(input, 0) != 0 ||
-        !parse_samples("SAMPLE 12 1024\nSAMPLE 20 2048\n", 2, parsed) ||
-        parsed.size() != 2 || parsed[1].nanoseconds != 20) {
+        !parse_samples("SAMPLE 0 1024\nSAMPLE 20 2048\n", 2, parsed) ||
+        parsed.size() != 2 || parsed[0].nanoseconds != 0 ||
+        parsed[1].nanoseconds != 20) {
         fail("statistics/parser positive selftest failed");
         return 1;
     }
     std::vector<Sample> bad;
-    if (parse_samples("SAMPLE 0 4\n", 1, bad) ||
+    if (parse_samples("SAMPLE 4 0\n", 1, bad) ||
         parse_samples("UNQUALIFIED 10 10\n", 1, bad) ||
         parse_samples("SAMPLE 5 5\n", 2, bad)) {
         fail("parser fail-closed selftest failed");
