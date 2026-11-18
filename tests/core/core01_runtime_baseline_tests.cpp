@@ -436,13 +436,13 @@ int benchmark(const char* executable) {
         cold.reserve(kSamples);
         for (std::size_t i = 0; i < kSamples; ++i) {
             std::string data;
+            std::vector<Sample> one;
             if (!launch_child(executable, mode, "cold", data) ||
-                !parse_samples(data, 1U, cold)) {
-                // parse_samples expects out.size() == expected; use a new vector
-                // in the corrected loop below instead of accumulating directly.
+                !parse_samples(data, 1U, one)) {
                 fail("cold process measurement failed");
                 return 1;
             }
+            cold.push_back(one.front());
         }
         std::string data;
         std::vector<Sample> warm;
