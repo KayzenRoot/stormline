@@ -69,6 +69,8 @@ private:
     struct Impl;
     std::unique_ptr<Impl> impl_;
     std::thread::id owner_thread_;
+    // Persistent across destroy/recreate on this Window, never a process global.
+    std::uint32_t generation_counter_{0};
 };
 
 } // namespace stormline::core::internal
