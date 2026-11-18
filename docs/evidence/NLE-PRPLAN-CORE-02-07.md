@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-07 — Leak tracking
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-07`. **ADR:** [ADR-0099](../adr/0099-core-02-leak-tracking.md). **Contract:** [core-02-leak-tracking-v0](../contracts/core-02-leak-tracking-v0.md). **WO:** [NLE-PRPLAN-CORE-02-07](../work-orders/NLE-PRPLAN-CORE-02-07.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Formal packet:** `NLE-PRPLAN-CORE-02-07`. **ADR:** [ADR-0099](../adr/0099-core-02-leak-tracking.md). **Contract:** [core-02-leak-tracking-v0](../contracts/core-02-leak-tracking-v0.md). **WO:** [NLE-PRPLAN-CORE-02-07](../work-orders/NLE-PRPLAN-CORE-02-07.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First explicit leak-tracking primitive: fixed-capacity generation-checked tokens, non-mutating capacity/stale/double-release rejection, live/peak counters and owner-thread enforcement for caller-declared allocations. A leak is an outstanding tracked token, not proof of process-wide or third-party leaks. No allocation interception, pointer capture, telemetry export, reporting service, global tracker, third-party dependency, public ABI or release.
 
@@ -8,8 +8,8 @@ First explicit leak-tracking primitive: fixed-capacity generation-checked tokens
 
 - **Gate:** [PR #474](https://github.com/KayzenRoot/stormline/pull/474) squash-merged as `0dbaef69e961b7d9a68e3fb965f4a7468d1005bb`; audit #6976903866 **APPROVED** (Sonar duplication debt noted).
 - **Base:** `0dbaef69e961b7d9a68e3fb965f4a7468d1005bb`.
-- **Code PR:** [PR #475](https://github.com/KayzenRoot/stormline/pull/475); implementation HEAD `cd3b947454b555eb289a6121e557cdfcbfc2453e`; CI and audit pending at the final documentation head.
-- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-07 --json` → `EXECUTOR_READY`, exit 0; all other IDs exit 2.
+- **Code PR:** [PR #475](https://github.com/KayzenRoot/stormline/pull/475), HEAD auditado `66e44c0…`, [auditoria pt-BR #6977180817](https://github.com/KayzenRoot/stormline/pull/475#issuecomment-6977180817) **APPROVED**; squash-merged as `51af5bd23211effdf30814f8c5584342a42fa775`.
+- **Selector:** durante a execução, `select_packet.py NLE-PRPLAN-CORE-02-07 --json` → `EXECUTOR_READY`, exit 0; após o closeout todo ID sai com 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
 ## 2. Implemented behavior
@@ -47,17 +47,17 @@ No other path changed. Existing targets unchanged except additive leak-tracker w
 
 ### Native CI (authoritative, observed)
 
-All jobs ran at implementation HEAD `cd3b947454b555eb289a6121e557cdfcbfc2453e`; the only subsequent delta is this Evidence Bundle text, revalidated by the PR head checks.
+All jobs ran at the final documentation HEAD `66e44c07018b665f0461eb665c971ea90fb7219e` (and at implementation HEAD `cd3b947…`); the only delta between them is this Evidence Bundle text.
 
 | Job | Runner / toolchain | Result |
 |---|---|---|
-| `docs-validation` | required G2 check | [run 44292955849](https://github.com/KayzenRoot/stormline/actions/runs/44292955849) **SUCCESS** |
+| `docs-validation` | required G2 check | [run 44294218073](https://github.com/KayzenRoot/stormline/actions/runs/44294218073) **SUCCESS** |
 | `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **92/92 CTest passed** |
 | `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **92/92 CTest passed** |
 | `windows` | windows-2025-vs2026, MSVC | **92/92 CTest passed** |
 | `macos` | macos-15-arm64, Apple clang | **92/92 CTest passed** |
 
-Native workflow run: [44292955794](https://github.com/KayzenRoot/stormline/actions/runs/44292955794) **SUCCESS**. Job IDs: Linux `134762553175`, sanitizers `134762553782`, Windows `134762553691`, macOS `134762553642`. All 6 leak tests executed; the 86 previous CTests continue passing. SonarCloud Code Analysis passed; Socket checks passed.
+Native workflow run: [44294217852](https://github.com/KayzenRoot/stormline/actions/runs/44294217852) **SUCCESS**. Job IDs: Linux `134766900437`, sanitizers `134766900682`, Windows `134766900087`, macOS `134766900545`. All 6 leak tests executed; the 86 previous CTests continue passing. SonarCloud Code Analysis passed; Socket checks passed.
 
 Docs validators: `validate_pr_plans.py` **PASS** (725 blocked, 1 ready, 18 completed, 4 approved gates), `validate_docs.py` **PASS** (42 required files, 981 Markdown), `validate_wo_registry.py` **PASS** (80 blocked packets), `test_validate_pr_plans.py` **68/68 OK**.
 
@@ -80,4 +80,6 @@ After an approved squash merge and readback, a separate closeout PR records the 
 
 ## 8. Actual closure
 
-Pending code PR CI, pt-BR audit, squash merge and the independent closeout PR.
+- [PR #475](https://github.com/KayzenRoot/stormline/pull/475) **squash-merged** at `2026-11-18T11:25:29Z`, merge `51af5bd2…`; audit #6977180817 **APPROVED**.
+- Final-head Docs Validation [44294218073](https://github.com/KayzenRoot/stormline/actions/runs/44294218073) **SUCCESS**; native [44294217852](https://github.com/KayzenRoot/stormline/actions/runs/44294217852) **SUCCESS**, **92/92 CTest** on Linux, Linux ASan/UBSan, Windows and macOS.
+- Packet `CORE-02-07` becomes `COMPLETED` with `github_pr=475`; manifest **725 `PLANNED_BLOCKED`, 19 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID. Interception/pointer-map/telemetry/reporting/global tracker remain out of scope. No next packet/module authorized.

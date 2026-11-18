@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-07 — Leak tracking (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-07`. **Predecessor:** `-06` `COMPLETED` via PR #472. **Issue:** #19. **Base:** `74524e55237436a6b4501aab58b31e76cd1d5479`. **ADR:** [ADR-0099](../adr/0099-core-02-leak-tracking.md). **Contract:** [core-02-leak-tracking-v0](../contracts/core-02-leak-tracking-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #475](https://github.com/KayzenRoot/stormline/pull/475), merge `51af5bd2…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-07`. **Predecessor:** `-06` `COMPLETED` via PR #472. **Issue:** #19. **Base:** `74524e55237436a6b4501aab58b31e76cd1d5479`. **ADR:** [ADR-0099](../adr/0099-core-02-leak-tracking.md). **Contract:** [core-02-leak-tracking-v0](../contracts/core-02-leak-tracking-v0.md).
 
 ## OBJECTIVE
 
