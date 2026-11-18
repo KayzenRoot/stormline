@@ -266,6 +266,36 @@ target_link_libraries(stormline_core01_qualification_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core01_qualification_test PRIVATE)
 
+# NLE-CORE01-QUAL-001: test-only, exploratory runtime measurements. The
+# post-build receipt is required because standard CI CTest hides PASS stdout.
+add_executable(stormline_core01_runtime_baseline_test
+    tests/core/core01_runtime_baseline_tests.cpp
+)
+target_link_libraries(stormline_core01_runtime_baseline_test PRIVATE
+    stormline_core01_headless
+    stormline_core01_sdl
+    stormline_core01_window
+    SDL3::SDL3-static
+)
+if(WIN32)
+    target_link_libraries(stormline_core01_runtime_baseline_test PRIVATE Psapi)
+endif()
+stormline_core01_apply_options(stormline_core01_runtime_baseline_test PRIVATE)
+add_custom_command(TARGET stormline_core01_runtime_baseline_test POST_BUILD
+    COMMAND "${CMAKE_COMMAND}" -E sha256sum
+        "$<TARGET_FILE:stormline_core01_runtime_baseline_test>"
+    COMMAND "$<TARGET_FILE:stormline_core01_runtime_baseline_test>" baseline
+    COMMENT "CORE-01 exploratory runtime samples and executable SHA256 (NOT acceptance)"
+    VERBATIM
+)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    add_custom_command(TARGET stormline_core01_runtime_baseline_test POST_BUILD
+        COMMAND "$<TARGET_FILE:stormline_core01_runtime_baseline_test>" no-display
+        COMMENT "CORE-01 Linux fail-closed missing-display proof"
+        VERBATIM
+    )
+endif()
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -527,6 +557,23 @@ add_test(NAME core01_soak
 add_test(NAME core01_qualification
     COMMAND stormline_core01_qualification_test qualify
 )
+add_test(NAME core01_runtime_baseline
+    COMMAND stormline_core01_runtime_baseline_test baseline
+)
+add_test(NAME core01_runtime_baseline_selftest
+    COMMAND stormline_core01_runtime_baseline_test selftest
+)
+set_tests_properties(core01_runtime_baseline core01_runtime_baseline_selftest
+    PROPERTIES TIMEOUT 300
+)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    add_test(NAME core01_runtime_no_display
+        COMMAND stormline_core01_runtime_baseline_test no-display
+    )
+    set_tests_properties(core01_runtime_no_display
+        PROPERTIES TIMEOUT 10
+    )
+endif()
 
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
