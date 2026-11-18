@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-05 — Monotonic arena
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PREFLIGHT_PASS / NATIVE_CI_PENDING / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-02-05`. **ADR:** [ADR-0097](../adr/0097-core-02-monotonic-arena.md). **Contract:** [core-02-monotonic-arena-v0](../contracts/core-02-monotonic-arena-v0.md). **WO:** [NLE-PRPLAN-CORE-02-05](../work-orders/NLE-PRPLAN-CORE-02-05.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AWAITING_AUDIT`. **Formal packet:** `NLE-PRPLAN-CORE-02-05`. **ADR:** [ADR-0097](../adr/0097-core-02-monotonic-arena.md). **Contract:** [core-02-monotonic-arena-v0](../contracts/core-02-monotonic-arena-v0.md). **WO:** [NLE-PRPLAN-CORE-02-05](../work-orders/NLE-PRPLAN-CORE-02-05.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First monotonic arena: one fixed-capacity backing `MemoryBlock`, bump allocation with alignment, explicit reset, high-water accounting, typed overflow and owner-thread enforcement. No per-slice free, pools, budgets, leak tracking, telemetry, global/static arena, third-party dependency, public ABI or release.
 
@@ -8,7 +8,8 @@ First monotonic arena: one fixed-capacity backing `MemoryBlock`, bump allocation
 
 - **Gate:** [PR #468](https://github.com/KayzenRoot/stormline/pull/468) squash-merged as `fdf04debc3a25e6f48b3aaa69aae116f28a11404`; audit #6965580258 **APPROVED** (Sonar duplication debt noted).
 - **Base:** `fdf04debc3a25e6f48b3aaa69aae116f28a11404`.
-- **Selector:** `select_packet.py NLE-PRPLAN-CORE-02-05 --json` → `EXECUTOR_READY`, exit 0; `-06`, `CORE-01-16` and every other ID exit 2.
+- **Code PR:** [PR #469](https://github.com/KayzenRoot/stormline/pull/469), HEAD auditado `e837cd2…`.
+- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-05 --json` → `EXECUTOR_READY`, exit 0; after closeout every ID exits 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
 ## 2. Implemented behavior
@@ -42,11 +43,19 @@ No other path changed. Existing targets unchanged except additive arena wiring.
 - Full local matrix: **80/80 CTests passed** (73 previous + 7 arena tests).
 - Tests cover alignment 1/8/16/32/64, overflow/state preservation, reset/high-water, invalid capacity/alignment/bytes, counting backing resource (one alloc/free), 1000 allocate/reset cycles and wrong-thread rejection.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-Pending exact-head Docs Validation and native Linux/Linux-sanitizers/Windows/macOS runs. This document will be updated with run IDs and observed CTest counts after they complete; no native PASS is claimed yet.
+All jobs ran at the exact HEAD `e837cd2…`:
 
-Expected matrix: existing 73 CTests plus 7 arena tests = **80 CTests** per native job, with Linux ASan/UBSan.
+| Job | Runner / toolchain | Result |
+|---|---|---|
+| `docs-validation` | required G2 check | [run 44211778774](https://github.com/KayzenRoot/stormline/actions/runs/44211778774) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **80/80 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **80/80 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **80/80 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **80/80 CTest passed** |
+
+Native workflow run: [44211778798](https://github.com/KayzenRoot/stormline/actions/runs/44211778798) **SUCCESS**. Job IDs: Linux `134491672753`, sanitizers `134491672677`, Windows `134491672523`, macOS `134491672286`. All 7 arena tests executed; 73 CTests anteriores continuam passando.
 
 ## 5. Security, licensing and limitations
 
