@@ -1,8 +1,7 @@
 #include "stormline/core/internal/window.hpp"
-#include "stormline/core/internal/sdl_runtime.hpp"
-
 #include <SDL3/SDL.h>
 
+#include <limits>
 #include <new>
 
 namespace stormline::core::internal {
@@ -10,6 +9,16 @@ namespace {
 
 bool on_owner_thread(const std::thread::id& owner) noexcept {
     return std::this_thread::get_id() == owner;
+}
+
+std::uint64_t window_token(SDL_Window* window, std::uint32_t sequence) noexcept {
+    const SDL_WindowID id = SDL_GetWindowID(window);
+    if (id == 0 || sequence == 0) {
+        return 0;
+    }
+    // SDL owns the window identity, and Window owns its persistent revision
+    // counter. This avoids global mutable adapter state.
+    return (static_cast<std::uint64_t>(id) << 32) | sequence;
 }
 
 } // namespace
@@ -31,7 +40,6 @@ Window::Window() noexcept
 Window::~Window() noexcept {
     if (impl_ && on_owner_thread(owner_thread_) && impl_->window != nullptr) {
         SDL_DestroyWindow(impl_->window);
-        SdlRuntime::window_destroyed();
     }
 }
 
@@ -46,7 +54,7 @@ WindowError Window::create(const WindowConfig& config) noexcept {
         if (config.width <= 0 || config.height <= 0) {
             return WindowError::InvalidSize;
         }
-        if (SDL_WasInit(SDL_INIT_VIDEO) == 0 || !SdlRuntime::owns_runtime()) {
+        if (SDL_WasInit(SDL_INIT_VIDEO) == 0 || !SDL_IsMainThread()) {
             return WindowError::VideoNotInitialized;
         }
 
@@ -64,9 +72,14 @@ WindowError Window::create(const WindowConfig& config) noexcept {
             SDL_DestroyWindow(window);
             return WindowError::AllocationFailed;
         }
-        std::uint64_t surface_generation = 0;
-        std::uint64_t native_generation = 0;
-        if (!SdlRuntime::window_created(surface_generation, native_generation)) {
+        if (generation_counter_ >= std::numeric_limits<std::uint32_t>::max() - 2U) {
+            SDL_DestroyWindow(window);
+            delete impl;
+            return WindowError::InternalFailure;
+        }
+        const std::uint64_t native_generation = window_token(window, ++generation_counter_);
+        const std::uint64_t surface_generation = window_token(window, ++generation_counter_);
+        if (native_generation == 0 || surface_generation == 0) {
             SDL_DestroyWindow(window);
             delete impl;
             return WindowError::InternalFailure;
@@ -98,7 +111,6 @@ WindowError Window::destroy() noexcept {
         }
         if (impl_->window != nullptr) {
             SDL_DestroyWindow(impl_->window);
-            SdlRuntime::window_destroyed();
         }
         impl_.reset();
         return WindowError::None;
@@ -118,10 +130,13 @@ WindowError Window::resize(int width, int height) noexcept {
         if (width <= 0 || height <= 0) {
             return WindowError::InvalidSize;
         }
+        if (generation_counter_ == std::numeric_limits<std::uint32_t>::max()) {
+            return WindowError::InternalFailure;
+        }
         if (!SDL_SetWindowSize(impl_->window, width, height)) {
             return WindowError::ResizeFailed;
         }
-        const std::uint64_t generation = SdlRuntime::next_generation();
+        const std::uint64_t generation = window_token(impl_->window, ++generation_counter_);
         if (generation == 0) {
             return WindowError::InternalFailure;
         }
@@ -198,7 +213,10 @@ WindowError Window::query_surface(SurfaceMetrics& out) noexcept {
             && (impl_->display_id != display_id
                 || impl_->pixel_width != pixel_width
                 || impl_->pixel_height != pixel_height)) {
-            const std::uint64_t generation = SdlRuntime::next_generation();
+            if (generation_counter_ == std::numeric_limits<std::uint32_t>::max()) {
+                return WindowError::SurfaceQueryFailed;
+            }
+            const std::uint64_t generation = window_token(impl_->window, ++generation_counter_);
             if (generation == 0) {
                 return WindowError::SurfaceQueryFailed;
             }
