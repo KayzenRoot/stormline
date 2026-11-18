@@ -9,6 +9,7 @@
 #include <bit>
 #include <cstddef>
 #include <cstdint>
+#include <initializer_list>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -18,7 +19,11 @@
 namespace {
 using namespace stormline::core::internal;
 
+#if defined(_MSC_VER)
+static_assert(_MSVC_LANG >= 202002L, "CORE-01 requires MSVC /std:c++20");
+#else
 static_assert(__cplusplus >= 202002L, "CORE-01 requires internal C++20");
+#endif
 static_assert(std::is_same_v<decltype(NativeWindowHandle{}.value), std::uint64_t>);
 static_assert(std::is_same_v<decltype(NativeWindowHandle{}.generation), std::uint64_t>);
 static_assert(std::is_same_v<std::underlying_type_t<NativeHandleKind>, std::uint8_t>);
@@ -60,6 +65,9 @@ void print_observed() {
     const std::string runtime{"STORMLINE_ABI_INTERNAL_CXX20"};
     std::cout << "ABI_META marker=" << runtime
               << " cplusplus=" << __cplusplus
+#if defined(_MSC_VER)
+              << " msvc_lang=" << _MSVC_LANG
+#endif
               << " pointer_bytes=" << sizeof(void*)
               << " endian=" << endian_name()
               << " native_handle_bytes=" << sizeof(NativeWindowHandle)
