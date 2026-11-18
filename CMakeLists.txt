@@ -297,6 +297,24 @@ target_link_libraries(stormline_core02_system_allocator_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core02_system_allocator_test PRIVATE)
 
+add_library(stormline_core02_arena STATIC
+    src/stormline/core/memory/monotonic_arena.cpp
+)
+target_include_directories(stormline_core02_arena PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core02_arena PRIVATE stormline_core02_memory)
+stormline_core01_apply_options(stormline_core02_arena PUBLIC)
+
+add_executable(stormline_core02_arena_test
+    tests/core/monotonic_arena_tests.cpp
+)
+target_link_libraries(stormline_core02_arena_test PRIVATE
+    stormline_core02_arena
+    stormline_core02_memory
+)
+stormline_core01_apply_options(stormline_core02_arena_test PRIVATE)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -529,6 +547,28 @@ add_test(NAME core02_system_benchmark
     COMMAND stormline_core02_system_allocator_test benchmark
 )
 
+add_test(NAME core02_arena_basic
+    COMMAND stormline_core02_arena_test basic
+)
+add_test(NAME core02_arena_alignment
+    COMMAND stormline_core02_arena_test alignment
+)
+add_test(NAME core02_arena_overflow
+    COMMAND stormline_core02_arena_test overflow
+)
+add_test(NAME core02_arena_invalid
+    COMMAND stormline_core02_arena_test invalid
+)
+add_test(NAME core02_arena_resource
+    COMMAND stormline_core02_arena_test resource
+)
+add_test(NAME core02_arena_lifetime
+    COMMAND stormline_core02_arena_test lifetime
+)
+add_test(NAME core02_arena_wrong_thread
+    COMMAND stormline_core02_arena_test wrong_thread
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -603,6 +643,13 @@ set_tests_properties(
     core02_system_lifetime
     core02_system_cross_thread
     core02_system_benchmark
+    core02_arena_basic
+    core02_arena_alignment
+    core02_arena_overflow
+    core02_arena_invalid
+    core02_arena_resource
+    core02_arena_lifetime
+    core02_arena_wrong_thread
     PROPERTIES TIMEOUT 180
 )
 
