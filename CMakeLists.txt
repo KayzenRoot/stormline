@@ -296,6 +296,29 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     )
 endif()
 
+# NLE-CORE01-QUAL-002: additive internal ABI fixture and native binary receipts.
+# This does not establish an external ABI or minimum supported platform.
+add_executable(stormline_core01_abi_portability_test
+    tests/core/core01_abi_portability_tests.cpp
+)
+target_link_libraries(stormline_core01_abi_portability_test PRIVATE
+    stormline_core01_window
+    stormline_core01_sdl
+    SDL3::SDL3-static
+)
+stormline_core01_apply_options(stormline_core01_abi_portability_test PRIVATE)
+add_custom_command(TARGET stormline_core01_abi_portability_test POST_BUILD
+    COMMAND "$<TARGET_FILE:stormline_core01_abi_portability_test>" positive
+    COMMAND "${CMAKE_COMMAND}"
+        "-DSTORM_ABI_BINARY=$<TARGET_FILE:stormline_core01_abi_portability_test>"
+        "-DSTORM_ABI_PLATFORM=${CMAKE_SYSTEM_NAME}"
+        "-DSTORM_ABI_COMPILER_ID=${CMAKE_CXX_COMPILER_ID}"
+        "-DSTORM_ABI_COMPILER_VERSION=${CMAKE_CXX_COMPILER_VERSION}"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/core01_abi_probe.cmake"
+    COMMENT "CORE-01 internal C++20 ABI observations and native PE/ELF/Mach-O evidence"
+    VERBATIM
+)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
@@ -574,6 +597,33 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         PROPERTIES TIMEOUT 10
     )
 endif()
+
+add_test(NAME core01_abi_internal_positive
+    COMMAND stormline_core01_abi_portability_test positive
+)
+add_test(NAME core01_abi_internal_negative
+    COMMAND stormline_core01_abi_portability_test negative
+)
+add_test(NAME core01_abi_native_probe
+    COMMAND "${CMAKE_COMMAND}"
+        "-DSTORM_ABI_BINARY=$<TARGET_FILE:stormline_core01_abi_portability_test>"
+        "-DSTORM_ABI_PLATFORM=${CMAKE_SYSTEM_NAME}"
+        "-DSTORM_ABI_COMPILER_ID=${CMAKE_CXX_COMPILER_ID}"
+        "-DSTORM_ABI_COMPILER_VERSION=${CMAKE_CXX_COMPILER_VERSION}"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/core01_abi_probe.cmake"
+)
+add_test(NAME core01_abi_native_negative
+    COMMAND "${CMAKE_COMMAND}"
+        "-DSTORM_ABI_BINARY=$<TARGET_FILE:stormline_core01_abi_portability_test>"
+        "-DSTORM_ABI_PLATFORM=${CMAKE_SYSTEM_NAME}"
+        "-DSTORM_ABI_MODE=negative"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/core01_abi_probe.cmake"
+)
+set_tests_properties(
+    core01_abi_internal_positive core01_abi_internal_negative
+    core01_abi_native_probe core01_abi_native_negative
+    PROPERTIES TIMEOUT 60
+)
 
 add_test(NAME core02_memory_basic
     COMMAND stormline_core02_memory_test basic
