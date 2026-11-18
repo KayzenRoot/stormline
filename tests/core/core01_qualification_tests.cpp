@@ -90,7 +90,8 @@ bool qualify_sdl_cycles() {
         if (runtime.initialize() != SdlError::None) {
 #if defined(__APPLE__)
             std::printf("NOT_QUALIFIED: cocoa runtime unavailable\n");
-            return true;
+            expect(false, "NOT_QUALIFIED: required Cocoa runtime for qualification unavailable");
+            return false;
 #else
             expect(false, "qualify runtime initialize");
             return false;
