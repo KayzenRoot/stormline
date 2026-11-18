@@ -30,6 +30,8 @@ New features/modules; renderer, GPU, audio, networking, public ABI; SDL version 
 - `tests/core/window_tests.cpp`
 - `tests/core/display_tests.cpp`
 - `tests/core/sdl_runtime_tests.cpp`
+- `tests/core/core01_soak_tests.cpp`
+- `tests/core/core01_qualification_tests.cpp`
 - `docs/work-orders/NLE-CORE01-CORR-001.md`
 - `docs/evidence/NLE-CORE01-CORR-001.md`
 No workflow/CMake edits without scoped authorization/correction delta. All other paths read-only.
@@ -60,3 +62,5 @@ Single Draft PR; test-before-fix red baseline; minimal production delta; full re
 
 ## STOP CONDITION
 Stop on stale HEAD/authority, unclear dependency contract, red after allowed corrections, HIGH/CRITICAL remaining, runner unqualified, unapproved scope/CI/registry changes, or unsafe merge. No merge or checkpoint promotion before APPROVED.
+## CORRECTION DELTA CD-01 — required Cocoa coverage (same WO)
+The source check found that `core01_soak_tests.cpp` and `core01_qualification_tests.cpp` returned `true` when Cocoa runtime was unavailable. Both are required CORE-01 qualification oracles and must fail closed instead of returning green CTest. Their inclusion in this exact allowlist is the minimum expansion needed for the owner-authorized Cocoa false-PASS correction; no engine feature expansion or CI workflow changes.
