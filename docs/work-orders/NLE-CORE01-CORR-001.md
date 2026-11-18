@@ -42,6 +42,7 @@ No workflow/CMake edits without scoped authorization/correction delta. All other
 - No SDL_Quit with outstanding window resources; report explicit recoverable error.
 - At most one active owned SDL runtime; reject duplicate ownership without perturbing the active one.
 - SDL video main-thread enforcement, not just constructor-thread affinity.
+- Preserve approved SDL contract: no global mutable adapter state; SdlRuntime must outlive Window in supported use. Consult SDL-owned global state and use instance-local counters instead of new globals.
 - A CI test without its required Cocoa window server must not silently PASS.
 - No exceptions across public methods, no new external dependencies and no UAF/leak regressions.
 
@@ -64,3 +65,6 @@ Single Draft PR; test-before-fix red baseline; minimal production delta; full re
 Stop on stale HEAD/authority, unclear dependency contract, red after allowed corrections, HIGH/CRITICAL remaining, runner unqualified, unapproved scope/CI/registry changes, or unsafe merge. No merge or checkpoint promotion before APPROVED.
 ## CORRECTION DELTA CD-01 — required Cocoa coverage (same WO)
 The source check found that `core01_soak_tests.cpp` and `core01_qualification_tests.cpp` returned `true` when Cocoa runtime was unavailable. Both are required CORE-01 qualification oracles and must fail closed instead of returning green CTest. Their inclusion in this exact allowlist is the minimum expansion needed for the owner-authorized Cocoa false-PASS correction; no engine feature expansion or CI workflow changes.
+
+## AUDIT CORRECTION DELTA CD-02 — contract preservation
+Initial corrected CI passed but audit identified a conflict with the approved no-global-state SDL contract and runtime-before-window lifetime precondition. Implementation was revised in this **same PR** to use `SDL_WasInit`, `SDL_GetWindows`, `SDL_GetWindowID` and a persistent `Window`-local generation counter. No mutable Stormline process registry remains. The destructor avoids SDL_Quit if the caller violates Window-before-Runtime destruction order, but cleanup cannot be guaranteed for unsupported misuse; this must not be claimed as supported recovery. Added a typed WrongThread test for a Window constructed on a background thread. Requalification on exact final HEAD is mandatory.
