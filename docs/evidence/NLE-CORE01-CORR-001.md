@@ -32,12 +32,15 @@
 
 ## Tests and checks
 - Documentation validator: [run #44356126944](https://github.com/KayzenRoot/stormline/actions/runs/44356126944) SUCCESS after correcting a first-pass missing final newline in the Work Order. The earlier docs failure was a formatting problem introduced in this PR, now fixed.
-- Corrected native Linux, Linux ASan/UBSan, Windows, macOS: **PENDING**, [run #44356127049](https://github.com/KayzenRoot/stormline/actions/runs/44356127049) in progress. Do not mark PASS until exact HEAD receipts are read.
+- Corrected native CI [run #44356586024](https://github.com/KayzenRoot/stormline/actions/runs/44356586024) at code+initial Evidence HEAD `a8935b7e6e2257c2be2b9a4ad95571f42b82f56d`: **SUCCESS**: Linux GCC **92/92 CTest**, Linux ASan/UBSan **92/92 CTest** with sanitizers confirmed active, Windows MSVC **92/92 CTest**, macOS AppleClang **92/92 CTest**. No tests failed; no sanitizer error, no skip reported. The former [run #44356127049](https://github.com/KayzenRoot/stormline/actions/runs/44356127049) was superseded/cancelled by newer push; it had green Linux/Windows/macOS jobs, but its sanitizer job was cancelled. Only the final all-green run is evidence for the correction.
 - Check physical hardware, real Wayland runtime, IME/hotplug/long soak, distribution and release remain NOT_QUALIFIED.
 
 ## Risk, rollback and audit
 - Unsafe teardown previously allowed lifetime invalidation of a `SDL_Window*`. Regression test deliberately exits before use of that pointer.
 - New SDL process-state is restricted to main-thread adapter internals; not a public engine singleton or ABI. Its deferred-quit branch must pass ASan/UBSan, native CI and audit.
 - Rollback: close unmerged PR; after merge require a normal revert PR, no force-push.
-- Exact-HEAD pt-BR audit: **PENDING**. Do not merge while CI red, tests skipped as PASS, or HIGH/CRITICAL is known.
+- Exact-HEAD pt-BR audit: **PENDING** until this Evidence update's own Docs/native CI checks complete. The proof of current code is 92/92 CTest per OS on the immediately prior HEAD; validate again on the final PR head. Do not merge while CI red, tests skipped as PASS, or HIGH/CRITICAL is known.
 - Proposed Checkpoint Delta: record this corrective PR and evidence only after APPROVED, in a separate authorized checkpoint PR if required; **not promoted**.
+
+## Changed-file review / correction scope
+11 total changed paths: 3 production files (`sdl_runtime.hpp/.cpp`, `window.cpp`), 6 test files (`sdl_runtime_tests.cpp`, `window_tests.cpp`, `native_bridge_tests.cpp`, `display_tests.cpp`, `core01_soak_tests.cpp`, `core01_qualification_tests.cpp`) and this Evidence plus WO. No CMake, workflow, manifest, activation, registry, ledger, license, source hierarchy, or ADR mutation. A proposed checkpoint update is explicitly deferred to a separate audited PR if this correction is APPROVED and merged.
