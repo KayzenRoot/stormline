@@ -6,6 +6,7 @@
 #endif
 
 #include <cstdio>
+#include <cstdlib>
 #include <exception>
 #include <iostream>
 #include <string_view>
@@ -84,6 +85,14 @@ bool run_basic() {
         return finish_case();
     }
     expect(window.valid(), "window is valid after create");
+    // The unfixed runtime calls SDL_Quit with a live SDL_Window. Exit this
+    // isolated CTest process immediately if that happens: never dereference
+    // or destroy a potentially freed window during the red reproduction.
+    if (runtime.shutdown() == SdlError::None) {
+        std::fprintf(stderr, "FAIL: runtime shut down with a live window\n");
+        std::_Exit(1);
+    }
+    expect(runtime.initialized(), "rejected shutdown leaves runtime active");
     expect(window.create(config) == WindowError::AlreadyCreated, "duplicate create rejected");
     expect(window.resize(800, 600) == WindowError::None, "resize succeeds");
     expect(window.show() == WindowError::None, "show succeeds");
