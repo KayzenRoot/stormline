@@ -29,8 +29,8 @@ Canonical hierarchy and Git blob receipts checked before changes:
 
 ## Tests, baseline results, corrections
 - **Native Linux:** PENDING.
-- **Linux ASan/UBSan:** PENDING.
-- **Windows MSVC:** PENDING.
+- **Linux ASan/UBSan:** first run #44383510514 PENDING/IN PROGRESS at last check. Final exact-head rerun required.
+- **Windows MSVC:** first run [#44383510514](https://github.com/KayzenRoot/stormline/actions/runs/44383510514), job 135081790463 **FAILED 1/94** in new `core01_runtime_baseline` (93/94 CTest PASS, 92 existing regressions green and new parser selftest green). Root cause: on Windows repeated headless lifecycle sometimes measures 0 ns due clock quantization; test originally rejected zero elapsed as invalid. Build-time baseline produced 30/30 headless/window samples with valid process peak memory; sample timing 0 is below clock resolution rather than engine failure. **Corrected in same PR (CD-01):** accept/count 0 as censored, print `below_clock_tick`, never invent positive timing or claim sub-tick precision. Rerun required: PENDING.
 - **macOS AppleClang:** PENDING.
 - **Docs Validation:** PENDING.
 - **Result counts/quantiles/SHA256:** PENDING receipt from exact-head native CI; never invent numbers.
@@ -43,3 +43,8 @@ Allowed: `tests/core/core01_runtime_baseline_tests.cpp` new, `CMakeLists.txt` ad
 
 ## Proposed checkpoint delta / audit
 **NOT PROMOTED.** Only after an objective pt-BR APPROVED on final PR HEAD and GitHub squash merge may a separate checkpoint PR record exact results, known limitations and main SHA. Final audit, final HEAD native CI and merge: PENDING. On any failure, fix only within this same WO/PR, rerun and maintain Draft / CORRECTION REQUIRED.
+
+## Correction record CD-01
+- No runtime code modified, all changed paths within the four-path allowlist.
+- Failure reproduced in first Windows native run at 2026-11-18 19:46 UTC: `BASELINE_FAIL: invalid clock or process peak memory measurement` while the CTest repeated faster-than-tick headless measurement. Existing 92 regressions passed, new baseline failed. Root cause is an overly strict timing measurement oracle, not evidence of an SDL UAF or regression.
+- New oracle: zero nanoseconds is a legitimate clock-quantized observation, explicitly counted as `below_clock_tick`. It must never be interpreted as an infinite-speed measurement or a p95 performance PASS. A zero RSS still fails. All four native platforms must retest on final SHA, with real logs and sample rows recorded here.
