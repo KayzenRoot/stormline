@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-07 — Leak tracking
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PASS / CI_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-07`. **ADR:** [ADR-0099](../adr/0099-core-02-leak-tracking.md). **Contract:** [core-02-leak-tracking-v0](../contracts/core-02-leak-tracking-v0.md). **WO:** [NLE-PRPLAN-CORE-02-07](../work-orders/NLE-PRPLAN-CORE-02-07.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-07`. **ADR:** [ADR-0099](../adr/0099-core-02-leak-tracking.md). **Contract:** [core-02-leak-tracking-v0](../contracts/core-02-leak-tracking-v0.md). **WO:** [NLE-PRPLAN-CORE-02-07](../work-orders/NLE-PRPLAN-CORE-02-07.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First explicit leak-tracking primitive: fixed-capacity generation-checked tokens, non-mutating capacity/stale/double-release rejection, live/peak counters and owner-thread enforcement for caller-declared allocations. A leak is an outstanding tracked token, not proof of process-wide or third-party leaks. No allocation interception, pointer capture, telemetry export, reporting service, global tracker, third-party dependency, public ABI or release.
 
@@ -8,7 +8,7 @@ First explicit leak-tracking primitive: fixed-capacity generation-checked tokens
 
 - **Gate:** [PR #474](https://github.com/KayzenRoot/stormline/pull/474) squash-merged as `0dbaef69e961b7d9a68e3fb965f4a7468d1005bb`; audit #6976903866 **APPROVED** (Sonar duplication debt noted).
 - **Base:** `0dbaef69e961b7d9a68e3fb965f4a7468d1005bb`.
-- **Code PR:** pending.
+- **Code PR:** [PR #475](https://github.com/KayzenRoot/stormline/pull/475); implementation HEAD `cd3b947454b555eb289a6121e557cdfcbfc2453e`; CI and audit pending at the final documentation head.
 - **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-07 --json` → `EXECUTOR_READY`, exit 0; all other IDs exit 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
@@ -45,17 +45,21 @@ No other path changed. Existing targets unchanged except additive leak-tracker w
 - `python scripts/validate_pr_plans.py`: **PASS** (725 blocked, 1 ready, 18 completed, 4 approved gates).
 - `python -m unittest scripts/test_validate_pr_plans.py`: **68/68 OK**.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-To be completed at the exact PR HEAD after push:
+All jobs ran at implementation HEAD `cd3b947454b555eb289a6121e557cdfcbfc2453e`; the only subsequent delta is this Evidence Bundle text, revalidated by the PR head checks.
 
 | Job | Runner / toolchain | Result |
 |---|---|---|
-| `docs-validation` | required G2 check | pending |
-| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | pending |
-| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | pending |
-| `windows` | windows-2025-vs2026, MSVC | pending |
-| `macos` | macos-15-arm64, Apple clang | pending |
+| `docs-validation` | required G2 check | [run 44292955849](https://github.com/KayzenRoot/stormline/actions/runs/44292955849) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **92/92 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **92/92 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **92/92 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **92/92 CTest passed** |
+
+Native workflow run: [44292955794](https://github.com/KayzenRoot/stormline/actions/runs/44292955794) **SUCCESS**. Job IDs: Linux `134762553175`, sanitizers `134762553782`, Windows `134762553691`, macOS `134762553642`. All 6 leak tests executed; the 86 previous CTests continue passing. SonarCloud Code Analysis passed; Socket checks passed.
+
+Docs validators: `validate_pr_plans.py` **PASS** (725 blocked, 1 ready, 18 completed, 4 approved gates), `validate_docs.py` **PASS** (42 required files, 981 Markdown), `validate_wo_registry.py` **PASS** (80 blocked packets), `test_validate_pr_plans.py` **68/68 OK**.
 
 ## 5. Security, licensing and limitations
 
