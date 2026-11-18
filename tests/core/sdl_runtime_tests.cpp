@@ -123,6 +123,17 @@ bool run_wrong_thread() {
     });
     stopper.join();
     expect(worker_stop == SdlError::WrongThread, "worker shutdown rejected");
+    SdlError background_owner = SdlError::None;
+    std::thread background([&background_owner] {
+        SdlRuntime wrong_owner;
+        background_owner = wrong_owner.initialize();
+        if (background_owner == SdlError::None) {
+            (void)wrong_owner.shutdown();
+        }
+    });
+    background.join();
+    expect(background_owner == SdlError::WrongThread,
+           "runtime constructed off SDL main thread cannot initialize video");
     expect(runtime.initialized(), "worker shutdown leaves runtime initialized");
     expect(runtime.shutdown() == SdlError::None, "owner shutdown succeeds");
     return finish_case();
