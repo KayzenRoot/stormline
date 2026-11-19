@@ -27,9 +27,10 @@ CORE02_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-07.json
 CORE02_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-08.json"
 CORE02_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-09.json"
 CORE02_10_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-10.json"
+CORE03_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-03-01.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = CORE02_10_ACTIVATION_FILE
+ACTIVATION_FILE = CORE03_01_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -60,6 +61,7 @@ CORE02_08_COMPLETED_STATUS = "CORE02_08_COMPLETED_REST_BLOCKED"
 CORE02_09_ACTIVATED_STATUS = "CORE02_09_READY_L1_CAPABILITY_OVERLAY"
 CORE02_09_COMPLETED_STATUS = "CORE02_09_COMPLETED_REST_BLOCKED"
 CORE02_10_COMPLETED_STATUS = "CORE02_10_COMPLETED_REST_BLOCKED"
+CORE03_01_APPROVED_STATUS = "CORE03_01_APPROVED_GOVERNANCE_ONLY"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -93,6 +95,7 @@ ACTIVE_STATUSES = {
     CORE02_09_ACTIVATED_STATUS,
     CORE02_09_COMPLETED_STATUS,
     CORE02_10_COMPLETED_STATUS,
+    CORE03_01_APPROVED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -113,6 +116,7 @@ CORE02_07_CODE_PR = 475
 CORE02_08_CODE_PR = 484
 CORE02_09_CODE_PR = 487
 CORE02_10_CODE_PR = 489
+CORE03_01_GATE_PR = 492
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -252,6 +256,36 @@ CORE01_11_ACTIVATION_SOURCES = {
     "display_contract": "docs/contracts/core-01-display-surface-v0.md",
     "native_bridge_contract": "docs/contracts/core-01-native-window-handle-v0.md",
     "core01_plan": "docs/pr-plans/CORE-01.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+CORE03_01_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "4be93feeccf32d6ef31b48b2d59fcfd551ac42da",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0005": "6302ec933f89733d0f0ed7c1009059b2c0eb15f4",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0103": "81adca6d4bc25574a4093783e55d22091b78c203",
+    "core03_architecture": "d27523a71854d2f3952453b2ec7a3ef31f2d4aac",
+    "core03_governance_contract": "00f962b919e85eece40ee3b3d7e03c4f6b3f7d4e",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "core03_plan": "6527c5ca5a176176506029edd4ae2de69d58928a",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+CORE03_01_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0005": "docs/adr/0005-core-03-jobs-concurrency.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0103": "docs/adr/0103-core-03-governance-gate.md",
+    "core03_architecture": "docs/architecture/core-03-concurrency-jobs.md",
+    "core03_governance_contract": "docs/contracts/core-03-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "core03_plan": "docs/pr-plans/CORE-03.md",
     "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
@@ -888,6 +922,25 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
         return expected, CORE01_ACTIVATION_SOURCES, CORE01_PINNED_SOURCE_BLOBS, {
             "source_blob_sha1", "sdl3", "window_slice"
         }
+    if selected == "NLE-PRPLAN-CORE-03-01":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-CORE-03-01",
+            "module_id": "CORE-03",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-19/core03-governance-prep",
+            "approved_adr": "docs/adr/0103-core-03-governance-gate.md",
+            "approved_contract": "docs/contracts/core-03-governance-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-CORE-03-01.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-03-01-G6-ACTIVATION.md",
+            "gate_base_sha": "a24d65092da5401b5534a7ba13d3391b991dd94a",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, CORE03_01_ACTIVATION_SOURCES, CORE03_01_PINNED_SOURCE_BLOBS, {
+            "source_blob_sha1", "gate_pr"
+        }
     if selected == "NLE-PRPLAN-CORE-02-10":
         expected = {
             "schema_version": 2,
@@ -1277,6 +1330,51 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
 def expected_packet_state(
     module_id: str, idx: int, activation: dict | None, manifest_status: str | None
 ) -> tuple[str, int | None]:
+    if (activation is not None
+            and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-03-01"
+            and module_id == "CORE-01"):
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", 422
+        if idx == 2:
+            return "APPROVED_CONTRACT", 424
+        code_prs = {
+            3: 428, 4: 428, 5: 428, 6: 432, 7: 435, 8: 438,
+            9: 444, 10: 447, 11: 450, 12: 453, 13: 456, 14: 459,
+            15: 462, 16: 464,
+        }
+        if idx in code_prs:
+            return "COMPLETED", code_prs[idx]
+        return "PLANNED_BLOCKED", None
+    if (activation is not None
+            and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-03-01"
+            and module_id == "CORE-02"):
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", CORE02_03_GATE_PR
+        if idx == 2:
+            return "APPROVED_CONTRACT", CORE02_03_GATE_PR
+        if idx == 3:
+            return "COMPLETED", CORE02_03_CODE_PR
+        if idx == 4:
+            return "COMPLETED", CORE02_04_CODE_PR
+        if idx == 5:
+            return "COMPLETED", CORE02_05_CODE_PR
+        if idx == 6:
+            return "COMPLETED", CORE02_06_CODE_PR
+        if idx == 7:
+            return "COMPLETED", CORE02_07_CODE_PR
+        if idx == 8:
+            return "COMPLETED", CORE02_08_CODE_PR
+        if idx == 9:
+            return "COMPLETED", CORE02_09_CODE_PR
+        if idx == 10:
+            return "COMPLETED", CORE02_10_CODE_PR
+        return "PLANNED_BLOCKED", None
+    if (activation is not None
+            and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-03-01"
+            and module_id == "CORE-03"):
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", CORE03_01_GATE_PR
+        return "PLANNED_BLOCKED", None
     if (activation is not None
             and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-02-10"
             and module_id == "CORE-01"):
@@ -1888,6 +1986,9 @@ def validate_manifest(
     if manifest.get("status") == CORE02_10_COMPLETED_STATUS:
         if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 22 or approved != 4:
             issues.append("CORE-02-10 closeout must have zero ready packets, twenty-two completed slices and four approved gates")
+    if manifest.get("status") == CORE03_01_APPROVED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 22 or approved != 5:
+            issues.append("CORE-03-01 governance state must have zero ready packets, twenty-two completed slices and five approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -1939,6 +2040,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-core-02-09.json"
     elif status == CORE02_10_COMPLETED_STATUS:
         activation_path = root / "docs/queue/packet-activation-core-02-10.json"
+    elif status == CORE03_01_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-core-03-01.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"
     else:
