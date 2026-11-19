@@ -1,0 +1,397 @@
+CORE-02 ALLOC-Q4 physical/constrained run raw log
+Host: Windows 11 Pro build 26300; AMD Ryzen 3 4300GE 4C/8T; 15.1 GiB; ASUS PRIME B450M-GAMING/BR; VBS/hypervisor present
+Executable SHA256: 0DBFC13322DBE39AB5B69599B72BEC2E2C150393C49A80CFAD8DD6510C6EE6BF
+Compiler: MSVC 14.44.35207; Release; harness full mode
+
+===== win11_2vcpu_logical =====
+HOST_PROFILE profile=win11_2vcpu_logical cpu_count=2 affinity_mask=0x3 host_logical=8 host_ram_gib=15,1 os=Microsoft Windows 11 Pro build=26300 cpu=AMD Ryzen 3 4300GE with Radeon Graphics
+PROFILE_RUN profile=win11_2vcpu_logical run=1 exit=0 affinity=0x3 peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=33.164 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=40.214 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=51.977 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=46.365 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=9.406 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=5.654 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=146.395 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=164.644 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=120.925 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=126.412 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=13.691 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=20.432 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=36.820 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=42.972 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=41.792 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=51.948 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=8.060 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=11.516 checksum=6367960
+
+PROFILE_RUN profile=win11_2vcpu_logical run=2 exit=0 affinity=0x3 peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=36.715 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=46.809 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=41.165 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=47.250 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=6.141 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=5.599 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=98.041 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=117.309 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=114.773 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=115.886 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=25.044 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=16.116 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=38.100 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=57.198 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=42.398 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=45.704 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=8.104 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=8.296 checksum=6367960
+
+PROFILE_RUN profile=win11_2vcpu_logical run=3 exit=0 affinity=0x3 peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=34.035 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=37.546 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=43.036 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=48.689 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=6.691 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=5.825 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=96.974 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=113.688 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=155.482 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=141.326 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=20.484 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=20.100 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=47.608 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=39.900 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=41.956 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=42.880 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=7.278 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=8.690 checksum=6367960
+
+===== win11_4vcpu_logical =====
+HOST_PROFILE profile=win11_4vcpu_logical cpu_count=4 affinity_mask=0xF host_logical=8 host_ram_gib=15,1 os=Microsoft Windows 11 Pro build=26300 cpu=AMD Ryzen 3 4300GE with Radeon Graphics
+PROFILE_RUN profile=win11_4vcpu_logical run=1 exit=0 affinity=0xF peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=32.886 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=44.789 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=43.450 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=49.658 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=10.300 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=5.575 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=81.280 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=77.077 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=85.229 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=85.299 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=34.176 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=25.601 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=38.200 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=42.452 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=41.188 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=42.802 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=7.614 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=7.486 checksum=6367960
+
+PROFILE_RUN profile=win11_4vcpu_logical run=2 exit=0 affinity=0xF peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=38.698 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=44.208 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=40.125 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=49.240 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=6.805 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=5.817 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=73.225 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=82.920 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=83.503 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=86.724 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=32.661 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=28.116 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=35.756 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=41.902 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=49.904 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=40.750 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=8.860 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=7.512 checksum=6367960
+
+PROFILE_RUN profile=win11_4vcpu_logical run=3 exit=0 affinity=0xF peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=34.763 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=36.713 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=44.282 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=92.329 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=7.131 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=7.290 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=81.184 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=80.819 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=81.137 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=83.327 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=22.309 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=15.619 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=36.286 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=66.226 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=41.850 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=48.850 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=7.294 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=7.534 checksum=6367960
+
+===== win11_host_8c =====
+HOST_PROFILE profile=win11_host_8c cpu_count=8 affinity_mask=0xFF host_logical=8 host_ram_gib=15,1 os=Microsoft Windows 11 Pro build=26300 cpu=AMD Ryzen 3 4300GE with Radeon Graphics
+PROFILE_RUN profile=win11_host_8c run=1 exit=0 affinity=0xFF peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=32.628 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=37.831 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=43.383 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=60.699 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=9.682 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=8.807 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=86.543 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=90.234 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=88.924 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=93.614 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=16.996 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=23.872 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=35.934 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=42.128 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=47.446 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=41.692 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=7.246 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=7.596 checksum=6367960
+
+PROFILE_RUN profile=win11_host_8c run=2 exit=0 affinity=0xFF peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=36.983 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=40.580 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=41.384 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=44.471 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=6.752 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=7.513 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=86.547 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=89.239 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=60.570 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=88.984 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=31.292 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=27.655 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=35.714 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=39.998 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=41.636 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=43.900 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=7.282 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=7.490 checksum=6367960
+
+PROFILE_RUN profile=win11_host_8c run=3 exit=0 affinity=0xFF peak_working_set_mib=0 ok=True
+ALLOC_BENCH_CONFIG compiler=MSVC pointer_bits=64 hardware_threads=8 mimalloc_version=30700 rpmalloc=2.0.1 override=none
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH_CORRECTNESS=PASS allocators=6
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 ns_per_pair=39.560 checksum=25493856
+
+ALLOC_BENCH allocator=new size=64 threads=1 ns_per_pair=37.685 checksum=25493856
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 ns_per_pair=40.267 checksum=25493856
+
+ALLOC_BENCH allocator=system size=64 threads=1 ns_per_pair=43.712 checksum=25493856
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 ns_per_pair=5.984 checksum=25493856
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 ns_per_pair=5.640 checksum=25493856
+
+ALLOC_BENCH allocator=malloc size=64 threads=4 ns_per_pair=89.766 checksum=101975424
+
+ALLOC_BENCH allocator=new size=64 threads=4 ns_per_pair=64.528 checksum=101975424
+
+ALLOC_BENCH allocator=pmr size=64 threads=4 ns_per_pair=63.230 checksum=101975424
+
+ALLOC_BENCH allocator=system size=64 threads=4 ns_per_pair=88.070 checksum=101975424
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=4 ns_per_pair=17.676 checksum=101975424
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=4 ns_per_pair=26.744 checksum=101975424
+
+ALLOC_BENCH allocator=malloc size=64 threads=1 aligned=64 ns_per_pair=271.650 checksum=6367960
+
+ALLOC_BENCH allocator=new size=64 threads=1 aligned=64 ns_per_pair=80.238 checksum=6367960
+
+ALLOC_BENCH allocator=pmr size=64 threads=1 aligned=64 ns_per_pair=76.056 checksum=6367960
+
+ALLOC_BENCH allocator=system size=64 threads=1 aligned=64 ns_per_pair=47.108 checksum=6367960
+
+ALLOC_BENCH allocator=mimalloc size=64 threads=1 aligned=64 ns_per_pair=8.886 checksum=6367960
+
+ALLOC_BENCH allocator=rpmalloc size=64 threads=1 aligned=64 ns_per_pair=8.032 checksum=6367960
