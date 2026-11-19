@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-09 — Integrated memory qualification (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-09`. **Predecessor:** `-08` `COMPLETED` via PR #484. **Issue:** #19. **Base:** `a20ff42cce2879657d357a52a9ba80052b9f7c02`. **ADR:** [ADR-0101](../adr/0101-core-02-integrated-memory-qualification.md). **Contract:** [core-02-integrated-memory-qualification-v0](../contracts/core-02-integrated-memory-qualification-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #487](https://github.com/KayzenRoot/stormline/pull/487), merge `46a72483…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-09`. **Predecessor:** `-08` `COMPLETED` via PR #484. **Issue:** #19. **Base:** `a20ff42cce2879657d357a52a9ba80052b9f7c02`. **ADR:** [ADR-0101](../adr/0101-core-02-integrated-memory-qualification.md). **Contract:** [core-02-integrated-memory-qualification-v0](../contracts/core-02-integrated-memory-qualification-v0.md).
 
 ## OBJECTIVE
 
