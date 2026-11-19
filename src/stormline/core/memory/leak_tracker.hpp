@@ -7,6 +7,8 @@
 
 namespace stormline::core::memory {
 
+class MemoryTelemetry;
+
 struct LeakToken {
     std::uint32_t index{0};
     std::uint32_t generation{0};
@@ -27,7 +29,7 @@ class LeakTracker final {
 public:
     static constexpr std::size_t capacity = 128;
 
-    LeakTracker() noexcept;
+    explicit LeakTracker(MemoryTelemetry* telemetry = nullptr) noexcept;
     ~LeakTracker() noexcept = default;
 
     LeakTracker(const LeakTracker&) = delete;
@@ -56,6 +58,7 @@ private:
     std::size_t peak_allocations_{0};
     std::size_t peak_bytes_{0};
     std::thread::id owner_thread_;
+    MemoryTelemetry* telemetry_{nullptr};
 };
 
 }  // namespace stormline::core::memory

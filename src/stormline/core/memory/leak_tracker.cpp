@@ -1,5 +1,7 @@
 #include "stormline/core/memory/leak_tracker.hpp"
 
+#include "stormline/core/memory/memory_telemetry.hpp"
+
 #include <thread>
 
 namespace stormline::core::memory {
@@ -11,7 +13,8 @@ bool on_owner_thread(const std::thread::id& owner) noexcept {
 
 }  // namespace
 
-LeakTracker::LeakTracker() noexcept : owner_thread_(std::this_thread::get_id()) {}
+LeakTracker::LeakTracker(MemoryTelemetry* telemetry) noexcept
+    : owner_thread_(std::this_thread::get_id()), telemetry_(telemetry) {}
 
 LeakError LeakTracker::track(std::size_t bytes, LeakToken& token) noexcept {
     try {
@@ -42,6 +45,9 @@ LeakError LeakTracker::track(std::size_t bytes, LeakToken& token) noexcept {
             if (live_bytes_ > peak_bytes_) {
                 peak_bytes_ = live_bytes_;
             }
+            if (telemetry_ != nullptr) {
+                telemetry_->record_leak_track(bytes);
+            }
             return LeakError::None;
         }
         return LeakError::CapacityExceeded;
@@ -64,8 +70,12 @@ LeakError LeakTracker::release(LeakToken token) noexcept {
         }
         live_bytes_ -= slot.bytes;
         --live_allocations_;
+        const std::size_t released_bytes = slot.bytes;
         slot.bytes = 0;
         slot.active = false;
+        if (telemetry_ != nullptr) {
+            telemetry_->record_leak_release(released_bytes);
+        }
         return LeakError::None;
     } catch (...) {
         return LeakError::InternalFailure;

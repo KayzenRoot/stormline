@@ -1,5 +1,7 @@
 #include "stormline/core/memory/memory_block.hpp"
 
+#include "stormline/core/memory/memory_telemetry.hpp"
+
 #include <new>
 #include <utility>
 
@@ -21,24 +23,28 @@ MemoryBlock::~MemoryBlock() noexcept {
 }
 
 MemoryBlock::MemoryBlock(std::pmr::memory_resource* resource, void* data, std::size_t bytes,
-                         std::size_t alignment, MemoryDomain domain) noexcept
+                         std::size_t alignment, MemoryDomain domain,
+                         MemoryTelemetry* telemetry) noexcept
     : resource_(resource),
       data_(data),
       bytes_(bytes),
       alignment_(alignment),
-      domain_(domain) {}
+      domain_(domain),
+      telemetry_(telemetry) {}
 
 MemoryBlock::MemoryBlock(MemoryBlock&& other) noexcept
     : resource_(other.resource_),
       data_(other.data_),
       bytes_(other.bytes_),
       alignment_(other.alignment_),
-      domain_(other.domain_) {
+      domain_(other.domain_),
+      telemetry_(other.telemetry_) {
     other.resource_ = nullptr;
     other.data_ = nullptr;
     other.bytes_ = 0;
     other.alignment_ = 0;
     other.domain_ = MemoryDomain::Persistent;
+    other.telemetry_ = nullptr;
 }
 
 MemoryBlock& MemoryBlock::operator=(MemoryBlock&& other) noexcept {
@@ -51,11 +57,13 @@ MemoryBlock& MemoryBlock::operator=(MemoryBlock&& other) noexcept {
     bytes_ = other.bytes_;
     alignment_ = other.alignment_;
     domain_ = other.domain_;
+    telemetry_ = other.telemetry_;
     other.resource_ = nullptr;
     other.data_ = nullptr;
     other.bytes_ = 0;
     other.alignment_ = 0;
     other.domain_ = MemoryDomain::Persistent;
+    other.telemetry_ = nullptr;
     return *this;
 }
 
@@ -63,7 +71,8 @@ MemoryError MemoryBlock::allocate(std::pmr::memory_resource* resource,
                                   std::size_t bytes,
                                   std::size_t alignment,
                                   MemoryDomain domain,
-                                  MemoryBlock& out) noexcept {
+                                  MemoryBlock& out,
+                                  MemoryTelemetry* telemetry) noexcept {
     if (out.valid()) {
         return MemoryError::AlreadyOwned;
     }
@@ -96,7 +105,17 @@ MemoryError MemoryBlock::allocate(std::pmr::memory_resource* resource,
         return MemoryError::InternalFailure;
     }
 
-    out = MemoryBlock(selected, data, bytes, alignment, domain);
+    if (telemetry != nullptr &&
+        telemetry->record_allocate(domain, bytes) != TelemetryError::None) {
+        try {
+            selected->deallocate(data, bytes, alignment);
+        } catch (...) {
+            // The block was never handed out; preserve the single-release invariant.
+        }
+        return MemoryError::InternalFailure;
+    }
+
+    out = MemoryBlock(selected, data, bytes, alignment, domain, telemetry);
     return MemoryError::None;
 }
 
@@ -109,16 +128,23 @@ MemoryError MemoryBlock::release() noexcept {
     void* const data = data_;
     const std::size_t bytes = bytes_;
     const std::size_t alignment = alignment_;
+    MemoryTelemetry* const telemetry = telemetry_;
+    const MemoryDomain domain = domain_;
 
     resource_ = nullptr;
     data_ = nullptr;
     bytes_ = 0;
     alignment_ = 0;
     domain_ = MemoryDomain::Persistent;
+    telemetry_ = nullptr;
 
     try {
         resource->deallocate(data, bytes, alignment);
     } catch (...) {
+        return MemoryError::InternalFailure;
+    }
+    if (telemetry != nullptr &&
+        telemetry->record_release(domain, bytes) != TelemetryError::None) {
         return MemoryError::InternalFailure;
     }
     return MemoryError::None;

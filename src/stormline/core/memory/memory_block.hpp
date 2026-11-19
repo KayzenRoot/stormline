@@ -6,6 +6,8 @@
 
 namespace stormline::core::memory {
 
+class MemoryTelemetry;
+
 enum class MemoryDomain : std::uint8_t {
     Persistent,
     Frame,
@@ -42,7 +44,8 @@ public:
         std::size_t bytes,
         std::size_t alignment,
         MemoryDomain domain,
-        MemoryBlock& out) noexcept;
+        MemoryBlock& out,
+        MemoryTelemetry* telemetry = nullptr) noexcept;
 
     [[nodiscard]] MemoryError release() noexcept;
     [[nodiscard]] std::byte* data() noexcept;
@@ -55,13 +58,15 @@ public:
 
 private:
     MemoryBlock(std::pmr::memory_resource* resource, void* data, std::size_t bytes,
-                std::size_t alignment, MemoryDomain domain) noexcept;
+                std::size_t alignment, MemoryDomain domain,
+                MemoryTelemetry* telemetry) noexcept;
 
     std::pmr::memory_resource* resource_{nullptr};
     void* data_{nullptr};
     std::size_t bytes_{0};
     std::size_t alignment_{0};
     MemoryDomain domain_{MemoryDomain::Persistent};
+    MemoryTelemetry* telemetry_{nullptr};
 };
 
 }  // namespace stormline::core::memory

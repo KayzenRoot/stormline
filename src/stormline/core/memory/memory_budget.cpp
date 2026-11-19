@@ -1,5 +1,7 @@
 #include "stormline/core/memory/memory_budget.hpp"
 
+#include "stormline/core/memory/memory_telemetry.hpp"
+
 #include <thread>
 
 namespace stormline::core::memory {
@@ -21,10 +23,12 @@ BudgetStatus status_for(std::size_t used, std::size_t soft, std::size_t hard) no
 
 }  // namespace
 
-MemoryBudget::MemoryBudget(std::size_t soft_limit, std::size_t hard_limit) noexcept
+MemoryBudget::MemoryBudget(std::size_t soft_limit, std::size_t hard_limit,
+                           MemoryTelemetry* telemetry) noexcept
     : soft_limit_(soft_limit),
       hard_limit_(hard_limit),
-      owner_thread_(std::this_thread::get_id()) {
+      owner_thread_(std::this_thread::get_id()),
+      telemetry_(telemetry) {
     if (soft_limit_ == 0 || hard_limit_ == 0 || soft_limit_ > hard_limit_) {
         init_error_ = BudgetError::InvalidLimit;
         soft_limit_ = 0;
@@ -46,10 +50,16 @@ BudgetError MemoryBudget::try_reserve(std::size_t bytes, BudgetStatus& status) n
         }
         if (bytes > hard_limit_ - used_) {
             status = BudgetStatus::HardLimit;
+            if (telemetry_ != nullptr) {
+                telemetry_->record_budget_rejection();
+            }
             return BudgetError::ExceededHardLimit;
         }
         used_ += bytes;
         status = status_for(used_, soft_limit_, hard_limit_);
+        if (telemetry_ != nullptr) {
+            telemetry_->record_budget_reserve(bytes, status);
+        }
         return BudgetError::None;
     } catch (...) {
         return BudgetError::InternalFailure;
@@ -72,6 +82,9 @@ BudgetError MemoryBudget::release(std::size_t bytes) noexcept {
             return BudgetError::ReleaseUnderflow;
         }
         used_ -= bytes;
+        if (telemetry_ != nullptr) {
+            telemetry_->record_budget_release(bytes);
+        }
         return BudgetError::None;
     } catch (...) {
         return BudgetError::InternalFailure;

@@ -1,5 +1,7 @@
 #include "stormline/core/memory/monotonic_arena.hpp"
 
+#include "stormline/core/memory/memory_telemetry.hpp"
+
 #include <algorithm>
 #include <thread>
 
@@ -17,10 +19,12 @@ constexpr bool is_power_of_two(std::size_t value) noexcept {
 }  // namespace
 
 MonotonicArena::MonotonicArena(std::size_t capacity, std::size_t backing_alignment,
-                               std::pmr::memory_resource* resource) noexcept
+                               std::pmr::memory_resource* resource,
+                               MemoryTelemetry* telemetry) noexcept
     : capacity_(capacity),
       backing_alignment_(backing_alignment),
-      owner_thread_(std::this_thread::get_id()) {
+      owner_thread_(std::this_thread::get_id()),
+      telemetry_(telemetry) {
     if (capacity_ == 0) {
         init_error_ = ArenaError::InvalidCapacity;
         capacity_ = 0;
@@ -33,7 +37,7 @@ MonotonicArena::MonotonicArena(std::size_t capacity, std::size_t backing_alignme
     }
 
     const MemoryError error = MemoryBlock::allocate(
-        resource, capacity_, backing_alignment_, MemoryDomain::Frame, backing_);
+        resource, capacity_, backing_alignment_, MemoryDomain::Frame, backing_, telemetry_);
     if (error != MemoryError::None) {
         init_error_ = error == MemoryError::OutOfMemory ? ArenaError::OutOfMemory
                                                         : ArenaError::NotInitialized;
@@ -74,6 +78,9 @@ ArenaError MonotonicArena::allocate(std::size_t bytes, std::size_t alignment,
         out.offset = aligned;
         offset_ = aligned + bytes;
         high_water_ = std::max(high_water_, offset_);
+        if (telemetry_ != nullptr) {
+            telemetry_->record_arena_slice(bytes, high_water_);
+        }
         return ArenaError::None;
     } catch (...) {
         return ArenaError::InternalFailure;
