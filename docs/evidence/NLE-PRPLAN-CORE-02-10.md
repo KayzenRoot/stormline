@@ -50,3 +50,10 @@ All package gates, code PRs and closeouts were audited `APPROVED`; no HIGH/CRITI
 ## 6. Proposed checkpoint delta (promoted only by this PR's approved merge)
 
 Record the internal CORE-02 sequence closeout, final counts, CI evidence and the explicit `NOT_QUALIFIED` boundary. Do not claim module completion, allocator winner, release, G3 clearance or license.
+
+## 7. Actual closure
+
+- [PR #489](https://github.com/KayzenRoot/stormline/pull/489) **squash-merged** as `97fbc48c2faa8b8b942420f31bd0760efe9f26b7`; audit #6997353648 **APPROVED**.
+- Final Docs Validation [44440826585](https://github.com/KayzenRoot/stormline/actions/runs/44440826585) **SUCCESS**; native CI was not triggered by this documentary diff, so the authoritative native matrix remains the `-09` run [44437799532](https://github.com/KayzenRoot/stormline/actions/runs/44437799532), **110/110** Linux/ASan and **109/109** Windows/macOS.
+- Manifest final: **722 `PLANNED_BLOCKED`, 22 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID; 80/80 module WOs BLOCKED; registry byte-identical.
+- CORE-02 remains **NOT module-qualified**; CORE-03 implementation is BLOCKED by the prerequisites listed in section 4 and requires a separate owner authorization/gate.
