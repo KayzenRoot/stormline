@@ -42,6 +42,8 @@ on:
       - 'docs/evidence/NLE-PRPLAN-CORE-02-07.md'
       - 'docs/work-orders/NLE-PRPLAN-CORE-02-08.md'
       - 'docs/evidence/NLE-PRPLAN-CORE-02-08.md'
+      - 'docs/work-orders/NLE-PRPLAN-CORE-02-09.md'
+      - 'docs/evidence/NLE-PRPLAN-CORE-02-09.md'
 
 permissions:
   contents: read
