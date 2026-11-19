@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-08 — Memory telemetry (INTERNAL_ONLY)
 
-**STATUS: EXECUTOR_READY ONLY AFTER THE GATE PR PASSES DOCS VALIDATION, PT-BR AUDIT AND SQUASH MERGE.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-08`. **Predecessor:** `-07` `COMPLETED` via PR #475. **Issue:** #19. **Base:** `dd76fceb6b9e835dd505c24a3c89065317528440`. **ADR:** [ADR-0100](../adr/0100-core-02-memory-telemetry.md). **Contract:** [core-02-memory-telemetry-v0](../contracts/core-02-memory-telemetry-v0.md).
+**STATUS: COMPLETED — implemented and merged via [PR #484](https://github.com/KayzenRoot/stormline/pull/484), merge `493fb130…`. This packet must not be re-executed; no next packet or module is authorized.** **Gate:** G6 individual + capability admission. **Formal packet:** `NLE-PRPLAN-CORE-02-08`. **Predecessor:** `-07` `COMPLETED` via PR #475. **Issue:** #19. **Base:** `dd76fceb6b9e835dd505c24a3c89065317528440`. **ADR:** [ADR-0100](../adr/0100-core-02-memory-telemetry.md). **Contract:** [core-02-memory-telemetry-v0](../contracts/core-02-memory-telemetry-v0.md).
 
 ## OBJECTIVE
 

@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-08 — Memory telemetry
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-08`. **ADR:** [ADR-0100](../adr/0100-core-02-memory-telemetry.md). **Contract:** [core-02-memory-telemetry-v0](../contracts/core-02-memory-telemetry-v0.md). **WO:** [NLE-PRPLAN-CORE-02-08](../work-orders/NLE-PRPLAN-CORE-02-08.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Formal packet:** `NLE-PRPLAN-CORE-02-08`. **ADR:** [ADR-0100](../adr/0100-core-02-memory-telemetry.md). **Contract:** [core-02-memory-telemetry-v0](../contracts/core-02-memory-telemetry-v0.md). **WO:** [NLE-PRPLAN-CORE-02-08](../work-orders/NLE-PRPLAN-CORE-02-08.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First internal memory-telemetry primitive: atomic per-domain and aggregate allocation/release/live/peak/cumulative counters, typed zero/invalid-domain/underflow rejection, and optional default-null hooks in the existing block, arena, budget and leak primitives. No global interception, pointer/call-site capture, timestamps, sampling thread, I/O/export, third-party tooling, public ABI or release.
 
@@ -8,8 +8,8 @@ First internal memory-telemetry primitive: atomic per-domain and aggregate alloc
 
 - **Gate:** [PR #483](https://github.com/KayzenRoot/stormline/pull/483) squash-merged as `21913c4029aa02a4ca991bc9e21e16aabbaf72dc`; audit #6995750093 **APPROVED** (Sonar duplication debt noted).
 - **Base:** `21913c4029aa02a4ca991bc9e21e16aabbaf72dc`.
-- **Code PR:** [PR #484](https://github.com/KayzenRoot/stormline/pull/484); implementation HEAD `3d099954e588b3da29ba6e6ace098c7cbd29dbe0`; CI and audit pending at the final documentation head.
-- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-08 --json` → `EXECUTOR_READY`, exit 0; all other IDs exit 2.
+- **Code PR:** [PR #484](https://github.com/KayzenRoot/stormline/pull/484), HEAD auditado `d720ce8…`, [auditoria pt-BR #6996326300](https://github.com/KayzenRoot/stormline/pull/484#issuecomment-6996326300) **APPROVED**; squash-merged as `493fb13041e766bbc2e94afe4354dd3fd0e212fb`.
+- **Selector:** durante a execução, `select_packet.py NLE-PRPLAN-CORE-02-08 --json` → `EXECUTOR_READY`, exit 0; após o closeout todo ID sai com 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 - **CORE-01 gap audit:** no NECESSARY executable code increment identified; remaining items require physical hardware, owner ratification of thresholds/versions, independent security/release decisions. QUAL-001/002 were not repeated.
 
@@ -54,17 +54,17 @@ No other path changed. Existing call sites remain source-compatible because ever
 
 ### Native CI (authoritative, observed)
 
-All jobs ran at implementation HEAD `3d099954e588b3da29ba6e6ace098c7cbd29dbe0`; the only subsequent delta is this Evidence Bundle text, revalidated by the PR head checks.
+All jobs ran at the final documentation HEAD `d720ce8c9dcc96d6e6a5d9b3a989cdcc8cbbc642` (and at implementation HEAD `3d09995…`); the only delta between them is this Evidence Bundle text.
 
 | Job | Runner / toolchain | Result |
 |---|---|---|
-| `docs-validation` | required G2 check | [run 44429802014](https://github.com/KayzenRoot/stormline/actions/runs/44429802014) **SUCCESS** |
+| `docs-validation` | required G2 check | [run 44431551762](https://github.com/KayzenRoot/stormline/actions/runs/44431551762) **SUCCESS** |
 | `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **105/105 CTest passed** |
 | `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **105/105 CTest passed** |
 | `windows` | windows-2025-vs2026, MSVC | **104/104 CTest passed** |
 | `macos` | macos-15-arm64, Apple clang | **104/104 CTest passed** |
 
-Native workflow run: [44429802030](https://github.com/KayzenRoot/stormline/actions/runs/44429802030) **SUCCESS**. Job IDs: Linux `135243959448`, sanitizers `135243959570`, Windows `135243959057`, macOS `135243959452`. All 6 telemetry CTests executed; previous CTests continue passing; Linux includes one additional ABI test. SonarCloud and Socket passed.
+Native workflow run: [44431551764](https://github.com/KayzenRoot/stormline/actions/runs/44431551764) **SUCCESS**. Job IDs: Linux `135249888882`, sanitizers `135249889413`, Windows `135249889175`, macOS `135249889280`. All 6 telemetry CTests executed; previous CTests continue passing; Linux includes one additional ABI test. SonarCloud and Socket passed.
 
 Docs validators: `validate_pr_plans.py` **PASS** (724 blocked, 1 ready, 19 completed, 4 approved gates), `validate_docs.py` **PASS** (992 Markdown), `validate_wo_registry.py` **PASS** (80 blocked packets), `test_validate_pr_plans.py` **70/70 OK**.
 
@@ -88,4 +88,6 @@ After an approved squash merge and readback, a separate closeout PR records the 
 
 ## 8. Actual closure
 
-Pending code PR CI, pt-BR audit, squash merge and the independent closeout PR.
+- [PR #484](https://github.com/KayzenRoot/stormline/pull/484) **squash-merged** at `2026-11-19T00:58:22Z`, merge `493fb130…`; audit #6996326300 **APPROVED**.
+- Final-head Docs Validation [44431551762](https://github.com/KayzenRoot/stormline/actions/runs/44431551762) **SUCCESS**; native [44431551764](https://github.com/KayzenRoot/stormline/actions/runs/44431551764) **SUCCESS**, **105/105 CTest** em Linux/ASan e **104/104** em Windows/macOS.
+- Packet `CORE-02-08` becomes `COMPLETED` with `github_pr=484`; manifest **724 `PLANNED_BLOCKED`, 20 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID. Global interception/export/pointer capture remain out of scope. No next packet/module authorized.
