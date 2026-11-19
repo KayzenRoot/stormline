@@ -1,46 +1,111 @@
-# CORE-02 — Dossier de decisão para qualificação de módulo
+# CORE-02 — Pacote de decisão para qualificação de módulo
 
-**Status:** `DECISION_DOSSIER / NO DECISION RATIFIED / MODULE NOT_QUALIFIED`. **Base:** `8db294b0292660ce684341209a33b9c2c1d34000`. **Módulo:** CORE-02. **Issue:** #19. **Referências:** [ADR-0004](../adr/0004-core-02-memory-policy.md), [ADR-0102](../adr/0102-core-02-internal-sequence-closeout.md), [checkpoint](../11-checkpoint.md).
+**Status:** `DECISION_PACKAGE / NO DECISION RATIFIED / MODULE NOT_QUALIFIED`. **Base:** `cd2e6f77a4ede2a47fc64229686c061d5e24ece1`. **Módulo:** CORE-02. **Issue:** #19. **Referências:** [ADR-0004](../adr/0004-core-02-memory-policy.md), [ADR-0102](../adr/0102-core-02-internal-sequence-closeout.md), [checkpoint](../11-checkpoint.md).
 
-## 1. Estado atual comprovado
+## 1. Estado comprovado
 
-- `CORE-02-03..09` concluídos e auditados; `-10` encerrou a sequência interna como documentário.
-- Última matriz nativa: **110/110** Linux e Linux ASan/UBSan, **109/109** Windows e macOS, no HEAD de `-09`.
-- Implementado: `MemoryBlock`, `SystemMemoryResource` (baseline new/delete), `MonotonicArena`, `MemoryBudget`, `LeakTracker` explícito e `MemoryTelemetry` opt-in.
-- Não implementado/qualificado: allocator comparison/selection, process-wide leak detection, telemetry export, SMF/reclaim, physical RSS/VRAM/fragmentation metrics, p95/RSS thresholds, ABI, license, release.
-- ADR-0004 continua `PROPOSED`; NLE-D009 `OPEN`; G3 global `NOT_CLEARED`; `engine_implemented=false`.
+- `CORE-02-03..09` concluídos/auditados; `-10` encerrou a sequência interna como documentário.
+- Última matriz nativa: **110/110** Linux e Linux ASan/UBSan; **109/109** Windows e macOS, no HEAD de `-09`.
+- Implementado: `MemoryBlock` ownership, `SystemMemoryResource` baseline, `MonotonicArena`, `MemoryBudget`, `LeakTracker` explícito e `MemoryTelemetry` opt-in.
+- Não qualificado: allocator comparison/selection, process-wide leak detection, telemetry export, SMF/reclaim, RSS/VRAM/fragmentação física, p95/RSS thresholds, ABI, licença e release.
+- ADR-0004 `PROPOSED`; NLE-D009 `OPEN`; G3 global `NOT_CLEARED`; `engine_implemented=false`.
 
-## 2. Decisões materiais necessárias (nenhuma pré-ratificada)
+## 2. Q1 — Ratificação da ADR-0004
 
-| ID | Decisão | Opções mínimas | Evidência necessária antes de ratificar | Consequência se não decidida |
-|---|---|---|---|---|
-| Q1 | Ratificar ADR-0004 como política de memória | (a) aprovar como direção de planejamento; (b) manter PROPOSED | auditoria do texto e confirmação de que não seleciona allocator/release | CORE-02 permanece sem política canônica |
-| Q2 | Estratégia de allocator | (a) manter somente baseline `std::pmr`/new-delete; (b) trial mimalloc 3.x + rpmalloc; (c) outro | versões/digests/licenças, benchmark em hardware aprovado, ASan/UBSan, cross-thread frees, OOM, ABI de plugin | nenhuma comparação/vencedor pode ser declarado |
-| Q3 | Thresholds quantitativos | definir p50/p95/p99, RSS, overhead, fragmentation e low-RAM tiers | metodologia, hardware, amostras, noise, baseline | nenhum PASS de performance ou budget físico |
-| Q4 | Matriz física | Windows 11 25H2 x64, Ubuntu 24.04 x64, macOS 15 arm64; opcionais Intel/Windows ARM64 | máquinas aprovadas, versões, drivers, recibos | G3 physical e qualificação de módulo bloqueados |
-| Q5 | Leak/telemetria de escopo | (a) manter explícito/opt-in; (b) autorizar interceptação/export | desenho de segurança, overhead, privacidade, testes | process-wide leak / export permanecem NOT_QUALIFIED |
-| Q6 | Revisão de segurança | (a) auditoria independente; (b) segundo mecanismo determinístico aprovado | escopo, evidência, ausência de HIGH/CRITICAL | release/qualificação de segurança bloqueados |
-| Q7 | Licença do código | decidir NLE-D009 | decisão explícita do proprietário; compatibilidade de terceiros | release/distribuição bloqueados |
-| Q8 | Release class / aceitação do módulo | `INTERNAL_ONLY` ou classe superior | DoD, gates, evidência física/segurança | módulo não pode ser declarado completo |
+**Pergunta:** a ADR-0004 deve ser ratificada como política de memória do CORE-02?
 
-## 3. Protocolo mínimo proposto para Q2/Q3 (não executado)
+| Opção | Conteúdo | Trade-offs | Risco |
+|---|---|---|---|
+| A (recomendada) | Ratificar **somente como direção de planejamento**: `std::pmr` explícito, baseline de sistema/fallback, arenas limitadas, SMF como pesquisa, sem selecionar allocator/threshold/release | Consolida a política já usada pelo código; não antecipa decisões materiais | Baixo, desde que o texto exclua implementação/release |
+| B | Manter `PROPOSED` até benchmark físico | Nenhum risco de interpretação; mantém CORE-02 sem política canônica | Bloqueia indefinidamente a qualificação |
+| C | Ratificar como política de implementação/release | Permitiria alegar decisão tecnológica sem evidência | Alto; rejeitada |
 
-1. Definir workloads reproduzíveis: blocos de tamanhos variados, arena slices, budgets, leak tokens, alocação concorrente e carga de streaming/asset simulada.
-2. Medir baseline `SystemMemoryResource`, `std::pmr` default, `new/delete`, `malloc/free` e candidatos aprovados com versões/digests fixados.
-3. Registrar p50/p95/p99, RSS, pico, retenção, fragmentação estimada (quando houver estimador definido), overhead de telemetria e falhas OOM.
-4. Executar sanitizers disponíveis, cross-thread free, double-free, UAF, over-alignment, capacity/overflow e recuperação.
-5. Repetir em hardware aprovado por SO; CI hospedado não é prova de performance física.
-6. Auditar licenças, notices e advisories antes de qualquer venda/embutimento.
-7. Não declarar vencedor sem comparação estatística e sem decisão explícita do proprietário.
+**Recomendação:** opção A, com texto que exclua explicitamente allocator, SMF, thresholds, G3, release e licença.
 
-## 4. Sequência recomendada
+**Texto exato para ratificação:**
+> RATIFICO a ADR-0004 exclusivamente como direção de planejamento da política de memória do CORE-02, preservando `std::pmr` explícito, baseline de sistema/fallback e arenas limitadas. Esta ratificação não seleciona allocator de terceiro, não aprova SMF, thresholds, G3, release class, NLE-D009 ou distribuição, e não autoriza código além das WOs já aprovadas.
 
-1. Proprietário ratifica ou rejeita Q1 (ADR-0004) e Q2 (estratégia de allocator).
-2. Se Q2 = trial, autorizar WO de benchmark/qualificação com candidatos e licenças pinadas.
-3. Definir Q3/Q4 com hardware e thresholds explícitos; executar a campanha.
-4. Resolver Q5/Q6/Q7; somente então Q8 e eventual declaração de módulo.
-5. CORE-03 permanece bloqueado até Q1/Q2/Q8 e dependência formal estarem satisfeitos.
+## 3. Q2 — Estratégia de allocator
 
-## 5. Limites deste documento
+**Pergunta:** qual estratégia de allocator deve orientar a qualificação?
 
-Este dossier **não** aprova ADR-0004, não escolhe allocator, não fixa thresholds, não declara leak-free, não altera G3, NLE-D009, registry, release class ou checkpoint. Nenhum código é produzido ou autorizado por este texto. A decisão continua exclusiva do proprietário.
+| Opção | Conteúdo | Vantagens | Riscos/custos |
+|---|---|---|---|
+| A | Somente baseline (`SystemMemoryResource`/`new/delete`/`std::pmr`) | Zero dependência nova; ABI/CRT simples; já implementado | Pode não atender metas futuras de tail latency; não cumpre sozinho “comparar allocators” |
+| B (recomendada) | Baseline permanece default; autorizar **somente harness isolado** para mimalloc 3.x e rpmalloc | Comparação controlada sem override global; evidência antes de escolha | Exige versões/digests/licenças/advisories, hardware e metodologia |
+| C | Selecionar mimalloc agora | Potencial performance | Sem benchmark/licença/ABI; rejeitada |
+| D | Selecionar rpmalloc agora | Potencial performance | Sem benchmark/licença/ABI; rejeitada |
+| E | Allocator proprietário/SMF agora | Controle | Pesquisa sem evidência; rejeitada |
+
+**Evidência mínima para trial:** versões/digests e licenças fixados; benchmark em hardware Q4; ASan/UBSan/TSan quando suportado; UAF/double-free/cross-thread/OOM/over-alignment; p50/p95/p99/RSS; nenhum tipo de terceiro na API; sem override global.
+
+**Recomendação:** opção B, com baseline como default e nenhum vencedor declarado antes de Q3/Q4.
+
+**Texto exato para ratificação:**
+> RATIFICO a estratégia de allocator do CORE-02: `SystemMemoryResource`/`std::pmr` permanece o default e fallback; autorizo somente um harness de benchmark isolado para mimalloc 3.x e rpmalloc, com versões, digests, licenças e advisories fixados, sem override global, sem ABI pública e sem integração de produção. Nenhum allocator de terceiro será selecionado como default antes de Q3/Q4 e de nova ratificação explícita.
+
+## 4. Q3 — Thresholds quantitativos
+
+**Pergunta:** quais números usar como PASS/FAIL?
+
+| Opção | Conteúdo | Consequência |
+|---|---|---|
+| A (recomendada) | `REPORT_ONLY`: registrar p50/p95/p99, RSS, overhead e churn sem threshold | Evita inventar metas; permite qualificação metodológica |
+| B | Thresholds provisórios agora | Exigiria números não calibrados; risco de falso PASS/FAIL |
+| C | Sem medição | Não qualifica |
+
+**Recomendação:** A até Q4 e ratificação numérica separada. Nenhum limite p95/RSS/fragmentação é aprovado por este pacote.
+
+**Texto exato para ratificação:**
+> RATIFICO que Q3 permanece `REPORT_ONLY`: nenhum threshold de p50/p95/p99, RSS, overhead, fragmentação ou alocação por frame será usado como PASS/FAIL até a matriz física Q4 e uma ratificação numérica separada. As medições serão registradas com metodologia, hardware e SHA.
+
+## 5. Q4 — Matriz física
+
+**Pergunta:** onde executar a qualificação de performance/memória?
+
+| Opção | Conteúdo | Limite |
+|---|---|---|
+| A | Somente CI hospedado | Não é prova física; rejeitada para performance/memória |
+| B (recomendada) | Windows 11 x64, Ubuntu 24.04 x64, macOS 15 arm64; perfis 2 vCPU/4 GiB e 4 vCPU/8 GiB, usando os pisos já ratificados G1-M04/M05 | Exige máquinas e recibos; não define hardware comercial |
+| C | Uma única máquina | Não cobre matriz obrigatória |
+
+**Recomendação:** B, reaproveitando os perfis G1-M04/M05 já ratificados, sem criar novos mínimos comerciais.
+
+**Texto exato para ratificação:**
+> RATIFICO a matriz física de qualificação CORE-02 em Windows 11 x64, Ubuntu 24.04 x64 e macOS 15 arm64, com perfis de 2 vCPU/4 GiB e 4 vCPU/8 GiB conforme G1-M04/M05. Máquinas, versões, drivers e recibos exatos serão registrados; CI hospedado não conta como prova física.
+
+## 6. Q7 — Licença
+
+**Pergunta:** escolher NLE-D009 agora?
+
+| Opção | Conteúdo | Consequência |
+|---|---|---|
+| A (recomendada) | Manter `OPEN`; qualificação interna sem distribuição | Permite avançar internamente sem decisão de licença |
+| B | Escolher licença agora | Exige decisão jurídica/owner; fora do escopo técnico |
+
+**Recomendação:** A. Nenhuma licença é escolhida por este pacote.
+
+**Texto exato para ratificação:**
+> Mantenho NLE-D009 `OPEN`; nenhuma licença de código é escolhida por este incremento. Qualificação interna não autoriza distribuição, publicação ou release; esses atos permanecem bloqueados até decisão específica.
+
+## 7. Bloco consolidado de ratificação
+
+Copie e responda explicitamente os itens desejados:
+
+```text
+Q1 = A (ADR-0004 apenas como direção de planejamento)
+Q2 = B (baseline default + harness isolado mimalloc/rpmalloc, sem seleção)
+Q3 = A (REPORT_ONLY, sem thresholds até Q4 + ratificação numérica)
+Q4 = B (matriz física G1-M04/M05: Win11 x64, Ubuntu 24.04 x64, macOS 15 arm64)
+Q7 = A (NLE-D009 permanece OPEN; sem release)
+```
+
+Qualquer item não ratificado mantém o gate correspondente bloqueado.
+
+## 8. Consequência da ratificação
+
+Com Q1/Q2/Q3/Q4/Q7 ratificados, o próximo incremento NECESSARY seria uma **WO de benchmark/qualificação CORE-02**, test-only e isolada, com harness de allocators, metodologia, hardware e evidências — sem integrar terceiro ao default e sem release. Sem essa ratificação, nenhum código novo é autorizado.
+
+## 9. Limites
+
+Este pacote não aprova ADR-0004, não escolhe allocator, não fixa thresholds, não declara leak-free, não altera G3, NLE-D009, registry, release class ou checkpoint. Nenhum código é produzido ou autorizado por este texto.
