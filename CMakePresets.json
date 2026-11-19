@@ -31,7 +31,7 @@
       "name": "core02-alloc-bench",
       "displayName": "CORE-02 isolated allocator benchmark (Release)",
       "inherits": "core01-internal-debug",
-      "binaryDir": "/build/core02-alloc-bench",
+      "binaryDir": "${sourceDir}/build/core02-alloc-bench",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "STORMLINE_CORE02_ALLOC_BENCH": "ON"

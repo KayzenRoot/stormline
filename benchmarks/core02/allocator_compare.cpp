@@ -15,7 +15,7 @@
 #include <thread>
 #include <vector>
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 #include <malloc.h>
 #endif
 
@@ -46,7 +46,7 @@ void malloc_deallocate(void*, void* pointer, std::size_t, std::size_t) {
 }
 
 void* malloc_aligned_allocate(void*, std::size_t size, std::size_t alignment) {
-#if defined(_MSC_VER)
+#if defined(_WIN32)
     return _aligned_malloc(size, alignment);
 #else
     const std::size_t rounded = (size + alignment - 1) / alignment * alignment;
@@ -55,7 +55,7 @@ void* malloc_aligned_allocate(void*, std::size_t size, std::size_t alignment) {
 }
 
 void malloc_aligned_deallocate(void*, void* pointer, std::size_t, std::size_t) {
-#if defined(_MSC_VER)
+#if defined(_WIN32)
     _aligned_free(pointer);
 #else
     std::free(pointer);
