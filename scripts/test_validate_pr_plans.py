@@ -34,7 +34,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.core02_08_activation = json.loads(v.CORE02_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core02_09_activation = json.loads(v.CORE02_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core02_10_activation = json.loads(v.CORE02_10_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.CORE02_10_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.core03_01_activation = json.loads(v.CORE03_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.CORE03_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -140,6 +141,10 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(487, core02[8]["github_pr"])
         self.assertEqual("COMPLETED", core02[9]["status"])
         self.assertEqual(489, core02[9]["github_pr"])
+        core03 = self.manifest["modules"][2]["packets"]
+        self.assertEqual("APPROVED_GOVERNANCE", core03[0]["status"])
+        self.assertEqual("PLANNED_BLOCKED", core03[1]["status"])
+        self.assertEqual("PLANNED_BLOCKED", core03[9]["status"])
         self.assertFalse(core02[2]["capability_admission"]["module_completion_claimed"])
         self.assertFalse(core02[3]["capability_admission"]["module_completion_claimed"])
 
@@ -183,7 +188,7 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["owner_authorization_ref"] = "forged"
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
         bad = copy.deepcopy(self.activation)
-        bad["risk"] = "LOW"
+        bad["risk"] = "HIGH"
         self.assertTrue(v.validate_manifest(self.manifest, self.registry, bad))
         bad = copy.deepcopy(self.activation)
         bad["source_blob_sha1"]["checkpoint"] = "bad"
@@ -229,7 +234,8 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_selector_cli_denies_all_after_core02_09_closeout(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
-        for packet_id in ("NLE-PRPLAN-CORE-02-10", "NLE-PRPLAN-CORE-02-09",
+        for packet_id in ("NLE-PRPLAN-CORE-03-01", "NLE-PRPLAN-CORE-03-02",
+                          "NLE-PRPLAN-CORE-02-10", "NLE-PRPLAN-CORE-02-09",
                           "NLE-PRPLAN-CORE-02-08", "NLE-PRPLAN-CORE-02-07",
                           "NLE-PRPLAN-CORE-02-06", "NLE-PRPLAN-CORE-02-05",
                           "NLE-PRPLAN-CORE-01-16", "NLE-PRPLAN-CORE-01-17",
@@ -300,6 +306,11 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_core02_cannot_unlock_10(self):
         def wrong(d):
             d["modules"][1]["packets"][9]["status"] = "EXECUTOR_READY"
+        self.assertTrue(self.check(wrong))
+
+    def test_core03_cannot_unlock_02(self):
+        def wrong(d):
+            d["modules"][2]["packets"][1]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
     def test_core02_activation_source_drift_denied(self):
@@ -570,16 +581,31 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertTrue(v.validate_activation(bad))
 
     def test_core02_10_activation_is_exact(self):
-        self.assertEqual("NLE-PRPLAN-CORE-02-10", self.activation["selected_packet_id"])
-        self.assertEqual("CORE-02", self.activation["module_id"])
-        self.assertEqual("STANDARD", self.activation["risk"])
+        self.assertEqual("NLE-PRPLAN-CORE-02-10", self.core02_10_activation["selected_packet_id"])
+        self.assertEqual("CORE-02", self.core02_10_activation["module_id"])
+        self.assertEqual("STANDARD", self.core02_10_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.core02_10_activation["release_class"])
+        self.assertIsInstance(self.core02_10_activation["gate_pr"], int)
+        bad = copy.deepcopy(self.core02_10_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core02_10_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.core02_10_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core03_01_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-CORE-03-01", self.activation["selected_packet_id"])
+        self.assertEqual("CORE-03", self.activation["module_id"])
+        self.assertEqual("LOW", self.activation["risk"])
         self.assertEqual("INTERNAL_ONLY", self.activation["release_class"])
         self.assertIsInstance(self.activation["gate_pr"], int)
         bad = copy.deepcopy(self.activation)
         bad["gate_pr"] = -1
         self.assertTrue(v.validate_activation(bad))
 
-    def test_core02_10_activation_source_drift_denied(self):
+    def test_core03_01_activation_source_drift_denied(self):
         bad = copy.deepcopy(self.activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
