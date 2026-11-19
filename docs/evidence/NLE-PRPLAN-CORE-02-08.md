@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-08 — Memory telemetry
 
-**Status:** `CODE_IMPLEMENTED / LOCAL_PASS / CI_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-08`. **ADR:** [ADR-0100](../adr/0100-core-02-memory-telemetry.md). **Contract:** [core-02-memory-telemetry-v0](../contracts/core-02-memory-telemetry-v0.md). **WO:** [NLE-PRPLAN-CORE-02-08](../work-orders/NLE-PRPLAN-CORE-02-08.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-08`. **ADR:** [ADR-0100](../adr/0100-core-02-memory-telemetry.md). **Contract:** [core-02-memory-telemetry-v0](../contracts/core-02-memory-telemetry-v0.md). **WO:** [NLE-PRPLAN-CORE-02-08](../work-orders/NLE-PRPLAN-CORE-02-08.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 First internal memory-telemetry primitive: atomic per-domain and aggregate allocation/release/live/peak/cumulative counters, typed zero/invalid-domain/underflow rejection, and optional default-null hooks in the existing block, arena, budget and leak primitives. No global interception, pointer/call-site capture, timestamps, sampling thread, I/O/export, third-party tooling, public ABI or release.
 
@@ -8,7 +8,7 @@ First internal memory-telemetry primitive: atomic per-domain and aggregate alloc
 
 - **Gate:** [PR #483](https://github.com/KayzenRoot/stormline/pull/483) squash-merged as `21913c4029aa02a4ca991bc9e21e16aabbaf72dc`; audit #6995750093 **APPROVED** (Sonar duplication debt noted).
 - **Base:** `21913c4029aa02a4ca991bc9e21e16aabbaf72dc`.
-- **Code PR:** pending.
+- **Code PR:** [PR #484](https://github.com/KayzenRoot/stormline/pull/484); implementation HEAD `3d099954e588b3da29ba6e6ace098c7cbd29dbe0`; CI and audit pending at the final documentation head.
 - **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-08 --json` → `EXECUTOR_READY`, exit 0; all other IDs exit 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 - **CORE-01 gap audit:** no NECESSARY executable code increment identified; remaining items require physical hardware, owner ratification of thresholds/versions, independent security/release decisions. QUAL-001/002 were not repeated.
@@ -52,17 +52,21 @@ No other path changed. Existing call sites remain source-compatible because ever
 - `python scripts/validate_pr_plans.py`: **PASS** (724 blocked, 1 ready, 19 completed, 4 approved gates).
 - `python -m unittest scripts/test_validate_pr_plans.py`: **70/70 OK**.
 
-### Native CI (authoritative, pending)
+### Native CI (authoritative, observed)
 
-To be completed at the exact PR HEAD after push:
+All jobs ran at implementation HEAD `3d099954e588b3da29ba6e6ace098c7cbd29dbe0`; the only subsequent delta is this Evidence Bundle text, revalidated by the PR head checks.
 
 | Job | Runner / toolchain | Result |
 |---|---|---|
-| `docs-validation` | required G2 check | pending |
-| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | pending |
-| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | pending |
-| `windows` | windows-2025-vs2026, MSVC | pending |
-| `macos` | macos-15-arm64, Apple clang | pending |
+| `docs-validation` | required G2 check | [run 44429802014](https://github.com/KayzenRoot/stormline/actions/runs/44429802014) **SUCCESS** |
+| `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **105/105 CTest passed** |
+| `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **105/105 CTest passed** |
+| `windows` | windows-2025-vs2026, MSVC | **104/104 CTest passed** |
+| `macos` | macos-15-arm64, Apple clang | **104/104 CTest passed** |
+
+Native workflow run: [44429802030](https://github.com/KayzenRoot/stormline/actions/runs/44429802030) **SUCCESS**. Job IDs: Linux `135243959448`, sanitizers `135243959570`, Windows `135243959057`, macOS `135243959452`. All 6 telemetry CTests executed; previous CTests continue passing; Linux includes one additional ABI test. SonarCloud and Socket passed.
+
+Docs validators: `validate_pr_plans.py` **PASS** (724 blocked, 1 ready, 19 completed, 4 approved gates), `validate_docs.py` **PASS** (992 Markdown), `validate_wo_registry.py` **PASS** (80 blocked packets), `test_validate_pr_plans.py` **70/70 OK**.
 
 ## 5. Security, licensing and limitations
 
