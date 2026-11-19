@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "CORE02_09_COMPLETED_REST_BLOCKED",
+  "status": "CORE02_10_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -583,8 +583,12 @@
             "NLE-PRPLAN-CORE-02-09"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 489,
+          "release_class": "INTERNAL_ONLY",
+          "risk": "STANDARD",
+          "approved_adr": "docs/adr/0102-core-02-internal-sequence-closeout.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-02-10-G6-ACTIVATION.md"
         }
       ],
       "plan_file": "docs/pr-plans/CORE-02.md"
