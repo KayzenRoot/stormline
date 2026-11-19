@@ -1,6 +1,6 @@
 # NLE-CORE02-ALLOC-001 — Isolated allocator benchmark
 
-**Status:** `IMPLEMENTED / LOCAL_PASS / CI_PENDING / PHYSICAL_Q4_NOT_RUN`. **WO:** [NLE-CORE02-ALLOC-001](../work-orders/NLE-CORE02-ALLOC-001.md). **ADR:** [ADR-0104](../adr/0104-core-02-allocator-benchmark.md). **Contract:** [core-02-allocator-benchmark-v0](../contracts/core-02-allocator-benchmark-v0.md). **Issue:** #19.
+**Status:** `IMPLEMENTED / LOCAL_PASS / NATIVE_CI_PASS / PHYSICAL_Q4_NOT_RUN`. **WO:** [NLE-CORE02-ALLOC-001](../work-orders/NLE-CORE02-ALLOC-001.md). **ADR:** [ADR-0104](../adr/0104-core-02-allocator-benchmark.md). **Contract:** [core-02-allocator-benchmark-v0](../contracts/core-02-allocator-benchmark-v0.md). **Issue:** #19.
 
 Optional, isolated, report-only comparison of baseline allocators with pinned mimalloc 3.7.0 and rpmalloc 2.0.1. Baseline remains default; no allocator is selected; no production target links the benchmark dependencies.
 
@@ -8,7 +8,7 @@ Optional, isolated, report-only comparison of baseline allocators with pinned mi
 
 - **Owner ratification 2026-11-19:** Q1=A, Q2=B, Q3=A, Q4=B, Q7=A.
 - **Base:** `358bca21352df5a0ccf7380c2f40472e8e8f031e`.
-- **Code PR:** pending.
+- **Code PR:** [PR #495](https://github.com/KayzenRoot/stormline/pull/495); implementation HEAD `51a2eb640a5389eb6342df2a607a52dc588c06bb`; audit pending at the final documentation head.
 - **Scope:** optional harness only; no production integration, default change, threshold, winner, release or CORE-03 change.
 
 ## 2. Dependencies and licensing
@@ -51,17 +51,41 @@ ALLOC_BENCH_OK
 
 These numbers are a single Windows MSVC local observation. They are not physical Q4 evidence, not cross-OS evidence, not a winner and not a performance PASS.
 
-## 5. Native CI (authoritative, pending)
+## 5. Native CI (authoritative, observed)
+
+Run [44520035927](https://github.com/KayzenRoot/stormline/actions/runs/44520035927) at implementation HEAD `51a2eb6…`; Docs [44520036058](https://github.com/KayzenRoot/stormline/actions/runs/44520036058) SUCCESS; all jobs SUCCESS.
 
 | Job | Runner | Result |
 |---|---|---|
-| `docs-validation` | required G2 check | pending |
-| `allocator-benchmark` | ubuntu-24.04 | pending |
-| `allocator-benchmark` | windows-2025-vs2026 | pending |
-| `allocator-benchmark` | macos-15 | pending |
-| default `linux`/`linux-sanitizers`/`windows`/`macos` | regression | pending |
+| `docs-validation` | required G2 check | SUCCESS |
+| `allocator-benchmark` | ubuntu-24.04 (GCC, 4 threads) | **PASS**, 111/111 CTest |
+| `allocator-benchmark` | windows-2025-vs2026 (MSVC, 4 threads) | **PASS**, 110/110 CTest |
+| `allocator-benchmark` | macos-15 (Clang, 3 threads) | **PASS**, 110/110 CTest |
+| `linux` | ubuntu-24.04 | SUCCESS |
+| `linux-sanitizers` | ASan/UBSan | SUCCESS |
+| `windows` | MSVC | SUCCESS |
+| `macos` | Apple clang | SUCCESS |
 
-CI runs are report-only for timing; correctness/exit status is authoritative for harness health.
+CI report-only 64-byte/1-thread samples (ns/pair, one run each; **no threshold/winner**):
+
+| Allocator | Linux GCC | Windows MSVC | macOS Clang |
+|---|---:|---:|---:|
+| malloc | 11.076 | 22.600 | 28.085 |
+| new | 13.617 | 24.233 | 25.220 |
+| pmr | 19.655 | 29.895 | 48.352 |
+| system | 16.704 | 24.688 | 34.669 |
+| mimalloc | 6.362 | 4.394 | 11.472 |
+| rpmalloc | 6.954 | 3.170 | 5.925 |
+
+All three benchmark jobs reported `ALLOC_BENCH_CORRECTNESS=PASS` and `ALLOC_BENCH_OK`.
+
+### Corrections during CI (same WO/PR)
+
+- Preset `binaryDir` expanded to `/build/...` due shell interpolation; corrected to `${sourceDir}/build/core02-alloc-bench`.
+- Windows benchmark initially selected MinGW; job now invokes the approved MSVC `vcvars64` before configure/build.
+- Ubuntu benchmark lacked X11/Wayland packages; benchmark builds SDL in console mode when the option is ON, since the harness creates no window.
+- GCC `-Werror=format` rejected `%llu` with `uint64_t`; checksum is now cast to `unsigned long long`.
+- First Windows run also exposed `std::aligned_alloc` unavailability under MinGW; Windows path now uses `_aligned_malloc`/`_aligned_free`.
 
 ## 6. Limitations
 
