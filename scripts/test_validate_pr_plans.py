@@ -143,6 +143,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(489, core02[9]["github_pr"])
         core03 = self.manifest["modules"][2]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core03[0]["status"])
+        self.assertEqual(492, core03[0]["github_pr"])
         self.assertEqual("PLANNED_BLOCKED", core03[1]["status"])
         self.assertEqual("PLANNED_BLOCKED", core03[9]["status"])
         self.assertFalse(core02[2]["capability_admission"]["module_completion_claimed"])
