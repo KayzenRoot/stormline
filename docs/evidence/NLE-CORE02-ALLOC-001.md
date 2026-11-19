@@ -1,6 +1,6 @@
 # NLE-CORE02-ALLOC-001 — Isolated allocator benchmark
 
-**Status:** `IMPLEMENTED / LOCAL_PASS / NATIVE_CI_PASS / PHYSICAL_Q4_NOT_RUN`. **WO:** [NLE-CORE02-ALLOC-001](../work-orders/NLE-CORE02-ALLOC-001.md). **ADR:** [ADR-0104](../adr/0104-core-02-allocator-benchmark.md). **Contract:** [core-02-allocator-benchmark-v0](../contracts/core-02-allocator-benchmark-v0.md). **Issue:** #19.
+**Status:** `IMPLEMENTED / LOCAL_PASS / NATIVE_CI_PASS / MERGED / PHYSICAL_Q4_NOT_RUN`. **WO:** [NLE-CORE02-ALLOC-001](../work-orders/NLE-CORE02-ALLOC-001.md). **ADR:** [ADR-0104](../adr/0104-core-02-allocator-benchmark.md). **Contract:** [core-02-allocator-benchmark-v0](../contracts/core-02-allocator-benchmark-v0.md). **Issue:** #19.
 
 Optional, isolated, report-only comparison of baseline allocators with pinned mimalloc 3.7.0 and rpmalloc 2.0.1. Baseline remains default; no allocator is selected; no production target links the benchmark dependencies.
 
@@ -8,7 +8,7 @@ Optional, isolated, report-only comparison of baseline allocators with pinned mi
 
 - **Owner ratification 2026-11-19:** Q1=A, Q2=B, Q3=A, Q4=B, Q7=A.
 - **Base:** `358bca21352df5a0ccf7380c2f40472e8e8f031e`.
-- **Code PR:** [PR #495](https://github.com/KayzenRoot/stormline/pull/495); implementation HEAD `51a2eb640a5389eb6342df2a607a52dc588c06bb`; audit pending at the final documentation head.
+- **Code PR:** [PR #495](https://github.com/KayzenRoot/stormline/pull/495), HEAD auditado `8eaec6a…`, [auditoria pt-BR #7009473387](https://github.com/KayzenRoot/stormline/pull/495#issuecomment-7009473387) **APPROVED**; squash-merged como `da50e5750e45a9201c85d473227b73e5b6ef3a40`.
 - **Scope:** optional harness only; no production integration, default change, threshold, winner, release or CORE-03 change.
 
 ## 2. Dependencies and licensing
@@ -102,3 +102,10 @@ Disable `STORMLINE_CORE02_ALLOC_BENCH` (default OFF) or revert the PR; no produc
 ## 8. Proposed checkpoint delta (promoted by independent documentation PR)
 
 Record the optional harness, pinned commits/licenses, report-only CI evidence, default regression and the explicit Q4 physical NOT_RUN boundary. Do not record an allocator winner, threshold, qualification or release.
+
+## 9. Actual closure
+
+- [PR #495](https://github.com/KayzenRoot/stormline/pull/495) **squash-merged** em `2026-11-19T12:44:21Z`, merge `da50e575…`; auditoria #7009473387 **APPROVED**.
+- CI final no HEAD `8eaec6a…`: Docs [44520628192](https://github.com/KayzenRoot/stormline/actions/runs/44520628192) SUCCESS; nativa [44520628281](https://github.com/KayzenRoot/stormline/actions/runs/44520628281) SUCCESS; `allocator-benchmark` PASS em Ubuntu GCC, Windows MSVC e macOS Clang; `linux`/`linux-sanitizers` **110/110**, `windows`/`macos` SUCCESS.
+- Default com opção OFF: **109/109** local Windows; nenhum `mimalloc`/`rpmalloc` no `_deps` default.
+- **Q4 físico permanece NOT_RUN**; nenhum vencedor, threshold, default ou qualificação de módulo. CORE-02 continua NOT_QUALIFIED; CORE-03 continua bloqueado.
