@@ -1,6 +1,6 @@
 # NLE-CORE02-ALLOC-Q4-001 — Correction Delta CD-01
 
-**Status:** `CORRECTION_IMPLEMENTED / LOCAL_PASS / CI_PENDING / Q4 STILL BLOCKED`. **Base:** `0fc1733781a3658df54bb429b7439bf1d4fda172`. **WO:** [NLE-CORE02-ALLOC-Q4-001](../work-orders/NLE-CORE02-ALLOC-Q4-001.md). **Audit referência:** PR #497, comentário #7015868526. **Issue:** #19.
+**Status:** `CORRECTION_IMPLEMENTED / LOCAL_PASS / NATIVE_CI_PASS / Q4 STILL BLOCKED`. **Base:** `0fc1733781a3658df54bb429b7439bf1d4fda172`. **WO:** [NLE-CORE02-ALLOC-Q4-001](../work-orders/NLE-CORE02-ALLOC-Q4-001.md). **Audit referência:** PR #497, comentário #7015868526. **Issue:** #19.
 
 ## 1. Scope
 
@@ -65,18 +65,20 @@ The historical raw log is preserved byte-for-byte; it was **not** rewritten. It 
 - `validate_pr_plans.py`: PASS (721 blocked, 22 completed, 5 approved gates, 0 ready).
 - No allocator default/integration, manifest, registry, G3, license or release change.
 
-## 6. Native CI (pending)
+## 6. Native CI (authoritative, observed)
 
-To be completed at the exact PR HEAD:
+Run [44573753578](https://github.com/KayzenRoot/stormline/actions/runs/44573753578) at HEAD `2998294…`; Docs [44573753458](https://github.com/KayzenRoot/stormline/actions/runs/44573753458) SUCCESS.
 
 | Job | Result |
 |---|---|
-| `docs-validation` | pending |
-| `linux` | pending |
-| `linux-sanitizers` | pending |
-| `windows` (includes `core02_q4_helper_failclosed`) | pending |
-| `macos` | pending |
-| `allocator-benchmark` (3 OS) | pending |
+| `docs-validation` | SUCCESS |
+| `linux` | **110/110 CTest PASS** |
+| `linux-sanitizers` | **110/110 CTest PASS** |
+| `windows` | **110/110 CTest PASS**, including `core02_q4_helper_failclosed` |
+| `macos` | **109/109 CTest PASS** |
+| `allocator-benchmark` | **PASS** on Ubuntu GCC, Windows MSVC and macOS Clang |
+
+The helper test ran 8 cases and reported `Q4_HELPER_TESTS_OK cases=8`. Sonar/Socket passed. This CI does not change Q4's BLOCKED status and does not satisfy physical Q4.
 
 ## 7. Limitations and next gate
 
