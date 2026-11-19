@@ -319,12 +319,21 @@ add_custom_command(TARGET stormline_core01_abi_portability_test POST_BUILD
     VERBATIM
 )
 
+add_library(stormline_core02_telemetry STATIC
+    src/stormline/core/memory/memory_telemetry.cpp
+)
+target_include_directories(stormline_core02_telemetry PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+stormline_core01_apply_options(stormline_core02_telemetry PUBLIC)
+
 add_library(stormline_core02_memory STATIC
     src/stormline/core/memory/memory_block.cpp
 )
 target_include_directories(stormline_core02_memory PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
+target_link_libraries(stormline_core02_memory PUBLIC stormline_core02_telemetry)
 stormline_core01_apply_options(stormline_core02_memory PUBLIC)
 
 add_executable(stormline_core02_memory_test
@@ -374,6 +383,7 @@ add_library(stormline_core02_budget STATIC
 target_include_directories(stormline_core02_budget PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
+target_link_libraries(stormline_core02_budget PUBLIC stormline_core02_telemetry)
 stormline_core01_apply_options(stormline_core02_budget PUBLIC)
 
 add_executable(stormline_core02_budget_test
@@ -388,6 +398,7 @@ add_library(stormline_core02_leak STATIC
 target_include_directories(stormline_core02_leak PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
+target_link_libraries(stormline_core02_leak PUBLIC stormline_core02_telemetry)
 stormline_core01_apply_options(stormline_core02_leak PUBLIC)
 
 add_executable(stormline_core02_leak_test
@@ -395,6 +406,19 @@ add_executable(stormline_core02_leak_test
 )
 target_link_libraries(stormline_core02_leak_test PRIVATE stormline_core02_leak)
 stormline_core01_apply_options(stormline_core02_leak_test PRIVATE)
+
+add_executable(stormline_core02_telemetry_test
+    tests/core/memory_telemetry_tests.cpp
+)
+target_link_libraries(stormline_core02_telemetry_test PRIVATE
+    stormline_core02_telemetry
+    stormline_core02_memory
+    stormline_core02_system_allocator
+    stormline_core02_arena
+    stormline_core02_budget
+    stormline_core02_leak
+)
+stormline_core01_apply_options(stormline_core02_telemetry_test PRIVATE)
 
 enable_testing()
 
@@ -732,6 +756,25 @@ add_test(NAME core02_leak_wrong_thread
     COMMAND stormline_core02_leak_test wrong_thread
 )
 
+add_test(NAME core02_telemetry_basic
+    COMMAND stormline_core02_telemetry_test basic
+)
+add_test(NAME core02_telemetry_invalid
+    COMMAND stormline_core02_telemetry_test invalid
+)
+add_test(NAME core02_telemetry_underflow
+    COMMAND stormline_core02_telemetry_test underflow
+)
+add_test(NAME core02_telemetry_integration
+    COMMAND stormline_core02_telemetry_test integration
+)
+add_test(NAME core02_telemetry_concurrent
+    COMMAND stormline_core02_telemetry_test concurrent
+)
+add_test(NAME core02_telemetry_benchmark
+    COMMAND stormline_core02_telemetry_test benchmark
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -825,6 +868,12 @@ set_tests_properties(
     core02_leak_token
     core02_leak_lifetime
     core02_leak_wrong_thread
+    core02_telemetry_basic
+    core02_telemetry_invalid
+    core02_telemetry_underflow
+    core02_telemetry_integration
+    core02_telemetry_concurrent
+    core02_telemetry_benchmark
     PROPERTIES TIMEOUT 180
 )
 

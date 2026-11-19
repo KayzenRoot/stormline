@@ -6,6 +6,8 @@
 
 namespace stormline::core::memory {
 
+class MemoryTelemetry;
+
 enum class BudgetStatus : std::uint8_t {
     Within,
     SoftPressure,
@@ -25,7 +27,8 @@ enum class BudgetError : std::uint8_t {
 
 class MemoryBudget final {
 public:
-    MemoryBudget(std::size_t soft_limit, std::size_t hard_limit) noexcept;
+    MemoryBudget(std::size_t soft_limit, std::size_t hard_limit,
+                 MemoryTelemetry* telemetry = nullptr) noexcept;
     ~MemoryBudget() noexcept = default;
 
     MemoryBudget(const MemoryBudget&) = delete;
@@ -47,6 +50,7 @@ private:
     std::size_t hard_limit_{0};
     std::size_t used_{0};
     std::thread::id owner_thread_;
+    MemoryTelemetry* telemetry_{nullptr};
     BudgetError init_error_{BudgetError::None};
 };
 

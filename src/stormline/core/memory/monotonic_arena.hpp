@@ -34,7 +34,8 @@ public:
 
     explicit MonotonicArena(std::size_t capacity = default_capacity,
                             std::size_t backing_alignment = default_backing_alignment,
-                            std::pmr::memory_resource* resource = nullptr) noexcept;
+                            std::pmr::memory_resource* resource = nullptr,
+                            MemoryTelemetry* telemetry = nullptr) noexcept;
     ~MonotonicArena() noexcept = default;
 
     MonotonicArena(const MonotonicArena&) = delete;
@@ -58,6 +59,7 @@ private:
     std::size_t high_water_{0};
     std::size_t backing_alignment_{default_backing_alignment};
     std::thread::id owner_thread_;
+    MemoryTelemetry* telemetry_{nullptr};
     ArenaError init_error_{ArenaError::None};
 };
 
