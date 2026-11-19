@@ -86,3 +86,9 @@ The helper test ran 8 cases and reported `Q4_HELPER_TESTS_OK cases=8`. Sonar/Soc
 - Affinity is post-start readback; measurements are approximations, not affinity-from-start proof.
 - No allocator selected, no threshold/ranking, no production change, CORE-02 NOT_QUALIFIED, CORE-03 blocked.
 - Next gate requires owner-provided/authorized physical hosts and exact profiles, or an express ratification of a constrained-profile methodology with hard memory cap; numerical thresholds/allocator selection require separate ratification.
+
+## 8. Actual closure
+
+- [PR #499](https://github.com/KayzenRoot/stormline/pull/499) **squash-merged** em `2026-11-19T17:26:01Z` como `820d189f…`; auditoria #7016705644 **APPROVED**.
+- Final-head Docs Validation [44575586994](https://github.com/KayzenRoot/stormline/actions/runs/44575586994) SUCCESS; nativa [44575587518](https://github.com/KayzenRoot/stormline/actions/runs/44575587518) SUCCESS, com `core02_q4_helper_failclosed` no Windows e `allocator-benchmark` nos três SO.
+- Q4 permanece BLOCKED; nenhum allocator selecionado, threshold ou integração; CORE-02 NOT_QUALIFIED; CORE-03 bloqueado.
