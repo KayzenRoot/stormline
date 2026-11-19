@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-02-09 — Integrated memory qualification
 
-**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / AUDIT_PENDING`. **Formal packet:** `NLE-PRPLAN-CORE-02-09`. **ADR:** [ADR-0101](../adr/0101-core-02-integrated-memory-qualification.md). **Contract:** [core-02-integrated-memory-qualification-v0](../contracts/core-02-integrated-memory-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-02-09](../work-orders/NLE-PRPLAN-CORE-02-09.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
+**Status:** `CODE_IMPLEMENTED / NATIVE_CI_PASS / MERGED`. **Formal packet:** `NLE-PRPLAN-CORE-02-09`. **ADR:** [ADR-0101](../adr/0101-core-02-integrated-memory-qualification.md). **Contract:** [core-02-integrated-memory-qualification-v0](../contracts/core-02-integrated-memory-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-02-09](../work-orders/NLE-PRPLAN-CORE-02-09.md). **Issue:** [#19](https://github.com/KayzenRoot/stormline/issues/19).
 
 Test-only integrated qualification of the CORE-02 internal memory primitives: deterministic integrated workload, 10,000-iteration mixed stress, overflow/recovery paths, 2,000+ size churn and report-only benchmark. No production API, threshold, fragmentation estimator, OS RSS/VRAM, allocator selection, global interception, public ABI or release.
 
@@ -8,8 +8,8 @@ Test-only integrated qualification of the CORE-02 internal memory primitives: de
 
 - **Gate:** [PR #486](https://github.com/KayzenRoot/stormline/pull/486) squash-merged as `6503dfb0e651f6466bc4e58175546edf51d00754`; audit #6996618512 **APPROVED** (Sonar duplication debt noted).
 - **Base:** `6503dfb0e651f6466bc4e58175546edf51d00754`.
-- **Code PR:** [PR #487](https://github.com/KayzenRoot/stormline/pull/487); implementation HEAD `df0fa0b42952c7e2d716d73333e5cb2923688611`; CI and audit pending at the final documentation head.
-- **Selector:** during execution, `select_packet.py NLE-PRPLAN-CORE-02-09 --json` → `EXECUTOR_READY`, exit 0; all other IDs exit 2.
+- **Code PR:** [PR #487](https://github.com/KayzenRoot/stormline/pull/487), HEAD auditado `1e6cf96…`, [auditoria pt-BR #6997074860](https://github.com/KayzenRoot/stormline/pull/487#issuecomment-6997074860) **APPROVED**; squash-merged as `46a724834da8821ff612250e33bb4e94b6fd12b9`.
+- **Selector:** durante a execução, `select_packet.py NLE-PRPLAN-CORE-02-09 --json` → `EXECUTOR_READY`, exit 0; após o closeout todo ID sai com 2.
 - **Capability admission:** `CORE-01-03/-06/-07/-08` completed; formal CORE-01 dependency retained; no module completion claim.
 
 ## 2. Implemented qualification
@@ -46,17 +46,17 @@ No other path changed; no production code, dependencies, ADR, contract, manifest
 
 ### Native CI (authoritative, observed)
 
-All jobs ran at implementation HEAD `df0fa0b42952c7e2d716d73333e5cb2923688611`; the only subsequent delta is this Evidence Bundle text, revalidated by the PR head checks.
+All jobs ran at the final documentation HEAD `1e6cf96cb2049ded6183169ad61bf68b22c85095` (and at implementation HEAD `df0fa0b…`); the only delta between them is this Evidence Bundle text.
 
 | Job | Runner / toolchain | Result |
 |---|---|---|
-| `docs-validation` | required G2 check | [run 44435872510](https://github.com/KayzenRoot/stormline/actions/runs/44435872510) **SUCCESS** |
+| `docs-validation` | required G2 check | [run 44437799567](https://github.com/KayzenRoot/stormline/actions/runs/44437799567) **SUCCESS** |
 | `linux` | ubuntu-24.04, GCC, X11 via Xvfb/openbox | **110/110 CTest passed** |
 | `linux-sanitizers` | ubuntu-24.04, ASan/UBSan | **110/110 CTest passed** |
 | `windows` | windows-2025-vs2026, MSVC | **109/109 CTest passed** |
 | `macos` | macos-15-arm64, Apple clang | **109/109 CTest passed** |
 
-Native workflow run: [44435872397](https://github.com/KayzenRoot/stormline/actions/runs/44435872397) **SUCCESS**. Job IDs: Linux `135264469315`, sanitizers `135264468862`, Windows `135264468165`, macOS `135264468553`. All 5 qualification CTests executed; previous CTests continue passing; Linux includes one additional ABI test. SonarCloud and Socket passed.
+Native workflow run: [44437799532](https://github.com/KayzenRoot/stormline/actions/runs/44437799532) **SUCCESS**. Job IDs: Linux `135270916374`, sanitizers `135270916425`, Windows `135270916308`, macOS `135270915972`. All 5 qualification CTests executed; previous CTests continue passing; Linux includes one additional ABI test. SonarCloud and Socket passed.
 
 Docs validators: `validate_pr_plans.py` **PASS** (723 blocked, 1 ready, 20 completed, 4 approved gates), `validate_docs.py` **PASS** (997 Markdown), `validate_wo_registry.py` **PASS** (80 blocked packets), `test_validate_pr_plans.py` **72/72 OK**.
 
@@ -79,4 +79,6 @@ After an approved squash merge and readback, a separate closeout PR records the 
 
 ## 8. Actual closure
 
-Pending code PR CI, pt-BR audit, squash merge and the independent closeout PR.
+- [PR #487](https://github.com/KayzenRoot/stormline/pull/487) **squash-merged** at `2026-11-19T01:42:33Z`, merge `46a72483…`; audit #6997074860 **APPROVED**.
+- Final-head Docs Validation [44437799567](https://github.com/KayzenRoot/stormline/actions/runs/44437799567) **SUCCESS**; native [44437799532](https://github.com/KayzenRoot/stormline/actions/runs/44437799532) **SUCCESS**, **110/110 CTest** em Linux/ASan e **109/109** em Windows/macOS.
+- Packet `CORE-02-09` becomes `COMPLETED` with `github_pr=487`; manifest **723 `PLANNED_BLOCKED`, 21 `COMPLETED`, 4 approved gates, 0 `EXECUTOR_READY`**; selector denies every ID. Threshold/fragmentation/OS-memory/allocator claims remain out of scope. No next packet/module authorized.
