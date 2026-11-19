@@ -26,6 +26,16 @@
       "cacheVariables": {
         "STORMLINE_CORE01_ENABLE_SANITIZERS": "ON"
       }
+    },
+    {
+      "name": "core02-alloc-bench",
+      "displayName": "CORE-02 isolated allocator benchmark (Release)",
+      "inherits": "core01-internal-debug",
+      "binaryDir": "${sourceDir}/build/core02-alloc-bench",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "STORMLINE_CORE02_ALLOC_BENCH": "ON"
+      }
     }
   ],
   "buildPresets": [
@@ -36,6 +46,10 @@
     {
       "name": "core01-internal-asan",
       "configurePreset": "core01-internal-asan"
+    },
+    {
+      "name": "core02-alloc-bench",
+      "configurePreset": "core02-alloc-bench"
     }
   ],
   "testPresets": [

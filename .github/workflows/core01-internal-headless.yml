@@ -10,6 +10,7 @@ on:
     paths:
       - 'src/stormline/core/internal/**'
       - 'src/stormline/core/memory/**'
+      - 'benchmarks/core02/**'
       - 'tests/core/**'
       - 'CMakeLists.txt'
       - 'CMakePresets.json'
@@ -44,6 +45,8 @@ on:
       - 'docs/evidence/NLE-PRPLAN-CORE-02-08.md'
       - 'docs/work-orders/NLE-PRPLAN-CORE-02-09.md'
       - 'docs/evidence/NLE-PRPLAN-CORE-02-09.md'
+      - 'docs/work-orders/NLE-CORE02-ALLOC-001.md'
+      - 'docs/evidence/NLE-CORE02-ALLOC-001.md'
 
 permissions:
   contents: read
@@ -200,6 +203,40 @@ jobs:
           cmake --build --preset core01-internal-asan
           ctest --preset core01-internal-asan --output-on-failure
           kill "$xvfb_pid" || true
+
+  allocator-benchmark:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+          - runner: windows-2025-vs2026
+          - runner: macos-15
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Configure, build and run (Windows MSVC)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          if errorlevel 1 exit /b 1
+          cmake --preset core02-alloc-bench
+          if errorlevel 1 exit /b 1
+          cmake --build --preset core02-alloc-bench --target stormline_core02_allocator_bench
+          if errorlevel 1 exit /b 1
+          ctest --test-dir build/core02-alloc-bench -R core02_allocator_bench -V
+      - name: Configure, build and run (Linux/macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmake --preset core02-alloc-bench
+          cmake --build --preset core02-alloc-bench --target stormline_core02_allocator_bench
+          ctest --test-dir build/core02-alloc-bench -R core02_allocator_bench -V
 
   windows:
     runs-on: windows-2025-vs2026
