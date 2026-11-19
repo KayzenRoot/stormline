@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-CORE-02-08",
+  "module_id": "CORE-02",
+  "risk": "STANDARD",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-18/core01-core02-core03-continuous",
+  "approved_adr": "docs/adr/0100-core-02-memory-telemetry.md",
+  "approved_contract": "docs/contracts/core-02-memory-telemetry-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-CORE-02-08.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-02-08-G6-ACTIVATION.md",
+  "gate_base_sha": "dd76fceb6b9e835dd505c24a3c89065317528440",
+  "gate_pr": 0,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "CORE-01",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
+      {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
+      {"id": "CORE01_SDL3_BUILD_BASELINE", "satisfied_by": "NLE-PRPLAN-CORE-01-07"},
+      {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"}
+    ],
+    "not_required": [
+      "window_runtime", "input", "dpi", "ime", "hotplug", "sleep_resume",
+      "soak", "renderer", "gpu", "audio", "network", "public_abi", "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "102fa61f64c084db3c7470b024fbb064b8793770",
+    "decisions_ledger": "01aa967790dc1ea5e72c2ebebae7b832ec579981",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0004": "e6c1639a96d6d484385476358bde50b38cc5b2ec",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0087": "fb93a02bc07c8ecfdc70953aff33783d508ef1e2",
+    "adr_0099": "fabde826cc64b5f6661c64b49bb2ae7f1e64d2e1",
+    "adr_0100": "74d30c49bf2fccc10699116bca29d29aeff3b064",
+    "core02_architecture": "f2b531fc1d2814d51ce59a136ed60320343a5625",
+    "core02_ownership_contract": "897546dab541cab50a0c5d9f4ec1b7a0c5ef360f",
+    "core02_system_contract": "658e2384ba357a3af03123e08d11902ebcf2d3e6",
+    "core02_arena_contract": "26daed9e9ff6ef2b5a1f8d10de007059ef915882",
+    "core02_budget_contract": "708ec2c47fcd51a69973869f86d5c693bceddb39",
+    "core02_leak_contract": "fea0dc6676e66fc01466e889effd24607361cc30",
+    "core02_telemetry_contract": "cc91b0abf31b46dbb52b574c5a0eb33f4446159a",
+    "core01_headless_contract": "4ea41263bcfd412ca35df2abb32a158706b64e48",
+    "core01_paths_contract": "e551ad7b3c8112f79b88a65c33050059762b71fc",
+    "core01_sdl3_contract": "841bff9de1caa9f8d995599a02d46ba7bf0ff470",
+    "core01_window_contract": "5bf7eaee2d0aea3f0dc4cc89a419f79f8442b479",
+    "core02_plan": "93ae6a8e2d5fa354604a57dc19ef5d17ba750689",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}
