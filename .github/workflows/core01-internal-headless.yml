@@ -10,6 +10,7 @@ on:
     paths:
       - 'src/stormline/core/internal/**'
       - 'src/stormline/core/memory/**'
+      - 'benchmarks/core02/**'
       - 'tests/core/**'
       - 'CMakeLists.txt'
       - 'CMakePresets.json'
@@ -44,6 +45,8 @@ on:
       - 'docs/evidence/NLE-PRPLAN-CORE-02-08.md'
       - 'docs/work-orders/NLE-PRPLAN-CORE-02-09.md'
       - 'docs/evidence/NLE-PRPLAN-CORE-02-09.md'
+      - 'docs/work-orders/NLE-CORE02-ALLOC-001.md'
+      - 'docs/evidence/NLE-CORE02-ALLOC-001.md'
 
 permissions:
   contents: read
@@ -200,6 +203,27 @@ jobs:
           cmake --build --preset core01-internal-asan
           ctest --preset core01-internal-asan --output-on-failure
           kill "$xvfb_pid" || true
+
+  allocator-benchmark:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+          - runner: windows-2025-vs2026
+          - runner: macos-15
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Configure isolated allocator benchmark
+        run: cmake --preset core02-alloc-bench
+      - name: Build isolated allocator benchmark
+        run: cmake --build --preset core02-alloc-bench --target stormline_core02_allocator_bench
+      - name: Run report-only allocator benchmark
+        run: ctest --test-dir build/core02-alloc-bench -R core02_allocator_bench -V
 
   windows:
     runs-on: windows-2025-vs2026

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.27)
 project(stormline_core01_internal LANGUAGES C CXX)
 
 option(STORMLINE_CORE01_ENABLE_SANITIZERS "Enable ASan/UBSan for the internal CORE-01 slice" OFF)
+option(STORMLINE_CORE02_ALLOC_BENCH "Build the optional isolated CORE-02 allocator benchmark" OFF)
 
 function(stormline_core01_apply_options target scope)
     target_compile_features(${target} ${scope} cxx_std_20)
@@ -407,6 +408,69 @@ add_executable(stormline_core02_leak_test
 target_link_libraries(stormline_core02_leak_test PRIVATE stormline_core02_leak)
 stormline_core01_apply_options(stormline_core02_leak_test PRIVATE)
 
+if(STORMLINE_CORE02_ALLOC_BENCH)
+    find_package(Threads REQUIRED)
+
+    # Optional, isolated benchmark dependencies. Never linked into production
+    # engine targets and never allowed to override global allocation.
+    set(MI_OVERRIDE OFF CACHE BOOL "" FORCE)
+    set(MI_BUILD_SHARED OFF CACHE BOOL "" FORCE)
+    set(MI_BUILD_STATIC ON CACHE BOOL "" FORCE)
+    set(MI_BUILD_OBJECT OFF CACHE BOOL "" FORCE)
+    set(MI_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(MI_OSX_INTERPOSE OFF CACHE BOOL "" FORCE)
+    set(MI_OSX_ZONE OFF CACHE BOOL "" FORCE)
+    set(MI_WIN_REDIRECT OFF CACHE BOOL "" FORCE)
+    set(MI_STATS OFF CACHE STRING "" FORCE)
+    set(MI_PROFILE OFF CACHE STRING "" FORCE)
+    set(MI_USE_CXX OFF CACHE STRING "" FORCE)
+    FetchContent_Declare(
+        mimalloc
+        GIT_REPOSITORY https://github.com/microsoft/mimalloc.git
+        GIT_TAG 1ed67b5156a763441d2ec3c20221a7b3cd866129
+        GIT_SHALLOW FALSE
+    )
+    FetchContent_MakeAvailable(mimalloc)
+
+    FetchContent_Declare(
+        rpmalloc
+        GIT_REPOSITORY https://github.com/mjansson/rpmalloc.git
+        GIT_TAG beef233c176b235587c0145f765e4316e5ca60d1
+        GIT_SHALLOW FALSE
+    )
+    FetchContent_MakeAvailable(rpmalloc)
+    add_library(stormline_rpmalloc STATIC
+        "${rpmalloc_SOURCE_DIR}/rpmalloc/rpmalloc.c"
+    )
+    target_include_directories(stormline_rpmalloc PUBLIC
+        "${rpmalloc_SOURCE_DIR}/rpmalloc"
+    )
+    target_compile_definitions(stormline_rpmalloc PRIVATE ENABLE_OVERRIDE=0)
+    set_target_properties(stormline_rpmalloc PROPERTIES
+        C_STANDARD 11
+        C_STANDARD_REQUIRED YES
+    )
+    if(MSVC)
+        target_compile_options(stormline_rpmalloc PRIVATE /experimental:c11atomics)
+    endif()
+    target_link_libraries(stormline_rpmalloc PUBLIC Threads::Threads)
+
+    add_executable(stormline_core02_allocator_bench
+        benchmarks/core02/allocator_compare.cpp
+    )
+    target_include_directories(stormline_core02_allocator_bench PRIVATE
+        "${rpmalloc_SOURCE_DIR}/rpmalloc"
+    )
+    target_link_libraries(stormline_core02_allocator_bench PRIVATE
+        stormline_core02_memory
+        stormline_core02_system_allocator
+        mimalloc-static
+        stormline_rpmalloc
+        Threads::Threads
+    )
+    stormline_core01_apply_options(stormline_core02_allocator_bench PRIVATE)
+endif()
+
 add_executable(stormline_core02_telemetry_test
     tests/core/memory_telemetry_tests.cpp
 )
@@ -803,6 +867,13 @@ add_test(NAME core02_qualification_size_churn
 add_test(NAME core02_qualification_benchmark
     COMMAND stormline_core02_qualification_test benchmark
 )
+
+if(STORMLINE_CORE02_ALLOC_BENCH)
+    add_test(NAME core02_allocator_bench
+        COMMAND stormline_core02_allocator_bench full
+    )
+    set_tests_properties(core02_allocator_bench PROPERTIES TIMEOUT 300)
+endif()
 
 set_tests_properties(
     core01_headless_lifecycle
