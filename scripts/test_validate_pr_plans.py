@@ -139,6 +139,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual("COMPLETED", core02[8]["status"])
         self.assertEqual(487, core02[8]["github_pr"])
         self.assertEqual("COMPLETED", core02[9]["status"])
+        self.assertEqual(489, core02[9]["github_pr"])
         self.assertFalse(core02[2]["capability_admission"]["module_completion_claimed"])
         self.assertFalse(core02[3]["capability_admission"]["module_completion_claimed"])
 

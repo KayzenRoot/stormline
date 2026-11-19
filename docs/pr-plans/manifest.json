@@ -584,7 +584,7 @@
           ],
           "requires_modules_merged": [],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 489,
           "release_class": "INTERNAL_ONLY",
           "risk": "STANDARD",
           "approved_adr": "docs/adr/0102-core-02-internal-sequence-closeout.md",

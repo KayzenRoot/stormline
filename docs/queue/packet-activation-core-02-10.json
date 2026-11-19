@@ -11,7 +11,7 @@
   "work_order": "docs/work-orders/NLE-PRPLAN-CORE-02-10.md",
   "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-02-10-G6-ACTIVATION.md",
   "gate_base_sha": "3ad22f34167d76e31a9c88d8ca2a7f27a3a5a73c",
-  "gate_pr": 0,
+  "gate_pr": 489,
   "requires_fresh_context_lock": true,
   "source_blob_sha1": {
     "checkpoint": "a0f4d69dfa4fe494191f04269c5eb31053e99ce9",
