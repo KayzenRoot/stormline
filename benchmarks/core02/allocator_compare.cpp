@@ -288,7 +288,8 @@ bool run_bench(const std::vector<Allocator>& allocators, bool multithread) {
                 std::printf("ALLOC_BENCH allocator=%s size=%zu threads=%d "
                             "ns_per_pair=%.3f checksum=%llu\n",
                             allocator.name, size, thread_count,
-                            total_ns / static_cast<double>(thread_count), checksum);
+                            total_ns / static_cast<double>(thread_count),
+                            static_cast<unsigned long long>(checksum));
             }
         }
     }
