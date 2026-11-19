@@ -490,6 +490,13 @@ target_link_libraries(stormline_core02_telemetry_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core02_telemetry_test PRIVATE)
 
+if(WIN32)
+    add_executable(stormline_core02_fake_allocator_bench
+        tests/core/fake_allocator_bench.cpp
+    )
+    stormline_core01_apply_options(stormline_core02_fake_allocator_bench PRIVATE)
+endif()
+
 add_executable(stormline_core02_qualification_test
     tests/core/core02_memory_qualification_tests.cpp
 )
@@ -873,6 +880,15 @@ add_test(NAME core02_qualification_size_churn
 add_test(NAME core02_qualification_benchmark
     COMMAND stormline_core02_qualification_test benchmark
 )
+
+if(WIN32)
+    add_test(NAME core02_q4_helper_failclosed
+        COMMAND powershell -NoProfile -ExecutionPolicy Bypass
+            -File "${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/core02/test_run_physical_profile.ps1"
+            -FakeExecutable $<TARGET_FILE:stormline_core02_fake_allocator_bench>
+    )
+    set_tests_properties(core02_q4_helper_failclosed PROPERTIES TIMEOUT 180)
+endif()
 
 if(STORMLINE_CORE02_ALLOC_BENCH)
     add_test(NAME core02_allocator_bench

@@ -69,4 +69,13 @@ Base `28b6105…`; merged harness `#495`; no uncommitted source changes.
 
 ## EVIDENCE BUNDLE
 
-`docs/evidence/NLE-CORE02-ALLOC-Q4-001.md` plus `docs/evidence/NLE-CORE02-ALLOC-Q4-raw.log`.
+`docs/evidence/NLE-CORE02-ALLOC-Q4-001.md` plus `docs/evidence/NLE-CORE02-ALLOC-Q4-raw.txt`.
+
+## CORRECTION DELTA CD-01 — fail-closed, affinity and provenance
+
+**Base:** `0fc1733781a3658df54bb429b7439bf1d4fda172`. **Audit:** PR #497 comment #7015868526. **Status:** correction only; Q4 remains BLOCKED.
+
+- CD-01: `run_physical_profile.ps1` validates exit code, stderr, exact markers, result count and completed runs; any failure exits non-zero. Negative tests cover exit≠0, missing `ALLOC_BENCH_OK`, missing `ALLOC_BENCH_CORRECTNESS=PASS`, short results, invalid CPU/runs and missing executable.
+- CD-02: affinity is applied after `Process.Start` and the effective mask is read back; measurements are labeled `affinity_coverage=post_start_readback` and classified as approximations, not affinity-from-start proof.
+- CD-03: historical raw output is preserved byte-for-byte; old/new helper and log hashes are recorded. The original temporary helper that emitted `peak_working_set_mib=0` is not reconstructable; that field is not a memory measurement. No historical result was rewritten.
+- Deliverables: modified helper, test script, fake negative fixture, CMake test wiring and `docs/evidence/NLE-CORE02-ALLOC-Q4-001-CD-01.md`. No allocator default, manifest, registry, G3, license, release or CORE-03 change.
