@@ -420,6 +420,19 @@ target_link_libraries(stormline_core02_telemetry_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core02_telemetry_test PRIVATE)
 
+add_executable(stormline_core02_qualification_test
+    tests/core/core02_memory_qualification_tests.cpp
+)
+target_link_libraries(stormline_core02_qualification_test PRIVATE
+    stormline_core02_telemetry
+    stormline_core02_memory
+    stormline_core02_system_allocator
+    stormline_core02_arena
+    stormline_core02_budget
+    stormline_core02_leak
+)
+stormline_core01_apply_options(stormline_core02_qualification_test PRIVATE)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -775,6 +788,22 @@ add_test(NAME core02_telemetry_benchmark
     COMMAND stormline_core02_telemetry_test benchmark
 )
 
+add_test(NAME core02_qualification_integrated
+    COMMAND stormline_core02_qualification_test integrated
+)
+add_test(NAME core02_qualification_stress
+    COMMAND stormline_core02_qualification_test stress
+)
+add_test(NAME core02_qualification_recovery
+    COMMAND stormline_core02_qualification_test recovery
+)
+add_test(NAME core02_qualification_size_churn
+    COMMAND stormline_core02_qualification_test size_churn
+)
+add_test(NAME core02_qualification_benchmark
+    COMMAND stormline_core02_qualification_test benchmark
+)
+
 set_tests_properties(
     core01_headless_lifecycle
     core01_headless_errors
@@ -874,6 +903,11 @@ set_tests_properties(
     core02_telemetry_integration
     core02_telemetry_concurrent
     core02_telemetry_benchmark
+    core02_qualification_integrated
+    core02_qualification_stress
+    core02_qualification_recovery
+    core02_qualification_size_churn
+    core02_qualification_benchmark
     PROPERTIES TIMEOUT 180
 )
 
