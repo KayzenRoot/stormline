@@ -11,7 +11,7 @@
   "work_order": "docs/work-orders/NLE-PRPLAN-CORE-03-09.md",
   "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-03-09-G6-ACTIVATION.md",
   "gate_base_sha": "6a3f245b3647b4b708b239147ec3c666fa5fef2c",
-  "gate_pr": 0,
+  "gate_pr": 515,
   "requires_fresh_context_lock": true,
   "capability_admission": {
     "adr": "docs/adr/0105-core-03-limited-capability-admission.md",
