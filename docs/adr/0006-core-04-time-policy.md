@@ -1,6 +1,6 @@
 # ADR-0006 — CORE-04 Monotonic Clock and Rational Fixed-Step Timeline
 
-**Status:** PROPOSED; NOT APPROVED FOR IMPLEMENTATION  
+**Status:** OWNER-RATIFIED AS PLANNING DIRECTION ONLY per [ADR-0107](0107-core-04-governance-slice.md); implementation still requires `CORE-04-02` contract, individual G6 and owner authorization.  
 **Date:** 2026-11-14 | **WO:** NLE-P00-WO-002-CORE-04 | **Issue:** #99
 
 ## Context
