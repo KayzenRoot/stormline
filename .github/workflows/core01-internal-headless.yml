@@ -10,6 +10,7 @@ on:
     paths:
       - 'src/stormline/core/internal/**'
       - 'src/stormline/core/memory/**'
+      - 'src/stormline/core/jobs/**'
       - 'benchmarks/core02/**'
       - 'tests/core/**'
       - 'CMakeLists.txt'
@@ -47,6 +48,9 @@ on:
       - 'docs/evidence/NLE-PRPLAN-CORE-02-09.md'
       - 'docs/work-orders/NLE-CORE02-ALLOC-001.md'
       - 'docs/evidence/NLE-CORE02-ALLOC-001.md'
+      - 'docs/work-orders/NLE-PRPLAN-CORE-03-03.md'
+      - 'docs/evidence/NLE-PRPLAN-CORE-03-03.md'
+      - 'docs/evidence/NLE-PRPLAN-CORE-03-03-G6-ACTIVATION.md'
 
 permissions:
   contents: read
@@ -203,6 +207,73 @@ jobs:
           cmake --build --preset core01-internal-asan
           ctest --preset core01-internal-asan --output-on-failure
           kill "$xvfb_pid" || true
+
+  core03-tsan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install authorized Linux window dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libx11-dev \
+            libxext-dev \
+            libxrandr-dev \
+            libxcursor-dev \
+            libxfixes-dev \
+            libxi-dev \
+            libxss-dev \
+            libxtst-dev \
+            libxinerama-dev \
+            libxrender-dev \
+            libxkbcommon-dev \
+            libxkbcommon-x11-dev \
+            libwayland-dev \
+            libdecor-0-dev \
+            wayland-protocols \
+            libdbus-1-dev \
+            libibus-1.0-dev \
+            libthai-dev \
+            libfribidi-dev \
+            libgl1-mesa-dev \
+            libegl1-mesa-dev \
+            libgles2-mesa-dev \
+            xvfb \
+            x11-utils \
+            openbox
+      - name: Detect preinstalled TSan support
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          if printf 'int main() { return 0; }\n' | c++ -x c++ -std=c++20 -fsanitize=thread -o /tmp/stormline-tsan-probe - >/dev/null 2>&1; then
+            echo "supported=true" >> "$GITHUB_OUTPUT"
+            echo "TSan supported by preinstalled toolchain"
+          else
+            echo "supported=false" >> "$GITHUB_OUTPUT"
+            echo "**TSAN_NOT_QUALIFIED**: preinstalled toolchain does not support TSan; CORE-03 implementation is BLOCKED." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+      - name: Configure, build and test with ThreadSanitizer
+        if: steps.detect.outputs.supported == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          c++ --version | sed -n '1p'
+          cmake --version | sed -n '1p'
+          ninja --version
+          cmake -S . -B build/core03-tsan -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DSTORMLINE_CORE03_ENABLE_TSAN=ON
+          cmake --build build/core03-tsan --target stormline_core03_jobs_test
+          setarch "$(uname -m)" -R env TSAN_OPTIONS="halt_on_error=1 second_deadlock_stack=1" \
+            ctest --test-dir build/core03-tsan -R '^core03_' --output-on-failure
 
   allocator-benchmark:
     strategy:
