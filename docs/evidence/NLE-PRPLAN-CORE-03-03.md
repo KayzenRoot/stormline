@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-03-03 — Task graph & executor implementation evidence
 
-**Status:** `IMPLEMENTATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `6cd1e9c3962bdbd71e9fded54787842203440e95`. **Head:** `5c72cc9cb90d7702867adfb4ed5e71a21f23e23b`. **Formal packet:** `NLE-PRPLAN-CORE-03-03`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-03-task-graph-v0](../contracts/core-03-task-graph-v0.md). **ADR:** [ADR-0105](../adr/0105-core-03-limited-capability-admission.md). **WO:** [NLE-PRPLAN-CORE-03-03](../work-orders/NLE-PRPLAN-CORE-03-03.md).
+**Status:** `IMPLEMENTATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `6cd1e9c3962bdbd71e9fded54787842203440e95`. **Code head:** `d5f85463a6460e7672222f0d69b449100e3a64c1`. **Formal packet:** `NLE-PRPLAN-CORE-03-03`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-03-task-graph-v0](../contracts/core-03-task-graph-v0.md). **ADR:** [ADR-0105](../adr/0105-core-03-limited-capability-admission.md). **WO:** [NLE-PRPLAN-CORE-03-03](../work-orders/NLE-PRPLAN-CORE-03-03.md).
 
 ## Scope
 
@@ -81,7 +81,7 @@ Unmerged: close the branch/PR; `main` untouched. After merge: normal revert PR; 
 
 ## Exact-head CI
 
-Native run [44958697932](https://github.com/KayzenRoot/stormline/actions/runs/44958697932) on head `5c72cc9cb90d7702867adfb4ed5e71a21f23e23b`: **SUCCESS**.
+Native run [44958946239](https://github.com/KayzenRoot/stormline/actions/runs/44958946239) on code head `d5f85463a6460e7672222f0d69b449100e3a64c1`: **SUCCESS**.
 
 - Linux GCC: **120/120** CTest PASS, including all 10 CORE-03 tests.
 - Linux ASan/UBSan: **120/120** PASS, no sanitizer failure.
@@ -93,3 +93,5 @@ Native run [44958697932](https://github.com/KayzenRoot/stormline/actions/runs/44
 - SonarCloud and Socket Security checks: **SUCCESS**.
 
 No native PASS is claimed beyond these exact-head run IDs. Full Q4, CORE-02 module completion and release remain outside this evidence.
+
+The final evidence-wording commit is documentation-only; it changes no code, test, CMake or workflow bytes. Docs Validation is the applicable exact-head gate for that delta.
