@@ -79,3 +79,13 @@ Base `28b6105…`; merged harness `#495`; no uncommitted source changes.
 - CD-02: affinity is applied after `Process.Start` and the effective mask is read back; measurements are labeled `affinity_coverage=post_start_readback` and classified as approximations, not affinity-from-start proof.
 - CD-03: historical raw output is preserved byte-for-byte; old/new helper and log hashes are recorded. The original temporary helper that emitted `peak_working_set_mib=0` is not reconstructable; that field is not a memory measurement. No historical result was rewritten.
 - Deliverables: modified helper, test script, fake negative fixture, CMake test wiring and `docs/evidence/NLE-CORE02-ALLOC-Q4-001-CD-01.md`. No allocator default, manifest, registry, G3, license, release or CORE-03 change.
+
+## CONSTRAINED-PROFILE CAMPAIGN CD-02 — owner-ratified Q4 option B
+
+**Base:** `6de186a64cebbdbc14026d24d04ceb7f6cbae7b2`. **Ratification:** NLE-D021 / ADR-0106 (2026-11-21). **Scope:** Windows-only launcher and campaign; Ubuntu/macOS remain BLOCKED.
+
+- `benchmarks/core02/q4_profile_runner.cpp`: suspended process, Job Object `ProcessMemoryLimit` + kill-on-close, affinity before resume, mask/limit readback, fail-closed markers/exit/run count, `CONSTRAINED_PROFILE_NOT_EXACT_HARDWARE` labeling through `affinity_coverage=before_resume`.
+- Tests: `test_q4_profile_runner.ps1` with 9 cases (success, exit 7, missing OK/correctness, short results, invalid CPU/memory/runs, missing exe); Windows CTest.
+- Campaign: Windows 11 x64 host, 2 CPUs/4 GiB and 4 CPUs/8 GiB constrained profiles, 3 runs each, report-only.
+- Evidence: `docs/evidence/NLE-CORE02-ALLOC-Q4-CONSTRAINED-001.md` + raw output.
+- No exact hardware, no Ubuntu/macOS physical, no allocator selection/threshold/ranking, no production integration; full Q4 remains BLOCKED.
