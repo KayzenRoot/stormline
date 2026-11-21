@@ -69,6 +69,7 @@ CORE03_03_READY_STATUS = "CORE03_03_READY_L1_CAPABILITY_OVERLAY"
 CORE03_03_COMPLETED_STATUS = "CORE03_03_COMPLETED_REST_BLOCKED"
 CORE03_04_COMPLETED_STATUS = "CORE03_04_COMPLETED_REST_BLOCKED"
 CORE03_05_COMPLETED_STATUS = "CORE03_05_COMPLETED_REST_BLOCKED"
+CORE03_06_COMPLETED_STATUS = "CORE03_06_COMPLETED_REST_BLOCKED"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -108,6 +109,7 @@ ACTIVE_STATUSES = {
     CORE03_03_COMPLETED_STATUS,
     CORE03_04_COMPLETED_STATUS,
     CORE03_05_COMPLETED_STATUS,
+    CORE03_06_COMPLETED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -133,6 +135,7 @@ CORE03_02_GATE_PR = 505
 CORE03_03_CODE_PR = 508
 CORE03_04_CLOSEOUT_PR = 510
 CORE03_05_CLOSEOUT_PR = 511
+CORE03_06_CLOSEOUT_PR = 0  # set by the CORE-03-06 satisfaction closeout
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -967,6 +970,8 @@ CORE03_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-CORE-03-04.md"),
     5: ("docs/adr/0105-core-03-limited-capability-admission.md",
         "docs/evidence/NLE-PRPLAN-CORE-03-05.md"),
+    6: ("docs/adr/0105-core-03-limited-capability-admission.md",
+        "docs/evidence/NLE-PRPLAN-CORE-03-06.md"),
 }
 
 CORE02_SLICE_METADATA = {
@@ -1573,16 +1578,21 @@ def expected_packet_state(
             return "APPROVED_CONTRACT", CORE03_02_GATE_PR
         if idx == 3:
             if manifest_status in (CORE03_03_COMPLETED_STATUS, CORE03_04_COMPLETED_STATUS,
-                                   CORE03_05_COMPLETED_STATUS):
+                                   CORE03_05_COMPLETED_STATUS, CORE03_06_COMPLETED_STATUS):
                 return "COMPLETED", CORE03_03_CODE_PR
             return "EXECUTOR_READY", None
         if idx == 4:
-            if manifest_status in (CORE03_04_COMPLETED_STATUS, CORE03_05_COMPLETED_STATUS):
+            if manifest_status in (CORE03_04_COMPLETED_STATUS, CORE03_05_COMPLETED_STATUS,
+                                   CORE03_06_COMPLETED_STATUS):
                 return "COMPLETED", CORE03_04_CLOSEOUT_PR
             return "PLANNED_BLOCKED", None
         if idx == 5:
-            if manifest_status == CORE03_05_COMPLETED_STATUS:
+            if manifest_status in (CORE03_05_COMPLETED_STATUS, CORE03_06_COMPLETED_STATUS):
                 return "COMPLETED", CORE03_05_CLOSEOUT_PR
+            return "PLANNED_BLOCKED", None
+        if idx == 6:
+            if manifest_status == CORE03_06_COMPLETED_STATUS:
+                return "COMPLETED", CORE03_06_CLOSEOUT_PR
             return "PLANNED_BLOCKED", None
         return "PLANNED_BLOCKED", None
     if (activation is not None
@@ -2282,6 +2292,9 @@ def validate_manifest(
     if manifest.get("status") == CORE03_05_COMPLETED_STATUS:
         if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 25 or approved != 6:
             issues.append("CORE-03-05 completed state must have zero ready packets, twenty-five completed slices and six approved gates")
+    if manifest.get("status") == CORE03_06_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 26 or approved != 6:
+            issues.append("CORE-03-06 completed state must have zero ready packets, twenty-six completed slices and six approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -2338,7 +2351,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     elif status == CORE03_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-core-03-02.json"
     elif status in (CORE03_03_READY_STATUS, CORE03_03_COMPLETED_STATUS,
-                    CORE03_04_COMPLETED_STATUS, CORE03_05_COMPLETED_STATUS):
+                    CORE03_04_COMPLETED_STATUS, CORE03_05_COMPLETED_STATUS,
+                    CORE03_06_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-03-03.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"

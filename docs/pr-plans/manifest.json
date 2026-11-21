@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "CORE03_05_COMPLETED_REST_BLOCKED",
+  "status": "CORE03_06_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -736,8 +736,12 @@
           "requires_modules_merged": [
             "CORE-02"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 0,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0105-core-03-limited-capability-admission.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-03-06.md"
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-03-07",
