@@ -550,6 +550,13 @@ target_link_libraries(stormline_core03_jobs_test PRIVATE stormline_core03_jobs)
 stormline_core01_apply_options(stormline_core03_jobs_test PRIVATE)
 stormline_core03_apply_tsan(stormline_core03_jobs_test)
 
+add_executable(stormline_core03_qualification_test
+    tests/core/core03_jobs_qualification_tests.cpp
+)
+target_link_libraries(stormline_core03_qualification_test PRIVATE stormline_core03_jobs)
+stormline_core01_apply_options(stormline_core03_qualification_test PRIVATE)
+stormline_core03_apply_tsan(stormline_core03_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -963,6 +970,30 @@ set_tests_properties(
     core03_job09_stress
     core03_job10_benchmark
     PROPERTIES TIMEOUT 180
+)
+
+add_test(NAME core03_qualification_integrated
+    COMMAND stormline_core03_qualification_test qlf01
+)
+add_test(NAME core03_qualification_stress
+    COMMAND stormline_core03_qualification_test qlf02
+)
+add_test(NAME core03_qualification_recovery
+    COMMAND stormline_core03_qualification_test qlf03
+)
+add_test(NAME core03_qualification_overload
+    COMMAND stormline_core03_qualification_test qlf04
+)
+add_test(NAME core03_qualification_benchmark
+    COMMAND stormline_core03_qualification_test qlf05
+)
+set_tests_properties(
+    core03_qualification_integrated
+    core03_qualification_stress
+    core03_qualification_recovery
+    core03_qualification_overload
+    core03_qualification_benchmark
+    PROPERTIES TIMEOUT 300
 )
 
 if(WIN32)
