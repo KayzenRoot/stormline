@@ -111,7 +111,8 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-02-07", "NLE-PRPLAN-CORE-02-08",
                           "NLE-PRPLAN-CORE-02-09", "NLE-PRPLAN-CORE-02-10",
                           "NLE-PRPLAN-CORE-03-03", "NLE-PRPLAN-CORE-03-04",
-                          "NLE-PRPLAN-CORE-03-05", "NLE-PRPLAN-CORE-03-06"], completed)
+                          "NLE-PRPLAN-CORE-03-05", "NLE-PRPLAN-CORE-03-06",
+                          "NLE-PRPLAN-CORE-03-07"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -166,7 +167,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.CORE03_06_CLOSEOUT_PR, core03[5]["github_pr"])
         self.assertEqual("ELEVATED", core03[5]["risk"])
         self.assertEqual("INTERNAL_ONLY", core03[5]["release_class"])
-        self.assertEqual("PLANNED_BLOCKED", core03[6]["status"])
+        self.assertEqual("COMPLETED", core03[6]["status"])
+        self.assertEqual(v.CORE03_07_CLOSEOUT_PR, core03[6]["github_pr"])
+        self.assertEqual("ELEVATED", core03[6]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core03[6]["release_class"])
+        self.assertEqual("PLANNED_BLOCKED", core03[7]["status"])
         self.assertEqual("PLANNED_BLOCKED", core03[9]["status"])
         self.assertFalse(core02[2]["capability_admission"]["module_completion_claimed"])
         self.assertFalse(core02[3]["capability_admission"]["module_completion_claimed"])
@@ -331,9 +336,9 @@ class PrPlanValidationTests(unittest.TestCase):
             d["modules"][1]["packets"][9]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
-    def test_core03_cannot_unlock_07(self):
+    def test_core03_cannot_unlock_08(self):
         def wrong(d):
-            d["modules"][2]["packets"][6]["status"] = "EXECUTOR_READY"
+            d["modules"][2]["packets"][7]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
     def test_core02_activation_source_drift_denied(self):
@@ -663,6 +668,11 @@ class PrPlanValidationTests(unittest.TestCase):
             d["modules"][2]["packets"][5]["github_pr"] = 999
         self.assertTrue(any("expected COMPLETED/" in x for x in self.check(wrong)))
 
+    def test_core03_07_completed_slice_cannot_claim_wrong_pr(self):
+        def wrong(d):
+            d["modules"][2]["packets"][6]["github_pr"] = 999
+        self.assertTrue(any("expected COMPLETED/" in x for x in self.check(wrong)))
+
     def test_core03_03_activation_is_exact(self):
         self.assertEqual("NLE-PRPLAN-CORE-03-03", self.activation["selected_packet_id"])
         self.assertEqual("CORE-03", self.activation["module_id"])
@@ -698,8 +708,8 @@ class PrPlanValidationTests(unittest.TestCase):
         selector = str(v.ROOT / "scripts/select_packet.py")
         for packet_id in ("NLE-PRPLAN-CORE-03-03", "NLE-PRPLAN-CORE-03-02",
                           "NLE-PRPLAN-CORE-03-04", "NLE-PRPLAN-CORE-03-05",
-                          "NLE-PRPLAN-CORE-03-06", "NLE-PRPLAN-CORE-03-10",
-                          "NLE-PRPLAN-CORE-02-10"):
+                          "NLE-PRPLAN-CORE-03-06", "NLE-PRPLAN-CORE-03-07",
+                          "NLE-PRPLAN-CORE-03-10", "NLE-PRPLAN-CORE-02-10"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
