@@ -114,7 +114,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-03-03", "NLE-PRPLAN-CORE-03-04",
                           "NLE-PRPLAN-CORE-03-05", "NLE-PRPLAN-CORE-03-06",
                           "NLE-PRPLAN-CORE-03-07", "NLE-PRPLAN-CORE-03-08",
-                          "NLE-PRPLAN-CORE-03-09"], completed)
+                          "NLE-PRPLAN-CORE-03-09", "NLE-PRPLAN-CORE-03-10"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -181,7 +181,10 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.CORE03_09_CODE_PR, core03[8]["github_pr"])
         self.assertEqual("ELEVATED", core03[8]["risk"])
         self.assertEqual("INTERNAL_ONLY", core03[8]["release_class"])
-        self.assertEqual("PLANNED_BLOCKED", core03[9]["status"])
+        self.assertEqual("COMPLETED", core03[9]["status"])
+        self.assertEqual(v.CORE03_10_CLOSEOUT_PR, core03[9]["github_pr"])
+        self.assertEqual("ELEVATED", core03[9]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core03[9]["release_class"])
         self.assertFalse(core02[2]["capability_admission"]["module_completion_claimed"])
         self.assertFalse(core02[3]["capability_admission"]["module_completion_claimed"])
 
@@ -345,7 +348,7 @@ class PrPlanValidationTests(unittest.TestCase):
             d["modules"][1]["packets"][9]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
-    def test_core03_cannot_unlock_10(self):
+    def test_core03_10_cannot_be_reopened(self):
         def wrong(d):
             d["modules"][2]["packets"][9]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
@@ -731,6 +734,11 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_core03_09_completed_slice_cannot_claim_wrong_pr(self):
         def wrong(d):
             d["modules"][2]["packets"][8]["github_pr"] = 999
+        self.assertTrue(any("expected COMPLETED/" in x for x in self.check(wrong)))
+
+    def test_core03_10_completed_slice_cannot_claim_wrong_pr(self):
+        def wrong(d):
+            d["modules"][2]["packets"][9]["github_pr"] = 999
         self.assertTrue(any("expected COMPLETED/" in x for x in self.check(wrong)))
 
     def test_core03_09_activation_is_exact(self):
