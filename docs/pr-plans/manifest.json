@@ -719,7 +719,7 @@
             "CORE-02"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 511,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0105-core-03-limited-capability-admission.md",
