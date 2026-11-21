@@ -1,6 +1,6 @@
 # NLE-CORE02-ALLOC-Q4-CONSTRAINED-001 — Constrained-profile campaign
 
-**Status:** `CONSTRAINED_PROFILE_CAMPAIGN_PASS / FULL Q4 STILL BLOCKED / NO ALLOCATOR SELECTION`. **Base:** `6de186a64cebbdbc14026d24d04ceb7f6cbae7b2`. **WO:** [NLE-CORE02-ALLOC-Q4-001](../work-orders/NLE-CORE02-ALLOC-Q4-001.md). **ADR:** [ADR-0106](../adr/0106-core-02-q4-constrained-profile.md). **Issue:** #19.
+**Status:** `CONSTRAINED_PROFILE_CAMPAIGN_PASS / NATIVE_CI_PASS / FULL Q4 STILL BLOCKED / NO ALLOCATOR SELECTION`. **Base:** `6de186a64cebbdbc14026d24d04ceb7f6cbae7b2`. **WO:** [NLE-CORE02-ALLOC-Q4-001](../work-orders/NLE-CORE02-ALLOC-Q4-001.md). **ADR:** [ADR-0106](../adr/0106-core-02-q4-constrained-profile.md). **Issue:** #19.
 
 ## 1. Authorization
 
@@ -101,7 +101,13 @@ Each profile: 3/3 runs exit 0, `ALLOC_BENCH_CORRECTNESS=PASS`, `ALLOC_BENCH_OK`,
 - Local Windows full matrix: **111/111 CTests PASS** (109 previous + helper + runner).
 - `core02_q4_profile_runner_failclosed`: **PASS**, `Q4_RUNNER_TESTS_OK cases=9`.
 - `validate_pr_plans.py`: PASS (721 blocked, 22 completed, 5 approved gates, 0 ready).
-- CI pending at exact PR HEAD; results to be added by audit/checkpoint.
+- CI [44951302855](https://github.com/KayzenRoot/stormline/actions/runs/44951302855) at HEAD `8fd1921…` SUCCESS:
+  - Windows **111/111**, including `core02_q4_profile_runner_failclosed` (10.47 s);
+  - Linux and Linux ASan/UBSan **110/110**;
+  - macOS **109/109**;
+  - `allocator-benchmark` PASS em Ubuntu GCC, Windows MSVC e macOS Clang.
+- Docs Validation [44951302784](https://github.com/KayzenRoot/stormline/actions/runs/44951302784) SUCCESS; Sonar/Socket PASS.
+- CI não substitui a matriz física; Ubuntu/macOS e perfis exatos continuam BLOCKED.
 
 ## 9. Limits and next gate
 
