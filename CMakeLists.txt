@@ -3,6 +3,21 @@ project(stormline_core01_internal LANGUAGES C CXX)
 
 option(STORMLINE_CORE01_ENABLE_SANITIZERS "Enable ASan/UBSan for the internal CORE-01 slice" OFF)
 option(STORMLINE_CORE02_ALLOC_BENCH "Build the optional isolated CORE-02 allocator benchmark" OFF)
+option(STORMLINE_CORE03_ENABLE_TSAN "Enable ThreadSanitizer for the internal CORE-03 slice" OFF)
+
+if(STORMLINE_CORE01_ENABLE_SANITIZERS AND STORMLINE_CORE03_ENABLE_TSAN)
+    message(FATAL_ERROR "ASan/UBSan and TSan cannot be enabled in the same build")
+endif()
+
+function(stormline_core03_apply_tsan target)
+    if(STORMLINE_CORE03_ENABLE_TSAN)
+        if(MSVC)
+            message(FATAL_ERROR "ThreadSanitizer is not enabled for the MSVC internal slice")
+        endif()
+        target_compile_options(${target} PRIVATE -fsanitize=thread -fno-omit-frame-pointer)
+        target_link_options(${target} PRIVATE -fsanitize=thread)
+    endif()
+endfunction()
 
 function(stormline_core01_apply_options target scope)
     target_compile_features(${target} ${scope} cxx_std_20)
@@ -515,6 +530,26 @@ target_link_libraries(stormline_core02_qualification_test PRIVATE
 )
 stormline_core01_apply_options(stormline_core02_qualification_test PRIVATE)
 
+find_package(Threads REQUIRED)
+
+add_library(stormline_core03_jobs STATIC
+    src/stormline/core/jobs/task_graph.cpp
+    src/stormline/core/jobs/job_executor.cpp
+)
+target_include_directories(stormline_core03_jobs PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_core03_jobs PUBLIC Threads::Threads)
+stormline_core01_apply_options(stormline_core03_jobs PUBLIC)
+stormline_core03_apply_tsan(stormline_core03_jobs)
+
+add_executable(stormline_core03_jobs_test
+    tests/core/job_executor_tests.cpp
+)
+target_link_libraries(stormline_core03_jobs_test PRIVATE stormline_core03_jobs)
+stormline_core01_apply_options(stormline_core03_jobs_test PRIVATE)
+stormline_core03_apply_tsan(stormline_core03_jobs_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -884,6 +919,50 @@ add_test(NAME core02_qualification_size_churn
 )
 add_test(NAME core02_qualification_benchmark
     COMMAND stormline_core02_qualification_test benchmark
+)
+
+add_test(NAME core03_job01_basic
+    COMMAND stormline_core03_jobs_test job01
+)
+add_test(NAME core03_job02_dependencies
+    COMMAND stormline_core03_jobs_test job02
+)
+add_test(NAME core03_job03_invalid
+    COMMAND stormline_core03_jobs_test job03
+)
+add_test(NAME core03_job04_priority
+    COMMAND stormline_core03_jobs_test job04
+)
+add_test(NAME core03_job05_cancel
+    COMMAND stormline_core03_jobs_test job05
+)
+add_test(NAME core03_job06_affinity
+    COMMAND stormline_core03_jobs_test job06
+)
+add_test(NAME core03_job07_backpressure
+    COMMAND stormline_core03_jobs_test job07
+)
+add_test(NAME core03_job08_shutdown
+    COMMAND stormline_core03_jobs_test job08
+)
+add_test(NAME core03_job09_stress
+    COMMAND stormline_core03_jobs_test job09
+)
+add_test(NAME core03_job10_benchmark
+    COMMAND stormline_core03_jobs_test job10
+)
+set_tests_properties(
+    core03_job01_basic
+    core03_job02_dependencies
+    core03_job03_invalid
+    core03_job04_priority
+    core03_job05_cancel
+    core03_job06_affinity
+    core03_job07_backpressure
+    core03_job08_shutdown
+    core03_job09_stress
+    core03_job10_benchmark
+    PROPERTIES TIMEOUT 180
 )
 
 if(WIN32)
