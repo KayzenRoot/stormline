@@ -110,7 +110,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-02-05", "NLE-PRPLAN-CORE-02-06",
                           "NLE-PRPLAN-CORE-02-07", "NLE-PRPLAN-CORE-02-08",
                           "NLE-PRPLAN-CORE-02-09", "NLE-PRPLAN-CORE-02-10",
-                          "NLE-PRPLAN-CORE-03-03"], completed)
+                          "NLE-PRPLAN-CORE-03-03", "NLE-PRPLAN-CORE-03-04"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -153,7 +153,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(508, core03[2]["github_pr"])
         self.assertEqual("ELEVATED", core03[2]["risk"])
         self.assertEqual("INTERNAL_ONLY", core03[2]["release_class"])
-        self.assertEqual("PLANNED_BLOCKED", core03[3]["status"])
+        self.assertEqual("COMPLETED", core03[3]["status"])
+        self.assertEqual(v.CORE03_04_CLOSEOUT_PR, core03[3]["github_pr"])
+        self.assertEqual("ELEVATED", core03[3]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core03[3]["release_class"])
+        self.assertEqual("PLANNED_BLOCKED", core03[4]["status"])
         self.assertEqual("PLANNED_BLOCKED", core03[9]["status"])
         self.assertFalse(core02[2]["capability_admission"]["module_completion_claimed"])
         self.assertFalse(core02[3]["capability_admission"]["module_completion_claimed"])
@@ -318,9 +322,9 @@ class PrPlanValidationTests(unittest.TestCase):
             d["modules"][1]["packets"][9]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
-    def test_core03_cannot_unlock_04(self):
+    def test_core03_cannot_unlock_05(self):
         def wrong(d):
-            d["modules"][2]["packets"][3]["status"] = "EXECUTOR_READY"
+            d["modules"][2]["packets"][4]["status"] = "EXECUTOR_READY"
         self.assertTrue(self.check(wrong))
 
     def test_core02_activation_source_drift_denied(self):
@@ -634,6 +638,11 @@ class PrPlanValidationTests(unittest.TestCase):
         bad = copy.deepcopy(self.core03_02_activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
+
+    def test_core03_04_completed_slice_cannot_claim_wrong_pr(self):
+        def wrong(d):
+            d["modules"][2]["packets"][3]["github_pr"] = 999
+        self.assertTrue(any("expected COMPLETED/" in x for x in self.check(wrong)))
 
     def test_core03_03_activation_is_exact(self):
         self.assertEqual("NLE-PRPLAN-CORE-03-03", self.activation["selected_packet_id"])
