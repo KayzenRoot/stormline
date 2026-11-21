@@ -29,9 +29,10 @@ CORE02_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-09.json
 CORE02_10_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-10.json"
 CORE03_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-03-01.json"
 CORE03_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-03-02.json"
+CORE03_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-03-03.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = CORE03_02_ACTIVATION_FILE
+ACTIVATION_FILE = CORE03_03_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -64,6 +65,8 @@ CORE02_09_COMPLETED_STATUS = "CORE02_09_COMPLETED_REST_BLOCKED"
 CORE02_10_COMPLETED_STATUS = "CORE02_10_COMPLETED_REST_BLOCKED"
 CORE03_01_APPROVED_STATUS = "CORE03_01_APPROVED_GOVERNANCE_ONLY"
 CORE03_02_APPROVED_STATUS = "CORE03_02_APPROVED_CONTRACT_ONLY"
+CORE03_03_READY_STATUS = "CORE03_03_READY_L1_CAPABILITY_OVERLAY"
+CORE03_03_COMPLETED_STATUS = "CORE03_03_COMPLETED_REST_BLOCKED"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -99,6 +102,8 @@ ACTIVE_STATUSES = {
     CORE02_10_COMPLETED_STATUS,
     CORE03_01_APPROVED_STATUS,
     CORE03_02_APPROVED_STATUS,
+    CORE03_03_READY_STATUS,
+    CORE03_03_COMPLETED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -121,6 +126,7 @@ CORE02_09_CODE_PR = 487
 CORE02_10_CODE_PR = 489
 CORE03_01_GATE_PR = 492
 CORE03_02_GATE_PR = 505
+CORE03_03_CODE_PR = 0  # set by the CORE-03-03 code PR
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -260,6 +266,38 @@ CORE01_11_ACTIVATION_SOURCES = {
     "display_contract": "docs/contracts/core-01-display-surface-v0.md",
     "native_bridge_contract": "docs/contracts/core-01-native-window-handle-v0.md",
     "core01_plan": "docs/pr-plans/CORE-01.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+CORE03_03_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "5f27254e23ddd5f90c67e02465f19bf2e82a4194",
+    "decisions_ledger": "0a33485023c43cb9d70da846071293394e45e998",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0005": "8569be8dd610ba449e4cbb0e553c2d8c6786f6d4",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0103": "81adca6d4bc25574a4093783e55d22091b78c203",
+    "adr_0105": "a87906e17b5e393a9b3cc500840e14b42f7ac858",
+    "core03_architecture": "d27523a71854d2f3952453b2ec7a3ef31f2d4aac",
+    "core03_task_graph_contract": "36b03944504b6b8e74907f773ead6901ce8705b0",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "core03_plan": "6527c5ca5a176176506029edd4ae2de69d58928a",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+CORE03_03_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0005": "docs/adr/0005-core-03-jobs-concurrency.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0103": "docs/adr/0103-core-03-governance-gate.md",
+    "adr_0105": "docs/adr/0105-core-03-limited-capability-admission.md",
+    "core03_architecture": "docs/architecture/core-03-concurrency-jobs.md",
+    "core03_task_graph_contract": "docs/contracts/core-03-task-graph-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "core03_plan": "docs/pr-plans/CORE-03.md",
     "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
@@ -827,6 +865,31 @@ CORE02_ACTIVATION_SOURCES = {
     "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
+CORE03_CAPABILITY_ADMISSION = {
+    "adr": "docs/adr/0105-core-03-limited-capability-admission.md",
+    "formal_dependency": "CORE-02",
+    "module_completion_claimed": False,
+    "required_capabilities": [
+        {"id": "CORE02_MEMORY_OWNERSHIP", "satisfied_by": "NLE-PRPLAN-CORE-02-03"},
+        {"id": "CORE02_SYSTEM_ALLOCATOR_BASELINE", "satisfied_by": "NLE-PRPLAN-CORE-02-04"},
+        {"id": "CORE02_MONOTONIC_ARENA", "satisfied_by": "NLE-PRPLAN-CORE-02-05"},
+        {"id": "CORE02_MEMORY_BUDGET", "satisfied_by": "NLE-PRPLAN-CORE-02-06"},
+        {"id": "CORE02_LEAK_TRACKING", "satisfied_by": "NLE-PRPLAN-CORE-02-07"},
+        {"id": "CORE02_MEMORY_TELEMETRY", "satisfied_by": "NLE-PRPLAN-CORE-02-08"},
+        {"id": "CORE02_INTEGRATED_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-02-09"},
+    ],
+    "not_required": [
+        "module_completion",
+        "allocator_selection",
+        "q4_physical_matrix",
+        "public_abi",
+        "release",
+        "renderer_gpu",
+        "audio",
+        "network",
+    ],
+}
+
 CORE02_CAPABILITY_ADMISSION = {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
     "formal_dependency": "CORE-01",
@@ -889,6 +952,11 @@ SLICE_METADATA = {
          "docs/evidence/NLE-PRPLAN-CORE-01-15-G6-ACTIVATION.md"),
     16: ("docs/adr/0095-core-01-internal-sequence-closeout.md",
          "docs/evidence/NLE-PRPLAN-CORE-01-16-G6-ACTIVATION.md"),
+}
+
+CORE03_SLICE_METADATA = {
+    3: ("docs/adr/0105-core-03-limited-capability-admission.md",
+        "docs/evidence/NLE-PRPLAN-CORE-03-03-G6-ACTIVATION.md"),
 }
 
 CORE02_SLICE_METADATA = {
@@ -957,6 +1025,25 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
         }
         return expected, CORE01_ACTIVATION_SOURCES, CORE01_PINNED_SOURCE_BLOBS, {
             "source_blob_sha1", "sdl3", "window_slice"
+        }
+    if selected == "NLE-PRPLAN-CORE-03-03":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-CORE-03-03",
+            "module_id": "CORE-03",
+            "risk": "ELEVATED",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-21/core03-03-continuation-authorized",
+            "approved_adr": "docs/adr/0105-core-03-limited-capability-admission.md",
+            "approved_contract": "docs/contracts/core-03-task-graph-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-CORE-03-03.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-03-03-G6-ACTIVATION.md",
+            "gate_base_sha": "38d73bd46fc66cc4f83294bcad44e7e310534013",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, CORE03_03_ACTIVATION_SOURCES, CORE03_03_PINNED_SOURCE_BLOBS, {
+            "source_blob_sha1", "gate_pr", "capability_admission"
         }
     if selected == "NLE-PRPLAN-CORE-03-02":
         expected = {
@@ -1370,8 +1457,12 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
         if activation.get("window_slice") != expected_window_slice:
             errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
     if "capability_admission" in extra_keys:
-        if activation.get("capability_admission") != CORE02_CAPABILITY_ADMISSION:
-            errors.append("activation capability admission mismatch: only the exact CORE-02 ownership set is authorized")
+        selected_id = str(activation.get("selected_packet_id", ""))
+        expected_admission = (CORE03_CAPABILITY_ADMISSION
+                              if selected_id.startswith("NLE-PRPLAN-CORE-03-")
+                              else CORE02_CAPABILITY_ADMISSION)
+        if activation.get("capability_admission") != expected_admission:
+            errors.append("activation capability admission mismatch: only the exact audited set is authorized")
     fingerprints = activation.get("source_blob_sha1")
     if not isinstance(fingerprints, dict) or set(fingerprints) != set(sources):
         errors.append("activation source_blob_sha1 must contain exactly the pinned sources")
@@ -1423,6 +1514,57 @@ def expected_packet_state(
             return "COMPLETED", CORE02_09_CODE_PR
         if idx == 10:
             return "COMPLETED", CORE02_10_CODE_PR
+        return "PLANNED_BLOCKED", None
+    if (activation is not None
+            and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-03-03"
+            and module_id == "CORE-01"):
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", 422
+        if idx == 2:
+            return "APPROVED_CONTRACT", 424
+        code_prs = {
+            3: 428, 4: 428, 5: 428, 6: 432, 7: 435, 8: 438,
+            9: 444, 10: 447, 11: 450, 12: 453, 13: 456, 14: 459,
+            15: 462, 16: 464,
+        }
+        if idx in code_prs:
+            return "COMPLETED", code_prs[idx]
+        return "PLANNED_BLOCKED", None
+    if (activation is not None
+            and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-03-03"
+            and module_id == "CORE-02"):
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", CORE02_03_GATE_PR
+        if idx == 2:
+            return "APPROVED_CONTRACT", CORE02_03_GATE_PR
+        if idx == 3:
+            return "COMPLETED", CORE02_03_CODE_PR
+        if idx == 4:
+            return "COMPLETED", CORE02_04_CODE_PR
+        if idx == 5:
+            return "COMPLETED", CORE02_05_CODE_PR
+        if idx == 6:
+            return "COMPLETED", CORE02_06_CODE_PR
+        if idx == 7:
+            return "COMPLETED", CORE02_07_CODE_PR
+        if idx == 8:
+            return "COMPLETED", CORE02_08_CODE_PR
+        if idx == 9:
+            return "COMPLETED", CORE02_09_CODE_PR
+        if idx == 10:
+            return "COMPLETED", CORE02_10_CODE_PR
+        return "PLANNED_BLOCKED", None
+    if (activation is not None
+            and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-03-03"
+            and module_id == "CORE-03"):
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", CORE03_01_GATE_PR
+        if idx == 2:
+            return "APPROVED_CONTRACT", CORE03_02_GATE_PR
+        if idx == 3:
+            if manifest_status == CORE03_03_COMPLETED_STATUS:
+                return "COMPLETED", CORE03_03_CODE_PR
+            return "EXECUTOR_READY", None
         return "PLANNED_BLOCKED", None
     if (activation is not None
             and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-03-02"
@@ -1844,31 +1986,39 @@ def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
         return SLICE_METADATA[idx]
     if module_id == "CORE-02" and idx in CORE02_SLICE_METADATA:
         return CORE02_SLICE_METADATA[idx]
+    if module_id == "CORE-03" and idx in CORE03_SLICE_METADATA:
+        return CORE03_SLICE_METADATA[idx]
     return None
 
 
 def validate_capability_admission(
-    packet: dict, status_by_packet: dict[str, str | None], formal_dependency: str
+    packet: dict,
+    status_by_packet: dict[str, str | None],
+    formal_dependency: str,
+    expected: dict | None = None,
+    allowed_prefix: str = "NLE-PRPLAN-CORE-01-",
+    label: str = "CORE-02-03",
 ) -> list[str]:
+    expected = CORE02_CAPABILITY_ADMISSION if expected is None else expected
     errors = []
     admission = packet.get("capability_admission")
     if not isinstance(admission, dict):
-        return ["CORE-02-03 capability admission must match the audited exact set"]
-    if admission != CORE02_CAPABILITY_ADMISSION:
-        errors.append("CORE-02-03 capability admission must match the audited exact set")
+        return [f"{label} capability admission must match the audited exact set"]
+    if admission != expected:
+        errors.append(f"{label} capability admission must match the audited exact set")
     if admission.get("formal_dependency") != formal_dependency:
-        errors.append("CORE-02-03 capability admission changes the formal module dependency")
+        errors.append(f"{label} capability admission changes the formal module dependency")
     if admission.get("module_completion_claimed") is not False:
-        errors.append("CORE-02-03 capability admission must not claim module completion")
+        errors.append(f"{label} capability admission must not claim module completion")
     for capability in admission.get("required_capabilities", []):
         if not isinstance(capability, dict) or "satisfied_by" not in capability:
-            errors.append("CORE-02-03 capability admission has an invalid capability entry")
+            errors.append(f"{label} capability admission has an invalid capability entry")
             continue
         satisfied_by = capability["satisfied_by"]
-        if not isinstance(satisfied_by, str) or not satisfied_by.startswith("NLE-PRPLAN-CORE-01-"):
-            errors.append("CORE-02-03 capability admission accepts only CORE-01 packets")
+        if not isinstance(satisfied_by, str) or not satisfied_by.startswith(allowed_prefix):
+            errors.append(f"{label} capability admission accepts only {allowed_prefix} packets")
         if status_by_packet.get(satisfied_by) != "COMPLETED":
-            errors.append(f"CORE-02-03 capability {capability.get('id')} lacks a completed packet")
+            errors.append(f"{label} capability {capability.get('id')} lacks a completed packet")
     return errors
 
 
@@ -1969,7 +2119,8 @@ def validate_manifest(
                 adr, evidence = metadata
                 if want_status not in ("EXECUTOR_READY", "COMPLETED"):
                     issues.append(f"{mid}: slice metadata on a non-completed packet")
-                elif (packet.get("risk") != "STANDARD"
+                expected_risk = "ELEVATED" if (mid == "CORE-03" and idx == 3) else "STANDARD"
+                if (packet.get("risk") != expected_risk
                       or packet.get("release_class") != "INTERNAL_ONLY"
                       or packet.get("approved_adr") != adr
                       or packet.get("activation_evidence") != evidence):
@@ -1977,6 +2128,12 @@ def validate_manifest(
                 if mid == "CORE-02" and idx in (3, 4, 5, 6, 7, 8, 9):
                     issues.extend(validate_capability_admission(
                         packet, status_by_packet, original["dependencies"][0]))
+                if mid == "CORE-03" and idx == 3:
+                    issues.extend(validate_capability_admission(
+                        packet, status_by_packet, original["dependencies"][0],
+                        expected=CORE03_CAPABILITY_ADMISSION,
+                        allowed_prefix="NLE-PRPLAN-CORE-02-",
+                        label="CORE-03-03"))
             elif any(field in packet for field in (
                 "risk", "release_class", "approved_adr", "activation_evidence",
                 "capability_admission"
@@ -2094,6 +2251,12 @@ def validate_manifest(
     if manifest.get("status") == CORE03_02_APPROVED_STATUS:
         if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 22 or approved != 6:
             issues.append("CORE-03-02 contract state must have zero ready packets, twenty-two completed slices and six approved gates")
+    if manifest.get("status") == CORE03_03_READY_STATUS:
+        if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 22 or approved != 6:
+            issues.append("CORE-03-03 activated state must have one ready packet, twenty-two completed slices and six approved gates")
+    if manifest.get("status") == CORE03_03_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 23 or approved != 6:
+            issues.append("CORE-03-03 completed state must have zero ready packets, twenty-three completed slices and six approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -2149,6 +2312,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-core-03-01.json"
     elif status == CORE03_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-core-03-02.json"
+    elif status in (CORE03_03_READY_STATUS, CORE03_03_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-core-03-03.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"
     else:
