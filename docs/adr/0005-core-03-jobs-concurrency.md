@@ -1,6 +1,6 @@
 # ADR-0005 — Job Scheduling and Concurrency Baseline
 
-**Status:** PROPOSED; NOT APPROVED FOR IMPLEMENTATION  
+**Status:** `OWNER_RATIFIED_PLANNING_ONLY / NOT IMPLEMENTATION / TECHNOLOGY NOT SELECTED` (owner ratification 2026-11-21).  
 **Date:** 2026-11-14 | **Work Order:** NLE-P00-WO-002-CORE-03 | **Issue:** #13
 
 ## Context
@@ -24,3 +24,13 @@ Exact dependency versions and notices; multi-OS compiler checks; benchmark acros
 ## Result
 This ADR and the architecture specification can be APPROVED as **planning artifacts only** after audit. No implementation authorization, compatibility claim, release target or proven proprietary invention arises from a docs PR.
 
+
+## Owner ratification 2026-11-21 (bounded)
+
+The owner ratified A+B+C+D2:
+- **A:** this ADR is planning direction only; no scheduler technology, API, dependency or code is selected.
+- **B:** documentary artifacts `LOW`; future concurrency implementation proposed `ELEVATED`; first internal slices proposed `INTERNAL_ONLY`; no public release.
+- **C:** benchmark baseline `std::jthread`/fixed pool + Taskflow 4.x + enkiTS; oneTBB conditional; SFAS not started; no candidate enters default/public API/product without benchmark, licenses/advisories and separate ratification.
+- **D2:** limited capability admission for the first internal CORE-03 slice uses completed `CORE-02-03..09`; CORE-02 module completion is not claimed. Only the `CORE-03-02` contract may be prepared; code requires `CORE-03-03` G6 and separate owner authorization.
+
+This ratification does not approve implementation, release, ABI, thresholds, CORE-02 module completion, G3 or NLE-D009. All CORE-03 implementation packets remain `PLANNED_BLOCKED` until their own gates.

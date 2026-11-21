@@ -24,6 +24,8 @@ Este Ledger separa instruções aprovadas pelo proprietário, propostas técnica
 | NLE-D018 | Autonomia delegada para propostas técnicas e integrações documentais de rotina com CI/auditoria; despesas, ações irreversíveis, bypass e HIGH/CRITICAL permanecem bloqueadas sem autorização adequada | OWNER-DIRECTED | Solicitação de prosseguir sem perguntas repetitivas, condicionada à governança aprovada |
 | NLE-D019 | Preparar todos os pacotes de Work Order/issues antes da execução, para Zcode se limitar à codificação após aprovação técnica | OWNER-DIRECTED | Solicitação explícita; o catálogo não libera code WOs automaticamente |
 | NLE-D020 | Fila versionada de 80 drafts BLOCKED, execução permitida somente após ADR/contratos/arquivos/testes/Context Lock aprovados | APPROVED AS BLOCKED QUEUE, NOT CODING | PR #17 and 80 issues #18–97; registry mapping audited |
+| NLE-D021 | CORE-02 Q4: metodologia `CONSTRAINED_PROFILE_NOT_EXACT_HARDWARE` em host físico, com affinity antes do workload, hard memory cap via Job Object, 3 execuções, fail-closed e rótulo de hardware não exato | OWNER-RATIFIED | Conversa de 2026-11-21; [ADR-0106](adr/0106-core-02-q4-constrained-profile.md) |
+| NLE-D022 | CORE-03: A (ADR-0005 só planejamento), B (LOW docs/ELEVATED implementação/INTERNAL_ONLY), C (benchmark jthread/Taskflow/enkiTS; oneTBB condicional; SFAS não iniciado), D2 (admissão limitada CORE-02-03..09, sem declarar módulo completo) | OWNER-RATIFIED | Conversa de 2026-11-21; [ADR-0105](adr/0105-core-03-limited-capability-admission.md) |
 
 Os estados OWNER-* são contexto aprovado; o arquivo em si só vira fonte canônica após auditoria e integração do PR. Nenhuma proposta técnica é aprovada por simples inclusão em documentação. Ver [ADR 0001](adr/0001-original-engine.md), [ADR 0002](adr/0002-solo-free-governance.md).
 
@@ -113,3 +115,20 @@ Autorizado agora: proposta **não executável** de WO experimental separada [NLE
 ## CORE-01 packet NLE-PRPLAN-CORE-01-02 — bounded contract decision under G3-V05 (2026-11-17)
 
 This section records the technical contract **PROPOSAL for audit**, not a new owner vote or implementation grant. The owner's ratification remains C01-G3V05-01..06 above: C++20 CPU-only headless `INTERNAL_ONLY`, future `MANDATORY_1_0` target and STANDARD first-slice risk. [ADR-0083](adr/0083-core-01-internal-headless-slice.md) is deliberately bounded to that slice; [typed contract](contracts/core-01-internal-headless-v0.md) and [WO -02](work-orders/NLE-PRPLAN-CORE-01-02.md) define prospective private interfaces, rollback, states and tests. G4/G5 become eligible for **BOUNDED** qualification only after exact-head Docs Validation and objective pt-BR audit of their PR and readback; G6 remains BLOCKED until a separate individual activation proof. The legacy ADR-0003/0075 remain PROPOSED in general; G3 global NOT_CLEARED and all 80 original coding WOs BLOCKED. Do not treat ADR-0083 as a new full CORE-01 release approval.
+
+## CORE-02 Q4 — ratificação da metodologia de perfis limitados (2026-11-21)
+
+**Autoridade:** proprietário do Stormline, resposta expressa à proposta `docs/research/core-02-q4-constrained-profile-proposal.md`.
+
+O proprietário ratificou a opção **B**: metodologia `CONSTRAINED_PROFILE_NOT_EXACT_HARDWARE` em host físico disponível, com CPU affinity comprovada antes do workload, hard memory cap de 4 GiB ou 8 GiB via Job Object, três execuções por perfil, validação fail-closed e rótulo explícito de que o hardware não é uma máquina física exata de 2 vCPU/4 GiB ou 4 vCPU/8 GiB. A ratificação não qualifica CORE-02, não seleciona allocator e não substitui os hosts Ubuntu 24.04 x64 e macOS 15 arm64 exigidos. Q4 permanece sem PASS completo; a campanha Windows será `PARTIAL_CONSTRAINED`, não qualificação de módulo.
+
+## CORE-03 — ratificação A/B/C/D2 (2026-11-21)
+
+**Autoridade:** proprietário do Stormline, resposta expressa à proposta `docs/research/core-03-limited-admission-proposal.md`.
+
+- **A:** ADR-0005 ratificada somente como direção de planejamento, sem selecionar tecnologia/API/dependência/release/código.
+- **B:** risco `LOW` para documentos, `ELEVATED` para implementação futura de concorrência, release `INTERNAL_ONLY` para primeiras fatias internas; sem release pública.
+- **C:** benchmark isolado com baseline C++20 `std::jthread`/pool fixo, Taskflow 4.x e enkiTS; oneTBB condicional; SFAS não iniciado; nenhum candidato integrado ao default/API/produto sem benchmark, licenças/advisories e nova ratificação.
+- **D2:** admissão limitada por capacidades concluídas `CORE-02-03..09`, sem declarar CORE-02 módulo completo e mantendo a dependência formal registrada. Autoriza somente preparar o contrato `CORE-03-02`; código exige `CORE-03-03` G6 e autorização posterior.
+
+CORE-03-01 permanece governance-only; `CORE-03-02`..`-10` continuam `PLANNED_BLOCKED`. CORE-02 continua `NOT_QUALIFIED`; G3 `NOT_CLEARED`; NLE-D009 `OPEN`; 80/80 module WOs `BLOCKED`.
