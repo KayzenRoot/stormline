@@ -114,3 +114,10 @@ Each profile: 3/3 runs exit 0, `ALLOC_BENCH_CORRECTNESS=PASS`, `ALLOC_BENCH_OK`,
 - Ubuntu/macOS physical hosts and exact 2 vCPU/4 GiB and 4 vCPU/8 GiB machines remain missing.
 - No threshold/ranking/winner; no allocator default/integration; CORE-02 NOT_QUALIFIED; CORE-03 unchanged; NLE-D009 OPEN; G3 NOT_CLEARED.
 - Next decision: provide exact physical hosts, or expressly accept constrained profiles as the maximum available evidence; numerical thresholds and allocator selection require separate ratification.
+
+## 10. Actual closure
+
+- [PR #503](https://github.com/KayzenRoot/stormline/pull/503) **squash-merged** em `2026-11-21T21:30:15Z` como `5ae54744…`; auditoria #7069517827 **APPROVED**.
+- Final-head Docs Validation [44951611215](https://github.com/KayzenRoot/stormline/actions/runs/44951611215) SUCCESS; nativa [44951611235](https://github.com/KayzenRoot/stormline/actions/runs/44951611235) SUCCESS, Windows **111/111**, Linux/ASan **110/110**, macOS 109/109, `allocator-benchmark` PASS.
+- Ratificação registrada em PR #502 / merge `6de186a…`.
+- Full Q4 continua BLOCKED; nenhum allocator selecionado/threshold; CORE-02 NOT_QUALIFIED; CORE-03 bloqueado.
