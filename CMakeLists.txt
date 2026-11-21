@@ -495,6 +495,11 @@ if(WIN32)
         tests/core/fake_allocator_bench.cpp
     )
     stormline_core01_apply_options(stormline_core02_fake_allocator_bench PRIVATE)
+
+    add_executable(stormline_core02_q4_profile_runner
+        benchmarks/core02/q4_profile_runner.cpp
+    )
+    stormline_core01_apply_options(stormline_core02_q4_profile_runner PRIVATE)
 endif()
 
 add_executable(stormline_core02_qualification_test
@@ -888,6 +893,14 @@ if(WIN32)
             -FakeExecutable $<TARGET_FILE:stormline_core02_fake_allocator_bench>
     )
     set_tests_properties(core02_q4_helper_failclosed PROPERTIES TIMEOUT 180)
+
+    add_test(NAME core02_q4_profile_runner_failclosed
+        COMMAND powershell -NoProfile -ExecutionPolicy Bypass
+            -File "${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/core02/test_q4_profile_runner.ps1"
+            -RunnerExecutable $<TARGET_FILE:stormline_core02_q4_profile_runner>
+            -FakeExecutable $<TARGET_FILE:stormline_core02_fake_allocator_bench>
+    )
+    set_tests_properties(core02_q4_profile_runner_failclosed PROPERTIES TIMEOUT 180)
 endif()
 
 if(STORMLINE_CORE02_ALLOC_BENCH)
