@@ -1,6 +1,6 @@
 # NLE-PRPLAN-DATA-03-10 — DATA-03 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO DECODER, ARCHIVE, NATIVE FILESYSTEM OR RELEASE`. **Base:** `0c9a5b5`. **Packet:** `NLE-PRPLAN-DATA-03-10`. **Closeout PR:** #628. **ADR:** [ADR-0112](../adr/0112-data-03-governance-slice.md). **Contract:** [data-03-import-v0](../contracts/data-03-import-v0.md).
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO DECODER, ARCHIVE, NATIVE FILESYSTEM OR RELEASE`. **Base:** `8419461`. **Packet:** `NLE-PRPLAN-DATA-03-10`. **Closeout PR:** #628. **ADR:** [ADR-0112](../adr/0112-data-03-governance-slice.md). **Contract:** [data-03-import-v0](../contracts/data-03-import-v0.md).
 
 ## Result
 
@@ -16,7 +16,7 @@ DATA-03 completed its bounded internal sequence:
 | `-06` | audio metadata, AUDIO-01 | `778c06d` |
 | `-07` | composite validation, VAL-01 | `27131f2` |
 | `-08` | provenance receipts, REC-01 | `ae1bab2` |
-| `-09` | QLF-I01..04 integrated qualification | `0c9a5b5` |
+| `-09` | QLF-I01..04 integrated qualification | `8419461` |
 
 All slices were merged through exact-head native CI (Linux, ASan/UBSan, TSan, Windows, macOS) and pt-BR audits with no HIGH/CRITICAL findings. Final qualification on `bed4c5d`: Linux 205/205, ASan/UBSan 205/205, TSan 53/53, Windows 206/206, macOS 204/204.
 
