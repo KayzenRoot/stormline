@@ -6,6 +6,7 @@
 #include <array>
 #include <limits>
 #include <span>
+#include <string_view>
 
 namespace stormline::data::registry {
 
@@ -310,6 +311,118 @@ public:
         return RegistryError::None;
     }
 
+    struct MetadataEntry {
+        std::array<char, kMaxMetadataKeyBytes> key{};
+        u32 key_length{0};
+        std::array<char, kMaxMetadataValueBytes> value{};
+        u32 value_length{0};
+    };
+
+    [[nodiscard]] static RegistryError make_metadata_entry(
+        std::string_view key, std::string_view value, MetadataEntry& out) noexcept {
+        if (key.empty() || key.size() > kMaxMetadataKeyBytes
+            || value.size() > kMaxMetadataValueBytes) {
+            return RegistryError::InvalidArgument;
+        }
+        MetadataEntry entry{};
+        for (u32 index = 0; index < static_cast<u32>(key.size()); ++index) {
+            const char byte = key[index];
+            const bool alpha = (byte >= 'a' && byte <= 'z')
+                || (byte >= 'A' && byte <= 'Z') || (byte >= '0' && byte <= '9');
+            if (!alpha && byte != '_' && byte != '.' && byte != '-') {
+                return RegistryError::InvalidArgument;
+            }
+            entry.key[index] = byte;
+        }
+        for (u32 index = 0; index < static_cast<u32>(value.size()); ++index) {
+            const char byte = value[index];
+            if (byte < 0x20 || byte > 0x7E) {
+                return RegistryError::InvalidArgument;
+            }
+            entry.value[index] = byte;
+        }
+        entry.key_length = static_cast<u32>(key.size());
+        entry.value_length = static_cast<u32>(value.size());
+        out = entry;
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError set_metadata(
+        AssetId id, u32 schema_version,
+        std::span<const MetadataEntry> entries) noexcept {
+        if (!valid(id)) {
+            return RegistryError::InvalidArgument;
+        }
+        if (schema_version != kSupportedSchemaVersion) {
+            return RegistryError::InvalidSchema;
+        }
+        if (entries.size() > kMaxMetadataEntriesPerAsset) {
+            return RegistryError::CapacityFull;
+        }
+        for (u32 index = 0; index < static_cast<u32>(entries.size()); ++index) {
+            if (!valid_metadata_entry(entries[index])) {
+                return RegistryError::InvalidArgument;
+            }
+            for (u32 earlier = 0; earlier < index; ++earlier) {
+                if (entries[earlier].key_length == entries[index].key_length
+                    && std::string_view(entries[earlier].key.data(),
+                                        entries[earlier].key_length)
+                        == std::string_view(entries[index].key.data(),
+                                            entries[index].key_length)) {
+                    return RegistryError::InvalidArgument;
+                }
+            }
+        }
+        u32 asset_index = 0;
+        while (asset_index < size_ && !same_id(assets_[asset_index].id, id)) {
+            ++asset_index;
+        }
+        if (asset_index >= size_) {
+            return RegistryError::NotFound;
+        }
+        if (assets_[asset_index].status != AssetStatus::Active) {
+            return RegistryError::Tombstoned;
+        }
+        remove_metadata(id);
+        for (const MetadataEntry& entry : entries) {
+            metadata_[metadata_count_] = MetadataRecord{id, entry};
+            ++metadata_count_;
+        }
+        assets_[asset_index].schema_version =
+            entries.empty() ? 0 : schema_version;
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError metadata(
+        AssetId id, std::span<MetadataEntry> output, u32& out_count) const noexcept {
+        out_count = 0;
+        if (!valid(id)) {
+            return RegistryError::InvalidArgument;
+        }
+        AssetRecord asset{};
+        const RegistryError asset_status = find(id, asset);
+        if (asset_status != RegistryError::None) {
+            return asset_status;
+        }
+        u32 required = 0;
+        for (u32 index = 0; index < metadata_count_; ++index) {
+            if (same_id(metadata_[index].asset, id)) {
+                ++required;
+            }
+        }
+        out_count = required;
+        if (required > output.size()) {
+            return RegistryError::BufferFull;
+        }
+        u32 written = 0;
+        for (u32 index = 0; index < metadata_count_; ++index) {
+            if (same_id(metadata_[index].asset, id)) {
+                output[written++] = metadata_[index].entry;
+            }
+        }
+        return RegistryError::None;
+    }
+
     struct AssetQuery {
         ProjectId project{};
         bool has_kind{false};
@@ -414,6 +527,28 @@ private:
         return lhs.high == rhs.high && lhs.low == rhs.low;
     }
 
+    [[nodiscard]] static bool valid_metadata_entry(const MetadataEntry& entry) noexcept {
+        if (entry.key_length == 0 || entry.key_length > kMaxMetadataKeyBytes
+            || entry.value_length > kMaxMetadataValueBytes) {
+            return false;
+        }
+        for (u32 index = 0; index < entry.key_length; ++index) {
+            const char byte = entry.key[index];
+            const bool alpha = (byte >= 'a' && byte <= 'z')
+                || (byte >= 'A' && byte <= 'Z') || (byte >= '0' && byte <= '9');
+            if (!alpha && byte != '_' && byte != '.' && byte != '-') {
+                return false;
+            }
+        }
+        for (u32 index = 0; index < entry.value_length; ++index) {
+            const char byte = entry.value[index];
+            if (byte < 0x20 || byte > 0x7E) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     static bool same_tag(const Tag& lhs, const Tag& rhs) noexcept {
         if (lhs.length != rhs.length) {
             return false;
@@ -494,7 +629,28 @@ private:
 
     std::array<AssetRecord, kMaxAssets> assets_{};
     std::array<DependencyEdge, kMaxDependencies> edges_{};
+    struct MetadataRecord {
+        AssetId asset{};
+        MetadataEntry entry{};
+    };
+
+    void remove_metadata(AssetId id) noexcept {
+        u32 index = 0;
+        while (index < metadata_count_) {
+            if (same_id(metadata_[index].asset, id)) {
+                for (u32 next = index + 1; next < metadata_count_; ++next) {
+                    metadata_[next - 1] = metadata_[next];
+                }
+                --metadata_count_;
+            } else {
+                ++index;
+            }
+        }
+    }
+
     std::array<TagEntry, kMaxAssets * kMaxTagsPerAsset> tags_{};
+    std::array<MetadataRecord, kMaxAssets * kMaxMetadataEntriesPerAsset> metadata_{};
+    u32 metadata_count_{0};
     u32 size_{0};
     u32 dependency_count_{0};
     u32 tag_count_{0};
