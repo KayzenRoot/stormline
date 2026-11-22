@@ -718,6 +718,13 @@ target_link_libraries(stormline_data01_mount_test PRIVATE stormline_data01_vfs)
 stormline_core01_apply_options(stormline_data01_mount_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data01_mount_test)
 
+add_executable(stormline_data01_overlay_test
+    tests/core/data01_overlay_tests.cpp
+)
+target_link_libraries(stormline_data01_overlay_test PRIVATE stormline_data01_vfs)
+stormline_core01_apply_options(stormline_data01_overlay_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data01_overlay_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1413,6 +1420,11 @@ add_test(NAME data01_mount_01
     COMMAND stormline_data01_mount_test mount01
 )
 set_tests_properties(data01_mount_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data01_overlay_01
+    COMMAND stormline_data01_overlay_test overlay01
+)
+set_tests_properties(data01_overlay_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
