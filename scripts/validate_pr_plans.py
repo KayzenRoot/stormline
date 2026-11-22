@@ -2071,7 +2071,7 @@ DATA05_03_ACTIVATION_SOURCES = {
 }
 
 DATA05_04_PINNED_SOURCE_BLOBS = {
-    "checkpoint": "7e1bc06dede25af9e5f7ed0a1eb006f84ddb5e55",
+    "checkpoint": "e8feef8fcec0b0d922c40be181a8e1ac65f98ee3",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
