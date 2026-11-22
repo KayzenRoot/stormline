@@ -704,6 +704,13 @@ target_include_directories(stormline_data01_vfs INTERFACE
 )
 target_compile_features(stormline_data01_vfs INTERFACE cxx_std_20)
 
+add_library(stormline_data02_registry INTERFACE)
+target_include_directories(stormline_data02_registry INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_data02_registry INTERFACE stormline_data01_vfs)
+target_compile_features(stormline_data02_registry INTERFACE cxx_std_20)
+
 add_executable(stormline_data01_path_test
     tests/core/data01_path_tests.cpp
 )
@@ -752,6 +759,13 @@ add_executable(stormline_data01_vfs_qualification_test
 target_link_libraries(stormline_data01_vfs_qualification_test PRIVATE stormline_data01_vfs)
 stormline_core01_apply_options(stormline_data01_vfs_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data01_vfs_qualification_test)
+
+add_executable(stormline_data02_id_test
+    tests/core/data02_id_tests.cpp
+)
+target_link_libraries(stormline_data02_id_test PRIVATE stormline_data02_registry)
+stormline_core01_apply_options(stormline_data02_id_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data02_id_test)
 
 enable_testing()
 
@@ -1488,6 +1502,11 @@ add_test(NAME data01_vfs_qualification_04
     COMMAND stormline_data01_vfs_qualification_test qlf04
 )
 set_tests_properties(data01_vfs_qualification_04 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data02_id_01
+    COMMAND stormline_data02_id_test id01
+)
+set_tests_properties(data02_id_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
