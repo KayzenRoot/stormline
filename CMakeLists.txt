@@ -663,6 +663,13 @@ target_link_libraries(stormline_core06_trace_test PRIVATE stormline_core06_diag)
 stormline_core01_apply_options(stormline_core06_trace_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core06_trace_test)
 
+add_executable(stormline_core06_counter_test
+    tests/core/core06_counter_tests.cpp
+)
+target_link_libraries(stormline_core06_counter_test PRIVATE stormline_core06_diag)
+stormline_core01_apply_options(stormline_core06_counter_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core06_counter_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1308,6 +1315,11 @@ add_test(NAME core06_trace_01
     COMMAND stormline_core06_trace_test trace01
 )
 set_tests_properties(core06_trace_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME core06_counter_01
+    COMMAND stormline_core06_counter_test counter01
+)
+set_tests_properties(core06_counter_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
