@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-05-04 — matrix/quaternion evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `076d6444c195a911d2625010e4ea8a1460cedc9c`. **Gate:** [NLE-PRPLAN-CORE-05-04-G6-ACTIVATION](NLE-PRPLAN-CORE-05-04-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-04](../work-orders/NLE-PRPLAN-CORE-05-04.md).
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `076d6444c195a911d2625010e4ea8a1460cedc9c`. **Implementation head:** `560e028`. **Gate:** [NLE-PRPLAN-CORE-05-04-G6-ACTIVATION](NLE-PRPLAN-CORE-05-04-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-04](../work-orders/NLE-PRPLAN-CORE-05-04.md).
 
 ## Scope delivered
 
@@ -32,7 +32,14 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core05_matrix_q
 All three modes exited 0. The same source rebuilt with
 `-fsanitize=address,undefined -fno-omit-frame-pointer`; all three modes exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No benchmark, hardware, SIMD or performance result exists.
+Native CI on implementation head `560e028`:
+[run 45017038311](https://github.com/KayzenRoot/stormline/actions/runs/45017038311)
+SUCCESS — Linux **153/153**, Linux ASan/UBSan **153/153**, TSan
+**43/43**, Windows **154/154**, macOS **152/152**; allocator benchmark
+1/1 per target. Docs Validation
+[45017038312](https://github.com/KayzenRoot/stormline/actions/runs/45017038312)
+SUCCESS; SonarCloud and Socket SUCCESS. No benchmark, hardware, SIMD or
+performance result exists.
 
 ## Errors and corrections
 
