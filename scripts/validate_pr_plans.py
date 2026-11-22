@@ -2011,7 +2011,7 @@ DATA03_06_ACTIVATION_SOURCES = {
 }
 
 DATA03_07_PINNED_SOURCE_BLOBS = {
-    "checkpoint": "06242cc09e1fbe5f2f96500227e7c3e97051868d",
+    "checkpoint": "27eda3308e814606c9420845b3b937953ee1beaf",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
