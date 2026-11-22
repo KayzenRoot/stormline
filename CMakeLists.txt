@@ -774,6 +774,13 @@ target_link_libraries(stormline_data02_dependency_test PRIVATE stormline_data02_
 stormline_core01_apply_options(stormline_data02_dependency_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data02_dependency_test)
 
+add_executable(stormline_data02_tag_test
+    tests/core/data02_tag_tests.cpp
+)
+target_link_libraries(stormline_data02_tag_test PRIVATE stormline_data02_registry)
+stormline_core01_apply_options(stormline_data02_tag_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data02_tag_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1519,6 +1526,11 @@ add_test(NAME data02_dependency_01
     COMMAND stormline_data02_dependency_test dep01
 )
 set_tests_properties(data02_dependency_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data02_tag_01
+    COMMAND stormline_data02_tag_test tag01
+)
+set_tests_properties(data02_tag_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed

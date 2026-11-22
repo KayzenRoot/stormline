@@ -195,6 +195,121 @@ public:
         return copy_sorted(matches, count, output, out_count);
     }
 
+    struct Tag {
+        std::array<char, kMaxTagBytes> bytes{};
+        u32 length{0};
+    };
+
+    [[nodiscard]] static RegistryError make_tag(
+        std::string_view text, Tag& out) noexcept {
+        if (text.empty() || text.size() > kMaxTagBytes) {
+            return RegistryError::InvalidTag;
+        }
+        Tag tag{};
+        for (u32 index = 0; index < static_cast<u32>(text.size()); ++index) {
+            const char byte = text[index];
+            if (byte < 0x21 || byte > 0x7E || byte == '/'
+                || byte == ':' || static_cast<unsigned char>(byte) == 0x5Cu) {
+                return RegistryError::InvalidTag;
+            }
+            tag.bytes[index] = byte;
+        }
+        tag.length = static_cast<u32>(text.size());
+        out = tag;
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError add_tag(AssetId id, const Tag& tag) noexcept {
+        if (!valid(id) || tag.length == 0 || tag.length > kMaxTagBytes) {
+            return RegistryError::InvalidArgument;
+        }
+        AssetRecord asset{};
+        const RegistryError asset_status = find(id, asset);
+        if (asset_status != RegistryError::None) {
+            return asset_status;
+        }
+        u32 count = 0;
+        for (u32 index = 0; index < tag_count_; ++index) {
+            if (!same_id(tags_[index].asset, id)) {
+                continue;
+            }
+            ++count;
+            if (same_tag(tags_[index].tag, tag)) {
+                return RegistryError::None;
+            }
+        }
+        if (count >= kMaxTagsPerAsset) {
+            return RegistryError::CapacityFull;
+        }
+        if (tag_count_ >= kMaxAssets * kMaxTagsPerAsset) {
+            return RegistryError::CapacityFull;
+        }
+        tags_[tag_count_] = TagEntry{id, tag};
+        ++tag_count_;
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError remove_tag(AssetId id, const Tag& tag) noexcept {
+        if (!valid(id) || tag.length == 0) {
+            return RegistryError::InvalidArgument;
+        }
+        AssetRecord asset{};
+        const RegistryError asset_status = find(id, asset);
+        if (asset_status != RegistryError::None) {
+            return asset_status;
+        }
+        for (u32 index = 0; index < tag_count_; ++index) {
+            if (!same_id(tags_[index].asset, id) || !same_tag(tags_[index].tag, tag)) {
+                continue;
+            }
+            for (u32 next = index + 1; next < tag_count_; ++next) {
+                tags_[next - 1] = tags_[next];
+            }
+            --tag_count_;
+            return RegistryError::None;
+        }
+        return RegistryError::NotFound;
+    }
+
+    [[nodiscard]] bool has_tag(AssetId id, const Tag& tag) const noexcept {
+        for (u32 index = 0; index < tag_count_; ++index) {
+            if (same_id(tags_[index].asset, id) && same_tag(tags_[index].tag, tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    [[nodiscard]] RegistryError tags_of(
+        AssetId id, std::span<Tag> output, u32& out_count) const noexcept {
+        out_count = 0;
+        if (!valid(id)) {
+            return RegistryError::InvalidArgument;
+        }
+        AssetRecord asset{};
+        const RegistryError asset_status = find(id, asset);
+        if (asset_status != RegistryError::None) {
+            return asset_status;
+        }
+        u32 required = 0;
+        for (u32 index = 0; index < tag_count_; ++index) {
+            if (same_id(tags_[index].asset, id)) {
+                ++required;
+            }
+        }
+        out_count = required;
+        if (required > output.size()) {
+            return RegistryError::BufferFull;
+        }
+        u32 written = 0;
+        for (u32 index = 0; index < tag_count_; ++index) {
+            if (same_id(tags_[index].asset, id)) {
+                output[written++] = tags_[index].tag;
+            }
+        }
+        return RegistryError::None;
+    }
+
     [[nodiscard]] u32 dependency_count() const noexcept { return dependency_count_; }
 
     [[nodiscard]] u32 unresolved_dependencies() const noexcept {
@@ -233,6 +348,18 @@ public:
 private:
     static bool same_id(AssetId lhs, AssetId rhs) noexcept {
         return lhs.high == rhs.high && lhs.low == rhs.low;
+    }
+
+    static bool same_tag(const Tag& lhs, const Tag& rhs) noexcept {
+        if (lhs.length != rhs.length) {
+            return false;
+        }
+        for (u32 index = 0; index < lhs.length; ++index) {
+            if (lhs.bytes[index] != rhs.bytes[index]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     [[nodiscard]] bool reaches(AssetId start, AssetId target) const noexcept {
@@ -296,10 +423,17 @@ private:
         return RegistryError::None;
     }
 
+    struct TagEntry {
+        AssetId asset{};
+        Tag tag{};
+    };
+
     std::array<AssetRecord, kMaxAssets> assets_{};
     std::array<DependencyEdge, kMaxDependencies> edges_{};
+    std::array<TagEntry, kMaxAssets * kMaxTagsPerAsset> tags_{};
     u32 size_{0};
     u32 dependency_count_{0};
+    u32 tag_count_{0};
 };
 
 }  // namespace stormline::data::registry
