@@ -89,9 +89,10 @@ DATA04_05_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-05.json
 DATA04_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-06.json"
 DATA04_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-07.json"
 DATA05_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-05-01.json"
+DATA05_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-05-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = DATA05_01_ACTIVATION_FILE
+ACTIVATION_FILE = DATA05_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -660,7 +661,7 @@ DATA05_CAPABILITY_ADMISSION = {
 }
 
 DATA05_01_GATE_PR = 642
-DATA05_02_GATE_PR = 0
+DATA05_02_GATE_PR = 643
 DATA05_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0}
 DATA05_STATE = {
     DATA05_01_APPROVED_STATUS: (1, 0, 0),
@@ -1993,6 +1994,40 @@ DATA05_01_ACTIVATION_SOURCES = {
     "adr_0114": "docs/adr/0114-data-05-governance-slice.md",
     "data05_architecture": "docs/architecture/data-05-cooking-streaming-bundles.md",
     "data05_cook_api": "docs/contracts/data-05-cook-bundle-api.md",
+    "data05_governance_contract": "docs/contracts/data-05-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "data05_plan": "docs/pr-plans/DATA-05.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+DATA05_02_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "866690f12ad4e731ba6c716c9ee1af00fb405075",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0013": "ab661c5111a1d4aebf79381c0a3834e572c0c762",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0114": "ce32a69b7f01d4b15f402dada1d5f70cf1557244",
+    "data05_architecture": "0e77be93e7d0fa2404acd297b98c1ef4545cb948",
+    "data05_cook_api": "f78d246ac2730f503ede0a1823334a39ba4040e7",
+    "data05_bundle_contract": "d1f4b3717a391c09ccd47a2b2e2a1261d1e4b348",
+    "data05_governance_contract": "d9535c94b47cdc15a5846bd802d7307f4bd88ba7",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "data05_plan": "d3560a536eb79e02a5054462166e69e1ef32eeb7",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+DATA05_02_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0013": "docs/adr/0013-data-05-cooking-policy.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0114": "docs/adr/0114-data-05-governance-slice.md",
+    "data05_architecture": "docs/architecture/data-05-cooking-streaming-bundles.md",
+    "data05_cook_api": "docs/contracts/data-05-cook-bundle-api.md",
+    "data05_bundle_contract": "docs/contracts/data-05-bundle-v0.md",
     "data05_governance_contract": "docs/contracts/data-05-governance-v0.md",
     "module_catalog": "docs/product/module-catalog.md",
     "data05_plan": "docs/pr-plans/DATA-05.md",
@@ -4328,6 +4363,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, DATA04_02_ACTIVATION_SOURCES, DATA04_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-DATA-05-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-DATA-05-02",
+            "module_id": "DATA-05",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/data05-02-continuation",
+            "approved_adr": "docs/adr/0114-data-05-governance-slice.md",
+            "approved_contract": "docs/contracts/data-05-bundle-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-DATA-05-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-05-02-G6-ACTIVATION.md",
+            "gate_base_sha": "23544dacb4522f33e11c78eb49b98b36c8627960",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, DATA05_02_ACTIVATION_SOURCES, DATA05_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -7865,6 +7922,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-04-03.json"
     elif status == DATA04_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-04-02.json"
+    elif status == DATA05_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-data-05-02.json"
     elif status == DATA05_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-05-01.json"
     elif status == DATA04_01_APPROVED_STATUS:
