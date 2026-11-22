@@ -55,3 +55,11 @@ Revert this PR normally; remove `ids.hpp`, the ID test and additive CMake/workfl
 ## Proposed checkpoint delta
 
 After merge, record `CORE-05-08` as `COMPLETED`, manifest `CORE05_08_COMPLETED_REST_BLOCKED`: **694 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 44 `COMPLETED`, 10 approved gates**, and keep `CORE-05-09`/`-10` blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#554](https://github.com/KayzenRoot/stormline/pull/554) squash-merged as `3ed321c667c9d98203df6dd9cede19586135310f`.
+- Final implementation head `74d348788038bdb7abe91b3764a949bcdd0de0d0`; exact-head native run [45021421595](https://github.com/KayzenRoot/stormline/actions/runs/45021421595) SUCCESS: Linux 159/159, ASan/UBSan 159/159, TSan 49/49, Windows 160/160, macOS 158/158.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/554#issuecomment-7079033388).
+- Manifest after closeout: `CORE05_08_COMPLETED_REST_BLOCKED` — 694 blocked, 0 ready, 44 completed, 10 approved gates. `CORE-05-09`/`-10` remain `PLANNED_BLOCKED`.
+- This completion does not claim CORE-05 module completion, ABI, release, ECS, persistence or replication.
