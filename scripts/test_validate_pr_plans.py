@@ -79,7 +79,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.data02_07_activation = json.loads(v.DATA02_07_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.data02_08_activation = json.loads(v.DATA02_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.data02_09_activation = json.loads(v.DATA02_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.DATA02_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.data03_01_activation = json.loads(v.DATA03_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.DATA03_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -382,6 +383,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual("INTERNAL_ONLY", data02[8]["release_class"])
         self.assertEqual("COMPLETED", data02[9]["status"])
         self.assertEqual(v.DATA02_CODE_PRS[10], data02[9]["github_pr"])
+        data03 = self.manifest["modules"][8]["packets"]
+        self.assertEqual("APPROVED_GOVERNANCE", data03[0]["status"])
+        self.assertEqual(v.DATA03_01_GATE_PR, data03[0]["github_pr"])
+        self.assertEqual("PLANNED_BLOCKED", data03[1]["status"])
+        self.assertIsNone(data03[1]["github_pr"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
         self.assertEqual(v.CORE04_01_GATE_PR, core04[0]["github_pr"])
@@ -1804,6 +1810,25 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_data03_01_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-DATA-03-01",
+                         self.data03_01_activation["selected_packet_id"])
+        self.assertEqual("DATA-03", self.data03_01_activation["module_id"])
+        self.assertEqual("LOW", self.data03_01_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.data03_01_activation["release_class"])
+        self.assertEqual("docs/contracts/data-03-governance-v0.md",
+                         self.data03_01_activation["approved_contract"])
+        self.assertEqual(v.DATA03_CAPABILITY_ADMISSION,
+                         self.data03_01_activation["capability_admission"])
+        bad = copy.deepcopy(self.data03_01_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_data03_01_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.data03_01_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_data01_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-DATA-01-03", "--json"],
@@ -1898,6 +1923,13 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_data02_09_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-DATA-02-09", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_data03_01_governance_selector_denies(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-DATA-03-01", "--json"],
                                  capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
