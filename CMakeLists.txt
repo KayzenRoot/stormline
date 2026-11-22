@@ -629,6 +629,13 @@ target_link_libraries(stormline_core05_precision_test PRIVATE stormline_core05_m
 stormline_core01_apply_options(stormline_core05_precision_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core05_precision_test)
 
+add_executable(stormline_core05_id_test
+    tests/core/core05_id_tests.cpp
+)
+target_link_libraries(stormline_core05_id_test PRIVATE stormline_core05_math)
+stormline_core01_apply_options(stormline_core05_id_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core05_id_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1219,6 +1226,18 @@ add_test(NAME core05_precision_math09
 set_tests_properties(
     core05_precision_math08
     core05_precision_math09
+    PROPERTIES TIMEOUT 60
+)
+
+add_test(NAME core05_id_math10
+    COMMAND stormline_core05_id_test math10
+)
+add_test(NAME core05_id_math11
+    COMMAND stormline_core05_id_test math11
+)
+set_tests_properties(
+    core05_id_math10
+    core05_id_math11
     PROPERTIES TIMEOUT 60
 )
 
