@@ -698,6 +698,19 @@ target_link_libraries(stormline_core06_qualification_test PRIVATE stormline_core
 stormline_core01_apply_options(stormline_core06_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core06_qualification_test)
 
+add_library(stormline_data01_vfs INTERFACE)
+target_include_directories(stormline_data01_vfs INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_data01_vfs INTERFACE cxx_std_20)
+
+add_executable(stormline_data01_path_test
+    tests/core/data01_path_tests.cpp
+)
+target_link_libraries(stormline_data01_path_test PRIVATE stormline_data01_vfs)
+stormline_core01_apply_options(stormline_data01_path_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data01_path_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1383,6 +1396,11 @@ set_tests_properties(
     core06_qualification_overload
     PROPERTIES TIMEOUT 120
 )
+
+add_test(NAME data01_path_01
+    COMMAND stormline_data01_path_test path01
+)
+set_tests_properties(data01_path_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
