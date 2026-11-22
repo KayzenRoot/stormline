@@ -15,7 +15,10 @@ ClockSample SteadyClockSource::sample() noexcept {
         return ClockSample{0, TimeError::NonMonotonicSample};
     }
     const auto elapsed = now - epoch_;
-    if (elapsed > std::chrono::nanoseconds::max()) {
+    const auto elapsed_seconds =
+        std::chrono::duration_cast<std::chrono::seconds>(elapsed).count();
+    constexpr std::int64_t max_nanoseconds = std::numeric_limits<std::int64_t>::max();
+    if (elapsed_seconds > (max_nanoseconds - 999'999'999) / 1'000'000'000) {
         return ClockSample{0, TimeError::DurationOverflow};
     }
     const auto nanoseconds =
