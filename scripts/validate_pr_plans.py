@@ -74,9 +74,10 @@ DATA02_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-02-08.json
 DATA02_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-02-09.json"
 DATA03_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-01.json"
 DATA03_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-02.json"
+DATA03_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-03.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = DATA03_02_ACTIVATION_FILE
+ACTIVATION_FILE = DATA03_03_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -1869,6 +1870,40 @@ DATA03_02_ACTIVATION_SOURCES = {
     "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
+DATA03_03_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "999366ff373954178be7b5eeddcb30fb85b4ba93",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0011": "6a885ffd56ebf3a0c8fb9aa657ba2ba28cac05b3",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0112": "bedd07f88b111b9781c8be1d052b5ad2d7def923",
+    "data03_architecture": "d7a31bf99f7eae0458f4b344cd94cbeea3f26699",
+    "data03_import_api": "b8b7e6b9bf1ad29cfb26713671c0d939ef1a91e9",
+    "data03_import_contract": "2d893edd867be8dac20494bc50e0cd32a0b86a24",
+    "data03_governance_contract": "193f076cbbac11bbfee1b04c12e85013b66b9265",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "data03_plan": "c34d5325aa2b717a0a77f1d8a4c08cd97e9a654d",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+DATA03_03_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0011": "docs/adr/0011-data-03-import-policy.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0112": "docs/adr/0112-data-03-governance-slice.md",
+    "data03_architecture": "docs/architecture/data-03-import-conversion-pipeline.md",
+    "data03_import_api": "docs/contracts/data-03-import-api.md",
+    "data03_import_contract": "docs/contracts/data-03-import-v0.md",
+    "data03_governance_contract": "docs/contracts/data-03-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "data03_plan": "docs/pr-plans/DATA-03.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
 DATA02_01_PINNED_SOURCE_BLOBS = {
     "checkpoint": "25338484a30e90cdc91667c7af6ccd905353e02e",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
@@ -3350,6 +3385,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, DATA02_02_ACTIVATION_SOURCES, DATA02_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-DATA-03-03":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-DATA-03-03",
+            "module_id": "DATA-03",
+            "risk": "ELEVATED",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/data03-03-continuation",
+            "approved_adr": "docs/adr/0112-data-03-governance-slice.md",
+            "approved_contract": "docs/contracts/data-03-import-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-DATA-03-03.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-03-03-G6-ACTIVATION.md",
+            "gate_base_sha": "8d3fb1cc65cdf4817e30b23f258d8da76b9b0633",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, DATA03_03_ACTIVATION_SOURCES, DATA03_03_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -6055,6 +6112,11 @@ def expected_packet_state(
     return "PLANNED_BLOCKED", None
 
 
+DATA03_SLICE_METADATA = {
+    3: ("docs/adr/0112-data-03-governance-slice.md",
+        "docs/evidence/NLE-PRPLAN-DATA-03-03-G6-ACTIVATION.md"),
+}
+
 def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
     if module_id == "CORE-01" and idx in SLICE_METADATA:
         return SLICE_METADATA[idx]
@@ -6072,6 +6134,8 @@ def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
         return DATA01_SLICE_METADATA[idx]
     if module_id == "DATA-02" and idx in DATA02_SLICE_METADATA:
         return DATA02_SLICE_METADATA[idx]
+    if module_id == "DATA-03" and idx in DATA03_SLICE_METADATA:
+        return DATA03_SLICE_METADATA[idx]
     return None
 
 
@@ -6204,7 +6268,7 @@ def validate_manifest(
                 if want_status not in ("EXECUTOR_READY", "COMPLETED"):
                     issues.append(f"{mid}: slice metadata on a non-completed packet")
                 expected_risk = ("ELEVATED"
-                                 if (mid in ("CORE-03", "CORE-04", "CORE-05", "CORE-06", "DATA-01", "DATA-02") and idx >= 3)
+                                 if (mid in ("CORE-03", "CORE-04", "CORE-05", "CORE-06", "DATA-01", "DATA-02", "DATA-03") and idx >= 3)
                                  else "STANDARD")
                 if (packet.get("risk") != expected_risk
                       or packet.get("release_class") != "INTERNAL_ONLY"
@@ -6250,6 +6314,12 @@ def validate_manifest(
                         expected=DATA02_CAPABILITY_ADMISSION,
                         allowed_prefix="NLE-PRPLAN-DATA-01-",
                         label=f"DATA-02-{idx:02}"))
+                if mid == "DATA-03" and idx == 3:
+                    issues.extend(validate_capability_admission(
+                        packet, status_by_packet, original["dependencies"][0],
+                        expected=DATA03_CAPABILITY_ADMISSION,
+                        allowed_prefix="NLE-PRPLAN-DATA-02-",
+                        label=f"DATA-03-{idx:02}"))
             elif any(field in packet for field in (
                 "risk", "release_class", "approved_adr", "activation_evidence",
                 "capability_admission"
@@ -6734,6 +6804,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-02-03.json"
     elif status == DATA02_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-02-02.json"
+    elif status == DATA03_03_READY_STATUS:
+        activation_path = root / "docs/queue/packet-activation-data-03-03.json"
     elif status == DATA03_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-03-02.json"
     elif status == DATA03_01_APPROVED_STATUS:
