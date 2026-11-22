@@ -559,6 +559,7 @@ stormline_core_internal_apply_tsan(stormline_core03_qualification_test)
 
 add_library(stormline_core04_time STATIC
     src/stormline/core/time/clock_source.cpp
+    src/stormline/core/time/timeline.cpp
 )
 target_include_directories(stormline_core04_time PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
@@ -572,6 +573,13 @@ add_executable(stormline_core04_clock_test
 target_link_libraries(stormline_core04_clock_test PRIVATE stormline_core04_time)
 stormline_core01_apply_options(stormline_core04_clock_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core04_clock_test)
+
+add_executable(stormline_core04_timeline_test
+    tests/core/timeline_tests.cpp
+)
+target_link_libraries(stormline_core04_timeline_test PRIVATE stormline_core04_time)
+stormline_core01_apply_options(stormline_core04_timeline_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core04_timeline_test)
 
 enable_testing()
 
@@ -1038,6 +1046,54 @@ set_tests_properties(
     core04_clock_defaults
     core04_clock_lifetime
     PROPERTIES TIMEOUT 120
+)
+
+add_test(NAME core04_timeline_fps
+    COMMAND stormline_core04_timeline_test fps
+)
+add_test(NAME core04_timeline_long_run
+    COMMAND stormline_core04_timeline_test long_run
+)
+add_test(NAME core04_timeline_pause
+    COMMAND stormline_core04_timeline_test pause
+)
+add_test(NAME core04_timeline_step
+    COMMAND stormline_core04_timeline_test step
+)
+add_test(NAME core04_timeline_drop
+    COMMAND stormline_core04_timeline_test drop
+)
+add_test(NAME core04_timeline_carry
+    COMMAND stormline_core04_timeline_test carry
+)
+add_test(NAME core04_timeline_scale
+    COMMAND stormline_core04_timeline_test scale
+)
+add_test(NAME core04_timeline_overflow
+    COMMAND stormline_core04_timeline_test overflow
+)
+add_test(NAME core04_timeline_replay
+    COMMAND stormline_core04_timeline_test replay
+)
+add_test(NAME core04_timeline_lifecycle
+    COMMAND stormline_core04_timeline_test lifecycle
+)
+add_test(NAME core04_timeline_determinism
+    COMMAND stormline_core04_timeline_test determinism
+)
+set_tests_properties(
+    core04_timeline_fps
+    core04_timeline_long_run
+    core04_timeline_pause
+    core04_timeline_step
+    core04_timeline_drop
+    core04_timeline_carry
+    core04_timeline_scale
+    core04_timeline_overflow
+    core04_timeline_replay
+    core04_timeline_lifecycle
+    core04_timeline_determinism
+    PROPERTIES TIMEOUT 300
 )
 
 if(WIN32)
