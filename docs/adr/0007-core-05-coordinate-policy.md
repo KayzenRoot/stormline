@@ -1,6 +1,6 @@
 # ADR-0007 — CORE-05 Math, Units and World Coordinate Policy
 
-**State:** PROPOSED; NOT APPROVED FOR IMPLEMENTATION  
+**State:** OWNER-RATIFIED AS PLANNING DIRECTION ONLY per [ADR-0108](0108-core-05-governance-slice.md); implementation requires `CORE-05-02` contract, individual G6 and owner authorization.  
 **Date:** 2026-11-14 | **Work Order:** NLE-P00-WO-002-CORE-05 | **Issue:** #102
 
 ## Context
