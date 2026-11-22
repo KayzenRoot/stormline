@@ -858,6 +858,13 @@ target_link_libraries(stormline_data03_receipt_test PRIVATE stormline_data03_imp
 stormline_core01_apply_options(stormline_data03_receipt_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data03_receipt_test)
 
+add_executable(stormline_data03_import_qualification_test
+    tests/core/data03_import_qualification_tests.cpp
+)
+target_link_libraries(stormline_data03_import_qualification_test PRIVATE stormline_data03_import)
+stormline_core01_apply_options(stormline_data03_import_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data03_import_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1673,6 +1680,26 @@ add_test(NAME data03_receipt_01
     COMMAND stormline_data03_receipt_test rec01
 )
 set_tests_properties(data03_receipt_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data03_import_qualification_01
+    COMMAND stormline_data03_import_qualification_test qlf01
+)
+set_tests_properties(data03_import_qualification_01 PROPERTIES TIMEOUT 120)
+
+add_test(NAME data03_import_qualification_02
+    COMMAND stormline_data03_import_qualification_test qlf02
+)
+set_tests_properties(data03_import_qualification_02 PROPERTIES TIMEOUT 120)
+
+add_test(NAME data03_import_qualification_03
+    COMMAND stormline_data03_import_qualification_test qlf03
+)
+set_tests_properties(data03_import_qualification_03 PROPERTIES TIMEOUT 120)
+
+add_test(NAME data03_import_qualification_04
+    COMMAND stormline_data03_import_qualification_test qlf04
+)
+set_tests_properties(data03_import_qualification_04 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
