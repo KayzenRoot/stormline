@@ -98,7 +98,15 @@ public:
 private:
     DeviceState state_{DeviceState::Uninitialized};
     u64 generation_{0};
+    struct ResourceSlot {
+        bool used{false};
+        ResourceClass resource_class{ResourceClass::Buffer};
+        u32 size{0};
+        u32 slot_generation{0};
+    };
+
     Capabilities capabilities_{};
+    std::array<ResourceSlot, kMaxResources> resources_{};
     u32 submit_count_{0};
 };
 
