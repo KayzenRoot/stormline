@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "DATA05_02_APPROVED_CONTRACT_ONLY",
+  "status": "DATA05_03_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -2946,8 +2946,32 @@
             "DATA-03",
             "DATA-04"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0114-data-05-governance-slice.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-05-03-G6-ACTIVATION.md",
+          "capability_admission": {
+            "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+            "formal_dependency": "DATA-03",
+            "module_completion_claimed": false,
+            "required_capabilities": [
+              {"id": "DATA03_IMPORTERS", "satisfied_by": "NLE-PRPLAN-DATA-03-03"},
+              {"id": "DATA03_TEXTURES", "satisfied_by": "NLE-PRPLAN-DATA-03-04"},
+              {"id": "DATA03_ANIMATIONS", "satisfied_by": "NLE-PRPLAN-DATA-03-05"},
+              {"id": "DATA03_AUDIO", "satisfied_by": "NLE-PRPLAN-DATA-03-06"},
+              {"id": "DATA03_VALIDATION", "satisfied_by": "NLE-PRPLAN-DATA-03-07"},
+              {"id": "DATA03_RECEIPTS", "satisfied_by": "NLE-PRPLAN-DATA-03-08"},
+              {"id": "DATA03_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-DATA-03-09"},
+              {"id": "DATA04_SCHEMA", "satisfied_by": "NLE-PRPLAN-DATA-04-03"},
+              {"id": "DATA04_DOCUMENT", "satisfied_by": "NLE-PRPLAN-DATA-04-04"},
+              {"id": "DATA04_PATCH", "satisfied_by": "NLE-PRPLAN-DATA-04-05"},
+              {"id": "DATA04_DIFF", "satisfied_by": "NLE-PRPLAN-DATA-04-06"},
+              {"id": "DATA04_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-DATA-04-07"}
+            ],
+            "not_required": ["external_codec", "signing", "archive", "persistence", "network", "native_io", "mcp", "public_abi", "release"]
+          }
         },
         {
           "packet_id": "NLE-PRPLAN-DATA-05-04",
