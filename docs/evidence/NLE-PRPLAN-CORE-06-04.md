@@ -54,3 +54,11 @@ Revert this PR normally; remove `trace.hpp`, the trace test and additive CMake/w
 ## Proposed checkpoint delta
 
 After merge, record `CORE-06-04` as `COMPLETED`, manifest `CORE06_04_COMPLETED_REST_BLOCKED`: **688 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 48 `COMPLETED`, 12 approved gates**, and keep every later packet blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#566](https://github.com/KayzenRoot/stormline/pull/566) squash-merged as `2b4283c9b73196d23282c8b9b55c7cf27aa7660c`.
+- Final implementation head `b7cdf4c`; exact-head native run [45026403835](https://github.com/KayzenRoot/stormline/actions/runs/45026403835) SUCCESS: Linux 167/167, ASan/UBSan 167/167, TSan 53/53, Windows 168/168, macOS 166/166.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/566#issuecomment-7079702029).
+- Manifest after closeout: `CORE06_04_COMPLETED_REST_BLOCKED` — 688 blocked, 0 ready, 48 completed, 12 approved gates.
+- Internal traces only; no profiler/network/file/ABI/release.
