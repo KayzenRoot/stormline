@@ -1,6 +1,6 @@
 # NLE-PRPLAN-DATA-01-10 — DATA-01 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO NATIVE FILESYSTEM, ARCHIVE, HARDWARE OR RELEASE`. **Base:** `706d5a8`. **Packet:** `NLE-PRPLAN-DATA-01-10`. **ADR:** [ADR-0110](../adr/0110-data-01-governance-slice.md). **Contract:** [data-01-vfs-v0](../contracts/data-01-vfs-v0.md).
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO NATIVE FILESYSTEM, ARCHIVE, HARDWARE OR RELEASE`. **Base:** `706d5a8`. **Packet:** `NLE-PRPLAN-DATA-01-10`. **Closeout PR:** #594. **ADR:** [ADR-0110](../adr/0110-data-01-governance-slice.md). **Contract:** [data-01-vfs-v0](../contracts/data-01-vfs-v0.md).
 
 ## Result
 

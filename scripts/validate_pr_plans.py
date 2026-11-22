@@ -170,6 +170,8 @@ DATA01_07_COMPLETED_STATUS = "DATA01_07_COMPLETED_REST_BLOCKED"
 DATA01_08_READY_STATUS = "DATA01_08_READY_L1_CAPABILITY_OVERLAY"
 DATA01_08_COMPLETED_STATUS = "DATA01_08_COMPLETED_REST_BLOCKED"
 DATA01_09_READY_STATUS = "DATA01_09_READY_L1_CAPABILITY_OVERLAY"
+DATA01_09_COMPLETED_STATUS = "DATA01_09_COMPLETED_REST_BLOCKED"
+DATA01_10_COMPLETED_STATUS = "DATA01_10_COMPLETED_REST_BLOCKED"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -277,6 +279,8 @@ ACTIVE_STATUSES = {
     DATA01_08_READY_STATUS,
     DATA01_08_COMPLETED_STATUS,
     DATA01_09_READY_STATUS,
+    DATA01_09_COMPLETED_STATUS,
+    DATA01_10_COMPLETED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -366,6 +370,8 @@ DATA01_07_CODE_PR = 589
 DATA01_08_GATE_PR = 590
 DATA01_08_CODE_PR = 591
 DATA01_09_GATE_PR = 592
+DATA01_09_CODE_PR = 593
+DATA01_10_CLOSEOUT_PR = 594
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -3597,6 +3603,28 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
 def expected_packet_state(
     module_id: str, idx: int, activation: dict | None, manifest_status: str | None
 ) -> tuple[str, int | None]:
+    if manifest_status == DATA01_10_COMPLETED_STATUS and module_id == "DATA-01":
+        if idx == 1:
+            return "APPROVED_GOVERNANCE", DATA01_01_GATE_PR
+        if idx == 2:
+            return "APPROVED_CONTRACT", DATA01_02_GATE_PR
+        if idx == 3:
+            return "COMPLETED", DATA01_03_CODE_PR
+        if idx == 4:
+            return "COMPLETED", DATA01_04_CODE_PR
+        if idx == 5:
+            return "COMPLETED", DATA01_05_CODE_PR
+        if idx == 6:
+            return "COMPLETED", DATA01_06_CODE_PR
+        if idx == 7:
+            return "COMPLETED", DATA01_07_CODE_PR
+        if idx == 8:
+            return "COMPLETED", DATA01_08_CODE_PR
+        if idx == 9:
+            return "COMPLETED", DATA01_09_CODE_PR
+        if idx == 10:
+            return "COMPLETED", DATA01_10_CLOSEOUT_PR
+        return "PLANNED_BLOCKED", None
     if activation is not None and activation.get("selected_packet_id") == "NLE-PRPLAN-DATA-01-09":
         if module_id == "DATA-01":
             if idx == 1:
@@ -5645,6 +5673,12 @@ def validate_manifest(
     if manifest.get("status") == DATA01_09_READY_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 60 or approved != 14:
             issues.append("DATA-01-09 activated state must have one ready packet, sixty completed slices and fourteen approved gates")
+    if manifest.get("status") == DATA01_09_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 61 or approved != 14:
+            issues.append("DATA-01-09 completed state must have zero ready packets, sixty-one completed slices and fourteen approved gates")
+    if manifest.get("status") == DATA01_10_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 62 or approved != 14:
+            issues.append("DATA-01-10 closeout must have zero ready packets, sixty-two completed slices and fourteen approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -5777,6 +5811,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-01-08.json" if status == DATA01_08_READY_STATUS else root / "docs/queue/packet-activation-data-01-07.json"
     elif status in (DATA01_08_COMPLETED_STATUS, DATA01_09_READY_STATUS):
         activation_path = root / "docs/queue/packet-activation-data-01-09.json" if status == DATA01_09_READY_STATUS else root / "docs/queue/packet-activation-data-01-08.json"
+    elif status in (DATA01_09_COMPLETED_STATUS, DATA01_10_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-data-01-09.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"
     else:
