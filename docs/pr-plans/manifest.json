@@ -1820,7 +1820,7 @@
           ],
           "requires_modules_merged": [],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 577,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0109-core-06-governance-slice.md",
