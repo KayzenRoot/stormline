@@ -2161,7 +2161,7 @@ GFX01_03_ACTIVATION_SOURCES = {
 }
 
 GFX01_04_PINNED_SOURCE_BLOBS = {
-    "checkpoint": "3d06b82e30fb3fc2144043cdd06d8430c1554c10",
+    "checkpoint": "c44bc1fb1664b24f38179258a344d6eec37c63e1",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
