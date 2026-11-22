@@ -53,3 +53,11 @@ Revert this PR normally; remove `profile.hpp`, the profile test and additive CMa
 ## Proposed checkpoint delta
 
 After merge, record `CORE-06-07` as `COMPLETED`, manifest `CORE06_07_COMPLETED_REST_BLOCKED`: **685 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 51 `COMPLETED`, 12 approved gates**, and keep every later packet blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#572](https://github.com/KayzenRoot/stormline/pull/572) squash-merged as `07caee3493de5744c9933ea82090d4774a459825`.
+- Final implementation head `6af3c3f`; exact-head native run [45029255533](https://github.com/KayzenRoot/stormline/actions/runs/45029255533) SUCCESS: Linux 170/170, ASan/UBSan 170/170, TSan 53/53, Windows 171/171, macOS 169/169.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/572#issuecomment-7080085505).
+- Manifest after closeout: `CORE06_07_COMPLETED_REST_BLOCKED` — 685 blocked, 0 ready, 51 completed, 12 approved gates.
+- Local samples only; no profiler/timer/thread/export/network/ABI/release.
