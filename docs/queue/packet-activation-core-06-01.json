@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-CORE-06-01",
+  "module_id": "CORE-06",
+  "risk": "LOW",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/core06-governance-continuation",
+  "approved_adr": "docs/adr/0109-core-06-governance-slice.md",
+  "approved_contract": "docs/contracts/core-06-governance-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-CORE-06-01.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-06-01-G6-ACTIVATION.md",
+  "gate_base_sha": "326f83fdfda026d3eb254010f3a82107c3743eb7",
+  "gate_pr": 0,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "CORE-01",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
+      {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
+      {"id": "CORE01_SDL3_BUILD_BASELINE", "satisfied_by": "NLE-PRPLAN-CORE-01-07"},
+      {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"},
+      {"id": "CORE01_LIFECYCLE_REQUESTS", "satisfied_by": "NLE-PRPLAN-CORE-01-12"},
+      {"id": "CORE01_CAPABILITY_GRAPH", "satisfied_by": "NLE-PRPLAN-CORE-01-13"}
+    ],
+    "not_required": [
+      "window_runtime", "input", "dpi", "ime", "hotplug", "sleep_resume",
+      "soak", "renderer", "gpu", "audio", "network", "public_abi", "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "68f458e0fe19fada7fd7c49681429becfb873c8c",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0008": "fdae6fe9c9ea540d2c3c3d998634ac4fb26c80f4",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0109": "b4fef5e271f6f439a346446250a5e717320c7111",
+    "core06_architecture": "12893dcb7bcd7c263f979a3b12202126e5791491",
+    "core06_governance_contract": "08046dfb005310e2a3094ac703216d4915578b19",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "core06_plan": "49c97ec52ae527c4d5d0084dacccc1daa31e35fb",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}

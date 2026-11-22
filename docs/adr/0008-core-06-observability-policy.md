@@ -1,6 +1,6 @@
 # ADR-0008 — CORE-06 Diagnostic and Observability Policy
 
-**Status:** PROPOSED; NOT APPROVED FOR ENGINE IMPLEMENTATION  
+**Status:** OWNER-RATIFIED AS PLANNING DIRECTION ONLY per [ADR-0109](0109-core-06-governance-slice.md); implementation requires `CORE-06-02` contract, individual G6 and owner authorization.  
 **Work Order:** NLE-P00-WO-002-CORE-06 | **Research issue:** #105 | **Date:** 2026-11-14
 
 ## Context
