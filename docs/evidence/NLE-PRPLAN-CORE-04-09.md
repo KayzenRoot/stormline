@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-04-09 — Integrated time qualification evidence
 
-**Status:** `TEST-ONLY QUALIFICATION / EXACT-HEAD CI PENDING`. **Base main:** `54a320c` (gate PR #532). **Packet:** `NLE-PRPLAN-CORE-04-09`. **Risk:** `ELEVATED`. **Release:** `INTERNAL_ONLY`. **Contract:** [core-04-qualification-v0](../contracts/core-04-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-04-09](../work-orders/NLE-PRPLAN-CORE-04-09.md).
+**Status:** `TEST-ONLY QUALIFICATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `54a320c` (gate PR #532). **Head:** `37039080c2e0af3cf731b3570f0b4c8b771ed975`. **Packet:** `NLE-PRPLAN-CORE-04-09`. **Risk:** `ELEVATED`. **Release:** `INTERNAL_ONLY`. **Contract:** [core-04-qualification-v0](../contracts/core-04-qualification-v0.md). **WO:** [NLE-PRPLAN-CORE-04-09](../work-orders/NLE-PRPLAN-CORE-04-09.md).
 
 ## Scope
 
@@ -48,4 +48,15 @@ CI/headless qualification only; no physical suspend/resume, platform clock resol
 
 ## Exact-head CI
 
-Pending. This section will be updated only with real run IDs after the code PR is opened.
+Native run [44992212838](https://github.com/KayzenRoot/stormline/actions/runs/44992212838) on head `37039080c2e0af3cf731b3570f0b4c8b771ed975`: **SUCCESS**.
+
+- Linux GCC: **147/147** CTest PASS, including 5 CORE-04 qualification tests.
+- Linux ASan/UBSan: **147/147** PASS, no sanitizer failure.
+- Linux TSan: **37/37** PASS (including 5 CORE-04 qualification tests), no TSan report.
+- Windows MSVC: **148/148** PASS, including 5 CORE-04 qualification tests.
+- macOS AppleClang: **146/146** PASS, including 5 CORE-04 qualification tests.
+- Docs Validation [44992212861](https://github.com/KayzenRoot/stormline/actions/runs/44992212861): SUCCESS.
+- SonarCloud and Socket Security: SUCCESS.
+- Allocator benchmark matrix: 3/3 PASS (isolated, report-only; no allocator selected).
+
+No native PASS is claimed beyond these exact-head run IDs. Full Q4, physical suspend/resume, CORE-02 module completion and release remain outside this evidence.
