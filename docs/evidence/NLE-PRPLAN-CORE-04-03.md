@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-04-03 — Monotonic ClockSource evidence
 
-**Status:** `IMPLEMENTATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `90c6377`. **Head:** `6c71b434473b34523c491b5bac60cf9dca007d26`. **Formal packet:** `NLE-PRPLAN-CORE-04-03`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md). **WO:** [NLE-PRPLAN-CORE-04-03](../work-orders/NLE-PRPLAN-CORE-04-03.md).
+**Status:** `IMPLEMENTATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `90c6377`. **Head:** `42aa51a4d3aa5761ec9d15298e0eebc4fb51d5ec`. **Formal packet:** `NLE-PRPLAN-CORE-04-03`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md). **WO:** [NLE-PRPLAN-CORE-04-03](../work-orders/NLE-PRPLAN-CORE-04-03.md).
 
 ## Scope
 
@@ -54,9 +54,13 @@ No secret, network, filesystem, upload, paid service, dependency or global overr
 - Manifest `CORE04_03_COMPLETED_REST_BLOCKED`: **709 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 31 `COMPLETED`, 8 approved gates**.
 - `CORE-04-04` remains `PLANNED_BLOCKED`; selector denies every ID; registry byte-identical.
 
+## Corrections
+
+- The initial overflow check compared the steady duration directly with `nanoseconds::max()`, which can overflow its common duration type near the limit. Corrected to a seconds-based bound before the checked nanosecond conversion.
+
 ## Exact-head CI
 
-Native run [44965514916](https://github.com/KayzenRoot/stormline/actions/runs/44965514916) on head `6c71b434473b34523c491b5bac60cf9dca007d26`: **SUCCESS**.
+Native run [44966113144](https://github.com/KayzenRoot/stormline/actions/runs/44966113144) on head `42aa51a4d3aa5761ec9d15298e0eebc4fb51d5ec`: **SUCCESS**.
 
 - Linux GCC: **131/131** CTest PASS, including 6 CORE-04 clock tests.
 - Linux ASan/UBSan: **131/131** PASS, no sanitizer failure.
