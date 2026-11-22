@@ -11,6 +11,7 @@ on:
       - 'src/stormline/core/internal/**'
       - 'src/stormline/core/memory/**'
       - 'src/stormline/core/jobs/**'
+      - 'src/stormline/core/time/**'
       - 'benchmarks/core02/**'
       - 'tests/core/**'
       - 'CMakeLists.txt'
@@ -53,6 +54,8 @@ on:
       - 'docs/evidence/NLE-PRPLAN-CORE-03-03-G6-ACTIVATION.md'
       - 'docs/work-orders/NLE-PRPLAN-CORE-03-09.md'
       - 'docs/evidence/NLE-PRPLAN-CORE-03-09.md'
+      - 'docs/work-orders/NLE-PRPLAN-CORE-04-03.md'
+      - 'docs/evidence/NLE-PRPLAN-CORE-04-03.md'
 
 permissions:
   contents: read
@@ -273,9 +276,9 @@ jobs:
           cmake -S . -B build/core03-tsan -G Ninja \
             -DCMAKE_BUILD_TYPE=Debug \
             -DSTORMLINE_CORE03_ENABLE_TSAN=ON
-          cmake --build build/core03-tsan --target stormline_core03_jobs_test stormline_core03_qualification_test
+          cmake --build build/core03-tsan --target stormline_core03_jobs_test stormline_core03_qualification_test stormline_core04_clock_test
           setarch "$(uname -m)" -R env TSAN_OPTIONS="halt_on_error=1 second_deadlock_stack=1" \
-            ctest --test-dir build/core03-tsan -R '^core03_' --output-on-failure
+            ctest --test-dir build/core03-tsan -R '^(core03_|core04_clock_)' --output-on-failure
 
   allocator-benchmark:
     strategy:
