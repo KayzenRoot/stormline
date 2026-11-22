@@ -41,7 +41,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.core04_01_activation = json.loads(v.CORE04_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core04_02_activation = json.loads(v.CORE04_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core04_03_activation = json.loads(v.CORE04_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.CORE04_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.core04_04_activation = json.loads(v.CORE04_04_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.CORE04_04_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -100,7 +101,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
+        self.assertEqual(["NLE-PRPLAN-CORE-04-04"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -200,7 +201,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.CORE04_03_CODE_PR, core04[2]["github_pr"])
         self.assertEqual("ELEVATED", core04[2]["risk"])
         self.assertEqual("INTERNAL_ONLY", core04[2]["release_class"])
-        self.assertEqual("PLANNED_BLOCKED", core04[3]["status"])
+        self.assertEqual("EXECUTOR_READY", core04[3]["status"])
+        self.assertIsNone(core04[3]["github_pr"])
+        self.assertEqual("ELEVATED", core04[3]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core04[3]["release_class"])
+        self.assertEqual("PLANNED_BLOCKED", core04[4]["status"])
         self.assertEqual("PLANNED_BLOCKED", core04[9]["status"])
 
     def test_completed_slice_08_cannot_claim_wrong_pr(self):
@@ -759,7 +764,7 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_core04_governance_selector_denies_all(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         for packet_id in ("NLE-PRPLAN-CORE-04-01", "NLE-PRPLAN-CORE-04-02",
-                          "NLE-PRPLAN-CORE-04-04", "NLE-PRPLAN-CORE-04-10"):
+                          "NLE-PRPLAN-CORE-04-05", "NLE-PRPLAN-CORE-04-10"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
@@ -786,15 +791,27 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_selector_denies_all_after_core04_03_completion(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         for packet_id in ("NLE-PRPLAN-CORE-04-03", "NLE-PRPLAN-CORE-04-02",
-                          "NLE-PRPLAN-CORE-04-04", "NLE-PRPLAN-CORE-04-10",
+                          "NLE-PRPLAN-CORE-04-05", "NLE-PRPLAN-CORE-04-10",
                           "NLE-PRPLAN-CORE-03-03"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
             self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
-    def test_core04_03_activation_is_exact(self):
-        self.assertEqual("NLE-PRPLAN-CORE-04-03", self.activation["selected_packet_id"])
+    def test_selector_allows_only_core04_04(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        allowed = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-04-04", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, allowed.returncode, (allowed.stdout, allowed.stderr))
+        self.assertTrue(json.loads(allowed.stdout)["executor_ready"])
+        for packet_id in ("NLE-PRPLAN-CORE-04-03", "NLE-PRPLAN-CORE-04-05",
+                          "NLE-PRPLAN-CORE-04-10", "NLE-PRPLAN-CORE-03-03"):
+            blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
+                                     capture_output=True, text=True, timeout=20, check=False)
+            self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
+
+    def test_core04_04_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-CORE-04-04", self.activation["selected_packet_id"])
         self.assertEqual("CORE-04", self.activation["module_id"])
         self.assertEqual("ELEVATED", self.activation["risk"])
         self.assertEqual("INTERNAL_ONLY", self.activation["release_class"])
@@ -806,8 +823,28 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["gate_pr"] = -1
         self.assertTrue(v.validate_activation(bad))
 
-    def test_core04_03_activation_source_drift_denied(self):
+    def test_core04_04_activation_source_drift_denied(self):
         bad = copy.deepcopy(self.activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core04_03_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-CORE-04-03",
+                         self.core04_03_activation["selected_packet_id"])
+        self.assertEqual("CORE-04", self.core04_03_activation["module_id"])
+        self.assertEqual("ELEVATED", self.core04_03_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.core04_03_activation["release_class"])
+        self.assertEqual("docs/contracts/core-04-timeline-v0.md",
+                         self.core04_03_activation["approved_contract"])
+        self.assertEqual(v.CORE04_CAPABILITY_ADMISSION,
+                         self.core04_03_activation["capability_admission"])
+        self.assertIsInstance(self.core04_03_activation["gate_pr"], int)
+        bad = copy.deepcopy(self.core04_03_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core04_03_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.core04_03_activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
