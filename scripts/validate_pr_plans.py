@@ -84,9 +84,10 @@ DATA03_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-09.json
 DATA04_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-01.json"
 DATA04_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-02.json"
 DATA04_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-03.json"
+DATA04_04_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-04.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = DATA04_03_ACTIVATION_FILE
+ACTIVATION_FILE = DATA04_04_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -595,7 +596,7 @@ DATA04_CAPABILITY_ADMISSION = {
 
 DATA04_01_GATE_PR = 629
 DATA04_02_GATE_PR = 630
-DATA04_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
+DATA04_CODE_PRS = {3: 632, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
 DATA04_STATE = {
     DATA04_01_APPROVED_STATUS: (1, 0, 0),
     DATA04_02_APPROVED_STATUS: (2, 0, 0),
@@ -1967,6 +1968,40 @@ DATA04_03_PINNED_SOURCE_BLOBS = {
 }
 
 DATA04_03_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0012": "docs/adr/0012-data-04-scene-schema-policy.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0113": "docs/adr/0113-data-04-governance-slice.md",
+    "data04_architecture": "docs/architecture/data-04-serialization-scene-format.md",
+    "data04_scene_api": "docs/contracts/data-04-scene-api.md",
+    "data04_scene_contract": "docs/contracts/data-04-scene-v0.md",
+    "data04_governance_contract": "docs/contracts/data-04-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "data04_plan": "docs/pr-plans/DATA-04.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+DATA04_04_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "55292eaf10be21a4e92dafd723c75b099b82d69b",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0012": "de48e3e586505c153d7240745da365ea28ab7f03",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0113": "db46eafc167c676cd259d24797a31d00c0e7089e",
+    "data04_architecture": "7e88d4fecaa83c9922f255087df9f97f6300b61f",
+    "data04_scene_api": "33b096149df35d20b3fe9e9d21e4bc6f22d71d5c",
+    "data04_scene_contract": "99962b6a800d5219db46ce42cf4abb34f6d0ac57",
+    "data04_governance_contract": "cc013afe163e6224b2a9324d84e28d7d31bb3d69",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "data04_plan": "719f98e522d4727b0c76625893d0b6309c40604d",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+DATA04_04_ACTIVATION_SOURCES = {
     "checkpoint": "docs/11-checkpoint.md",
     "decisions_ledger": "docs/10-decisions-ledger.md",
     "scope": "docs/03-scope.md",
@@ -3944,6 +3979,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, DATA03_02_ACTIVATION_SOURCES, DATA03_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-DATA-04-04":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-DATA-04-04",
+            "module_id": "DATA-04",
+            "risk": "ELEVATED",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/data04-04-continuation",
+            "approved_adr": "docs/adr/0113-data-04-governance-slice.md",
+            "approved_contract": "docs/contracts/data-04-scene-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-DATA-04-04.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-04-04-G6-ACTIVATION.md",
+            "gate_base_sha": "a10b8257c45482091dd7f1b40224038abf6c0015",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, DATA04_04_ACTIVATION_SOURCES, DATA04_04_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -6732,6 +6789,8 @@ DATA03_SLICE_METADATA = {
 DATA04_SLICE_METADATA = {
     3: ("docs/adr/0113-data-04-governance-slice.md",
         "docs/evidence/NLE-PRPLAN-DATA-04-03-G6-ACTIVATION.md"),
+    4: ("docs/adr/0113-data-04-governance-slice.md",
+        "docs/evidence/NLE-PRPLAN-DATA-04-04-G6-ACTIVATION.md"),
 }
 
 def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
@@ -7455,6 +7514,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-03-03.json"
     elif status == DATA03_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-03-02.json"
+    elif status == DATA04_04_READY_STATUS:
+        activation_path = root / "docs/queue/packet-activation-data-04-04.json"
     elif status == DATA04_03_READY_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-04-03.json"
     elif status == DATA04_02_APPROVED_STATUS:

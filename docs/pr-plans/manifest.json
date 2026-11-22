@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "DATA04_03_READY_L1_CAPABILITY_OVERLAY",
+  "status": "DATA04_04_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -2712,8 +2712,8 @@
             "CORE-05",
             "DATA-02"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 632,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0113-data-04-governance-slice.md",
@@ -2749,8 +2749,30 @@
             "CORE-05",
             "DATA-02"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0113-data-04-governance-slice.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-04-04-G6-ACTIVATION.md",
+          "capability_admission": {
+            "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+            "formal_dependency": "CORE-05",
+            "module_completion_claimed": false,
+            "required_capabilities": [
+              {"id": "CORE05_TYPED_SCALARS", "satisfied_by": "NLE-PRPLAN-CORE-05-03"},
+              {"id": "CORE05_VECTORS", "satisfied_by": "NLE-PRPLAN-CORE-05-04"},
+              {"id": "CORE05_MATRICES", "satisfied_by": "NLE-PRPLAN-CORE-05-05"},
+              {"id": "CORE05_COORDINATES", "satisfied_by": "NLE-PRPLAN-CORE-05-06"},
+              {"id": "CORE05_UNITS", "satisfied_by": "NLE-PRPLAN-CORE-05-07"},
+              {"id": "CORE05_IDS", "satisfied_by": "NLE-PRPLAN-CORE-05-09"},
+              {"id": "CORE05_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-05-10"},
+              {"id": "DATA02_IDENTITY", "satisfied_by": "NLE-PRPLAN-DATA-02-03"},
+              {"id": "DATA02_SCHEMA", "satisfied_by": "NLE-PRPLAN-DATA-02-07"},
+              {"id": "DATA02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-DATA-02-09"}
+            ],
+            "not_required": ["json_codec", "cbor_codec", "schema_validator", "persistence", "migration_journal", "native_io", "network", "mcp", "public_abi", "release"]
+          }
         },
         {
           "packet_id": "NLE-PRPLAN-DATA-04-05",
