@@ -53,7 +53,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.core05_08_activation = json.loads(v.CORE05_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core05_09_activation = json.loads(v.CORE05_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core06_01_activation = json.loads(v.CORE06_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.CORE06_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.core06_02_activation = json.loads(v.CORE06_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.CORE06_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -247,7 +248,8 @@ class PrPlanValidationTests(unittest.TestCase):
         core06 = self.manifest["modules"][5]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core06[0]["status"])
         self.assertEqual(v.CORE06_01_GATE_PR, core06[0]["github_pr"])
-        self.assertEqual("PLANNED_BLOCKED", core06[1]["status"])
+        self.assertEqual("APPROVED_CONTRACT", core06[1]["status"])
+        self.assertEqual(v.CORE06_02_GATE_PR, core06[1]["github_pr"])
         self.assertEqual("PLANNED_BLOCKED", core06[9]["status"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
@@ -1154,6 +1156,33 @@ class PrPlanValidationTests(unittest.TestCase):
         bad = copy.deepcopy(self.core06_01_activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
+
+    def test_core06_02_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-CORE-06-02",
+                         self.core06_02_activation["selected_packet_id"])
+        self.assertEqual("CORE-06", self.core06_02_activation["module_id"])
+        self.assertEqual("LOW", self.core06_02_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.core06_02_activation["release_class"])
+        self.assertEqual("docs/contracts/core-06-diagnostics-v0.md",
+                         self.core06_02_activation["approved_contract"])
+        self.assertEqual(v.CORE04_CAPABILITY_ADMISSION,
+                         self.core06_02_activation["capability_admission"])
+        self.assertIsInstance(self.core06_02_activation["gate_pr"], int)
+        bad = copy.deepcopy(self.core06_02_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core06_02_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.core06_02_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core06_02_selector_denies(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-06-02", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
     def test_core06_01_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
