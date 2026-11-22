@@ -311,6 +311,122 @@ public:
         return RegistryError::None;
     }
 
+    struct AssetReference {
+        AssetId asset{};
+        AssetKind expected_kind{AssetKind::Unknown};
+        u32 subasset{0};
+    };
+
+    [[nodiscard]] static RegistryError make_reference(
+        AssetId id, AssetKind expected_kind, u32 subasset,
+        AssetReference& out) noexcept {
+        if (!valid(id)) {
+            return RegistryError::InvalidId;
+        }
+        out = AssetReference{id, expected_kind, subasset};
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError resolve_reference(
+        const AssetReference& reference, AssetRecord& out) const noexcept {
+        if (!valid(reference.asset)) {
+            return RegistryError::InvalidArgument;
+        }
+        const RegistryError status = find(reference.asset, out);
+        if (status != RegistryError::None) {
+            return status;
+        }
+        if (reference.expected_kind != AssetKind::Unknown
+            && out.kind != reference.expected_kind) {
+            return RegistryError::InvalidArgument;
+        }
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError rename(
+        AssetId id, const vfs::VfsPath& destination) noexcept {
+        if (!valid(id)) {
+            return RegistryError::InvalidArgument;
+        }
+        u32 asset_index = 0;
+        while (asset_index < size_ && !same_id(assets_[asset_index].id, id)) {
+            ++asset_index;
+        }
+        if (asset_index >= size_) {
+            return RegistryError::NotFound;
+        }
+        if (assets_[asset_index].status != AssetStatus::Active) {
+            return RegistryError::Tombstoned;
+        }
+        vfs::VfsPath path{};
+        if (destination.length > vfs::kMaxPathBytes) {
+            return RegistryError::InvalidPath;
+        }
+        if (vfs::make_path(vfs::view(destination), path) != vfs::VfsError::None) {
+            return RegistryError::InvalidPath;
+        }
+        for (u32 index = 0; index < size_; ++index) {
+            if (index != asset_index
+                && assets_[index].project.value == assets_[asset_index].project.value
+                && vfs::view(assets_[index].path) == vfs::view(path)) {
+                return RegistryError::DuplicatePath;
+            }
+        }
+        if (vfs::view(assets_[asset_index].path) == vfs::view(path)) {
+            return RegistryError::None;
+        }
+        if (assets_[asset_index].revision == std::numeric_limits<u64>::max()) {
+            return RegistryError::InternalFailure;
+        }
+        assets_[asset_index].path = path;
+        ++assets_[asset_index].revision;
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError impact(
+        AssetId id, std::span<AssetId> output, u32& out_count) const noexcept {
+        out_count = 0;
+        AssetRecord source{};
+        const RegistryError source_status = find(id, source);
+        if (source_status != RegistryError::None) {
+            return source_status;
+        }
+        AssetId stack[kMaxAssets]{};
+        AssetId visited[kMaxAssets]{};
+        u32 stack_size = 0;
+        u32 visited_size = 0;
+        stack[stack_size++] = id;
+        while (stack_size > 0) {
+            const AssetId current = stack[--stack_size];
+            for (u32 edge_index = 0; edge_index < dependency_count_; ++edge_index) {
+                if (!same_id(edges_[edge_index].to, current)) {
+                    continue;
+                }
+                const AssetId dependent = edges_[edge_index].from;
+                if (same_id(dependent, id)) {
+                    continue;
+                }
+                bool seen = false;
+                for (u32 index = 0; index < visited_size; ++index) {
+                    if (same_id(visited[index], dependent)) {
+                        seen = true;
+                        break;
+                    }
+                }
+                if (seen) {
+                    continue;
+                }
+                if (visited_size < kMaxAssets) {
+                    visited[visited_size++] = dependent;
+                }
+                if (stack_size < kMaxAssets) {
+                    stack[stack_size++] = dependent;
+                }
+            }
+        }
+        return copy_sorted(visited, visited_size, output, out_count);
+    }
+
     struct MetadataEntry {
         std::array<char, kMaxMetadataKeyBytes> key{};
         u32 key_length{0};
