@@ -851,6 +851,13 @@ target_link_libraries(stormline_data03_validation_test PRIVATE stormline_data03_
 stormline_core01_apply_options(stormline_data03_validation_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data03_validation_test)
 
+add_executable(stormline_data03_receipt_test
+    tests/core/data03_receipt_tests.cpp
+)
+target_link_libraries(stormline_data03_receipt_test PRIVATE stormline_data03_import)
+stormline_core01_apply_options(stormline_data03_receipt_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data03_receipt_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1661,6 +1668,11 @@ add_test(NAME data03_validation_01
     COMMAND stormline_data03_validation_test val01
 )
 set_tests_properties(data03_validation_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data03_receipt_01
+    COMMAND stormline_data03_receipt_test rec01
+)
+set_tests_properties(data03_receipt_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
