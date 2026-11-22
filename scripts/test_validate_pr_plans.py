@@ -123,7 +123,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-04-03", "NLE-PRPLAN-CORE-04-04",
                           "NLE-PRPLAN-CORE-04-05", "NLE-PRPLAN-CORE-04-06",
                           "NLE-PRPLAN-CORE-04-07", "NLE-PRPLAN-CORE-04-08",
-                          "NLE-PRPLAN-CORE-04-09"], completed)
+                          "NLE-PRPLAN-CORE-04-09", "NLE-PRPLAN-CORE-04-10"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -229,7 +229,10 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.CORE04_09_CODE_PR, core04[8]["github_pr"])
         self.assertEqual("ELEVATED", core04[8]["risk"])
         self.assertEqual("INTERNAL_ONLY", core04[8]["release_class"])
-        self.assertEqual("PLANNED_BLOCKED", core04[9]["status"])
+        self.assertEqual("COMPLETED", core04[9]["status"])
+        self.assertEqual(v.CORE04_10_CLOSEOUT_PR, core04[9]["github_pr"])
+        self.assertEqual("ELEVATED", core04[9]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core04[9]["release_class"])
 
     def test_completed_slice_08_cannot_claim_wrong_pr(self):
         def wrong(d):
