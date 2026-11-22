@@ -9,7 +9,7 @@ if(STORMLINE_CORE01_ENABLE_SANITIZERS AND STORMLINE_CORE03_ENABLE_TSAN)
     message(FATAL_ERROR "ASan/UBSan and TSan cannot be enabled in the same build")
 endif()
 
-function(stormline_core03_apply_tsan target)
+function(stormline_core_internal_apply_tsan target)
     if(STORMLINE_CORE03_ENABLE_TSAN)
         if(MSVC)
             message(FATAL_ERROR "ThreadSanitizer is not enabled for the MSVC internal slice")
@@ -541,21 +541,37 @@ target_include_directories(stormline_core03_jobs PUBLIC
 )
 target_link_libraries(stormline_core03_jobs PUBLIC Threads::Threads)
 stormline_core01_apply_options(stormline_core03_jobs PUBLIC)
-stormline_core03_apply_tsan(stormline_core03_jobs)
+stormline_core_internal_apply_tsan(stormline_core03_jobs)
 
 add_executable(stormline_core03_jobs_test
     tests/core/job_executor_tests.cpp
 )
 target_link_libraries(stormline_core03_jobs_test PRIVATE stormline_core03_jobs)
 stormline_core01_apply_options(stormline_core03_jobs_test PRIVATE)
-stormline_core03_apply_tsan(stormline_core03_jobs_test)
+stormline_core_internal_apply_tsan(stormline_core03_jobs_test)
 
 add_executable(stormline_core03_qualification_test
     tests/core/core03_jobs_qualification_tests.cpp
 )
 target_link_libraries(stormline_core03_qualification_test PRIVATE stormline_core03_jobs)
 stormline_core01_apply_options(stormline_core03_qualification_test PRIVATE)
-stormline_core03_apply_tsan(stormline_core03_qualification_test)
+stormline_core_internal_apply_tsan(stormline_core03_qualification_test)
+
+add_library(stormline_core04_time STATIC
+    src/stormline/core/time/clock_source.cpp
+)
+target_include_directories(stormline_core04_time PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+stormline_core01_apply_options(stormline_core04_time PUBLIC)
+stormline_core_internal_apply_tsan(stormline_core04_time)
+
+add_executable(stormline_core04_clock_test
+    tests/core/clock_source_tests.cpp
+)
+target_link_libraries(stormline_core04_clock_test PRIVATE stormline_core04_time)
+stormline_core01_apply_options(stormline_core04_clock_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core04_clock_test)
 
 enable_testing()
 
@@ -994,6 +1010,34 @@ set_tests_properties(
     core03_qualification_overload
     core03_qualification_benchmark
     PROPERTIES TIMEOUT 300
+)
+
+add_test(NAME core04_clock_basic
+    COMMAND stormline_core04_clock_test basic
+)
+add_test(NAME core04_clock_injected
+    COMMAND stormline_core04_clock_test injected
+)
+add_test(NAME core04_clock_errors
+    COMMAND stormline_core04_clock_test errors
+)
+add_test(NAME core04_clock_monotonic
+    COMMAND stormline_core04_clock_test monotonic
+)
+add_test(NAME core04_clock_defaults
+    COMMAND stormline_core04_clock_test defaults
+)
+add_test(NAME core04_clock_lifetime
+    COMMAND stormline_core04_clock_test lifetime
+)
+set_tests_properties(
+    core04_clock_basic
+    core04_clock_injected
+    core04_clock_errors
+    core04_clock_monotonic
+    core04_clock_defaults
+    core04_clock_lifetime
+    PROPERTIES TIMEOUT 120
 )
 
 if(WIN32)
