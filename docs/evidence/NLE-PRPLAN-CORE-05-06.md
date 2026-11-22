@@ -53,3 +53,11 @@ Revert this PR normally; remove `units.hpp`, the unit test and additive CMake/wo
 ## Proposed checkpoint delta
 
 After merge, record `CORE-05-06` as `COMPLETED`, manifest `CORE05_06_COMPLETED_REST_BLOCKED`: **696 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 42 `COMPLETED`, 10 approved gates**, and keep every later packet blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#548](https://github.com/KayzenRoot/stormline/pull/548) squash-merged as `74eac0349b647f5db1c3f1c9d7cc5296e8f050d6`.
+- Final implementation head `d60a5d0b0778d4036c3031524191d55ece95f9a1`; exact-head native run [45019297948](https://github.com/KayzenRoot/stormline/actions/runs/45019297948) SUCCESS: Linux 155/155, ASan/UBSan 155/155, TSan 45/45, Windows 156/156, macOS 154/154.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/548#issuecomment-7078737469).
+- Manifest after closeout: `CORE05_06_COMPLETED_REST_BLOCKED` — 696 blocked, 0 ready, 42 completed, 10 approved gates. `CORE-05-07` remains `PLANNED_BLOCKED`.
+- This completion does not claim CORE-05 module completion, ABI, release, serialization or broad numerical determinism.
