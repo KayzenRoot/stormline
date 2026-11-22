@@ -105,7 +105,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual(["NLE-PRPLAN-CORE-05-03"], ready)
+        self.assertEqual([], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -126,7 +126,8 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-04-03", "NLE-PRPLAN-CORE-04-04",
                           "NLE-PRPLAN-CORE-04-05", "NLE-PRPLAN-CORE-04-06",
                           "NLE-PRPLAN-CORE-04-07", "NLE-PRPLAN-CORE-04-08",
-                          "NLE-PRPLAN-CORE-04-09", "NLE-PRPLAN-CORE-04-10"], completed)
+                          "NLE-PRPLAN-CORE-04-09", "NLE-PRPLAN-CORE-04-10",
+                          "NLE-PRPLAN-CORE-05-03"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -204,8 +205,8 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.CORE05_01_GATE_PR, core05[0]["github_pr"])
         self.assertEqual("APPROVED_CONTRACT", core05[1]["status"])
         self.assertEqual(v.CORE05_02_GATE_PR, core05[1]["github_pr"])
-        self.assertEqual("EXECUTOR_READY", core05[2]["status"])
-        self.assertIsNone(core05[2]["github_pr"])
+        self.assertEqual("COMPLETED", core05[2]["status"])
+        self.assertEqual(v.CORE05_03_CLOSEOUT_PR, core05[2]["github_pr"])
         self.assertEqual("ELEVATED", core05[2]["risk"])
         self.assertEqual("INTERNAL_ONLY", core05[2]["release_class"])
         self.assertEqual("PLANNED_BLOCKED", core05[9]["status"])
@@ -859,18 +860,19 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_core05_governance_selector_denies_all(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         for packet_id in ("NLE-PRPLAN-CORE-05-01", "NLE-PRPLAN-CORE-05-02",
-                          "NLE-PRPLAN-CORE-05-04", "NLE-PRPLAN-CORE-05-10"):
+                          "NLE-PRPLAN-CORE-05-03", "NLE-PRPLAN-CORE-05-04",
+                          "NLE-PRPLAN-CORE-05-10"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))
             self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
-    def test_core05_03_selector_is_ready(self):
+    def test_core05_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
-        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-05-03", "--json"],
-                               capture_output=True, text=True, timeout=20, check=False)
-        self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
-        self.assertTrue(json.loads(ready.stdout)["executor_ready"])
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-05-03", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
     def test_core05_01_activation_is_exact(self):
         self.assertEqual("NLE-PRPLAN-CORE-05-01",
