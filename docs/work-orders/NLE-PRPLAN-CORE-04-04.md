@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-04-04 — Rational fixed-step Timeline (INTERNAL_ONLY)
 
-**STATUS: G6 IMPLEMENTATION PACKET — code authorized only after this gate merges.** **Gate:** G6 implementation + CORE-01 capability admission. **Formal packet:** `NLE-PRPLAN-CORE-04-04`. **Predecessor:** `CORE-04-03` ClockSource. **Issue:** #21. **Base:** `60cd2dfbaf38ee43b332f0b2274816a9b739736e`. **ADR:** [ADR-0107](../adr/0107-core-04-governance-slice.md). **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md).
+**STATUS: G6 IMPLEMENTATION PACKET — code authorized only after this gate merges; CD-01 adds `start_at` and `replay_schedule_compatible`.** **Gate:** G6 implementation + CORE-01 capability admission. **Formal packet:** `NLE-PRPLAN-CORE-04-04`. **Predecessor:** `CORE-04-03` ClockSource. **Issue:** #21. **Base:** `60cd2dfbaf38ee43b332f0b2274816a9b739736e`. **ADR:** [ADR-0107](../adr/0107-core-04-governance-slice.md). **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md).
 
 ## OBJECTIVE
 
@@ -12,9 +12,9 @@ CORE-04-03 delivered `ClockSource`/`SteadyClockSource` and shared time types. CO
 
 ## SCOPE
 
-- `timeline.hpp/.cpp`: `Timeline`, start/pump/pump_elapsed/pause/resume/step_once/stop/state/stats/current_tick.
+- `timeline.hpp/.cpp`: `Timeline`, start/start_at/pump/pump_elapsed/pause/resume/step_once/stop/state/stats/current_tick and `replay_schedule_compatible`.
 - Exact integer/rational tick accumulator with carried remainder; no float accumulation.
-- Interpolation alpha, clamp, DropExcess/Carry debt, replay header, typed lifecycle errors.
+- Interpolation alpha, clamp, DropExcess/Carry debt, replay header/compatibility, typed lifecycle errors.
 - `tests/core/timeline_tests.cpp` for TICK-03..TICK-12.
 - Additive CMake/workflow and evidence.
 
@@ -42,12 +42,13 @@ Risk `ELEVATED`; release `INTERNAL_ONLY`; no dependency/package/secret/paid serv
 
 - Exact allowlist; rational 60 Hz/24 h exact; no float accumulation.
 - Pause/resume/step, interpolation alpha, clamp, debt policies and typed errors.
+- `start_at` near-max tick overflow and `replay_schedule_compatible` mismatch are exercised.
 - TICK-03..TICK-12 pass on Linux/ASan/UBSan/TSan/Windows/macOS; no HIGH/CRITICAL.
 - No Timeline dependency/ABI/release; pt-BR audit `APPROVED`.
 
 ## TESTS
 
-TICK-03 FPS partitions 30/60/144; TICK-04 24 h exact; TICK-05 pause; TICK-06 single-step; TICK-07 catch-up/drop; TICK-08 debt carry; TICK-09 time scale; TICK-10 overflow/config; TICK-11 lifecycle/thread; TICK-12 determinism/replay header. Full existing CTest suite.
+TICK-03 FPS partitions 30/60/144; TICK-04 24 h exact; TICK-05 pause; TICK-06 single-step; TICK-07 catch-up/drop; TICK-08 debt carry; TICK-09 time scale; TICK-10 start_at near-max TickOverflow/duration overflow; TICK-11 lifecycle/thread; TICK-12 determinism/replay compatibility. Full existing CTest suite.
 
 ## DELIVERABLES
 
