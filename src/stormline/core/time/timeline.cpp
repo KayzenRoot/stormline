@@ -212,6 +212,11 @@ Timeline::Timeline() noexcept
 Timeline::~Timeline() noexcept = default;
 
 TimeError Timeline::start(ClockSource* source, TimelineConfig config) noexcept {
+    return start_at(source, config, TickId{0});
+}
+
+TimeError Timeline::start_at(ClockSource* source, TimelineConfig config,
+                             TickId initial_tick) noexcept {
     if (!impl_) {
         return TimeError::InternalFailure;
     }
@@ -228,6 +233,7 @@ TimeError Timeline::start(ClockSource* source, TimelineConfig config) noexcept {
     impl_->tick_denominator =
         static_cast<std::int64_t>(config.tick_rate_denominator) * nanoseconds_per_second;
     impl_->reset_counters();
+    impl_->next_tick = initial_tick;
     impl_->state = TimelineState::Running;
     return TimeError::None;
 }
@@ -392,6 +398,26 @@ TickId Timeline::current_tick() const noexcept {
     }
     std::lock_guard<std::mutex> lock(impl_->mutex);
     return impl_->next_tick;
+}
+
+TimeError replay_schedule_compatible(const ReplayScheduleHeader& header,
+                                     const TimelineConfig& config,
+                                     TickId initial_tick,
+                                     std::uint64_t current_build_fingerprint) noexcept {
+    if (!validate_config(config)) {
+        return TimeError::InvalidConfig;
+    }
+    if (header.schema_version != 1U
+        || header.tick_rate_numerator != config.tick_rate_numerator
+        || header.tick_rate_denominator != config.tick_rate_denominator
+        || header.initial_tick != initial_tick.value) {
+        return TimeError::ReplayIncompatible;
+    }
+    if (header.build_fingerprint != 0U
+        && header.build_fingerprint != current_build_fingerprint) {
+        return TimeError::ReplayIncompatible;
+    }
+    return TimeError::None;
 }
 
 }  // namespace stormline::core::time

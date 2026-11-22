@@ -1072,6 +1072,9 @@ add_test(NAME core04_timeline_scale
 add_test(NAME core04_timeline_overflow
     COMMAND stormline_core04_timeline_test overflow
 )
+add_test(NAME core04_timeline_replay
+    COMMAND stormline_core04_timeline_test replay
+)
 add_test(NAME core04_timeline_lifecycle
     COMMAND stormline_core04_timeline_test lifecycle
 )
@@ -1087,6 +1090,7 @@ set_tests_properties(
     core04_timeline_carry
     core04_timeline_scale
     core04_timeline_overflow
+    core04_timeline_replay
     core04_timeline_lifecycle
     core04_timeline_determinism
     PROPERTIES TIMEOUT 300

@@ -26,14 +26,14 @@ No third-party timing library, SDL/QPC adapter, public ABI or release.
 | TICK-07 catch-up/drop | PASS | 250 ms pump capped at 4 ticks; dropped duration recorded |
 | TICK-08 debt carry | PASS | bounded debt drains over pumps; exceeding `max_debt_ns` returns `DebtLimitExceeded` |
 | TICK-09 time scale | PASS | 2× → 60 ticks/0.5 s; 0.5× → 30 ticks/1 s |
-| TICK-10 overflow/config | PARTIAL | invalid config/null source/negative delta/`AlreadyInitialized` covered; duration overflow guarded; `TickOverflow` guard exists but is not reachable through the public v0 API (no initial-tick/reset seam) |
+| TICK-10 overflow/config | PASS | `start_at(max-1)` then two single steps → second `TickOverflow`; invalid config/null source/negative delta/`AlreadyInitialized` typed; no wrap |
 | TICK-11 lifecycle | PASS | stop idempotent, restart rejected, wrong-thread pump/pause, destructor safe |
-| TICK-12 determinism/replay | PARTIAL | same admitted partition yields same 600-tick schedule; replay header fields frozen; `ReplayIncompatible` compatibility API is deferred to CORE-04-08 |
+| TICK-12 determinism/replay | PASS | same admitted partition yields same 600-tick schedule; `replay_schedule_compatible` accepts exact/unknown fingerprint and rejects schema/rate/initial/fingerprint mismatch |
 
 ## Local evidence
 
-- Windows 11 x64 / MSVC 19.44, Ninja Debug: CORE-04 timeline **10/10 PASS**; full CTest **142/142 PASS**.
-- WSL Ubuntu 24.04 / GCC 13.3: ASan/UBSan **10/10 PASS**; TSan **10/10 PASS**; no sanitizer report.
+- Windows 11 x64 / MSVC 19.44, Ninja Debug: CORE-04 timeline **11/11 PASS**; full CTest **143/143 PASS**.
+- WSL Ubuntu 24.04 / GCC 13.3: ASan/UBSan **11/11 PASS**; TSan **11/11 PASS**; no sanitizer report.
 - Exact rational arithmetic uses integer numerator/remainder; no floating-point simulation accumulation. `interpolation_alpha` is presentation-only.
 
 ## Contract fidelity
@@ -46,8 +46,8 @@ No third-party timing library, SDL/QPC adapter, public ABI or release.
 
 ## Limitations / residual risk
 
-- `TickOverflow` is guarded but not exercisable without a contract-level initial-tick/reset seam; TICK-10 is partial, not a full counter-overflow proof.
-- `ReplayIncompatible` has no public compatibility function in v0; TICK-12 proves deterministic schedule/header fields only.
+- `start_at` carries an initial tick for replay/tests; it does not imply cross-machine deterministic physics or network replay.
+- `replay_schedule_compatible` treats `build_fingerprint == 0` as unknown; it does not prove numerical determinism.
 - Real suspend/resume, platform clock resolution and native comparators remain future evidence.
 
 ## Security and rollback

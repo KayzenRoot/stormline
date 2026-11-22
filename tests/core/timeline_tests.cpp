@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstdint>
 #include <cstdio>
+#include <limits>
 #include <string_view>
 #include <thread>
 #include <vector>
@@ -16,6 +17,7 @@ using stormline::core::time::ClockSource;
 using stormline::core::time::DebtPolicy;
 using stormline::core::time::Rational;
 using stormline::core::time::ReplayScheduleHeader;
+using stormline::core::time::replay_schedule_compatible;
 using stormline::core::time::SteadyClockSource;
 using stormline::core::time::TickId;
 using stormline::core::time::TickPlan;
@@ -290,6 +292,46 @@ bool run_overflow() {
            "overflow negative delta");
     expect(timeline.state() == TimelineState::Running, "overflow state");
     expect(timeline.stop() == TimeError::None, "overflow stop");
+
+    Timeline tick_timeline;
+    constexpr std::uint64_t maximum = std::numeric_limits<std::uint64_t>::max();
+    expect(tick_timeline.start_at(&source, base_config(), TickId{maximum - 1U})
+               == TimeError::None,
+           "overflow start at max");
+    expect(tick_timeline.pause() == TimeError::None, "overflow pause");
+    expect(tick_timeline.step_once(plan) == TimeError::None, "overflow step max-1");
+    expect(plan.first_tick.value == maximum - 1U, "overflow first tick");
+    expect(tick_timeline.step_once(plan) == TimeError::TickOverflow, "overflow tick guard");
+    expect(tick_timeline.stop() == TimeError::None, "overflow tick stop");
+    return finish_case();
+}
+
+bool run_replay() {
+    begin_case();
+    const TimelineConfig config = base_config();
+    const ReplayScheduleHeader exact{1, 60, 1, 0, 42};
+    expect(replay_schedule_compatible(exact, config, TickId{0}, 42) == TimeError::None,
+           "replay exact");
+    ReplayScheduleHeader unknown = exact;
+    unknown.build_fingerprint = 0;
+    expect(replay_schedule_compatible(unknown, config, TickId{0}, 42) == TimeError::None,
+           "replay unknown fingerprint accepted");
+    ReplayScheduleHeader wrong_schema = exact;
+    wrong_schema.schema_version = 2;
+    expect(replay_schedule_compatible(wrong_schema, config, TickId{0}, 42)
+               == TimeError::ReplayIncompatible,
+           "replay schema rejected");
+    ReplayScheduleHeader wrong_rate = exact;
+    wrong_rate.tick_rate_numerator = 30;
+    expect(replay_schedule_compatible(wrong_rate, config, TickId{0}, 42)
+               == TimeError::ReplayIncompatible,
+           "replay rate rejected");
+    expect(replay_schedule_compatible(exact, config, TickId{1}, 42)
+               == TimeError::ReplayIncompatible,
+           "replay initial tick rejected");
+    expect(replay_schedule_compatible(exact, config, TickId{0}, 7)
+               == TimeError::ReplayIncompatible,
+           "replay fingerprint rejected");
     return finish_case();
 }
 
@@ -374,6 +416,8 @@ int main(int argc, char** argv) {
         success = run_scale();
     } else if (mode == "overflow") {
         success = run_overflow();
+    } else if (mode == "replay") {
+        success = run_replay();
     } else if (mode == "lifecycle") {
         success = run_lifecycle();
     } else if (mode == "determinism") {
