@@ -1,0 +1,66 @@
+name: G3-V04 isolated headless candidate smoke
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/core01-headless/**'
+      - '.github/workflows/g3-v04-headless-smoke.yml'
+      - 'docs/work-orders/NLE-G3-V04-EXP-001.md'
+      - 'docs/evidence/NLE-G3-V04-EXP-001.md'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: g3-v04-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  unix-headless:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'experiment/nle-g3-v04-core01-headless-001'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Report preinstalled tools and test isolated headless state machine
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "ImageVersion=$ImageVersion"
+          cmake --version
+          ninja --version
+          c++ --version | head -n 1
+          cmake -S experiments/core01-headless -B build/g3-v04 -G Ninja -DCMAKE_BUILD_TYPE=Debug
+          cmake --build build/g3-v04
+          env -u DISPLAY -u WAYLAND_DISPLAY ctest --test-dir build/g3-v04 --output-on-failure --no-tests=error
+
+  windows-headless:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'experiment/nle-g3-v04-core01-headless-001'
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Report preinstalled MSVC and test isolated headless state machine
+        shell: cmd
+        run: |
+          echo ImageVersion=%ImageVersion%
+          call "C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          if errorlevel 1 exit /b 1
+          cl /Bv
+          cmake --version
+          ninja --version
+          cmake -S experiments/core01-headless -B build\g3-v04 -G Ninja -DCMAKE_BUILD_TYPE=Debug
+          if errorlevel 1 exit /b 1
+          cmake --build build\g3-v04
+          if errorlevel 1 exit /b 1
+          ctest --test-dir build\g3-v04 --output-on-failure --no-tests=error
+          if errorlevel 1 exit /b 1
