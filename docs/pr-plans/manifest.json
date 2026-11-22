@@ -1551,7 +1551,7 @@
           "depends_on": [],
           "requires_modules_merged": [],
           "status": "APPROVED_GOVERNANCE",
-          "github_pr": 0
+          "github_pr": 561
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-06-02",
