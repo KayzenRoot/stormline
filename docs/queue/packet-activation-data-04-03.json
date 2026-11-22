@@ -1,0 +1,91 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-DATA-04-03",
+  "module_id": "DATA-04",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/data04-03-continuation",
+  "approved_adr": "docs/adr/0113-data-04-governance-slice.md",
+  "approved_contract": "docs/contracts/data-04-scene-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-DATA-04-03.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-04-03-G6-ACTIVATION.md",
+  "gate_base_sha": "d2b5dc347113ee403e3c988bf0e1512b5324045d",
+  "gate_pr": 0,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "CORE-05",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE05_TYPED_SCALARS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-04"
+      },
+      {
+        "id": "CORE05_MATRICES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-05"
+      },
+      {
+        "id": "CORE05_COORDINATES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-06"
+      },
+      {
+        "id": "CORE05_UNITS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "CORE05_IDS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-09"
+      },
+      {
+        "id": "CORE05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-10"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      }
+    ],
+    "not_required": [
+      "json_codec",
+      "cbor_codec",
+      "schema_validator",
+      "persistence",
+      "migration_journal",
+      "native_io",
+      "network",
+      "mcp",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "a5831e1a3ee765fc09a63b5a0d899d09998a15d6",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0012": "de48e3e586505c153d7240745da365ea28ab7f03",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0113": "db46eafc167c676cd259d24797a31d00c0e7089e",
+    "data04_architecture": "7e88d4fecaa83c9922f255087df9f97f6300b61f",
+    "data04_scene_api": "33b096149df35d20b3fe9e9d21e4bc6f22d71d5c",
+    "data04_governance_contract": "cc013afe163e6224b2a9324d84e28d7d31bb3d69",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "data04_plan": "719f98e522d4727b0c76625893d0b6309c40604d",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "data04_scene_contract": "99962b6a800d5219db46ce42cf4abb34f6d0ac57"
+  }
+}
