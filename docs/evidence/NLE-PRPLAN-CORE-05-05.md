@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-05-05 — coordinate-space evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `8367761d87c3f8147c649ef53b5247ff9f3f68cd`. **Gate:** [NLE-PRPLAN-CORE-05-05-G6-ACTIVATION](NLE-PRPLAN-CORE-05-05-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-05](../work-orders/NLE-PRPLAN-CORE-05-05.md).
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `8367761d87c3f8147c649ef53b5247ff9f3f68cd`. **Implementation head:** `7b9b4cc`. **Gate:** [NLE-PRPLAN-CORE-05-05-G6-ACTIVATION](NLE-PRPLAN-CORE-05-05-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-05](../work-orders/NLE-PRPLAN-CORE-05-05.md).
 
 ## Scope delivered
 
@@ -29,7 +29,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core05_coord_te
 Exited 0. The same source rebuilt with
 `-fsanitize=address,undefined -fno-omit-frame-pointer`; exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No benchmark, hardware, SIMD or performance result exists.
+Native CI on implementation head `7b9b4cc`: [run 45018105762](https://github.com/KayzenRoot/stormline/actions/runs/45018105762) SUCCESS — Linux **154/154**, ASan/UBSan **154/154**, TSan **44/44**, Windows **155/155**, macOS **153/153**; allocator 1/1 per target. Docs [45018105715](https://github.com/KayzenRoot/stormline/actions/runs/45018105715) SUCCESS; SonarCloud and Socket SUCCESS. No benchmark, hardware, SIMD or performance result exists.
 
 ## Errors and corrections
 
