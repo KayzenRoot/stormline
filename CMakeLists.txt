@@ -886,6 +886,13 @@ target_link_libraries(stormline_data04_document_test PRIVATE stormline_data04_sc
 stormline_core01_apply_options(stormline_data04_document_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data04_document_test)
 
+add_executable(stormline_data04_patch_test
+    tests/core/data04_patch_tests.cpp
+)
+target_link_libraries(stormline_data04_patch_test PRIVATE stormline_data04_scene)
+stormline_core01_apply_options(stormline_data04_patch_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data04_patch_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1731,6 +1738,11 @@ add_test(NAME data04_document_01
     COMMAND stormline_data04_document_test doc01
 )
 set_tests_properties(data04_document_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data04_patch_01
+    COMMAND stormline_data04_patch_test patch01
+)
+set_tests_properties(data04_patch_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
