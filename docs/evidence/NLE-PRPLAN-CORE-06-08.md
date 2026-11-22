@@ -54,3 +54,11 @@ Revert this PR normally; remove `telemetry.hpp`, the telemetry test and additive
 ## Proposed checkpoint delta
 
 After merge, record `CORE-06-08` as `COMPLETED`, manifest `CORE06_08_COMPLETED_REST_BLOCKED`: **684 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 52 `COMPLETED`, 12 approved gates**, and keep `CORE-06-09`/`-10` blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#574](https://github.com/KayzenRoot/stormline/pull/574) squash-merged as `51342e965bbb38144869e665f71801d3183821c6`.
+- Final implementation head `b6f0b64`; exact-head native run [45030402929](https://github.com/KayzenRoot/stormline/actions/runs/45030402929) SUCCESS: Linux 171/171, ASan/UBSan 171/171, TSan 53/53, Windows 172/172, macOS 170/170.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/574#issuecomment-7080256765).
+- Manifest after closeout: `CORE06_08_COMPLETED_REST_BLOCKED` — 684 blocked, 0 ready, 52 completed, 12 approved gates.
+- Local opt-in only; no network/upload/cloud/privacy/ABI/release.
