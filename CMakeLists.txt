@@ -704,6 +704,13 @@ target_include_directories(stormline_data01_vfs INTERFACE
 )
 target_compile_features(stormline_data01_vfs INTERFACE cxx_std_20)
 
+add_library(stormline_data03_import INTERFACE)
+target_include_directories(stormline_data03_import INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(stormline_data03_import INTERFACE stormline_data02_registry stormline_data01_vfs)
+target_compile_features(stormline_data03_import INTERFACE cxx_std_20)
+
 add_library(stormline_data02_registry INTERFACE)
 target_include_directories(stormline_data02_registry INTERFACE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
@@ -808,6 +815,13 @@ add_executable(stormline_data02_registry_qualification_test
 target_link_libraries(stormline_data02_registry_qualification_test PRIVATE stormline_data02_registry)
 stormline_core01_apply_options(stormline_data02_registry_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data02_registry_qualification_test)
+
+add_executable(stormline_data03_importer_test
+    tests/core/data03_importer_tests.cpp
+)
+target_link_libraries(stormline_data03_importer_test PRIVATE stormline_data03_import)
+stormline_core01_apply_options(stormline_data03_importer_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data03_importer_test)
 
 enable_testing()
 
@@ -1594,6 +1608,11 @@ add_test(NAME data02_registry_qualification_04
     COMMAND stormline_data02_registry_qualification_test qlf04
 )
 set_tests_properties(data02_registry_qualification_04 PROPERTIES TIMEOUT 120)
+
+add_test(NAME data03_importer_01
+    COMMAND stormline_data03_importer_test imp01
+)
+set_tests_properties(data03_importer_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
