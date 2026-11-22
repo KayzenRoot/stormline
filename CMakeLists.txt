@@ -643,6 +643,19 @@ target_link_libraries(stormline_core05_qualification_test PRIVATE stormline_core
 stormline_core01_apply_options(stormline_core05_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core05_qualification_test)
 
+add_library(stormline_core06_diag INTERFACE)
+target_include_directories(stormline_core06_diag INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_core06_diag INTERFACE cxx_std_20)
+
+add_executable(stormline_core06_log_test
+    tests/core/core06_log_tests.cpp
+)
+target_link_libraries(stormline_core06_log_test PRIVATE stormline_core06_diag)
+stormline_core01_apply_options(stormline_core06_log_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core06_log_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1266,6 +1279,22 @@ set_tests_properties(
     core05_qualification_recovery
     core05_qualification_large_coordinates
     PROPERTIES TIMEOUT 120
+)
+
+add_test(NAME core06_log_01
+    COMMAND stormline_core06_log_test log01
+)
+add_test(NAME core06_log_02
+    COMMAND stormline_core06_log_test log02
+)
+add_test(NAME core06_log_03
+    COMMAND stormline_core06_log_test log03
+)
+set_tests_properties(
+    core06_log_01
+    core06_log_02
+    core06_log_03
+    PROPERTIES TIMEOUT 60
 )
 
 if(WIN32)
