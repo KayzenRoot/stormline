@@ -880,7 +880,7 @@
           "depends_on": [],
           "requires_modules_merged": [],
           "status": "APPROVED_GOVERNANCE",
-          "github_pr": 0
+          "github_pr": 519
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-04-02",
