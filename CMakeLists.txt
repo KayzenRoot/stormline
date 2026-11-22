@@ -795,6 +795,13 @@ target_link_libraries(stormline_data02_schema_test PRIVATE stormline_data02_regi
 stormline_core01_apply_options(stormline_data02_schema_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data02_schema_test)
 
+add_executable(stormline_data02_reference_test
+    tests/core/data02_reference_tests.cpp
+)
+target_link_libraries(stormline_data02_reference_test PRIVATE stormline_data02_registry)
+stormline_core01_apply_options(stormline_data02_reference_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data02_reference_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1555,6 +1562,11 @@ add_test(NAME data02_schema_01
     COMMAND stormline_data02_schema_test schema01
 )
 set_tests_properties(data02_schema_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data02_reference_01
+    COMMAND stormline_data02_reference_test ref01
+)
+set_tests_properties(data02_reference_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
