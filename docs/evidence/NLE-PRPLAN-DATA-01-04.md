@@ -1,6 +1,6 @@
 # NLE-PRPLAN-DATA-01-04 — mounts evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `d8dd352`. **Gate:** [NLE-PRPLAN-DATA-01-04-G6-ACTIVATION](NLE-PRPLAN-DATA-01-04-G6-ACTIVATION.md). **Contract:** [data-01-vfs-v0](../contracts/data-01-vfs-v0.md). **WO:** [NLE-PRPLAN-DATA-01-04](../work-orders/NLE-PRPLAN-DATA-01-04.md).
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `d8dd352`. **Implementation head:** `9efa1f8`. **Gate:** [NLE-PRPLAN-DATA-01-04-G6-ACTIVATION](NLE-PRPLAN-DATA-01-04-G6-ACTIVATION.md). **Contract:** [data-01-vfs-v0](../contracts/data-01-vfs-v0.md). **WO:** [NLE-PRPLAN-DATA-01-04](../work-orders/NLE-PRPLAN-DATA-01-04.md).
 
 ## Scope delivered
 
@@ -28,7 +28,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/data01_mount_te
 
 Exited 0. ASan/UBSan rebuild exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No native OS/sandbox or performance result exists.
+Native CI on implementation head `9efa1f8`: [run 45054063073](https://github.com/KayzenRoot/stormline/actions/runs/45054063073) SUCCESS — Linux **177/177**, ASan/UBSan **177/177**, TSan **53/53**, Windows **178/178**, macOS **176/176**. Docs [45054063061](https://github.com/KayzenRoot/stormline/actions/runs/45054063061) SUCCESS; SonarCloud e Socket SUCCESS. No native OS/sandbox or performance result exists.
 
 ## Errors and corrections
 
