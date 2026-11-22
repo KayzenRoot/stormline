@@ -601,6 +601,13 @@ target_link_libraries(stormline_core05_vector_test PRIVATE stormline_core05_math
 stormline_core01_apply_options(stormline_core05_vector_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core05_vector_test)
 
+add_executable(stormline_core05_matrix_quat_test
+    tests/core/core05_matrix_quat_tests.cpp
+)
+target_link_libraries(stormline_core05_matrix_quat_test PRIVATE stormline_core05_math)
+stormline_core01_apply_options(stormline_core05_matrix_quat_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core05_matrix_quat_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1153,6 +1160,22 @@ set_tests_properties(
     core05_vector_math01
     core05_vector_math02
     core05_vector_errors
+    PROPERTIES TIMEOUT 60
+)
+
+add_test(NAME core05_matrix_math03
+    COMMAND stormline_core05_matrix_quat_test math03
+)
+add_test(NAME core05_matrix_math04
+    COMMAND stormline_core05_matrix_quat_test math04
+)
+add_test(NAME core05_quat_math05
+    COMMAND stormline_core05_matrix_quat_test math05
+)
+set_tests_properties(
+    core05_matrix_math03
+    core05_matrix_math04
+    core05_quat_math05
     PROPERTIES TIMEOUT 60
 )
 
