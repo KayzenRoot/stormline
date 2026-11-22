@@ -1848,7 +1848,7 @@
           "depends_on": [],
           "requires_modules_merged": [],
           "status": "APPROVED_GOVERNANCE",
-          "github_pr": 0
+          "github_pr": 578
         },
         {
           "packet_id": "NLE-PRPLAN-DATA-01-02",
