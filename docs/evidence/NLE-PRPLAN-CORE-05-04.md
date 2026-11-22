@@ -66,3 +66,11 @@ Revert this PR normally; remove `mat.hpp`, `quat.hpp`, the matrix/quaternion tes
 ## Proposed checkpoint delta
 
 After merge, record `CORE-05-04` as `COMPLETED`, manifest `CORE05_04_COMPLETED_REST_BLOCKED`: **698 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 40 `COMPLETED`, 10 approved gates**, and keep every later packet blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#542](https://github.com/KayzenRoot/stormline/pull/542) squash-merged as `a22abfbcfb405e3c4ace635c717d1fc21488d8a9`.
+- Final implementation head `aeacab2025b62651a9b73f3e029d8ee882a0622a`; exact-head native run [45017423487](https://github.com/KayzenRoot/stormline/actions/runs/45017423487) SUCCESS: Linux 153/153, ASan/UBSan 153/153, TSan 43/43, Windows 154/154, macOS 152/152.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/542#issuecomment-7078486242).
+- Manifest after closeout: `CORE05_04_COMPLETED_REST_BLOCKED` — 698 blocked, 0 ready, 40 completed, 10 approved gates. `CORE-05-05` remains `PLANNED_BLOCKED`.
+- This completion does not claim CORE-05 module completion, ABI, release, SIMD, hardware qualification or broad numerical determinism.
