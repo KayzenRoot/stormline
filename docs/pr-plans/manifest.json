@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "CORE05_05_COMPLETED_REST_BLOCKED",
+  "status": "CORE05_06_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -1384,8 +1384,29 @@
           "requires_modules_merged": [
             "CORE-01"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0108-core-05-governance-slice.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-CORE-05-06-G6-ACTIVATION.md",
+          "capability_admission": {
+            "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+            "formal_dependency": "CORE-01",
+            "module_completion_claimed": false,
+            "required_capabilities": [
+              {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
+              {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
+              {"id": "CORE01_SDL3_BUILD_BASELINE", "satisfied_by": "NLE-PRPLAN-CORE-01-07"},
+              {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"},
+              {"id": "CORE01_LIFECYCLE_REQUESTS", "satisfied_by": "NLE-PRPLAN-CORE-01-12"},
+              {"id": "CORE01_CAPABILITY_GRAPH", "satisfied_by": "NLE-PRPLAN-CORE-01-13"}
+            ],
+            "not_required": [
+              "window_runtime", "input", "dpi", "ime", "hotplug", "sleep_resume",
+              "soak", "renderer", "gpu", "audio", "network", "public_abi", "release"
+            ]
+          }
         },
         {
           "packet_id": "NLE-PRPLAN-CORE-05-07",
