@@ -99,6 +99,7 @@ private:
     DeviceState state_{DeviceState::Uninitialized};
     u64 generation_{0};
     Capabilities capabilities_{};
+    u32 submit_count_{0};
 };
 
 }  // namespace stormline::graphics::rhi
