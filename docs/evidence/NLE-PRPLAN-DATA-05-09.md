@@ -1,6 +1,6 @@
 # NLE-PRPLAN-DATA-05-09 — DATA-05 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO EXTERNAL CODEC, SIGNING, NETWORK OR RELEASE`. **Base:** `9b1cf3a`. **Packet:** `NLE-PRPLAN-DATA-05-09`. **Closeout PR:** #656. **ADR:** [ADR-0114](../adr/0114-data-05-governance-slice.md). **Contract:** [data-05-bundle-v0](../contracts/data-05-bundle-v0.md).
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO EXTERNAL CODEC, SIGNING, NETWORK OR RELEASE`. **Base:** `72b4494`. **Packet:** `NLE-PRPLAN-DATA-05-09`. **Closeout PR:** #656. **ADR:** [ADR-0114](../adr/0114-data-05-governance-slice.md). **Contract:** [data-05-bundle-v0](../contracts/data-05-bundle-v0.md).
 
 ## Result
 
@@ -15,7 +15,7 @@ DATA-05 completed its bounded internal sequence:
 | `-05` | chunk store/stream window, STR-01 | `95466bf` |
 | `-06` | FNV-1a 64 manifest verification, MAN-01 | `1386689` |
 | `-07` | incremental reuse plan, PAT-01 | `eee95bc` |
-| `-08` | QLF-B01..04 integrated qualification | `9b1cf3a` |
+| `-08` | QLF-B01..04 integrated qualification | `72b4494` |
 
 All slices were merged through exact-head native CI (Linux, ASan/UBSan, TSan, Windows, macOS) and pt-BR audits with no HIGH/CRITICAL findings. Final qualification on `51712ed`: Linux 222/222, ASan/UBSan 222/222, TSan 53/53, Windows 223/223, macOS 221/221.
 

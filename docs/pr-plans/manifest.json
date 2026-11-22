@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "DATA05_08_READY_L1_CAPABILITY_OVERLAY",
+  "status": "DATA05_09_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -3141,8 +3141,8 @@
             "DATA-03",
             "DATA-04"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 655,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0114-data-05-governance-slice.md",
@@ -3177,8 +3177,8 @@
             "NLE-PRPLAN-DATA-05-08"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 656
         }
       ],
       "plan_file": "docs/pr-plans/DATA-05.md"
