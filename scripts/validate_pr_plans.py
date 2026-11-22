@@ -144,6 +144,8 @@ CORE06_07_COMPLETED_STATUS = "CORE06_07_COMPLETED_REST_BLOCKED"
 CORE06_08_READY_STATUS = "CORE06_08_READY_L1_CAPABILITY_OVERLAY"
 CORE06_08_COMPLETED_STATUS = "CORE06_08_COMPLETED_REST_BLOCKED"
 CORE06_09_READY_STATUS = "CORE06_09_READY_L1_CAPABILITY_OVERLAY"
+CORE06_09_COMPLETED_STATUS = "CORE06_09_COMPLETED_REST_BLOCKED"
+CORE06_10_COMPLETED_STATUS = "CORE06_10_COMPLETED_REST_BLOCKED"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -234,6 +236,8 @@ ACTIVE_STATUSES = {
     CORE06_08_READY_STATUS,
     CORE06_08_COMPLETED_STATUS,
     CORE06_09_READY_STATUS,
+    CORE06_09_COMPLETED_STATUS,
+    CORE06_10_COMPLETED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -306,6 +310,8 @@ CORE06_07_CODE_PR = 572
 CORE06_08_GATE_PR = 573
 CORE06_08_CODE_PR = 574
 CORE06_09_GATE_PR = 575
+CORE06_09_CODE_PR = 576
+CORE06_10_CLOSEOUT_PR = 577
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -2000,6 +2006,8 @@ CORE06_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-CORE-06-08-G6-ACTIVATION.md"),
     9: ("docs/adr/0109-core-06-governance-slice.md",
         "docs/evidence/NLE-PRPLAN-CORE-06-09-G6-ACTIVATION.md"),
+    10: ("docs/adr/0109-core-06-governance-slice.md",
+         "docs/evidence/NLE-PRPLAN-CORE-06-10.md"),
 }
 
 CORE02_SLICE_METADATA = {
@@ -3051,7 +3059,13 @@ def expected_packet_state(
             if idx == 8:
                 return "COMPLETED", CORE06_08_CODE_PR
             if idx == 9:
+                if manifest_status in (CORE06_09_COMPLETED_STATUS, CORE06_10_COMPLETED_STATUS):
+                    return "COMPLETED", CORE06_09_CODE_PR
                 return "EXECUTOR_READY", None
+            if idx == 10:
+                if manifest_status == CORE06_10_COMPLETED_STATUS:
+                    return "COMPLETED", CORE06_10_CLOSEOUT_PR
+                return "PLANNED_BLOCKED", None
             return "PLANNED_BLOCKED", None
         activation = {"selected_packet_id": "NLE-PRPLAN-CORE-06-08"}
     if activation is not None and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-06-08":
@@ -4890,6 +4904,9 @@ def validate_manifest(
     if manifest.get("status") == CORE06_09_READY_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 52 or approved != 12:
             issues.append("CORE-06-09 activated state must have one ready packet, fifty-two completed slices and twelve approved gates")
+    if manifest.get("status") == CORE06_10_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 54 or approved != 12:
+            issues.append("CORE-06-10 closeout must have zero ready packets, fifty-four completed slices and twelve approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -5001,8 +5018,9 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-core-06-07.json" if status == CORE06_07_READY_STATUS else root / "docs/queue/packet-activation-core-06-06.json"
     elif status in (CORE06_07_COMPLETED_STATUS, CORE06_08_READY_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-06-08.json" if status == CORE06_08_READY_STATUS else root / "docs/queue/packet-activation-core-06-07.json"
-    elif status in (CORE06_08_COMPLETED_STATUS, CORE06_09_READY_STATUS):
-        activation_path = root / "docs/queue/packet-activation-core-06-09.json" if status == CORE06_09_READY_STATUS else root / "docs/queue/packet-activation-core-06-08.json"
+    elif status in (CORE06_08_COMPLETED_STATUS, CORE06_09_READY_STATUS,
+                    CORE06_09_COMPLETED_STATUS, CORE06_10_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-core-06-09.json" if status in (CORE06_09_READY_STATUS, CORE06_09_COMPLETED_STATUS, CORE06_10_COMPLETED_STATUS) else root / "docs/queue/packet-activation-core-06-08.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"
     else:

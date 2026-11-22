@@ -56,3 +56,11 @@ Revert this PR normally; remove the qualification test and additive CMake/workfl
 ## Proposed checkpoint delta
 
 After merge, record `CORE-06-09` as `COMPLETED`, manifest `CORE06_09_COMPLETED_REST_BLOCKED`: **683 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 53 `COMPLETED`, 12 approved gates**, and keep `CORE-06-10` blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#576](https://github.com/KayzenRoot/stormline/pull/576) squash-merged as `550db6e417ee74f9ec8cce840be9ecc873b722c7`.
+- Final implementation head `a6c5cdb`; exact-head native run [45031467498](https://github.com/KayzenRoot/stormline/actions/runs/45031467498) SUCCESS: Linux 175/175, ASan/UBSan 175/175, TSan 53/53, Windows 176/176, macOS 174/174.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/576#issuecomment-7080400327).
+- Manifest after closeout: `CORE06_09_COMPLETED_REST_BLOCKED` — 683 blocked, 0 ready, 53 completed, 12 approved gates.
+- Internal qualification only; no network/privacy/crash-handler/profiler/hardware/ABI/release qualification.
