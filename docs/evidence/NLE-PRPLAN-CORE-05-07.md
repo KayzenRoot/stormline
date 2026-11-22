@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-05-07 — precision/origin evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `7a4728dd0b249f94434fd3e780d47cb8a1461488`. **Gate:** [NLE-PRPLAN-CORE-05-07-G6-ACTIVATION](NLE-PRPLAN-CORE-05-07-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-07](../work-orders/NLE-PRPLAN-CORE-05-07.md).
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `7a4728dd0b249f94434fd3e780d47cb8a1461488`. **Implementation head:** `89a3255`. **Gate:** [NLE-PRPLAN-CORE-05-07-G6-ACTIVATION](NLE-PRPLAN-CORE-05-07-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-07](../work-orders/NLE-PRPLAN-CORE-05-07.md).
 
 ## Scope delivered
 
@@ -30,7 +30,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core05_precisio
 
 Both modes exited 0. The same source rebuilt with `-fsanitize=address,undefined -fno-omit-frame-pointer`; both modes exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No benchmark, hardware, SIMD or performance result exists.
+Native CI on implementation head `89a3255`: [run 45020065167](https://github.com/KayzenRoot/stormline/actions/runs/45020065167) SUCCESS — Linux **157/157**, ASan/UBSan **157/157**, TSan **47/47**, Windows **158/158**, macOS **156/156**; allocator 1/1 per target. Docs [45020065200](https://github.com/KayzenRoot/stormline/actions/runs/45020065200) SUCCESS; SonarCloud and Socket SUCCESS. No benchmark, hardware, SIMD or performance result exists.
 
 ## Errors and corrections
 
