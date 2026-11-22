@@ -1,6 +1,6 @@
 # ADR-0009 — VFS Namespace, Mounts and File System Security Policy
 
-**Date:** 2026-11-14 | **Status:** PROPOSED / NOT APPROVED FOR ENGINE IMPLEMENTATION  
+**Date:** 2026-11-14 | **Status:** OWNER-RATIFIED AS PLANNING DIRECTION ONLY per [ADR-0110](0110-data-01-governance-slice.md); implementation requires `DATA-01-02` contract, individual G6 and owner authorization.  
 **Work Order:** NLE-P00-WO-002-DATA-01 | **Research issue:** #108 | **Future implementation issue:** #24
 
 ## Decision context
