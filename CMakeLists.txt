@@ -691,6 +691,13 @@ target_link_libraries(stormline_core06_telemetry_test PRIVATE stormline_core06_d
 stormline_core01_apply_options(stormline_core06_telemetry_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core06_telemetry_test)
 
+add_executable(stormline_core06_qualification_test
+    tests/core/core06_diagnostics_qualification_tests.cpp
+)
+target_link_libraries(stormline_core06_qualification_test PRIVATE stormline_core06_diag)
+stormline_core01_apply_options(stormline_core06_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core06_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1356,6 +1363,26 @@ add_test(NAME core06_telemetry_01
     COMMAND stormline_core06_telemetry_test tel01
 )
 set_tests_properties(core06_telemetry_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME core06_qualification_integrated
+    COMMAND stormline_core06_qualification_test qlfd01
+)
+add_test(NAME core06_qualification_repeatability
+    COMMAND stormline_core06_qualification_test qlfd02
+)
+add_test(NAME core06_qualification_recovery
+    COMMAND stormline_core06_qualification_test qlfd03
+)
+add_test(NAME core06_qualification_overload
+    COMMAND stormline_core06_qualification_test qlfd04
+)
+set_tests_properties(
+    core06_qualification_integrated
+    core06_qualification_repeatability
+    core06_qualification_recovery
+    core06_qualification_overload
+    PROPERTIES TIMEOUT 120
+)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
