@@ -837,6 +837,13 @@ target_link_libraries(stormline_data03_animation_test PRIVATE stormline_data03_i
 stormline_core01_apply_options(stormline_data03_animation_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data03_animation_test)
 
+add_executable(stormline_data03_audio_test
+    tests/core/data03_audio_tests.cpp
+)
+target_link_libraries(stormline_data03_audio_test PRIVATE stormline_data03_import)
+stormline_core01_apply_options(stormline_data03_audio_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data03_audio_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1637,6 +1644,11 @@ add_test(NAME data03_animation_01
     COMMAND stormline_data03_animation_test anim01
 )
 set_tests_properties(data03_animation_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data03_audio_01
+    COMMAND stormline_data03_audio_test audio01
+)
+set_tests_properties(data03_audio_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
