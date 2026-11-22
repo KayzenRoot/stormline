@@ -106,6 +106,7 @@ CORE05_03_COMPLETED_STATUS = "CORE05_03_COMPLETED_REST_BLOCKED"
 CORE05_04_READY_STATUS = "CORE05_04_READY_L1_CAPABILITY_OVERLAY"
 CORE05_04_COMPLETED_STATUS = "CORE05_04_COMPLETED_REST_BLOCKED"
 CORE05_05_READY_STATUS = "CORE05_05_READY_L1_CAPABILITY_OVERLAY"
+CORE05_05_COMPLETED_STATUS = "CORE05_05_COMPLETED_REST_BLOCKED"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -171,6 +172,7 @@ ACTIVE_STATUSES = {
     CORE05_04_READY_STATUS,
     CORE05_04_COMPLETED_STATUS,
     CORE05_05_READY_STATUS,
+    CORE05_05_COMPLETED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -218,6 +220,7 @@ CORE05_03_CLOSEOUT_PR = 540
 CORE05_04_GATE_PR = 541
 CORE05_04_CLOSEOUT_PR = 543
 CORE05_05_GATE_PR = 544
+CORE05_05_CLOSEOUT_PR = 546
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -2226,6 +2229,8 @@ def expected_packet_state(
             if idx == 4:
                 return "COMPLETED", CORE05_04_CLOSEOUT_PR
             if idx == 5:
+                if manifest_status == CORE05_05_COMPLETED_STATUS:
+                    return "COMPLETED", CORE05_05_CLOSEOUT_PR
                 return "EXECUTOR_READY", None
             return "PLANNED_BLOCKED", None
         activation = {"selected_packet_id": "NLE-PRPLAN-CORE-05-04"}
@@ -3708,6 +3713,9 @@ def validate_manifest(
     if manifest.get("status") == CORE05_05_READY_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 40 or approved != 10:
             issues.append("CORE-05-05 activated state must have one ready packet, forty completed slices and ten approved gates")
+    if manifest.get("status") == CORE05_05_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 41 or approved != 10:
+            issues.append("CORE-05-05 completed state must have zero ready packets, forty-one completed slices and ten approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -3792,7 +3800,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-core-05-03.json"
     elif status in (CORE05_04_READY_STATUS, CORE05_04_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-05-04.json"
-    elif status == CORE05_05_READY_STATUS:
+    elif status in (CORE05_05_READY_STATUS, CORE05_05_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-05-05.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"
