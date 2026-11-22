@@ -133,7 +133,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-04-05", "NLE-PRPLAN-CORE-04-06",
                           "NLE-PRPLAN-CORE-04-07", "NLE-PRPLAN-CORE-04-08",
                           "NLE-PRPLAN-CORE-04-09", "NLE-PRPLAN-CORE-04-10",
-                          "NLE-PRPLAN-CORE-05-03", "NLE-PRPLAN-CORE-05-04", "NLE-PRPLAN-CORE-05-05", "NLE-PRPLAN-CORE-05-06", "NLE-PRPLAN-CORE-05-07", "NLE-PRPLAN-CORE-05-08", "NLE-PRPLAN-CORE-05-09"], completed)
+                          "NLE-PRPLAN-CORE-05-03", "NLE-PRPLAN-CORE-05-04", "NLE-PRPLAN-CORE-05-05", "NLE-PRPLAN-CORE-05-06", "NLE-PRPLAN-CORE-05-07", "NLE-PRPLAN-CORE-05-08", "NLE-PRPLAN-CORE-05-09", "NLE-PRPLAN-CORE-05-10"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -237,9 +237,12 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual("INTERNAL_ONLY", core05[7]["release_class"])
         self.assertEqual("COMPLETED", core05[8]["status"])
         self.assertEqual(v.CORE05_09_CLOSEOUT_PR, core05[8]["github_pr"])
+        self.assertEqual("COMPLETED", core05[9]["status"])
+        self.assertEqual(v.CORE05_10_CLOSEOUT_PR, core05[9]["github_pr"])
         self.assertEqual("ELEVATED", core05[8]["risk"])
         self.assertEqual("INTERNAL_ONLY", core05[8]["release_class"])
-        self.assertEqual("PLANNED_BLOCKED", core05[9]["status"])
+        self.assertEqual("ELEVATED", core05[9]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core05[9]["release_class"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
         self.assertEqual(v.CORE04_01_GATE_PR, core04[0]["github_pr"])
@@ -893,7 +896,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-05-03", "NLE-PRPLAN-CORE-05-04",
                           "NLE-PRPLAN-CORE-05-05", "NLE-PRPLAN-CORE-05-06",
                           "NLE-PRPLAN-CORE-05-07", "NLE-PRPLAN-CORE-05-08",
-                          "NLE-PRPLAN-CORE-05-10"):
+                          "NLE-PRPLAN-CORE-05-09", "NLE-PRPLAN-CORE-05-10"):
             blocked = subprocess.run([sys.executable, selector, packet_id, "--json"],
                                      capture_output=True, text=True, timeout=20, check=False)
             self.assertEqual(2, blocked.returncode, (packet_id, blocked.stdout, blocked.stderr))

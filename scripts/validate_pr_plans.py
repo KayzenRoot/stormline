@@ -119,6 +119,7 @@ CORE05_08_READY_STATUS = "CORE05_08_READY_L1_CAPABILITY_OVERLAY"
 CORE05_08_COMPLETED_STATUS = "CORE05_08_COMPLETED_REST_BLOCKED"
 CORE05_09_READY_STATUS = "CORE05_09_READY_L1_CAPABILITY_OVERLAY"
 CORE05_09_COMPLETED_STATUS = "CORE05_09_COMPLETED_REST_BLOCKED"
+CORE05_10_COMPLETED_STATUS = "CORE05_10_COMPLETED_REST_BLOCKED"
 CORE02_ACTIVATED_STATUS = "CORE02_03_READY_L1_CAPABILITY_OVERLAY"
 CORE02_COMPLETED_STATUS = "CORE02_03_COMPLETED_REST_BLOCKED"
 ACTIVE_STATUSES = {
@@ -193,6 +194,7 @@ ACTIVE_STATUSES = {
     CORE05_08_COMPLETED_STATUS,
     CORE05_09_READY_STATUS,
     CORE05_09_COMPLETED_STATUS,
+    CORE05_10_COMPLETED_STATUS,
     CORE02_ACTIVATED_STATUS,
     CORE02_COMPLETED_STATUS,
 }
@@ -249,6 +251,7 @@ CORE05_08_GATE_PR = 553
 CORE05_08_CLOSEOUT_PR = 555
 CORE05_09_GATE_PR = 556
 CORE05_09_CLOSEOUT_PR = 558
+CORE05_10_CLOSEOUT_PR = 0
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -1619,6 +1622,8 @@ CORE05_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-CORE-05-08-G6-ACTIVATION.md"),
     9: ("docs/adr/0108-core-05-governance-slice.md",
         "docs/evidence/NLE-PRPLAN-CORE-05-09-G6-ACTIVATION.md"),
+    10: ("docs/adr/0108-core-05-governance-slice.md",
+         "docs/evidence/NLE-PRPLAN-CORE-05-10.md"),
 }
 
 CORE04_SLICE_METADATA = {
@@ -2489,9 +2494,13 @@ def expected_packet_state(
             if idx == 8:
                 return "COMPLETED", CORE05_08_CLOSEOUT_PR
             if idx == 9:
-                if manifest_status == CORE05_09_COMPLETED_STATUS:
+                if manifest_status in (CORE05_09_COMPLETED_STATUS, CORE05_10_COMPLETED_STATUS):
                     return "COMPLETED", CORE05_09_CLOSEOUT_PR
                 return "EXECUTOR_READY", None
+            if idx == 10:
+                if manifest_status == CORE05_10_COMPLETED_STATUS:
+                    return "COMPLETED", CORE05_10_CLOSEOUT_PR
+                return "PLANNED_BLOCKED", None
             return "PLANNED_BLOCKED", None
         activation = {"selected_packet_id": "NLE-PRPLAN-CORE-05-08"}
     if activation is not None and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-05-08":
@@ -4076,6 +4085,9 @@ def validate_manifest(
     if manifest.get("status") == CORE05_09_COMPLETED_STATUS:
         if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 45 or approved != 10:
             issues.append("CORE-05-09 completed state must have zero ready packets, forty-five completed slices and ten approved gates")
+    if manifest.get("status") == CORE05_10_COMPLETED_STATUS:
+        if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 46 or approved != 10:
+            issues.append("CORE-05-10 closeout must have zero ready packets, forty-six completed slices and ten approved gates")
     if manifest.get("status") == CORE02_ACTIVATED_STATUS:
         if statuses.count("EXECUTOR_READY") != 1 or statuses.count("COMPLETED") != 6 or approved != 4:
             issues.append("CORE-02 activated state must have one ready packet, six completed CORE-01 slices and four approved gates")
@@ -4168,7 +4180,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-core-05-07.json"
     elif status in (CORE05_08_READY_STATUS, CORE05_08_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-05-08.json"
-    elif status in (CORE05_09_READY_STATUS, CORE05_09_COMPLETED_STATUS):
+    elif status in (CORE05_09_READY_STATUS, CORE05_09_COMPLETED_STATUS,
+                    CORE05_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-05-09.json"
     elif status in (CORE02_ACTIVATED_STATUS, CORE02_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-core-02-03.json"
