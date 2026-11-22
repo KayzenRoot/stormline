@@ -732,6 +732,13 @@ target_link_libraries(stormline_data01_capability_test PRIVATE stormline_data01_
 stormline_core01_apply_options(stormline_data01_capability_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data01_capability_test)
 
+add_executable(stormline_data01_cache_test
+    tests/core/data01_cache_tests.cpp
+)
+target_link_libraries(stormline_data01_cache_test PRIVATE stormline_data01_vfs)
+stormline_core01_apply_options(stormline_data01_cache_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data01_cache_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1437,6 +1444,11 @@ add_test(NAME data01_capability_01
     COMMAND stormline_data01_capability_test cap01
 )
 set_tests_properties(data01_capability_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data01_cache_01
+    COMMAND stormline_data01_cache_test cache01
+)
+set_tests_properties(data01_cache_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
