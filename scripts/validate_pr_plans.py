@@ -81,9 +81,10 @@ DATA03_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-06.json
 DATA03_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-07.json"
 DATA03_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-08.json"
 DATA03_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-03-09.json"
+DATA04_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-data-04-01.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = DATA03_09_ACTIVATION_FILE
+ACTIVATION_FILE = DATA04_01_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -224,6 +225,19 @@ DATA03_08_COMPLETED_STATUS = "DATA03_08_COMPLETED_REST_BLOCKED"
 DATA03_09_READY_STATUS = "DATA03_09_READY_L1_CAPABILITY_OVERLAY"
 DATA03_09_COMPLETED_STATUS = "DATA03_09_COMPLETED_REST_BLOCKED"
 DATA03_10_COMPLETED_STATUS = "DATA03_10_COMPLETED_REST_BLOCKED"
+DATA04_01_APPROVED_STATUS = "DATA04_01_APPROVED_GOVERNANCE_ONLY"
+DATA04_02_APPROVED_STATUS = "DATA04_02_APPROVED_CONTRACT_ONLY"
+DATA04_03_READY_STATUS = "DATA04_03_READY_L1_CAPABILITY_OVERLAY"
+DATA04_03_COMPLETED_STATUS = "DATA04_03_COMPLETED_REST_BLOCKED"
+DATA04_04_READY_STATUS = "DATA04_04_READY_L1_CAPABILITY_OVERLAY"
+DATA04_04_COMPLETED_STATUS = "DATA04_04_COMPLETED_REST_BLOCKED"
+DATA04_05_READY_STATUS = "DATA04_05_READY_L1_CAPABILITY_OVERLAY"
+DATA04_05_COMPLETED_STATUS = "DATA04_05_COMPLETED_REST_BLOCKED"
+DATA04_06_READY_STATUS = "DATA04_06_READY_L1_CAPABILITY_OVERLAY"
+DATA04_06_COMPLETED_STATUS = "DATA04_06_COMPLETED_REST_BLOCKED"
+DATA04_07_READY_STATUS = "DATA04_07_READY_L1_CAPABILITY_OVERLAY"
+DATA04_07_COMPLETED_STATUS = "DATA04_07_COMPLETED_REST_BLOCKED"
+DATA04_08_COMPLETED_STATUS = "DATA04_08_COMPLETED_REST_BLOCKED"
 DATA03_09_COMPLETED_STATUS = "DATA03_09_COMPLETED_REST_BLOCKED"
 DATA03_10_COMPLETED_STATUS = "DATA03_10_COMPLETED_REST_BLOCKED"
 DATA02_09_COMPLETED_STATUS = "DATA02_09_COMPLETED_REST_BLOCKED"
@@ -371,6 +385,19 @@ ACTIVE_STATUSES = {
     DATA03_09_READY_STATUS,
     DATA03_09_COMPLETED_STATUS,
     DATA03_10_COMPLETED_STATUS,
+    DATA04_01_APPROVED_STATUS,
+    DATA04_02_APPROVED_STATUS,
+    DATA04_03_READY_STATUS,
+    DATA04_03_COMPLETED_STATUS,
+    DATA04_04_READY_STATUS,
+    DATA04_04_COMPLETED_STATUS,
+    DATA04_05_READY_STATUS,
+    DATA04_05_COMPLETED_STATUS,
+    DATA04_06_READY_STATUS,
+    DATA04_06_COMPLETED_STATUS,
+    DATA04_07_READY_STATUS,
+    DATA04_07_COMPLETED_STATUS,
+    DATA04_08_COMPLETED_STATUS,
     DATA03_09_COMPLETED_STATUS,
     DATA03_10_COMPLETED_STATUS,
     DATA02_09_COMPLETED_STATUS,
@@ -542,7 +569,46 @@ DATA03_STATE = {
     DATA03_10_COMPLETED_STATUS: (2, 10, 0),
 }
 
-DATA04_STATE = {}
+DATA04_CAPABILITY_ADMISSION = {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "CORE-05",
+    "module_completion_claimed": False,
+    "required_capabilities": [
+        {"id": "CORE05_TYPED_SCALARS", "satisfied_by": "NLE-PRPLAN-CORE-05-03"},
+        {"id": "CORE05_VECTORS", "satisfied_by": "NLE-PRPLAN-CORE-05-04"},
+        {"id": "CORE05_MATRICES", "satisfied_by": "NLE-PRPLAN-CORE-05-05"},
+        {"id": "CORE05_COORDINATES", "satisfied_by": "NLE-PRPLAN-CORE-05-06"},
+        {"id": "CORE05_UNITS", "satisfied_by": "NLE-PRPLAN-CORE-05-07"},
+        {"id": "CORE05_IDS", "satisfied_by": "NLE-PRPLAN-CORE-05-09"},
+        {"id": "CORE05_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-05-10"},
+        {"id": "DATA02_IDENTITY", "satisfied_by": "NLE-PRPLAN-DATA-02-03"},
+        {"id": "DATA02_SCHEMA", "satisfied_by": "NLE-PRPLAN-DATA-02-07"},
+        {"id": "DATA02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-DATA-02-09"},
+    ],
+    "not_required": [
+        "json_codec", "cbor_codec", "schema_validator", "persistence",
+        "migration_journal", "native_io", "network", "mcp", "public_abi", "release",
+    ],
+}
+
+DATA04_01_GATE_PR = 0
+DATA04_02_GATE_PR = 0
+DATA04_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
+DATA04_STATE = {
+    DATA04_01_APPROVED_STATUS: (1, 0, 0),
+    DATA04_02_APPROVED_STATUS: (2, 0, 0),
+    DATA04_03_READY_STATUS: (2, 0, 3),
+    DATA04_03_COMPLETED_STATUS: (2, 3, 0),
+    DATA04_04_READY_STATUS: (2, 3, 4),
+    DATA04_04_COMPLETED_STATUS: (2, 4, 0),
+    DATA04_05_READY_STATUS: (2, 4, 5),
+    DATA04_05_COMPLETED_STATUS: (2, 5, 0),
+    DATA04_06_READY_STATUS: (2, 5, 6),
+    DATA04_06_COMPLETED_STATUS: (2, 6, 0),
+    DATA04_07_READY_STATUS: (2, 6, 7),
+    DATA04_07_COMPLETED_STATUS: (2, 7, 0),
+    DATA04_08_COMPLETED_STATUS: (2, 8, 0),
+}
 CORE02_03_GATE_PR = 440
 CORE02_03_CODE_PR = 441
 PACKET = re.compile(r"^NLE-PRPLAN-([A-Z]+-[0-9]{2})-([0-9]{2})$")
@@ -1812,6 +1878,38 @@ DATA02_09_ACTIVATION_SOURCES = {
     "data02_registry_contract": "docs/contracts/data-02-registry-v0.md",
     "module_catalog": "docs/product/module-catalog.md",
     "data02_plan": "docs/pr-plans/DATA-02.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+DATA04_01_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "fee9bf4760dcd0a8c8b3dbceafd3cb02eae58e1b",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0012": "de48e3e586505c153d7240745da365ea28ab7f03",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0113": "db46eafc167c676cd259d24797a31d00c0e7089e",
+    "data04_architecture": "7e88d4fecaa83c9922f255087df9f97f6300b61f",
+    "data04_scene_api": "33b096149df35d20b3fe9e9d21e4bc6f22d71d5c",
+    "data04_governance_contract": "cc013afe163e6224b2a9324d84e28d7d31bb3d69",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "data04_plan": "719f98e522d4727b0c76625893d0b6309c40604d",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+DATA04_01_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0012": "docs/adr/0012-data-04-scene-schema-policy.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0113": "docs/adr/0113-data-04-governance-slice.md",
+    "data04_architecture": "docs/architecture/data-04-serialization-scene-format.md",
+    "data04_scene_api": "docs/contracts/data-04-scene-api.md",
+    "data04_governance_contract": "docs/contracts/data-04-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "data04_plan": "docs/pr-plans/DATA-04.md",
     "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
@@ -3781,6 +3879,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "work_order", "activation_evidence", "capability_admission",
             "source_blob_sha1", "gate_pr",
         }
+    if selected == "NLE-PRPLAN-DATA-04-01":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-DATA-04-01",
+            "module_id": "DATA-04",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/data04-01-continuation",
+            "approved_adr": "docs/adr/0113-data-04-governance-slice.md",
+            "approved_contract": "docs/contracts/data-04-governance-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-DATA-04-01.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-04-01-G6-ACTIVATION.md",
+            "gate_base_sha": "a26e4636aab3b9af759edf4c952003ac092f0f1d",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, DATA04_01_ACTIVATION_SOURCES, DATA04_01_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
     if selected == "NLE-PRPLAN-DATA-03-01":
         expected = {
             "schema_version": 2,
@@ -4785,7 +4905,9 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
             errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
     if "capability_admission" in extra_keys:
         selected_id = str(activation.get("selected_packet_id", ""))
-        if selected_id.startswith("NLE-PRPLAN-DATA-03-"):
+        if selected_id.startswith("NLE-PRPLAN-DATA-04-"):
+            expected_admission = DATA04_CAPABILITY_ADMISSION
+        elif selected_id.startswith("NLE-PRPLAN-DATA-03-"):
             expected_admission = DATA03_CAPABILITY_ADMISSION
         elif selected_id.startswith("NLE-PRPLAN-DATA-02-"):
             expected_admission = DATA02_CAPABILITY_ADMISSION
@@ -4864,6 +4986,12 @@ FINAL_MODULE_STATES = {
         ("COMPLETED", 604), ("COMPLETED", 606), ("COMPLETED", 608),
         ("COMPLETED", 610), ("COMPLETED", 611),
     ],
+    "DATA-03": [
+        ("APPROVED_GOVERNANCE", 612), ("APPROVED_CONTRACT", 613),
+        ("COMPLETED", 615), ("COMPLETED", 617), ("COMPLETED", 619),
+        ("COMPLETED", 621), ("COMPLETED", 623), ("COMPLETED", 625),
+        ("COMPLETED", 627), ("COMPLETED", 628),
+    ],
 }
 
 def expected_packet_state(
@@ -4883,6 +5011,17 @@ def expected_packet_state(
             return "APPROVED_GOVERNANCE", DATA02_01_GATE_PR
         if idx == 2:
             return "APPROVED_CONTRACT", DATA02_02_GATE_PR
+        return "PLANNED_BLOCKED", None
+    if module_id == "DATA-04" and manifest_status in DATA04_STATE:
+        approved_count, completed_through, ready_idx = DATA04_STATE[manifest_status]
+        if idx == 1 and approved_count >= 1:
+            return "APPROVED_GOVERNANCE", DATA04_01_GATE_PR
+        if idx == 2 and approved_count >= 2:
+            return "APPROVED_CONTRACT", DATA04_02_GATE_PR
+        if 3 <= idx <= completed_through:
+            return "COMPLETED", DATA04_CODE_PRS[idx]
+        if idx == ready_idx:
+            return "EXECUTOR_READY", None
         return "PLANNED_BLOCKED", None
     if module_id == "DATA-03" and manifest_status in DATA03_STATE:
         approved_count, completed_through, ready_idx = DATA03_STATE[manifest_status]
@@ -6964,6 +7103,14 @@ def validate_manifest(
     if manifest.get("status") == CORE06_10_COMPLETED_STATUS:
         if statuses.count("EXECUTOR_READY") != 0 or statuses.count("COMPLETED") != 54 or approved != 12:
             issues.append("CORE-06-10 closeout must have zero ready packets, fifty-four completed slices and twelve approved gates")
+    if manifest.get("status") in DATA04_STATE:
+        approved_count, completed_through, ready_idx = DATA04_STATE[manifest.get("status")]
+        expected_completed = 78 + max(0, completed_through - 2)
+        expected_ready = 1 if ready_idx else 0
+        if (statuses.count("EXECUTOR_READY") != expected_ready
+                or statuses.count("COMPLETED") != expected_completed
+                or approved != 18 + approved_count):
+            issues.append("DATA-04 state counts do not match the audited packet transition")
     if manifest.get("status") in DATA03_STATE:
         approved_count, completed_through, ready_idx = DATA03_STATE[manifest.get("status")]
         expected_completed = 70 + max(0, completed_through - 2)
@@ -7181,6 +7328,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-03-03.json"
     elif status == DATA03_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-03-02.json"
+    elif status == DATA04_01_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-data-04-01.json"
     elif status == DATA03_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-03-01.json"
     elif status == DATA02_01_APPROVED_STATUS:
