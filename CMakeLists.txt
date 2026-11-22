@@ -608,6 +608,13 @@ target_link_libraries(stormline_core05_matrix_quat_test PRIVATE stormline_core05
 stormline_core01_apply_options(stormline_core05_matrix_quat_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core05_matrix_quat_test)
 
+add_executable(stormline_core05_coord_test
+    tests/core/core05_coord_tests.cpp
+)
+target_link_libraries(stormline_core05_coord_test PRIVATE stormline_core05_math)
+stormline_core01_apply_options(stormline_core05_coord_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core05_coord_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1178,6 +1185,11 @@ set_tests_properties(
     core05_quat_math05
     PROPERTIES TIMEOUT 60
 )
+
+add_test(NAME core05_coord_math06
+    COMMAND stormline_core05_coord_test math06
+)
+set_tests_properties(core05_coord_math06 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
