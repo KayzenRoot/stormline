@@ -636,6 +636,13 @@ target_link_libraries(stormline_core05_id_test PRIVATE stormline_core05_math)
 stormline_core01_apply_options(stormline_core05_id_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core05_id_test)
 
+add_executable(stormline_core05_qualification_test
+    tests/core/core05_qualification_tests.cpp
+)
+target_link_libraries(stormline_core05_qualification_test PRIVATE stormline_core05_math)
+stormline_core01_apply_options(stormline_core05_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core05_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1239,6 +1246,26 @@ set_tests_properties(
     core05_id_math10
     core05_id_math11
     PROPERTIES TIMEOUT 60
+)
+
+add_test(NAME core05_qualification_integrated
+    COMMAND stormline_core05_qualification_test qlf01
+)
+add_test(NAME core05_qualification_repeatability
+    COMMAND stormline_core05_qualification_test qlf02
+)
+add_test(NAME core05_qualification_recovery
+    COMMAND stormline_core05_qualification_test qlf03
+)
+add_test(NAME core05_qualification_large_coordinates
+    COMMAND stormline_core05_qualification_test qlf04
+)
+set_tests_properties(
+    core05_qualification_integrated
+    core05_qualification_repeatability
+    core05_qualification_recovery
+    core05_qualification_large_coordinates
+    PROPERTIES TIMEOUT 120
 )
 
 if(WIN32)
