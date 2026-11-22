@@ -659,7 +659,7 @@ DATA05_CAPABILITY_ADMISSION = {
     ],
 }
 
-DATA05_01_GATE_PR = 0
+DATA05_01_GATE_PR = 642
 DATA05_02_GATE_PR = 0
 DATA05_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0}
 DATA05_STATE = {
@@ -1968,7 +1968,7 @@ DATA02_09_ACTIVATION_SOURCES = {
 }
 
 DATA05_01_PINNED_SOURCE_BLOBS = {
-    "checkpoint": "c6d1485fef5c2d7e2b338bacc356901fd491a92a",
+    "checkpoint": "a37f115e1952f950daa08f329864354867f1421d",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
