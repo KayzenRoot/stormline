@@ -57,7 +57,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.core06_03_activation = json.loads(v.CORE06_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core06_04_activation = json.loads(v.CORE06_04_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core06_05_activation = json.loads(v.CORE06_05_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.CORE06_05_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.core06_06_activation = json.loads(v.CORE06_06_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.CORE06_06_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -116,7 +117,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual(["NLE-PRPLAN-CORE-06-05"], ready)
+        self.assertEqual(["NLE-PRPLAN-CORE-06-06"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -139,7 +140,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-04-07", "NLE-PRPLAN-CORE-04-08",
                           "NLE-PRPLAN-CORE-04-09", "NLE-PRPLAN-CORE-04-10",
                           "NLE-PRPLAN-CORE-05-03", "NLE-PRPLAN-CORE-05-04", "NLE-PRPLAN-CORE-05-05", "NLE-PRPLAN-CORE-05-06", "NLE-PRPLAN-CORE-05-07", "NLE-PRPLAN-CORE-05-08", "NLE-PRPLAN-CORE-05-09", "NLE-PRPLAN-CORE-05-10",
-                          "NLE-PRPLAN-CORE-06-03", "NLE-PRPLAN-CORE-06-04"], completed)
+                          "NLE-PRPLAN-CORE-06-03", "NLE-PRPLAN-CORE-06-04", "NLE-PRPLAN-CORE-06-05"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -262,10 +263,14 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.CORE06_04_CODE_PR, core06[3]["github_pr"])
         self.assertEqual("ELEVATED", core06[3]["risk"])
         self.assertEqual("INTERNAL_ONLY", core06[3]["release_class"])
-        self.assertEqual("EXECUTOR_READY", core06[4]["status"])
-        self.assertIsNone(core06[4]["github_pr"])
+        self.assertEqual("COMPLETED", core06[4]["status"])
+        self.assertEqual(v.CORE06_05_CODE_PR, core06[4]["github_pr"])
         self.assertEqual("ELEVATED", core06[4]["risk"])
         self.assertEqual("INTERNAL_ONLY", core06[4]["release_class"])
+        self.assertEqual("EXECUTOR_READY", core06[5]["status"])
+        self.assertIsNone(core06[5]["github_pr"])
+        self.assertEqual("ELEVATED", core06[5]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core06[5]["release_class"])
         self.assertEqual("PLANNED_BLOCKED", core06[9]["status"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
@@ -1253,6 +1258,26 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_core06_06_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-CORE-06-06",
+                         self.core06_06_activation["selected_packet_id"])
+        self.assertEqual("CORE-06", self.core06_06_activation["module_id"])
+        self.assertEqual("ELEVATED", self.core06_06_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.core06_06_activation["release_class"])
+        self.assertEqual("docs/contracts/core-06-diagnostics-v0.md",
+                         self.core06_06_activation["approved_contract"])
+        self.assertEqual(v.CORE04_CAPABILITY_ADMISSION,
+                         self.core06_06_activation["capability_admission"])
+        self.assertIsInstance(self.core06_06_activation["gate_pr"], int)
+        bad = copy.deepcopy(self.core06_06_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_core06_06_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.core06_06_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_core06_04_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-06-04", "--json"],
@@ -1260,9 +1285,16 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
-    def test_core06_05_selector_is_ready(self):
+    def test_core06_05_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
-        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-06-05", "--json"],
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-06-05", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_core06_06_selector_is_ready(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-CORE-06-06", "--json"],
                                capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
         self.assertTrue(json.loads(ready.stdout)["executor_ready"])
