@@ -802,6 +802,13 @@ target_link_libraries(stormline_data02_reference_test PRIVATE stormline_data02_r
 stormline_core01_apply_options(stormline_data02_reference_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data02_reference_test)
 
+add_executable(stormline_data02_registry_qualification_test
+    tests/core/data02_registry_qualification_tests.cpp
+)
+target_link_libraries(stormline_data02_registry_qualification_test PRIVATE stormline_data02_registry)
+stormline_core01_apply_options(stormline_data02_registry_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data02_registry_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1567,6 +1574,26 @@ add_test(NAME data02_reference_01
     COMMAND stormline_data02_reference_test ref01
 )
 set_tests_properties(data02_reference_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data02_registry_qualification_01
+    COMMAND stormline_data02_registry_qualification_test qlf01
+)
+set_tests_properties(data02_registry_qualification_01 PROPERTIES TIMEOUT 120)
+
+add_test(NAME data02_registry_qualification_02
+    COMMAND stormline_data02_registry_qualification_test qlf02
+)
+set_tests_properties(data02_registry_qualification_02 PROPERTIES TIMEOUT 120)
+
+add_test(NAME data02_registry_qualification_03
+    COMMAND stormline_data02_registry_qualification_test qlf03
+)
+set_tests_properties(data02_registry_qualification_03 PROPERTIES TIMEOUT 120)
+
+add_test(NAME data02_registry_qualification_04
+    COMMAND stormline_data02_registry_qualification_test qlf04
+)
+set_tests_properties(data02_registry_qualification_04 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
