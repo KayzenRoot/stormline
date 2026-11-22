@@ -310,6 +310,70 @@ public:
         return RegistryError::None;
     }
 
+    struct AssetQuery {
+        ProjectId project{};
+        bool has_kind{false};
+        AssetKind kind{AssetKind::Unknown};
+        bool has_tag{false};
+        Tag tag{};
+        bool has_prefix{false};
+        vfs::VfsPath prefix{};
+        u32 offset{0};
+    };
+
+    [[nodiscard]] RegistryError query(
+        const AssetQuery& filter, std::span<AssetId> output,
+        u32& out_count, u32& next_offset) const noexcept {
+        out_count = 0;
+        next_offset = 0;
+        if (!valid(filter.project) || output.empty()
+            || (filter.has_tag && (filter.tag.length == 0
+                                   || filter.tag.length > kMaxTagBytes))
+            || (filter.has_prefix && filter.prefix.length > vfs::kMaxPathBytes)) {
+            return RegistryError::InvalidArgument;
+        }
+        AssetId matches[kMaxAssets]{};
+        u32 count = 0;
+        for (u32 index = 0; index < size_; ++index) {
+            const AssetRecord& asset = assets_[index];
+            if (asset.status != AssetStatus::Active
+                || asset.project.value != filter.project.value) {
+                continue;
+            }
+            if (filter.has_kind && asset.kind != filter.kind) {
+                continue;
+            }
+            if (filter.has_tag && !has_tag(asset.id, filter.tag)) {
+                continue;
+            }
+            if (filter.has_prefix && !vfs::is_prefix(filter.prefix, asset.path)) {
+                continue;
+            }
+            matches[count++] = asset.id;
+        }
+        for (u32 index = 1; index < count; ++index) {
+            const AssetId key = matches[index];
+            u32 position = index;
+            while (position > 0 && less(key, matches[position - 1])) {
+                matches[position] = matches[position - 1];
+                --position;
+            }
+            matches[position] = key;
+        }
+        if (filter.offset >= count) {
+            return RegistryError::None;
+        }
+        u32 written = 0;
+        for (u32 index = filter.offset; index < count && written < output.size(); ++index) {
+            output[written++] = matches[index];
+        }
+        out_count = written;
+        if (filter.offset + written < count) {
+            next_offset = filter.offset + written;
+        }
+        return RegistryError::None;
+    }
+
     [[nodiscard]] u32 dependency_count() const noexcept { return dependency_count_; }
 
     [[nodiscard]] u32 unresolved_dependencies() const noexcept {
