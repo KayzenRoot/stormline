@@ -68,6 +68,14 @@ public:
         return BundleError::NotFound;
     }
 
+    [[nodiscard]] bool at(u32 index, ManifestEntry& out) const noexcept {
+        if (index >= size_) {
+            return false;
+        }
+        out = entries_[index];
+        return true;
+    }
+
     [[nodiscard]] u32 size() const noexcept { return size_; }
     [[nodiscard]] u64 generation() const noexcept { return generation_; }
     [[nodiscard]] u32 total_bytes() const noexcept { return total_bytes_; }

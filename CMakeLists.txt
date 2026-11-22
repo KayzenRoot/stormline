@@ -942,6 +942,13 @@ target_link_libraries(stormline_data05_manifest_test PRIVATE stormline_data05_bu
 stormline_core01_apply_options(stormline_data05_manifest_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_data05_manifest_test)
 
+add_executable(stormline_data05_patch_test
+    tests/core/data05_patch_tests.cpp
+)
+target_link_libraries(stormline_data05_patch_test PRIVATE stormline_data05_bundle)
+stormline_core01_apply_options(stormline_data05_patch_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_data05_patch_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1837,6 +1844,11 @@ add_test(NAME data05_manifest_01
     COMMAND stormline_data05_manifest_test man01
 )
 set_tests_properties(data05_manifest_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME data05_patch_01
+    COMMAND stormline_data05_patch_test pat01
+)
+set_tests_properties(data05_patch_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
