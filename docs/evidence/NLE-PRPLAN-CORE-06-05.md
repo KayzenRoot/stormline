@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-06-05 — counters evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `dead9f9`. **Gate:** [NLE-PRPLAN-CORE-06-05-G6-ACTIVATION](NLE-PRPLAN-CORE-06-05-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-05](../work-orders/NLE-PRPLAN-CORE-06-05.md).
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ABI OR RELEASE CLAIM`. **Base:** `dead9f9`. **Implementation head:** `bba2291`. **Gate:** [NLE-PRPLAN-CORE-06-05-G6-ACTIVATION](NLE-PRPLAN-CORE-06-05-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-05](../work-orders/NLE-PRPLAN-CORE-06-05.md).
 
 ## Scope delivered
 
@@ -27,7 +27,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core06_counter_
 
 Exited 0. ASan/UBSan rebuild exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No benchmark, hardware, metrics backend or performance result exists.
+Native CI on implementation head `bba2291`: [run 45027059081](https://github.com/KayzenRoot/stormline/actions/runs/45027059081) SUCCESS — Linux **168/168**, ASan/UBSan **168/168**, TSan **53/53**, Windows **169/169**, macOS **167/167**; allocator 1/1. Docs [45027059211](https://github.com/KayzenRoot/stormline/actions/runs/45027059211) SUCCESS; SonarCloud e Socket SUCCESS. No benchmark, hardware, metrics backend or performance result exists.
 
 ## Errors and corrections
 
