@@ -62,7 +62,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.core06_08_activation = json.loads(v.CORE06_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.core06_09_activation = json.loads(v.CORE06_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.data01_01_activation = json.loads(v.DATA01_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.DATA01_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.data01_02_activation = json.loads(v.DATA01_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.DATA01_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -295,7 +296,8 @@ class PrPlanValidationTests(unittest.TestCase):
         data01 = self.manifest["modules"][6]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", data01[0]["status"])
         self.assertEqual(v.DATA01_01_GATE_PR, data01[0]["github_pr"])
-        self.assertEqual("PLANNED_BLOCKED", data01[1]["status"])
+        self.assertEqual("APPROVED_CONTRACT", data01[1]["status"])
+        self.assertEqual(v.DATA01_02_GATE_PR, data01[1]["github_pr"])
         self.assertEqual("PLANNED_BLOCKED", data01[9]["status"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
@@ -1380,6 +1382,26 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_data01_01_activation_source_drift_denied(self):
         bad = copy.deepcopy(self.data01_01_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_data01_02_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-DATA-01-02",
+                         self.data01_02_activation["selected_packet_id"])
+        self.assertEqual("DATA-01", self.data01_02_activation["module_id"])
+        self.assertEqual("LOW", self.data01_02_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.data01_02_activation["release_class"])
+        self.assertEqual("docs/contracts/data-01-vfs-v0.md",
+                         self.data01_02_activation["approved_contract"])
+        self.assertEqual(v.CORE04_CAPABILITY_ADMISSION,
+                         self.data01_02_activation["capability_admission"])
+        self.assertIsInstance(self.data01_02_activation["gate_pr"], int)
+        bad = copy.deepcopy(self.data01_02_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_data01_02_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.data01_02_activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
