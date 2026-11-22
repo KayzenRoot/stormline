@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-04-04 — Rational fixed-step Timeline evidence
 
-**Status:** `IMPLEMENTATION / EXACT-HEAD CI PENDING`. **Base main:** `99e59b0`. **Formal packet:** `NLE-PRPLAN-CORE-04-04`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md). **WO:** [NLE-PRPLAN-CORE-04-04](../work-orders/NLE-PRPLAN-CORE-04-04.md).
+**Status:** `IMPLEMENTATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `99e59b0`. **Head:** `b9144da96cc1cac67ebec6c615a2edfbf8330ae5`. **Formal packet:** `NLE-PRPLAN-CORE-04-04`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md). **WO:** [NLE-PRPLAN-CORE-04-04](../work-orders/NLE-PRPLAN-CORE-04-04.md).
 
 ## Scope
 
@@ -62,4 +62,15 @@ No secret, network, filesystem, upload, paid service, dependency or global overr
 
 ## Exact-head CI
 
-Pending. This section will be updated only with real run IDs and conclusions after the code PR is opened.
+Native run [44989284287](https://github.com/KayzenRoot/stormline/actions/runs/44989284287) on head `b9144da96cc1cac67ebec6c615a2edfbf8330ae5`: **SUCCESS**.
+
+- Linux GCC: **141/141** CTest PASS, including 10 CORE-04 timeline tests.
+- Linux ASan/UBSan: **141/141** PASS, no sanitizer failure.
+- Linux TSan: **31/31** PASS (15 CORE-03 + 6 CORE-04 clock + 10 CORE-04 timeline), no TSan report.
+- Windows MSVC: **142/142** PASS, including 10 CORE-04 timeline tests.
+- macOS AppleClang: **140/140** PASS, including 10 CORE-04 timeline tests.
+- Docs Validation [44989284391](https://github.com/KayzenRoot/stormline/actions/runs/44989284391): SUCCESS.
+- SonarCloud and Socket Security: SUCCESS.
+- Allocator benchmark matrix: 3/3 PASS (isolated, report-only; no allocator selected).
+
+No native PASS is claimed beyond these exact-head run IDs. TICK-10 `TickOverflow` and TICK-12 `ReplayIncompatible` remain partial as documented above.
