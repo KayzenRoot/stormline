@@ -12,6 +12,7 @@ on:
       - 'src/stormline/core/memory/**'
       - 'src/stormline/core/jobs/**'
       - 'src/stormline/core/time/**'
+      - 'src/stormline/core/math/**'
       - 'benchmarks/core02/**'
       - 'tests/core/**'
       - 'CMakeLists.txt'
@@ -276,9 +277,9 @@ jobs:
           cmake -S . -B build/core03-tsan -G Ninja \
             -DCMAKE_BUILD_TYPE=Debug \
             -DSTORMLINE_CORE03_ENABLE_TSAN=ON
-          cmake --build build/core03-tsan --target stormline_core03_jobs_test stormline_core03_qualification_test stormline_core04_clock_test stormline_core04_timeline_test stormline_core04_qualification_test
+          cmake --build build/core03-tsan --target stormline_core03_jobs_test stormline_core03_qualification_test stormline_core04_clock_test stormline_core04_timeline_test stormline_core04_qualification_test stormline_core05_vector_test
           setarch "$(uname -m)" -R env TSAN_OPTIONS="halt_on_error=1 second_deadlock_stack=1" \
-            ctest --test-dir build/core03-tsan -R '^(core03_|core04_)' --output-on-failure
+            ctest --test-dir build/core03-tsan -R '^(core03_|core04_|core05_)' --output-on-failure
 
   allocator-benchmark:
     strategy:

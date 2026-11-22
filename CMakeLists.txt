@@ -588,6 +588,19 @@ target_link_libraries(stormline_core04_qualification_test PRIVATE stormline_core
 stormline_core01_apply_options(stormline_core04_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_core04_qualification_test)
 
+add_library(stormline_core05_math INTERFACE)
+target_include_directories(stormline_core05_math INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_core05_math INTERFACE cxx_std_20)
+
+add_executable(stormline_core05_vector_test
+    tests/core/core05_vector_tests.cpp
+)
+target_link_libraries(stormline_core05_vector_test PRIVATE stormline_core05_math)
+stormline_core01_apply_options(stormline_core05_vector_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_core05_vector_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1125,6 +1138,22 @@ set_tests_properties(
     core04_qualification_overload
     core04_qualification_benchmark
     PROPERTIES TIMEOUT 300
+)
+
+add_test(NAME core05_vector_math01
+    COMMAND stormline_core05_vector_test math01
+)
+add_test(NAME core05_vector_math02
+    COMMAND stormline_core05_vector_test math02
+)
+add_test(NAME core05_vector_errors
+    COMMAND stormline_core05_vector_test errors
+)
+set_tests_properties(
+    core05_vector_math01
+    core05_vector_math02
+    core05_vector_errors
+    PROPERTIES TIMEOUT 60
 )
 
 if(WIN32)
