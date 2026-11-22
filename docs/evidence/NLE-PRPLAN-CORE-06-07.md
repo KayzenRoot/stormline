@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-06-07 — profile samples evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO PROFILER OR PERFORMANCE CLAIM`. **Base:** `1522d80`. **Gate:** [NLE-PRPLAN-CORE-06-07-G6-ACTIVATION](NLE-PRPLAN-CORE-06-07-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-07](../work-orders/NLE-PRPLAN-CORE-06-07.md).
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO PROFILER OR PERFORMANCE CLAIM`. **Base:** `1522d80`. **Implementation head:** `e3f9080`. **Gate:** [NLE-PRPLAN-CORE-06-07-G6-ACTIVATION](NLE-PRPLAN-CORE-06-07-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-07](../work-orders/NLE-PRPLAN-CORE-06-07.md).
 
 ## Scope delivered
 
@@ -27,7 +27,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core06_profile_
 
 Exited 0. ASan/UBSan rebuild exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No profiler, benchmark, sampling or performance result exists.
+Native CI on implementation head `e3f9080`: [run 45028933777](https://github.com/KayzenRoot/stormline/actions/runs/45028933777) SUCCESS — Linux **170/170**, ASan/UBSan **170/170**, TSan **53/53**, Windows **171/171**, macOS **169/169**. Docs [45028933745](https://github.com/KayzenRoot/stormline/actions/runs/45028933745) SUCCESS; SonarCloud e Socket SUCCESS. No profiler, benchmark, sampling or performance result exists.
 
 ## Errors and corrections
 
