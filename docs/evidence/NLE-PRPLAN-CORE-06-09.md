@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-06-09 — integrated diagnostics qualification evidence
 
-**Status:** `INTERNAL QUALIFICATION / NO NETWORK, CRASH-HANDLER OR RELEASE CLAIM`. **Base:** `29bf653`. **Gate:** [NLE-PRPLAN-CORE-06-09-G6-ACTIVATION](NLE-PRPLAN-CORE-06-09-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-09](../work-orders/NLE-PRPLAN-CORE-06-09.md).
+**Status:** `INTERNAL QUALIFICATION / NO NETWORK, CRASH-HANDLER OR RELEASE CLAIM`. **Base:** `29bf653`. **Implementation head:** `6bffce3`. **Gate:** [NLE-PRPLAN-CORE-06-09-G6-ACTIVATION](NLE-PRPLAN-CORE-06-09-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-09](../work-orders/NLE-PRPLAN-CORE-06-09.md).
 
 ## Scope delivered
 
@@ -29,7 +29,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core06_diagnost
 
 All four modes exited 0. ASan/UBSan rebuild exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No network/privacy/crash/profiler/performance/hardware result exists.
+Native CI on implementation head `6bffce3`: [run 45031173662](https://github.com/KayzenRoot/stormline/actions/runs/45031173662) SUCCESS — Linux **175/175**, ASan/UBSan **175/175**, TSan **53/53**, Windows **176/176**, macOS **174/174**. Docs [45031173657](https://github.com/KayzenRoot/stormline/actions/runs/45031173657) SUCCESS; SonarCloud e Socket SUCCESS. No network/privacy/crash/profiler/performance/hardware result exists.
 
 ## Errors and corrections
 
