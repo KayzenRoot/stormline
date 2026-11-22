@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-05-09 — integrated qualification evidence
 
-**Status:** `INTERNAL QUALIFICATION / NO HARDWARE, ABI OR RELEASE CLAIM`. **Base:** `01e033922fb23b535d90628b8d99030a8462f46b`. **Gate:** [NLE-PRPLAN-CORE-05-09-G6-ACTIVATION](NLE-PRPLAN-CORE-05-09-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-09](../work-orders/NLE-PRPLAN-CORE-05-09.md).
+**Status:** `INTERNAL QUALIFICATION / NO HARDWARE, ABI OR RELEASE CLAIM`. **Base:** `01e033922fb23b535d90628b8d99030a8462f46b`. **Implementation head:** `78d1a21`. **Gate:** [NLE-PRPLAN-CORE-05-09-G6-ACTIVATION](NLE-PRPLAN-CORE-05-09-G6-ACTIVATION.md). **Contract:** [core-05-math-v0](../contracts/core-05-math-v0.md). **WO:** [NLE-PRPLAN-CORE-05-09](../work-orders/NLE-PRPLAN-CORE-05-09.md).
 
 ## Scope delivered
 
@@ -29,7 +29,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core05_qualific
 
 All four modes exited 0. The same source rebuilt with `-fsanitize=address,undefined -fno-omit-frame-pointer`; all four modes exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No hardware, soak, SIMD, performance, serialization or ABI qualification is claimed.
+Native CI on implementation head `78d1a21`: [run 45022325849](https://github.com/KayzenRoot/stormline/actions/runs/45022325849) SUCCESS — Linux **163/163**, ASan/UBSan **163/163**, TSan **53/53**, Windows **164/164**, macOS **162/162**; allocator 1/1 per target. Docs [45022325897](https://github.com/KayzenRoot/stormline/actions/runs/45022325897) SUCCESS; SonarCloud and Socket SUCCESS. No hardware, soak, SIMD, performance, serialization or ABI qualification is claimed.
 
 ## Errors and corrections
 
