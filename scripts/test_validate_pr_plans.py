@@ -120,7 +120,8 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-03-07", "NLE-PRPLAN-CORE-03-08",
                           "NLE-PRPLAN-CORE-03-09", "NLE-PRPLAN-CORE-03-10",
                           "NLE-PRPLAN-CORE-04-03", "NLE-PRPLAN-CORE-04-04",
-                          "NLE-PRPLAN-CORE-04-05", "NLE-PRPLAN-CORE-04-06"], completed)
+                          "NLE-PRPLAN-CORE-04-05", "NLE-PRPLAN-CORE-04-06",
+                          "NLE-PRPLAN-CORE-04-07"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -214,7 +215,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.CORE04_06_CLOSEOUT_PR, core04[5]["github_pr"])
         self.assertEqual("ELEVATED", core04[5]["risk"])
         self.assertEqual("INTERNAL_ONLY", core04[5]["release_class"])
-        self.assertEqual("PLANNED_BLOCKED", core04[6]["status"])
+        self.assertEqual("COMPLETED", core04[6]["status"])
+        self.assertEqual(v.CORE04_07_CLOSEOUT_PR, core04[6]["github_pr"])
+        self.assertEqual("ELEVATED", core04[6]["risk"])
+        self.assertEqual("INTERNAL_ONLY", core04[6]["release_class"])
+        self.assertEqual("PLANNED_BLOCKED", core04[7]["status"])
         self.assertEqual("PLANNED_BLOCKED", core04[9]["status"])
 
     def test_completed_slice_08_cannot_claim_wrong_pr(self):
