@@ -68,3 +68,11 @@ Revert this PR normally; delete `src/stormline/core/math/math_types.hpp`, `vec.h
 ## Proposed checkpoint delta
 
 After merge, record `CORE-05-03` as `COMPLETED`, manifest `CORE05_03_COMPLETED_REST_BLOCKED`: **699 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 39 `COMPLETED`, 10 approved gates**, and keep every later packet blocked. This is a proposal, not a self-promoted checkpoint.
+
+## Completion (2026-11-22)
+
+- Code PR [#539](https://github.com/KayzenRoot/stormline/pull/539) squash-merged as `11486b2df91e71c287139d632d5829c4a89a287b`.
+- Final implementation head `f47acef9cfbd339d721cf8cf269bbc0260687877`; exact-head native run [45016159363](https://github.com/KayzenRoot/stormline/actions/runs/45016159363) SUCCESS: Linux 150/150, ASan/UBSan 150/150, TSan 40/40, Windows 151/151, macOS 149/149.
+- pt-BR audit [APPROVED](https://github.com/KayzenRoot/stormline/pull/539#issuecomment-7078320932).
+- Manifest after closeout: `CORE05_03_COMPLETED_REST_BLOCKED` — 699 blocked, 0 ready, 39 completed, 10 approved gates. `CORE-05-04` remains `PLANNED_BLOCKED`.
+- This completion does not claim CORE-05 module completion, ABI, release, SIMD, hardware qualification or broad numerical determinism.
