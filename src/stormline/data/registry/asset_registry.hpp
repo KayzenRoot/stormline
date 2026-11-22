@@ -5,6 +5,7 @@
 
 #include <array>
 #include <limits>
+#include <span>
 
 namespace stormline::data::registry {
 
@@ -87,6 +88,127 @@ public:
         return true;
     }
 
+    enum class DependencyKind : std::uint8_t { Runtime, Build, Editor };
+
+    struct DependencyEdge {
+        AssetId from{};
+        AssetId to{};
+        DependencyKind kind{DependencyKind::Runtime};
+    };
+
+    [[nodiscard]] RegistryError add_dependency(const DependencyEdge& edge) noexcept {
+        if (!valid(edge.from) || !valid(edge.to)
+            || static_cast<std::uint8_t>(edge.kind)
+                > static_cast<std::uint8_t>(DependencyKind::Editor)) {
+            return RegistryError::InvalidArgument;
+        }
+        if (edge.from.high == edge.to.high && edge.from.low == edge.to.low) {
+            return RegistryError::DependencyCycle;
+        }
+        AssetRecord source{};
+        const RegistryError source_status = find(edge.from, source);
+        if (source_status != RegistryError::None) {
+            return source_status;
+        }
+        for (u32 index = 0; index < dependency_count_; ++index) {
+            const DependencyEdge& existing = edges_[index];
+            if (same_id(existing.from, edge.from) && same_id(existing.to, edge.to)
+                && existing.kind == edge.kind) {
+                return RegistryError::None;
+            }
+        }
+        if (dependency_count_ >= kMaxDependencies) {
+            return RegistryError::CapacityFull;
+        }
+        if (reaches(edge.to, edge.from)) {
+            return RegistryError::DependencyCycle;
+        }
+        edges_[dependency_count_] = edge;
+        ++dependency_count_;
+        return RegistryError::None;
+    }
+
+    [[nodiscard]] RegistryError remove_dependency(
+        AssetId from, AssetId to, DependencyKind kind) noexcept {
+        if (!valid(from) || !valid(to)) {
+            return RegistryError::InvalidArgument;
+        }
+        for (u32 index = 0; index < dependency_count_; ++index) {
+            const DependencyEdge& edge = edges_[index];
+            if (!same_id(edge.from, from) || !same_id(edge.to, to) || edge.kind != kind) {
+                continue;
+            }
+            for (u32 next = index + 1; next < dependency_count_; ++next) {
+                edges_[next - 1] = edges_[next];
+            }
+            --dependency_count_;
+            return RegistryError::None;
+        }
+        return RegistryError::NotFound;
+    }
+
+    [[nodiscard]] bool has_dependency(
+        AssetId from, AssetId to, DependencyKind kind) const noexcept {
+        for (u32 index = 0; index < dependency_count_; ++index) {
+            const DependencyEdge& edge = edges_[index];
+            if (same_id(edge.from, from) && same_id(edge.to, to) && edge.kind == kind) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    [[nodiscard]] RegistryError dependencies_of(
+        AssetId from, std::span<AssetId> output, u32& out_count) const noexcept {
+        out_count = 0;
+        if (!valid(from)) {
+            return RegistryError::InvalidArgument;
+        }
+        AssetRecord source{};
+        const RegistryError source_status = find(from, source);
+        if (source_status != RegistryError::None) {
+            return source_status;
+        }
+        AssetId matches[kMaxDependencies]{};
+        u32 count = 0;
+        for (u32 index = 0; index < dependency_count_; ++index) {
+            if (same_id(edges_[index].from, from)) {
+                matches[count++] = edges_[index].to;
+            }
+        }
+        return copy_sorted(matches, count, output, out_count);
+    }
+
+    [[nodiscard]] RegistryError dependents_of(
+        AssetId to, std::span<AssetId> output, u32& out_count) const noexcept {
+        out_count = 0;
+        if (!valid(to)) {
+            return RegistryError::InvalidArgument;
+        }
+        AssetId matches[kMaxDependencies]{};
+        u32 count = 0;
+        for (u32 index = 0; index < dependency_count_; ++index) {
+            if (same_id(edges_[index].to, to)) {
+                matches[count++] = edges_[index].from;
+            }
+        }
+        return copy_sorted(matches, count, output, out_count);
+    }
+
+    [[nodiscard]] u32 dependency_count() const noexcept { return dependency_count_; }
+
+    [[nodiscard]] u32 unresolved_dependencies() const noexcept {
+        u32 unresolved = 0;
+        for (u32 index = 0; index < dependency_count_; ++index) {
+            AssetRecord target{};
+            if (find(edges_[index].to, target) != RegistryError::None
+                || target.status != AssetStatus::Active) {
+                ++unresolved;
+            }
+        }
+        return unresolved;
+    }
+
     [[nodiscard]] RegistryError tombstone(AssetId id) noexcept {
         for (u32 index = 0; index < size_; ++index) {
             AssetRecord& asset = assets_[index];
@@ -109,8 +231,75 @@ public:
     [[nodiscard]] u32 size() const noexcept { return size_; }
 
 private:
+    static bool same_id(AssetId lhs, AssetId rhs) noexcept {
+        return lhs.high == rhs.high && lhs.low == rhs.low;
+    }
+
+    [[nodiscard]] bool reaches(AssetId start, AssetId target) const noexcept {
+        AssetId stack[kMaxAssets]{};
+        AssetId visited[kMaxAssets]{};
+        u32 stack_size = 0;
+        u32 visited_size = 0;
+        stack[stack_size++] = start;
+        while (stack_size > 0) {
+            const AssetId current = stack[--stack_size];
+            if (same_id(current, target)) {
+                return true;
+            }
+            bool seen = false;
+            for (u32 index = 0; index < visited_size; ++index) {
+                if (same_id(visited[index], current)) {
+                    seen = true;
+                    break;
+                }
+            }
+            if (seen) {
+                continue;
+            }
+            if (visited_size < kMaxAssets) {
+                visited[visited_size++] = current;
+            }
+            for (u32 index = 0; index < dependency_count_; ++index) {
+                if (same_id(edges_[index].from, current) && stack_size < kMaxAssets) {
+                    stack[stack_size++] = edges_[index].to;
+                }
+            }
+        }
+        return false;
+    }
+
+    static RegistryError copy_sorted(
+        AssetId* matches, u32 count, std::span<AssetId> output,
+        u32& out_count) noexcept {
+        for (u32 index = 1; index < count; ++index) {
+            const AssetId key = matches[index];
+            u32 position = index;
+            while (position > 0 && less(key, matches[position - 1])) {
+                matches[position] = matches[position - 1];
+                --position;
+            }
+            matches[position] = key;
+        }
+        u32 unique = 0;
+        for (u32 index = 0; index < count; ++index) {
+            if (unique == 0 || !same_id(matches[unique - 1], matches[index])) {
+                matches[unique++] = matches[index];
+            }
+        }
+        out_count = unique;
+        if (unique > output.size()) {
+            return RegistryError::BufferFull;
+        }
+        for (u32 index = 0; index < unique; ++index) {
+            output[index] = matches[index];
+        }
+        return RegistryError::None;
+    }
+
     std::array<AssetRecord, kMaxAssets> assets_{};
+    std::array<DependencyEdge, kMaxDependencies> edges_{};
     u32 size_{0};
+    u32 dependency_count_{0};
 };
 
 }  // namespace stormline::data::registry
