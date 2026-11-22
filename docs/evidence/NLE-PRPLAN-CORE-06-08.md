@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-06-08 — local opt-in telemetry evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO NETWORK OR RELEASE CLAIM`. **Base:** `eeb9225`. **Gate:** [NLE-PRPLAN-CORE-06-08-G6-ACTIVATION](NLE-PRPLAN-CORE-06-08-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-08](../work-orders/NLE-PRPLAN-CORE-06-08.md).
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO NETWORK OR RELEASE CLAIM`. **Base:** `eeb9225`. **Implementation head:** `3b1fdb1`. **Gate:** [NLE-PRPLAN-CORE-06-08-G6-ACTIVATION](NLE-PRPLAN-CORE-06-08-G6-ACTIVATION.md). **Contract:** [core-06-diagnostics-v0](../contracts/core-06-diagnostics-v0.md). **WO:** [NLE-PRPLAN-CORE-06-08](../work-orders/NLE-PRPLAN-CORE-06-08.md).
 
 ## Scope delivered
 
@@ -28,7 +28,7 @@ g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror -Isrc tests/core/core06_telemetr
 
 Exited 0. ASan/UBSan rebuild exited 0.
 
-Native CI is executed by the PR workflow; no result is claimed here before the exact-head run. No network/upload/privacy/consent result exists.
+Native CI on implementation head `3b1fdb1`: [run 45030048569](https://github.com/KayzenRoot/stormline/actions/runs/45030048569) SUCCESS — Linux **171/171**, ASan/UBSan **171/171**, TSan **53/53**, Windows **172/172**, macOS **170/170**. Docs [45030048462](https://github.com/KayzenRoot/stormline/actions/runs/45030048462) SUCCESS; SonarCloud e Socket SUCCESS. No network/upload/privacy/consent result exists.
 
 ## Errors and corrections
 
