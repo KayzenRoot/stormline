@@ -3099,90 +3099,11 @@ def expected_packet_state(
     module_id: str, idx: int, activation: dict | None, manifest_status: str | None
 ) -> tuple[str, int | None]:
     if activation is not None and activation.get("selected_packet_id") == "NLE-PRPLAN-DATA-01-01":
-        if module_id == "CORE-01":
-            if idx == 1:
-                return "APPROVED_GOVERNANCE", 422
-            if idx == 2:
-                return "APPROVED_CONTRACT", 424
-            code_prs = {
-                3: 428, 4: 428, 5: 428, 6: 432, 7: 435, 8: 438,
-                9: 444, 10: 447, 11: 450, 12: 453, 13: 456, 14: 459,
-                15: 462, 16: 464,
-            }
-            if idx in code_prs:
-                return "COMPLETED", code_prs[idx]
-            return "PLANNED_BLOCKED", None
-        if module_id == "CORE-02":
-            if idx == 1:
-                return "APPROVED_GOVERNANCE", CORE02_03_GATE_PR
-            if idx == 2:
-                return "APPROVED_CONTRACT", CORE02_03_GATE_PR
-            code_prs = {
-                3: CORE02_03_CODE_PR, 4: CORE02_04_CODE_PR, 5: CORE02_05_CODE_PR,
-                6: CORE02_06_CODE_PR, 7: CORE02_07_CODE_PR, 8: CORE02_08_CODE_PR,
-                9: CORE02_09_CODE_PR, 10: CORE02_10_CODE_PR,
-            }
-            if idx in code_prs:
-                return "COMPLETED", code_prs[idx]
-            return "PLANNED_BLOCKED", None
-        if module_id == "CORE-03":
-            if idx == 1:
-                return "APPROVED_GOVERNANCE", CORE03_01_GATE_PR
-            if idx == 2:
-                return "APPROVED_CONTRACT", CORE03_02_GATE_PR
-            code_prs = {
-                3: CORE03_03_CODE_PR, 4: CORE03_04_CLOSEOUT_PR, 5: CORE03_05_CLOSEOUT_PR,
-                6: CORE03_06_CLOSEOUT_PR, 7: CORE03_07_CLOSEOUT_PR, 8: CORE03_08_CLOSEOUT_PR,
-                9: CORE03_09_CODE_PR, 10: CORE03_10_CLOSEOUT_PR,
-            }
-            if idx in code_prs:
-                return "COMPLETED", code_prs[idx]
-            return "PLANNED_BLOCKED", None
-        if module_id == "CORE-04":
-            if idx == 1:
-                return "APPROVED_GOVERNANCE", CORE04_01_GATE_PR
-            if idx == 2:
-                return "APPROVED_CONTRACT", CORE04_02_GATE_PR
-            code_prs = {
-                3: CORE04_03_CODE_PR, 4: CORE04_04_CODE_PR, 5: CORE04_05_CLOSEOUT_PR,
-                6: CORE04_06_CLOSEOUT_PR, 7: CORE04_07_CLOSEOUT_PR, 8: CORE04_08_CLOSEOUT_PR,
-                9: CORE04_09_CODE_PR, 10: CORE04_10_CLOSEOUT_PR,
-            }
-            if idx in code_prs:
-                return "COMPLETED", code_prs[idx]
-            return "PLANNED_BLOCKED", None
-        if module_id == "CORE-05":
-            if idx == 1:
-                return "APPROVED_GOVERNANCE", CORE05_01_GATE_PR
-            if idx == 2:
-                return "APPROVED_CONTRACT", CORE05_02_GATE_PR
-            code_prs = {
-                3: CORE05_03_CLOSEOUT_PR, 4: CORE05_04_CLOSEOUT_PR,
-                5: CORE05_05_CLOSEOUT_PR, 6: CORE05_06_CLOSEOUT_PR,
-                7: CORE05_07_CLOSEOUT_PR, 8: CORE05_08_CLOSEOUT_PR,
-                9: CORE05_09_CLOSEOUT_PR, 10: CORE05_10_CLOSEOUT_PR,
-            }
-            if idx in code_prs:
-                return "COMPLETED", code_prs[idx]
-            return "PLANNED_BLOCKED", None
-        if module_id == "CORE-06":
-            if idx == 1:
-                return "APPROVED_GOVERNANCE", CORE06_01_GATE_PR
-            if idx == 2:
-                return "APPROVED_CONTRACT", CORE06_02_GATE_PR
-            code_prs = {
-                3: CORE06_03_CODE_PR, 4: CORE06_04_CODE_PR, 5: CORE06_05_CODE_PR,
-                6: CORE06_06_CODE_PR, 7: CORE06_07_CODE_PR, 8: CORE06_08_CODE_PR,
-                9: CORE06_09_CODE_PR, 10: CORE06_10_CLOSEOUT_PR,
-            }
-            if idx in code_prs:
-                return "COMPLETED", code_prs[idx]
-            return "PLANNED_BLOCKED", None
         if module_id == "DATA-01":
             if idx == 1:
                 return "APPROVED_GOVERNANCE", DATA01_01_GATE_PR
             return "PLANNED_BLOCKED", None
-        return "PLANNED_BLOCKED", None
+        activation = {"selected_packet_id": "NLE-PRPLAN-CORE-06-09"}
     if activation is not None and activation.get("selected_packet_id") == "NLE-PRPLAN-CORE-06-09":
         if module_id == "CORE-06":
             if idx == 1:
@@ -3202,11 +3123,11 @@ def expected_packet_state(
             if idx == 8:
                 return "COMPLETED", CORE06_08_CODE_PR
             if idx == 9:
-                if manifest_status in (CORE06_09_COMPLETED_STATUS, CORE06_10_COMPLETED_STATUS):
+                if manifest_status in (CORE06_09_COMPLETED_STATUS, CORE06_10_COMPLETED_STATUS, DATA01_01_APPROVED_STATUS):
                     return "COMPLETED", CORE06_09_CODE_PR
                 return "EXECUTOR_READY", None
             if idx == 10:
-                if manifest_status == CORE06_10_COMPLETED_STATUS:
+                if manifest_status in (CORE06_10_COMPLETED_STATUS, DATA01_01_APPROVED_STATUS):
                     return "COMPLETED", CORE06_10_CLOSEOUT_PR
                 return "PLANNED_BLOCKED", None
             return "PLANNED_BLOCKED", None
