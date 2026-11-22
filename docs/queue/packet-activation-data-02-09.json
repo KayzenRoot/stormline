@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-DATA-02-09",
+  "module_id": "DATA-02",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/data02-09-continuation",
+  "approved_adr": "docs/adr/0111-data-02-governance-slice.md",
+  "approved_contract": "docs/contracts/data-02-registry-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-DATA-02-09.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-02-09-G6-ACTIVATION.md",
+  "gate_base_sha": "dfb10eddf8573445deb19c3e824d4fc5387ec4a2",
+  "gate_pr": 609,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "DATA-01",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "DATA01_PATH_VALIDATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-01-03"
+      },
+      {
+        "id": "DATA01_MOUNT_TABLE",
+        "satisfied_by": "NLE-PRPLAN-DATA-01-04"
+      },
+      {
+        "id": "DATA01_OVERLAY",
+        "satisfied_by": "NLE-PRPLAN-DATA-01-05"
+      },
+      {
+        "id": "DATA01_CAPABILITIES",
+        "satisfied_by": "NLE-PRPLAN-DATA-01-06"
+      },
+      {
+        "id": "DATA01_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-01-09"
+      }
+    ],
+    "not_required": [
+      "persistence",
+      "sqlite",
+      "serialization",
+      "native_io",
+      "network",
+      "mcp",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "52b62dd653725ad0818d688e2395b92013184492",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0010": "c9465747dc6589ceed121e89bcdf211687021d00",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0111": "dc392094d15920a768e7f13e7da2dc227fe67c33",
+    "data02_architecture": "8838799363620c2cc77b90bd76a0151bfca696ff",
+    "data02_registry_api": "e1fe73afe60906c3bf1cfdd7c1d508a6d2bc99ff",
+    "data02_governance_contract": "4897cec31432fa3985798e4c33e7927f222caf46",
+    "data02_registry_contract": "ada255f8b4dc3d468adabaaecb074bfa3cfdbd1d",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "data02_plan": "4320e9d941e566a233adebf88f514f3ddfb49874",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}
