@@ -1070,7 +1070,7 @@
             "CORE-01"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 530,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0107-core-04-governance-slice.md",
