@@ -1,6 +1,6 @@
 # NLE-PRPLAN-CORE-04-04 — Rational fixed-step Timeline evidence
 
-**Status:** `IMPLEMENTATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `99e59b0`. **Head:** `b9144da96cc1cac67ebec6c615a2edfbf8330ae5`. **Formal packet:** `NLE-PRPLAN-CORE-04-04`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md). **WO:** [NLE-PRPLAN-CORE-04-04](../work-orders/NLE-PRPLAN-CORE-04-04.md).
+**Status:** `IMPLEMENTATION / EXACT-HEAD CI GREEN / AUDIT PENDING`. **Base main:** `99e59b0`. **Head:** `33f5daaac3b05aa276797bf08b2fb7a76c1c9612`. **Formal packet:** `NLE-PRPLAN-CORE-04-04`. **Risk:** `ELEVATED`. **Release class:** `INTERNAL_ONLY`. **Contract:** [core-04-timeline-v0](../contracts/core-04-timeline-v0.md). **WO:** [NLE-PRPLAN-CORE-04-04](../work-orders/NLE-PRPLAN-CORE-04-04.md). **Correction:** [CD-01](../evidence/NLE-PRPLAN-CORE-04-02-CORR-01.md).
 
 ## Scope
 
@@ -62,15 +62,15 @@ No secret, network, filesystem, upload, paid service, dependency or global overr
 
 ## Exact-head CI
 
-Native run [44989284287](https://github.com/KayzenRoot/stormline/actions/runs/44989284287) on head `b9144da96cc1cac67ebec6c615a2edfbf8330ae5`: **SUCCESS**.
+Native run [44990102431](https://github.com/KayzenRoot/stormline/actions/runs/44990102431) on head `33f5daaac3b05aa276797bf08b2fb7a76c1c9612`: **SUCCESS**.
 
-- Linux GCC: **141/141** CTest PASS, including 10 CORE-04 timeline tests.
-- Linux ASan/UBSan: **141/141** PASS, no sanitizer failure.
-- Linux TSan: **31/31** PASS (15 CORE-03 + 6 CORE-04 clock + 10 CORE-04 timeline), no TSan report.
-- Windows MSVC: **142/142** PASS, including 10 CORE-04 timeline tests.
-- macOS AppleClang: **140/140** PASS, including 10 CORE-04 timeline tests.
-- Docs Validation [44989284391](https://github.com/KayzenRoot/stormline/actions/runs/44989284391): SUCCESS.
+- Linux GCC: **142/142** CTest PASS, including 11 CORE-04 timeline tests.
+- Linux ASan/UBSan: **142/142** PASS, no sanitizer failure.
+- Linux TSan: **32/32** PASS (15 CORE-03 + 6 CORE-04 clock + 11 CORE-04 timeline), no TSan report.
+- Windows MSVC: **143/143** PASS, including 11 CORE-04 timeline tests.
+- macOS AppleClang: **141/141** PASS, including 11 CORE-04 timeline tests.
+- Docs Validation [44990102407](https://github.com/KayzenRoot/stormline/actions/runs/44990102407): SUCCESS.
 - SonarCloud and Socket Security: SUCCESS.
 - Allocator benchmark matrix: 3/3 PASS (isolated, report-only; no allocator selected).
 
-No native PASS is claimed beyond these exact-head run IDs. TICK-10 `TickOverflow` and TICK-12 `ReplayIncompatible` remain partial as documented above.
+No native PASS is claimed beyond these exact-head run IDs. TICK-10 and TICK-12 now include the CD-01 `start_at`/`replay_schedule_compatible` paths.
