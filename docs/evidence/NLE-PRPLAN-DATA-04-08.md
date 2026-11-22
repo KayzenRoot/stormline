@@ -1,6 +1,6 @@
 # NLE-PRPLAN-DATA-04-08 — DATA-04 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO JSON/CBOR, PERSISTENCE, NATIVE FILESYSTEM OR RELEASE`. **Base:** `5f7e2a1`. **Packet:** `NLE-PRPLAN-DATA-04-08`. **Closeout PR:** #641. **ADR:** [ADR-0113](../adr/0113-data-04-governance-slice.md). **Contract:** [data-04-scene-v0](../contracts/data-04-scene-v0.md).
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO JSON/CBOR, PERSISTENCE, NATIVE FILESYSTEM OR RELEASE`. **Base:** `3f5c56e`. **Packet:** `NLE-PRPLAN-DATA-04-08`. **Closeout PR:** #641. **ADR:** [ADR-0113](../adr/0113-data-04-governance-slice.md). **Contract:** [data-04-scene-v0](../contracts/data-04-scene-v0.md).
 
 ## Result
 
@@ -14,7 +14,7 @@ DATA-04 completed its bounded internal sequence:
 | `-04` | declarative document, DOC-01 | `d024bef` |
 | `-05` | atomic patches, PATCH-01 | `46ef785` |
 | `-06` | semantic diffs, DIFF-01 | `5163c81` |
-| `-07` | QLF-S01..04 integrated qualification | `5f7e2a1` |
+| `-07` | QLF-S01..04 integrated qualification | `3f5c56e` |
 
 All slices were merged through exact-head native CI (Linux, ASan/UBSan, TSan, Windows, macOS) and pt-BR audits with no HIGH/CRITICAL findings. Final qualification on `2be16cd`: Linux 213/213, ASan/UBSan 213/213, TSan 53/53, Windows 214/214, macOS 212/212.
 
