@@ -1,6 +1,6 @@
 # CORE-04 INTERNAL_ONLY Timeline Contract v0 (NLE-PRPLAN-CORE-04-02)
 
-**Status:** `CONTRACT PROPOSAL / NOT IMPLEMENTED / NO CODE AUTHORIZED`. **Base:** `7fb0949`. **ADR:** [ADR-0107](../adr/0107-core-04-governance-slice.md), [ADR-0006](../adr/0006-core-04-time-policy.md) planning-only. **WO:** [NLE-PRPLAN-CORE-04-02](../work-orders/NLE-PRPLAN-CORE-04-02.md).
+**Status:** `CONTRACT PROPOSAL / NOT IMPLEMENTED / NO CODE AUTHORIZED / v0.1 CD-01 correction`. **Base:** `7fb0949`; correction base `99e59b0`. **ADR:** [ADR-0107](../adr/0107-core-04-governance-slice.md), [ADR-0006](../adr/0006-core-04-time-policy.md) planning-only. **WO:** [NLE-PRPLAN-CORE-04-02](../work-orders/NLE-PRPLAN-CORE-04-02.md).
 
 ## Objective
 
@@ -116,6 +116,8 @@ public:
     Timeline& operator=(Timeline&&) = delete;
 
     [[nodiscard]] TimeError start(ClockSource* source, TimelineConfig config) noexcept;
+    [[nodiscard]] TimeError start_at(ClockSource* source, TimelineConfig config,
+                                     TickId initial_tick) noexcept;
     [[nodiscard]] TimeError pump(TickPlan& plan) noexcept;          // owner thread
     [[nodiscard]] TimeError pump_elapsed(std::int64_t elapsed_ns,
                                          TickPlan& plan) noexcept;  // owner thread, tests/replay
@@ -128,6 +130,12 @@ public:
     [[nodiscard]] TickId current_tick() const noexcept;
 };
 
+[[nodiscard]] TimeError replay_schedule_compatible(
+    const ReplayScheduleHeader& header,
+    const TimelineConfig& config,
+    TickId initial_tick,
+    std::uint64_t current_build_fingerprint) noexcept;
+
 }  // namespace stormline::core::time
 ```
 
@@ -135,7 +143,7 @@ No implementation is provided. Signatures may be refined only by an audited cont
 
 ## Semantics
 
-- **Lifecycle:** `Uninitialized -> Running <-> Paused -> Stopped`; source invariant failure enters `Failed`. `start` only from `Uninitialized`; `stop` is idempotent; restart is rejected. Owner thread is the `start` caller; owner-only methods return `WrongThread` elsewhere.
+- **Lifecycle:** `Uninitialized -> Running <-> Paused -> Stopped`; source invariant failure enters `Failed`. `start`/`start_at` only from `Uninitialized`; `stop` is idempotent; restart is rejected. `start_at` takes the initial `TickId` for replay/tests and otherwise follows `start`; `start` is `start_at(..., TickId{0})`. Owner thread is the start caller; owner-only methods return `WrongThread` elsewhere.
 - **Config:** tick rate numerator/denominator > 0; `max_catch_up_ticks` 1..64; `max_frame_delta_ns` > 0; `max_debt_ns` > 0; time scale positive rational. Invalid values return `InvalidConfig` without state change.
 - **Clock:** monotonic elapsed nanoseconds since an opaque process epoch. Null source, `ClockUnavailable`, backward/duplicate samples and overflow return typed errors; source failures move the timeline to `Failed`.
 - **Fixed step:** exact rational period `tick_rate_denominator / tick_rate_numerator` seconds. Use checked integer arithmetic with carried remainder; never accumulate floating-point `dt`. `TickId` starts at 0 and increments by one per emitted tick; overflow returns `TickOverflow`.
@@ -144,7 +152,7 @@ No implementation is provided. Signatures may be refined only by an audited cont
 - **Interpolation:** `interpolation_alpha` is the remaining fraction of a tick after emitted ticks, in `[0,1)`; it is derived only from admitted elapsed, never wall-clock UTC or presentation timestamps.
 - **Pause/step:** pause while running; resume while paused; `step_once` emits exactly one tick while remaining paused and never accumulates background time.
 - **Determinism envelope:** same admitted elapsed/input schedule and config yields the same `TickId` sequence and rational fixed step. This is not a bit-exact physics, multi-thread numerical, compiler floating-point or cross-platform replay guarantee.
-- **Replay header:** `ReplayScheduleHeader` records schema, tick rate, initial tick and build fingerprint; mismatch returns `ReplayIncompatible` rather than asserting cross-machine determinism.
+- **Replay header:** `ReplayScheduleHeader` records schema, tick rate, initial tick and build fingerprint. `replay_schedule_compatible` returns `ReplayIncompatible` when schema, tick rate, initial tick or a nonzero build fingerprint differs from the current config/fingerprint; it returns `None` on a match. It never asserts cross-machine determinism.
 - **Diagnostics:** stats are monotonic counters/snapshot; no pointers, thread IDs, unbounded logs or third-party tracing.
 - **Errors:** no exception crosses the API.
 
@@ -161,9 +169,9 @@ No implementation is provided. Signatures may be refined only by an audited cont
 | TICK-07 | catch-up/drop | bounded tick count; every dropped duration recorded |
 | TICK-08 | debt carry | bounded debt; exceeding `max_debt_ns` returns `DebtLimitExceeded` |
 | TICK-09 | time scale | 2× and 0.5× rational scale produce exact expected tick counts |
-| TICK-10 | overflow | tick counter near max and duration overflow → typed errors, no wrap |
+| TICK-10 | overflow | `start_at(max-1)` then two single steps → second returns `TickOverflow`; duration overflow and invalid config also typed, no wrap |
 | TICK-11 | lifecycle | stop idempotent; restart rejected; destructor safe; no detached work |
-| TICK-12 | determinism/replay | same elapsed partition → identical tick sequence; replay header mismatch rejected |
+| TICK-12 | determinism/replay | same elapsed partition → identical tick sequence; `replay_schedule_compatible` accepts exact config/fingerprint and rejects schema/rate/initial/fingerprint mismatch with `ReplayIncompatible` |
 
 ## Implementation allowlists
 
@@ -193,3 +201,13 @@ No implementation is provided. Signatures may be refined only by an audited cont
 Stop on stale source, missing admission, third-party timing type, float-only accumulation, unbounded catch-up, silent authoritative tick loss, public ABI/release claim, HIGH/CRITICAL. Unmerged: close the branch; after merge: normal revert PR, never force push.
 
 No implementation is authorized by this contract. `CORE-04-03` requires its own G6 activation.
+
+## CD-01 correction (2026-11-22)
+
+The first CORE-04-04 code audit found TICK-10 (`TickOverflow`) and TICK-12 (`ReplayIncompatible`) were not exercisable through the v0 API: `start` always began at tick 0 and no replay compatibility function existed. This correction adds only:
+
+- `Timeline::start_at(..., TickId initial_tick)` for a bounded initial tick; `start` is equivalent to `start_at(..., TickId{0})`.
+- `replay_schedule_compatible(...)` returning `None`/`ReplayIncompatible` for schema, tick-rate, initial-tick and nonzero build-fingerprint comparisons.
+
+No other semantics, dependency, file allowlist or production behavior changes. The correction is audited under the same `CORE-04-02` contract and `CORE-04-04` code packet.
+
