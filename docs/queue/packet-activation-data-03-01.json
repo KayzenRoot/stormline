@@ -11,7 +11,7 @@
   "work_order": "docs/work-orders/NLE-PRPLAN-DATA-03-01.md",
   "activation_evidence": "docs/evidence/NLE-PRPLAN-DATA-03-01-G6-ACTIVATION.md",
   "gate_base_sha": "26ef8543a8c0a9c3a6d7a9333b3ee18fa2b10a0f",
-  "gate_pr": 0,
+  "gate_pr": 612,
   "requires_fresh_context_lock": true,
   "capability_admission": {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
@@ -60,7 +60,7 @@
     ]
   },
   "source_blob_sha1": {
-    "checkpoint": "01df4ce98497269fde7a56fe4f55fd1c4197fd81",
+    "checkpoint": "52fd327d05a43028c6b72569ee76f4a96ec0dd9d",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
