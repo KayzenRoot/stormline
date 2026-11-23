@@ -1307,6 +1307,13 @@ target_link_libraries(stormline_gfx07_reconstruction_test PRIVATE stormline_gfx0
 stormline_core01_apply_options(stormline_gfx07_reconstruction_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx07_reconstruction_test)
 
+add_executable(stormline_gfx07_motion_blur_test
+    tests/core/gfx07_motion_blur_tests.cpp
+)
+target_link_libraries(stormline_gfx07_motion_blur_test PRIVATE stormline_gfx07_post)
+stormline_core01_apply_options(stormline_gfx07_motion_blur_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx07_motion_blur_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2537,6 +2544,11 @@ add_test(NAME gfx07_reconstruction_01
     COMMAND stormline_gfx07_reconstruction_test rcn01
 )
 set_tests_properties(gfx07_reconstruction_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx07_motion_blur_01
+    COMMAND stormline_gfx07_motion_blur_test mbl01
+)
+set_tests_properties(gfx07_motion_blur_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
