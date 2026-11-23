@@ -11,7 +11,7 @@
   "work_order": "docs/work-orders/NLE-PRPLAN-GFX-05-09.md",
   "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-05-09-G6-ACTIVATION.md",
   "gate_base_sha": "953dc83f22f5314afd2de844371a7a538eaeef3f",
-  "gate_pr": 0,
+  "gate_pr": 735,
   "requires_fresh_context_lock": true,
   "capability_admission": {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
