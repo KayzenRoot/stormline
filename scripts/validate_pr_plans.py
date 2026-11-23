@@ -139,9 +139,10 @@ GFX05_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-05-06.json"
 GFX05_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-05-07.json"
 GFX05_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-05-08.json"
 GFX05_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-05-09.json"
+GFX06_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-01.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = GFX05_09_ACTIVATION_FILE
+ACTIVATION_FILE = GFX06_01_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -391,6 +392,23 @@ GFX05_08_COMPLETED_STATUS = "GFX05_08_COMPLETED_REST_BLOCKED"
 GFX05_09_READY_STATUS = "GFX05_09_READY_L1_CAPABILITY_OVERLAY"
 GFX05_09_COMPLETED_STATUS = "GFX05_09_COMPLETED_REST_BLOCKED"
 GFX05_10_COMPLETED_STATUS = "GFX05_10_COMPLETED_REST_BLOCKED"
+GFX06_01_APPROVED_STATUS = "GFX06_01_APPROVED_GOVERNANCE_ONLY"
+GFX06_02_APPROVED_STATUS = "GFX06_02_APPROVED_CONTRACT_ONLY"
+GFX06_03_READY_STATUS = "GFX06_03_READY_L1_CAPABILITY_OVERLAY"
+GFX06_03_COMPLETED_STATUS = "GFX06_03_COMPLETED_REST_BLOCKED"
+GFX06_04_READY_STATUS = "GFX06_04_READY_L1_CAPABILITY_OVERLAY"
+GFX06_04_COMPLETED_STATUS = "GFX06_04_COMPLETED_REST_BLOCKED"
+GFX06_05_READY_STATUS = "GFX06_05_READY_L1_CAPABILITY_OVERLAY"
+GFX06_05_COMPLETED_STATUS = "GFX06_05_COMPLETED_REST_BLOCKED"
+GFX06_06_READY_STATUS = "GFX06_06_READY_L1_CAPABILITY_OVERLAY"
+GFX06_06_COMPLETED_STATUS = "GFX06_06_COMPLETED_REST_BLOCKED"
+GFX06_07_READY_STATUS = "GFX06_07_READY_L1_CAPABILITY_OVERLAY"
+GFX06_07_COMPLETED_STATUS = "GFX06_07_COMPLETED_REST_BLOCKED"
+GFX06_08_READY_STATUS = "GFX06_08_READY_L1_CAPABILITY_OVERLAY"
+GFX06_08_COMPLETED_STATUS = "GFX06_08_COMPLETED_REST_BLOCKED"
+GFX06_09_READY_STATUS = "GFX06_09_READY_L1_CAPABILITY_OVERLAY"
+GFX06_09_COMPLETED_STATUS = "GFX06_09_COMPLETED_REST_BLOCKED"
+GFX06_10_COMPLETED_STATUS = "GFX06_10_COMPLETED_REST_BLOCKED"
 DATA05_08_COMPLETED_STATUS = "DATA05_08_COMPLETED_REST_BLOCKED"
 DATA05_09_COMPLETED_STATUS = "DATA05_09_COMPLETED_REST_BLOCKED"
 DATA04_07_COMPLETED_STATUS = "DATA04_07_COMPLETED_REST_BLOCKED"
@@ -651,6 +669,23 @@ ACTIVE_STATUSES = {
     GFX05_09_READY_STATUS,
     GFX05_09_COMPLETED_STATUS,
     GFX05_10_COMPLETED_STATUS,
+    GFX06_01_APPROVED_STATUS,
+    GFX06_02_APPROVED_STATUS,
+    GFX06_03_READY_STATUS,
+    GFX06_03_COMPLETED_STATUS,
+    GFX06_04_READY_STATUS,
+    GFX06_04_COMPLETED_STATUS,
+    GFX06_05_READY_STATUS,
+    GFX06_05_COMPLETED_STATUS,
+    GFX06_06_READY_STATUS,
+    GFX06_06_COMPLETED_STATUS,
+    GFX06_07_READY_STATUS,
+    GFX06_07_COMPLETED_STATUS,
+    GFX06_08_READY_STATUS,
+    GFX06_08_COMPLETED_STATUS,
+    GFX06_09_READY_STATUS,
+    GFX06_09_COMPLETED_STATUS,
+    GFX06_10_COMPLETED_STATUS,
     DATA05_08_COMPLETED_STATUS,
     DATA05_09_COMPLETED_STATUS,
     DATA04_07_COMPLETED_STATUS,
@@ -954,6 +989,36 @@ GFX05_CAPABILITY_ADMISSION = {
     ],
 }
 
+GFX06_CAPABILITY_ADMISSION = {
+    "adr": GFX02_CAPABILITY_ADMISSION["adr"],
+    "formal_dependency": "GFX-03+GFX-05",
+    "module_completion_claimed": False,
+    "required_capabilities": [
+        *[cap for cap in GFX02_CAPABILITY_ADMISSION["required_capabilities"]
+          if cap["id"].startswith(("CORE01_", "CORE02_"))],
+        {"id": "CORE05_VECTORS", "satisfied_by": "NLE-PRPLAN-CORE-05-03"},
+        {"id": "CORE05_PRECISION", "satisfied_by": "NLE-PRPLAN-CORE-05-07"},
+        *[cap for cap in GFX02_CAPABILITY_ADMISSION["required_capabilities"]
+          if cap["id"] in ("GFX01_RHI_QUALIFICATION", "GFX02_SHADER_PARSER",
+                           "GFX02_REFLECTION", "GFX02_VARIANTS",
+                           "GFX02_QUALIFICATION")],
+        {"id": "GFX03_RENDER_GRAPH_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-03-08"},
+        {"id": "GFX05_MATERIAL", "satisfied_by": "NLE-PRPLAN-GFX-05-03"},
+        {"id": "GFX05_TEXTURES", "satisfied_by": "NLE-PRPLAN-GFX-05-04"},
+        {"id": "GFX05_MIPS", "satisfied_by": "NLE-PRPLAN-GFX-05-05"},
+        {"id": "GFX05_SAMPLER", "satisfied_by": "NLE-PRPLAN-GFX-05-06"},
+        {"id": "GFX05_DECALS", "satisfied_by": "NLE-PRPLAN-GFX-05-07"},
+        {"id": "GFX05_TRANSPARENCY", "satisfied_by": "NLE-PRPLAN-GFX-05-08"},
+        {"id": "GFX05_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-05-09"},
+    ],
+    "not_required": [
+        "native_gpu", "vulkan", "d3d12", "metal", "webgpu", "shadow_map",
+        "virtual_shadow_map", "ray_tracing", "global_illumination", "probe_bake",
+        "ssr", "froxel_volume", "shader_compiler", "gpu_allocator", "rendering",
+        "hardware", "network", "public_abi", "release",
+    ],
+}
+
 GFX04_CAPABILITY_ADMISSION = {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
     "formal_dependency": "GFX-03",
@@ -1044,6 +1109,14 @@ GFX05_STATE = {
     GFX05_09_READY_STATUS: (2, 8, 9),
     GFX05_09_COMPLETED_STATUS: (2, 9, 0),
     GFX05_10_COMPLETED_STATUS: (2, 10, 0),
+}
+
+GFX06_01_GATE_PR = 738
+GFX06_02_GATE_PR = 0
+GFX06_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+GFX06_STATE = {
+    GFX06_01_APPROVED_STATUS: (1, 0, 0),
+    GFX06_02_APPROVED_STATUS: (2, 0, 0),
 }
 
 GFX04_01_GATE_PR = 704
@@ -3063,6 +3136,40 @@ GFX05_09_PINNED_SOURCE_BLOBS = {
 
 GFX05_09_ACTIVATION_SOURCES = {
     **GFX05_08_ACTIVATION_SOURCES,
+}
+
+GFX06_01_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "611de2be97e12a4152455494c6fa390a88fb05ca",
+    "decisions_ledger": GFX04_01_PINNED_SOURCE_BLOBS["decisions_ledger"],
+    "scope": GFX04_01_PINNED_SOURCE_BLOBS["scope"],
+    "definition_of_done": GFX04_01_PINNED_SOURCE_BLOBS["definition_of_done"],
+    "adr_0019": "1f9c00e4ce3a14506104687ceb593001e0ca9335",
+    "adr_0086": GFX04_01_PINNED_SOURCE_BLOBS["adr_0086"],
+    "adr_0120": "df13d2409b787d93d27308b47e7c417677f73fde",
+    "gfx06_architecture": "a4a6ce14eb93df10554f35e8d8e31196d65fdf83",
+    "gfx06_internal_architecture": "bd65c39491b02e12d6caf9bc7e8ca7eabf0394f8",
+    "gfx06_api": "7e38013c2a161b8d463e21f0c89dd36ebe9d641e",
+    "gfx06_governance_contract": "e9605a56e5614552f5912330378d131df652eb70",
+    "module_catalog": GFX04_01_PINNED_SOURCE_BLOBS["module_catalog"],
+    "gfx06_plan": "dd06f030605946b1de49fb18f886e00d9bbe6088",
+    "implementation_registry": GFX04_01_PINNED_SOURCE_BLOBS["implementation_registry"],
+}
+
+GFX06_01_ACTIVATION_SOURCES = {
+    "checkpoint": GFX04_01_ACTIVATION_SOURCES["checkpoint"],
+    "decisions_ledger": GFX04_01_ACTIVATION_SOURCES["decisions_ledger"],
+    "scope": GFX04_01_ACTIVATION_SOURCES["scope"],
+    "definition_of_done": GFX04_01_ACTIVATION_SOURCES["definition_of_done"],
+    "adr_0019": "docs/adr/0019-gfx-06-adaptive-lighting-policy.md",
+    "adr_0086": GFX04_01_ACTIVATION_SOURCES["adr_0086"],
+    "adr_0120": "docs/adr/0120-gfx-06-internal-lighting-pipeline.md",
+    "gfx06_architecture": "docs/architecture/gfx-06-lighting-shadows.md",
+    "gfx06_internal_architecture": "docs/architecture/gfx-06-internal-lighting-pipeline.md",
+    "gfx06_api": "docs/contracts/gfx-06-lighting-api.md",
+    "gfx06_governance_contract": "docs/contracts/gfx-06-governance-v0.md",
+    "module_catalog": GFX04_01_ACTIVATION_SOURCES["module_catalog"],
+    "gfx06_plan": "docs/pr-plans/GFX-06.md",
+    "implementation_registry": GFX04_01_ACTIVATION_SOURCES["implementation_registry"],
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -6303,6 +6410,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "work_order", "activation_evidence", "capability_admission",
             "source_blob_sha1", "gate_pr",
         }
+    if selected == "NLE-PRPLAN-GFX-06-01":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-06-01",
+            "module_id": "GFX-06",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx06-01-continuation",
+            "approved_adr": "docs/adr/0120-gfx-06-internal-lighting-pipeline.md",
+            "approved_contract": "docs/contracts/gfx-06-governance-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-06-01.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-06-01-G6-ACTIVATION.md",
+            "gate_base_sha": "de396b2674b86c908f1b001f0fd4235c957fa1d2",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX06_01_ACTIVATION_SOURCES, GFX06_01_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
     if selected == "NLE-PRPLAN-GFX-05-09":
         expected = {
             "schema_version": 2,
@@ -8121,7 +8250,9 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
             errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
     if "capability_admission" in extra_keys:
         selected_id = str(activation.get("selected_packet_id", ""))
-        if selected_id.startswith("NLE-PRPLAN-GFX-05-"):
+        if selected_id.startswith("NLE-PRPLAN-GFX-06-"):
+            expected_admission = GFX06_CAPABILITY_ADMISSION
+        elif selected_id.startswith("NLE-PRPLAN-GFX-05-"):
             expected_admission = GFX05_CAPABILITY_ADMISSION
         elif selected_id.startswith("NLE-PRPLAN-GFX-04-"):
             expected_admission = GFX04_CAPABILITY_ADMISSION
@@ -8266,7 +8397,7 @@ FINAL_MODULE_STATES = {
 def expected_packet_state(
     module_id: str, idx: int, activation: dict | None, manifest_status: str | None
 ) -> tuple[str, int | None]:
-    if (manifest_status in DATA02_STATE or manifest_status in DATA03_STATE or manifest_status in DATA04_STATE or manifest_status in DATA05_STATE or manifest_status in GFX01_STATE or manifest_status in GFX02_STATE or manifest_status in GFX03_STATE or manifest_status in GFX04_STATE or manifest_status in GFX05_STATE) and module_id in FINAL_MODULE_STATES:
+    if (manifest_status in DATA02_STATE or manifest_status in DATA03_STATE or manifest_status in DATA04_STATE or manifest_status in DATA05_STATE or manifest_status in GFX01_STATE or manifest_status in GFX02_STATE or manifest_status in GFX03_STATE or manifest_status in GFX04_STATE or manifest_status in GFX05_STATE or manifest_status in GFX06_STATE) and module_id in FINAL_MODULE_STATES:
         states = FINAL_MODULE_STATES[module_id]
         if 1 <= idx <= len(states):
             return states[idx - 1]
@@ -8280,6 +8411,17 @@ def expected_packet_state(
             return "APPROVED_GOVERNANCE", DATA02_01_GATE_PR
         if idx == 2:
             return "APPROVED_CONTRACT", DATA02_02_GATE_PR
+        return "PLANNED_BLOCKED", None
+    if module_id == "GFX-06" and manifest_status in GFX06_STATE:
+        approved_count, completed_through, ready_idx = GFX06_STATE[manifest_status]
+        if idx == 1 and approved_count >= 1:
+            return "APPROVED_GOVERNANCE", GFX06_01_GATE_PR
+        if idx == 2 and approved_count >= 2:
+            return "APPROVED_CONTRACT", GFX06_02_GATE_PR
+        if 3 <= idx <= completed_through:
+            return "COMPLETED", GFX06_CODE_PRS[idx]
+        if idx == ready_idx:
+            return "EXECUTOR_READY", None
         return "PLANNED_BLOCKED", None
     if module_id == "GFX-05" and manifest_status in GFX05_STATE:
         approved_count, completed_through, ready_idx = GFX05_STATE[manifest_status]
@@ -10897,6 +11039,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     elif status in (GFX05_09_READY_STATUS, GFX05_09_COMPLETED_STATUS,
                     GFX05_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-05-09.json"
+    elif status == GFX06_01_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-gfx-06-01.json"
     elif status in (GFX04_09_READY_STATUS, GFX04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-04-09.json"
     elif status in (GFX03_08_READY_STATUS, GFX03_09_COMPLETED_STATUS):
