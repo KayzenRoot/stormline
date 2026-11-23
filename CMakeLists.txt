@@ -1273,6 +1273,19 @@ target_link_libraries(stormline_gfx06_lighting_qualification_test PRIVATE storml
 stormline_core01_apply_options(stormline_gfx06_lighting_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx06_lighting_qualification_test)
 
+add_library(stormline_gfx07_post INTERFACE)
+target_include_directories(stormline_gfx07_post INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_gfx07_post INTERFACE cxx_std_20)
+
+add_executable(stormline_gfx07_camera_test
+    tests/core/gfx07_camera_tests.cpp
+)
+target_link_libraries(stormline_gfx07_camera_test PRIVATE stormline_gfx07_post)
+stormline_core01_apply_options(stormline_gfx07_camera_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx07_camera_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2483,6 +2496,11 @@ add_test(NAME gfx06_lighting_qualification_04
     COMMAND stormline_gfx06_lighting_qualification_test qlf04
 )
 set_tests_properties(gfx06_lighting_qualification_04 PROPERTIES TIMEOUT 120)
+
+add_test(NAME gfx07_camera_01
+    COMMAND stormline_gfx07_camera_test cam01
+)
+set_tests_properties(gfx07_camera_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
