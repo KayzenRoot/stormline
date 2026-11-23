@@ -1293,6 +1293,13 @@ target_link_libraries(stormline_gfx07_color_test PRIVATE stormline_gfx07_post)
 stormline_core01_apply_options(stormline_gfx07_color_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx07_color_test)
 
+add_executable(stormline_gfx07_output_test
+    tests/core/gfx07_output_tests.cpp
+)
+target_link_libraries(stormline_gfx07_output_test PRIVATE stormline_gfx07_post)
+stormline_core01_apply_options(stormline_gfx07_output_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx07_output_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2513,6 +2520,11 @@ add_test(NAME gfx07_color_01
     COMMAND stormline_gfx07_color_test col01
 )
 set_tests_properties(gfx07_color_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx07_output_01
+    COMMAND stormline_gfx07_output_test hdr01
+)
+set_tests_properties(gfx07_output_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
