@@ -735,6 +735,12 @@ target_include_directories(stormline_gfx05_material INTERFACE
 )
 target_compile_features(stormline_gfx05_material INTERFACE cxx_std_20)
 
+add_library(stormline_gfx06_lighting INTERFACE)
+target_include_directories(stormline_gfx06_lighting INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_gfx06_lighting INTERFACE cxx_std_20)
+
 add_library(stormline_data05_bundle INTERFACE)
 target_include_directories(stormline_data05_bundle INTERFACE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
@@ -1217,6 +1223,13 @@ add_executable(stormline_gfx05_material_qualification_test
 target_link_libraries(stormline_gfx05_material_qualification_test PRIVATE stormline_gfx05_material)
 stormline_core01_apply_options(stormline_gfx05_material_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx05_material_qualification_test)
+
+add_executable(stormline_gfx06_light_test
+    tests/core/gfx06_light_tests.cpp
+)
+target_link_libraries(stormline_gfx06_light_test PRIVATE stormline_gfx06_lighting)
+stormline_core01_apply_options(stormline_gfx06_light_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx06_light_test)
 
 enable_testing()
 
@@ -2378,6 +2391,11 @@ add_test(NAME gfx05_material_qualification_04
     COMMAND stormline_gfx05_material_qualification_test qlf04
 )
 set_tests_properties(gfx05_material_qualification_04 PROPERTIES TIMEOUT 120)
+
+add_test(NAME gfx06_light_01
+    COMMAND stormline_gfx06_light_test lgt01
+)
+set_tests_properties(gfx06_light_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
