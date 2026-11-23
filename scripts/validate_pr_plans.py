@@ -122,9 +122,10 @@ GFX03_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-06.json"
 GFX03_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-07.json"
 GFX03_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-08.json"
 GFX04_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-04-01.json"
+GFX04_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-04-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = GFX04_01_ACTIVATION_FILE
+ACTIVATION_FILE = GFX04_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -931,11 +932,13 @@ GFX03_CAPABILITY_ADMISSION = {
 }
 
 GFX04_01_GATE_PR = 704
-GFX04_02_GATE_PR = 0
+GFX04_02_GATE_PR = 705
 GFX04_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
 GFX04_STATE = {
     GFX04_01_APPROVED_STATUS: (1, 0, 0),
     GFX04_02_APPROVED_STATUS: (2, 0, 0),
+    GFX04_03_READY_STATUS: (2, 0, 3),
+    GFX04_03_COMPLETED_STATUS: (2, 3, 0),
 }
 
 GFX03_01_GATE_PR = 689
@@ -2733,6 +2736,17 @@ GFX04_01_ACTIVATION_SOURCES = {
     "module_catalog": "docs/product/module-catalog.md",
     "gfx04_plan": "docs/pr-plans/GFX-04.md",
     "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+GFX04_02_PINNED_SOURCE_BLOBS = {
+    **GFX04_01_PINNED_SOURCE_BLOBS,
+    "checkpoint": "0c956d55432ae241e1d29e837a6ccdbefb1fff85",
+    "gfx04_internal_contract": "46eb1e5847175bc698d03746edd1e1d0e3e02808",
+}
+
+GFX04_02_ACTIVATION_SOURCES = {
+    **GFX04_01_ACTIVATION_SOURCES,
+    "gfx04_internal_contract": "docs/contracts/gfx-04-geometry-internal-v0.md",
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -5792,6 +5806,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, DATA05_02_ACTIVATION_SOURCES, DATA05_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-GFX-04-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-04-02",
+            "module_id": "GFX-04",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx04-02-continuation",
+            "approved_adr": "docs/adr/0118-gfx-04-internal-geometry-pipeline.md",
+            "approved_contract": "docs/contracts/gfx-04-geometry-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-04-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-04-02-G6-ACTIVATION.md",
+            "gate_base_sha": "35d6b31c5bf42739211fe8431ef7e75498719b53",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX04_02_ACTIVATION_SOURCES, GFX04_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -10131,6 +10167,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-03-07.json"
     elif status == GFX04_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-04-01.json"
+    elif status == GFX04_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-gfx-04-02.json"
     elif status in (GFX03_08_READY_STATUS, GFX03_09_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-03-08.json"
     elif status in (GFX02_08_READY_STATUS, GFX02_09_COMPLETED_STATUS):

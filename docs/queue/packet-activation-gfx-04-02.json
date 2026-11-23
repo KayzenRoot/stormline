@@ -1,0 +1,128 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-GFX-04-02",
+  "module_id": "GFX-04",
+  "risk": "LOW",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx04-02-continuation",
+  "approved_adr": "docs/adr/0118-gfx-04-internal-geometry-pipeline.md",
+  "approved_contract": "docs/contracts/gfx-04-geometry-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-GFX-04-02.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-04-02-G6-ACTIVATION.md",
+  "gate_base_sha": "35d6b31c5bf42739211fe8431ef7e75498719b53",
+  "gate_pr": 705,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "GFX-03",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      },
+      {
+        "id": "CORE01_LIFECYCLE_REQUESTS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-12"
+      },
+      {
+        "id": "CORE01_CAPABILITY_GRAPH",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-13"
+      },
+      {
+        "id": "CORE02_ALLOCATOR",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-03"
+      },
+      {
+        "id": "CORE02_OWNERSHIP",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-04"
+      },
+      {
+        "id": "CORE02_LEAK_TRACKING",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-08"
+      },
+      {
+        "id": "CORE02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-10"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_COORDINATE_SYSTEMS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-05"
+      },
+      {
+        "id": "CORE05_UNITS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-06"
+      },
+      {
+        "id": "CORE05_PRECISION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "CORE05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-09"
+      },
+      {
+        "id": "GFX01_RHI_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-01-09"
+      },
+      {
+        "id": "GFX03_RENDER_GRAPH_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-03-08"
+      },
+      {
+        "id": "DATA05_STREAMING",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-05"
+      },
+      {
+        "id": "DATA05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-08"
+      }
+    ],
+    "not_required": [
+      "native_gpu",
+      "vulkan",
+      "d3d12",
+      "metal",
+      "webgpu",
+      "mesh_shader",
+      "indirect_draw",
+      "gpu_occlusion",
+      "meshoptimizer",
+      "mesh_codec",
+      "streaming_io",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "0c956d55432ae241e1d29e837a6ccdbefb1fff85",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0017": "6ff45aefdda3c04c91e0bbcf53524661c1496468",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0118": "edcf790c12e426f05dbd142fb36f1d49b48978b8",
+    "gfx04_architecture": "25a53895c60bea8feeb00382b7c593fb66fc506f",
+    "gfx04_internal_architecture": "9c0f72a9ca33e975bc2937b396d1f55a8d2cd7ae",
+    "gfx04_api": "27ed733bf3652ec6aec48d2d49a55fcbd8d66a82",
+    "gfx04_governance_contract": "fd095a761d96cc9cdc5df1d41ab8680ae6c4ebee",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "gfx04_plan": "285b81583940509fba3363e235a4009d257eb912",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "gfx04_internal_contract": "46eb1e5847175bc698d03746edd1e1d0e3e02808"
+  }
+}
