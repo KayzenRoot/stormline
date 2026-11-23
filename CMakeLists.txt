@@ -1472,6 +1472,13 @@ target_link_libraries(stormline_two02_parallax_test PRIVATE stormline_two02_tile
 stormline_core01_apply_options(stormline_two02_parallax_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two02_parallax_test)
 
+add_executable(stormline_two02_streaming_test
+    tests/core/two02_streaming_tests.cpp
+)
+target_link_libraries(stormline_two02_streaming_test PRIVATE stormline_two02_tilemap)
+stormline_core01_apply_options(stormline_two02_streaming_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two02_streaming_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2847,6 +2854,11 @@ add_test(NAME two02_parallax_01
     COMMAND stormline_two02_parallax_test prx01
 )
 set_tests_properties(two02_parallax_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two02_streaming_01
+    COMMAND stormline_two02_streaming_test str01
+)
+set_tests_properties(two02_streaming_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
