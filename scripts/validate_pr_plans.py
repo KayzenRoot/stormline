@@ -940,7 +940,7 @@ GFX03_CAPABILITY_ADMISSION = {
 
 GFX04_01_GATE_PR = 704
 GFX04_02_GATE_PR = 705
-GFX04_CODE_PRS = {3: 707, 4: 709, 5: 711, 6: 713, 7: 715, 8: 717, 9: 0, 10: 0}
+GFX04_CODE_PRS = {3: 707, 4: 709, 5: 711, 6: 713, 7: 715, 8: 717, 9: 719, 10: 720}
 GFX04_SLICE_METADATA = {
     3: ("docs/adr/0118-gfx-04-internal-geometry-pipeline.md",
         "docs/evidence/NLE-PRPLAN-GFX-04-03-G6-ACTIVATION.md"),
@@ -7833,6 +7833,12 @@ FINAL_MODULE_STATES = {
         ("COMPLETED", 698), ("COMPLETED", 700), ("COMPLETED", 702),
         ("COMPLETED", 703),
     ],
+    "GFX-04": [
+        ("APPROVED_GOVERNANCE", 704), ("APPROVED_CONTRACT", 705),
+        ("COMPLETED", 707), ("COMPLETED", 709), ("COMPLETED", 711),
+        ("COMPLETED", 713), ("COMPLETED", 715), ("COMPLETED", 717),
+        ("COMPLETED", 719), ("COMPLETED", 720),
+    ],
 }
 
 def expected_packet_state(
@@ -10437,7 +10443,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-04-07.json"
     elif status == GFX04_08_READY_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-04-08.json"
-    elif status == GFX04_09_READY_STATUS:
+    elif status in (GFX04_09_READY_STATUS, GFX04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-04-09.json"
     elif status in (GFX03_08_READY_STATUS, GFX03_09_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-03-08.json"
