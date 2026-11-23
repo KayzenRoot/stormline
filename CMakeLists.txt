@@ -1121,6 +1121,13 @@ target_link_libraries(stormline_gfx04_instance_test PRIVATE stormline_gfx04_geom
 stormline_core01_apply_options(stormline_gfx04_instance_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx04_instance_test)
 
+add_executable(stormline_gfx04_cull_test
+    tests/core/gfx04_cull_tests.cpp
+)
+target_link_libraries(stormline_gfx04_cull_test PRIVATE stormline_gfx04_geometry)
+stormline_core01_apply_options(stormline_gfx04_cull_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx04_cull_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2186,6 +2193,11 @@ add_test(NAME gfx04_instance_01
     COMMAND stormline_gfx04_instance_test ins01
 )
 set_tests_properties(gfx04_instance_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx04_cull_01
+    COMMAND stormline_gfx04_cull_test cul01
+)
+set_tests_properties(gfx04_cull_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
