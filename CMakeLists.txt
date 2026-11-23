@@ -1376,6 +1376,13 @@ target_link_libraries(stormline_gfx08_pool_test PRIVATE stormline_gfx08_vfx)
 stormline_core01_apply_options(stormline_gfx08_pool_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx08_pool_test)
 
+add_executable(stormline_gfx08_vfx_qualification_test
+    tests/core/gfx08_vfx_qualification_tests.cpp
+)
+target_link_libraries(stormline_gfx08_vfx_qualification_test PRIVATE stormline_gfx08_vfx)
+stormline_core01_apply_options(stormline_gfx08_vfx_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx08_vfx_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2667,6 +2674,23 @@ add_test(NAME gfx08_pool_01
     COMMAND stormline_gfx08_pool_test pool01
 )
 set_tests_properties(gfx08_pool_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx08_vfx_qualification_801
+    COMMAND stormline_gfx08_vfx_qualification_test qlfg801
+)
+set_tests_properties(gfx08_vfx_qualification_801 PROPERTIES TIMEOUT 60)
+add_test(NAME gfx08_vfx_qualification_802
+    COMMAND stormline_gfx08_vfx_qualification_test qlfg802
+)
+set_tests_properties(gfx08_vfx_qualification_802 PROPERTIES TIMEOUT 60)
+add_test(NAME gfx08_vfx_qualification_803
+    COMMAND stormline_gfx08_vfx_qualification_test qlfg803
+)
+set_tests_properties(gfx08_vfx_qualification_803 PROPERTIES TIMEOUT 60)
+add_test(NAME gfx08_vfx_qualification_804
+    COMMAND stormline_gfx08_vfx_qualification_test qlfg804
+)
+set_tests_properties(gfx08_vfx_qualification_804 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
