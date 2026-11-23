@@ -150,9 +150,10 @@ GFX06_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-08.json"
 GFX06_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-09.json"
 GFX07_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-07-01.json"
 GFX07_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-07-02.json"
+GFX07_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-07-03.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = GFX07_02_ACTIVATION_FILE
+ACTIVATION_FILE = GFX07_03_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -1227,6 +1228,8 @@ GFX07_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
 GFX07_STATE = {
     GFX07_01_APPROVED_STATUS: (1, 0, 0),
     GFX07_02_APPROVED_STATUS: (2, 0, 0),
+    GFX07_03_READY_STATUS: (2, 0, 3),
+    GFX07_03_COMPLETED_STATUS: (2, 3, 0),
 }
 
 GFX04_01_GATE_PR = 704
@@ -3399,6 +3402,20 @@ GFX07_02_PINNED_SOURCE_BLOBS = {
 GFX07_02_ACTIVATION_SOURCES = {
     **GFX07_01_ACTIVATION_SOURCES,
     "gfx07_internal_contract": "docs/contracts/gfx-07-post-processing-internal-v0.md",
+}
+
+GFX07_SLICE_METADATA = {
+    3: ("docs/adr/0121-gfx-07-internal-post-processing-pipeline.md",
+        "docs/evidence/NLE-PRPLAN-GFX-07-03-G6-ACTIVATION.md"),
+}
+
+GFX07_03_PINNED_SOURCE_BLOBS = {
+    **GFX07_02_PINNED_SOURCE_BLOBS,
+    "checkpoint": "9fc8464a98b56ea05eab73e80cbc23ea7eabf426",
+}
+
+GFX07_03_ACTIVATION_SOURCES = {
+    **GFX07_02_ACTIVATION_SOURCES,
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -6656,6 +6673,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, GFX06_01_ACTIVATION_SOURCES, GFX06_01_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-GFX-07-03":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-07-03",
+            "module_id": "GFX-07",
+            "risk": "ELEVATED",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx07-03-continuation",
+            "approved_adr": "docs/adr/0121-gfx-07-internal-post-processing-pipeline.md",
+            "approved_contract": "docs/contracts/gfx-07-post-processing-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-07-03.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-07-03-G6-ACTIVATION.md",
+            "gate_base_sha": "6ad7a8306995f899f2a6f985107391be7064c510",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX07_03_ACTIVATION_SOURCES, GFX07_03_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -10670,6 +10709,8 @@ def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
         return GFX05_SLICE_METADATA[idx]
     if module_id == "GFX-06" and idx in GFX06_SLICE_METADATA:
         return GFX06_SLICE_METADATA[idx]
+    if module_id == "GFX-07" and idx in GFX07_SLICE_METADATA:
+        return GFX07_SLICE_METADATA[idx]
     return None
 
 
@@ -10802,7 +10843,7 @@ def validate_manifest(
                 if want_status not in ("EXECUTOR_READY", "COMPLETED"):
                     issues.append(f"{mid}: slice metadata on a non-completed packet")
                 expected_risk = ("ELEVATED"
-                                 if (mid in ("CORE-03", "CORE-04", "CORE-05", "CORE-06", "DATA-01", "DATA-02", "DATA-03", "DATA-04", "DATA-05", "GFX-01", "GFX-02", "GFX-03", "GFX-04", "GFX-05", "GFX-06") and idx >= 3)
+                                 if (mid in ("CORE-03", "CORE-04", "CORE-05", "CORE-06", "DATA-01", "DATA-02", "DATA-03", "DATA-04", "DATA-05", "GFX-01", "GFX-02", "GFX-03", "GFX-04", "GFX-05", "GFX-06", "GFX-07") and idx >= 3)
                                  else "STANDARD")
                 if (packet.get("risk") != expected_risk
                       or packet.get("release_class") != "INTERNAL_ONLY"
@@ -11532,6 +11573,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-07-01.json"
     elif status == GFX07_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-07-02.json"
+    elif status in (GFX07_03_READY_STATUS, GFX07_03_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-gfx-07-03.json"
     elif status in (GFX04_09_READY_STATUS, GFX04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-04-09.json"
     elif status in (GFX03_08_READY_STATUS, GFX03_09_COMPLETED_STATUS):
