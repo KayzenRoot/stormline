@@ -1009,7 +1009,7 @@ GFX03_CAPABILITY_ADMISSION = {
 
 GFX05_01_GATE_PR = 721
 GFX05_02_GATE_PR = 722
-GFX05_CODE_PRS = {3: 724, 4: 726, 5: 728, 6: 730, 7: 732, 8: 734, 9: 0, 10: 0}
+GFX05_CODE_PRS = {3: 724, 4: 726, 5: 728, 6: 730, 7: 732, 8: 734, 9: 736, 10: 0}
 GFX05_SLICE_METADATA = {
     3: ("docs/adr/0119-gfx-05-internal-material-texture-pipeline.md",
         "docs/evidence/NLE-PRPLAN-GFX-05-03-G6-ACTIVATION.md"),
