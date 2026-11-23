@@ -1003,7 +1003,7 @@ GFX03_CAPABILITY_ADMISSION = {
 
 GFX05_01_GATE_PR = 721
 GFX05_02_GATE_PR = 722
-GFX05_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+GFX05_CODE_PRS = {3: 724, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
 GFX05_SLICE_METADATA = {
     3: ("docs/adr/0119-gfx-05-internal-material-texture-pipeline.md",
         "docs/evidence/NLE-PRPLAN-GFX-05-03-G6-ACTIVATION.md"),
@@ -10659,7 +10659,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-05-01.json"
     elif status == GFX05_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-05-02.json"
-    elif status == GFX05_03_READY_STATUS:
+    elif status in (GFX05_03_READY_STATUS, GFX05_03_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-05-03.json"
     elif status in (GFX04_09_READY_STATUS, GFX04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-04-09.json"

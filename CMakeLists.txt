@@ -729,6 +729,12 @@ target_include_directories(stormline_gfx04_geometry INTERFACE
 )
 target_compile_features(stormline_gfx04_geometry INTERFACE cxx_std_20)
 
+add_library(stormline_gfx05_material INTERFACE)
+target_include_directories(stormline_gfx05_material INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_gfx05_material INTERFACE cxx_std_20)
+
 add_library(stormline_data05_bundle INTERFACE)
 target_include_directories(stormline_data05_bundle INTERFACE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
@@ -1162,6 +1168,13 @@ add_executable(stormline_gfx04_geometry_qualification_test
 target_link_libraries(stormline_gfx04_geometry_qualification_test PRIVATE stormline_gfx04_geometry)
 stormline_core01_apply_options(stormline_gfx04_geometry_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx04_geometry_qualification_test)
+
+add_executable(stormline_gfx05_material_test
+    tests/core/gfx05_material_tests.cpp
+)
+target_link_libraries(stormline_gfx05_material_test PRIVATE stormline_gfx05_material)
+stormline_core01_apply_options(stormline_gfx05_material_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx05_material_test)
 
 enable_testing()
 
@@ -2273,6 +2286,11 @@ add_test(NAME gfx04_geometry_qualification_04
     COMMAND stormline_gfx04_geometry_qualification_test qlf04
 )
 set_tests_properties(gfx04_geometry_qualification_04 PROPERTIES TIMEOUT 120)
+
+add_test(NAME gfx05_material_01
+    COMMAND stormline_gfx05_material_test pbr01
+)
+set_tests_properties(gfx05_material_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
