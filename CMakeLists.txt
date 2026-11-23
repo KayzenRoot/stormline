@@ -1438,6 +1438,19 @@ target_link_libraries(stormline_two01_canvas_qualification_test PRIVATE stormlin
 stormline_core01_apply_options(stormline_two01_canvas_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two01_canvas_qualification_test)
 
+add_library(stormline_two02_tilemap INTERFACE)
+target_include_directories(stormline_two02_tilemap INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_two02_tilemap INTERFACE cxx_std_20)
+
+add_executable(stormline_two02_grid_test
+    tests/core/two02_grid_tests.cpp
+)
+target_link_libraries(stormline_two02_grid_test PRIVATE stormline_two02_tilemap)
+stormline_core01_apply_options(stormline_two02_grid_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two02_grid_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2793,6 +2806,11 @@ add_test(NAME two01_canvas_qualification_104
     COMMAND stormline_two01_canvas_qualification_test qlft104
 )
 set_tests_properties(two01_canvas_qualification_104 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two02_grid_01
+    COMMAND stormline_two02_grid_test grd01
+)
+set_tests_properties(two02_grid_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
