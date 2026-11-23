@@ -1328,6 +1328,19 @@ target_link_libraries(stormline_gfx07_post_qualification_test PRIVATE stormline_
 stormline_core01_apply_options(stormline_gfx07_post_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx07_post_qualification_test)
 
+add_library(stormline_gfx08_vfx INTERFACE)
+target_include_directories(stormline_gfx08_vfx INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_gfx08_vfx INTERFACE cxx_std_20)
+
+add_executable(stormline_gfx08_particle_test
+    tests/core/gfx08_particle_tests.cpp
+)
+target_link_libraries(stormline_gfx08_particle_test PRIVATE stormline_gfx08_vfx)
+stormline_core01_apply_options(stormline_gfx08_particle_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx08_particle_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2585,6 +2598,15 @@ add_test(NAME gfx07_post_qualification_704
     COMMAND stormline_gfx07_post_qualification_test qlfg704
 )
 set_tests_properties(gfx07_post_qualification_704 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx08_particle_vfx01
+    COMMAND stormline_gfx08_particle_test vfx01
+)
+set_tests_properties(gfx08_particle_vfx01 PROPERTIES TIMEOUT 60)
+add_test(NAME gfx08_particle_spawn01
+    COMMAND stormline_gfx08_particle_test spawn01
+)
+set_tests_properties(gfx08_particle_spawn01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
