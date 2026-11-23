@@ -1245,6 +1245,13 @@ target_link_libraries(stormline_gfx06_gi_test PRIVATE stormline_gfx06_lighting)
 stormline_core01_apply_options(stormline_gfx06_gi_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx06_gi_test)
 
+add_executable(stormline_gfx06_probe_test
+    tests/core/gfx06_probe_tests.cpp
+)
+target_link_libraries(stormline_gfx06_probe_test PRIVATE stormline_gfx06_lighting)
+stormline_core01_apply_options(stormline_gfx06_probe_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx06_probe_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2420,6 +2427,11 @@ add_test(NAME gfx06_gi_01
     COMMAND stormline_gfx06_gi_test gi01
 )
 set_tests_properties(gfx06_gi_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx06_probe_01
+    COMMAND stormline_gfx06_probe_test prb01
+)
+set_tests_properties(gfx06_probe_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
