@@ -112,7 +112,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.gfx01_07_activation = json.loads(v.GFX01_07_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx01_08_activation = json.loads(v.GFX01_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx01_09_activation = json.loads(v.GFX01_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.GFX01_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.gfx02_01_activation = json.loads(v.GFX02_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.GFX02_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -551,6 +552,11 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual("INTERNAL_ONLY", gfx01[8]["release_class"])
         self.assertEqual("COMPLETED", gfx01[9]["status"])
         self.assertEqual(v.GFX01_CODE_PRS[10], gfx01[9]["github_pr"])
+        gfx02 = self.manifest["modules"][12]["packets"]
+        self.assertEqual("APPROVED_GOVERNANCE", gfx02[0]["status"])
+        self.assertEqual(v.GFX02_01_GATE_PR, gfx02[0]["github_pr"])
+        self.assertEqual("PLANNED_BLOCKED", gfx02[1]["status"])
+        self.assertIsNone(gfx02[1]["github_pr"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
         self.assertEqual(v.CORE04_01_GATE_PR, core04[0]["github_pr"])
@@ -2600,6 +2606,25 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_gfx02_01_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-GFX-02-01",
+                         self.gfx02_01_activation["selected_packet_id"])
+        self.assertEqual("GFX-02", self.gfx02_01_activation["module_id"])
+        self.assertEqual("LOW", self.gfx02_01_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.gfx02_01_activation["release_class"])
+        self.assertEqual("docs/contracts/gfx-02-governance-v0.md",
+                         self.gfx02_01_activation["approved_contract"])
+        self.assertEqual(v.GFX02_CAPABILITY_ADMISSION,
+                         self.gfx02_01_activation["capability_admission"])
+        bad = copy.deepcopy(self.gfx02_01_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_gfx02_01_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.gfx02_01_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_data01_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-DATA-01-03", "--json"],
@@ -2876,6 +2901,20 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_gfx01_10_closeout_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-01-10", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_gfx02_01_governance_selector_denies(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-02-01", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_gfx02_02_contract_selector_denies(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-02-02", "--json"],
                                  capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
