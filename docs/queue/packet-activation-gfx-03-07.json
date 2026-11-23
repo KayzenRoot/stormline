@@ -1,0 +1,122 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-GFX-03-07",
+  "module_id": "GFX-03",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/gfx03-07-continuation",
+  "approved_adr": "docs/adr/0117-gfx-03-internal-render-graph.md",
+  "approved_contract": "docs/contracts/gfx-03-render-graph-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-GFX-03-07.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-03-07-G6-ACTIVATION.md",
+  "gate_base_sha": "953d785778ed7d202132d3289af8762c64d7722a",
+  "gate_pr": 699,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "GFX-01",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      },
+      {
+        "id": "CORE01_LIFECYCLE_REQUESTS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-12"
+      },
+      {
+        "id": "CORE01_CAPABILITY_GRAPH",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-13"
+      },
+      {
+        "id": "CORE02_ALLOCATOR",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-03"
+      },
+      {
+        "id": "CORE02_OWNERSHIP",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-04"
+      },
+      {
+        "id": "CORE02_LEAK_TRACKING",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-08"
+      },
+      {
+        "id": "CORE02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-10"
+      },
+      {
+        "id": "CORE03_SCHEDULER",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-03"
+      },
+      {
+        "id": "CORE03_PRIORITIES",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-04"
+      },
+      {
+        "id": "CORE03_DEPENDENCIES",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-05"
+      },
+      {
+        "id": "CORE03_CANCELLATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-07"
+      },
+      {
+        "id": "CORE03_ISOLATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-08"
+      },
+      {
+        "id": "CORE03_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-09"
+      },
+      {
+        "id": "GFX01_RHI_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-01-09"
+      }
+    ],
+    "not_required": [
+      "native_gpu",
+      "vulkan",
+      "d3d12",
+      "metal",
+      "webgpu",
+      "vma",
+      "d3d12ma",
+      "command_buffer",
+      "fence",
+      "swapchain",
+      "rendering",
+      "gpu_timing",
+      "shader_compiler",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "a018c7f86c417d4de0371372d6c852cf3409c956",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0016": "216719c5d19d4877bcfb7d60923e07f4f58b5109",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0117": "a10209ff9b329ed7366d575af470b1d396a92758",
+    "gfx03_architecture": "64995e61950a257cda7309e4c1341a82f498ed19",
+    "gfx03_internal_architecture": "c13fb0196febb93442e3ea71f3d1e3a9e02b2ef5",
+    "gfx03_api": "78702022c131f1f13a66cee959d3b8095a19bb2b",
+    "gfx03_governance_contract": "d5162db421257096d21ae1c242d8aee6ddb28a46",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "gfx03_plan": "6396cc6f378583d594a56ce05de9e845844ed782",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "gfx03_internal_contract": "f153934b03d9f72cefcc14cc485e1cb16ba46ff4"
+  }
+}
