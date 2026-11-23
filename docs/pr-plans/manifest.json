@@ -5450,7 +5450,7 @@
             "GFX-06"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 766,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0121-gfx-07-internal-post-processing-pipeline.md",
