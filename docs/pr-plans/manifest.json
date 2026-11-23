@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "GFX07_06_COMPLETED_REST_BLOCKED",
+  "status": "GFX07_07_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -5449,8 +5449,40 @@
           "requires_modules_merged": [
             "GFX-06"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0121-gfx-07-internal-post-processing-pipeline.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-07-07-G6-ACTIVATION.md",
+          "capability_admission": {
+            "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+            "formal_dependency": "GFX-06",
+            "module_completion_claimed": false,
+            "required_capabilities": [
+              {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
+              {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
+              {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"},
+              {"id": "CORE01_LIFECYCLE_REQUESTS", "satisfied_by": "NLE-PRPLAN-CORE-01-12"},
+              {"id": "CORE01_CAPABILITY_GRAPH", "satisfied_by": "NLE-PRPLAN-CORE-01-13"},
+              {"id": "CORE02_ALLOCATOR", "satisfied_by": "NLE-PRPLAN-CORE-02-03"},
+              {"id": "CORE02_OWNERSHIP", "satisfied_by": "NLE-PRPLAN-CORE-02-04"},
+              {"id": "CORE02_LEAK_TRACKING", "satisfied_by": "NLE-PRPLAN-CORE-02-08"},
+              {"id": "CORE02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-02-10"},
+              {"id": "CORE05_VECTORS", "satisfied_by": "NLE-PRPLAN-CORE-05-03"},
+              {"id": "CORE05_PRECISION", "satisfied_by": "NLE-PRPLAN-CORE-05-07"},
+              {"id": "GFX01_RHI_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-01-09"},
+              {"id": "GFX02_SHADER_PARSER", "satisfied_by": "NLE-PRPLAN-GFX-02-03"},
+              {"id": "GFX02_REFLECTION", "satisfied_by": "NLE-PRPLAN-GFX-02-04"},
+              {"id": "GFX02_VARIANTS", "satisfied_by": "NLE-PRPLAN-GFX-02-05"},
+              {"id": "GFX02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-02-08"},
+              {"id": "GFX03_RENDER_GRAPH_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-03-08"},
+              {"id": "GFX05_MATERIAL", "satisfied_by": "NLE-PRPLAN-GFX-05-03"},
+              {"id": "GFX05_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-05-09"},
+              {"id": "GFX06_LIGHTING_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-06-09"}
+            ],
+            "not_required": ["native_gpu", "vulkan", "d3d12", "metal", "webgpu", "hdr_display", "swapchain", "aces", "ocio", "lut", "fsr", "dlss", "xess", "frame_generation", "shader_compiler", "gpu_allocator", "rendering", "hardware", "network", "public_abi", "release"]
+          }
         },
         {
           "packet_id": "NLE-PRPLAN-GFX-07-08",
