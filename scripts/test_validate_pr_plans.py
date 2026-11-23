@@ -122,7 +122,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.gfx02_08_activation = json.loads(v.GFX02_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx03_01_activation = json.loads(v.GFX03_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx03_02_activation = json.loads(v.GFX03_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.GFX03_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.gfx03_03_activation = json.loads(v.GFX03_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.GFX03_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -181,7 +182,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
+        self.assertEqual(["NLE-PRPLAN-GFX-03-03"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -585,7 +586,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.GFX03_01_GATE_PR, gfx03[0]["github_pr"])
         self.assertEqual("APPROVED_CONTRACT", gfx03[1]["status"])
         self.assertEqual(v.GFX03_02_GATE_PR, gfx03[1]["github_pr"])
-        self.assertEqual("PLANNED_BLOCKED", gfx03[2]["status"])
+        self.assertEqual("EXECUTOR_READY", gfx03[2]["status"])
         self.assertIsNone(gfx03[2]["github_pr"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
@@ -2826,6 +2827,25 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_gfx03_03_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-GFX-03-03",
+                         self.gfx03_03_activation["selected_packet_id"])
+        self.assertEqual("GFX-03", self.gfx03_03_activation["module_id"])
+        self.assertEqual("ELEVATED", self.gfx03_03_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.gfx03_03_activation["release_class"])
+        self.assertEqual("docs/contracts/gfx-03-render-graph-internal-v0.md",
+                         self.gfx03_03_activation["approved_contract"])
+        self.assertEqual(v.GFX03_CAPABILITY_ADMISSION,
+                         self.gfx03_03_activation["capability_admission"])
+        bad = copy.deepcopy(self.gfx03_03_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_gfx03_03_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.gfx03_03_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_data01_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-DATA-01-03", "--json"],
@@ -3182,6 +3202,13 @@ class PrPlanValidationTests(unittest.TestCase):
                                  capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_gfx03_03_selector_is_ready(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-03-03", "--json"],
+                               capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
+        self.assertTrue(json.loads(ready.stdout)["executor_ready"])
 
     def test_gfx01_02_contract_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
