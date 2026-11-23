@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "GFX05_03_READY_L1_CAPABILITY_OVERLAY",
+  "status": "GFX05_03_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -4490,8 +4490,8 @@
             "GFX-02",
             "DATA-03"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 0,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0119-gfx-05-internal-material-texture-pipeline.md",

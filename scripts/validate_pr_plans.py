@@ -10659,7 +10659,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-05-01.json"
     elif status == GFX05_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-05-02.json"
-    elif status == GFX05_03_READY_STATUS:
+    elif status in (GFX05_03_READY_STATUS, GFX05_03_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-05-03.json"
     elif status in (GFX04_09_READY_STATUS, GFX04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-04-09.json"
