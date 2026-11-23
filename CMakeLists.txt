@@ -1479,6 +1479,13 @@ target_link_libraries(stormline_two02_streaming_test PRIVATE stormline_two02_til
 stormline_core01_apply_options(stormline_two02_streaming_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two02_streaming_test)
 
+add_executable(stormline_two02_tilemap_qualification_test
+    tests/core/two02_tilemap_qualification_tests.cpp
+)
+target_link_libraries(stormline_two02_tilemap_qualification_test PRIVATE stormline_two02_tilemap)
+stormline_core01_apply_options(stormline_two02_tilemap_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two02_tilemap_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2859,6 +2866,23 @@ add_test(NAME two02_streaming_01
     COMMAND stormline_two02_streaming_test str01
 )
 set_tests_properties(two02_streaming_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two02_tilemap_qualification_201
+    COMMAND stormline_two02_tilemap_qualification_test qlft201
+)
+set_tests_properties(two02_tilemap_qualification_201 PROPERTIES TIMEOUT 60)
+add_test(NAME two02_tilemap_qualification_202
+    COMMAND stormline_two02_tilemap_qualification_test qlft202
+)
+set_tests_properties(two02_tilemap_qualification_202 PROPERTIES TIMEOUT 60)
+add_test(NAME two02_tilemap_qualification_203
+    COMMAND stormline_two02_tilemap_qualification_test qlft203
+)
+set_tests_properties(two02_tilemap_qualification_203 PROPERTIES TIMEOUT 60)
+add_test(NAME two02_tilemap_qualification_204
+    COMMAND stormline_two02_tilemap_qualification_test qlft204
+)
+set_tests_properties(two02_tilemap_qualification_204 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
