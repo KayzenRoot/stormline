@@ -1307,7 +1307,7 @@ GFX07_STATE = {
     GFX07_10_COMPLETED_STATUS: (2, 10, 0),
 }
 
-GFX08_CODE_PRS = {3: 775, 4: 777, 5: 779, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+GFX08_CODE_PRS = {3: 775, 4: 777, 5: 779, 6: 781, 7: 0, 8: 0, 9: 0, 10: 0}
 GFX08_01_GATE_PR = 772
 GFX08_02_GATE_PR = 773
 GFX08_STATE = {
@@ -12120,7 +12120,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-08-04.json"
     elif status in (GFX08_05_READY_STATUS, GFX08_05_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-08-05.json"
-    elif status == GFX08_06_READY_STATUS:
+    elif status in (GFX08_06_READY_STATUS, GFX08_06_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-08-06.json"
     elif status == GFX07_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-07-01.json"
