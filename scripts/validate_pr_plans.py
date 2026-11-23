@@ -176,9 +176,10 @@ TWO01_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-01-07.json"
 TWO01_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-01-08.json"
 TWO01_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-01-09.json"
 TWO02_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-02-01.json"
+TWO02_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-02-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = TWO02_01_ACTIVATION_FILE
+ACTIVATION_FILE = TWO02_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -1500,7 +1501,7 @@ TWO01_SLICE_METADATA = {
 
 TWO02_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0}
 TWO02_01_GATE_PR = 806
-TWO02_02_GATE_PR = 0
+TWO02_02_GATE_PR = 807
 TWO02_STATE = {
     TWO02_01_APPROVED_STATUS: (1, 0, 0),
     TWO02_02_APPROVED_STATUS: (2, 0, 0),
@@ -4022,6 +4023,17 @@ TWO02_01_ACTIVATION_SOURCES = {
     "module_catalog": GFX04_01_ACTIVATION_SOURCES["module_catalog"],
     "two02_plan": "docs/pr-plans/TWO-02.md",
     "implementation_registry": GFX04_01_ACTIVATION_SOURCES["implementation_registry"],
+}
+
+TWO02_02_PINNED_SOURCE_BLOBS = {
+    **TWO02_01_PINNED_SOURCE_BLOBS,
+    "checkpoint": "3a7ce167c98eac442242902269d5c6cd3a829b7a",
+    "two02_internal_contract": "d69588a97930442e6b7f986ce2c61a5670d509b3",
+}
+
+TWO02_02_ACTIVATION_SOURCES = {
+    **TWO02_01_ACTIVATION_SOURCES,
+    "two02_internal_contract": "docs/contracts/two-02-tilemap-internal-v0.md",
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -7455,6 +7467,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, GFX07_02_ACTIVATION_SOURCES, GFX07_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-TWO-02-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-TWO-02-02",
+            "module_id": "TWO-02",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/two02-02-continuation",
+            "approved_adr": "docs/adr/0124-two-02-internal-tilemap-pipeline.md",
+            "approved_contract": "docs/contracts/two-02-tilemap-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-TWO-02-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-TWO-02-02-G6-ACTIVATION.md",
+            "gate_base_sha": "fa7f2bd28e7e59b6d8668d62e7f2cc32b292e892",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, TWO02_02_ACTIVATION_SOURCES, TWO02_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -12828,6 +12862,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-two-01-09.json"
     elif status == TWO02_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-two-02-01.json"
+    elif status == TWO02_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-two-02-02.json"
     elif status == GFX07_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-07-01.json"
     elif status == GFX07_02_APPROVED_STATUS:
