@@ -1119,7 +1119,7 @@ GFX05_STATE = {
 
 GFX06_01_GATE_PR = 738
 GFX06_02_GATE_PR = 739
-GFX06_CODE_PRS = {3: 741, 4: 743, 5: 745, 6: 747, 7: 0, 8: 0, 9: 0, 10: 0}
+GFX06_CODE_PRS = {3: 741, 4: 743, 5: 745, 6: 747, 7: 749, 8: 0, 9: 0, 10: 0}
 GFX06_SLICE_METADATA = {
     3: ("docs/adr/0120-gfx-06-internal-lighting-pipeline.md",
         "docs/evidence/NLE-PRPLAN-GFX-06-03-G6-ACTIVATION.md"),
