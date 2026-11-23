@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "TWO02_07_READY_L1_CAPABILITY_OVERLAY",
+  "status": "TWO02_07_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -6077,8 +6077,8 @@
             "TWO-01",
             "DATA-04"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 817,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0124-two-02-internal-tilemap-pipeline.md",
