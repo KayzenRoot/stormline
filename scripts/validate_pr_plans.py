@@ -1403,7 +1403,7 @@ GFX08_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-GFX-08-09-G6-ACTIVATION.md"),
 }
 
-TWO01_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+TWO01_CODE_PRS = {3: 792, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
 TWO01_01_GATE_PR = 789
 TWO01_02_GATE_PR = 790
 TWO01_STATE = {
@@ -12457,7 +12457,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-two-01-01.json"
     elif status == TWO01_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-two-01-02.json"
-    elif status == TWO01_03_READY_STATUS:
+    elif status in (TWO01_03_READY_STATUS, TWO01_03_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-two-01-03.json"
     elif status == GFX07_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-07-01.json"

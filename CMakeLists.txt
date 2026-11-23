@@ -1383,6 +1383,19 @@ target_link_libraries(stormline_gfx08_vfx_qualification_test PRIVATE stormline_g
 stormline_core01_apply_options(stormline_gfx08_vfx_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx08_vfx_qualification_test)
 
+add_library(stormline_two01_canvas INTERFACE)
+target_include_directories(stormline_two01_canvas INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_two01_canvas INTERFACE cxx_std_20)
+
+add_executable(stormline_two01_sprite_test
+    tests/core/two01_sprite_tests.cpp
+)
+target_link_libraries(stormline_two01_sprite_test PRIVATE stormline_two01_canvas)
+stormline_core01_apply_options(stormline_two01_sprite_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two01_sprite_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2691,6 +2704,11 @@ add_test(NAME gfx08_vfx_qualification_804
     COMMAND stormline_gfx08_vfx_qualification_test qlfg804
 )
 set_tests_properties(gfx08_vfx_qualification_804 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two01_sprite_01
+    COMMAND stormline_two01_sprite_test spr01
+)
+set_tests_properties(two01_sprite_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
