@@ -1424,6 +1424,13 @@ target_link_libraries(stormline_two01_snap_test PRIVATE stormline_two01_canvas)
 stormline_core01_apply_options(stormline_two01_snap_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two01_snap_test)
 
+add_executable(stormline_two01_light_test
+    tests/core/two01_light_tests.cpp
+)
+target_link_libraries(stormline_two01_light_test PRIVATE stormline_two01_canvas)
+stormline_core01_apply_options(stormline_two01_light_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two01_light_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2757,6 +2764,11 @@ add_test(NAME two01_snap_01
     COMMAND stormline_two01_snap_test snp01
 )
 set_tests_properties(two01_snap_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two01_light_01
+    COMMAND stormline_two01_light_test lgt01
+)
+set_tests_properties(two01_light_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
