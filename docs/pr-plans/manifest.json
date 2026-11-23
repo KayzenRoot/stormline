@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "TWO01_07_READY_L1_CAPABILITY_OVERLAY",
+  "status": "TWO01_07_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -5895,8 +5895,8 @@
             "GFX-01",
             "DATA-03"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 800,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0123-two-01-internal-canvas-pipeline.md",
