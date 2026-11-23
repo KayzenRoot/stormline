@@ -921,29 +921,23 @@ GFX01_01_GATE_PR = 657
 GFX01_02_GATE_PR = 658
 GFX01_CODE_PRS = {3: 660, 4: 662, 5: 664, 6: 666, 7: 668, 8: 670, 9: 672, 10: 673}
 GFX05_CAPABILITY_ADMISSION = {
-    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr": GFX02_CAPABILITY_ADMISSION["adr"],
     "formal_dependency": "GFX-02",
     "module_completion_claimed": False,
     "required_capabilities": [
-        {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
-        {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
-        {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"},
-        {"id": "CORE01_LIFECYCLE_REQUESTS", "satisfied_by": "NLE-PRPLAN-CORE-01-12"},
-        {"id": "CORE01_CAPABILITY_GRAPH", "satisfied_by": "NLE-PRPLAN-CORE-01-13"},
-        {"id": "CORE02_ALLOCATOR", "satisfied_by": "NLE-PRPLAN-CORE-02-03"},
-        {"id": "CORE02_OWNERSHIP", "satisfied_by": "NLE-PRPLAN-CORE-02-04"},
-        {"id": "CORE02_LEAK_TRACKING", "satisfied_by": "NLE-PRPLAN-CORE-02-08"},
-        {"id": "CORE02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-02-10"},
+        *[cap for cap in GFX02_CAPABILITY_ADMISSION["required_capabilities"]
+          if cap["id"].startswith(("CORE01_", "CORE02_"))],
         {"id": "CORE05_VECTORS", "satisfied_by": "NLE-PRPLAN-CORE-05-03"},
         {"id": "CORE05_PRECISION", "satisfied_by": "NLE-PRPLAN-CORE-05-07"},
-        {"id": "GFX01_RHI_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-01-09"},
+        *[cap for cap in GFX02_CAPABILITY_ADMISSION["required_capabilities"]
+          if cap["id"] == "GFX01_RHI_QUALIFICATION"],
         {"id": "GFX02_SHADER_PARSER", "satisfied_by": "NLE-PRPLAN-GFX-02-03"},
         {"id": "GFX02_REFLECTION", "satisfied_by": "NLE-PRPLAN-GFX-02-04"},
         {"id": "GFX02_VARIANTS", "satisfied_by": "NLE-PRPLAN-GFX-02-05"},
         {"id": "GFX02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-02-08"},
         {"id": "DATA03_TEXTURES", "satisfied_by": "NLE-PRPLAN-DATA-03-04"},
-        {"id": "DATA03_VALIDATION", "satisfied_by": "NLE-PRPLAN-DATA-03-07"},
-        {"id": "DATA03_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-DATA-03-09"},
+        *[cap for cap in GFX02_CAPABILITY_ADMISSION["required_capabilities"]
+          if cap["id"] in ("DATA03_VALIDATION", "DATA03_QUALIFICATION")],
     ],
     "not_required": [
         "native_gpu", "vulkan", "d3d12", "metal", "webgpu", "ktx2", "basis",
@@ -2926,36 +2920,36 @@ GFX04_09_ACTIVATION_SOURCES = {
 
 GFX05_01_PINNED_SOURCE_BLOBS = {
     "checkpoint": "a1e7acc60cf15b955eb1ebac6d599d46ce0e5fef",
-    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
-    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
-    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "decisions_ledger": GFX04_01_PINNED_SOURCE_BLOBS["decisions_ledger"],
+    "scope": GFX04_01_PINNED_SOURCE_BLOBS["scope"],
+    "definition_of_done": GFX04_01_PINNED_SOURCE_BLOBS["definition_of_done"],
     "adr_0018": "7b447206b40869f2f38ae6a13252ca4186e6c0a1",
-    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0086": GFX04_01_PINNED_SOURCE_BLOBS["adr_0086"],
     "adr_0119": "3dce516085891d4adc1e8ee4b4ad8108bacd3a11",
     "gfx05_architecture": "d35e343843ab77fea26f2ae53d1aa6723dc7ccf4",
     "gfx05_internal_architecture": "572c73c47a711df868b2119a7ad70e42def60196",
     "gfx05_api": "42c15e9a1d7ff97765a24c1539869cba066110c3",
     "gfx05_governance_contract": "ec9ad22dff0a0371595d690c4ef8603a575d7ea8",
-    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "module_catalog": GFX04_01_PINNED_SOURCE_BLOBS["module_catalog"],
     "gfx05_plan": "d4db905a674d2530c24248581d90fdbf1be02e27",
-    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "implementation_registry": GFX04_01_PINNED_SOURCE_BLOBS["implementation_registry"],
 }
 
 GFX05_01_ACTIVATION_SOURCES = {
-    "checkpoint": "docs/11-checkpoint.md",
-    "decisions_ledger": "docs/10-decisions-ledger.md",
-    "scope": "docs/03-scope.md",
-    "definition_of_done": "docs/09-definition-of-done.md",
+    "checkpoint": GFX04_01_ACTIVATION_SOURCES["checkpoint"],
+    "decisions_ledger": GFX04_01_ACTIVATION_SOURCES["decisions_ledger"],
+    "scope": GFX04_01_ACTIVATION_SOURCES["scope"],
+    "definition_of_done": GFX04_01_ACTIVATION_SOURCES["definition_of_done"],
     "adr_0018": "docs/adr/0018-gfx-05-material-texture-policy.md",
-    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0086": GFX04_01_ACTIVATION_SOURCES["adr_0086"],
     "adr_0119": "docs/adr/0119-gfx-05-internal-material-texture-pipeline.md",
     "gfx05_architecture": "docs/architecture/gfx-05-materials-textures-pbr.md",
     "gfx05_internal_architecture": "docs/architecture/gfx-05-internal-material-texture-pipeline.md",
     "gfx05_api": "docs/contracts/gfx-05-material-texture-api.md",
     "gfx05_governance_contract": "docs/contracts/gfx-05-governance-v0.md",
-    "module_catalog": "docs/product/module-catalog.md",
+    "module_catalog": GFX04_01_ACTIVATION_SOURCES["module_catalog"],
     "gfx05_plan": "docs/pr-plans/GFX-05.md",
-    "implementation_registry": "docs/queue/implementation-registry.json",
+    "implementation_registry": GFX04_01_ACTIVATION_SOURCES["implementation_registry"],
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
