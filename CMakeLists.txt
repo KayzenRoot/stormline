@@ -1231,6 +1231,13 @@ target_link_libraries(stormline_gfx06_light_test PRIVATE stormline_gfx06_lightin
 stormline_core01_apply_options(stormline_gfx06_light_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx06_light_test)
 
+add_executable(stormline_gfx06_shadow_test
+    tests/core/gfx06_shadow_tests.cpp
+)
+target_link_libraries(stormline_gfx06_shadow_test PRIVATE stormline_gfx06_lighting)
+stormline_core01_apply_options(stormline_gfx06_shadow_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx06_shadow_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2396,6 +2403,11 @@ add_test(NAME gfx06_light_01
     COMMAND stormline_gfx06_light_test lgt01
 )
 set_tests_properties(gfx06_light_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx06_shadow_01
+    COMMAND stormline_gfx06_shadow_test shd01
+)
+set_tests_properties(gfx06_shadow_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
