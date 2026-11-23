@@ -739,7 +739,7 @@ GFX01_CAPABILITY_ADMISSION = {
 
 GFX01_01_GATE_PR = 657
 GFX01_02_GATE_PR = 658
-GFX01_CODE_PRS = {3: 660, 4: 662, 5: 664, 6: 666, 7: 668, 8: 670, 9: 0, 10: 0}
+GFX01_CODE_PRS = {3: 660, 4: 662, 5: 664, 6: 666, 7: 668, 8: 670, 9: 672, 10: 673}
 GFX01_STATE = {
     GFX01_01_APPROVED_STATUS: (1, 0, 0),
     GFX01_02_APPROVED_STATUS: (2, 0, 0),
@@ -8948,7 +8948,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-05-03.json"
     elif status == DATA05_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-05-02.json"
-    elif status == GFX01_09_READY_STATUS:
+    elif status in (GFX01_09_READY_STATUS, GFX01_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-01-09.json"
     elif status == GFX01_08_READY_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-01-08.json"

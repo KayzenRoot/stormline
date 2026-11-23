@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "GFX01_09_READY_L1_CAPABILITY_OVERLAY",
+  "status": "GFX01_10_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -3445,8 +3445,8 @@
             "CORE-01",
             "CORE-02"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 672,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0115-gfx-01-governance-slice.md",
@@ -3478,8 +3478,8 @@
             "NLE-PRPLAN-GFX-01-09"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 673
         }
       ],
       "plan_file": "docs/pr-plans/GFX-01.md"
