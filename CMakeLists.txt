@@ -1348,6 +1348,13 @@ target_link_libraries(stormline_gfx08_ribbon_test PRIVATE stormline_gfx08_vfx)
 stormline_core01_apply_options(stormline_gfx08_ribbon_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx08_ribbon_test)
 
+add_executable(stormline_gfx08_trail_test
+    tests/core/gfx08_trail_tests.cpp
+)
+target_link_libraries(stormline_gfx08_trail_test PRIVATE stormline_gfx08_vfx)
+stormline_core01_apply_options(stormline_gfx08_trail_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx08_trail_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2619,6 +2626,11 @@ add_test(NAME gfx08_ribbon_01
     COMMAND stormline_gfx08_ribbon_test rib01
 )
 set_tests_properties(gfx08_ribbon_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx08_trail_01
+    COMMAND stormline_gfx08_trail_test trl01
+)
+set_tests_properties(gfx08_trail_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
