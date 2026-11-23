@@ -113,7 +113,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.gfx01_08_activation = json.loads(v.GFX01_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx01_09_activation = json.loads(v.GFX01_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx02_01_activation = json.loads(v.GFX02_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.GFX02_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.gfx02_02_activation = json.loads(v.GFX02_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.GFX02_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -555,8 +556,10 @@ class PrPlanValidationTests(unittest.TestCase):
         gfx02 = self.manifest["modules"][12]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", gfx02[0]["status"])
         self.assertEqual(v.GFX02_01_GATE_PR, gfx02[0]["github_pr"])
-        self.assertEqual("PLANNED_BLOCKED", gfx02[1]["status"])
-        self.assertIsNone(gfx02[1]["github_pr"])
+        self.assertEqual("APPROVED_CONTRACT", gfx02[1]["status"])
+        self.assertEqual(v.GFX02_02_GATE_PR, gfx02[1]["github_pr"])
+        self.assertEqual("PLANNED_BLOCKED", gfx02[2]["status"])
+        self.assertIsNone(gfx02[2]["github_pr"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])
         self.assertEqual(v.CORE04_01_GATE_PR, core04[0]["github_pr"])
@@ -2622,6 +2625,25 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_gfx02_01_activation_source_drift_denied(self):
         bad = copy.deepcopy(self.gfx02_01_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_gfx02_02_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-GFX-02-02",
+                         self.gfx02_02_activation["selected_packet_id"])
+        self.assertEqual("GFX-02", self.gfx02_02_activation["module_id"])
+        self.assertEqual("LOW", self.gfx02_02_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.gfx02_02_activation["release_class"])
+        self.assertEqual("docs/contracts/gfx-02-shader-internal-v0.md",
+                         self.gfx02_02_activation["approved_contract"])
+        self.assertEqual(v.GFX02_CAPABILITY_ADMISSION,
+                         self.gfx02_02_activation["capability_admission"])
+        bad = copy.deepcopy(self.gfx02_02_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_gfx02_02_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.gfx02_02_activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
