@@ -1197,6 +1197,13 @@ target_link_libraries(stormline_gfx05_sampler_test PRIVATE stormline_gfx05_mater
 stormline_core01_apply_options(stormline_gfx05_sampler_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx05_sampler_test)
 
+add_executable(stormline_gfx05_decal_test
+    tests/core/gfx05_decal_tests.cpp
+)
+target_link_libraries(stormline_gfx05_decal_test PRIVATE stormline_gfx05_material)
+stormline_core01_apply_options(stormline_gfx05_decal_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx05_decal_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2327,6 +2334,11 @@ add_test(NAME gfx05_sampler_01
     COMMAND stormline_gfx05_sampler_test smp01
 )
 set_tests_properties(gfx05_sampler_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx05_decal_01
+    COMMAND stormline_gfx05_decal_test dec01
+)
+set_tests_properties(gfx05_decal_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
