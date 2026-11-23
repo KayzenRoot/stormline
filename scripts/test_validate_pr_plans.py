@@ -147,7 +147,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.gfx05_08_activation = json.loads(v.GFX05_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx05_09_activation = json.loads(v.GFX05_09_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx06_01_activation = json.loads(v.GFX06_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.GFX06_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.gfx06_02_activation = json.loads(v.GFX06_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.GFX06_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -3335,6 +3336,25 @@ class PrPlanValidationTests(unittest.TestCase):
 
     def test_gfx06_01_activation_source_drift_denied(self):
         bad = copy.deepcopy(self.gfx06_01_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_gfx06_02_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-GFX-06-02",
+                         self.gfx06_02_activation["selected_packet_id"])
+        self.assertEqual("GFX-06", self.gfx06_02_activation["module_id"])
+        self.assertEqual("LOW", self.gfx06_02_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.gfx06_02_activation["release_class"])
+        self.assertEqual("docs/contracts/gfx-06-lighting-internal-v0.md",
+                         self.gfx06_02_activation["approved_contract"])
+        self.assertEqual(v.GFX06_CAPABILITY_ADMISSION,
+                         self.gfx06_02_activation["capability_admission"])
+        bad = copy.deepcopy(self.gfx06_02_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_gfx06_02_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.gfx06_02_activation)
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 

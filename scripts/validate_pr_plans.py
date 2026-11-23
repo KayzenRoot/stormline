@@ -140,6 +140,7 @@ GFX05_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-05-07.json"
 GFX05_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-05-08.json"
 GFX05_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-05-09.json"
 GFX06_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-01.json"
+GFX06_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
 ACTIVATION_FILE = GFX06_01_ACTIVATION_FILE
@@ -1112,13 +1113,12 @@ GFX05_STATE = {
 }
 
 GFX06_01_GATE_PR = 738
-GFX06_02_GATE_PR = 0
+GFX06_02_GATE_PR = 739
 GFX06_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
 GFX06_STATE = {
     GFX06_01_APPROVED_STATUS: (1, 0, 0),
     GFX06_02_APPROVED_STATUS: (2, 0, 0),
 }
-
 GFX04_01_GATE_PR = 704
 GFX04_02_GATE_PR = 705
 GFX04_CODE_PRS = {3: 707, 4: 709, 5: 711, 6: 713, 7: 715, 8: 717, 9: 719, 10: 720}
@@ -3170,6 +3170,17 @@ GFX06_01_ACTIVATION_SOURCES = {
     "module_catalog": GFX04_01_ACTIVATION_SOURCES["module_catalog"],
     "gfx06_plan": "docs/pr-plans/GFX-06.md",
     "implementation_registry": GFX04_01_ACTIVATION_SOURCES["implementation_registry"],
+}
+
+GFX06_02_PINNED_SOURCE_BLOBS = {
+    **GFX06_01_PINNED_SOURCE_BLOBS,
+    "checkpoint": "a6485f249f30e9b6817c3d9b012cf9f9f950027f",
+    "gfx06_internal_contract": "e51d3700f69b73804208a1079750405f9e015f6c",
+}
+
+GFX06_02_ACTIVATION_SOURCES = {
+    **GFX06_01_ACTIVATION_SOURCES,
+    "gfx06_internal_contract": "docs/contracts/gfx-06-lighting-internal-v0.md",
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -6427,6 +6438,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, GFX06_01_ACTIVATION_SOURCES, GFX06_01_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-GFX-06-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-06-02",
+            "module_id": "GFX-06",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx06-02-continuation",
+            "approved_adr": "docs/adr/0120-gfx-06-internal-lighting-pipeline.md",
+            "approved_contract": "docs/contracts/gfx-06-lighting-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-06-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-06-02-G6-ACTIVATION.md",
+            "gate_base_sha": "533d983c4484af9dc7b444bcf6deb023e89204b9",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX06_02_ACTIVATION_SOURCES, GFX06_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -11041,6 +11074,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-05-09.json"
     elif status == GFX06_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-06-01.json"
+    elif status == GFX06_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-gfx-06-02.json"
     elif status in (GFX04_09_READY_STATUS, GFX04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-04-09.json"
     elif status in (GFX03_08_READY_STATUS, GFX03_09_COMPLETED_STATUS):

@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "GFX06_01_APPROVED_GOVERNANCE_ONLY",
+  "status": "GFX06_02_APPROVED_CONTRACT_ONLY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -4846,8 +4846,8 @@
             "NLE-PRPLAN-GFX-06-01"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "APPROVED_CONTRACT",
+          "github_pr": 739
         },
         {
           "packet_id": "NLE-PRPLAN-GFX-06-03",
