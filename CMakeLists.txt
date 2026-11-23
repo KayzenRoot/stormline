@@ -1321,6 +1321,13 @@ target_link_libraries(stormline_gfx07_upscale_test PRIVATE stormline_gfx07_post)
 stormline_core01_apply_options(stormline_gfx07_upscale_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx07_upscale_test)
 
+add_executable(stormline_gfx07_post_qualification_test
+    tests/core/gfx07_post_qualification_tests.cpp
+)
+target_link_libraries(stormline_gfx07_post_qualification_test PRIVATE stormline_gfx07_post)
+stormline_core01_apply_options(stormline_gfx07_post_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx07_post_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2561,6 +2568,23 @@ add_test(NAME gfx07_upscale_01
     COMMAND stormline_gfx07_upscale_test ups01
 )
 set_tests_properties(gfx07_upscale_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx07_post_qualification_701
+    COMMAND stormline_gfx07_post_qualification_test qlfg701
+)
+set_tests_properties(gfx07_post_qualification_701 PROPERTIES TIMEOUT 60)
+add_test(NAME gfx07_post_qualification_702
+    COMMAND stormline_gfx07_post_qualification_test qlfg702
+)
+set_tests_properties(gfx07_post_qualification_702 PROPERTIES TIMEOUT 60)
+add_test(NAME gfx07_post_qualification_703
+    COMMAND stormline_gfx07_post_qualification_test qlfg703
+)
+set_tests_properties(gfx07_post_qualification_703 PROPERTIES TIMEOUT 60)
+add_test(NAME gfx07_post_qualification_704
+    COMMAND stormline_gfx07_post_qualification_test qlfg704
+)
+set_tests_properties(gfx07_post_qualification_704 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
