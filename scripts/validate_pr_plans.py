@@ -1132,30 +1132,10 @@ GFX07_CAPABILITY_ADMISSION = {
 }
 
 GFX08_CAPABILITY_ADMISSION = {
-    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    **GFX07_CAPABILITY_ADMISSION,
     "formal_dependency": "GFX-03+GFX-05",
-    "module_completion_claimed": False,
     "required_capabilities": [
-        {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
-        {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
-        {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"},
-        {"id": "CORE01_LIFECYCLE_REQUESTS", "satisfied_by": "NLE-PRPLAN-CORE-01-12"},
-        {"id": "CORE01_CAPABILITY_GRAPH", "satisfied_by": "NLE-PRPLAN-CORE-01-13"},
-        {"id": "CORE02_ALLOCATOR", "satisfied_by": "NLE-PRPLAN-CORE-02-03"},
-        {"id": "CORE02_OWNERSHIP", "satisfied_by": "NLE-PRPLAN-CORE-02-04"},
-        {"id": "CORE02_LEAK_TRACKING", "satisfied_by": "NLE-PRPLAN-CORE-02-08"},
-        {"id": "CORE02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-02-10"},
-        {"id": "CORE05_VECTORS", "satisfied_by": "NLE-PRPLAN-CORE-05-03"},
-        {"id": "CORE05_PRECISION", "satisfied_by": "NLE-PRPLAN-CORE-05-07"},
-        {"id": "GFX01_RHI_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-01-09"},
-        {"id": "GFX02_SHADER_PARSER", "satisfied_by": "NLE-PRPLAN-GFX-02-03"},
-        {"id": "GFX02_REFLECTION", "satisfied_by": "NLE-PRPLAN-GFX-02-04"},
-        {"id": "GFX02_VARIANTS", "satisfied_by": "NLE-PRPLAN-GFX-02-05"},
-        {"id": "GFX02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-02-08"},
-        {"id": "GFX03_RENDER_GRAPH_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-03-08"},
-        {"id": "GFX05_MATERIAL", "satisfied_by": "NLE-PRPLAN-GFX-05-03"},
-        {"id": "GFX05_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-05-09"},
-        {"id": "GFX06_LIGHTING_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-06-09"},
+        *GFX07_CAPABILITY_ADMISSION["required_capabilities"],
         {"id": "GFX07_POST_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-07-09"},
     ],
     "not_required": [
