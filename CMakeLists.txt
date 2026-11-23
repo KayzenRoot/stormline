@@ -710,6 +710,12 @@ target_include_directories(stormline_gfx01_rhi INTERFACE
 )
 target_compile_features(stormline_gfx01_rhi INTERFACE cxx_std_20)
 
+add_library(stormline_gfx02_shader INTERFACE)
+target_include_directories(stormline_gfx02_shader INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_gfx02_shader INTERFACE cxx_std_20)
+
 add_library(stormline_data05_bundle INTERFACE)
 target_include_directories(stormline_data05_bundle INTERFACE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
@@ -1010,6 +1016,13 @@ add_executable(stormline_gfx01_rhi_qualification_test
 target_link_libraries(stormline_gfx01_rhi_qualification_test PRIVATE stormline_gfx01_rhi)
 stormline_core01_apply_options(stormline_gfx01_rhi_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx01_rhi_qualification_test)
+
+add_executable(stormline_gfx02_shader_test
+    tests/core/gfx02_shader_tests.cpp
+)
+target_link_libraries(stormline_gfx02_shader_test PRIVATE stormline_gfx02_shader)
+stormline_core01_apply_options(stormline_gfx02_shader_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx02_shader_test)
 
 enable_testing()
 
@@ -1981,6 +1994,11 @@ add_test(NAME gfx01_rhi_qualification_04
     COMMAND stormline_gfx01_rhi_qualification_test qlf04
 )
 set_tests_properties(gfx01_rhi_qualification_04 PROPERTIES TIMEOUT 120)
+
+add_test(NAME gfx02_shader_01
+    COMMAND stormline_gfx02_shader_test par01
+)
+set_tests_properties(gfx02_shader_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
