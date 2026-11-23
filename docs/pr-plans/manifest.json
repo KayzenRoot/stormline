@@ -4913,7 +4913,7 @@
             "GFX-05"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 743,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0120-gfx-06-internal-lighting-pipeline.md",
