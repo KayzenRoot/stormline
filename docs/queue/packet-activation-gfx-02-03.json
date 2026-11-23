@@ -1,0 +1,110 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-GFX-02-03",
+  "module_id": "GFX-02",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/gfx02-03-continuation",
+  "approved_adr": "docs/adr/0116-gfx-02-internal-shader-pipeline.md",
+  "approved_contract": "docs/contracts/gfx-02-shader-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-GFX-02-03.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-02-03-G6-ACTIVATION.md",
+  "gate_base_sha": "5cadb011530be69788af073c73c43559f595ed71",
+  "gate_pr": 676,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "GFX-01",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      },
+      {
+        "id": "CORE01_LIFECYCLE_REQUESTS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-12"
+      },
+      {
+        "id": "CORE01_CAPABILITY_GRAPH",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-13"
+      },
+      {
+        "id": "CORE02_ALLOCATOR",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-03"
+      },
+      {
+        "id": "CORE02_OWNERSHIP",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-04"
+      },
+      {
+        "id": "CORE02_LEAK_TRACKING",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-08"
+      },
+      {
+        "id": "CORE02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-10"
+      },
+      {
+        "id": "GFX01_RHI_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-01-09"
+      },
+      {
+        "id": "DATA03_VALIDATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-07"
+      },
+      {
+        "id": "DATA03_IMPORT_RECEIPT",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-08"
+      },
+      {
+        "id": "DATA03_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-09"
+      }
+    ],
+    "not_required": [
+      "native_compiler",
+      "glsl",
+      "hlsl",
+      "slang",
+      "wgsl",
+      "spirv",
+      "dxil",
+      "msl",
+      "gpu",
+      "driver",
+      "pipeline",
+      "rendering",
+      "hot_reload",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "999a5fd9508bc28c3eec0b45bd4898c24da562aa",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0015": "b26e90e9f0fa4c45a22a8aa920bc2680c0e61c88",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0116": "a4a7df30f08c31181dbc0b1657171e74cd8161e0",
+    "gfx02_architecture": "dbc2822aa6d6890b93e60fc095d94bf5d78e6f6b",
+    "gfx02_internal_architecture": "26bc4f3c5d34622f8e720812a73d3f50022a4b8c",
+    "gfx02_api": "2e7e14f5f598d25229582683ea4a9d0d531e8580",
+    "gfx02_governance_contract": "ab5dbc5f29bdd014c9d02a5fb0d2d939b8af82fd",
+    "gfx02_shader_contract": "4db1a7329e940f7124ac62e7bd45c3424bf3b20e",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "gfx02_plan": "c486c98f387113e54e98c6b3db52719ac2de344f",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}

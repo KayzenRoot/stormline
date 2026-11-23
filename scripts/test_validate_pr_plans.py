@@ -173,7 +173,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
+        self.assertEqual(["NLE-PRPLAN-GFX-02-03"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -558,7 +558,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(v.GFX02_01_GATE_PR, gfx02[0]["github_pr"])
         self.assertEqual("APPROVED_CONTRACT", gfx02[1]["status"])
         self.assertEqual(v.GFX02_02_GATE_PR, gfx02[1]["github_pr"])
-        self.assertEqual("PLANNED_BLOCKED", gfx02[2]["status"])
+        self.assertEqual("EXECUTOR_READY", gfx02[2]["status"])
         self.assertIsNone(gfx02[2]["github_pr"])
         core04 = self.manifest["modules"][3]["packets"]
         self.assertEqual("APPROVED_GOVERNANCE", core04[0]["status"])

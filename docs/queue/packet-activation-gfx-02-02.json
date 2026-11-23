@@ -15,7 +15,7 @@
   "requires_fresh_context_lock": true,
   "capability_admission": {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
-    "formal_dependency": "GFX-01+DATA-03",
+    "formal_dependency": "GFX-01",
     "module_completion_claimed": false,
     "required_capabilities": [
       {
@@ -53,10 +53,6 @@
       {
         "id": "CORE02_QUALIFICATION",
         "satisfied_by": "NLE-PRPLAN-CORE-02-10"
-      },
-      {
-        "id": "GFX01_RHI_CONTRACT",
-        "satisfied_by": "NLE-PRPLAN-GFX-01-02"
       },
       {
         "id": "GFX01_RHI_QUALIFICATION",
