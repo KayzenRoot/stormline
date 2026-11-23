@@ -4335,13 +4335,6 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
-    def test_gfx08_03_selector_is_ready(self):
-        selector = str(v.ROOT / "scripts/select_packet.py")
-        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-08-03", "--json"],
-                               capture_output=True, text=True, timeout=20, check=False)
-        self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
-        self.assertTrue(json.loads(ready.stdout)["executor_ready"])
-
     def test_gfx08_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-08-03", "--json"],
