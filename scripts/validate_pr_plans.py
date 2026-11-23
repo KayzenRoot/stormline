@@ -149,9 +149,10 @@ GFX06_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-07.json"
 GFX06_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-08.json"
 GFX06_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-06-09.json"
 GFX07_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-07-01.json"
+GFX07_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-07-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = GFX07_01_ACTIVATION_FILE
+ACTIVATION_FILE = GFX07_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -3387,6 +3388,17 @@ GFX07_01_ACTIVATION_SOURCES = {
     "module_catalog": GFX04_01_ACTIVATION_SOURCES["module_catalog"],
     "gfx07_plan": "docs/pr-plans/GFX-07.md",
     "implementation_registry": GFX04_01_ACTIVATION_SOURCES["implementation_registry"],
+}
+
+GFX07_02_PINNED_SOURCE_BLOBS = {
+    **GFX07_01_PINNED_SOURCE_BLOBS,
+    "checkpoint": "c6c9c9b4cd728dd35daa6361faaed62257dc4b0b",
+    "gfx07_internal_contract": "99e47a7ba458b2101798c913f1ef15d09128c573",
+}
+
+GFX07_02_ACTIVATION_SOURCES = {
+    **GFX07_01_ACTIVATION_SOURCES,
+    "gfx07_internal_contract": "docs/contracts/gfx-07-post-processing-internal-v0.md",
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -6644,6 +6656,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, GFX06_01_ACTIVATION_SOURCES, GFX06_01_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-GFX-07-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-07-02",
+            "module_id": "GFX-07",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx07-02-continuation",
+            "approved_adr": "docs/adr/0121-gfx-07-internal-post-processing-pipeline.md",
+            "approved_contract": "docs/contracts/gfx-07-post-processing-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-07-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-07-02-G6-ACTIVATION.md",
+            "gate_base_sha": "d0494461a94fb316756cce9c8519d094a3d9ae36",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX07_02_ACTIVATION_SOURCES, GFX07_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -11496,6 +11530,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-06-09.json"
     elif status == GFX07_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-07-01.json"
+    elif status == GFX07_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-gfx-07-02.json"
     elif status in (GFX04_09_READY_STATUS, GFX04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-04-09.json"
     elif status in (GFX03_08_READY_STATUS, GFX03_09_COMPLETED_STATUS):
