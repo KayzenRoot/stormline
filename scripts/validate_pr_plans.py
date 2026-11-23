@@ -117,9 +117,10 @@ GFX03_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-01.json"
 GFX03_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-02.json"
 GFX03_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-03.json"
 GFX03_04_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-04.json"
+GFX03_05_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-03-05.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = GFX03_04_ACTIVATION_FILE
+ACTIVATION_FILE = GFX03_05_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -864,7 +865,8 @@ GFX03_01_GATE_PR = 689
 GFX03_02_GATE_PR = 690
 GFX03_03_GATE_PR = 691
 GFX03_04_GATE_PR = 693
-GFX03_CODE_PRS = {3: 692, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0}
+GFX03_05_GATE_PR = 695
+GFX03_CODE_PRS = {3: 692, 4: 694, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0}
 GFX03_STATE = {
     GFX03_01_APPROVED_STATUS: (1, 0, 0),
     GFX03_02_APPROVED_STATUS: (2, 0, 0),
@@ -872,6 +874,8 @@ GFX03_STATE = {
     GFX03_03_COMPLETED_STATUS: (2, 3, 0),
     GFX03_04_READY_STATUS: (2, 3, 4),
     GFX03_04_COMPLETED_STATUS: (2, 4, 0),
+    GFX03_05_READY_STATUS: (2, 4, 5),
+    GFX03_05_COMPLETED_STATUS: (2, 5, 0),
 }
 
 GFX02_01_GATE_PR = 674
@@ -2572,6 +2576,15 @@ GFX03_04_PINNED_SOURCE_BLOBS = {
 
 GFX03_04_ACTIVATION_SOURCES = {
     **GFX03_03_ACTIVATION_SOURCES,
+}
+
+GFX03_05_PINNED_SOURCE_BLOBS = {
+    **GFX03_04_PINNED_SOURCE_BLOBS,
+    "checkpoint": "99a37afba332fe6f13357fb83c1006f4471eb4f7",
+}
+
+GFX03_05_ACTIVATION_SOURCES = {
+    **GFX03_04_ACTIVATION_SOURCES,
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -5631,6 +5644,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, DATA05_02_ACTIVATION_SOURCES, DATA05_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-GFX-03-05":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-03-05",
+            "module_id": "GFX-03",
+            "risk": "ELEVATED",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/gfx03-05-continuation",
+            "approved_adr": "docs/adr/0117-gfx-03-internal-render-graph.md",
+            "approved_contract": "docs/contracts/gfx-03-render-graph-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-03-05.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-03-05-G6-ACTIVATION.md",
+            "gate_base_sha": "d12d56ba82d596d89cd846fb18d97dae17ae348e",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX03_05_ACTIVATION_SOURCES, GFX03_05_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -8996,6 +9031,8 @@ GFX03_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-GFX-03-03-G6-ACTIVATION.md"),
     4: ("docs/adr/0117-gfx-03-internal-render-graph.md",
         "docs/evidence/NLE-PRPLAN-GFX-03-04-G6-ACTIVATION.md"),
+    5: ("docs/adr/0117-gfx-03-internal-render-graph.md",
+        "docs/evidence/NLE-PRPLAN-GFX-03-05-G6-ACTIVATION.md"),
 }
 
 def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
@@ -9819,6 +9856,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-gfx-03-03.json"
     elif status == GFX03_04_READY_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-03-04.json"
+    elif status == GFX03_05_READY_STATUS:
+        activation_path = root / "docs/queue/packet-activation-gfx-03-05.json"
     elif status in (GFX02_08_READY_STATUS, GFX02_09_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-02-08.json"
     elif status in (GFX01_09_READY_STATUS, GFX01_10_COMPLETED_STATUS):
