@@ -4583,7 +4583,7 @@
             "DATA-03"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 728,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0119-gfx-05-internal-material-texture-pipeline.md",
