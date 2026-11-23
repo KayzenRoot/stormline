@@ -1024,6 +1024,13 @@ target_link_libraries(stormline_gfx02_shader_test PRIVATE stormline_gfx02_shader
 stormline_core01_apply_options(stormline_gfx02_shader_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx02_shader_test)
 
+add_executable(stormline_gfx02_reflection_test
+    tests/core/gfx02_reflection_tests.cpp
+)
+target_link_libraries(stormline_gfx02_reflection_test PRIVATE stormline_gfx02_shader)
+stormline_core01_apply_options(stormline_gfx02_reflection_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx02_reflection_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1999,6 +2006,11 @@ add_test(NAME gfx02_shader_01
     COMMAND stormline_gfx02_shader_test par01
 )
 set_tests_properties(gfx02_shader_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx02_reflection_01
+    COMMAND stormline_gfx02_reflection_test ref01
+)
+set_tests_properties(gfx02_reflection_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
