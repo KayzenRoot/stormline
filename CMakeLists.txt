@@ -1451,6 +1451,13 @@ target_link_libraries(stormline_two02_grid_test PRIVATE stormline_two02_tilemap)
 stormline_core01_apply_options(stormline_two02_grid_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two02_grid_test)
 
+add_executable(stormline_two02_tile_test
+    tests/core/two02_tile_tests.cpp
+)
+target_link_libraries(stormline_two02_tile_test PRIVATE stormline_two02_tilemap)
+stormline_core01_apply_options(stormline_two02_tile_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two02_tile_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2811,6 +2818,11 @@ add_test(NAME two02_grid_01
     COMMAND stormline_two02_grid_test grd01
 )
 set_tests_properties(two02_grid_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two02_tile_01
+    COMMAND stormline_two02_tile_test til01
+)
+set_tests_properties(two02_tile_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
