@@ -1156,6 +1156,13 @@ target_link_libraries(stormline_gfx04_budget_test PRIVATE stormline_gfx04_geomet
 stormline_core01_apply_options(stormline_gfx04_budget_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx04_budget_test)
 
+add_executable(stormline_gfx04_geometry_qualification_test
+    tests/core/gfx04_geometry_qualification_tests.cpp
+)
+target_link_libraries(stormline_gfx04_geometry_qualification_test PRIVATE stormline_gfx04_geometry)
+stormline_core01_apply_options(stormline_gfx04_geometry_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx04_geometry_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2246,6 +2253,26 @@ add_test(NAME gfx04_budget_01
     COMMAND stormline_gfx04_budget_test geo01
 )
 set_tests_properties(gfx04_budget_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx04_geometry_qualification_01
+    COMMAND stormline_gfx04_geometry_qualification_test qlf01
+)
+set_tests_properties(gfx04_geometry_qualification_01 PROPERTIES TIMEOUT 120)
+
+add_test(NAME gfx04_geometry_qualification_02
+    COMMAND stormline_gfx04_geometry_qualification_test qlf02
+)
+set_tests_properties(gfx04_geometry_qualification_02 PROPERTIES TIMEOUT 120)
+
+add_test(NAME gfx04_geometry_qualification_03
+    COMMAND stormline_gfx04_geometry_qualification_test qlf03
+)
+set_tests_properties(gfx04_geometry_qualification_03 PROPERTIES TIMEOUT 120)
+
+add_test(NAME gfx04_geometry_qualification_04
+    COMMAND stormline_gfx04_geometry_qualification_test qlf04
+)
+set_tests_properties(gfx04_geometry_qualification_04 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
