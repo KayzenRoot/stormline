@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "GFX03_08_READY_L1_CAPABILITY_OVERLAY",
+  "status": "GFX03_09_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -4034,8 +4034,8 @@
             "GFX-01",
             "CORE-03"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 702,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0117-gfx-03-internal-render-graph.md",
@@ -4074,8 +4074,8 @@
             "NLE-PRPLAN-GFX-03-08"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 703
         }
       ],
       "plan_file": "docs/pr-plans/GFX-03.md"
