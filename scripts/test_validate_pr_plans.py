@@ -134,7 +134,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.gfx04_04_activation = json.loads(v.GFX04_04_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx04_05_activation = json.loads(v.GFX04_05_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.gfx04_06_activation = json.loads(v.GFX04_06_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.GFX04_06_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.gfx04_07_activation = json.loads(v.GFX04_07_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.GFX04_07_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -193,7 +194,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual(["NLE-PRPLAN-GFX-04-06"], ready)
+        self.assertEqual(["NLE-PRPLAN-GFX-04-07"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -218,7 +219,7 @@ class PrPlanValidationTests(unittest.TestCase):
                           "NLE-PRPLAN-CORE-05-03", "NLE-PRPLAN-CORE-05-04", "NLE-PRPLAN-CORE-05-05", "NLE-PRPLAN-CORE-05-06", "NLE-PRPLAN-CORE-05-07", "NLE-PRPLAN-CORE-05-08", "NLE-PRPLAN-CORE-05-09", "NLE-PRPLAN-CORE-05-10",
                           "NLE-PRPLAN-CORE-06-03", "NLE-PRPLAN-CORE-06-04", "NLE-PRPLAN-CORE-06-05", "NLE-PRPLAN-CORE-06-06", "NLE-PRPLAN-CORE-06-07", "NLE-PRPLAN-CORE-06-08", "NLE-PRPLAN-CORE-06-09",
                           "NLE-PRPLAN-CORE-06-10", "NLE-PRPLAN-DATA-01-03",
-                          "NLE-PRPLAN-DATA-01-04", "NLE-PRPLAN-DATA-01-05", "NLE-PRPLAN-DATA-01-06", "NLE-PRPLAN-DATA-01-07", "NLE-PRPLAN-DATA-01-08", "NLE-PRPLAN-DATA-01-09", "NLE-PRPLAN-DATA-01-10", "NLE-PRPLAN-DATA-02-03", "NLE-PRPLAN-DATA-02-04", "NLE-PRPLAN-DATA-02-05", "NLE-PRPLAN-DATA-02-06", "NLE-PRPLAN-DATA-02-07", "NLE-PRPLAN-DATA-02-08", "NLE-PRPLAN-DATA-02-09", "NLE-PRPLAN-DATA-02-10", "NLE-PRPLAN-DATA-03-03", "NLE-PRPLAN-DATA-03-04", "NLE-PRPLAN-DATA-03-05", "NLE-PRPLAN-DATA-03-06", "NLE-PRPLAN-DATA-03-07", "NLE-PRPLAN-DATA-03-08", "NLE-PRPLAN-DATA-03-09", "NLE-PRPLAN-DATA-03-10", "NLE-PRPLAN-DATA-04-03", "NLE-PRPLAN-DATA-04-04", "NLE-PRPLAN-DATA-04-05", "NLE-PRPLAN-DATA-04-06", "NLE-PRPLAN-DATA-04-07", "NLE-PRPLAN-DATA-04-08", "NLE-PRPLAN-DATA-05-03", "NLE-PRPLAN-DATA-05-04", "NLE-PRPLAN-DATA-05-05", "NLE-PRPLAN-DATA-05-06", "NLE-PRPLAN-DATA-05-07", "NLE-PRPLAN-DATA-05-08", "NLE-PRPLAN-DATA-05-09", "NLE-PRPLAN-GFX-01-03", "NLE-PRPLAN-GFX-01-04", "NLE-PRPLAN-GFX-01-05", "NLE-PRPLAN-GFX-01-06", "NLE-PRPLAN-GFX-01-07", "NLE-PRPLAN-GFX-01-08", "NLE-PRPLAN-GFX-01-09", "NLE-PRPLAN-GFX-01-10", "NLE-PRPLAN-GFX-02-03", "NLE-PRPLAN-GFX-02-04", "NLE-PRPLAN-GFX-02-05", "NLE-PRPLAN-GFX-02-06", "NLE-PRPLAN-GFX-02-07", "NLE-PRPLAN-GFX-02-08", "NLE-PRPLAN-GFX-02-09", "NLE-PRPLAN-GFX-03-03", "NLE-PRPLAN-GFX-03-04", "NLE-PRPLAN-GFX-03-05", "NLE-PRPLAN-GFX-03-06", "NLE-PRPLAN-GFX-03-07", "NLE-PRPLAN-GFX-03-08", "NLE-PRPLAN-GFX-03-09", "NLE-PRPLAN-GFX-04-03", "NLE-PRPLAN-GFX-04-04", "NLE-PRPLAN-GFX-04-05"], completed)
+                          "NLE-PRPLAN-DATA-01-04", "NLE-PRPLAN-DATA-01-05", "NLE-PRPLAN-DATA-01-06", "NLE-PRPLAN-DATA-01-07", "NLE-PRPLAN-DATA-01-08", "NLE-PRPLAN-DATA-01-09", "NLE-PRPLAN-DATA-01-10", "NLE-PRPLAN-DATA-02-03", "NLE-PRPLAN-DATA-02-04", "NLE-PRPLAN-DATA-02-05", "NLE-PRPLAN-DATA-02-06", "NLE-PRPLAN-DATA-02-07", "NLE-PRPLAN-DATA-02-08", "NLE-PRPLAN-DATA-02-09", "NLE-PRPLAN-DATA-02-10", "NLE-PRPLAN-DATA-03-03", "NLE-PRPLAN-DATA-03-04", "NLE-PRPLAN-DATA-03-05", "NLE-PRPLAN-DATA-03-06", "NLE-PRPLAN-DATA-03-07", "NLE-PRPLAN-DATA-03-08", "NLE-PRPLAN-DATA-03-09", "NLE-PRPLAN-DATA-03-10", "NLE-PRPLAN-DATA-04-03", "NLE-PRPLAN-DATA-04-04", "NLE-PRPLAN-DATA-04-05", "NLE-PRPLAN-DATA-04-06", "NLE-PRPLAN-DATA-04-07", "NLE-PRPLAN-DATA-04-08", "NLE-PRPLAN-DATA-05-03", "NLE-PRPLAN-DATA-05-04", "NLE-PRPLAN-DATA-05-05", "NLE-PRPLAN-DATA-05-06", "NLE-PRPLAN-DATA-05-07", "NLE-PRPLAN-DATA-05-08", "NLE-PRPLAN-DATA-05-09", "NLE-PRPLAN-GFX-01-03", "NLE-PRPLAN-GFX-01-04", "NLE-PRPLAN-GFX-01-05", "NLE-PRPLAN-GFX-01-06", "NLE-PRPLAN-GFX-01-07", "NLE-PRPLAN-GFX-01-08", "NLE-PRPLAN-GFX-01-09", "NLE-PRPLAN-GFX-01-10", "NLE-PRPLAN-GFX-02-03", "NLE-PRPLAN-GFX-02-04", "NLE-PRPLAN-GFX-02-05", "NLE-PRPLAN-GFX-02-06", "NLE-PRPLAN-GFX-02-07", "NLE-PRPLAN-GFX-02-08", "NLE-PRPLAN-GFX-02-09", "NLE-PRPLAN-GFX-03-03", "NLE-PRPLAN-GFX-03-04", "NLE-PRPLAN-GFX-03-05", "NLE-PRPLAN-GFX-03-06", "NLE-PRPLAN-GFX-03-07", "NLE-PRPLAN-GFX-03-08", "NLE-PRPLAN-GFX-03-09", "NLE-PRPLAN-GFX-04-03", "NLE-PRPLAN-GFX-04-04", "NLE-PRPLAN-GFX-04-05", "NLE-PRPLAN-GFX-04-06"], completed)
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][8]["status"])
         self.assertEqual(444, self.manifest["modules"][0]["packets"][8]["github_pr"])
         self.assertEqual("COMPLETED", self.manifest["modules"][0]["packets"][9]["status"])
@@ -3078,6 +3079,25 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_gfx04_07_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-GFX-04-07",
+                         self.gfx04_07_activation["selected_packet_id"])
+        self.assertEqual("GFX-04", self.gfx04_07_activation["module_id"])
+        self.assertEqual("ELEVATED", self.gfx04_07_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.gfx04_07_activation["release_class"])
+        self.assertEqual("docs/contracts/gfx-04-geometry-internal-v0.md",
+                         self.gfx04_07_activation["approved_contract"])
+        self.assertEqual(v.GFX04_CAPABILITY_ADMISSION,
+                         self.gfx04_07_activation["capability_admission"])
+        bad = copy.deepcopy(self.gfx04_07_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_gfx04_07_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.gfx04_07_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_data01_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-DATA-01-03", "--json"],
@@ -3519,9 +3539,16 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
 
-    def test_gfx04_06_selector_is_ready(self):
+    def test_gfx04_06_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
-        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-04-06", "--json"],
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-04-06", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_gfx04_07_selector_is_ready(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-GFX-04-07", "--json"],
                                capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
         self.assertTrue(json.loads(ready.stdout)["executor_ready"])
