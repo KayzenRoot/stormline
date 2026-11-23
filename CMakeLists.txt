@@ -997,6 +997,13 @@ target_link_libraries(stormline_gfx01_sync_test PRIVATE stormline_gfx01_rhi)
 stormline_core01_apply_options(stormline_gfx01_sync_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_gfx01_sync_test)
 
+add_executable(stormline_gfx01_feature_test
+    tests/core/gfx01_feature_tests.cpp
+)
+target_link_libraries(stormline_gfx01_feature_test PRIVATE stormline_gfx01_rhi)
+stormline_core01_apply_options(stormline_gfx01_feature_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_gfx01_feature_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -1942,6 +1949,11 @@ add_test(NAME gfx01_sync_01
     COMMAND stormline_gfx01_sync_test syn01
 )
 set_tests_properties(gfx01_sync_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME gfx01_feature_01
+    COMMAND stormline_gfx01_feature_test tier01
+)
+set_tests_properties(gfx01_feature_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
