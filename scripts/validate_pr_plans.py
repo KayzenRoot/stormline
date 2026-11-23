@@ -101,9 +101,10 @@ GFX01_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-02.json"
 GFX01_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-03.json"
 GFX01_04_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-04.json"
 GFX01_05_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-05.json"
+GFX01_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-06.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = GFX01_05_ACTIVATION_FILE
+ACTIVATION_FILE = GFX01_06_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -735,7 +736,7 @@ GFX01_CAPABILITY_ADMISSION = {
 
 GFX01_01_GATE_PR = 657
 GFX01_02_GATE_PR = 658
-GFX01_CODE_PRS = {3: 660, 4: 662, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+GFX01_CODE_PRS = {3: 660, 4: 662, 5: 664, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
 GFX01_STATE = {
     GFX01_01_APPROVED_STATUS: (1, 0, 0),
     GFX01_02_APPROVED_STATUS: (2, 0, 0),
@@ -2213,6 +2214,40 @@ GFX01_05_PINNED_SOURCE_BLOBS = {
 }
 
 GFX01_05_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0014": "docs/adr/0014-gfx-01-rhi-backends.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0115": "docs/adr/0115-gfx-01-governance-slice.md",
+    "gfx01_architecture": "docs/architecture/gfx-01-graphics-rhi.md",
+    "gfx01_api": "docs/contracts/gfx-01-rhi-api.md",
+    "gfx01_rhi_contract": "docs/contracts/gfx-01-rhi-v0.md",
+    "gfx01_governance_contract": "docs/contracts/gfx-01-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "gfx01_plan": "docs/pr-plans/GFX-01.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+GFX01_06_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "b15e5c1c57d32c3b4a11603efe57d8a984d7b265",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0014": "27b3f4533083c6b6a23a989e0eb8661898d44ade",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0115": "2296e8e3015acc4b102b4d6f9f65c05abaaaaa97",
+    "gfx01_architecture": "4512de487da7df97969b56f8e5f508a56125ab32",
+    "gfx01_api": "822cbd118df75b4acf033443d5f75842d1344ae7",
+    "gfx01_rhi_contract": "8873be5a526ba11045663f33a00673ff41eac993",
+    "gfx01_governance_contract": "532a89eae87d0f1e11976fb743fc460f515167f3",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "gfx01_plan": "d0d4788a60a8aaf5c54cf141798748ee09ef819b",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+GFX01_06_ACTIVATION_SOURCES = {
     "checkpoint": "docs/11-checkpoint.md",
     "decisions_ledger": "docs/10-decisions-ledger.md",
     "scope": "docs/03-scope.md",
@@ -4982,6 +5017,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, DATA05_02_ACTIVATION_SOURCES, DATA05_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-GFX-01-06":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-01-06",
+            "module_id": "GFX-01",
+            "risk": "ELEVATED",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/gfx01-06-continuation",
+            "approved_adr": "docs/adr/0115-gfx-01-governance-slice.md",
+            "approved_contract": "docs/contracts/gfx-01-rhi-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-01-06.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-01-06-G6-ACTIVATION.md",
+            "gate_base_sha": "010f584e35f5906f8a8694c309f9520e2a011585",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX01_06_ACTIVATION_SOURCES, GFX01_06_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -7927,6 +7984,8 @@ GFX01_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-GFX-01-04-G6-ACTIVATION.md"),
     5: ("docs/adr/0115-gfx-01-governance-slice.md",
         "docs/evidence/NLE-PRPLAN-GFX-01-05-G6-ACTIVATION.md"),
+    6: ("docs/adr/0115-gfx-01-governance-slice.md",
+        "docs/evidence/NLE-PRPLAN-GFX-01-06-G6-ACTIVATION.md"),
 }
 
 def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
@@ -8712,6 +8771,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-05-03.json"
     elif status == DATA05_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-data-05-02.json"
+    elif status == GFX01_06_READY_STATUS:
+        activation_path = root / "docs/queue/packet-activation-gfx-01-06.json"
     elif status == GFX01_05_READY_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-01-05.json"
     elif status == GFX01_04_READY_STATUS:
