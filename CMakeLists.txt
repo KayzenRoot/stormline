@@ -1431,6 +1431,13 @@ target_link_libraries(stormline_two01_light_test PRIVATE stormline_two01_canvas)
 stormline_core01_apply_options(stormline_two01_light_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two01_light_test)
 
+add_executable(stormline_two01_canvas_qualification_test
+    tests/core/two01_canvas_qualification_tests.cpp
+)
+target_link_libraries(stormline_two01_canvas_qualification_test PRIVATE stormline_two01_canvas)
+stormline_core01_apply_options(stormline_two01_canvas_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two01_canvas_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2769,6 +2776,23 @@ add_test(NAME two01_light_01
     COMMAND stormline_two01_light_test lgt01
 )
 set_tests_properties(two01_light_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two01_canvas_qualification_101
+    COMMAND stormline_two01_canvas_qualification_test qlft101
+)
+set_tests_properties(two01_canvas_qualification_101 PROPERTIES TIMEOUT 60)
+add_test(NAME two01_canvas_qualification_102
+    COMMAND stormline_two01_canvas_qualification_test qlft102
+)
+set_tests_properties(two01_canvas_qualification_102 PROPERTIES TIMEOUT 60)
+add_test(NAME two01_canvas_qualification_103
+    COMMAND stormline_two01_canvas_qualification_test qlft103
+)
+set_tests_properties(two01_canvas_qualification_103 PROPERTIES TIMEOUT 60)
+add_test(NAME two01_canvas_qualification_104
+    COMMAND stormline_two01_canvas_qualification_test qlft104
+)
+set_tests_properties(two01_canvas_qualification_104 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
