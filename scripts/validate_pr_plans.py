@@ -106,9 +106,10 @@ GFX01_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-07.json"
 GFX01_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-08.json"
 GFX01_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-01-09.json"
 GFX02_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-02-01.json"
+GFX02_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-gfx-02-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = GFX02_01_ACTIVATION_FILE
+ACTIVATION_FILE = GFX02_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -773,7 +774,7 @@ GFX01_01_GATE_PR = 657
 GFX01_02_GATE_PR = 658
 GFX01_CODE_PRS = {3: 660, 4: 662, 5: 664, 6: 666, 7: 668, 8: 670, 9: 672, 10: 673}
 GFX02_01_GATE_PR = 674
-GFX02_02_GATE_PR = 0
+GFX02_02_GATE_PR = 675
 GFX02_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0}
 GFX02_STATE = {
     GFX02_01_APPROVED_STATUS: (1, 0, 0),
@@ -2133,6 +2134,42 @@ GFX02_01_ACTIVATION_SOURCES = {
     "gfx02_internal_architecture": "docs/architecture/gfx-02-internal-shader-pipeline.md",
     "gfx02_api": "docs/contracts/gfx-02-shader-api.md",
     "gfx02_governance_contract": "docs/contracts/gfx-02-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "gfx02_plan": "docs/pr-plans/GFX-02.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
+}
+
+GFX02_02_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "829c59c26fd95cc7757c6d22dd94f938ef93dd3b",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0015": "b26e90e9f0fa4c45a22a8aa920bc2680c0e61c88",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0116": "a4a7df30f08c31181dbc0b1657171e74cd8161e0",
+    "gfx02_architecture": "dbc2822aa6d6890b93e60fc095d94bf5d78e6f6b",
+    "gfx02_internal_architecture": "26bc4f3c5d34622f8e720812a73d3f50022a4b8c",
+    "gfx02_api": "2e7e14f5f598d25229582683ea4a9d0d531e8580",
+    "gfx02_governance_contract": "ab5dbc5f29bdd014c9d02a5fb0d2d939b8af82fd",
+    "gfx02_shader_contract": "4db1a7329e940f7124ac62e7bd45c3424bf3b20e",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "gfx02_plan": "c486c98f387113e54e98c6b3db52719ac2de344f",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+GFX02_02_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0015": "docs/adr/0015-gfx-02-shader-compilation-policy.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0116": "docs/adr/0116-gfx-02-internal-shader-pipeline.md",
+    "gfx02_architecture": "docs/architecture/gfx-02-shader-material-compilation.md",
+    "gfx02_internal_architecture": "docs/architecture/gfx-02-internal-shader-pipeline.md",
+    "gfx02_api": "docs/contracts/gfx-02-shader-api.md",
+    "gfx02_governance_contract": "docs/contracts/gfx-02-governance-v0.md",
+    "gfx02_shader_contract": "docs/contracts/gfx-02-shader-internal-v0.md",
     "module_catalog": "docs/product/module-catalog.md",
     "gfx02_plan": "docs/pr-plans/GFX-02.md",
     "implementation_registry": "docs/queue/implementation-registry.json",
@@ -5195,6 +5232,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, DATA05_02_ACTIVATION_SOURCES, DATA05_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-GFX-02-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-GFX-02-02",
+            "module_id": "GFX-02",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-22/gfx02-02-continuation",
+            "approved_adr": "docs/adr/0116-gfx-02-internal-shader-pipeline.md",
+            "approved_contract": "docs/contracts/gfx-02-shader-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-GFX-02-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-02-02-G6-ACTIVATION.md",
+            "gate_base_sha": "c1f0b89e9d10afd297075eaf7822e412b627c290",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, GFX02_02_ACTIVATION_SOURCES, GFX02_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -9064,6 +9123,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-data-05-02.json"
     elif status == GFX02_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-02-01.json"
+    elif status == GFX02_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-gfx-02-02.json"
     elif status in (GFX01_09_READY_STATUS, GFX01_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-gfx-01-09.json"
     elif status == GFX01_08_READY_STATUS:
