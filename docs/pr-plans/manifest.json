@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "GFX04_05_READY_L1_CAPABILITY_OVERLAY",
+  "status": "GFX04_06_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -4216,8 +4216,8 @@
             "GFX-03",
             "DATA-05"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 711,
           "risk": "ELEVATED",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0118-gfx-04-internal-geometry-pipeline.md",
@@ -4261,8 +4261,38 @@
             "GFX-03",
             "DATA-05"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0118-gfx-04-internal-geometry-pipeline.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-04-06-G6-ACTIVATION.md",
+          "capability_admission": {
+            "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+            "formal_dependency": "GFX-03",
+            "module_completion_claimed": false,
+            "required_capabilities": [
+              {"id": "CORE01_HEADLESS_BUILD_AND_TEST", "satisfied_by": "NLE-PRPLAN-CORE-01-03"},
+              {"id": "CORE01_PORTABLE_PATHS", "satisfied_by": "NLE-PRPLAN-CORE-01-06"},
+              {"id": "CORE01_NATIVE_CI_MATRIX", "satisfied_by": "NLE-PRPLAN-CORE-01-08"},
+              {"id": "CORE01_LIFECYCLE_REQUESTS", "satisfied_by": "NLE-PRPLAN-CORE-01-12"},
+              {"id": "CORE01_CAPABILITY_GRAPH", "satisfied_by": "NLE-PRPLAN-CORE-01-13"},
+              {"id": "CORE02_ALLOCATOR", "satisfied_by": "NLE-PRPLAN-CORE-02-03"},
+              {"id": "CORE02_OWNERSHIP", "satisfied_by": "NLE-PRPLAN-CORE-02-04"},
+              {"id": "CORE02_LEAK_TRACKING", "satisfied_by": "NLE-PRPLAN-CORE-02-08"},
+              {"id": "CORE02_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-02-10"},
+              {"id": "CORE05_VECTORS", "satisfied_by": "NLE-PRPLAN-CORE-05-03"},
+              {"id": "CORE05_COORDINATE_SYSTEMS", "satisfied_by": "NLE-PRPLAN-CORE-05-05"},
+              {"id": "CORE05_UNITS", "satisfied_by": "NLE-PRPLAN-CORE-05-06"},
+              {"id": "CORE05_PRECISION", "satisfied_by": "NLE-PRPLAN-CORE-05-07"},
+              {"id": "CORE05_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-05-09"},
+              {"id": "GFX01_RHI_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-01-09"},
+              {"id": "GFX03_RENDER_GRAPH_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-GFX-03-08"},
+              {"id": "DATA05_STREAMING", "satisfied_by": "NLE-PRPLAN-DATA-05-05"},
+              {"id": "DATA05_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-DATA-05-08"}
+            ],
+            "not_required": ["native_gpu", "vulkan", "d3d12", "metal", "webgpu", "mesh_shader", "indirect_draw", "gpu_occlusion", "meshoptimizer", "mesh_codec", "streaming_io", "network", "public_abi", "release"]
+          }
         },
         {
           "packet_id": "NLE-PRPLAN-GFX-04-07",
