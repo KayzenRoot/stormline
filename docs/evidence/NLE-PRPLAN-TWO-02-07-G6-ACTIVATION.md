@@ -1,0 +1,26 @@
+# NLE-PRPLAN-TWO-02-07 — G6 implementation activation
+
+**Status:** `G6 IMPLEMENTATION ACTIVATION / TEST AUTHORIZED ONLY AFTER THIS GATE MERGES`. **Base main:** `fa66e50`. **Formal packet:** `NLE-PRPLAN-TWO-02-07`. **ADR:** [ADR-0124](../adr/0124-two-02-internal-tilemap-pipeline.md). **Contract:** [two-02-tilemap-internal-v0](../contracts/two-02-tilemap-internal-v0.md). **WO:** [NLE-PRPLAN-TWO-02-07](../work-orders/NLE-PRPLAN-TWO-02-07.md).
+
+## Authorization
+
+The owner authorized continuation on 2026-11-23. TWO-02-01/-06 are approved/completed. This gate activates only the logical streaming-plan slice.
+
+## Capability admission
+
+- Formal dependencies are `TWO-01` and `DATA-04`; neither is module-qualified.
+- Admission uses completed TWO-01 and DATA-04 capabilities.
+- `module_completion_claimed=false`.
+
+## Activated scope
+
+- `src/stormline/tilemap/streaming_plan.hpp`
+- `tests/core/two02_streaming_tests.cpp`
+- additive CMake/workflow and `docs/evidence/NLE-PRPLAN-TWO-02-07.md`
+
+STR-01 is required. No streaming I/O, cache, async job, residency mutation, GPU or render is permitted.
+
+## Gate state after merge
+
+- Manifest root `TWO02_07_READY_L1_CAPABILITY_OVERLAY`: **540 `PLANNED_BLOCKED`, 1 `EXECUTOR_READY`, 165 `COMPLETED`, 42 approved gates**.
+- `TWO-02-07` becomes `EXECUTOR_READY`; `TWO-02-08`..`-09` remain `PLANNED_BLOCKED`.
