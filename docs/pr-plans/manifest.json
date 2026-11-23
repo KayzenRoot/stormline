@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "TWO01_09_COMPLETED_REST_BLOCKED",
+  "status": "TWO01_10_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -5949,8 +5949,8 @@
             "NLE-PRPLAN-TWO-01-09"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 805
         }
       ],
       "plan_file": "docs/pr-plans/TWO-01.md"
