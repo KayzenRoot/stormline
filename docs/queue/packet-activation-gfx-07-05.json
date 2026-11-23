@@ -1,0 +1,127 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-GFX-07-05",
+  "module_id": "GFX-07",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx07-05-continuation",
+  "approved_adr": "docs/adr/0121-gfx-07-internal-post-processing-pipeline.md",
+  "approved_contract": "docs/contracts/gfx-07-post-processing-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-GFX-07-05.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-07-05-G6-ACTIVATION.md",
+  "gate_base_sha": "c5872c69fabc02bdff1ec92b4d03501eaae5be6f",
+  "gate_pr": 761,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "GFX-06",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      },
+      {
+        "id": "CORE01_LIFECYCLE_REQUESTS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-12"
+      },
+      {
+        "id": "CORE01_CAPABILITY_GRAPH",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-13"
+      },
+      {
+        "id": "CORE02_ALLOCATOR",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-03"
+      },
+      {
+        "id": "CORE02_OWNERSHIP",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-04"
+      },
+      {
+        "id": "CORE02_LEAK_TRACKING",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-08"
+      },
+      {
+        "id": "CORE02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-10"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_PRECISION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "GFX01_RHI_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-01-09"
+      },
+      {
+        "id": "GFX03_RENDER_GRAPH_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-03-08"
+      },
+      {
+        "id": "GFX05_MATERIAL",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-03"
+      },
+      {
+        "id": "GFX05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-09"
+      },
+      {
+        "id": "GFX06_LIGHTING_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-06-09"
+      }
+    ],
+    "not_required": [
+      "native_gpu",
+      "vulkan",
+      "d3d12",
+      "metal",
+      "webgpu",
+      "hdr_display",
+      "swapchain",
+      "aces",
+      "ocio",
+      "lut",
+      "fsr",
+      "dlss",
+      "xess",
+      "frame_generation",
+      "shader_compiler",
+      "gpu_allocator",
+      "rendering",
+      "hardware",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "e2bdfd63b8872c3ea59f99d8ea1dbc907dce3e2b",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0020": "8fd381ddfeb3837805606a2788a3a1b5b3910d30",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0121": "23e9b21e6147d36f688902537d3ce6b68ae4b498",
+    "gfx07_architecture": "2f8ead7b021f8d68e256599f2205cfacc26de85c",
+    "gfx07_internal_architecture": "e0a26412516a40ec2af55b62f502f46ba92e6cef",
+    "gfx07_api": "07de1be322a9b1838be8d0efb8279ac43d78ad55",
+    "gfx07_governance_contract": "901bf81392be17627130927a44c2c762a06a3b63",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "gfx07_plan": "cf93a1e14864b7ba99c660dbd1771f0f894ff6b8",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "gfx07_internal_contract": "99e47a7ba458b2101798c913f1ef15d09128c573"
+  }
+}
