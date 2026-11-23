@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-GFX-06-07",
+  "module_id": "GFX-06",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/gfx06-07-continuation",
+  "approved_adr": "docs/adr/0120-gfx-06-internal-lighting-pipeline.md",
+  "approved_contract": "docs/contracts/gfx-06-lighting-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-GFX-06-07.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-GFX-06-07-G6-ACTIVATION.md",
+  "gate_base_sha": "10e43cab3eae712b3ba40e12ea26a52bca001e80",
+  "gate_pr": 748,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "GFX-03+GFX-05",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      },
+      {
+        "id": "CORE01_LIFECYCLE_REQUESTS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-12"
+      },
+      {
+        "id": "CORE01_CAPABILITY_GRAPH",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-13"
+      },
+      {
+        "id": "CORE02_ALLOCATOR",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-03"
+      },
+      {
+        "id": "CORE02_OWNERSHIP",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-04"
+      },
+      {
+        "id": "CORE02_LEAK_TRACKING",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-08"
+      },
+      {
+        "id": "CORE02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-10"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_PRECISION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "GFX01_RHI_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-01-09"
+      },
+      {
+        "id": "GFX03_RENDER_GRAPH_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-03-08"
+      },
+      {
+        "id": "GFX05_MATERIAL",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-03"
+      },
+      {
+        "id": "GFX05_TEXTURES",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-04"
+      },
+      {
+        "id": "GFX05_MIPS",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-05"
+      },
+      {
+        "id": "GFX05_SAMPLER",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-06"
+      },
+      {
+        "id": "GFX05_DECALS",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-07"
+      },
+      {
+        "id": "GFX05_TRANSPARENCY",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-08"
+      },
+      {
+        "id": "GFX05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-09"
+      }
+    ],
+    "not_required": [
+      "native_gpu",
+      "vulkan",
+      "d3d12",
+      "metal",
+      "webgpu",
+      "shadow_map",
+      "virtual_shadow_map",
+      "ray_tracing",
+      "global_illumination",
+      "probe_bake",
+      "ssr",
+      "froxel_volume",
+      "shader_compiler",
+      "gpu_allocator",
+      "rendering",
+      "hardware",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "e7448fe74872af40110f1dacfe0a6ca99b3664fa",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0019": "1f9c00e4ce3a14506104687ceb593001e0ca9335",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0120": "df13d2409b787d93d27308b47e7c417677f73fde",
+    "gfx06_architecture": "a4a6ce14eb93df10554f35e8d8e31196d65fdf83",
+    "gfx06_internal_architecture": "bd65c39491b02e12d6caf9bc7e8ca7eabf0394f8",
+    "gfx06_api": "7e38013c2a161b8d463e21f0c89dd36ebe9d641e",
+    "gfx06_governance_contract": "e9605a56e5614552f5912330378d131df652eb70",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "gfx06_plan": "dd06f030605946b1de49fb18f886e00d9bbe6088",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "gfx06_internal_contract": "e51d3700f69b73804208a1079750405f9e015f6c"
+  }
+}
