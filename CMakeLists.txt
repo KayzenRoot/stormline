@@ -1671,6 +1671,19 @@ target_link_libraries(stormline_world02_qualification_test PRIVATE stormline_wor
 stormline_core01_apply_options(stormline_world02_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world02_qualification_test)
 
+add_library(stormline_world03_spatial INTERFACE)
+target_include_directories(stormline_world03_spatial INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_world03_spatial INTERFACE cxx_std_20)
+
+add_executable(stormline_world03_cell_test
+    tests/core/world03_cell_tests.cpp
+)
+target_link_libraries(stormline_world03_cell_test PRIVATE stormline_world03_spatial)
+stormline_core01_apply_options(stormline_world03_cell_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world03_cell_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3231,6 +3244,11 @@ add_test(NAME world02_qualification_204
     COMMAND stormline_world02_qualification_test qlfs204
 )
 set_tests_properties(world02_qualification_204 PROPERTIES TIMEOUT 120)
+
+add_test(NAME world03_cell_01
+    COMMAND stormline_world03_cell_test cel01
+)
+set_tests_properties(world03_cell_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
