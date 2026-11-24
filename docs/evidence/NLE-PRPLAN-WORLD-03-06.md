@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-03-06 — Streaming plan metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO STREAMING TASK OR I/O`. **Base:** `3bba470`. **Gate:** [NLE-PRPLAN-WORLD-03-06-G6-ACTIVATION](NLE-PRPLAN-WORLD-03-06-G6-ACTIVATION.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-03-06](../work-orders/NLE-PRPLAN-WORLD-03-06.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO STREAMING TASK OR I/O`. **Base:** `3bba470`. **Gate:** [NLE-PRPLAN-WORLD-03-06-G6-ACTIVATION](NLE-PRPLAN-WORLD-03-06-G6-ACTIVATION.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-03-06](../work-orders/NLE-PRPLAN-WORLD-03-06.md). **PR:** #888.
 
 ## Scope delivered
 
