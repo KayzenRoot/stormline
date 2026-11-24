@@ -1767,6 +1767,19 @@ target_link_libraries(stormline_world04_qualification_test PRIVATE stormline_wor
 stormline_core01_apply_options(stormline_world04_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world04_qualification_test)
 
+add_library(stormline_world05_procedural INTERFACE)
+target_include_directories(stormline_world05_procedural INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_world05_procedural INTERFACE cxx_std_20)
+
+add_executable(stormline_world05_seed_test
+    tests/core/world05_seed_tests.cpp
+)
+target_link_libraries(stormline_world05_seed_test PRIVATE stormline_world05_procedural)
+stormline_core01_apply_options(stormline_world05_seed_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world05_seed_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3411,6 +3424,11 @@ add_test(NAME world04_qualification_404
     COMMAND stormline_world04_qualification_test qlfw404
 )
 set_tests_properties(world04_qualification_404 PROPERTIES TIMEOUT 120)
+
+add_test(NAME world05_seed_01
+    COMMAND stormline_world05_seed_test seed01
+)
+set_tests_properties(world05_seed_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
