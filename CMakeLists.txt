@@ -1877,6 +1877,19 @@ target_link_libraries(stormline_sim01_qualification_test PRIVATE stormline_sim01
 stormline_core01_apply_options(stormline_sim01_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim01_qualification_test)
 
+add_library(stormline_sim02_physics3d INTERFACE)
+target_include_directories(stormline_sim02_physics3d INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_sim02_physics3d INTERFACE cxx_std_20)
+
+add_executable(stormline_sim02_body_test
+    tests/core/sim02_body_tests.cpp
+)
+target_link_libraries(stormline_sim02_body_test PRIVATE stormline_sim02_physics3d)
+stormline_core01_apply_options(stormline_sim02_body_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim02_body_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3615,6 +3628,11 @@ add_test(NAME sim01_qualification_104
     COMMAND stormline_sim01_qualification_test qlfs104
 )
 set_tests_properties(sim01_qualification_104 PROPERTIES TIMEOUT 120)
+
+add_test(NAME sim02_body_01
+    COMMAND stormline_sim02_body_test body301
+)
+set_tests_properties(sim02_body_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
