@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-01-10 — SIM-01 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO PHYSICS RUNTIME`. **Base:** `bddbd5a8`. **Packet:** `NLE-PRPLAN-SIM-01-10`. **Closeout PR:** pendente. **ADR:** [ADR-0132](../adr/0132-sim-01-internal-physics-2d-metadata.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **Planning policy remains:** [ADR-0031](../adr/0031-sim-01-physics-2d-fixedstep-backend-policy.md) `PROPOSED`.
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO PHYSICS RUNTIME`. **Base:** `bddbd5a8`. **Packet:** `NLE-PRPLAN-SIM-01-10`. **Closeout PR:** #942. **ADR:** [ADR-0132](../adr/0132-sim-01-internal-physics-2d-metadata.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **Planning policy remains:** [ADR-0031](../adr/0031-sim-01-physics-2d-fixedstep-backend-policy.md) `PROPOSED`.
 
 ## Result
 
