@@ -1870,6 +1870,13 @@ target_link_libraries(stormline_sim01_mask_test PRIVATE stormline_sim01_physics2
 stormline_core01_apply_options(stormline_sim01_mask_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim01_mask_test)
 
+add_executable(stormline_sim01_qualification_test
+    tests/core/sim01_qualification_tests.cpp
+)
+target_link_libraries(stormline_sim01_qualification_test PRIVATE stormline_sim01_physics2d)
+stormline_core01_apply_options(stormline_sim01_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim01_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3591,6 +3598,23 @@ add_test(NAME sim01_mask_01
     COMMAND stormline_sim01_mask_test msk01
 )
 set_tests_properties(sim01_mask_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim01_qualification_101
+    COMMAND stormline_sim01_qualification_test qlfs101
+)
+set_tests_properties(sim01_qualification_101 PROPERTIES TIMEOUT 60)
+add_test(NAME sim01_qualification_102
+    COMMAND stormline_sim01_qualification_test qlfs102
+)
+set_tests_properties(sim01_qualification_102 PROPERTIES TIMEOUT 60)
+add_test(NAME sim01_qualification_103
+    COMMAND stormline_sim01_qualification_test qlfs103
+)
+set_tests_properties(sim01_qualification_103 PROPERTIES TIMEOUT 60)
+add_test(NAME sim01_qualification_104
+    COMMAND stormline_sim01_qualification_test qlfs104
+)
+set_tests_properties(sim01_qualification_104 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
