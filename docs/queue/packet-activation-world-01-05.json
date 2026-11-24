@@ -1,0 +1,122 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-WORLD-01-05",
+  "module_id": "WORLD-01",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world01-05-continuation",
+  "approved_adr": "docs/adr/0127-world-01-internal-entity-metadata.md",
+  "approved_contract": "docs/contracts/world-01-entity-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-01-05.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-01-05-G6-ACTIVATION.md",
+  "gate_base_sha": "46834fbfee2d9c2954156d4c93553e691248154d",
+  "gate_pr": 855,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "CORE-05+DATA-04",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE05_TYPED_SCALARS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-04"
+      },
+      {
+        "id": "CORE05_MATRICES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-05"
+      },
+      {
+        "id": "CORE05_COORDINATES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-06"
+      },
+      {
+        "id": "CORE05_UNITS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "CORE05_IDS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-09"
+      },
+      {
+        "id": "CORE05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-10"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      },
+      {
+        "id": "DATA04_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-03"
+      },
+      {
+        "id": "DATA04_DOCUMENT",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-04"
+      },
+      {
+        "id": "DATA04_PATCH",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-05"
+      },
+      {
+        "id": "DATA04_DIFF",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-06"
+      },
+      {
+        "id": "DATA04_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-07"
+      }
+    ],
+    "not_required": [
+      "ecs_storage",
+      "archetype_tables",
+      "sparse_sets",
+      "component_pointers",
+      "job_system",
+      "borrow_checker",
+      "change_detection",
+      "serialization_codec",
+      "persistence",
+      "scene_hierarchy",
+      "spatial_index",
+      "physics",
+      "network",
+      "editor",
+      "gpu",
+      "audio",
+      "export",
+      "performance",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "2152fccc6a54b42ad4151f04e0c7aaf0b7c040f0",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0026": "d97cc3e74aa167acb0c97fddd264f507920a4f4b",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0127": "60a3c171b992b9f9aade85c8abc541f956400474",
+    "world01_architecture": "099a92e687a47ab0ab2b35b480c69e9f4365723e",
+    "world01_internal_architecture": "3e32a470ac4baa95fb6117d99f5259752b72a98f",
+    "world01_api": "7220a1cf26ae3a2648f78b536fc38221715fcc76",
+    "world01_governance_contract": "fb73d01ae1f0d3fe159572c57d3843259f8d0555",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "world01_plan": "d84aa3687db0fe873e7c3d86a6a0f45c55e3b37c",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "world01_internal_contract": "9d511e4255e6e4550a05d73dc5725e8c0ed537a8"
+  }
+}
