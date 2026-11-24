@@ -217,9 +217,10 @@ WORLD02_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-02-08.js
 WORLD03_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-03-01.json"
 WORLD03_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-03-02.json"
 WORLD03_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-03-03.json"
+WORLD03_04_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-03-04.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = WORLD03_03_ACTIVATION_FILE
+ACTIVATION_FILE = WORLD03_04_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -1970,6 +1971,8 @@ WORLD03_STATE = {
 WORLD03_SLICE_METADATA = {
     3: ("docs/adr/0129-world-03-internal-spatial-streaming-metadata.md",
         "docs/evidence/NLE-PRPLAN-WORLD-03-03-G6-ACTIVATION.md"),
+    4: ("docs/adr/0129-world-03-internal-spatial-streaming-metadata.md",
+        "docs/evidence/NLE-PRPLAN-WORLD-03-04-G6-ACTIVATION.md"),
 }
 
 GFX04_01_GATE_PR = 704
@@ -4978,6 +4981,15 @@ WORLD03_03_PINNED_SOURCE_BLOBS = {
 
 WORLD03_03_ACTIVATION_SOURCES = {
     **WORLD03_02_ACTIVATION_SOURCES,
+}
+
+WORLD03_04_PINNED_SOURCE_BLOBS = {
+    **WORLD03_03_PINNED_SOURCE_BLOBS,
+    "checkpoint": "a0eabebd3b58517fe4f06671b855117f757b7e77",
+}
+
+WORLD03_04_ACTIVATION_SOURCES = {
+    **WORLD03_03_ACTIVATION_SOURCES,
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -9049,6 +9061,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, WORLD03_03_ACTIVATION_SOURCES, WORLD03_03_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-WORLD-03-04":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-WORLD-03-04",
+            "module_id": "WORLD-03",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world03-04-continuation",
+            "approved_adr": "docs/adr/0129-world-03-internal-spatial-streaming-metadata.md",
+            "approved_contract": "docs/contracts/world-03-spatial-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-03-04.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-03-04-G6-ACTIVATION.md",
+            "gate_base_sha": "c5cc0e540b43e4d0ea73b66fd628d5adfd3ccab0",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, WORLD03_04_ACTIVATION_SOURCES, WORLD03_04_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -14813,6 +14847,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-world-03-02.json"
     elif status in (WORLD03_03_READY_STATUS, WORLD03_03_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-world-03-03.json"
+    elif status in (WORLD03_04_READY_STATUS, WORLD03_04_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-world-03-04.json"
     elif status == WORLD02_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-02-01.json"
     elif status == WORLD02_02_APPROVED_STATUS:
