@@ -6908,7 +6908,7 @@
           "depends_on": [],
           "requires_modules_merged": [],
           "status": "APPROVED_GOVERNANCE",
-          "github_pr": 0
+          "github_pr": 892
         },
         {
           "packet_id": "NLE-PRPLAN-WORLD-04-02",
