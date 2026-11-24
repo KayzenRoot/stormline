@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-03 — Terrain patch metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO HEIGHTFIELD STORAGE OR TERRAIN RENDER`. **Base:** `5de3bd0`. **Gate:** [NLE-PRPLAN-WORLD-04-03-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-03-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-03](../work-orders/NLE-PRPLAN-WORLD-04-03.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO HEIGHTFIELD STORAGE OR TERRAIN RENDER`. **Base:** `5de3bd0`. **Gate:** [NLE-PRPLAN-WORLD-04-03-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-03-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-03](../work-orders/NLE-PRPLAN-WORLD-04-03.md). **PR:** #895.
 
 ## Scope delivered
 
