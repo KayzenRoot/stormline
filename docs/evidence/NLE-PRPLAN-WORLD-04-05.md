@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-05 — Vegetation placement metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO INSTANCE BUFFER OR VEGETATION RUNTIME`. **Base:** `ad86cd4`. **Gate:** [NLE-PRPLAN-WORLD-04-05-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-05-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-05](../work-orders/NLE-PRPLAN-WORLD-04-05.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO INSTANCE BUFFER OR VEGETATION RUNTIME`. **Base:** `ad86cd4`. **Gate:** [NLE-PRPLAN-WORLD-04-05-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-05-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-05](../work-orders/NLE-PRPLAN-WORLD-04-05.md). **PR:** #899.
 
 ## Scope delivered
 
