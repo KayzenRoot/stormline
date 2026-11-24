@@ -11,7 +11,7 @@
   "work_order": "docs/work-orders/NLE-PRPLAN-SIM-01-02.md",
   "activation_evidence": "docs/evidence/NLE-PRPLAN-SIM-01-02-G6-ACTIVATION.md",
   "gate_base_sha": "64eeff547a79642386bcb579c2f7fa792648d16c",
-  "gate_pr": 0,
+  "gate_pr": 927,
   "requires_fresh_context_lock": true,
   "capability_admission": {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
@@ -133,7 +133,7 @@
     ]
   },
   "source_blob_sha1": {
-    "checkpoint": "ffe9f01fa2bbb9b3be732884cf64c8595b5d91d3",
+    "checkpoint": "1f5fa3ea1a39fe223c848097a2eb71e74a743450",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
