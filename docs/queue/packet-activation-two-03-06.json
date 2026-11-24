@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-TWO-03-06",
+  "module_id": "TWO-03",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/two03-06-continuation",
+  "approved_adr": "docs/adr/0125-two-03-internal-animation-pipeline.md",
+  "approved_contract": "docs/contracts/two-03-animation-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-TWO-03-06.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-TWO-03-06-G6-ACTIVATION.md",
+  "gate_base_sha": "d3dfe264c05d6f371d8a5a8778a4a6e3fb735fdb",
+  "gate_pr": 829,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "TWO-01",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      },
+      {
+        "id": "CORE01_LIFECYCLE_REQUESTS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-12"
+      },
+      {
+        "id": "CORE01_CAPABILITY_GRAPH",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-13"
+      },
+      {
+        "id": "CORE02_ALLOCATOR",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-03"
+      },
+      {
+        "id": "CORE02_OWNERSHIP",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-04"
+      },
+      {
+        "id": "CORE02_LEAK_TRACKING",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-08"
+      },
+      {
+        "id": "CORE02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-10"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_PRECISION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "GFX01_RHI_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-01-09"
+      },
+      {
+        "id": "GFX03_RENDER_GRAPH_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-03-08"
+      },
+      {
+        "id": "GFX05_MATERIAL",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-03"
+      },
+      {
+        "id": "GFX05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-09"
+      },
+      {
+        "id": "GFX06_LIGHTING_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-06-09"
+      },
+      {
+        "id": "GFX07_POST_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-07-09"
+      },
+      {
+        "id": "DATA03_IMPORT_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-09"
+      }
+    ],
+    "not_required": [
+      "animation_runtime",
+      "pose_evaluator",
+      "skinning",
+      "native_gpu",
+      "vulkan",
+      "d3d12",
+      "metal",
+      "webgpu",
+      "audio_device",
+      "audio_mixer",
+      "sample_playback",
+      "av_export",
+      "video_encoder",
+      "ffmpeg",
+      "codec",
+      "animation_importer",
+      "timeline_editor",
+      "state_machine_runtime",
+      "ik_solver",
+      "root_motion_authority",
+      "shader_compiler",
+      "gpu_allocator",
+      "rendering",
+      "hardware",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "8792713238b3ad175711f78ec7b99ddbf94da18a",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0024": "90201d14dd4f3120f4306cfef1fa4c89ab4a3a84",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0125": "caa7c758b4408c5eb7beab6d042bf164efa9a60d",
+    "two03_architecture": "f900c6b60e5d218723f985d4c518193ec09c1dee",
+    "two03_internal_architecture": "9a56558c3918207306ce1221d003959635087cb0",
+    "two03_api": "0b9ae436513edc1dfcabb6f613cdd9deb2157b8a",
+    "two03_governance_contract": "6fb7e78f00dbcccf57a9c2dd5b87bd38ae3c6647",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "two03_plan": "4f4f370e4ecd5b61a2918ed87d5abed3516eef1e",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "two03_internal_contract": "8a9c665e90c9415910f9851ef6368bc757796b45"
+  }
+}
