@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "WORLD03_07_COMPLETED_REST_BLOCKED",
+  "status": "WORLD03_08_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -6882,8 +6882,8 @@
             "NLE-PRPLAN-WORLD-03-07"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 891
         }
       ],
       "plan_file": "docs/pr-plans/WORLD-03.md"
