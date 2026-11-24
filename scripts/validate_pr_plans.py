@@ -248,9 +248,10 @@ SIM01_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-01-06.json"
 SIM01_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-01-07.json"
 SIM01_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-01-08.json"
 SIM01_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-01-09.json"
+SIM02_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-02-01.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = SIM01_09_ACTIVATION_FILE
+ACTIVATION_FILE = SIM02_01_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -705,6 +706,23 @@ SIM01_08_COMPLETED_STATUS = "SIM01_08_COMPLETED_REST_BLOCKED"
 SIM01_09_READY_STATUS = "SIM01_09_READY_L1_CAPABILITY_OVERLAY"
 SIM01_09_COMPLETED_STATUS = "SIM01_09_COMPLETED_REST_BLOCKED"
 SIM01_10_COMPLETED_STATUS = "SIM01_10_COMPLETED_REST_BLOCKED"
+SIM02_01_APPROVED_STATUS = "SIM02_01_APPROVED_GOVERNANCE_ONLY"
+SIM02_02_APPROVED_STATUS = "SIM02_02_APPROVED_CONTRACT_ONLY"
+SIM02_03_READY_STATUS = "SIM02_03_READY_L1_CAPABILITY_OVERLAY"
+SIM02_03_COMPLETED_STATUS = "SIM02_03_COMPLETED_REST_BLOCKED"
+SIM02_04_READY_STATUS = "SIM02_04_READY_L1_CAPABILITY_OVERLAY"
+SIM02_04_COMPLETED_STATUS = "SIM02_04_COMPLETED_REST_BLOCKED"
+SIM02_05_READY_STATUS = "SIM02_05_READY_L1_CAPABILITY_OVERLAY"
+SIM02_05_COMPLETED_STATUS = "SIM02_05_COMPLETED_REST_BLOCKED"
+SIM02_06_READY_STATUS = "SIM02_06_READY_L1_CAPABILITY_OVERLAY"
+SIM02_06_COMPLETED_STATUS = "SIM02_06_COMPLETED_REST_BLOCKED"
+SIM02_07_READY_STATUS = "SIM02_07_READY_L1_CAPABILITY_OVERLAY"
+SIM02_07_COMPLETED_STATUS = "SIM02_07_COMPLETED_REST_BLOCKED"
+SIM02_08_READY_STATUS = "SIM02_08_READY_L1_CAPABILITY_OVERLAY"
+SIM02_08_COMPLETED_STATUS = "SIM02_08_COMPLETED_REST_BLOCKED"
+SIM02_09_READY_STATUS = "SIM02_09_READY_L1_CAPABILITY_OVERLAY"
+SIM02_09_COMPLETED_STATUS = "SIM02_09_COMPLETED_REST_BLOCKED"
+SIM02_10_COMPLETED_STATUS = "SIM02_10_COMPLETED_REST_BLOCKED"
 DATA05_08_COMPLETED_STATUS = "DATA05_08_COMPLETED_REST_BLOCKED"
 DATA05_09_COMPLETED_STATUS = "DATA05_09_COMPLETED_REST_BLOCKED"
 DATA04_07_COMPLETED_STATUS = "DATA04_07_COMPLETED_REST_BLOCKED"
@@ -1170,6 +1188,23 @@ ACTIVE_STATUSES = {
     SIM01_09_READY_STATUS,
     SIM01_09_COMPLETED_STATUS,
     SIM01_10_COMPLETED_STATUS,
+    SIM02_01_APPROVED_STATUS,
+    SIM02_02_APPROVED_STATUS,
+    SIM02_03_READY_STATUS,
+    SIM02_03_COMPLETED_STATUS,
+    SIM02_04_READY_STATUS,
+    SIM02_04_COMPLETED_STATUS,
+    SIM02_05_READY_STATUS,
+    SIM02_05_COMPLETED_STATUS,
+    SIM02_06_READY_STATUS,
+    SIM02_06_COMPLETED_STATUS,
+    SIM02_07_READY_STATUS,
+    SIM02_07_COMPLETED_STATUS,
+    SIM02_08_READY_STATUS,
+    SIM02_08_COMPLETED_STATUS,
+    SIM02_09_READY_STATUS,
+    SIM02_09_COMPLETED_STATUS,
+    SIM02_10_COMPLETED_STATUS,
     DATA05_08_COMPLETED_STATUS,
     DATA05_09_COMPLETED_STATUS,
     DATA04_07_COMPLETED_STATUS,
@@ -1670,6 +1705,27 @@ WORLD02_CAPABILITY_ADMISSION = {
         "asset_database", "journal", "undo_redo", "transform_solver",
         "spatial_index", "physics", "network", "editor", "gpu", "audio",
         "export", "performance", "public_abi", "release",
+    ],
+}
+
+SIM02_CAPABILITY_ADMISSION = {
+    **WORLD02_CAPABILITY_ADMISSION,
+    "formal_dependency": "WORLD-02+CORE-03",
+    "required_capabilities": [
+        *WORLD02_CAPABILITY_ADMISSION["required_capabilities"],
+        {"id": "WORLD02_SCENE_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-WORLD-02-08"},
+        {"id": "WORLD02_SEQUENCE_CLOSEOUT", "satisfied_by": "NLE-PRPLAN-WORLD-02-09"},
+        {"id": "CORE03_SCHEDULER", "satisfied_by": "NLE-PRPLAN-CORE-03-03"},
+        {"id": "CORE03_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-CORE-03-09"},
+        {"id": "CORE03_SEQUENCE_CLOSEOUT", "satisfied_by": "NLE-PRPLAN-CORE-03-10"},
+    ],
+    "not_required": [
+        "physics_solver", "physics_backend", "jolt", "physx", "bullet",
+        "rapier", "simulation", "fixed_tick", "broadphase_execution",
+        "narrowphase", "query_execution", "contact_events",
+        "constraint_solver", "ecs_mutation", "mesh_import",
+        "heightfield_import", "streaming_io", "gpu", "network", "editor",
+        "audio", "export", "performance", "public_abi", "release",
     ],
 }
 
@@ -2273,6 +2329,31 @@ SIM01_STATE = {
     SIM01_09_COMPLETED_STATUS: (2, 9, 0),
     SIM01_10_COMPLETED_STATUS: (2, 10, 0),
 }
+
+SIM02_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+SIM02_01_GATE_PR = 0
+SIM02_02_GATE_PR = 0
+SIM02_STATE = {
+    SIM02_01_APPROVED_STATUS: (1, 0, 0),
+    SIM02_02_APPROVED_STATUS: (2, 0, 0),
+    SIM02_03_READY_STATUS: (2, 0, 3),
+    SIM02_03_COMPLETED_STATUS: (2, 3, 0),
+    SIM02_04_READY_STATUS: (2, 3, 4),
+    SIM02_04_COMPLETED_STATUS: (2, 4, 0),
+    SIM02_05_READY_STATUS: (2, 4, 5),
+    SIM02_05_COMPLETED_STATUS: (2, 5, 0),
+    SIM02_06_READY_STATUS: (2, 5, 6),
+    SIM02_06_COMPLETED_STATUS: (2, 6, 0),
+    SIM02_07_READY_STATUS: (2, 6, 7),
+    SIM02_07_COMPLETED_STATUS: (2, 7, 0),
+    SIM02_08_READY_STATUS: (2, 7, 8),
+    SIM02_08_COMPLETED_STATUS: (2, 8, 0),
+    SIM02_09_READY_STATUS: (2, 8, 9),
+    SIM02_09_COMPLETED_STATUS: (2, 9, 0),
+    SIM02_10_COMPLETED_STATUS: (2, 10, 0),
+}
+
+SIM02_SLICE_METADATA = {}
 
 SIM01_SLICE_METADATA = {
     3: ("docs/adr/0132-sim-01-internal-physics-2d-metadata.md",
@@ -5656,6 +5737,40 @@ SIM01_09_PINNED_SOURCE_BLOBS = {
 
 SIM01_09_ACTIVATION_SOURCES = {
     **SIM01_08_ACTIVATION_SOURCES,
+}
+
+SIM02_01_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "8149269de130a8250a2e0b3ac9f15caeb12e18c5",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0032": "70c24ba2fccc7c4340034b869408e082ef89988c",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0133": "871ec5c8c958eaad6b4194823aa12cd2dd8b9379",
+    "sim02_architecture": "29d72da818a462b0b5815a105661ad15b5d54bd0",
+    "sim02_internal_architecture": "4a5177fdbc24a3d5a0709075cc12ace3edb20a2d",
+    "sim02_api": "02b5218c2705030292371ce9895a5f48dbed2323",
+    "sim02_governance_contract": "fd1ce4c3fe1ad9410d6d18f909d29cd14131bb29",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "sim02_plan": "420e3f7897779e8e26fd0e8ece92c48dfee6b4f4",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+SIM02_01_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0032": "docs/adr/0032-sim-02-engine-owned-3d-physics-and-collider-publication.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0133": "docs/adr/0133-sim-02-internal-physics-3d-metadata.md",
+    "sim02_architecture": "docs/architecture/sim-02-physics-3d.md",
+    "sim02_internal_architecture": "docs/architecture/sim-02-internal-physics-3d-metadata.md",
+    "sim02_api": "docs/contracts/sim-02-physics-3d-api.md",
+    "sim02_governance_contract": "docs/contracts/sim-02-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "sim02_plan": "docs/pr-plans/SIM-02.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
 
@@ -10349,6 +10464,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "work_order", "activation_evidence", "capability_admission",
             "source_blob_sha1", "gate_pr",
         }
+    if selected == "NLE-PRPLAN-SIM-02-01":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-SIM-02-01",
+            "module_id": "SIM-02",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/sim02-01-continuation",
+            "approved_adr": "docs/adr/0133-sim-02-internal-physics-3d-metadata.md",
+            "approved_contract": "docs/contracts/sim-02-governance-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-SIM-02-01.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-SIM-02-01-G6-ACTIVATION.md",
+            "gate_base_sha": "1c7a68805d0f0fbec606871d15d5ee91052235af",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, SIM02_01_ACTIVATION_SOURCES, SIM02_01_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
     if selected == "NLE-PRPLAN-SIM-01-01":
         expected = {
             "schema_version": 2,
@@ -13113,7 +13250,9 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
             errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
     if "capability_admission" in extra_keys:
         selected_id = str(activation.get("selected_packet_id", ""))
-        if selected_id.startswith("NLE-PRPLAN-SIM-01-"):
+        if selected_id.startswith("NLE-PRPLAN-SIM-02-"):
+            expected_admission = SIM02_CAPABILITY_ADMISSION
+        elif selected_id.startswith("NLE-PRPLAN-SIM-01-"):
             expected_admission = SIM01_CAPABILITY_ADMISSION
         elif selected_id.startswith("NLE-PRPLAN-WORLD-05-"):
             expected_admission = WORLD05_CAPABILITY_ADMISSION
@@ -13349,12 +13488,18 @@ FINAL_MODULE_STATES = {
         ("COMPLETED", 918), ("COMPLETED", 920), ("COMPLETED", 922),
         ("COMPLETED", 924), ("COMPLETED", 925),
     ],
+    "SIM-01": [
+        ("APPROVED_GOVERNANCE", 926), ("APPROVED_CONTRACT", 927),
+        ("COMPLETED", 929), ("COMPLETED", 931), ("COMPLETED", 933),
+        ("COMPLETED", 935), ("COMPLETED", 937), ("COMPLETED", 939),
+        ("COMPLETED", 941), ("COMPLETED", 942),
+    ],
 }
 
 def expected_packet_state(
     module_id: str, idx: int, activation: dict | None, manifest_status: str | None
 ) -> tuple[str, int | None]:
-    if (manifest_status in DATA02_STATE or manifest_status in DATA03_STATE or manifest_status in DATA04_STATE or manifest_status in DATA05_STATE or manifest_status in GFX01_STATE or manifest_status in GFX02_STATE or manifest_status in GFX03_STATE or manifest_status in GFX04_STATE or manifest_status in GFX05_STATE or manifest_status in GFX06_STATE or manifest_status in GFX07_STATE or manifest_status in GFX08_STATE or manifest_status in TWO01_STATE or manifest_status in TWO02_STATE or manifest_status in TWO03_STATE or manifest_status in TWO04_STATE or manifest_status in WORLD01_STATE or manifest_status in WORLD02_STATE or manifest_status in WORLD03_STATE or manifest_status in WORLD04_STATE or manifest_status in WORLD05_STATE or manifest_status in SIM01_STATE) and module_id in FINAL_MODULE_STATES:
+    if (manifest_status in DATA02_STATE or manifest_status in DATA03_STATE or manifest_status in DATA04_STATE or manifest_status in DATA05_STATE or manifest_status in GFX01_STATE or manifest_status in GFX02_STATE or manifest_status in GFX03_STATE or manifest_status in GFX04_STATE or manifest_status in GFX05_STATE or manifest_status in GFX06_STATE or manifest_status in GFX07_STATE or manifest_status in GFX08_STATE or manifest_status in TWO01_STATE or manifest_status in TWO02_STATE or manifest_status in TWO03_STATE or manifest_status in TWO04_STATE or manifest_status in WORLD01_STATE or manifest_status in WORLD02_STATE or manifest_status in WORLD03_STATE or manifest_status in WORLD04_STATE or manifest_status in WORLD05_STATE or manifest_status in SIM01_STATE or manifest_status in SIM02_STATE) and module_id in FINAL_MODULE_STATES:
         states = FINAL_MODULE_STATES[module_id]
         if 1 <= idx <= len(states):
             return states[idx - 1]
@@ -13377,6 +13522,17 @@ def expected_packet_state(
             return "APPROVED_CONTRACT", GFX06_02_GATE_PR
         if 3 <= idx <= completed_through:
             return "COMPLETED", GFX06_CODE_PRS[idx]
+        if idx == ready_idx:
+            return "EXECUTOR_READY", None
+        return "PLANNED_BLOCKED", None
+    if module_id == "SIM-02" and manifest_status in SIM02_STATE:
+        approved_count, completed_through, ready_idx = SIM02_STATE[manifest_status]
+        if idx == 1 and approved_count >= 1:
+            return "APPROVED_GOVERNANCE", SIM02_01_GATE_PR
+        if idx == 2 and approved_count >= 2:
+            return "APPROVED_CONTRACT", SIM02_02_GATE_PR
+        if 3 <= idx <= completed_through:
+            return "COMPLETED", SIM02_CODE_PRS[idx]
         if idx == ready_idx:
             return "EXECUTOR_READY", None
         return "PLANNED_BLOCKED", None
@@ -15291,6 +15447,8 @@ def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
         return GFX05_SLICE_METADATA[idx]
     if module_id == "GFX-06" and idx in GFX06_SLICE_METADATA:
         return GFX06_SLICE_METADATA[idx]
+    if module_id == "SIM-02" and idx in SIM02_SLICE_METADATA:
+        return SIM02_SLICE_METADATA[idx]
     if module_id == "SIM-01" and idx in SIM01_SLICE_METADATA:
         return SIM01_SLICE_METADATA[idx]
     if module_id == "WORLD-05" and idx in WORLD05_SLICE_METADATA:
@@ -15447,7 +15605,7 @@ def validate_manifest(
                 if want_status not in ("EXECUTOR_READY", "COMPLETED"):
                     issues.append(f"{mid}: slice metadata on a non-completed packet")
                 expected_risk = ("LOW"
-                                 if mid in ("WORLD-03", "WORLD-04", "WORLD-05", "SIM-01") and idx >= 3
+                                 if mid in ("WORLD-03", "WORLD-04", "WORLD-05", "SIM-01", "SIM-02") and idx >= 3
                                  else "ELEVATED"
                                  if (mid in ("CORE-03", "CORE-04", "CORE-05", "CORE-06", "DATA-01", "DATA-02", "DATA-03", "DATA-04", "DATA-05", "GFX-01", "GFX-02", "GFX-03", "GFX-04", "GFX-05", "GFX-06", "GFX-07", "GFX-08", "TWO-01", "TWO-02", "TWO-03", "TWO-04", "WORLD-01", "WORLD-02") and idx >= 3)
                                  else "STANDARD")
@@ -16249,6 +16407,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     elif status in (SIM01_09_READY_STATUS, SIM01_09_COMPLETED_STATUS,
                     SIM01_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-sim-01-09.json"
+    elif status == SIM02_01_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-sim-02-01.json"
     elif status == WORLD05_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-05-01.json"
     elif status == WORLD05_02_APPROVED_STATUS:
