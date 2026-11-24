@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-02-08 — Integration metadata 3D evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RUNTIME BRIDGE`. **Base:** `f0f9eb4c`. **Gate:** [NLE-PRPLAN-SIM-02-08-G6-ACTIVATION](NLE-PRPLAN-SIM-02-08-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-08](../work-orders/NLE-PRPLAN-SIM-02-08.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RUNTIME BRIDGE`. **Base:** `f0f9eb4c`. **Gate:** [NLE-PRPLAN-SIM-02-08-G6-ACTIVATION](NLE-PRPLAN-SIM-02-08-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-08](../work-orders/NLE-PRPLAN-SIM-02-08.md). **PR:** #956.
 
 ## Scope delivered
 
