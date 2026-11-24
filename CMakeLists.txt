@@ -1815,6 +1815,13 @@ target_link_libraries(stormline_world05_generator_test PRIVATE stormline_world05
 stormline_core01_apply_options(stormline_world05_generator_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world05_generator_test)
 
+add_executable(stormline_world05_qualification_test
+    tests/core/world05_qualification_tests.cpp
+)
+target_link_libraries(stormline_world05_qualification_test PRIVATE stormline_world05_procedural)
+stormline_core01_apply_options(stormline_world05_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world05_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3489,6 +3496,23 @@ add_test(NAME world05_generator_01
     COMMAND stormline_world05_generator_test gen01
 )
 set_tests_properties(world05_generator_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME world05_qualification_501
+    COMMAND stormline_world05_qualification_test qlfw501
+)
+set_tests_properties(world05_qualification_501 PROPERTIES TIMEOUT 60)
+add_test(NAME world05_qualification_502
+    COMMAND stormline_world05_qualification_test qlfw502
+)
+set_tests_properties(world05_qualification_502 PROPERTIES TIMEOUT 60)
+add_test(NAME world05_qualification_503
+    COMMAND stormline_world05_qualification_test qlfw503
+)
+set_tests_properties(world05_qualification_503 PROPERTIES TIMEOUT 60)
+add_test(NAME world05_qualification_504
+    COMMAND stormline_world05_qualification_test qlfw504
+)
+set_tests_properties(world05_qualification_504 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
