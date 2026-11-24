@@ -1554,6 +1554,13 @@ target_link_libraries(stormline_two04_layer_test PRIVATE stormline_two04_hybrid)
 stormline_core01_apply_options(stormline_two04_layer_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two04_layer_test)
 
+add_executable(stormline_two04_sort_test
+    tests/core/two04_sort_tests.cpp
+)
+target_link_libraries(stormline_two04_sort_test PRIVATE stormline_two04_hybrid)
+stormline_core01_apply_options(stormline_two04_sort_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two04_sort_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3003,6 +3010,11 @@ add_test(NAME two04_layer_01
     COMMAND stormline_two04_layer_test lay01
 )
 set_tests_properties(two04_layer_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two04_sort_01
+    COMMAND stormline_two04_sort_test srt01
+)
+set_tests_properties(two04_sort_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
