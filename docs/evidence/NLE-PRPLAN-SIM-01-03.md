@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-01-03 — Rigid body metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO PHYSICS SOLVER`. **Base:** `3125557`. **Gate:** [NLE-PRPLAN-SIM-01-03-G6-ACTIVATION](NLE-PRPLAN-SIM-01-03-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-03](../work-orders/NLE-PRPLAN-SIM-01-03.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO PHYSICS SOLVER`. **Base:** `3125557`. **Gate:** [NLE-PRPLAN-SIM-01-03-G6-ACTIVATION](NLE-PRPLAN-SIM-01-03-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-03](../work-orders/NLE-PRPLAN-SIM-01-03.md). **PR:** #929.
 
 ## Scope delivered
 

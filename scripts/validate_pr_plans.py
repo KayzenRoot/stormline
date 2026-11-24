@@ -2245,7 +2245,7 @@ WORLD05_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-WORLD-05-09-G6-ACTIVATION.md"),
 }
 
-SIM01_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+SIM01_CODE_PRS = {3: 929, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
 SIM01_01_GATE_PR = 926
 SIM01_02_GATE_PR = 927
 SIM01_STATE = {
