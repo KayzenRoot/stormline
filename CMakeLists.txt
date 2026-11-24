@@ -1499,6 +1499,13 @@ target_link_libraries(stormline_two03_flipbook_test PRIVATE stormline_two03_anim
 stormline_core01_apply_options(stormline_two03_flipbook_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two03_flipbook_test)
 
+add_executable(stormline_two03_skeleton_test
+    tests/core/two03_skeleton_tests.cpp
+)
+target_link_libraries(stormline_two03_skeleton_test PRIVATE stormline_two03_animation)
+stormline_core01_apply_options(stormline_two03_skeleton_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two03_skeleton_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2901,6 +2908,11 @@ add_test(NAME two03_flipbook_01
     COMMAND stormline_two03_flipbook_test flb01
 )
 set_tests_properties(two03_flipbook_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two03_skeleton_01
+    COMMAND stormline_two03_skeleton_test bon01
+)
+set_tests_properties(two03_skeleton_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
