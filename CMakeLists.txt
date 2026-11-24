@@ -1486,6 +1486,19 @@ target_link_libraries(stormline_two02_tilemap_qualification_test PRIVATE stormli
 stormline_core01_apply_options(stormline_two02_tilemap_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two02_tilemap_qualification_test)
 
+add_library(stormline_two03_animation INTERFACE)
+target_include_directories(stormline_two03_animation INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_two03_animation INTERFACE cxx_std_20)
+
+add_executable(stormline_two03_flipbook_test
+    tests/core/two03_flipbook_tests.cpp
+)
+target_link_libraries(stormline_two03_flipbook_test PRIVATE stormline_two03_animation)
+stormline_core01_apply_options(stormline_two03_flipbook_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two03_flipbook_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2883,6 +2896,11 @@ add_test(NAME two02_tilemap_qualification_204
     COMMAND stormline_two02_tilemap_qualification_test qlft204
 )
 set_tests_properties(two02_tilemap_qualification_204 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two03_flipbook_01
+    COMMAND stormline_two03_flipbook_test flb01
+)
+set_tests_properties(two03_flipbook_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
