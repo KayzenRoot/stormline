@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-02-05 — Broadphase layer metadata 3D evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO BROADPHASE EXECUTION`. **Base:** `3e1d1d53`. **Gate:** [NLE-PRPLAN-SIM-02-05-G6-ACTIVATION](NLE-PRPLAN-SIM-02-05-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-05](../work-orders/NLE-PRPLAN-SIM-02-05.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO BROADPHASE EXECUTION`. **Base:** `3e1d1d53`. **Gate:** [NLE-PRPLAN-SIM-02-05-G6-ACTIVATION](NLE-PRPLAN-SIM-02-05-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-05](../work-orders/NLE-PRPLAN-SIM-02-05.md). **PR:** #950.
 
 ## Scope delivered
 

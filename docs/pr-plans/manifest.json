@@ -7515,7 +7515,7 @@
             "CORE-03"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 950,
           "risk": "LOW",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0133-sim-02-internal-physics-3d-metadata.md",
