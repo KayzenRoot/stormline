@@ -228,9 +228,10 @@ WORLD04_04_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-04.js
 WORLD04_05_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-05.json"
 WORLD04_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-06.json"
 WORLD04_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-07.json"
+WORLD04_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-08.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = WORLD04_07_ACTIVATION_FILE
+ACTIVATION_FILE = WORLD04_08_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -2079,6 +2080,8 @@ WORLD04_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-WORLD-04-06-G6-ACTIVATION.md"),
     7: ("docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
         "docs/evidence/NLE-PRPLAN-WORLD-04-07-G6-ACTIVATION.md"),
+    8: ("docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
+        "docs/evidence/NLE-PRPLAN-WORLD-04-08-G6-ACTIVATION.md"),
 }
 
 GFX04_01_GATE_PR = 704
@@ -5213,6 +5216,15 @@ WORLD04_07_PINNED_SOURCE_BLOBS = {
 
 WORLD04_07_ACTIVATION_SOURCES = {
     **WORLD04_06_ACTIVATION_SOURCES,
+}
+
+WORLD04_08_PINNED_SOURCE_BLOBS = {
+    **WORLD04_07_PINNED_SOURCE_BLOBS,
+    "checkpoint": "e443613857b533d1fcfb0abcac942196e5ca8951",
+}
+
+WORLD04_08_ACTIVATION_SOURCES = {
+    **WORLD04_07_ACTIVATION_SOURCES,
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -9372,6 +9384,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, WORLD03_07_ACTIVATION_SOURCES, WORLD03_07_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-WORLD-04-08":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-WORLD-04-08",
+            "module_id": "WORLD-04",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world04-08-continuation",
+            "approved_adr": "docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
+            "approved_contract": "docs/contracts/world-04-terrain-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-04-08.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-04-08-G6-ACTIVATION.md",
+            "gate_base_sha": "761f8378a32b9f8564f5ef91550719b5d4d72087",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, WORLD04_08_ACTIVATION_SOURCES, WORLD04_08_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -15318,6 +15352,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-world-04-06.json"
     elif status in (WORLD04_07_READY_STATUS, WORLD04_07_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-world-04-07.json"
+    elif status in (WORLD04_08_READY_STATUS, WORLD04_08_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-world-04-08.json"
     elif status == WORLD03_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-03-01.json"
     elif status == WORLD03_02_APPROVED_STATUS:
