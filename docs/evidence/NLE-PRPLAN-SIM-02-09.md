@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-02-09 — Integrated 3D physics metadata qualification evidence
 
-**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO PHYSICS RUNTIME`. **Base:** `decfde6d`. **Gate:** [NLE-PRPLAN-SIM-02-09-G6-ACTIVATION](NLE-PRPLAN-SIM-02-09-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-09](../work-orders/NLE-PRPLAN-SIM-02-09.md). **PR:** pendente.
+**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO PHYSICS RUNTIME`. **Base:** `decfde6d`. **Gate:** [NLE-PRPLAN-SIM-02-09-G6-ACTIVATION](NLE-PRPLAN-SIM-02-09-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-09](../work-orders/NLE-PRPLAN-SIM-02-09.md). **PR:** #958.
 
 ## Scope delivered
 
