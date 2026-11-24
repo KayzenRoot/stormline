@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-05-07 — Geometry recipe metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO MESH GENERATION`. **Base:** `6eb82b2`. **Gate:** [NLE-PRPLAN-WORLD-05-07-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-07-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-07](../work-orders/NLE-PRPLAN-WORLD-05-07.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO MESH GENERATION`. **Base:** `6eb82b2`. **Gate:** [NLE-PRPLAN-WORLD-05-07-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-07-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-07](../work-orders/NLE-PRPLAN-WORLD-05-07.md). **PR:** #920.
 
 ## Scope delivered
 
