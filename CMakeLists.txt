@@ -1657,6 +1657,13 @@ target_link_libraries(stormline_world02_instance_test PRIVATE stormline_world02_
 stormline_core01_apply_options(stormline_world02_instance_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world02_instance_test)
 
+add_executable(stormline_world02_transform_test
+    tests/core/world02_transform_tests.cpp
+)
+target_link_libraries(stormline_world02_transform_test PRIVATE stormline_world02_scene)
+stormline_core01_apply_options(stormline_world02_transform_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world02_transform_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3195,6 +3202,11 @@ add_test(NAME world02_instance_01
     COMMAND stormline_world02_instance_test ins01
 )
 set_tests_properties(world02_instance_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME world02_transform_01
+    COMMAND stormline_world02_transform_test trs01
+)
+set_tests_properties(world02_transform_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
