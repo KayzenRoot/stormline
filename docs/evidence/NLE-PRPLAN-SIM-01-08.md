@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-01-08 — Collision mask metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CONTACT GENERATION`. **Base:** `4c16311`. **Gate:** [NLE-PRPLAN-SIM-01-08-G6-ACTIVATION](NLE-PRPLAN-SIM-01-08-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-08](../work-orders/NLE-PRPLAN-SIM-01-08.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CONTACT GENERATION`. **Base:** `4c16311`. **Gate:** [NLE-PRPLAN-SIM-01-08-G6-ACTIVATION](NLE-PRPLAN-SIM-01-08-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-08](../work-orders/NLE-PRPLAN-SIM-01-08.md). **PR:** #939.
 
 ## Scope delivered
 
