@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-08 — Weather visual intent metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CLIMATE SIMULATION OR WEATHER AUTHORITY`. **Base:** `194e41c`. **Gate:** [NLE-PRPLAN-WORLD-04-08-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-08-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-08](../work-orders/NLE-PRPLAN-WORLD-04-08.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CLIMATE SIMULATION OR WEATHER AUTHORITY`. **Base:** `194e41c`. **Gate:** [NLE-PRPLAN-WORLD-04-08-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-08-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-08](../work-orders/NLE-PRPLAN-WORLD-04-08.md). **PR:** #905.
 
 ## Scope delivered
 
