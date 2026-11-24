@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-03-04 — Interest query metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO SPATIAL INDEX OR QUERY RESULT`. **Base:** `8be1767`. **Gate:** [NLE-PRPLAN-WORLD-03-04-G6-ACTIVATION](NLE-PRPLAN-WORLD-03-04-G6-ACTIVATION.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-03-04](../work-orders/NLE-PRPLAN-WORLD-03-04.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO SPATIAL INDEX OR QUERY RESULT`. **Base:** `8be1767`. **Gate:** [NLE-PRPLAN-WORLD-03-04-G6-ACTIVATION](NLE-PRPLAN-WORLD-03-04-G6-ACTIVATION.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-03-04](../work-orders/NLE-PRPLAN-WORLD-03-04.md). **PR:** #884.
 
 ## Scope delivered
 
