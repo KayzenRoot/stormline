@@ -258,7 +258,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.sim02_01_activation = json.loads(v.SIM02_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.sim02_02_activation = json.loads(v.SIM02_02_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.sim02_03_activation = json.loads(v.SIM02_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.SIM02_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.sim02_04_activation = json.loads(v.SIM02_04_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.SIM02_04_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -317,7 +318,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
+        self.assertEqual(["NLE-PRPLAN-SIM-02-04"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -3601,6 +3602,25 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_sim02_04_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-SIM-02-04",
+                         self.sim02_04_activation["selected_packet_id"])
+        self.assertEqual("SIM-02", self.sim02_04_activation["module_id"])
+        self.assertEqual("LOW", self.sim02_04_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.sim02_04_activation["release_class"])
+        self.assertEqual("docs/contracts/sim-02-physics3d-internal-v0.md",
+                         self.sim02_04_activation["approved_contract"])
+        self.assertEqual(v.SIM02_CAPABILITY_ADMISSION,
+                         self.sim02_04_activation["capability_admission"])
+        bad = copy.deepcopy(self.sim02_04_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_sim02_04_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.sim02_04_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_sim02_03_activation_is_exact(self):
         self.assertEqual("NLE-PRPLAN-SIM-02-03",
                          self.sim02_03_activation["selected_packet_id"])
@@ -6378,6 +6398,13 @@ class PrPlanValidationTests(unittest.TestCase):
                                  capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_sim02_04_selector_is_ready(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-SIM-02-04", "--json"],
+                               capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
+        self.assertTrue(json.loads(ready.stdout)["executor_ready"])
 
     def test_sim02_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
