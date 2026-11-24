@@ -1681,7 +1681,7 @@ TWO03_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-TWO-03-08-G6-ACTIVATION.md"),
 }
 
-TWO04_CODE_PRS = {3: 839, 4: 841, 5: 0, 6: 0, 7: 0, 8: 0}
+TWO04_CODE_PRS = {3: 839, 4: 841, 5: 843, 6: 0, 7: 0, 8: 0}
 TWO04_01_GATE_PR = 836
 TWO04_02_GATE_PR = 837
 TWO04_STATE = {
@@ -13756,7 +13756,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-two-04-03.json"
     elif status in (TWO04_04_READY_STATUS, TWO04_04_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-two-04-04.json"
-    elif status == TWO04_05_READY_STATUS:
+    elif status in (TWO04_05_READY_STATUS, TWO04_05_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-two-04-05.json"
     elif status == TWO03_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-two-03-01.json"
