@@ -2149,7 +2149,7 @@ WORLD04_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-WORLD-04-09-G6-ACTIVATION.md"),
 }
 
-WORLD05_CODE_PRS = {3: 912, 4: 914, 5: 916, 6: 918, 7: 920, 8: 922, 9: 924, 10: 0}
+WORLD05_CODE_PRS = {3: 912, 4: 914, 5: 916, 6: 918, 7: 920, 8: 922, 9: 924, 10: 925}
 WORLD05_01_GATE_PR = 909
 WORLD05_02_GATE_PR = 910
 WORLD05_STATE = {
@@ -15818,7 +15818,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-world-05-07.json"
     elif status in (WORLD05_08_READY_STATUS, WORLD05_08_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-world-05-08.json"
-    elif status in (WORLD05_09_READY_STATUS, WORLD05_09_COMPLETED_STATUS):
+    elif status in (WORLD05_09_READY_STATUS, WORLD05_09_COMPLETED_STATUS,
+                    WORLD05_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-world-05-09.json"
     elif status == WORLD04_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-04-01.json"
