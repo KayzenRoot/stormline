@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-03-08 — WORLD-03 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO SPATIAL INDEX, CELL STORAGE, ASYNC STREAMING, I/O, DECODE, CACHE, ORIGIN REBASE, PHYSICS, NETWORKING, RENDERER, EDITOR, GPU, HARDWARE, PERFORMANCE, ABI OR RELEASE`. **Base:** `c295ae0`. **Packet:** `NLE-PRPLAN-WORLD-03-08`. **Closeout PR:** pendente. **ADR:** [ADR-0129](../adr/0129-world-03-internal-spatial-streaming-metadata.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **Planning policy remains:** [ADR-0028](../adr/0028-world-03-budgeted-spatial-streaming-policy.md) `PROPOSED`.
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO SPATIAL INDEX, CELL STORAGE, ASYNC STREAMING, I/O, DECODE, CACHE, ORIGIN REBASE, PHYSICS, NETWORKING, RENDERER, EDITOR, GPU, HARDWARE, PERFORMANCE, ABI OR RELEASE`. **Base:** `c295ae0`. **Packet:** `NLE-PRPLAN-WORLD-03-08`. **Closeout PR:** #891. **ADR:** [ADR-0129](../adr/0129-world-03-internal-spatial-streaming-metadata.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **Planning policy remains:** [ADR-0028](../adr/0028-world-03-budgeted-spatial-streaming-policy.md) `PROPOSED`.
 
 ## Result
 
