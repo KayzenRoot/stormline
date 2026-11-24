@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "WORLD01_02_APPROVED_CONTRACT_ONLY",
+  "status": "WORLD01_03_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -6464,8 +6464,12 @@
             "CORE-05",
             "DATA-04"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0127-world-01-internal-entity-metadata.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-01-03-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-WORLD-01-04",
