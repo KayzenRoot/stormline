@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "WORLD05_06_COMPLETED_REST_BLOCKED",
+  "status": "WORLD05_07_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -7192,8 +7192,12 @@
             "WORLD-04",
             "DATA-03"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "LOW",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0131-world-05-internal-procedural-generation-metadata.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-05-07-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-WORLD-05-08",
