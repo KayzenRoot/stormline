@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "SIM02_03_COMPLETED_REST_BLOCKED",
+  "status": "SIM02_04_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -7495,8 +7495,12 @@
             "WORLD-02",
             "CORE-03"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "LOW",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0133-sim-02-internal-physics-3d-metadata.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-SIM-02-04-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-SIM-02-05",
