@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-02-04 — Collision shape metadata 3D evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO NARROWPHASE`. **Base:** `7865a643`. **Gate:** [NLE-PRPLAN-SIM-02-04-G6-ACTIVATION](NLE-PRPLAN-SIM-02-04-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-04](../work-orders/NLE-PRPLAN-SIM-02-04.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO NARROWPHASE`. **Base:** `7865a643`. **Gate:** [NLE-PRPLAN-SIM-02-04-G6-ACTIVATION](NLE-PRPLAN-SIM-02-04-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-04](../work-orders/NLE-PRPLAN-SIM-02-04.md). **PR:** #948.
 
 ## Scope delivered
 
