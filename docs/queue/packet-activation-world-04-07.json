@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-WORLD-04-07",
+  "module_id": "WORLD-04",
+  "risk": "LOW",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world04-07-continuation",
+  "approved_adr": "docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
+  "approved_contract": "docs/contracts/world-04-terrain-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-04-07.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-04-07-G6-ACTIVATION.md",
+  "gate_base_sha": "214fe4c10a823c7a51d6cadec540705bb633c39c",
+  "gate_pr": 902,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "WORLD-03+GFX-04",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE05_TYPED_SCALARS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-04"
+      },
+      {
+        "id": "CORE05_MATRICES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-05"
+      },
+      {
+        "id": "CORE05_COORDINATES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-06"
+      },
+      {
+        "id": "CORE05_UNITS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "CORE05_IDS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-09"
+      },
+      {
+        "id": "CORE05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-10"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      },
+      {
+        "id": "DATA04_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-03"
+      },
+      {
+        "id": "DATA04_DOCUMENT",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-04"
+      },
+      {
+        "id": "DATA04_PATCH",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-05"
+      },
+      {
+        "id": "DATA04_DIFF",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-06"
+      },
+      {
+        "id": "DATA04_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-07"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_DEPENDENCIES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-04"
+      },
+      {
+        "id": "DATA02_TAGS",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-05"
+      },
+      {
+        "id": "DATA02_QUERIES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-06"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_REFERENCES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-08"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      },
+      {
+        "id": "DATA05_STREAMING",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-05"
+      },
+      {
+        "id": "DATA05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-08"
+      },
+      {
+        "id": "WORLD03_SPATIAL_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-WORLD-03-07"
+      },
+      {
+        "id": "WORLD03_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-WORLD-03-08"
+      },
+      {
+        "id": "GFX04_GEOMETRY_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-04-09"
+      },
+      {
+        "id": "GFX04_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-GFX-04-10"
+      }
+    ],
+    "not_required": [
+      "terrain_runtime",
+      "heightfield_storage",
+      "mesh_generation",
+      "terrain_renderer",
+      "gpu_lod",
+      "texture_residency",
+      "vegetation_instancing",
+      "water_simulation",
+      "water_rendering",
+      "atmosphere_renderer",
+      "weather_simulation",
+      "physics",
+      "network",
+      "streaming_io",
+      "editor",
+      "gpu",
+      "audio",
+      "export",
+      "performance",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "110ac28f37bc6a8c9165a723fbe005ae353cbd49",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0029": "39f760591408f390fb788fb3a7a1e68ce43f2e4e",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0130": "32d1f74a8c484f788d526db13c3a15de1d0b0056",
+    "world04_architecture": "3eb567c83b1aad6a6a3033ab84ac350235591fb5",
+    "world04_internal_architecture": "3afb2183260523342ac0e834461e554dd9d6be01",
+    "world04_api": "495cc750036e8eb38c99ae3ccadd69fb436d09cb",
+    "world04_governance_contract": "d0d0751f2f5524b385ff641ce4f0bad47f3f0690",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "world04_plan": "45f1cf0902c9b7af112e3951796d4ba34392c5ce",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "world04_internal_contract": "f32251158a520d4e73151cb578ebf5f5b1bb08a3"
+  }
+}
