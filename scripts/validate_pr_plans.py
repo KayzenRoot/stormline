@@ -224,9 +224,10 @@ WORLD03_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-03-07.js
 WORLD04_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-01.json"
 WORLD04_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-02.json"
 WORLD04_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-03.json"
+WORLD04_04_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-04.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = WORLD04_03_ACTIVATION_FILE
+ACTIVATION_FILE = WORLD04_04_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -2067,6 +2068,8 @@ WORLD04_STATE = {
 WORLD04_SLICE_METADATA = {
     3: ("docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
         "docs/evidence/NLE-PRPLAN-WORLD-04-03-G6-ACTIVATION.md"),
+    4: ("docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
+        "docs/evidence/NLE-PRPLAN-WORLD-04-04-G6-ACTIVATION.md"),
 }
 
 GFX04_01_GATE_PR = 704
@@ -5165,6 +5168,15 @@ WORLD04_03_PINNED_SOURCE_BLOBS = {
 
 WORLD04_03_ACTIVATION_SOURCES = {
     **WORLD04_02_ACTIVATION_SOURCES,
+}
+
+WORLD04_04_PINNED_SOURCE_BLOBS = {
+    **WORLD04_03_PINNED_SOURCE_BLOBS,
+    "checkpoint": "71d89e9f927eed4555ccec5dd078e5590044a3b2",
+}
+
+WORLD04_04_ACTIVATION_SOURCES = {
+    **WORLD04_03_ACTIVATION_SOURCES,
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -9324,6 +9336,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, WORLD03_07_ACTIVATION_SOURCES, WORLD03_07_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-WORLD-04-04":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-WORLD-04-04",
+            "module_id": "WORLD-04",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world04-04-continuation",
+            "approved_adr": "docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
+            "approved_contract": "docs/contracts/world-04-terrain-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-04-04.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-04-04-G6-ACTIVATION.md",
+            "gate_base_sha": "9a4f2371873d600c9190d46e9702b5f606db3269",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, WORLD04_04_ACTIVATION_SOURCES, WORLD04_04_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -15174,6 +15208,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-world-04-02.json"
     elif status in (WORLD04_03_READY_STATUS, WORLD04_03_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-world-04-03.json"
+    elif status in (WORLD04_04_READY_STATUS, WORLD04_04_COMPLETED_STATUS):
+        activation_path = root / "docs/queue/packet-activation-world-04-04.json"
     elif status == WORLD03_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-03-01.json"
     elif status == WORLD03_02_APPROVED_STATUS:
