@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-02-07 — Constraint metadata 3D evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CONSTRAINT SOLVER`. **Base:** `823defb9`. **Gate:** [NLE-PRPLAN-SIM-02-07-G6-ACTIVATION](NLE-PRPLAN-SIM-02-07-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-07](../work-orders/NLE-PRPLAN-SIM-02-07.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CONSTRAINT SOLVER`. **Base:** `823defb9`. **Gate:** [NLE-PRPLAN-SIM-02-07-G6-ACTIVATION](NLE-PRPLAN-SIM-02-07-G6-ACTIVATION.md). **Contract:** [sim-02-physics3d-internal-v0](../contracts/sim-02-physics3d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-02-07](../work-orders/NLE-PRPLAN-SIM-02-07.md). **PR:** #954.
 
 ## Scope delivered
 
