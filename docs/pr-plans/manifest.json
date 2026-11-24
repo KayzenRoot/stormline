@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "WORLD02_03_COMPLETED_REST_BLOCKED",
+  "status": "WORLD02_04_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -6646,8 +6646,12 @@
             "WORLD-01",
             "DATA-02"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0128-world-02-internal-scene-prefab-metadata.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-02-04-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-WORLD-02-05",
