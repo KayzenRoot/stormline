@@ -6791,7 +6791,7 @@
             "DATA-05"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 882,
           "risk": "LOW",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0129-world-03-internal-spatial-streaming-metadata.md",
