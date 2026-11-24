@@ -1,0 +1,192 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-WORLD-05-01",
+  "module_id": "WORLD-05",
+  "risk": "LOW",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world05-01-continuation",
+  "approved_adr": "docs/adr/0131-world-05-internal-procedural-generation-metadata.md",
+  "approved_contract": "docs/contracts/world-05-governance-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-05-01.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-05-01-G6-ACTIVATION.md",
+  "gate_base_sha": "479123be8a2febbe6bf6fb367cc64de3bed982bb",
+  "gate_pr": 0,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "WORLD-04+DATA-03",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE05_TYPED_SCALARS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-04"
+      },
+      {
+        "id": "CORE05_MATRICES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-05"
+      },
+      {
+        "id": "CORE05_COORDINATES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-06"
+      },
+      {
+        "id": "CORE05_UNITS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "CORE05_IDS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-09"
+      },
+      {
+        "id": "CORE05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-10"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      },
+      {
+        "id": "DATA04_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-03"
+      },
+      {
+        "id": "DATA04_DOCUMENT",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-04"
+      },
+      {
+        "id": "DATA04_PATCH",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-05"
+      },
+      {
+        "id": "DATA04_DIFF",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-06"
+      },
+      {
+        "id": "DATA04_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-07"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_DEPENDENCIES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-04"
+      },
+      {
+        "id": "DATA02_TAGS",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-05"
+      },
+      {
+        "id": "DATA02_QUERIES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-06"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_REFERENCES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-08"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      },
+      {
+        "id": "DATA05_STREAMING",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-05"
+      },
+      {
+        "id": "DATA05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-08"
+      },
+      {
+        "id": "WORLD03_SPATIAL_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-WORLD-03-07"
+      },
+      {
+        "id": "WORLD03_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-WORLD-03-08"
+      },
+      {
+        "id": "GFX04_GEOMETRY_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-04-09"
+      },
+      {
+        "id": "GFX04_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-GFX-04-10"
+      },
+      {
+        "id": "WORLD04_TERRAIN_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-WORLD-04-09"
+      },
+      {
+        "id": "WORLD04_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-WORLD-04-10"
+      },
+      {
+        "id": "DATA03_IMPORT_PIPELINE",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-03"
+      },
+      {
+        "id": "DATA03_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-09"
+      },
+      {
+        "id": "DATA03_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-10"
+      }
+    ],
+    "not_required": [
+      "graph_evaluation",
+      "rng_execution",
+      "noise_library",
+      "wfc_solver",
+      "asset_import",
+      "cook_cache",
+      "source_writes",
+      "mesh_generation",
+      "gpu_preview",
+      "streaming_io",
+      "physics",
+      "network",
+      "editor",
+      "gpu",
+      "audio",
+      "export",
+      "performance",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "9695480a940c517387a96777c31d56ff4b30d90d",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0030": "0b4a66f658d5ccf552c9b13e521087f0a4085c38",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0131": "1cd50bac3c85c73572d39d8d643ec5a69e0f6a7f",
+    "world05_architecture": "f04b3e502f6a1780b519c65f1fe1fd8822366c4a",
+    "world05_internal_architecture": "af887b6e886dd482db81dc83bc363b4548eb3e62",
+    "world05_api": "7bd4183999964205ef3e72ef75a2d031b3f0bea8",
+    "world05_governance_contract": "22601f772329b98253940b3aec1fed7dfde639c7",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "world05_plan": "8ede1039032ffa599a05e18780fdfd8238285840",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024"
+  }
+}

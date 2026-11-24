@@ -230,9 +230,10 @@ WORLD04_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-06.js
 WORLD04_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-07.json"
 WORLD04_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-08.json"
 WORLD04_09_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-04-09.json"
+WORLD05_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-05-01.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = WORLD04_09_ACTIVATION_FILE
+ACTIVATION_FILE = WORLD05_01_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -653,6 +654,23 @@ WORLD04_08_COMPLETED_STATUS = "WORLD04_08_COMPLETED_REST_BLOCKED"
 WORLD04_09_READY_STATUS = "WORLD04_09_READY_L1_CAPABILITY_OVERLAY"
 WORLD04_09_COMPLETED_STATUS = "WORLD04_09_COMPLETED_REST_BLOCKED"
 WORLD04_10_COMPLETED_STATUS = "WORLD04_10_COMPLETED_REST_BLOCKED"
+WORLD05_01_APPROVED_STATUS = "WORLD05_01_APPROVED_GOVERNANCE_ONLY"
+WORLD05_02_APPROVED_STATUS = "WORLD05_02_APPROVED_CONTRACT_ONLY"
+WORLD05_03_READY_STATUS = "WORLD05_03_READY_L1_CAPABILITY_OVERLAY"
+WORLD05_03_COMPLETED_STATUS = "WORLD05_03_COMPLETED_REST_BLOCKED"
+WORLD05_04_READY_STATUS = "WORLD05_04_READY_L1_CAPABILITY_OVERLAY"
+WORLD05_04_COMPLETED_STATUS = "WORLD05_04_COMPLETED_REST_BLOCKED"
+WORLD05_05_READY_STATUS = "WORLD05_05_READY_L1_CAPABILITY_OVERLAY"
+WORLD05_05_COMPLETED_STATUS = "WORLD05_05_COMPLETED_REST_BLOCKED"
+WORLD05_06_READY_STATUS = "WORLD05_06_READY_L1_CAPABILITY_OVERLAY"
+WORLD05_06_COMPLETED_STATUS = "WORLD05_06_COMPLETED_REST_BLOCKED"
+WORLD05_07_READY_STATUS = "WORLD05_07_READY_L1_CAPABILITY_OVERLAY"
+WORLD05_07_COMPLETED_STATUS = "WORLD05_07_COMPLETED_REST_BLOCKED"
+WORLD05_08_READY_STATUS = "WORLD05_08_READY_L1_CAPABILITY_OVERLAY"
+WORLD05_08_COMPLETED_STATUS = "WORLD05_08_COMPLETED_REST_BLOCKED"
+WORLD05_09_READY_STATUS = "WORLD05_09_READY_L1_CAPABILITY_OVERLAY"
+WORLD05_09_COMPLETED_STATUS = "WORLD05_09_COMPLETED_REST_BLOCKED"
+WORLD05_10_COMPLETED_STATUS = "WORLD05_10_COMPLETED_REST_BLOCKED"
 DATA05_08_COMPLETED_STATUS = "DATA05_08_COMPLETED_REST_BLOCKED"
 DATA05_09_COMPLETED_STATUS = "DATA05_09_COMPLETED_REST_BLOCKED"
 DATA04_07_COMPLETED_STATUS = "DATA04_07_COMPLETED_REST_BLOCKED"
@@ -1084,6 +1102,23 @@ ACTIVE_STATUSES = {
     WORLD04_09_READY_STATUS,
     WORLD04_09_COMPLETED_STATUS,
     WORLD04_10_COMPLETED_STATUS,
+    WORLD05_01_APPROVED_STATUS,
+    WORLD05_02_APPROVED_STATUS,
+    WORLD05_03_READY_STATUS,
+    WORLD05_03_COMPLETED_STATUS,
+    WORLD05_04_READY_STATUS,
+    WORLD05_04_COMPLETED_STATUS,
+    WORLD05_05_READY_STATUS,
+    WORLD05_05_COMPLETED_STATUS,
+    WORLD05_06_READY_STATUS,
+    WORLD05_06_COMPLETED_STATUS,
+    WORLD05_07_READY_STATUS,
+    WORLD05_07_COMPLETED_STATUS,
+    WORLD05_08_READY_STATUS,
+    WORLD05_08_COMPLETED_STATUS,
+    WORLD05_09_READY_STATUS,
+    WORLD05_09_COMPLETED_STATUS,
+    WORLD05_10_COMPLETED_STATUS,
     DATA05_08_COMPLETED_STATUS,
     DATA05_09_COMPLETED_STATUS,
     DATA04_07_COMPLETED_STATUS,
@@ -1604,6 +1639,25 @@ WORLD04_CAPABILITY_ADMISSION = {
     ],
 }
 
+WORLD05_CAPABILITY_ADMISSION = {
+    **WORLD04_CAPABILITY_ADMISSION,
+    "formal_dependency": "WORLD-04+DATA-03",
+    "required_capabilities": [
+        *WORLD04_CAPABILITY_ADMISSION["required_capabilities"],
+        {"id": "WORLD04_TERRAIN_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-WORLD-04-09"},
+        {"id": "WORLD04_SEQUENCE_CLOSEOUT", "satisfied_by": "NLE-PRPLAN-WORLD-04-10"},
+        {"id": "DATA03_IMPORT_PIPELINE", "satisfied_by": "NLE-PRPLAN-DATA-03-03"},
+        {"id": "DATA03_QUALIFICATION", "satisfied_by": "NLE-PRPLAN-DATA-03-09"},
+        {"id": "DATA03_SEQUENCE_CLOSEOUT", "satisfied_by": "NLE-PRPLAN-DATA-03-10"},
+    ],
+    "not_required": [
+        "graph_evaluation", "rng_execution", "noise_library", "wfc_solver",
+        "asset_import", "cook_cache", "source_writes", "mesh_generation",
+        "gpu_preview", "streaming_io", "physics", "network", "editor", "gpu",
+        "audio", "export", "performance", "public_abi", "release",
+    ],
+}
+
 GFX04_CAPABILITY_ADMISSION = {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
     "formal_dependency": "GFX-03",
@@ -2085,6 +2139,32 @@ WORLD04_SLICE_METADATA = {
         "docs/evidence/NLE-PRPLAN-WORLD-04-08-G6-ACTIVATION.md"),
     9: ("docs/adr/0130-world-04-internal-terrain-environment-metadata.md",
         "docs/evidence/NLE-PRPLAN-WORLD-04-09-G6-ACTIVATION.md"),
+}
+
+WORLD05_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
+WORLD05_01_GATE_PR = 0
+WORLD05_02_GATE_PR = 0
+WORLD05_STATE = {
+    WORLD05_01_APPROVED_STATUS: (1, 0, 0),
+    WORLD05_02_APPROVED_STATUS: (2, 0, 0),
+    WORLD05_03_READY_STATUS: (2, 0, 3),
+    WORLD05_03_COMPLETED_STATUS: (2, 3, 0),
+    WORLD05_04_READY_STATUS: (2, 3, 4),
+    WORLD05_04_COMPLETED_STATUS: (2, 4, 0),
+    WORLD05_05_READY_STATUS: (2, 4, 5),
+    WORLD05_05_COMPLETED_STATUS: (2, 5, 0),
+    WORLD05_06_READY_STATUS: (2, 5, 6),
+    WORLD05_06_COMPLETED_STATUS: (2, 6, 0),
+    WORLD05_07_READY_STATUS: (2, 6, 7),
+    WORLD05_07_COMPLETED_STATUS: (2, 7, 0),
+    WORLD05_08_READY_STATUS: (2, 7, 8),
+    WORLD05_08_COMPLETED_STATUS: (2, 8, 0),
+    WORLD05_09_READY_STATUS: (2, 8, 9),
+    WORLD05_09_COMPLETED_STATUS: (2, 9, 0),
+    WORLD05_10_COMPLETED_STATUS: (2, 10, 0),
+}
+
+WORLD05_SLICE_METADATA = {
 }
 
 GFX04_01_GATE_PR = 704
@@ -5237,6 +5317,40 @@ WORLD04_09_PINNED_SOURCE_BLOBS = {
 
 WORLD04_09_ACTIVATION_SOURCES = {
     **WORLD04_08_ACTIVATION_SOURCES,
+}
+
+WORLD05_01_PINNED_SOURCE_BLOBS = {
+    "checkpoint": "9695480a940c517387a96777c31d56ff4b30d90d",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0030": "0b4a66f658d5ccf552c9b13e521087f0a4085c38",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0131": "1cd50bac3c85c73572d39d8d643ec5a69e0f6a7f",
+    "world05_architecture": "f04b3e502f6a1780b519c65f1fe1fd8822366c4a",
+    "world05_internal_architecture": "af887b6e886dd482db81dc83bc363b4548eb3e62",
+    "world05_api": "7bd4183999964205ef3e72ef75a2d031b3f0bea8",
+    "world05_governance_contract": "22601f772329b98253940b3aec1fed7dfde639c7",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "world05_plan": "8ede1039032ffa599a05e18780fdfd8238285840",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+}
+
+WORLD05_01_ACTIVATION_SOURCES = {
+    "checkpoint": "docs/11-checkpoint.md",
+    "decisions_ledger": "docs/10-decisions-ledger.md",
+    "scope": "docs/03-scope.md",
+    "definition_of_done": "docs/09-definition-of-done.md",
+    "adr_0030": "docs/adr/0030-world-05-versioned-deterministic-nondestructive-generation.md",
+    "adr_0086": "docs/adr/0086-capability-based-l1-dependency.md",
+    "adr_0131": "docs/adr/0131-world-05-internal-procedural-generation-metadata.md",
+    "world05_architecture": "docs/architecture/world-05-procedural-generation.md",
+    "world05_internal_architecture": "docs/architecture/world-05-internal-procedural-generation-metadata.md",
+    "world05_api": "docs/contracts/world-05-generation-api.md",
+    "world05_governance_contract": "docs/contracts/world-05-governance-v0.md",
+    "module_catalog": "docs/product/module-catalog.md",
+    "world05_plan": "docs/pr-plans/WORLD-05.md",
+    "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -9577,6 +9691,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "work_order", "activation_evidence", "capability_admission",
             "source_blob_sha1", "gate_pr",
         }
+    if selected == "NLE-PRPLAN-WORLD-05-01":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-WORLD-05-01",
+            "module_id": "WORLD-05",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world05-01-continuation",
+            "approved_adr": "docs/adr/0131-world-05-internal-procedural-generation-metadata.md",
+            "approved_contract": "docs/contracts/world-05-governance-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-05-01.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-05-01-G6-ACTIVATION.md",
+            "gate_base_sha": "479123be8a2febbe6bf6fb367cc64de3bed982bb",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, WORLD05_01_ACTIVATION_SOURCES, WORLD05_01_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
     if selected == "NLE-PRPLAN-WORLD-04-01":
         expected = {
             "schema_version": 2,
@@ -12297,7 +12433,9 @@ def validate_activation(activation: dict, root: Path = ROOT, verify_sources: boo
             errors.append("activation window slice mismatch: only the exact X11/Win32/Cocoa install matrix is authorized")
     if "capability_admission" in extra_keys:
         selected_id = str(activation.get("selected_packet_id", ""))
-        if selected_id.startswith("NLE-PRPLAN-WORLD-04-"):
+        if selected_id.startswith("NLE-PRPLAN-WORLD-05-"):
+            expected_admission = WORLD05_CAPABILITY_ADMISSION
+        elif selected_id.startswith("NLE-PRPLAN-WORLD-04-"):
             expected_admission = WORLD04_CAPABILITY_ADMISSION
         elif selected_id.startswith("NLE-PRPLAN-WORLD-03-"):
             expected_admission = WORLD03_CAPABILITY_ADMISSION
@@ -12517,12 +12655,18 @@ FINAL_MODULE_STATES = {
         ("COMPLETED", 882), ("COMPLETED", 884), ("COMPLETED", 886),
         ("COMPLETED", 888), ("COMPLETED", 890), ("COMPLETED", 891),
     ],
+    "WORLD-04": [
+        ("APPROVED_GOVERNANCE", 892), ("APPROVED_CONTRACT", 893),
+        ("COMPLETED", 895), ("COMPLETED", 897), ("COMPLETED", 899),
+        ("COMPLETED", 901), ("COMPLETED", 903), ("COMPLETED", 905),
+        ("COMPLETED", 907), ("COMPLETED", 908),
+    ],
 }
 
 def expected_packet_state(
     module_id: str, idx: int, activation: dict | None, manifest_status: str | None
 ) -> tuple[str, int | None]:
-    if (manifest_status in DATA02_STATE or manifest_status in DATA03_STATE or manifest_status in DATA04_STATE or manifest_status in DATA05_STATE or manifest_status in GFX01_STATE or manifest_status in GFX02_STATE or manifest_status in GFX03_STATE or manifest_status in GFX04_STATE or manifest_status in GFX05_STATE or manifest_status in GFX06_STATE or manifest_status in GFX07_STATE or manifest_status in GFX08_STATE or manifest_status in TWO01_STATE or manifest_status in TWO02_STATE or manifest_status in TWO03_STATE or manifest_status in TWO04_STATE or manifest_status in WORLD01_STATE or manifest_status in WORLD02_STATE or manifest_status in WORLD03_STATE or manifest_status in WORLD04_STATE) and module_id in FINAL_MODULE_STATES:
+    if (manifest_status in DATA02_STATE or manifest_status in DATA03_STATE or manifest_status in DATA04_STATE or manifest_status in DATA05_STATE or manifest_status in GFX01_STATE or manifest_status in GFX02_STATE or manifest_status in GFX03_STATE or manifest_status in GFX04_STATE or manifest_status in GFX05_STATE or manifest_status in GFX06_STATE or manifest_status in GFX07_STATE or manifest_status in GFX08_STATE or manifest_status in TWO01_STATE or manifest_status in TWO02_STATE or manifest_status in TWO03_STATE or manifest_status in TWO04_STATE or manifest_status in WORLD01_STATE or manifest_status in WORLD02_STATE or manifest_status in WORLD03_STATE or manifest_status in WORLD04_STATE or manifest_status in WORLD05_STATE) and module_id in FINAL_MODULE_STATES:
         states = FINAL_MODULE_STATES[module_id]
         if 1 <= idx <= len(states):
             return states[idx - 1]
@@ -12545,6 +12689,17 @@ def expected_packet_state(
             return "APPROVED_CONTRACT", GFX06_02_GATE_PR
         if 3 <= idx <= completed_through:
             return "COMPLETED", GFX06_CODE_PRS[idx]
+        if idx == ready_idx:
+            return "EXECUTOR_READY", None
+        return "PLANNED_BLOCKED", None
+    if module_id == "WORLD-05" and manifest_status in WORLD05_STATE:
+        approved_count, completed_through, ready_idx = WORLD05_STATE[manifest_status]
+        if idx == 1 and approved_count >= 1:
+            return "APPROVED_GOVERNANCE", WORLD05_01_GATE_PR
+        if idx == 2 and approved_count >= 2:
+            return "APPROVED_CONTRACT", WORLD05_02_GATE_PR
+        if 3 <= idx <= completed_through:
+            return "COMPLETED", WORLD05_CODE_PRS[idx]
         if idx == ready_idx:
             return "EXECUTOR_READY", None
         return "PLANNED_BLOCKED", None
@@ -14437,6 +14592,8 @@ def expected_metadata(module_id: str, idx: int) -> tuple[str, str] | None:
         return GFX05_SLICE_METADATA[idx]
     if module_id == "GFX-06" and idx in GFX06_SLICE_METADATA:
         return GFX06_SLICE_METADATA[idx]
+    if module_id == "WORLD-05" and idx in WORLD05_SLICE_METADATA:
+        return WORLD05_SLICE_METADATA[idx]
     if module_id == "WORLD-04" and idx in WORLD04_SLICE_METADATA:
         return WORLD04_SLICE_METADATA[idx]
     if module_id == "WORLD-03" and idx in WORLD03_SLICE_METADATA:
@@ -14589,7 +14746,7 @@ def validate_manifest(
                 if want_status not in ("EXECUTOR_READY", "COMPLETED"):
                     issues.append(f"{mid}: slice metadata on a non-completed packet")
                 expected_risk = ("LOW"
-                                 if mid in ("WORLD-03", "WORLD-04") and idx >= 3
+                                 if mid in ("WORLD-03", "WORLD-04", "WORLD-05") and idx >= 3
                                  else "ELEVATED"
                                  if (mid in ("CORE-03", "CORE-04", "CORE-05", "CORE-06", "DATA-01", "DATA-02", "DATA-03", "DATA-04", "DATA-05", "GFX-01", "GFX-02", "GFX-03", "GFX-04", "GFX-05", "GFX-06", "GFX-07", "GFX-08", "TWO-01", "TWO-02", "TWO-03", "TWO-04", "WORLD-01", "WORLD-02") and idx >= 3)
                                  else "STANDARD")
@@ -15372,6 +15529,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     elif status in (TWO02_08_READY_STATUS, TWO02_08_COMPLETED_STATUS,
                     TWO02_09_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-two-02-08.json"
+    elif status == WORLD05_01_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-world-05-01.json"
     elif status == WORLD04_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-04-01.json"
     elif status == WORLD04_02_APPROVED_STATUS:
