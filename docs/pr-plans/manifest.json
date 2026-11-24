@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "WORLD03_04_COMPLETED_REST_BLOCKED",
+  "status": "WORLD03_05_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -6828,8 +6828,12 @@
             "WORLD-02",
             "DATA-05"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "LOW",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0129-world-03-internal-spatial-streaming-metadata.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-03-05-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-WORLD-03-06",
