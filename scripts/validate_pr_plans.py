@@ -192,9 +192,10 @@ TWO03_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-03-06.json"
 TWO03_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-03-07.json"
 TWO03_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-03-08.json"
 TWO04_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-04-01.json"
+TWO04_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-04-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = TWO04_01_ACTIVATION_FILE
+ACTIVATION_FILE = TWO04_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -1679,7 +1680,7 @@ TWO03_SLICE_METADATA = {
 
 TWO04_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
 TWO04_01_GATE_PR = 836
-TWO04_02_GATE_PR = 0
+TWO04_02_GATE_PR = 837
 TWO04_STATE = {
     TWO04_01_APPROVED_STATUS: (1, 0, 0),
     TWO04_02_APPROVED_STATUS: (2, 0, 0),
@@ -4397,6 +4398,17 @@ TWO04_01_ACTIVATION_SOURCES = {
     "module_catalog": GFX04_01_ACTIVATION_SOURCES["module_catalog"],
     "two04_plan": "docs/pr-plans/TWO-04.md",
     "implementation_registry": GFX04_01_ACTIVATION_SOURCES["implementation_registry"],
+}
+
+TWO04_02_PINNED_SOURCE_BLOBS = {
+    **TWO04_01_PINNED_SOURCE_BLOBS,
+    "checkpoint": "722e4cf9b79dbc2cbd518ceb00b425165362ab42",
+    "two04_internal_contract": "86349e9277c1a01f1b4651ad46426784567a42e3",
+}
+
+TWO04_02_ACTIVATION_SOURCES = {
+    **TWO04_01_ACTIVATION_SOURCES,
+    "two04_internal_contract": "docs/contracts/two-04-hybrid-internal-v0.md",
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -7984,6 +7996,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, TWO03_02_ACTIVATION_SOURCES, TWO03_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-TWO-04-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-TWO-04-02",
+            "module_id": "TWO-04",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/two04-02-continuation",
+            "approved_adr": "docs/adr/0126-two-04-internal-hybrid-composition.md",
+            "approved_contract": "docs/contracts/two-04-hybrid-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-TWO-04-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-TWO-04-02-G6-ACTIVATION.md",
+            "gate_base_sha": "dfb09535718bcec2936c9bbfb516ec99e8569bd5",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, TWO04_02_ACTIVATION_SOURCES, TWO04_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -13612,6 +13646,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-two-02-08.json"
     elif status == TWO04_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-two-04-01.json"
+    elif status == TWO04_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-two-04-02.json"
     elif status == TWO03_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-two-03-01.json"
     elif status == TWO03_02_APPROVED_STATUS:
