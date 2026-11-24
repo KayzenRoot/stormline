@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-05-08 — Content generator metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ARTIFACT PRODUCTION`. **Base:** `cc43340`. **Gate:** [NLE-PRPLAN-WORLD-05-08-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-08-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-08](../work-orders/NLE-PRPLAN-WORLD-05-08.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ARTIFACT PRODUCTION`. **Base:** `cc43340`. **Gate:** [NLE-PRPLAN-WORLD-05-08-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-08-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-08](../work-orders/NLE-PRPLAN-WORLD-05-08.md). **PR:** #922.
 
 ## Scope delivered
 
