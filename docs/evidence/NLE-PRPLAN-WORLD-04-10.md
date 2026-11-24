@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-10 — WORLD-04 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO TERRAIN OR ENVIRONMENT RUNTIME`. **Base:** `2107f3e`. **Packet:** `NLE-PRPLAN-WORLD-04-10`. **Closeout PR:** pendente. **ADR:** [ADR-0130](../adr/0130-world-04-internal-terrain-environment-metadata.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **Planning policy remains:** [ADR-0029](../adr/0029-world-04-authored-terrain-environment-visual-ownership.md) `PROPOSED`.
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO TERRAIN OR ENVIRONMENT RUNTIME`. **Base:** `2107f3e`. **Packet:** `NLE-PRPLAN-WORLD-04-10`. **Closeout PR:** #908. **ADR:** [ADR-0130](../adr/0130-world-04-internal-terrain-environment-metadata.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **Planning policy remains:** [ADR-0029](../adr/0029-world-04-authored-terrain-environment-visual-ownership.md) `PROPOSED`.
 
 ## Result
 
