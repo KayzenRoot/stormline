@@ -1684,6 +1684,13 @@ target_link_libraries(stormline_world03_cell_test PRIVATE stormline_world03_spat
 stormline_core01_apply_options(stormline_world03_cell_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world03_cell_test)
 
+add_executable(stormline_world03_interest_test
+    tests/core/world03_interest_tests.cpp
+)
+target_link_libraries(stormline_world03_interest_test PRIVATE stormline_world03_spatial)
+stormline_core01_apply_options(stormline_world03_interest_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world03_interest_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3249,6 +3256,11 @@ add_test(NAME world03_cell_01
     COMMAND stormline_world03_cell_test cel01
 )
 set_tests_properties(world03_cell_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME world03_interest_01
+    COMMAND stormline_world03_interest_test int01
+)
+set_tests_properties(world03_interest_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
