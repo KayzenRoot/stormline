@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-03-07 — Integrated spatial qualification evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RUNTIME QUALIFICATION`. **Base:** `5a5d693`. **Gate:** [NLE-PRPLAN-WORLD-03-07-G6-ACTIVATION](NLE-PRPLAN-WORLD-03-07-G6-ACTIVATION.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-03-07](../work-orders/NLE-PRPLAN-WORLD-03-07.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RUNTIME QUALIFICATION`. **Base:** `5a5d693`. **Gate:** [NLE-PRPLAN-WORLD-03-07-G6-ACTIVATION](NLE-PRPLAN-WORLD-03-07-G6-ACTIVATION.md). **Contract:** [world-03-spatial-internal-v0](../contracts/world-03-spatial-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-03-07](../work-orders/NLE-PRPLAN-WORLD-03-07.md). **PR:** #890.
 
 ## Scope delivered
 
