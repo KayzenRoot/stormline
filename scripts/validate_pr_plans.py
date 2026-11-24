@@ -15388,7 +15388,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-world-04-07.json"
     elif status in (WORLD04_08_READY_STATUS, WORLD04_08_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-world-04-08.json"
-    elif status in (WORLD04_09_READY_STATUS, WORLD04_09_COMPLETED_STATUS):
+    elif status in (WORLD04_09_READY_STATUS, WORLD04_09_COMPLETED_STATUS,
+                    WORLD04_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-world-04-09.json"
     elif status == WORLD03_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-03-01.json"
