@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-05-04 — Generator graph topology evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO GRAPH EVALUATION`. **Base:** `b804a27`. **Gate:** [NLE-PRPLAN-WORLD-05-04-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-04-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-04](../work-orders/NLE-PRPLAN-WORLD-05-04.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO GRAPH EVALUATION`. **Base:** `b804a27`. **Gate:** [NLE-PRPLAN-WORLD-05-04-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-04-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-04](../work-orders/NLE-PRPLAN-WORLD-05-04.md). **PR:** #914.
 
 ## Scope delivered
 
