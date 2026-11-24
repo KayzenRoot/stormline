@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "TWO03_03_COMPLETED_REST_BLOCKED",
+  "status": "TWO03_04_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -6180,8 +6180,12 @@
           "requires_modules_merged": [
             "TWO-01"
           ],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "EXECUTOR_READY",
+          "github_pr": null,
+          "risk": "ELEVATED",
+          "release_class": "INTERNAL_ONLY",
+          "approved_adr": "docs/adr/0125-two-03-internal-animation-pipeline.md",
+          "activation_evidence": "docs/evidence/NLE-PRPLAN-TWO-03-04-G6-ACTIVATION.md"
         },
         {
           "packet_id": "NLE-PRPLAN-TWO-03-05",
