@@ -1698,6 +1698,13 @@ target_link_libraries(stormline_world03_origin_test PRIVATE stormline_world03_sp
 stormline_core01_apply_options(stormline_world03_origin_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world03_origin_test)
 
+add_executable(stormline_world03_streaming_test
+    tests/core/world03_streaming_tests.cpp
+)
+target_link_libraries(stormline_world03_streaming_test PRIVATE stormline_world03_spatial)
+stormline_core01_apply_options(stormline_world03_streaming_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world03_streaming_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3273,6 +3280,11 @@ add_test(NAME world03_origin_01
     COMMAND stormline_world03_origin_test org01
 )
 set_tests_properties(world03_origin_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME world03_streaming_01
+    COMMAND stormline_world03_streaming_test str01
+)
+set_tests_properties(world03_streaming_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
