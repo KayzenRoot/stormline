@@ -1575,6 +1575,19 @@ target_link_libraries(stormline_two04_hybrid_qualification_test PRIVATE stormlin
 stormline_core01_apply_options(stormline_two04_hybrid_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two04_hybrid_qualification_test)
 
+add_library(stormline_world01_ecs INTERFACE)
+target_include_directories(stormline_world01_ecs INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_world01_ecs INTERFACE cxx_std_20)
+
+add_executable(stormline_world01_identity_test
+    tests/core/world01_identity_tests.cpp
+)
+target_link_libraries(stormline_world01_identity_test PRIVATE stormline_world01_ecs)
+stormline_core01_apply_options(stormline_world01_identity_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world01_identity_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3051,6 +3064,11 @@ add_test(NAME two04_hybrid_qualification_404
     COMMAND stormline_two04_hybrid_qualification_test qlft404
 )
 set_tests_properties(two04_hybrid_qualification_404 PROPERTIES TIMEOUT 120)
+
+add_test(NAME world01_identity_01
+    COMMAND stormline_world01_identity_test ent01
+)
+set_tests_properties(world01_identity_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
