@@ -185,9 +185,10 @@ TWO02_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-02-07.json"
 TWO02_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-02-08.json"
 TWO03_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-03-01.json"
 TWO03_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-03-02.json"
+TWO03_03_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-two-03-03.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = TWO03_02_ACTIVATION_FILE
+ACTIVATION_FILE = TWO03_03_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -1609,6 +1610,8 @@ TWO03_STATE = {
 }
 
 TWO03_SLICE_METADATA = {
+    3: ("docs/adr/0125-two-03-internal-animation-pipeline.md",
+        "docs/evidence/NLE-PRPLAN-TWO-03-03-G6-ACTIVATION.md"),
 }
 
 GFX04_01_GATE_PR = 704
@@ -4221,6 +4224,15 @@ TWO03_02_PINNED_SOURCE_BLOBS = {
 TWO03_02_ACTIVATION_SOURCES = {
     **TWO03_01_ACTIVATION_SOURCES,
     "two03_internal_contract": "docs/contracts/two-03-animation-internal-v0.md",
+}
+
+TWO03_03_PINNED_SOURCE_BLOBS = {
+    **TWO03_02_PINNED_SOURCE_BLOBS,
+    "checkpoint": "cb1a0eb74c53f726cdc2147fa9a5a8c8da75d178",
+}
+
+TWO03_03_ACTIVATION_SOURCES = {
+    **TWO03_02_ACTIVATION_SOURCES,
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -7654,6 +7666,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, GFX07_02_ACTIVATION_SOURCES, GFX07_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-TWO-03-03":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-TWO-03-03",
+            "module_id": "TWO-03",
+            "risk": "ELEVATED",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-23/two03-03-continuation",
+            "approved_adr": "docs/adr/0125-two-03-internal-animation-pipeline.md",
+            "approved_contract": "docs/contracts/two-03-animation-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-TWO-03-03.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-TWO-03-03-G6-ACTIVATION.md",
+            "gate_base_sha": "9c1c57fe9bff155bf6aa0caf6ce4a14bc671f25d",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, TWO03_03_ACTIVATION_SOURCES, TWO03_03_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -13265,6 +13299,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-two-03-01.json"
     elif status == TWO03_02_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-two-03-02.json"
+    elif status == TWO03_03_READY_STATUS:
+        activation_path = root / "docs/queue/packet-activation-two-03-03.json"
     elif status == GFX07_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-gfx-07-01.json"
     elif status == GFX07_02_APPROVED_STATUS:
