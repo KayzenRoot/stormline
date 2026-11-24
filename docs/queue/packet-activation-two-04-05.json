@@ -1,0 +1,158 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-TWO-04-05",
+  "module_id": "TWO-04",
+  "risk": "ELEVATED",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/two04-05-continuation",
+  "approved_adr": "docs/adr/0126-two-04-internal-hybrid-composition.md",
+  "approved_contract": "docs/contracts/two-04-hybrid-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-TWO-04-05.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-TWO-04-05-G6-ACTIVATION.md",
+  "gate_base_sha": "8a118c7abef3abb8f0c19dce8a89a508948bc96b",
+  "gate_pr": 842,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "TWO-01+GFX-04",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE01_HEADLESS_BUILD_AND_TEST",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-03"
+      },
+      {
+        "id": "CORE01_PORTABLE_PATHS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-06"
+      },
+      {
+        "id": "CORE01_NATIVE_CI_MATRIX",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-08"
+      },
+      {
+        "id": "CORE01_LIFECYCLE_REQUESTS",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-12"
+      },
+      {
+        "id": "CORE01_CAPABILITY_GRAPH",
+        "satisfied_by": "NLE-PRPLAN-CORE-01-13"
+      },
+      {
+        "id": "CORE02_ALLOCATOR",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-03"
+      },
+      {
+        "id": "CORE02_OWNERSHIP",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-04"
+      },
+      {
+        "id": "CORE02_LEAK_TRACKING",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-08"
+      },
+      {
+        "id": "CORE02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-02-10"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_PRECISION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "GFX01_RHI_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-01-09"
+      },
+      {
+        "id": "GFX03_RENDER_GRAPH_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-03-08"
+      },
+      {
+        "id": "GFX05_MATERIAL",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-03"
+      },
+      {
+        "id": "GFX05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-05-09"
+      },
+      {
+        "id": "GFX06_LIGHTING_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-06-09"
+      },
+      {
+        "id": "GFX07_POST_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-GFX-07-09"
+      },
+      {
+        "id": "DATA03_IMPORT_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-09"
+      },
+      {
+        "id": "CORE05_COORDINATE_SYSTEMS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-05"
+      },
+      {
+        "id": "CORE05_UNITS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-06"
+      },
+      {
+        "id": "CORE05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-09"
+      },
+      {
+        "id": "DATA05_STREAMING",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-05"
+      },
+      {
+        "id": "DATA05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-05-08"
+      }
+    ],
+    "not_required": [
+      "native_gpu",
+      "vulkan",
+      "d3d12",
+      "metal",
+      "webgpu",
+      "renderer",
+      "depth_attachment",
+      "render_graph_execution",
+      "gpu_sorting",
+      "camera_matrix",
+      "frustum_culling",
+      "shader_compiler",
+      "shader",
+      "lighting",
+      "shadow",
+      "subview_render",
+      "hybrid_scene_loader",
+      "editor_viewport",
+      "gpu_allocator",
+      "rendering",
+      "hardware",
+      "network",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "574ff41767654aa22b9e35a270b9f7c3cb0bdbc3",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0025": "7d6574a4caa002c05e3c1dc75cf58acf8dd6ccb3",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0126": "5b93a3cd10bfee7ff19fcd2113909e2d0f953d04",
+    "two04_architecture": "e9c0db7f90f7f6914202d709669632ebbf1cd216",
+    "two04_internal_architecture": "9bc75838552162ff6826a259123b1f49d5bfaadb",
+    "two04_api": "be8d36f2364883b5ad8effb4d7b04b117e4756ee",
+    "two04_governance_contract": "aeebc131ff843a641daf66f1dcf6a2564a474721",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "two04_plan": "0f4109de1c30c24aab2f1445b4a1c540280fce7f",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "two04_internal_contract": "86349e9277c1a01f1b4651ad46426784567a42e3"
+  }
+}
