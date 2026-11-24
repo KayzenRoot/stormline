@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "SIM01_08_COMPLETED_REST_BLOCKED",
+  "status": "SIM01_09_READY_L1_CAPABILITY_OVERLAY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -7412,7 +7412,7 @@
             "WORLD-01",
             "TWO-01"
           ],
-          "status": "PLANNED_BLOCKED",
+          "status": "EXECUTOR_READY",
           "github_pr": null
         },
         {
