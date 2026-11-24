@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-01-07 — Trigger/sensor metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO EVENT DISPATCH`. **Base:** `f42c2bd`. **Gate:** [NLE-PRPLAN-SIM-01-07-G6-ACTIVATION](NLE-PRPLAN-SIM-01-07-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-07](../work-orders/NLE-PRPLAN-SIM-01-07.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO EVENT DISPATCH`. **Base:** `f42c2bd`. **Gate:** [NLE-PRPLAN-SIM-01-07-G6-ACTIVATION](NLE-PRPLAN-SIM-01-07-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-07](../work-orders/NLE-PRPLAN-SIM-01-07.md). **PR:** #937.
 
 ## Scope delivered
 
