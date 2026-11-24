@@ -1890,6 +1890,13 @@ target_link_libraries(stormline_sim02_body_test PRIVATE stormline_sim02_physics3
 stormline_core01_apply_options(stormline_sim02_body_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim02_body_test)
 
+add_executable(stormline_sim02_shape_test
+    tests/core/sim02_shape_tests.cpp
+)
+target_link_libraries(stormline_sim02_shape_test PRIVATE stormline_sim02_physics3d)
+stormline_core01_apply_options(stormline_sim02_shape_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim02_shape_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3633,6 +3640,11 @@ add_test(NAME sim02_body_01
     COMMAND stormline_sim02_body_test body301
 )
 set_tests_properties(sim02_body_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim02_shape_01
+    COMMAND stormline_sim02_shape_test shape301
+)
+set_tests_properties(sim02_shape_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
