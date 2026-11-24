@@ -11,7 +11,7 @@
   "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-03-06.md",
   "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-03-06-G6-ACTIVATION.md",
   "gate_base_sha": "68912669c7c2e9818b59520368684744fb7250e1",
-  "gate_pr": 0,
+  "gate_pr": 887,
   "requires_fresh_context_lock": true,
   "capability_admission": {
     "adr": "docs/adr/0086-capability-based-l1-dependency.md",
@@ -136,7 +136,7 @@
     ]
   },
   "source_blob_sha1": {
-    "checkpoint": "554e044aae788f4bd50b69e780c0f01590354577",
+    "checkpoint": "043cd721efd55f0aaa2ea681dbd9952d0f12df35",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
