@@ -7049,7 +7049,7 @@
             "GFX-04"
           ],
           "status": "COMPLETED",
-          "github_pr": 0,
+          "github_pr": 907,
           "risk": "LOW",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0130-world-04-internal-terrain-environment-metadata.md",

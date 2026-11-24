@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-09 — Integrated terrain/environment qualification evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RENDER OR TRAVERSAL QUALIFICATION`. **Base:** `2616be5`. **Gate:** [NLE-PRPLAN-WORLD-04-09-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-09-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-09](../work-orders/NLE-PRPLAN-WORLD-04-09.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RENDER OR TRAVERSAL QUALIFICATION`. **Base:** `2616be5`. **Gate:** [NLE-PRPLAN-WORLD-04-09-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-09-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-09](../work-orders/NLE-PRPLAN-WORLD-04-09.md). **PR:** #907.
 
 ## Scope delivered
 
