@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-05-09 — Integrated procedural qualification evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO DETERMINISM OR GENERATION QUALIFICATION`. **Base:** `1cf2e38`. **Gate:** [NLE-PRPLAN-WORLD-05-09-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-09-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-09](../work-orders/NLE-PRPLAN-WORLD-05-09.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO DETERMINISM OR GENERATION QUALIFICATION`. **Base:** `1cf2e38`. **Gate:** [NLE-PRPLAN-WORLD-05-09-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-09-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-09](../work-orders/NLE-PRPLAN-WORLD-05-09.md). **PR:** #924.
 
 ## Scope delivered
 
