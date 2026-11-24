@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "SIM02_04_READY_L1_CAPABILITY_OVERLAY",
+  "status": "SIM02_04_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -7495,8 +7495,8 @@
             "WORLD-02",
             "CORE-03"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 948,
           "risk": "LOW",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0133-sim-02-internal-physics-3d-metadata.md",
