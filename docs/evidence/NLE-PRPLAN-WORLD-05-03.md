@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-05-03 — Seed/domain metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RNG OR NOISE`. **Base:** `1b9bc6b`. **Gate:** [NLE-PRPLAN-WORLD-05-03-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-03-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-03](../work-orders/NLE-PRPLAN-WORLD-05-03.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RNG OR NOISE`. **Base:** `1b9bc6b`. **Gate:** [NLE-PRPLAN-WORLD-05-03-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-03-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-03](../work-orders/NLE-PRPLAN-WORLD-05-03.md). **PR:** #912.
 
 ## Scope delivered
 
