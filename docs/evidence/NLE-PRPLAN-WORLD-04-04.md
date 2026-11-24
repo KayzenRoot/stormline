@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-04 — Splat/material layer metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO TEXTURE OR MATERIAL RESIDENCY`. **Base:** `a9a812d`. **Gate:** [NLE-PRPLAN-WORLD-04-04-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-04-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-04](../work-orders/NLE-PRPLAN-WORLD-04-04.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO TEXTURE OR MATERIAL RESIDENCY`. **Base:** `a9a812d`. **Gate:** [NLE-PRPLAN-WORLD-04-04-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-04-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-04](../work-orders/NLE-PRPLAN-WORLD-04-04.md). **PR:** #897.
 
 ## Scope delivered
 
