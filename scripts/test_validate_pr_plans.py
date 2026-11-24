@@ -242,7 +242,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.world05_03_activation = json.loads(v.WORLD05_03_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.world05_04_activation = json.loads(v.WORLD05_04_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.world05_05_activation = json.loads(v.WORLD05_05_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.WORLD05_05_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.world05_06_activation = json.loads(v.WORLD05_06_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.WORLD05_06_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -301,7 +302,7 @@ class PrPlanValidationTests(unittest.TestCase):
         self.assertEqual(438, packets[7]["github_pr"])
         ready = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                  if p["status"] == "EXECUTOR_READY"]
-        self.assertEqual([], ready)
+        self.assertEqual(["NLE-PRPLAN-WORLD-05-06"], ready)
         completed = [p["packet_id"] for m in self.manifest["modules"] for p in m["packets"]
                      if p["status"] == "COMPLETED"]
         self.assertEqual(["NLE-PRPLAN-CORE-01-03", "NLE-PRPLAN-CORE-01-04",
@@ -3585,6 +3586,25 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_world05_06_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-WORLD-05-06",
+                         self.world05_06_activation["selected_packet_id"])
+        self.assertEqual("WORLD-05", self.world05_06_activation["module_id"])
+        self.assertEqual("LOW", self.world05_06_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.world05_06_activation["release_class"])
+        self.assertEqual("docs/contracts/world-05-procedural-internal-v0.md",
+                         self.world05_06_activation["approved_contract"])
+        self.assertEqual(v.WORLD05_CAPABILITY_ADMISSION,
+                         self.world05_06_activation["capability_admission"])
+        bad = copy.deepcopy(self.world05_06_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_world05_06_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.world05_06_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_world05_05_activation_is_exact(self):
         self.assertEqual("NLE-PRPLAN-WORLD-05-05",
                          self.world05_05_activation["selected_packet_id"])
@@ -5988,6 +6008,13 @@ class PrPlanValidationTests(unittest.TestCase):
                                  capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_world05_06_selector_is_ready(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        ready = subprocess.run([sys.executable, selector, "NLE-PRPLAN-WORLD-05-06", "--json"],
+                               capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(0, ready.returncode, (ready.stdout, ready.stderr))
+        self.assertTrue(json.loads(ready.stdout)["executor_ready"])
 
     def test_world05_05_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
