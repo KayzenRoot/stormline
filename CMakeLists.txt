@@ -1712,6 +1712,19 @@ target_link_libraries(stormline_world03_qualification_test PRIVATE stormline_wor
 stormline_core01_apply_options(stormline_world03_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world03_qualification_test)
 
+add_library(stormline_world04_terrain INTERFACE)
+target_include_directories(stormline_world04_terrain INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_world04_terrain INTERFACE cxx_std_20)
+
+add_executable(stormline_world04_terrain_test
+    tests/core/world04_terrain_tests.cpp
+)
+target_link_libraries(stormline_world04_terrain_test PRIVATE stormline_world04_terrain)
+stormline_core01_apply_options(stormline_world04_terrain_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world04_terrain_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3309,6 +3322,11 @@ add_test(NAME world03_qualification_304
     COMMAND stormline_world03_qualification_test qlfw304
 )
 set_tests_properties(world03_qualification_304 PROPERTIES TIMEOUT 120)
+
+add_test(NAME world04_terrain_01
+    COMMAND stormline_world04_terrain_test ter01
+)
+set_tests_properties(world04_terrain_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
