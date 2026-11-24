@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-06 — Water body metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO WATER SIMULATION OR RENDERING`. **Base:** `482781b`. **Gate:** [NLE-PRPLAN-WORLD-04-06-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-06-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-06](../work-orders/NLE-PRPLAN-WORLD-04-06.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO WATER SIMULATION OR RENDERING`. **Base:** `482781b`. **Gate:** [NLE-PRPLAN-WORLD-04-06-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-06-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-06](../work-orders/NLE-PRPLAN-WORLD-04-06.md). **PR:** #901.
 
 ## Scope delivered
 
