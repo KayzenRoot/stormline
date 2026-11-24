@@ -1636,6 +1636,13 @@ target_link_libraries(stormline_world02_hierarchy_test PRIVATE stormline_world02
 stormline_core01_apply_options(stormline_world02_hierarchy_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world02_hierarchy_test)
 
+add_executable(stormline_world02_composition_test
+    tests/core/world02_composition_tests.cpp
+)
+target_link_libraries(stormline_world02_composition_test PRIVATE stormline_world02_scene)
+stormline_core01_apply_options(stormline_world02_composition_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world02_composition_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3159,6 +3166,11 @@ add_test(NAME world02_hierarchy_01
     COMMAND stormline_world02_hierarchy_test hir01
 )
 set_tests_properties(world02_hierarchy_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME world02_composition_01
+    COMMAND stormline_world02_composition_test pfc01
+)
+set_tests_properties(world02_composition_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
