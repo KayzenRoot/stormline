@@ -190,7 +190,8 @@ class PrPlanValidationTests(unittest.TestCase):
         cls.two02_06_activation = json.loads(v.TWO02_06_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.two02_07_activation = json.loads(v.TWO02_07_ACTIVATION_FILE.read_text(encoding="utf-8"))
         cls.two02_08_activation = json.loads(v.TWO02_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
-        cls.activation = json.loads(v.TWO02_08_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.two03_01_activation = json.loads(v.TWO03_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
+        cls.activation = json.loads(v.TWO03_01_ACTIVATION_FILE.read_text(encoding="utf-8"))
 
     def check(self, edit):
         d = copy.deepcopy(self.manifest)
@@ -3533,6 +3534,25 @@ class PrPlanValidationTests(unittest.TestCase):
         bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
         self.assertTrue(v.validate_activation(bad))
 
+    def test_two03_01_activation_is_exact(self):
+        self.assertEqual("NLE-PRPLAN-TWO-03-01",
+                         self.two03_01_activation["selected_packet_id"])
+        self.assertEqual("TWO-03", self.two03_01_activation["module_id"])
+        self.assertEqual("LOW", self.two03_01_activation["risk"])
+        self.assertEqual("INTERNAL_ONLY", self.two03_01_activation["release_class"])
+        self.assertEqual("docs/contracts/two-03-governance-v0.md",
+                         self.two03_01_activation["approved_contract"])
+        self.assertEqual(v.TWO03_CAPABILITY_ADMISSION,
+                         self.two03_01_activation["capability_admission"])
+        bad = copy.deepcopy(self.two03_01_activation)
+        bad["gate_pr"] = -1
+        self.assertTrue(v.validate_activation(bad))
+
+    def test_two03_01_activation_source_drift_denied(self):
+        bad = copy.deepcopy(self.two03_01_activation)
+        bad["source_blob_sha1"]["checkpoint"] = "deadbeef"
+        self.assertTrue(v.validate_activation(bad))
+
     def test_two02_08_activation_is_exact(self):
         self.assertEqual("NLE-PRPLAN-TWO-02-08",
                          self.two02_08_activation["selected_packet_id"])
@@ -4931,6 +4951,13 @@ class PrPlanValidationTests(unittest.TestCase):
     def test_two02_03_completed_selector_denies(self):
         selector = str(v.ROOT / "scripts/select_packet.py")
         blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-TWO-02-03", "--json"],
+                                 capture_output=True, text=True, timeout=20, check=False)
+        self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
+        self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
+
+    def test_two03_01_governance_selector_denies(self):
+        selector = str(v.ROOT / "scripts/select_packet.py")
+        blocked = subprocess.run([sys.executable, selector, "NLE-PRPLAN-TWO-03-01", "--json"],
                                  capture_output=True, text=True, timeout=20, check=False)
         self.assertEqual(2, blocked.returncode, (blocked.stdout, blocked.stderr))
         self.assertFalse(json.loads(blocked.stdout)["executor_ready"])
