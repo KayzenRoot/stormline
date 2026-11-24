@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-04-07 — Sky/environment profile metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ATMOSPHERE OR LIGHT RENDERER`. **Base:** `f9ac15b`. **Gate:** [NLE-PRPLAN-WORLD-04-07-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-07-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-07](../work-orders/NLE-PRPLAN-WORLD-04-07.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO ATMOSPHERE OR LIGHT RENDERER`. **Base:** `f9ac15b`. **Gate:** [NLE-PRPLAN-WORLD-04-07-G6-ACTIVATION](NLE-PRPLAN-WORLD-04-07-G6-ACTIVATION.md). **Contract:** [world-04-terrain-internal-v0](../contracts/world-04-terrain-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-04-07](../work-orders/NLE-PRPLAN-WORLD-04-07.md). **PR:** #903.
 
 ## Scope delivered
 
