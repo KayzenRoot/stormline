@@ -1918,6 +1918,13 @@ target_link_libraries(stormline_sim02_constraint_test PRIVATE stormline_sim02_ph
 stormline_core01_apply_options(stormline_sim02_constraint_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim02_constraint_test)
 
+add_executable(stormline_sim02_integration_test
+    tests/core/sim02_integration_tests.cpp
+)
+target_link_libraries(stormline_sim02_integration_test PRIVATE stormline_sim02_physics3d)
+stormline_core01_apply_options(stormline_sim02_integration_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim02_integration_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3681,6 +3688,11 @@ add_test(NAME sim02_constraint_01
     COMMAND stormline_sim02_constraint_test constraint301
 )
 set_tests_properties(sim02_constraint_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim02_integration_01
+    COMMAND stormline_sim02_integration_test integration301
+)
+set_tests_properties(sim02_integration_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
