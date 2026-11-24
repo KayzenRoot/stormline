@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-01-09 — Integrated physics 2D qualification evidence
 
-**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO CONTACT GENERATION`. **Base:** `c1cff13c`. **Gate:** [NLE-PRPLAN-SIM-01-09-G6-ACTIVATION](NLE-PRPLAN-SIM-01-09-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-09](../work-orders/NLE-PRPLAN-SIM-01-09.md). **PR:** pendente.
+**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO CONTACT GENERATION`. **Base:** `c1cff13c`. **Gate:** [NLE-PRPLAN-SIM-01-09-G6-ACTIVATION](NLE-PRPLAN-SIM-01-09-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-09](../work-orders/NLE-PRPLAN-SIM-01-09.md). **PR:** #941.
 
 ## Scope delivered
 
