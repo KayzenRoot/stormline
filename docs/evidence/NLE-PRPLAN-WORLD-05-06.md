@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-05-06 — Biome classification metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO BIOME CLASSIFICATION`. **Base:** `7544758`. **Gate:** [NLE-PRPLAN-WORLD-05-06-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-06-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-06](../work-orders/NLE-PRPLAN-WORLD-05-06.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO BIOME CLASSIFICATION`. **Base:** `7544758`. **Gate:** [NLE-PRPLAN-WORLD-05-06-G6-ACTIVATION](NLE-PRPLAN-WORLD-05-06-G6-ACTIVATION.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **WO:** [NLE-PRPLAN-WORLD-05-06](../work-orders/NLE-PRPLAN-WORLD-05-06.md). **PR:** #918.
 
 ## Scope delivered
 
