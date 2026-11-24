@@ -1,6 +1,7 @@
 #include "stormline/physics3d/body_plan.hpp"
 
 #include <cstdio>
+#include <limits>
 #include <string_view>
 
 namespace {
@@ -99,7 +100,7 @@ bool run_body301() {
            "invalid kind");
 
     bodies = body_set();
-    bodies.bodies[1].x = 0.0f / 0.0f;
+    bodies.bodies[1].x = std::numeric_limits<f32>::quiet_NaN();
     expect(plan_bodies(bodies, plan, diagnostic)
                == Physics3DError::NonFiniteValue,
            "non-finite pose");
