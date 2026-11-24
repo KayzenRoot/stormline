@@ -16246,7 +16246,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-sim-01-07.json"
     elif status in (SIM01_08_READY_STATUS, SIM01_08_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-sim-01-08.json"
-    elif status in (SIM01_09_READY_STATUS, SIM01_09_COMPLETED_STATUS):
+    elif status in (SIM01_09_READY_STATUS, SIM01_09_COMPLETED_STATUS,
+                    SIM01_10_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-sim-01-09.json"
     elif status == WORLD05_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-05-01.json"
