@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-01-05 — Query intent metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO QUERY EXECUTION`. **Base:** `6773d56`. **Gate:** [NLE-PRPLAN-SIM-01-05-G6-ACTIVATION](NLE-PRPLAN-SIM-01-05-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-05](../work-orders/NLE-PRPLAN-SIM-01-05.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO QUERY EXECUTION`. **Base:** `6773d56`. **Gate:** [NLE-PRPLAN-SIM-01-05-G6-ACTIVATION](NLE-PRPLAN-SIM-01-05-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-05](../work-orders/NLE-PRPLAN-SIM-01-05.md). **PR:** #933.
 
 ## Scope delivered
 
