@@ -215,9 +215,10 @@ WORLD02_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-02-06.js
 WORLD02_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-02-07.json"
 WORLD02_08_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-02-08.json"
 WORLD03_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-03-01.json"
+WORLD03_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-world-03-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = WORLD03_01_ACTIVATION_FILE
+ACTIVATION_FILE = WORLD03_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -1948,7 +1949,7 @@ WORLD02_SLICE_METADATA = {
 
 WORLD03_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
 WORLD03_01_GATE_PR = 879
-WORLD03_02_GATE_PR = 0
+WORLD03_02_GATE_PR = 880
 WORLD03_STATE = {
     WORLD03_01_APPROVED_STATUS: (1, 0, 0),
     WORLD03_02_APPROVED_STATUS: (2, 0, 0),
@@ -4954,6 +4955,17 @@ WORLD03_01_ACTIVATION_SOURCES = {
     "module_catalog": GFX04_01_ACTIVATION_SOURCES["module_catalog"],
     "world03_plan": "docs/pr-plans/WORLD-03.md",
     "implementation_registry": GFX04_01_ACTIVATION_SOURCES["implementation_registry"],
+}
+
+WORLD03_02_PINNED_SOURCE_BLOBS = {
+    **WORLD03_01_PINNED_SOURCE_BLOBS,
+    "checkpoint": "b2167cc4ddbc9b18bc501eaf244755262cb0d7d6",
+    "world03_internal_contract": "b21b813e8f8557101444fbc6f3a8cb28af392d46",
+}
+
+WORLD03_02_ACTIVATION_SOURCES = {
+    **WORLD03_01_ACTIVATION_SOURCES,
+    "world03_internal_contract": "docs/contracts/world-03-spatial-internal-v0.md",
 }
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
@@ -8981,6 +8993,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, WORLD02_02_ACTIVATION_SOURCES, WORLD02_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-WORLD-03-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-WORLD-03-02",
+            "module_id": "WORLD-03",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/world03-02-continuation",
+            "approved_adr": "docs/adr/0129-world-03-internal-spatial-streaming-metadata.md",
+            "approved_contract": "docs/contracts/world-03-spatial-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-WORLD-03-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-WORLD-03-02-G6-ACTIVATION.md",
+            "gate_base_sha": "ac9e864eb9db3881f1c7921aea176565b6110b34",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, WORLD03_02_ACTIVATION_SOURCES, WORLD03_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -14739,6 +14773,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-two-02-08.json"
     elif status == WORLD03_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-03-01.json"
+    elif status == WORLD03_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-world-03-02.json"
     elif status == WORLD02_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-02-01.json"
     elif status == WORLD02_02_APPROVED_STATUS:
