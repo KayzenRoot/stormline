@@ -1725,6 +1725,13 @@ target_link_libraries(stormline_world04_terrain_test PRIVATE stormline_world04_t
 stormline_core01_apply_options(stormline_world04_terrain_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world04_terrain_test)
 
+add_executable(stormline_world04_splat_test
+    tests/core/world04_splat_tests.cpp
+)
+target_link_libraries(stormline_world04_splat_test PRIVATE stormline_world04_terrain)
+stormline_core01_apply_options(stormline_world04_splat_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world04_splat_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3327,6 +3334,11 @@ add_test(NAME world04_terrain_01
     COMMAND stormline_world04_terrain_test ter01
 )
 set_tests_properties(world04_terrain_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME world04_splat_01
+    COMMAND stormline_world04_splat_test spl01
+)
+set_tests_properties(world04_splat_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
