@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-01-06 — Joint metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CONSTRAINT SOLVER`. **Base:** `9bdf96c`. **Gate:** [NLE-PRPLAN-SIM-01-06-G6-ACTIVATION](NLE-PRPLAN-SIM-01-06-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-06](../work-orders/NLE-PRPLAN-SIM-01-06.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CONSTRAINT SOLVER`. **Base:** `9bdf96c`. **Gate:** [NLE-PRPLAN-SIM-01-06-G6-ACTIVATION](NLE-PRPLAN-SIM-01-06-G6-ACTIVATION.md). **Contract:** [sim-01-physics2d-internal-v0](../contracts/sim-01-physics2d-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-01-06](../work-orders/NLE-PRPLAN-SIM-01-06.md). **PR:** #935.
 
 ## Scope delivered
 
