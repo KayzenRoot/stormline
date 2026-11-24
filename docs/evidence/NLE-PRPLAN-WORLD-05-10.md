@@ -1,6 +1,6 @@
 # NLE-PRPLAN-WORLD-05-10 — WORLD-05 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO PROCEDURAL GENERATION RUNTIME`. **Base:** `aa11c04`. **Packet:** `NLE-PRPLAN-WORLD-05-10`. **Closeout PR:** pendente. **ADR:** [ADR-0131](../adr/0131-world-05-internal-procedural-generation-metadata.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **Planning policy remains:** [ADR-0030](../adr/0030-world-05-versioned-deterministic-nondestructive-generation.md) `PROPOSED`.
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO PROCEDURAL GENERATION RUNTIME`. **Base:** `aa11c04`. **Packet:** `NLE-PRPLAN-WORLD-05-10`. **Closeout PR:** #925. **ADR:** [ADR-0131](../adr/0131-world-05-internal-procedural-generation-metadata.md). **Contract:** [world-05-procedural-internal-v0](../contracts/world-05-procedural-internal-v0.md). **Planning policy remains:** [ADR-0030](../adr/0030-world-05-versioned-deterministic-nondestructive-generation.md) `PROPOSED`.
 
 ## Result
 
