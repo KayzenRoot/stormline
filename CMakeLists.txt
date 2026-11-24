@@ -1616,6 +1616,13 @@ target_link_libraries(stormline_world01_reflection_test PRIVATE stormline_world0
 stormline_core01_apply_options(stormline_world01_reflection_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world01_reflection_test)
 
+add_executable(stormline_world01_qualification_test
+    tests/core/world01_qualification_tests.cpp
+)
+target_link_libraries(stormline_world01_qualification_test PRIVATE stormline_world01_ecs)
+stormline_core01_apply_options(stormline_world01_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world01_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3117,6 +3124,23 @@ add_test(NAME world01_reflection_01
     COMMAND stormline_world01_reflection_test ref01
 )
 set_tests_properties(world01_reflection_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME world01_qualification_101
+    COMMAND stormline_world01_qualification_test qlfw101
+)
+set_tests_properties(world01_qualification_101 PROPERTIES TIMEOUT 60)
+add_test(NAME world01_qualification_102
+    COMMAND stormline_world01_qualification_test qlfw102
+)
+set_tests_properties(world01_qualification_102 PROPERTIES TIMEOUT 60)
+add_test(NAME world01_qualification_103
+    COMMAND stormline_world01_qualification_test qlfw103
+)
+set_tests_properties(world01_qualification_103 PROPERTIES TIMEOUT 60)
+add_test(NAME world01_qualification_104
+    COMMAND stormline_world01_qualification_test qlfw104
+)
+set_tests_properties(world01_qualification_104 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
