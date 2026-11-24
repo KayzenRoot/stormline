@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "WORLD03_08_COMPLETED_REST_BLOCKED",
+  "status": "WORLD04_01_APPROVED_GOVERNANCE_ONLY",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -6907,8 +6907,8 @@
           "acceptance": "Owner ratification required; nothing approved by planning",
           "depends_on": [],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "APPROVED_GOVERNANCE",
+          "github_pr": 892
         },
         {
           "packet_id": "NLE-PRPLAN-WORLD-04-02",
