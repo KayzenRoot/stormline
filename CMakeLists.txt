@@ -1527,6 +1527,13 @@ target_link_libraries(stormline_two03_timeline_test PRIVATE stormline_two03_anim
 stormline_core01_apply_options(stormline_two03_timeline_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two03_timeline_test)
 
+add_executable(stormline_two03_animation_qualification_test
+    tests/core/two03_animation_qualification_tests.cpp
+)
+target_link_libraries(stormline_two03_animation_qualification_test PRIVATE stormline_two03_animation)
+stormline_core01_apply_options(stormline_two03_animation_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two03_animation_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2949,6 +2956,23 @@ add_test(NAME two03_timeline_01
     COMMAND stormline_two03_timeline_test tml01
 )
 set_tests_properties(two03_timeline_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME two03_animation_qualification_301
+    COMMAND stormline_two03_animation_qualification_test qlft301
+)
+set_tests_properties(two03_animation_qualification_301 PROPERTIES TIMEOUT 60)
+add_test(NAME two03_animation_qualification_302
+    COMMAND stormline_two03_animation_qualification_test qlft302
+)
+set_tests_properties(two03_animation_qualification_302 PROPERTIES TIMEOUT 60)
+add_test(NAME two03_animation_qualification_303
+    COMMAND stormline_two03_animation_qualification_test qlft303
+)
+set_tests_properties(two03_animation_qualification_303 PROPERTIES TIMEOUT 60)
+add_test(NAME two03_animation_qualification_304
+    COMMAND stormline_two03_animation_qualification_test qlft304
+)
+set_tests_properties(two03_animation_qualification_304 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
