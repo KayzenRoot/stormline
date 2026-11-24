@@ -1849,6 +1849,13 @@ target_link_libraries(stormline_sim01_query_test PRIVATE stormline_sim01_physics
 stormline_core01_apply_options(stormline_sim01_query_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim01_query_test)
 
+add_executable(stormline_sim01_joint_test
+    tests/core/sim01_joint_tests.cpp
+)
+target_link_libraries(stormline_sim01_joint_test PRIVATE stormline_sim01_physics2d)
+stormline_core01_apply_options(stormline_sim01_joint_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim01_joint_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3555,6 +3562,11 @@ add_test(NAME sim01_query_01
     COMMAND stormline_sim01_query_test qry01
 )
 set_tests_properties(sim01_query_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim01_joint_01
+    COMMAND stormline_sim01_joint_test jnt01
+)
+set_tests_properties(sim01_joint_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
