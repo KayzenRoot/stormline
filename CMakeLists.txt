@@ -1534,6 +1534,19 @@ target_link_libraries(stormline_two03_animation_qualification_test PRIVATE storm
 stormline_core01_apply_options(stormline_two03_animation_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_two03_animation_qualification_test)
 
+add_library(stormline_two04_hybrid INTERFACE)
+target_include_directories(stormline_two04_hybrid INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_two04_hybrid INTERFACE cxx_std_20)
+
+add_executable(stormline_two04_camera_test
+    tests/core/two04_camera_tests.cpp
+)
+target_link_libraries(stormline_two04_camera_test PRIVATE stormline_two04_hybrid)
+stormline_core01_apply_options(stormline_two04_camera_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_two04_camera_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -2973,6 +2986,11 @@ add_test(NAME two03_animation_qualification_304
     COMMAND stormline_two03_animation_qualification_test qlft304
 )
 set_tests_properties(two03_animation_qualification_304 PROPERTIES TIMEOUT 120)
+
+add_test(NAME two04_camera_01
+    COMMAND stormline_two04_camera_test cam01
+)
+set_tests_properties(two04_camera_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
