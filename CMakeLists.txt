@@ -1623,6 +1623,19 @@ target_link_libraries(stormline_world01_qualification_test PRIVATE stormline_wor
 stormline_core01_apply_options(stormline_world01_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_world01_qualification_test)
 
+add_library(stormline_world02_scene INTERFACE)
+target_include_directories(stormline_world02_scene INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_world02_scene INTERFACE cxx_std_20)
+
+add_executable(stormline_world02_hierarchy_test
+    tests/core/world02_hierarchy_tests.cpp
+)
+target_link_libraries(stormline_world02_hierarchy_test PRIVATE stormline_world02_scene)
+stormline_core01_apply_options(stormline_world02_hierarchy_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_world02_hierarchy_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3141,6 +3154,11 @@ add_test(NAME world01_qualification_104
     COMMAND stormline_world01_qualification_test qlfw104
 )
 set_tests_properties(world01_qualification_104 PROPERTIES TIMEOUT 120)
+
+add_test(NAME world02_hierarchy_01
+    COMMAND stormline_world02_hierarchy_test hir01
+)
+set_tests_properties(world02_hierarchy_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
