@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-03-05 — Input response metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO INPUT DEVICES`. **Base:** `baadb9a8`. **Gate:** [NLE-PRPLAN-SIM-03-05-G6-ACTIVATION](NLE-PRPLAN-SIM-03-05-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-05](../work-orders/NLE-PRPLAN-SIM-03-05.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO INPUT DEVICES`. **Base:** `baadb9a8`. **Gate:** [NLE-PRPLAN-SIM-03-05-G6-ACTIVATION](NLE-PRPLAN-SIM-03-05-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-05](../work-orders/NLE-PRPLAN-SIM-03-05.md). **PR:** #967.
 
 ## Scope delivered
 
