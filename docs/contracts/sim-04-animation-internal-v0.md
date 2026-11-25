@@ -6,7 +6,7 @@ This contract freezes the exact C++20 header-only logical API for the SIM-04 int
 
 ## Common types
 
-Namespace `stormline::animation`, headers under `src/stormline/animation/`.
+Namespace `stormline::animation::skeletal`, headers under `src/stormline/animation/skeletal/`. Existing TWO-03 animation headers under `src/stormline/animation/` remain untouched.
 
 ```cpp
 using u8 = std::uint8_t;
@@ -26,20 +26,20 @@ inline constexpr u32 kMaxCompressionProfiles = 16;
 inline constexpr u32 kMaxSyncGroups = 32;
 inline constexpr u32 kMaxTickWindow = 240;
 
-enum class AnimationError : std::uint8_t {
+enum class SkeletalError : std::uint8_t {
     None, InvalidArgument, DuplicateId, NotFound, CapacityFull,
     NonFiniteValue, OutOfRange, RetargetInvalid, BlendInvalid, IkInvalid,
     RagdollInvalid, CompressionInvalid, SyncInvalid, Incomplete, Unsupported
 };
 
-struct AnimationDiagnostic {
-    AnimationError code{AnimationError::None};
+struct SkeletalDiagnostic {
+    SkeletalError code{SkeletalError::None};
     u32 owner_id{0};
     u32 index{0};
 };
 ```
 
-Shared detail helpers: `set_animation_error`, `finite(f32)` and `unit_scalar_in(f32, f32, f32)` for `[0,1]` checks.
+Shared detail helpers: `set_skeletal_error`, `finite(f32)` and `unit_scalar_in(f32, f32, f32)` for `[0,1]` checks.
 
 ## `SIM-04-03` (retargeting)
 
@@ -71,9 +71,9 @@ struct RetargetPlan {
     u32 enabled_count{0};
 };
 
-[[nodiscard]] AnimationError plan_retargets(
+[[nodiscard]] SkeletalError plan_retargets(
     const RetargetSetDesc& retargets, RetargetPlan& plan,
-    AnimationDiagnostic& diagnostic) noexcept;
+    SkeletalDiagnostic& diagnostic) noexcept;
 ```
 
 Semantics: owner ID/revision nonzero; profile count `0..16`; profile IDs nonzero and unique; revisions nonzero; bind_scale finite and `> 0`; pair count `0..64`; source/target joints nonzero; source joints unique and target joints unique within a profile. Plan counts profiles, total pairs and enabled profiles. No pose conversion.
@@ -109,9 +109,9 @@ struct BlendPlan {
     u32 enabled_count{0};
 };
 
-[[nodiscard]] AnimationError plan_blends(
+[[nodiscard]] SkeletalError plan_blends(
     const BlendSetDesc& blends, BlendPlan& plan,
-    AnimationDiagnostic& diagnostic) noexcept;
+    SkeletalDiagnostic& diagnostic) noexcept;
 ```
 
 Semantics: owner ID/revision nonzero; count `0..64`; node IDs nonzero and unique; revisions nonzero; kind allowlist; weight and threshold finite and in `[0,1]`. Plan counts kinds and enabled nodes. No graph evaluation.
@@ -143,9 +143,9 @@ struct IkPlan {
     u32 enabled_count{0};
 };
 
-[[nodiscard]] AnimationError plan_ik(
+[[nodiscard]] SkeletalError plan_ik(
     const IkSetDesc& ik, IkPlan& plan,
-    AnimationDiagnostic& diagnostic) noexcept;
+    SkeletalDiagnostic& diagnostic) noexcept;
 ```
 
 Semantics: owner ID/revision nonzero; count `0..32`; chain IDs nonzero and unique; revisions nonzero; bone_count `1..16`; iterations `0..64`; tolerance finite and `>= 0`; target_weight finite and in `[0,1]`. Plan counts chains, total bones, max iterations and enabled chains. No solver.
@@ -176,9 +176,9 @@ struct RagdollPlan {
     u32 enabled_count{0};
 };
 
-[[nodiscard]] AnimationError plan_ragdolls(
+[[nodiscard]] SkeletalError plan_ragdolls(
     const RagdollSetDesc& ragdolls, RagdollPlan& plan,
-    AnimationDiagnostic& diagnostic) noexcept;
+    SkeletalDiagnostic& diagnostic) noexcept;
 ```
 
 Semantics: owner ID/revision nonzero; count `0..16`; profile IDs nonzero and unique; revisions nonzero; body/constraint mapping IDs nonzero; activation_weight finite and in `[0,1]`. Plan counts auto-enabled and enabled profiles. No physics lifetime ownership.
@@ -210,9 +210,9 @@ struct CompressionPlan {
     u32 enabled_count{0};
 };
 
-[[nodiscard]] AnimationError plan_compression(
+[[nodiscard]] SkeletalError plan_compression(
     const CompressionSetDesc& compression, CompressionPlan& plan,
-    AnimationDiagnostic& diagnostic) noexcept;
+    SkeletalDiagnostic& diagnostic) noexcept;
 ```
 
 Semantics: owner ID/revision nonzero; count `0..16`; profile IDs nonzero and unique; revisions nonzero; bit widths `1..32`; keyframe_interval `1..240`. Plan counts lossless and enabled profiles. No codec.
@@ -242,9 +242,9 @@ struct SyncPlan {
     u32 enabled_count{0};
 };
 
-[[nodiscard]] AnimationError plan_sync(
+[[nodiscard]] SkeletalError plan_sync(
     const SyncSetDesc& sync, SyncPlan& plan,
-    AnimationDiagnostic& diagnostic) noexcept;
+    SkeletalDiagnostic& diagnostic) noexcept;
 ```
 
 Semantics: owner ID/revision nonzero; count `0..32`; group IDs nonzero and unique; revisions nonzero; leader ID nonzero; member_count `1..32`; phase finite and in `[0,1]`. Plan counts phased (`phase != 0`) and enabled groups. No runtime synchronization.
@@ -274,43 +274,43 @@ No production `.cpp`. One `INTERFACE` target and one test executable per impleme
 
 ### `SIM-04-03` (retargeting)
 
-1. `src/stormline/animation/animation_types.hpp`
-2. `src/stormline/animation/retarget_plan.hpp`
+1. `src/stormline/animation/skeletal/skeletal_types.hpp`
+2. `src/stormline/animation/skeletal/retarget_plan.hpp`
 3. `tests/core/sim04_retarget_tests.cpp`
 4. `CMakeLists.txt`
 5. `.github/workflows/core01-internal-headless.yml`
 
 ### `SIM-04-04` (blend trees)
 
-1. `src/stormline/animation/blend_plan.hpp`
+1. `src/stormline/animation/skeletal/blend_tree_plan.hpp`
 2. `tests/core/sim04_blend_tests.cpp`
 3. `CMakeLists.txt`
 4. `.github/workflows/core01-internal-headless.yml`
 
 ### `SIM-04-05` (IK)
 
-1. `src/stormline/animation/ik_plan.hpp`
+1. `src/stormline/animation/skeletal/ik_plan.hpp`
 2. `tests/core/sim04_ik_tests.cpp`
 3. `CMakeLists.txt`
 4. `.github/workflows/core01-internal-headless.yml`
 
 ### `SIM-04-06` (ragdoll)
 
-1. `src/stormline/animation/ragdoll_plan.hpp`
+1. `src/stormline/animation/skeletal/ragdoll_plan.hpp`
 2. `tests/core/sim04_ragdoll_tests.cpp`
 3. `CMakeLists.txt`
 4. `.github/workflows/core01-internal-headless.yml`
 
 ### `SIM-04-07` (compression)
 
-1. `src/stormline/animation/compression_plan.hpp`
+1. `src/stormline/animation/skeletal/compression_plan.hpp`
 2. `tests/core/sim04_compression_tests.cpp`
 3. `CMakeLists.txt`
 4. `.github/workflows/core01-internal-headless.yml`
 
 ### `SIM-04-08` (sync)
 
-1. `src/stormline/animation/sync_plan.hpp`
+1. `src/stormline/animation/skeletal/sync_plan.hpp`
 2. `tests/core/sim04_sync_tests.cpp`
 3. `CMakeLists.txt`
 4. `.github/workflows/core01-internal-headless.yml`

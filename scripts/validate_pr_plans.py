@@ -6168,7 +6168,7 @@ SIM04_01_ACTIVATION_SOURCES = {
 SIM04_02_PINNED_SOURCE_BLOBS = {
     **SIM04_01_PINNED_SOURCE_BLOBS,
     "checkpoint": "466f9c91727c2ed773ab97867c7e70e5a0f742e3",
-    "sim04_internal_contract": "8518b6f8a13a482d0dc4b32fe9514165648dfa0d",
+    "sim04_internal_contract": "ad0b8b1ca2afdb2e6d00f6b6986a6c919762dd67",
 }
 
 SIM04_02_ACTIVATION_SOURCES = {
