@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-03-04 — Locomotion metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO MOVEMENT SIMULATION`. **Base:** `11f3afbb`. **Gate:** [NLE-PRPLAN-SIM-03-04-G6-ACTIVATION](NLE-PRPLAN-SIM-03-04-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-04](../work-orders/NLE-PRPLAN-SIM-03-04.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO MOVEMENT SIMULATION`. **Base:** `11f3afbb`. **Gate:** [NLE-PRPLAN-SIM-03-04-G6-ACTIVATION](NLE-PRPLAN-SIM-03-04-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-04](../work-orders/NLE-PRPLAN-SIM-03-04.md). **PR:** #965.
 
 ## Scope delivered
 
