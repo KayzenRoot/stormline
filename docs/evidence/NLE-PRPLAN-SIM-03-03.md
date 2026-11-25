@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-03-03 — Controller profile metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CHARACTER RUNTIME`. **Base:** `5b1a28ac`. **Gate:** [NLE-PRPLAN-SIM-03-03-G6-ACTIVATION](NLE-PRPLAN-SIM-03-03-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-03](../work-orders/NLE-PRPLAN-SIM-03-03.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CHARACTER RUNTIME`. **Base:** `5b1a28ac`. **Gate:** [NLE-PRPLAN-SIM-03-03-G6-ACTIVATION](NLE-PRPLAN-SIM-03-03-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-03](../work-orders/NLE-PRPLAN-SIM-03-03.md). **PR:** #963.
 
 ## Scope delivered
 
