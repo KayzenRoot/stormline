@@ -2021,6 +2021,13 @@ target_link_libraries(stormline_sim04_sync_test PRIVATE stormline_sim04_skeletal
 stormline_core01_apply_options(stormline_sim04_sync_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim04_sync_test)
 
+add_executable(stormline_sim04_qualification_test
+    tests/core/sim04_qualification_tests.cpp
+)
+target_link_libraries(stormline_sim04_qualification_test PRIVATE stormline_sim04_skeletal)
+stormline_core01_apply_options(stormline_sim04_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim04_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3873,6 +3880,23 @@ add_test(NAME sim04_sync_01
     COMMAND stormline_sim04_sync_test sync01
 )
 set_tests_properties(sim04_sync_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim04_qualification_401
+    COMMAND stormline_sim04_qualification_test qlfs401
+)
+set_tests_properties(sim04_qualification_401 PROPERTIES TIMEOUT 60)
+add_test(NAME sim04_qualification_402
+    COMMAND stormline_sim04_qualification_test qlfs402
+)
+set_tests_properties(sim04_qualification_402 PROPERTIES TIMEOUT 60)
+add_test(NAME sim04_qualification_403
+    COMMAND stormline_sim04_qualification_test qlfs403
+)
+set_tests_properties(sim04_qualification_403 PROPERTIES TIMEOUT 60)
+add_test(NAME sim04_qualification_404
+    COMMAND stormline_sim04_qualification_test qlfs404
+)
+set_tests_properties(sim04_qualification_404 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
