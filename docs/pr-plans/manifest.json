@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "SIM03_06_READY_L1_CAPABILITY_OVERLAY",
+  "status": "SIM03_06_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -7711,8 +7711,8 @@
             "SIM-01",
             "SIM-02"
           ],
-          "status": "EXECUTOR_READY",
-          "github_pr": null,
+          "status": "COMPLETED",
+          "github_pr": 0,
           "risk": "LOW",
           "release_class": "INTERNAL_ONLY",
           "approved_adr": "docs/adr/0134-sim-03-internal-character-motor-metadata.md",
