@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-04-10 — SIM-04 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO ANIMATION RUNTIME`. **Base:** `46590ef0`. **Packet:** `NLE-PRPLAN-SIM-04-10`. **Closeout PR:** pendente. **ADR:** [ADR-0135](../adr/0135-sim-04-internal-skeletal-animation-metadata.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **Planning policy remains:** [ADR-0034](../adr/0034-sim-04-animation-authority-retarget-ik-and-ragdoll.md) `PROPOSED`.
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO ANIMATION RUNTIME`. **Base:** `46590ef0`. **Packet:** `NLE-PRPLAN-SIM-04-10`. **Closeout PR:** #990. **ADR:** [ADR-0135](../adr/0135-sim-04-internal-skeletal-animation-metadata.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **Planning policy remains:** [ADR-0034](../adr/0034-sim-04-animation-authority-retarget-ik-and-ragdoll.md) `PROPOSED`.
 
 ## Result
 
