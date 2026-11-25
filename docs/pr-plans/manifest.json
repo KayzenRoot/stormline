@@ -7768,7 +7768,7 @@
           "depends_on": [],
           "requires_modules_merged": [],
           "status": "APPROVED_GOVERNANCE",
-          "github_pr": 0
+          "github_pr": 973
         },
         {
           "packet_id": "NLE-PRPLAN-SIM-04-02",

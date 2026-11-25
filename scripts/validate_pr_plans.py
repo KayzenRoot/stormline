@@ -2494,7 +2494,7 @@ SIM03_STATE = {
 }
 
 SIM04_CODE_PRS = {3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0}
-SIM04_01_GATE_PR = 0
+SIM04_01_GATE_PR = 973
 SIM04_02_GATE_PR = 0
 SIM04_STATE = {
     SIM04_01_APPROVED_STATUS: (1, 0, 0),
@@ -6127,7 +6127,7 @@ SIM03_07_ACTIVATION_SOURCES = {
 }
 
 SIM04_01_PINNED_SOURCE_BLOBS = {
-    "checkpoint": "14a3f53fc298ee7cf71546fe176a54aba57b40be",
+    "checkpoint": "bea035f28d4c6fea7e18fd2f318feb1aa4b9acef",
     "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
     "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
     "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
