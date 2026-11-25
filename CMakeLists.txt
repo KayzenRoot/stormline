@@ -1966,6 +1966,13 @@ target_link_libraries(stormline_sim03_camera_test PRIVATE stormline_sim03_charac
 stormline_core01_apply_options(stormline_sim03_camera_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim03_camera_test)
 
+add_executable(stormline_sim03_qualification_test
+    tests/core/sim03_qualification_tests.cpp
+)
+target_link_libraries(stormline_sim03_qualification_test PRIVATE stormline_sim03_character)
+stormline_core01_apply_options(stormline_sim03_qualification_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim03_qualification_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3771,6 +3778,23 @@ add_test(NAME sim03_camera_01
     COMMAND stormline_sim03_camera_test cam01
 )
 set_tests_properties(sim03_camera_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim03_qualification_301
+    COMMAND stormline_sim03_qualification_test qlfs301
+)
+set_tests_properties(sim03_qualification_301 PROPERTIES TIMEOUT 60)
+add_test(NAME sim03_qualification_302
+    COMMAND stormline_sim03_qualification_test qlfs302
+)
+set_tests_properties(sim03_qualification_302 PROPERTIES TIMEOUT 60)
+add_test(NAME sim03_qualification_303
+    COMMAND stormline_sim03_qualification_test qlfs303
+)
+set_tests_properties(sim03_qualification_303 PROPERTIES TIMEOUT 60)
+add_test(NAME sim03_qualification_304
+    COMMAND stormline_sim03_qualification_test qlfs304
+)
+set_tests_properties(sim03_qualification_304 PROPERTIES TIMEOUT 120)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
