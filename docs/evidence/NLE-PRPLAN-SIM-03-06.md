@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-03-06 — Decoupled camera metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CAMERA UPDATE`. **Base:** `c0c54f3e`. **Gate:** [NLE-PRPLAN-SIM-03-06-G6-ACTIVATION](NLE-PRPLAN-SIM-03-06-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-06](../work-orders/NLE-PRPLAN-SIM-03-06.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO CAMERA UPDATE`. **Base:** `c0c54f3e`. **Gate:** [NLE-PRPLAN-SIM-03-06-G6-ACTIVATION](NLE-PRPLAN-SIM-03-06-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-06](../work-orders/NLE-PRPLAN-SIM-03-06.md). **PR:** #969.
 
 ## Scope delivered
 
