@@ -2000,6 +2000,13 @@ target_link_libraries(stormline_sim04_ik_test PRIVATE stormline_sim04_skeletal)
 stormline_core01_apply_options(stormline_sim04_ik_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim04_ik_test)
 
+add_executable(stormline_sim04_ragdoll_test
+    tests/core/sim04_ragdoll_tests.cpp
+)
+target_link_libraries(stormline_sim04_ragdoll_test PRIVATE stormline_sim04_skeletal)
+stormline_core01_apply_options(stormline_sim04_ragdoll_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim04_ragdoll_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3837,6 +3844,11 @@ add_test(NAME sim04_ik_01
     COMMAND stormline_sim04_ik_test ik01
 )
 set_tests_properties(sim04_ik_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim04_ragdoll_01
+    COMMAND stormline_sim04_ragdoll_test rag01
+)
+set_tests_properties(sim04_ragdoll_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
