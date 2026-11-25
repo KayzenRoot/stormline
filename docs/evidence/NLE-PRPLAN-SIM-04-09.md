@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-04-09 — Integrated skeletal animation qualification evidence
 
-**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO ANIMATION RUNTIME`. **Base:** `8353f279`. **Gate:** [NLE-PRPLAN-SIM-04-09-G6-ACTIVATION](NLE-PRPLAN-SIM-04-09-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-09](../work-orders/NLE-PRPLAN-SIM-04-09.md). **PR:** pendente.
+**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO ANIMATION RUNTIME`. **Base:** `8353f279`. **Gate:** [NLE-PRPLAN-SIM-04-09-G6-ACTIVATION](NLE-PRPLAN-SIM-04-09-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-09](../work-orders/NLE-PRPLAN-SIM-04-09.md). **PR:** #989.
 
 ## Scope delivered
 
