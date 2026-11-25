@@ -2014,6 +2014,13 @@ target_link_libraries(stormline_sim04_compression_test PRIVATE stormline_sim04_s
 stormline_core01_apply_options(stormline_sim04_compression_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim04_compression_test)
 
+add_executable(stormline_sim04_sync_test
+    tests/core/sim04_sync_tests.cpp
+)
+target_link_libraries(stormline_sim04_sync_test PRIVATE stormline_sim04_skeletal)
+stormline_core01_apply_options(stormline_sim04_sync_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim04_sync_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3861,6 +3868,11 @@ add_test(NAME sim04_compression_01
     COMMAND stormline_sim04_compression_test cmp01
 )
 set_tests_properties(sim04_compression_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim04_sync_01
+    COMMAND stormline_sim04_sync_test sync01
+)
+set_tests_properties(sim04_sync_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
