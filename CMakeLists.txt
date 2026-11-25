@@ -1959,6 +1959,13 @@ target_link_libraries(stormline_sim03_input_test PRIVATE stormline_sim03_charact
 stormline_core01_apply_options(stormline_sim03_input_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim03_input_test)
 
+add_executable(stormline_sim03_camera_test
+    tests/core/sim03_camera_tests.cpp
+)
+target_link_libraries(stormline_sim03_camera_test PRIVATE stormline_sim03_character)
+stormline_core01_apply_options(stormline_sim03_camera_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim03_camera_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3759,6 +3766,11 @@ add_test(NAME sim03_input_01
     COMMAND stormline_sim03_input_test input01
 )
 set_tests_properties(sim03_input_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim03_camera_01
+    COMMAND stormline_sim03_camera_test cam01
+)
+set_tests_properties(sim03_camera_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
