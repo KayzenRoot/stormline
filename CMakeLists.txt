@@ -1973,6 +1973,19 @@ target_link_libraries(stormline_sim03_qualification_test PRIVATE stormline_sim03
 stormline_core01_apply_options(stormline_sim03_qualification_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim03_qualification_test)
 
+add_library(stormline_sim04_skeletal INTERFACE)
+target_include_directories(stormline_sim04_skeletal INTERFACE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_compile_features(stormline_sim04_skeletal INTERFACE cxx_std_20)
+
+add_executable(stormline_sim04_retarget_test
+    tests/core/sim04_retarget_tests.cpp
+)
+target_link_libraries(stormline_sim04_retarget_test PRIVATE stormline_sim04_skeletal)
+stormline_core01_apply_options(stormline_sim04_retarget_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim04_retarget_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3795,6 +3808,11 @@ add_test(NAME sim03_qualification_304
     COMMAND stormline_sim03_qualification_test qlfs304
 )
 set_tests_properties(sim03_qualification_304 PROPERTIES TIMEOUT 120)
+
+add_test(NAME sim04_retarget_01
+    COMMAND stormline_sim04_retarget_test ret01
+)
+set_tests_properties(sim04_retarget_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
