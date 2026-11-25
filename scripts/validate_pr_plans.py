@@ -265,9 +265,10 @@ SIM03_05_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-03-05.json"
 SIM03_06_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-03-06.json"
 SIM03_07_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-03-07.json"
 SIM04_01_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-04-01.json"
+SIM04_02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-sim-04-02.json"
 CORE02_ACTIVATION_FILE = ROOT / "docs/queue/packet-activation-core-02-03.json"
 # The selector reads this path; it is the activation for the current manifest state.
-ACTIVATION_FILE = SIM04_01_ACTIVATION_FILE
+ACTIVATION_FILE = SIM04_02_ACTIVATION_FILE
 CORE01_ACTIVATED_STATUS = "CORE01_08_READY_PREDECESSORS_COMPLETED"
 CORE01_COMPLETED_STATUS = "CORE01_08_COMPLETED_REST_BLOCKED"
 CORE01_09_ACTIVATED_STATUS = "CORE01_09_READY_PREDECESSORS_COMPLETED"
@@ -6160,6 +6161,17 @@ SIM04_01_ACTIVATION_SOURCES = {
     "implementation_registry": "docs/queue/implementation-registry.json",
 }
 
+SIM04_02_PINNED_SOURCE_BLOBS = {
+    **SIM04_01_PINNED_SOURCE_BLOBS,
+    "checkpoint": "f4e3fe6393d3930727780ee389b750ac76f573ea",
+    "sim04_internal_contract": "8518b6f8a13a482d0dc4b32fe9514165648dfa0d",
+}
+
+SIM04_02_ACTIVATION_SOURCES = {
+    **SIM04_01_ACTIVATION_SOURCES,
+    "sim04_internal_contract": "docs/contracts/sim-04-animation-internal-v0.md",
+}
+
 
 GFX01_01_PINNED_SOURCE_BLOBS = {
     "checkpoint": "aeefbd29209e08ce6403cf64415f7fb9b4e07619",
@@ -11154,6 +11166,28 @@ def activation_spec(activation: dict) -> tuple[dict, dict, dict, set[str]] | Non
             "requires_fresh_context_lock": True,
         }
         return expected, SIM03_02_ACTIVATION_SOURCES, SIM03_02_PINNED_SOURCE_BLOBS, {
+            "selected_packet_id", "module_id", "risk", "release_class",
+            "owner_authorization_ref", "approved_adr", "approved_contract",
+            "work_order", "activation_evidence", "capability_admission",
+            "source_blob_sha1", "gate_pr",
+        }
+    if selected == "NLE-PRPLAN-SIM-04-02":
+        expected = {
+            "schema_version": 2,
+            "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+            "selected_packet_id": "NLE-PRPLAN-SIM-04-02",
+            "module_id": "SIM-04",
+            "risk": "LOW",
+            "release_class": "INTERNAL_ONLY",
+            "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/sim04-02-continuation",
+            "approved_adr": "docs/adr/0135-sim-04-internal-skeletal-animation-metadata.md",
+            "approved_contract": "docs/contracts/sim-04-animation-internal-v0.md",
+            "work_order": "docs/work-orders/NLE-PRPLAN-SIM-04-02.md",
+            "activation_evidence": "docs/evidence/NLE-PRPLAN-SIM-04-02-G6-ACTIVATION.md",
+            "gate_base_sha": "8a595f95ac35e61c8a5d13317f84b27ec0e1c61d",
+            "requires_fresh_context_lock": True,
+        }
+        return expected, SIM04_02_ACTIVATION_SOURCES, SIM04_02_PINNED_SOURCE_BLOBS, {
             "selected_packet_id", "module_id", "risk", "release_class",
             "owner_authorization_ref", "approved_adr", "approved_contract",
             "work_order", "activation_evidence", "capability_admission",
@@ -17223,6 +17257,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-sim-03-07.json"
     elif status == SIM04_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-sim-04-01.json"
+    elif status == SIM04_02_APPROVED_STATUS:
+        activation_path = root / "docs/queue/packet-activation-sim-04-02.json"
     elif status == WORLD05_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-05-01.json"
     elif status == WORLD05_02_APPROVED_STATUS:
