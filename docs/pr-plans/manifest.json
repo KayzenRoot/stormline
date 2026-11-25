@@ -4,7 +4,7 @@
   "base_sha": "bc11813de9e8eb2bc7ffd4c2941b7b8653a23701",
   "module_count": 80,
   "planned_packet_count": 748,
-  "status": "SIM03_07_COMPLETED_REST_BLOCKED",
+  "status": "SIM03_08_COMPLETED_REST_BLOCKED",
   "modules": [
     {
       "module_id": "CORE-01",
@@ -7742,8 +7742,8 @@
             "NLE-PRPLAN-SIM-03-07"
           ],
           "requires_modules_merged": [],
-          "status": "PLANNED_BLOCKED",
-          "github_pr": null
+          "status": "COMPLETED",
+          "github_pr": 972
         }
       ],
       "plan_file": "docs/pr-plans/SIM-03.md"

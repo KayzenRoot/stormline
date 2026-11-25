@@ -2416,7 +2416,7 @@ SIM02_STATE = {
     SIM02_10_COMPLETED_STATUS: (2, 10, 0),
 }
 
-SIM03_CODE_PRS = {3: 963, 4: 965, 5: 967, 6: 969, 7: 971, 8: 0}
+SIM03_CODE_PRS = {3: 963, 4: 965, 5: 967, 6: 969, 7: 971, 8: 972}
 SIM03_01_GATE_PR = 960
 SIM03_02_GATE_PR = 961
 SIM03_STATE = {
@@ -17059,7 +17059,8 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         activation_path = root / "docs/queue/packet-activation-sim-03-05.json"
     elif status in (SIM03_06_READY_STATUS, SIM03_06_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-sim-03-06.json"
-    elif status in (SIM03_07_READY_STATUS, SIM03_07_COMPLETED_STATUS):
+    elif status in (SIM03_07_READY_STATUS, SIM03_07_COMPLETED_STATUS,
+                    SIM03_08_COMPLETED_STATUS):
         activation_path = root / "docs/queue/packet-activation-sim-03-07.json"
     elif status == WORLD05_01_APPROVED_STATUS:
         activation_path = root / "docs/queue/packet-activation-world-05-01.json"
