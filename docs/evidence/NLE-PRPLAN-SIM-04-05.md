@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-04-05 — IK chain metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO IK SOLVER`. **Base:** `bfd07f87`. **Gate:** [NLE-PRPLAN-SIM-04-05-G6-ACTIVATION](NLE-PRPLAN-SIM-04-05-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-05](../work-orders/NLE-PRPLAN-SIM-04-05.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO IK SOLVER`. **Base:** `bfd07f87`. **Gate:** [NLE-PRPLAN-SIM-04-05-G6-ACTIVATION](NLE-PRPLAN-SIM-04-05-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-05](../work-orders/NLE-PRPLAN-SIM-04-05.md). **PR:** #981.
 
 ## Scope delivered
 
