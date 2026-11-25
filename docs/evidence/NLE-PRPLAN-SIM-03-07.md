@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-03-07 — Integrated character motor metadata qualification evidence
 
-**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO CHARACTER RUNTIME`. **Base:** `4ad2ccf0`. **Gate:** [NLE-PRPLAN-SIM-03-07-G6-ACTIVATION](NLE-PRPLAN-SIM-03-07-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-07](../work-orders/NLE-PRPLAN-SIM-03-07.md). **PR:** pendente.
+**Status:** `QUALIFICATION EVIDENCE / INTERNAL_ONLY / NO CHARACTER RUNTIME`. **Base:** `4ad2ccf0`. **Gate:** [NLE-PRPLAN-SIM-03-07-G6-ACTIVATION](NLE-PRPLAN-SIM-03-07-G6-ACTIVATION.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-03-07](../work-orders/NLE-PRPLAN-SIM-03-07.md). **PR:** #971.
 
 ## Scope delivered
 
