@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-03-08 — SIM-03 module closeout
 
-**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO CHARACTER RUNTIME`. **Base:** `576d2435`. **Packet:** `NLE-PRPLAN-SIM-03-08`. **Closeout PR:** pendente. **ADR:** [ADR-0134](../adr/0134-sim-03-internal-character-motor-metadata.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **Planning policy remains:** [ADR-0033](../adr/0033-sim-03-authoritative-character-motor-policy.md) `PROPOSED`.
+**Status:** `INTERNAL_SEQUENCE_COMPLETE_NOT_QUALIFIED / INTERNAL_ONLY / NO CHARACTER RUNTIME`. **Base:** `576d2435`. **Packet:** `NLE-PRPLAN-SIM-03-08`. **Closeout PR:** #972. **ADR:** [ADR-0134](../adr/0134-sim-03-internal-character-motor-metadata.md). **Contract:** [sim-03-character-internal-v0](../contracts/sim-03-character-internal-v0.md). **Planning policy remains:** [ADR-0033](../adr/0033-sim-03-authoritative-character-motor-policy.md) `PROPOSED`.
 
 ## Result
 
