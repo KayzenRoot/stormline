@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-04-04 — Blend tree metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO GRAPH EVALUATION`. **Base:** `871dd91d`. **Gate:** [NLE-PRPLAN-SIM-04-04-G6-ACTIVATION](NLE-PRPLAN-SIM-04-04-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-04](../work-orders/NLE-PRPLAN-SIM-04-04.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO GRAPH EVALUATION`. **Base:** `871dd91d`. **Gate:** [NLE-PRPLAN-SIM-04-04-G6-ACTIVATION](NLE-PRPLAN-SIM-04-04-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-04](../work-orders/NLE-PRPLAN-SIM-04-04.md). **PR:** #979.
 
 ## Scope delivered
 
