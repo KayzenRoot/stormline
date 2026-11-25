@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-04-08 — Sync group metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO SYNC RUNTIME`. **Base:** `5c9e8f0d`. **Gate:** [NLE-PRPLAN-SIM-04-08-G6-ACTIVATION](NLE-PRPLAN-SIM-04-08-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-08](../work-orders/NLE-PRPLAN-SIM-04-08.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO SYNC RUNTIME`. **Base:** `5c9e8f0d`. **Gate:** [NLE-PRPLAN-SIM-04-08-G6-ACTIVATION](NLE-PRPLAN-SIM-04-08-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-08](../work-orders/NLE-PRPLAN-SIM-04-08.md). **PR:** #987.
 
 ## Scope delivered
 
