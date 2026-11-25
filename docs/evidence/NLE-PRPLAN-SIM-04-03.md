@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-04-03 — Retarget profile metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO POSE EVALUATION`. **Base:** `5e0c6e25`. **Gate:** [NLE-PRPLAN-SIM-04-03-G6-ACTIVATION](NLE-PRPLAN-SIM-04-03-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-03](../work-orders/NLE-PRPLAN-SIM-04-03.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO POSE EVALUATION`. **Base:** `5e0c6e25`. **Gate:** [NLE-PRPLAN-SIM-04-03-G6-ACTIVATION](NLE-PRPLAN-SIM-04-03-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-03](../work-orders/NLE-PRPLAN-SIM-04-03.md). **PR:** #977.
 
 ## Scope delivered
 
