@@ -1945,6 +1945,13 @@ target_link_libraries(stormline_sim03_controller_test PRIVATE stormline_sim03_ch
 stormline_core01_apply_options(stormline_sim03_controller_test PRIVATE)
 stormline_core_internal_apply_tsan(stormline_sim03_controller_test)
 
+add_executable(stormline_sim03_locomotion_test
+    tests/core/sim03_locomotion_tests.cpp
+)
+target_link_libraries(stormline_sim03_locomotion_test PRIVATE stormline_sim03_character)
+stormline_core01_apply_options(stormline_sim03_locomotion_test PRIVATE)
+stormline_core_internal_apply_tsan(stormline_sim03_locomotion_test)
+
 enable_testing()
 
 add_test(NAME core01_headless_lifecycle
@@ -3735,6 +3742,11 @@ add_test(NAME sim03_controller_01
     COMMAND stormline_sim03_controller_test ctrl01
 )
 set_tests_properties(sim03_controller_01 PROPERTIES TIMEOUT 60)
+
+add_test(NAME sim03_locomotion_01
+    COMMAND stormline_sim03_locomotion_test loco01
+)
+set_tests_properties(sim03_locomotion_01 PROPERTIES TIMEOUT 60)
 
 if(WIN32)
     add_test(NAME core02_q4_helper_failclosed
