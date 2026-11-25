@@ -22,3 +22,7 @@ No source, test, CMake or workflow file may change. No pose evaluation, solver, 
 
 - Manifest root `SIM04_02_APPROVED_CONTRACT_ONLY`: **445 `PLANNED_BLOCKED`, 0 `EXECUTOR_READY`, 239 `COMPLETED`, 64 approved gates**.
 - `SIM-04-02` becomes `APPROVED_CONTRACT`; `SIM-04-03`..`-10` remain `PLANNED_BLOCKED`.
+
+## Correction (2026-11-24)
+
+The frozen contract was corrected after the baseline inspection found that TWO-03 already owns `src/stormline/animation/animation_types.hpp`, `blend_plan.hpp` and sibling headers. SIM-04 now uses `src/stormline/animation/skeletal/` with namespace `stormline::animation::skeletal`, `SkeletalError`/`SkeletalDiagnostic` and `blend_tree_plan.hpp`; no approved TWO-03 code is modified. Activation pins for `-02` and `-03` were updated to the corrected contract blob in the same work order.
