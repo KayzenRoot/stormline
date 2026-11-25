@@ -1,0 +1,218 @@
+{
+  "schema_version": 2,
+  "status": "OWNER_RATIFIED_BOUNDED_G6_ACTIVATION",
+  "selected_packet_id": "NLE-PRPLAN-SIM-04-08",
+  "module_id": "SIM-04",
+  "risk": "LOW",
+  "release_class": "INTERNAL_ONLY",
+  "owner_authorization_ref": "STORM-CORE-01-IMPL-001/issue-387/2026-11-24/sim04-08-continuation",
+  "approved_adr": "docs/adr/0135-sim-04-internal-skeletal-animation-metadata.md",
+  "approved_contract": "docs/contracts/sim-04-animation-internal-v0.md",
+  "work_order": "docs/work-orders/NLE-PRPLAN-SIM-04-08.md",
+  "activation_evidence": "docs/evidence/NLE-PRPLAN-SIM-04-08-G6-ACTIVATION.md",
+  "gate_base_sha": "790b43593bef3409a0ef118cbfb3540c2bfc90fa",
+  "gate_pr": 986,
+  "requires_fresh_context_lock": true,
+  "capability_admission": {
+    "adr": "docs/adr/0086-capability-based-l1-dependency.md",
+    "formal_dependency": "SIM-03+DATA-03",
+    "module_completion_claimed": false,
+    "required_capabilities": [
+      {
+        "id": "CORE05_TYPED_SCALARS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-03"
+      },
+      {
+        "id": "CORE05_VECTORS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-04"
+      },
+      {
+        "id": "CORE05_MATRICES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-05"
+      },
+      {
+        "id": "CORE05_COORDINATES",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-06"
+      },
+      {
+        "id": "CORE05_UNITS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-07"
+      },
+      {
+        "id": "CORE05_IDS",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-09"
+      },
+      {
+        "id": "CORE05_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-05-10"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      },
+      {
+        "id": "DATA04_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-03"
+      },
+      {
+        "id": "DATA04_DOCUMENT",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-04"
+      },
+      {
+        "id": "DATA04_PATCH",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-05"
+      },
+      {
+        "id": "DATA04_DIFF",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-06"
+      },
+      {
+        "id": "DATA04_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-04-07"
+      },
+      {
+        "id": "DATA02_IDENTITY",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-03"
+      },
+      {
+        "id": "DATA02_DEPENDENCIES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-04"
+      },
+      {
+        "id": "DATA02_TAGS",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-05"
+      },
+      {
+        "id": "DATA02_QUERIES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-06"
+      },
+      {
+        "id": "DATA02_SCHEMA",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-07"
+      },
+      {
+        "id": "DATA02_REFERENCES",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-08"
+      },
+      {
+        "id": "DATA02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-02-09"
+      },
+      {
+        "id": "WORLD02_SCENE_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-WORLD-02-08"
+      },
+      {
+        "id": "WORLD02_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-WORLD-02-09"
+      },
+      {
+        "id": "CORE03_SCHEDULER",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-03"
+      },
+      {
+        "id": "CORE03_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-09"
+      },
+      {
+        "id": "CORE03_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-CORE-03-10"
+      },
+      {
+        "id": "SIM01_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-SIM-01-09"
+      },
+      {
+        "id": "SIM01_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-SIM-01-10"
+      },
+      {
+        "id": "SIM02_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-SIM-02-09"
+      },
+      {
+        "id": "SIM02_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-SIM-02-10"
+      },
+      {
+        "id": "SIM03_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-SIM-03-07"
+      },
+      {
+        "id": "SIM03_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-SIM-03-08"
+      },
+      {
+        "id": "DATA03_IMPORT_PIPELINE",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-03"
+      },
+      {
+        "id": "DATA03_QUALIFICATION",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-09"
+      },
+      {
+        "id": "DATA03_SEQUENCE_CLOSEOUT",
+        "satisfied_by": "NLE-PRPLAN-DATA-03-10"
+      }
+    ],
+    "not_required": [
+      "pose_evaluator",
+      "animation_graph_runtime",
+      "blend_execution",
+      "ik_solver",
+      "ragdoll_runtime",
+      "physics_solver",
+      "physics_backend",
+      "jolt",
+      "physx",
+      "bullet",
+      "rapier",
+      "codec",
+      "ozz",
+      "acl",
+      "root_motion_application",
+      "simulation",
+      "fixed_tick",
+      "contact_events",
+      "constraint_solver",
+      "ecs_mutation",
+      "input_devices",
+      "camera_update",
+      "mesh_import",
+      "streaming_io",
+      "gpu",
+      "network",
+      "editor",
+      "audio",
+      "export",
+      "performance",
+      "public_abi",
+      "release"
+    ]
+  },
+  "source_blob_sha1": {
+    "checkpoint": "ab924d5e0b146c26c6df53f2a16e918df4b06a3f",
+    "decisions_ledger": "5fa9a9deef076252fa89675a17f1958e499f277c",
+    "scope": "0b65820507d946d2b2b4ed3a2b869e60cafaaf22",
+    "definition_of_done": "e0b7c2466ebec9790a715e47490c015cfb502db4",
+    "adr_0034": "45bc3a8cec22e2b22160b2193869691d4fa4c8fc",
+    "adr_0086": "76e3160fa75770d97bf444171a5188cceee39e3c",
+    "adr_0135": "efacb446fbc3abe32003697234a2bbacfa8560d4",
+    "sim04_architecture": "8f1d0a9211c093322d8a2868cc6ef89a6308c919",
+    "sim04_internal_architecture": "afeba34bba16cd320779980921489cdea7dfa5db",
+    "sim04_api": "da2dde2a7b742ed2fc72be5797cd0476d88d89bf",
+    "sim04_governance_contract": "9921266a4441d4ddeb5e29290db9a9fa61030a8a",
+    "module_catalog": "18d69bca439831d65982cb0f8acbca1dbaa2eee9",
+    "sim04_plan": "039cfcf061c6d8ae0a2961ed7d499f38adac4f6b",
+    "implementation_registry": "abbf8e5f971b8de5d73f55c9ec5a0bd7a2632024",
+    "sim04_internal_contract": "ad0b8b1ca2afdb2e6d00f6b6986a6c919762dd67"
+  }
+}
