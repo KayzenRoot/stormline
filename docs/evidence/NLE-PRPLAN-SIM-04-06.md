@@ -1,6 +1,6 @@
 # NLE-PRPLAN-SIM-04-06 — Ragdoll profile metadata evidence
 
-**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RAGDOLL RUNTIME`. **Base:** `a4ade2a5`. **Gate:** [NLE-PRPLAN-SIM-04-06-G6-ACTIVATION](NLE-PRPLAN-SIM-04-06-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-06](../work-orders/NLE-PRPLAN-SIM-04-06.md). **PR:** pendente.
+**Status:** `IMPLEMENTATION EVIDENCE / INTERNAL_ONLY / NO RAGDOLL RUNTIME`. **Base:** `a4ade2a5`. **Gate:** [NLE-PRPLAN-SIM-04-06-G6-ACTIVATION](NLE-PRPLAN-SIM-04-06-G6-ACTIVATION.md). **Contract:** [sim-04-animation-internal-v0](../contracts/sim-04-animation-internal-v0.md). **WO:** [NLE-PRPLAN-SIM-04-06](../work-orders/NLE-PRPLAN-SIM-04-06.md). **PR:** #983.
 
 ## Scope delivered
 
